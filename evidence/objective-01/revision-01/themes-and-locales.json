@@ -1,0 +1,180 @@
+{
+  "status": "passed",
+  "version": "0.1.1",
+  "verifiedAtUtc": "2026-11-24T22:14:08.856Z",
+  "environment": {
+    "platform": "win32",
+    "browser": "Google Chrome via Playwright",
+    "mode": "headless fresh contexts",
+    "source": "production dist over a dedicated ephemeral loopback HTTP server",
+    "browserVersion": "158.0.8127.38",
+    "playwrightVersion": "1.65.1"
+  },
+  "coverage": "Desktop Chrome at a 390 x 844 viewport. System appearance and motion preferences were emulated in Chrome. The checks cover rendered UI and calculator behavior.",
+  "productionSha256": {
+    "index.html": "a1ffd85e501cb09e42606a86aeddc26b15709df17295b57f2bbb31374121bde8",
+    "dars-worker.js": "9e6ce04b82a3334d222ed76fa94b12267d2de6a149d309937b3b8affef9d28cf",
+    "dars.svg": "c4d9aff5ed902c7f76dc5fa10b02b7fb349c8e4d5e849a2cf446627d6b45a17a",
+    "assets/ar-B_tCj-Mr.js": "476683f46537e2dae2ca4f0d7e0f98db6f3a8782bc6989e5c85983ff1a7b6dc1",
+    "assets/dars_wasm_bg-C82IiR-_.wasm": "1cf84880513ab6f358beed65687fc1cc0bc4c4d844741469804fe85f5a83101f",
+    "assets/en-BBrOvOGo.js": "42ff6d9c6e38dc4c2a356160956db0cf54724a2677012f1ad0d030ed433fd221",
+    "assets/es-X4QwE4QM.js": "85220e4d87572029bb3f230da3db933c71d0b2b3269cd5d7298dba177e5e4542",
+    "assets/fr-CXfenmxR.js": "804c1061a2b9b87c5c8e3cfc08d02f3b65a8ee15c4733738763ad9d97f8c3141",
+    "assets/hi-D-za0pbR.js": "6fd6b8921dd10a2777a1f7e154298ecd6cdfaff3bd44a9002703c076026dc452",
+    "assets/index-BP2XPgJr.css": "385577f47caf5eaa0b145323bba2bb0cfbc95a4f3efbc600f7985595b519ad33",
+    "assets/index-JdeQqoYX.js": "f7498b57e63a75bb1553b1081768e5b97bce28aac70437b7373113a521772086",
+    "assets/pt-BR-DFkTCm2o.js": "48e5c6090ce54d5d6869b32675fe04a655635d58d195e840502b07b42a782dc0",
+    "assets/standard-KsbuxeKl.js": "bf7659db256cd973719c01132a11ffd6543596cbb7a5fc4806732eb257ba0b1e",
+    "assets/wasm-worker-YCBPbhAo.js": "9b8f72bd9a3e684549fe12d36f4cfea9eb43666c9b9da3920850647e525ed7d6",
+    "assets/zh-CN-Dl280ACa.js": "a72bddb386f39cf979902b336e8c99645ecb192e5e7b6be53819753d6f414a7e"
+  },
+  "locales": {
+    "en": {
+      "status": "pass",
+      "catalogKeys": 69,
+      "productionBundle": "assets/en-BBrOvOGo.js",
+      "documentDirection": "ltr",
+      "expressionAndKeypadDirection": "ltr",
+      "localizedDecimalResult": "0.3",
+      "localizedDivisionByZero": true,
+      "localizedSettings": true,
+      "noHorizontalOverflowAt390px": true,
+      "pageErrors": 0
+    },
+    "pt-BR": {
+      "status": "pass",
+      "catalogKeys": 69,
+      "productionBundle": "assets/pt-BR-DFkTCm2o.js",
+      "documentDirection": "ltr",
+      "expressionAndKeypadDirection": "ltr",
+      "localizedDecimalResult": "0,3",
+      "localizedDivisionByZero": true,
+      "localizedSettings": true,
+      "noHorizontalOverflowAt390px": true,
+      "pageErrors": 0
+    },
+    "zh-CN": {
+      "status": "pass",
+      "catalogKeys": 69,
+      "productionBundle": "assets/zh-CN-Dl280ACa.js",
+      "documentDirection": "ltr",
+      "expressionAndKeypadDirection": "ltr",
+      "localizedDecimalResult": "0.3",
+      "localizedDivisionByZero": true,
+      "localizedSettings": true,
+      "noHorizontalOverflowAt390px": true,
+      "pageErrors": 0
+    },
+    "hi": {
+      "status": "pass",
+      "catalogKeys": 69,
+      "productionBundle": "assets/hi-D-za0pbR.js",
+      "documentDirection": "ltr",
+      "expressionAndKeypadDirection": "ltr",
+      "localizedDecimalResult": "०.३",
+      "localizedDivisionByZero": true,
+      "localizedSettings": true,
+      "noHorizontalOverflowAt390px": true,
+      "pageErrors": 0
+    },
+    "es": {
+      "status": "pass",
+      "catalogKeys": 69,
+      "productionBundle": "assets/es-X4QwE4QM.js",
+      "documentDirection": "ltr",
+      "expressionAndKeypadDirection": "ltr",
+      "localizedDecimalResult": "0,3",
+      "localizedDivisionByZero": true,
+      "localizedSettings": true,
+      "noHorizontalOverflowAt390px": true,
+      "pageErrors": 0
+    },
+    "ar": {
+      "status": "pass",
+      "catalogKeys": 69,
+      "productionBundle": "assets/ar-B_tCj-Mr.js",
+      "documentDirection": "rtl",
+      "expressionAndKeypadDirection": "ltr",
+      "localizedDecimalResult": "٠٫٣",
+      "localizedDivisionByZero": true,
+      "localizedSettings": true,
+      "noHorizontalOverflowAt390px": true,
+      "pageErrors": 0
+    },
+    "fr": {
+      "status": "pass",
+      "catalogKeys": 69,
+      "productionBundle": "assets/fr-CXfenmxR.js",
+      "documentDirection": "ltr",
+      "expressionAndKeypadDirection": "ltr",
+      "localizedDecimalResult": "0,3",
+      "localizedDivisionByZero": true,
+      "localizedSettings": true,
+      "noHorizontalOverflowAt390px": true,
+      "pageErrors": 0
+    }
+  },
+  "freshDarkDefault": {
+    "light": {
+      "status": "pass",
+      "withoutJavaScript": true,
+      "withJavaScript": true,
+      "bodyBackground": "rgb(10, 20, 39)",
+      "renderedBrandAccent": "rgb(141, 204, 255)",
+      "writesAutomaticPreference": false
+    },
+    "dark": {
+      "status": "pass",
+      "withoutJavaScript": true,
+      "withJavaScript": true,
+      "bodyBackground": "rgb(10, 20, 39)",
+      "renderedBrandAccent": "rgb(141, 204, 255)",
+      "writesAutomaticPreference": false
+    }
+  },
+  "themes": {
+    "system": {
+      "status": "pass",
+      "persistedAfterReload": true,
+      "bodyBackgroundBySystemTheme": {
+        "light": "rgb(239, 244, 251)",
+        "dark": "rgb(10, 20, 39)"
+      }
+    },
+    "light": {
+      "status": "pass",
+      "persistedAfterReload": true,
+      "bodyBackgroundBySystemTheme": {
+        "light": "rgb(239, 244, 251)",
+        "dark": "rgb(239, 244, 251)"
+      }
+    },
+    "dark": {
+      "status": "pass",
+      "persistedAfterReload": true,
+      "bodyBackgroundBySystemTheme": {
+        "light": "rgb(10, 20, 39)",
+        "dark": "rgb(10, 20, 39)"
+      }
+    },
+    "oled": {
+      "status": "pass",
+      "persistedAfterReload": true,
+      "bodyBackgroundBySystemTheme": {
+        "light": "rgb(0, 0, 0)",
+        "dark": "rgb(0, 0, 0)"
+      }
+    }
+  },
+  "reducedMotion": {
+    "status": "pass",
+    "transitionsAndAnimationsDisabled": true,
+    "smoothScrollingDisabled": true
+  },
+  "languagePreference": {
+    "status": "pass",
+    "initial": "en",
+    "selected": "ar",
+    "persistedAfterReload": true
+  }
+}

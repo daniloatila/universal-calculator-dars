@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "objective": "01",
+  "revision": "01",
+  "version": "0.1.1",
+  "status": "READY_FOR_REVIEW",
+  "approved": false,
+  "objective_02": "NOT_STARTED",
+  "implementation_commit": "69fb558050644220f4bec3354d180e66df9bc013",
+  "verified_source_commit": "460c2f05049acaa75da0035444150f5f4eaed801",
+  "benchmark_instrumentation_commit": "bc9c945dfca361d2c774697cca78697542b72a54",
+  "baseline_delivery_commit": "ea26c7f9d4d870d1ee06a8b95f60854d0da059d3",
+  "criteria": [
+    {
+      "id": "R01-01",
+      "requirement": "Reproduce the memory fault and verify the supplied interaction on production browser and Windows.",
+      "status": "PASS",
+      "evidence": [
+        "baseline-memory.json",
+        "reproduction.md",
+        "tests.json"
+      ]
+    },
+    {
+      "id": "R01-02",
+      "requirement": "Store evaluated values, preserve exactness and certified irrational precision, and preserve absolute/relative percentage semantics.",
+      "status": "PASS",
+      "evidence": [
+        "findings.json",
+        "regression.md",
+        "tests.json"
+      ]
+    },
+    {
+      "id": "R01-03",
+      "requirement": "Cover all memory functions, magnitudes, negatives, chains, context, language, continued precision and async invalidation.",
+      "status": "PASS",
+      "evidence": [
+        "regression.md",
+        "tests.json"
+      ]
+    },
+    {
+      "id": "R01-04",
+      "requirement": "Run native Rust and independent CLI/WASM combinatorial oracle checks, including percentages, powers, roots and intervals.",
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "regression.md"
+      ]
+    },
+    {
+      "id": "R01-05",
+      "requirement": "Prove worker deadline, native termination, bounded recovery, cancellation and stale-response rejection.",
+      "status": "PASS",
+      "evidence": [
+        "findings.json",
+        "tests.json",
+        "regression.md"
+      ]
+    },
+    {
+      "id": "R01-06",
+      "requirement": "Measure actual Windows working sets, private commit, shared pages, auxiliaries, estimated increment, CPU in multiple phases and startup.",
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "../../../benchmarks/windows-desktop.md"
+      ],
+      "limits": "System-level deltas reflect the machine during the run. Startup types indicate fresh/reused profiles. Recovery is a finite observation."
+    },
+    {
+      "id": "R01-07",
+      "requirement": "Re-run native Windows app and browser, UI, themes, seven locales, offline, responsiveness and accessibility.",
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "themes-and-locales.json",
+        "regression.md"
+      ]
+    },
+    {
+      "id": "R01-08",
+      "requirement": "Exceed 95% Rust core coverage and supplement it with browser behavior and independent calculations.",
+      "status": "PASS",
+      "evidence": [
+        "tests.json"
+      ]
+    },
+    {
+      "id": "R01-09",
+      "requirement": "Verify security, lockfiles and Windows, macOS and Linux CI with appropriate build/runtime claims.",
+      "status": "PASS",
+      "evidence": [
+        "security.md",
+        "ci.json",
+        "tests.json"
+      ]
+    },
+    {
+      "id": "R01-10",
+      "requirement": "Publish reviewed 0.1.1 correction and evidence, preserve historical baseline and avoid a stable release.",
+      "status": "PASS",
+      "evidence": [
+        "REPORT.md",
+        "../acceptance.json",
+        "security.md"
+      ],
+      "limits": "Published development source and audit evidence. Objective 01 requires independent review and explicit approval."
+    },
+    {
+      "id": "R01-12",
+      "requirement": "Start in navy Dark on fresh profiles regardless of system scheme and retain saved choices.",
+      "status": "PASS",
+      "evidence": [
+        "themes-and-locales.json",
+        "windows-memory.png",
+        "tests.json"
+      ]
+    },
+    {
+      "id": "R01-11",
+      "requirement": "Keep the project bilingual, the future increment target recorded and Objective 02 unstarted.",
+      "status": "PASS",
+      "evidence": [
+        "REPORT.md",
+        "../../../PROJECT_STATE.md",
+        "../../../docs/pt-BR/project-state.md",
+        "../../../benchmarks/windows-desktop.pt-BR.md"
+      ]
+    }
+  ]
+}

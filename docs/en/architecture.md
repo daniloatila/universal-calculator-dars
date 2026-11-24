@@ -26,7 +26,7 @@ flowchart LR
 
 ## Evaluation interface
 
-The boundary accepts a canonical expression string and returns one of two JSON objects.
+The CLI and the basic Wasm `evaluate_json` export accept a canonical expression string and return one of two JSON objects.
 
 ```json
 {"ok":true,"exact":"3/10","approximate":"0.3"}
@@ -38,6 +38,16 @@ The boundary accepts a canonical expression string and returns one of two JSON o
 
 An exact result uses a reduced rational string or an integer string. Approximate-only results have a null `exact` field. Numerical fields are strings, so calculation never depends on JavaScript's floating-point conversion. The UI is responsible for localized display. Stable error codes let different clients report the same mathematical failure in their own language.
 
-The engine is isolated from I/O and the host environment. Modules receive a narrow evaluation adapter. Standard uses the shared Rust evaluator and owns session-local state. Future modules can introduce different contracts at their own boundaries. Runtime lifecycle optimization belongs to Objective 02.
+The Standard worker uses `evaluate_value_json(expression, bindings_json)` and `combine_values_json(left, right, subtract)`. Successful responses add a `value` string containing an opaque Rust representation of a reduced rational or a certified interval with rational endpoints. The UI passes it back unchanged for memory arithmetic and session references. This preserves the original numeric value when the displayed decimal rounds and keeps `%` interpretation inside expression evaluation. An empty left value in `combine_values_json` represents zero. Both exports use the same stable error response.
+
+For an expression containing `@n` references, the UI supplies only the values referenced by that expression. The binding object has at most 256 entries with positive canonical 32-bit unsigned integer keys. Each stored value is limited to 10,000 bytes and the binding JSON is limited to 2,565,122 bytes. The one-shot CLI has no session bindings.
+
+## Worker lifecycle
+
+The adapter dispatches one request at a time after the worker signals readiness, with at most eight active and queued requests in total. Worker startup has a 15-second deadline, and a dispatched request has a five-second deadline. Cancelling a queued request removes it from the queue. Cancelling an active request terminates its worker and starts a replacement. Replies from a superseded worker cannot settle current work.
+
+Startup failures, worker faults, malformed responses and timeouts trigger recovery. The adapter can make two consecutive automatic retries, each after 250 ms. A valid job response resets that retry count. When retries are exhausted, the engine reports that it is unavailable and reload can start it again. Standard checks whether a pending operation still belongs to the current expression before updating the result or memory. It also checks whether history was cleared since dispatch before adding an entry.
+
+The engine is isolated from I/O and the host environment. Modules receive a narrow evaluation adapter. Standard uses the shared Rust evaluator and owns session-local state. Future modules can introduce different contracts at their own boundaries.
 
 See [Standard calculation semantics](standard.md) for the expression grammar, rounding, and resource bounds. See [ADR 001](../adr/0001-shared-calculation-core.md) for the architectural decision.

@@ -6,6 +6,7 @@
 
 - Armazenamento de racionais exatos e aproximações por intervalo independentemente da expressão original. A memória e a reutilização de resultados preservam seu valor em expressões percentuais.
 - Prazo de execução, cancelamento, isolamento de respostas obsoletas e recuperação limitada do worker.
+- Tema Escuro em tons de azul-marinho por padrão em perfis novos, com as escolhas explícitas de tema preservadas.
 - Regressões de navegador, Rust e oráculo independente, além de benchmark Windows com *working set* privado, memória comprometida e amostras mais longas de repouso.
 
 ## 0.1.0 · Revisão do Objetivo 01

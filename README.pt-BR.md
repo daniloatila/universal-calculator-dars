@@ -8,7 +8,7 @@ O DARS é uma plataforma de computação local de Danilo Átila. Seu primeiro ma
 
 ## Fundação
 
-A revisão 01 do Objetivo 01 (0.1.1) está em validação. A calculadora Standard usa o mesmo núcleo matemático Rust no aplicativo Windows x64, no navegador e na interface de linha de comando. Ela oferece aritmética, porcentagens, frações, potências e raízes, expressões editáveis, histórico temporário e memória de valores avaliados.
+A revisão 01 do Objetivo 01 (0.1.1) está pronta para auditoria independente. A calculadora Standard usa o mesmo núcleo matemático Rust no aplicativo Windows x64, no navegador e na interface de linha de comando. Ela oferece aritmética, porcentagens, frações, potências e raízes, expressões editáveis, histórico temporário e memória de valores avaliados. O tema Escuro em azul-marinho abre por padrão em perfis novos.
 
 - [Compilar a partir do código-fonte](docs/pt-BR/build.md)
 - [Usar a calculadora Padrão](docs/pt-BR/standard.md)

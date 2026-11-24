@@ -10,13 +10,19 @@ Alterne entre **Decimal** e **Exato**. **Copiar resultado** copia a representaç
 
 | Tecla de memória | Ação |
 | --- | --- |
-| MS | Armazenar o cálculo atual |
-| M+ | Somar o cálculo atual à memória |
-| M− | Subtrair o cálculo atual da memória |
+| MS | Calcular a expressão atual e armazenar seu valor |
+| M+ | Somar o valor calculado à memória, partindo de zero se ela estiver vazia |
+| M− | Subtrair o valor calculado da memória, partindo de zero se ela estiver vazia |
 | MR | Recuperar o valor na expressão |
 | MC | Limpar a memória |
 
-Selecione um item do **Histórico** para editar ou refazer o cálculo. O histórico mantém os últimos 32 cálculos bem-sucedidos nesta sessão. Fechar ou recarregar limpa o estado da calculadora. **Configurações** salva as escolhas explícitas de tema e idioma no dispositivo. Sem escolha prévia, a interface segue as preferências do sistema e usa inglês se o idioma não estiver disponível.
+A memória guarda um racional irredutível ou um intervalo certificado pelo núcleo. M+ e M− combinam esses valores diretamente. Por exemplo, com `100` na memória, digitar `sqrt(2)%` e pressionar M+ soma √2 dividido por 100, dando aproximadamente `100,014142135623730950488`.
+
+MR substitui uma entrada vazia, um cálculo concluído ou a expressão ainda intacta usada pela última operação de memória bem-sucedida. Em uma expressão editada, MR insere o valor entre parênteses na posição do cursor ou substitui a seleção. Quando o resultado é apenas aproximado ou um numerador ou denominador exato supera 256 dígitos, o editor usa uma referência como `@1` ao recuperar o valor ou continuar um cálculo. Cada referência conserva o mesmo valor enquanto estiver em uso no editor, no desfazer/refazer ou no histórico. Limpar a memória preserva essas referências durante a sessão atual.
+
+Selecione um item do **Histórico** para editar ou refazer o cálculo. O histórico mantém os últimos 32 cálculos bem-sucedidos nesta sessão. Se o histórico for limpo durante um cálculo, esse cálculo não aparece na lista recém-limpa. MC cancela uma operação de memória pendente antes de limpar seu valor. **Cancelar cálculo** interrompe a operação atual. Editar, desfazer ou refazer uma edição também cancela a operação da expressão anterior.
+
+Fechar ou recarregar limpa o estado da calculadora. **Configurações** salva as escolhas explícitas de tema e idioma no dispositivo. Em um perfil novo, o tema Escuro em tons de azul-marinho é o padrão. Para seguir o sistema, escolha Sistema. Também é possível escolher Claro ou OLED. Sem idioma salvo, a interface segue a preferência de idioma do navegador e usa inglês como fallback.
 
 O campo de expressão aceita dígitos e separador decimal locais. Em idiomas que usam vírgula decimal, separe argumentos de funções com `;`. Por exemplo, em português brasileiro use `root(-32;5)`. No núcleo e na CLI, a expressão canônica é `root(-32,5)`. Digite números sem separadores de milhares. A separação de milhares no resultado serve apenas para apresentação.
 
@@ -35,7 +41,7 @@ O núcleo usa dígitos ASCII e ponto decimal. São permitidos espaços entre os 
 
 Da maior à menor precedência vêm a raiz prefixada `√`, a porcentagem, a potência, o sinal prefixado, os operadores multiplicativos e os aditivos. Parênteses e limites de argumentos de função delimitam uma expressão completa. Multiplicação e divisão no mesmo nível associam-se à esquerda, assim como soma e subtração. Escreva a multiplicação de forma explícita. A gramática aceita literais decimais sem notação científica nem variáveis.
 
-Uma porcentagem diretamente à direita de uma soma ou subtração usa o valor avaliado à esquerda como base. Por exemplo, `200 + 10% = 220` e `200 - (10%) = 180`. Sinais unários e parênteses mantêm essa forma percentual. Outros operandos seguem a divisão por 100, de modo que `200 * 10% = 20` e `200 + (10% * 2) = 200.2`.
+Uma porcentagem diretamente à direita de uma soma ou subtração usa o valor avaliado à esquerda como base. Por exemplo, `200 + 10% = 220` e `200 - (10%) = 180`. Sinais unários e parênteses mantêm essa forma percentual. Outros operandos seguem a divisão por 100, de modo que `200 * 10% = 20` e `200 + (10% * 2) = 200.2`. Um valor recuperado ou uma referência como `@1` é um operando numérico. Um `%` acrescentado a ele segue a mesma gramática.
 
 ## Exatidão, aproximação e limites
 

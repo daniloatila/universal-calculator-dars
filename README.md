@@ -8,7 +8,7 @@ DARS is a local-first computation platform by Danilo Átila. Its first milestone
 
 ## Foundation
 
-Objective 01 revision 01 (0.1.1) is in verification. Its Standard calculator uses one Rust math engine in the Windows x64 app, browser and CLI. It supports arithmetic, percentages, fractions, powers and roots, editable expressions, temporary history and memory based on evaluated values.
+Objective 01 revision 01 (0.1.1) is ready for independent review. Its Standard calculator uses one Rust math engine in the Windows x64 app, browser and CLI. It supports arithmetic, percentages, fractions, powers and roots, editable expressions, temporary history and memory based on evaluated values. Dark navy is the default theme on fresh profiles.
 
 - [Build from source](docs/en/build.md)
 - [Use Standard](docs/en/standard.md)

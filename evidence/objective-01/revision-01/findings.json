@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "ea26c7f9d4d870d1ee06a8b95f60854d0da059d3",
+  "calculation_implementation_commit": "69fb558050644220f4bec3354d180e66df9bc013",
+  "findings": [
+    {
+      "id": "R01-MEMORY-PERCENT",
+      "severity": "high",
+      "cause": "Standard stored an irrational expression as text. M+ composed that text with '+', allowing the Rust parser to treat the trailing percent as relative to the saved left operand.",
+      "before": "On Chrome with the archived 0.1.0 bundle, use MS 100, enter sqrt(2)%, M+, then AC, MR and evaluate to isolate the second fault. The result was 101.414213562373095048802.",
+      "fix": "Rust now transports canonical rationals or rational interval endpoints and combines evaluated values directly. Standard binds retained values as numeric operands. An explicit percentage in a new expression still follows the parser's relative-percentage rule.",
+      "after": "In Chromium and Windows WebView2, MS 100, sqrt(2)%, M+, MR and evaluate shows 100.014142135623730950488. The ordinary 200+10% control still returns 220.",
+      "evidence": [
+        "baseline-memory.json",
+        "reproduction.md",
+        "tests.json"
+      ],
+      "regressions": [
+        "apps/web/tests/standard-revision.spec.ts",
+        "crates/dars-core/tests/structured_values.rs",
+        "crates/dars-core/tests/structured-oracle.py"
+      ],
+      "implementation_commit": "69fb558050644220f4bec3354d180e66df9bc013"
+    },
+    {
+      "id": "R01-MEMORY-RECALL",
+      "severity": "medium",
+      "cause": "Immediate MR inserted a second operand into the expression that M+ had already evaluated, with no operator at the caret.",
+      "before": "On archived 0.1.0, MS 100, sqrt(2)%, M+, MR immediately produced sqrt(2)%((100)+(sqrt(2)%)) and evaluation returned an invalid-expression error.",
+      "fix": "MR replaces an entry just consumed by MS, M+ or M−. In a newly edited entry it uses the normal operand insertion path.",
+      "after": "Immediate MR succeeds in Chrome and the Windows app. Browser regression also exercises contextual reuse with explicit percentages, negative values, powers and subsequent editing.",
+      "evidence": [
+        "baseline-memory.json",
+        "reproduction.md",
+        "tests.json"
+      ],
+      "regressions": [
+        "apps/web/tests/standard-revision.spec.ts",
+        "scripts/verify-desktop.mjs"
+      ],
+      "implementation_commit": "69fb558050644220f4bec3354d180e66df9bc013"
+    },
+    {
+      "id": "R01-STALE-STATE",
+      "severity": "medium",
+      "cause": "The old interface could clear state while an outstanding request retained the ability to write it back. This was identified by inspecting the old memory/history completion paths.",
+      "before": "The old MC/clear-history handlers did not invalidate their respective completion paths. The directed test recipe retains an actual worker response while the clear, edit or cancel action is taken, then delivers the retained response.",
+      "fix": "Use abortable operation identity for pending writes and a separate history generation. Old work cannot repopulate cleared state. A completed history entry keeps its own immutable session binding.",
+      "after": "Controlled production Chromium tests held and replayed obsolete replies, exercised MC during M+, Cancel, edits and history clear, and checked the next committed values.",
+      "evidence": [
+        "tests.json",
+        "regression.md"
+      ],
+      "regressions": [
+        "apps/web/tests/standard-revision.spec.ts",
+        "apps/web/tests/worker.test.mts"
+      ],
+      "implementation_commit": "69fb558050644220f4bec3354d180e66df9bc013"
+    },
+    {
+      "id": "R01-WORKER-DEADLINE",
+      "severity": "high",
+      "cause": "The original worker port capped initialization time only. An unresponsive active calculation had no deadline or cancellation path.",
+      "before": "A browser fault injector withheld the first post-handshake reply on 0.1.0. Working remained visible and Calculate was disabled after 1,200 ms. Source inspection confirmed there was no active-job expiry.",
+      "fix": "Bound startup, execution, queue depth and automatic recovery; terminate the affected worker, ignore retired-generation replies and resume queued work only on a healthy worker.",
+      "after": "The production browser fault test verifies native termination following the execution deadline and a correct subsequent calculation without page reload. Deterministic unit tests cover late and malformed replies, abort, queue bounds and exhausted retries.",
+      "evidence": [
+        "tests.json",
+        "regression.md"
+      ],
+      "regressions": [
+        "apps/web/tests/worker.spec.ts",
+        "apps/web/tests/worker.test.mts"
+      ],
+      "implementation_commit": "69fb558050644220f4bec3354d180e66df9bc013"
+    },
+    {
+      "id": "R01-BENCHMARK-INTERPRETATION",
+      "severity": "methodology",
+      "cause": "The original native result summed working sets and used a short CPU window. Shared pages could be counted repeatedly, and idle/load/minimized/recovery were not distinguished.",
+      "before": "Historical evidence shows approximately 25.4 MiB for the host, 400.5 MiB summed working sets and 5.51% of one CPU over approximately three seconds.",
+      "fix": "Capture native private working set, private bytes, working set and shared counters per host/descendants, measure system deltas against unlaunched ambient, and use sustained phases plus several launches.",
+      "after": "The 0.1.1 phase summary contains distinct visible idle, minimized, sustained calculation, recovery and closed observations with startup profile-state distribution.",
+      "evidence": [
+        "../benchmarks.json",
+        "benchmarks.json",
+        "../../../benchmarks/windows-desktop.md"
+      ],
+      "regressions": [
+        "benchmarks/windows-desktop-profile.mjs",
+        "benchmarks/windows-process-sampler.ps1"
+      ],
+      "implementation_commit": "bc9c945dfca361d2c774697cca78697542b72a54"
+    }
+  ],
+  "appearance_change": {
+    "requested_by_owner": true,
+    "commit": "460c2f05049acaa75da0035444150f5f4eaed801",
+    "default_theme": "dark",
+    "palette": "navy blue",
+    "compatibility": "Saved explicit theme choices remain available and persistent. System can be chosen explicitly.",
+    "prior_native_observation": "In one pre-theme screenshot under CDP offline mode the header image displayed a missing-image marker. The exact trigger was unconfirmed.",
+    "after": "The original mark path is embedded in the interface and uses theme tokens. Windows WebView2 verified its blue fill during the offline calculation.",
+    "evidence": [
+      "tests.json",
+      "themes-and-locales.json",
+      "windows-memory.png"
+    ]
+  }
+}

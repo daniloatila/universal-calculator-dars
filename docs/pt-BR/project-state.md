@@ -4,13 +4,13 @@
 
 ## Objetivo atual
 
-**Objetivo 01 · Fundação · 0.1.1 · IN_PROGRESS**
+**Objetivo 01 · Fundação · 0.1.1 · READY_FOR_REVIEW**
 
-A revisão 01 está validando a correção da memória da Standard, a recuperação do worker e as medições de desempenho no Windows. O Objetivo 02 requer aprovação explícita do autor. [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) · [Linha de base 0.1.0](../../evidence/objective-01/REPORT.md)
+A revisão 01 verificou a correção da memória da Standard, a recuperação do worker, o tema Escuro azul-marinho por padrão e as medições de desempenho no Windows. O Objetivo 02 requer aprovação explícita do autor. [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) · [Linha de base 0.1.0](../../evidence/objective-01/REPORT.md)
 
 | Objetivo | Versão planejada | Estado | Evidências |
 | --- | --- | --- | --- |
-| 01 · Fundação | 0.1.1 | IN_PROGRESS | [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) |
+| 01 · Fundação | 0.1.1 | READY_FOR_REVIEW | [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) |
 | 02 · Inteligência operacional | 0.2.0 | NOT_STARTED | `evidence/objective-02/` |
 | 03 · Matemática universal | 0.3.0 | NOT_STARTED | `evidence/objective-03/` |
 | 04 · Finanças e negócios | 0.4.0 | NOT_STARTED | `evidence/objective-04/` |

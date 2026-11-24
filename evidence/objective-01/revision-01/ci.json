@@ -1,0 +1,57 @@
+{
+  "conclusion": "success",
+  "createdAt": "2026-11-24T22:14:48Z",
+  "headSha": "460c2f05049acaa75da0035444150f5f4eaed801",
+  "jobs": [
+    {
+      "name": "verify (windows-latest)",
+      "databaseId": 138817259133,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45499090489/job/138817259133",
+      "conclusion": "success",
+      "status": "completed",
+      "startedAt": "2026-11-24T22:14:52Z",
+      "completedAt": "2026-11-24T22:19:58Z"
+    },
+    {
+      "name": "security",
+      "databaseId": 138817259704,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45499090489/job/138817259704",
+      "conclusion": "success",
+      "status": "completed",
+      "startedAt": "2026-11-24T22:14:52Z",
+      "completedAt": "2026-11-24T22:18:32Z"
+    },
+    {
+      "name": "verify (macos-latest)",
+      "databaseId": 138817259734,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45499090489/job/138817259734",
+      "conclusion": "success",
+      "status": "completed",
+      "startedAt": "2026-11-24T22:14:55Z",
+      "completedAt": "2026-11-24T22:18:20Z"
+    },
+    {
+      "name": "verify (ubuntu-latest)",
+      "databaseId": 138817259764,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45499090489/job/138817259764",
+      "conclusion": "success",
+      "status": "completed",
+      "startedAt": "2026-11-24T22:14:52Z",
+      "completedAt": "2026-11-24T22:17:09Z"
+    }
+  ],
+  "status": "completed",
+  "updatedAt": "2026-11-24T22:19:59Z",
+  "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45499090489",
+  "prior_math_verification": {
+    "headSha": "69fb558050644220f4bec3354d180e66df9bc013",
+    "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45497036409",
+    "conclusion": "success"
+  },
+  "scope": {
+    "ubuntu": "Rust and Linux CLI, WASM and frontend, independent Python oracles, native/WASM parity, Chromium UI and offline.",
+    "windows": "Rust, Windows CLI, WASM and frontend and build of the Windows native executable. Local runner separately executed the release app with WebView2.",
+    "macos": "Rust, macOS CLI, WASM/frontend, independent Python oracles, native/WASM parity, native macOS desktop build.",
+    "security": "npm audit at high threshold, RustSec cargo audit with yanked versions denied."
+  }
+}
