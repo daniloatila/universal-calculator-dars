@@ -1,0 +1,8 @@
+[workspace]
+members = ["apps/desktop", "crates/dars-cli", "crates/dars-core", "crates/dars-wasm"]
+default-members = ["crates/dars-cli", "crates/dars-core", "crates/dars-wasm"]
+resolver = "3"
+
+[profile.release]
+strip = "symbols"
+lto = "thin"

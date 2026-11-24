@@ -1,0 +1,29 @@
+{
+  "browser": "158.0.8127.38",
+  "captures": [
+    {
+      "name": "web-desktop-light",
+      "width": 1120,
+      "height": 820,
+      "colorScheme": "light",
+      "touch": false,
+      "overflow": false,
+      "renderedResult": "0.333333333333333333333333",
+      "resultTextLines": 1,
+      "calculateBottom": 810.046875,
+      "viewportHeight": 820
+    },
+    {
+      "name": "web-mobile-dark",
+      "width": 390,
+      "height": 844,
+      "colorScheme": "dark",
+      "touch": true,
+      "overflow": false,
+      "renderedResult": "0.333333333333333333333333",
+      "resultTextLines": 1,
+      "calculateBottom": 837.890625,
+      "viewportHeight": 844
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "Local Objective 01 verification on Windows x64 with the production web build",
+  "counts": {
+    "passed_checks": 219,
+    "failed": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {"name":"Rust workspace", "passed":10, "command":"cargo test --workspace --locked"},
+    {"name":"Independent Python Fraction and Decimal oracle", "passed":157, "evidence":"oracle.json"},
+    {"name":"Native and WASM JSON parity", "passed":20, "evidence":"parity.json"},
+    {"name":"Frontend unit suites", "passed":9, "command":"npm test --prefix apps/web"},
+    {"name":"Chromium browser scenarios including axe", "passed":8, "command":"npm run test:e2e --prefix apps/web", "evidence":"web-validation.json"},
+    {"name":"Production offline and lazy locale checks", "passed":10, "command":"node tests/verify-web-offline.mjs", "evidence":"web-offline.json"},
+    {"name":"Actual Windows desktop and WebView2 assertions", "passed":5, "command":"node scripts/verify-desktop.mjs", "evidence":"windows-x64.json"}
+  ],
+  "core_properties": "The Rust suite includes 297 generated rational/root cases and 2,500 deterministic malformed/Unicode mutations. These are nested cases and are not added to the headline total.",
+  "coverage": "coverage.json",
+  "quality_checks": ["cargo fmt --all --check", "cargo clippy --workspace --locked --all-targets -- -D warnings", "npm run build --prefix apps/web"]
+}

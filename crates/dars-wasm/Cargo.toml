@@ -1,0 +1,13 @@
+[package]
+name = "dars-wasm"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+dars-core = { path = "../dars-core" }
+wasm-bindgen = "=0.2.130"

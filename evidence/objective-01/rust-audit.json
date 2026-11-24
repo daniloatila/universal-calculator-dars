@@ -1,0 +1,26 @@
+{
+  "tool": "cargo-audit 0.23.0",
+  "database_commit": "1d328b6bb9f2f350bf65c1c81ab68781cb9e018a",
+  "dependency_count": 425,
+  "vulnerabilities": 0,
+  "warnings": [
+    {
+      "kind": "unmaintained",
+      "package": "chrono",
+      "version": "0.4.45",
+      "advisory": "RUSTSEC-2026-0543"
+    },
+    {
+      "kind": "unmaintained",
+      "package": "proc-macro-error",
+      "version": "1.0.4",
+      "advisory": "RUSTSEC-2024-0370"
+    },
+    {
+      "kind": "unsound",
+      "package": "glib",
+      "version": "0.18.5",
+      "advisory": "RUSTSEC-2024-0429"
+    }
+  ]
+}

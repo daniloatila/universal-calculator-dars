@@ -1,0 +1,35 @@
+{
+  "observed": "2026-11-24",
+  "test_host": {
+    "windows": "Microsoft Windows 11 Pro",
+    "build": "26200",
+    "architecture": "AMD64",
+    "processor": "Intel(R) Core(TM) Ultra 7 255HX",
+    "logical_processors": 20,
+    "ram_bytes": 33752997888,
+    "msvc_build_tools": "18.9.12112.369",
+    "windows_sdk": "10.0.26100.0",
+    "webview2_installed": [
+      "157.0.4341.60",
+      "158.0.4370.33"
+    ]
+  },
+  "tools": {
+    "rust": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+    "cargo": "cargo 1.100.0 (3acc79c0c 2026-11-05)",
+    "node": "v24.19.0",
+    "npm": "11.17.0",
+    "python": "Python 3.14.7",
+    "git": "git version 2.55.0.windows.3",
+    "wasm_bindgen": "wasm-bindgen 0.2.130"
+  },
+  "name_checks": {
+    "github": "authenticated API returned 404 for repository before creation",
+    "github_search": "no exact Universal Calculator + DARS repo match",
+    "npm": "generic dars in use; qualified names not found in registry",
+    "crates_io": "generic dars in use; qualified name absent from sparse index",
+    "google_play": "application ID returned HTTP 404",
+    "apple": "US public bundle-ID lookup returned zero results",
+    "limitations": "Point-in-time public checks; no store reservation, trademark clearance, or universal uniqueness."
+  }
+}

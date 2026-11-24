@@ -1,0 +1,27 @@
+{
+  "desktop": {
+    "workspace_relative": "target/release/dars-desktop.exe",
+    "bytes": 8387072,
+    "sha256": "495de271647dd97b683e2681de8a017feb516acdde6a9f24c96c71646669a16b"
+  },
+  "cli": {
+    "workspace_relative": "target/release/dars.exe",
+    "bytes": 464896,
+    "sha256": "276c35bb644013b0141682dc26262c3d71db590d23f962e0c20c536d8c92be0f"
+  },
+  "web_entry": {
+    "workspace_relative": "apps/web/dist/index.html",
+    "bytes": 873,
+    "sha256": "9b0bf301c23466485bc5ae461dd19121e1fb19cef6b55640c9a2f777ad9617b6"
+  },
+  "web_worker": {
+    "workspace_relative": "apps/web/dist/dars-worker.js",
+    "bytes": 2518,
+    "sha256": "7bf290d2f92943c879ad45205d49feb49abdcfd3ea1bf067554b56c7285dfda9"
+  },
+  "web_wasm": {
+    "workspace_relative": "apps/web/dist/assets/dars_wasm_bg-BGGS5SvM.wasm",
+    "bytes": 210926,
+    "sha256": "ad9f1d9cd220438853312f491db84d4f572d38fabb3bec43b03f648698cf7953"
+  }
+}

@@ -1,0 +1,14 @@
+[package]
+name = "dars-desktop"
+version = "0.1.0"
+edition = "2024"
+description = "Universal Calculator (DARS) desktop application"
+license = "Apache-2.0"
+publish = false
+build = "build.rs"
+
+[build-dependencies]
+tauri-build = { version = "=2.7.6" }
+
+[dependencies]
+tauri = { version = "=2.12.7", default-features = false, features = ["wry"] }

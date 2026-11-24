@@ -1,0 +1,8 @@
+{
+  "suite": "python-fraction-decimal-oracle",
+  "passed": 157,
+  "failed": 0,
+  "skipped": 0,
+  "command": "python -B tests/oracle.py target/release/dars.exe",
+  "cli_sha256": "276c35bb644013b0141682dc26262c3d71db590d23f962e0c20c536d8c92be0f"
+}

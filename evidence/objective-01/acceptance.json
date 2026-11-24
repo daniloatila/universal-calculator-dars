@@ -1,0 +1,567 @@
+{
+  "schema_version": 1,
+  "objective": "01",
+  "version": "0.1.0",
+  "objective_status": "IN_PROGRESS",
+  "criterion_states": [
+    "PENDING",
+    "PASS",
+    "FAIL",
+    "PARTIAL",
+    "NOT_APPLICABLE",
+    "BLOCKED"
+  ],
+  "criteria": [
+    {
+      "id": "DARS-01-ENVIRONMENT",
+      "category": "delivery",
+      "requirement": {
+        "en": "Development environment audit",
+        "pt-BR": "Auditoria do ambiente de desenvolvimento"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-IDENTIFIERS",
+      "category": "delivery",
+      "requirement": {
+        "en": "Validation of name, repository, and identifier in relevant channels",
+        "pt-BR": "Validação de nome, repositório e identificador nos canais relevantes"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-ARCHITECTURE",
+      "category": "delivery",
+      "requirement": {
+        "en": "Documented modular architecture",
+        "pt-BR": "Arquitetura modular documentada"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-MONOREPO",
+      "category": "delivery",
+      "requirement": {
+        "en": "Organized monorepo",
+        "pt-BR": "Estrutura monorepo organizada"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-DESIGN_SYSTEM",
+      "category": "delivery",
+      "requirement": {
+        "en": "Original design system",
+        "pt-BR": "Design system original"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-VISUAL_ASSETS",
+      "category": "delivery",
+      "requirement": {
+        "en": "Original lightweight scalable logo and icons",
+        "pt-BR": "Logotipo e ícones originais, leves e escaláveis"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-RESPONSIVE",
+      "category": "delivery",
+      "requirement": {
+        "en": "Responsive interface and accessibility checks",
+        "pt-BR": "Interface responsiva e verificações de acessibilidade"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-RUST_CORE",
+      "category": "delivery",
+      "requirement": {
+        "en": "Independent Rust math engine",
+        "pt-BR": "Núcleo matemático independente em Rust"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-WASM_BRIDGE",
+      "category": "delivery",
+      "requirement": {
+        "en": "Working Rust, TypeScript, and WebAssembly integration",
+        "pt-BR": "Integração funcional entre Rust, TypeScript e WebAssembly"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-WINDOWS_APP",
+      "category": "delivery",
+      "requirement": {
+        "en": "Working Windows desktop application",
+        "pt-BR": "Aplicativo desktop funcional no Windows"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-WEB_APP",
+      "category": "delivery",
+      "requirement": {
+        "en": "Working browser application",
+        "pt-BR": "Aplicativo web funcional"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-OTHER_TARGETS",
+      "category": "delivery",
+      "requirement": {
+        "en": "Initial build evidence for other available targets",
+        "pt-BR": "Provas iniciais de compilação para outros alvos disponíveis"
+      },
+      "status": "PENDING",
+      "evidence": [],
+      "condition": "when the platform toolchain and prerequisites are available"
+    },
+    {
+      "id": "DARS-01-CLI",
+      "category": "delivery",
+      "requirement": {
+        "en": "Initial CLI",
+        "pt-BR": "Estrutura inicial de CLI"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-LOCALIZATION",
+      "category": "delivery",
+      "requirement": {
+        "en": "Initial internationalization infrastructure",
+        "pt-BR": "Infraestrutura inicial de internacionalização"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-SECURITY",
+      "category": "delivery",
+      "requirement": {
+        "en": "Initial security design and privacy checks",
+        "pt-BR": "Estrutura inicial de segurança e verificações de privacidade"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-MODULE_INTERFACE",
+      "category": "delivery",
+      "requirement": {
+        "en": "Stable initial interface for future modules",
+        "pt-BR": "Interface inicial estável para módulos futuros"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-CI",
+      "category": "delivery",
+      "requirement": {
+        "en": "Continuous integration",
+        "pt-BR": "Integração contínua"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-BILINGUAL_DOCS",
+      "category": "delivery",
+      "requirement": {
+        "en": "Equivalent English and Brazilian Portuguese documentation",
+        "pt-BR": "Documentação equivalente em inglês e português brasileiro"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-INDEPENDENT_ORACLE",
+      "category": "delivery",
+      "requirement": {
+        "en": "Independent mathematical verification environment and execution",
+        "pt-BR": "Ambiente e execução de verificações matemáticas independentes"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-ARITHMETIC",
+      "category": "standard",
+      "requirement": {
+        "en": "Arithmetic",
+        "pt-BR": "Operações aritméticas"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-PERCENT",
+      "category": "standard",
+      "requirement": {
+        "en": "Percentages",
+        "pt-BR": "Porcentagens"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-FRACTIONS",
+      "category": "standard",
+      "requirement": {
+        "en": "Fractions",
+        "pt-BR": "Frações"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-EXPONENTS",
+      "category": "standard",
+      "requirement": {
+        "en": "Powers",
+        "pt-BR": "Potências"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-ROOTS",
+      "category": "standard",
+      "requirement": {
+        "en": "Roots",
+        "pt-BR": "Raízes"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-PARENTHESES",
+      "category": "standard",
+      "requirement": {
+        "en": "Parentheses",
+        "pt-BR": "Parênteses"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-PRECEDENCE",
+      "category": "standard",
+      "requirement": {
+        "en": "Operator precedence",
+        "pt-BR": "Ordem de precedência"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-NEGATIVES",
+      "category": "standard",
+      "requirement": {
+        "en": "Negative numbers",
+        "pt-BR": "Números negativos"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-MEMORY",
+      "category": "standard",
+      "requirement": {
+        "en": "Calculator memory",
+        "pt-BR": "Memória da calculadora"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-TEMPORARY_HISTORY",
+      "category": "standard",
+      "requirement": {
+        "en": "Temporary history",
+        "pt-BR": "Histórico temporário"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-UNDO_REDO",
+      "category": "standard",
+      "requirement": {
+        "en": "Undo and redo",
+        "pt-BR": "Desfazer e refazer"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-COPY",
+      "category": "standard",
+      "requirement": {
+        "en": "Result copying",
+        "pt-BR": "Cópia de resultados"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-KEYBOARD",
+      "category": "standard",
+      "requirement": {
+        "en": "Keyboard input",
+        "pt-BR": "Entrada por teclado"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-EDITING",
+      "category": "standard",
+      "requirement": {
+        "en": "Editable expressions",
+        "pt-BR": "Expressões editáveis"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-EXACT_APPROXIMATE",
+      "category": "standard",
+      "requirement": {
+        "en": "Exact and approximate representation",
+        "pt-BR": "Representação exata e aproximada"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-ERRORS",
+      "category": "standard",
+      "requirement": {
+        "en": "Correct error handling",
+        "pt-BR": "Tratamento correto de erros"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-PARSER",
+      "category": "standard",
+      "requirement": {
+        "en": "Safe parser with explicit grammar, structured expressions, and limits",
+        "pt-BR": "Parser seguro, gramática explícita, representação estruturada e limites"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-OFFLINE",
+      "category": "verification",
+      "requirement": {
+        "en": "Basic calculations with no internet",
+        "pt-BR": "Cálculos básicos executados sem internet"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-DECIMAL_EXACT",
+      "category": "verification",
+      "requirement": {
+        "en": "0.1 + 0.2 returns an exact 0.3",
+        "pt-BR": "0,1 + 0,2 retorna 0,3 com exatidão"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-RATIONAL_EXACT",
+      "category": "verification",
+      "requirement": {
+        "en": "1/3 represented as an exact rational",
+        "pt-BR": "1/3 representado como fração exata"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-DIVISION_BY_ZERO",
+      "category": "verification",
+      "requirement": {
+        "en": "Division by zero is handled correctly",
+        "pt-BR": "A divisão por zero é tratada corretamente"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-CROSS_RUNTIME",
+      "category": "verification",
+      "requirement": {
+        "en": "Consistent results across all tested environments",
+        "pt-BR": "Resultados consistentes entre ambientes efetivamente testados"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-AUTOMATED_TESTS",
+      "category": "verification",
+      "requirement": {
+        "en": "Applicable automated tests pass",
+        "pt-BR": "Os testes automatizados aplicáveis passam"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-BENCHMARK_MEMORY",
+      "category": "verification",
+      "requirement": {
+        "en": "Initial memory benchmark",
+        "pt-BR": "Benchmark inicial de memória"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-BENCHMARK_CPU",
+      "category": "verification",
+      "requirement": {
+        "en": "Initial CPU benchmark",
+        "pt-BR": "Benchmark inicial de CPU"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-BENCHMARK_STARTUP",
+      "category": "verification",
+      "requirement": {
+        "en": "Initial startup benchmark",
+        "pt-BR": "Benchmark inicial de inicialização"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-BENCHMARK_SIZE",
+      "category": "verification",
+      "requirement": {
+        "en": "Initial artifact size benchmark",
+        "pt-BR": "Benchmark inicial de tamanho dos artefatos"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-BENCHMARK_LATENCY",
+      "category": "verification",
+      "requirement": {
+        "en": "Initial latency benchmark",
+        "pt-BR": "Benchmark inicial de latência"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-FOUNDATION_DOCS",
+      "category": "verification",
+      "requirement": {
+        "en": "Complete foundation documentation",
+        "pt-BR": "Documentação completa da fundação"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-REPRODUCTION",
+      "category": "verification",
+      "requirement": {
+        "en": "Reproducible installation and use instructions",
+        "pt-BR": "Instruções reproduzíveis de instalação e execução"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-PUBLIC_REPOSITORY",
+      "category": "delivery_gate",
+      "requirement": {
+        "en": "Dedicated public repository containing reviewed source",
+        "pt-BR": "Repositório público dedicado com o código auditado"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-SOURCE_PRIVACY",
+      "category": "delivery_gate",
+      "requirement": {
+        "en": "Publication free of secrets, private data, or planned features presented as delivered",
+        "pt-BR": "Publicação sem segredos, dados privados ou funcionalidades planejadas anunciadas como prontas"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-NO_STABLE_RELEASE",
+      "category": "delivery_gate",
+      "requirement": {
+        "en": "No stable end-user release in Objective 01",
+        "pt-BR": "Objetivo 01 sem release estável para usuários finais"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-ARTIFACT_AND_EVIDENCE",
+      "category": "delivery_gate",
+      "requirement": {
+        "en": "Working app, report, and evidence manifest with hashes",
+        "pt-BR": "Aplicativo funcional, relatório e manifesto de evidências com hashes"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-PRESERVE_PRIOR_WORK",
+      "category": "delivery_gate",
+      "requirement": {
+        "en": "Earlier work preserved and scope limited to DARS",
+        "pt-BR": "Trabalho anterior preservado e escopo limitado ao DARS"
+      },
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "DARS-01-REVIEW_GATE",
+      "category": "delivery_gate",
+      "requirement": {
+        "en": "Stop at delivery and require explicit approval before Objective 02",
+        "pt-BR": "Parar após a entrega e exigir aprovação explícita antes do Objetivo 02"
+      },
+      "status": "PENDING",
+      "evidence": []
+    }
+  ]
+}

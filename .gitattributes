@@ -1,0 +1,4 @@
+* text=auto eol=lf
+PROJECT_SPEC.md -text
+*.png binary
+*.ico binary

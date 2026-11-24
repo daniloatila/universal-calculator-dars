@@ -1,0 +1,15 @@
+/.codex/
+/.tooling/
+/github-portfolio/
+/target/
+/artifacts/
+/apps/desktop/gen/
+/apps/web/src/wasm/
+node_modules/
+dist/
+test-results/
+playwright-report/
+__pycache__/
+.env
+.env.*
+*.log

@@ -1,0 +1,31 @@
+{
+  "suite": "objective-01-baseline",
+  "environment": {
+    "platform": "win32",
+    "osRelease": "10.0.26200",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) Ultra 7 255HX",
+    "logicalCores": 20,
+    "node": "v24.19.0"
+  },
+  "method": "Node WebAssembly elapsed time includes evaluation and JSON serialization. Gzip bytes are the sum of per-file compressed sizes for the complete build. Process RSS includes Node.",
+  "webAssembly": {
+    "iterations": 2400,
+    "coldInitMs": 23.333,
+    "medianMs": 0.0044,
+    "p95Ms": 0.292,
+    "p99Ms": 0.3122,
+    "elapsedMs": 100.046,
+    "userCpuUs": 47000,
+    "systemCpuUs": 0,
+    "processRssBytes": 53604352,
+    "processRssDeltaBytes": 14319616
+  },
+  "size": {
+    "wasmBytes": 210926,
+    "distBytes": 488948,
+    "gzipDistBytes": 162147,
+    "cliWindowsBytes": 464896,
+    "desktopWindowsBytes": 8387072
+  }
+}
