@@ -13,13 +13,15 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const require = createRequire(new URL('../apps/web/package.json', import.meta.url));
 const { chromium, expect } = require('@playwright/test');
 const smoke = process.argv.includes('--quick');
-const args = process.argv.slice(2).filter((value) => value !== '--quick');
+const diagnosticOnly = process.argv.includes('--diagnostic-only');
+assert(!(smoke && diagnosticOnly), 'Choose either --quick or --diagnostic-only.');
+const args = process.argv.slice(2).filter((value) => value !== '--quick' && value !== '--diagnostic-only');
 assert.equal(process.platform, 'win32', 'Use an interactive Windows session');
 assert.equal(args.length, 3, 'Pass the 0.1.1, 0.2.0 and 0.2.1 Windows executables in that order.');
 const versions = ['0.1.1', '0.2.0', '0.2.1'];
 const artifactRoot = resolve(root, 'artifacts/objective-02/revision-01');
 await mkdir(artifactRoot, { recursive: true });
-const directory = await mkdtemp(join(artifactRoot, smoke ? 'native-smoke-' : 'native-comparison-'));
+const directory = await mkdtemp(join(artifactRoot, diagnosticOnly ? 'native-interaction-diagnostic-' : smoke ? 'native-smoke-' : 'native-comparison-'));
 const [rawPath, summaryPath] = [join(directory, 'samples.jsonl'), join(directory, 'benchmarks.json')];
 const durations = smoke
   ? { ambient: 1, settle: 2, load: 2, idle: 2, minimized: 2, recovery: 2 }
@@ -33,8 +35,9 @@ const inputs = await Promise.all(args.map(async (name, index) => {
   return { path, version: versions[index], bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') };
 }));
 const report = {
-  schema: 1, status: 'in_progress', qualifying: false, utcStarted: new Date().toISOString(), durations,
-  order: smoke ? [0, 1, 2] : [0, 1, 2, 2, 1, 0],
+  schema: 1, status: 'in_progress', qualifying: false, utcStarted: new Date().toISOString(),
+  ...(diagnosticOnly ? { mode: 'diagnostic-only', durations: null } : { durations }),
+  order: smoke || diagnosticOnly ? [0, 1, 2] : [0, 1, 2, 2, 1, 0],
   inputs: inputs.map(({ path, ...safe }) => safe),
   environment: { platform: process.platform, release: release(), architecture: process.arch,
     processor: cpus()[0]?.model, logicalProcessors: cpus().length, usablePhysicalBytes: totalmem(), node: process.version },
@@ -48,10 +51,11 @@ const checkpoint = async (event) => {
 };
 const logSample = (event) => writeFile(rawPath, JSON.stringify(event) + '\n', { flag: 'a', flush: true });
 
-const sampler = spawn('pwsh.exe', ['-NoProfile', '-NonInteractive', '-File', join(root, 'benchmarks/windows-process-sampler.ps1')],
+const sampler = diagnosticOnly ? undefined : spawn('pwsh.exe',
+  ['-NoProfile', '-NonInteractive', '-File', join(root, 'benchmarks/windows-process-sampler.ps1')],
   { windowsHide: true, stdio: ['pipe', 'pipe', 'inherit'] });
-sampler.stdin.on('error', () => {});
-const lines = createInterface({ input: sampler.stdout, crlfDelay: Infinity })[Symbol.asyncIterator]();
+sampler?.stdin.on('error', () => {});
+const lines = sampler ? createInterface({ input: sampler.stdout, crlfDelay: Infinity })[Symbol.asyncIterator]() : undefined;
 let requestId = 0;
 async function receive() {
   let deadline;
@@ -197,8 +201,10 @@ async function start(input) {
   await app.button.click({ timeout: 8000 });
   await expect(app.result).toHaveText('0.3', { timeout: 8000 });
   app.launchMs = performance.now() - started;
-  app.renderer = await context.newCDPSession(page);
-  app.cdp = await browser.newBrowserCDPSession();
+  if (!diagnosticOnly) {
+    app.renderer = await context.newCDPSession(page);
+    app.cdp = await browser.newBrowserCDPSession();
+  }
   return app;
 }
 
@@ -244,8 +250,127 @@ async function workload(app, durationMs) {
     waitForCheckedDisplay: quantiles(display), externalTotal: quantiles(total) };
 }
 
+async function installResultClock(page) {
+  await page.addInitScript(() => {
+    const WorkerClass = globalThis.Worker;
+    const starts = [];
+    const roundTrips = [];
+    let latestWasmBytes = null;
+    let active;
+    let probeNumber = 0;
+
+    globalThis.__darsBenchWorker = () => ({ starts: starts.slice(), roundTrips: roundTrips.slice(), latestWasmBytes });
+    globalThis.__darsBenchResultClock = {
+      begin() {
+        if (active) throw new Error('Overlapping calculation probes');
+        active = { number: ++probeNumber, sent: 0, received: 0, arrival: null };
+        return active.number;
+      },
+      end(number) {
+        if (active?.number !== number) throw new Error('Mismatched calculation probe');
+        const completed = active;
+        active = undefined;
+        return completed;
+      },
+    };
+    globalThis.Worker = class extends WorkerClass {
+      constructor(...args) {
+        super(...args);
+        const createdAt = performance.now();
+        const jobs = new Map();
+        const original = this.postMessage;
+        this.postMessage = function (message, ...rest) {
+          if (Number.isSafeInteger(message?.id)) {
+            jobs.set(message.id, { sentAt: performance.now(), probe: active?.number });
+            if (active) active.sent++;
+          }
+          return original.apply(this, [message, ...rest]);
+        };
+        // Installed before the application registers its Worker result handler.
+        this.addEventListener('message', ({ data }) => {
+          const arrivedAt = performance.now();
+          if (data?.type === 'ready') starts.push(arrivedAt - createdAt);
+          if (data?.type === 'result' && jobs.has(data.id)) {
+            const job = jobs.get(data.id);
+            jobs.delete(data.id);
+            roundTrips.push(arrivedAt - job.sentAt);
+            if (active && active.number === job.probe) {
+              active.received++;
+              active.arrival ??= arrivedAt;
+            }
+          }
+          if (Number.isSafeInteger(data?.wasmBytes)) latestWasmBytes = data.wasmBytes;
+        }, { capture: true });
+      }
+    };
+  });
+}
+
+function checkResultClock(page, expected) {
+  return page.evaluate((value) => new Promise((resolve, reject) => {
+    const output = document.querySelector('[data-testid="result"]');
+    const button = document.querySelector('button[aria-label="Calculate"]');
+    if (!output || !button) throw new Error('Calculation probe controls unavailable');
+    const clock = globalThis.__darsBenchResultClock;
+    const number = clock.begin();
+    const alreadyMatched = output.textContent?.trim() === value;
+    let checkedAt = null;
+    let frameId;
+    let ended = false;
+
+    function complete(status) {
+      ended = true;
+      observer.disconnect();
+      clearTimeout(timer);
+      cancelAnimationFrame(frameId);
+      const frameAt = performance.now();
+      const probe = clock.end(number);
+      const matched = checkedAt !== null && probe.sent === 1 && probe.received === 1 &&
+        probe.arrival !== null && probe.arrival >= before && probe.arrival <= checkedAt;
+      resolve({
+        probe: number,
+        status: status === 'unchanged' ? status : matched ? 'matched' : 'worker_result_unmatched',
+        dispatched: probe.sent,
+        received: probe.received,
+        workerArrivalAfterClickMs: probe.arrival === null ? null : probe.arrival - before,
+        commit: checkedAt === null ? null : checkedAt - before,
+        frame: checkedAt === null ? null : frameAt - checkedAt,
+        workerResultArrivalToCheckedDomMs: matched ? checkedAt - probe.arrival : null,
+        workerResultArrivalToNextAnimationFrameMs: matched ? frameAt - probe.arrival : null,
+      });
+    }
+
+    const observer = new MutationObserver(() => {
+      if (output.textContent?.trim() !== value) return;
+      checkedAt = performance.now();
+      observer.disconnect();
+      if (frameId !== undefined) cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => complete('checked'));
+    });
+    observer.observe(output, { childList: true, characterData: true, subtree: true });
+
+    const timer = setTimeout(() => {
+      observer.disconnect();
+      cancelAnimationFrame(frameId);
+      clock.end(number);
+      reject(new Error('Checked DOM result timed out'));
+    }, 2500);
+
+    function checkUnchanged() {
+      if (ended || checkedAt !== null) return;
+      if (!button.disabled && output.textContent?.trim() === value) return complete('unchanged');
+      frameId = requestAnimationFrame(checkUnchanged);
+    }
+
+    const before = performance.now();
+    button.click();
+    if (alreadyMatched) frameId = requestAnimationFrame(checkUnchanged);
+  }), expected);
+}
+
 async function focus(app) {
-  await app.page.addInitScript(() => {
+  if (diagnosticOnly) await installResultClock(app.page);
+  else await app.page.addInitScript(() => {
     const workerClass = globalThis.Worker;
     const starts = [];
     const roundTrips = [];
@@ -275,28 +400,32 @@ async function focus(app) {
   await app.page.reload({ timeout: 10000 });
   await expect(app.input).toBeVisible({ timeout: 8000 });
   const inside = [], nextFrame = [], normal = [], forced = [];
+  const resultClockSamples = [];
   const steps = smoke ? 6 : 50;
   for (let i = 0; i < steps; i++) {
     const n = i % 70;
     await app.input.fill(n + '+0.1+0.2');
     await expect(app.button).toBeEnabled();
-    const result = await app.page.evaluate((expected) => new Promise((resolve, reject) => {
-      const output = document.querySelector('[data-testid="result"]');
-      const button = document.querySelector('button[aria-label="Calculate"]');
-      const before = performance.now();
-      let finished;
-      const timer = setTimeout(() => { observer.disconnect(); reject(new Error('Checked DOM result timed out')); }, 2500);
-      const observer = new MutationObserver(() => {
-        if (output.textContent?.trim() !== expected) return;
-        finished = performance.now();
-        observer.disconnect();
-        requestAnimationFrame(() => { clearTimeout(timer); resolve({ commit: finished - before, frame: performance.now() - finished }); });
-      });
-      observer.observe(output, { childList: true, characterData: true, subtree: true });
-      button.click();
-    }), String(n) + '.3');
-    inside.push(result.commit);
-    nextFrame.push(result.frame);
+    const result = diagnosticOnly
+      ? await checkResultClock(app.page, String(n) + '.3')
+      : await app.page.evaluate((expected) => new Promise((resolve, reject) => {
+          const output = document.querySelector('[data-testid="result"]');
+          const button = document.querySelector('button[aria-label="Calculate"]');
+          const before = performance.now();
+          let finished;
+          const timer = setTimeout(() => { observer.disconnect(); reject(new Error('Checked DOM result timed out')); }, 2500);
+          const observer = new MutationObserver(() => {
+            if (output.textContent?.trim() !== expected) return;
+            finished = performance.now();
+            observer.disconnect();
+            requestAnimationFrame(() => { clearTimeout(timer); resolve({ commit: finished - before, frame: performance.now() - finished }); });
+          });
+          observer.observe(output, { childList: true, characterData: true, subtree: true });
+          button.click();
+      }), String(n) + '.3');
+    if (result.commit !== null) inside.push(result.commit);
+    if (result.frame !== null) nextFrame.push(result.frame);
+    if (diagnosticOnly) resultClockSamples.push(result);
 
     // Counterbalance normal and force in the focused diagnostic step only.
     for (const force of i % 2 ? [true, false] : [false, true]) {
@@ -312,16 +441,39 @@ async function focus(app) {
   return { clickToResultDom: quantiles(inside), domResultToNextAnimationFrame: quantiles(nextFrame),
     isolatedNormalLocatorClick: quantiles(normal), isolatedForcedLocatorClick: quantiles(forced),
     workerStartup: quantiles(workers.starts), workerRoundTrip: quantiles(workers.roundTrips),
-    lastReportedWasmBytes: workers.latestWasmBytes };
+    lastReportedWasmBytes: workers.latestWasmBytes,
+    ...(diagnosticOnly ? {
+      timingClock: 'renderer performance.now()',
+      checkedResultProbes: resultClockSamples.length,
+      workerResultArrivalToCheckedDom: quantiles(resultClockSamples.map((sample) => sample.workerResultArrivalToCheckedDomMs).filter(Number.isFinite)),
+      workerResultArrivalToNextAnimationFrame: quantiles(resultClockSamples.map((sample) => sample.workerResultArrivalToNextAnimationFrameMs).filter(Number.isFinite)),
+      resultClockSamples,
+    } : {}) };
 }
 
 try {
-  assert((await receive()).ready);
+  if (!diagnosticOnly) assert((await receive()).ready);
   await checkpoint({ type: 'begin', summary: summaryPath.split(/[\\/]/).at(-1), directory: directory.split(/[\\/]/).at(-1) });
   for (const index of report.order) {
     const binary = inputs[index];
     const run = { number: report.runs.length + 1, version: binary.version, phases: {} };
     report.runs.push(run);
+    if (diagnosticOnly) {
+      const app = await start(binary);
+      run.launchToExactResultMs = app.launchMs;
+      run.webView = app.browser.version();
+      run.interactionDiagnostic = await focus(app);
+      await stop();
+      const probes = run.interactionDiagnostic.resultClockSamples;
+      const workerResultMatches = run.interactionDiagnostic.workerResultArrivalToCheckedDom?.count ?? 0;
+      const unchanged = probes.filter((probe) => probe.status === 'unchanged').length;
+      if (!workerResultMatches || workerResultMatches + unchanged !== probes.length) {
+        report.qualificationIssues.push({ run: run.number, workerResultMatches, unchanged, probes: probes.length });
+      }
+      await checkpoint({ type: 'complete-run', run: run.number, version: run.version,
+        checkedResultProbes: probes.length, workerResultMatches, unchanged });
+      continue;
+    }
     await phase(run, 'ambient', null, 'missing');
     const app = await start(binary);
     run.launchToExactResultMs = app.launchMs;
@@ -350,7 +502,7 @@ try {
   }
   for (const input of inputs) assert.equal(createHash('sha256').update(await readFile(input.path)).digest('hex'), input.sha256);
   report.status = report.qualificationIssues.length ? 'complete_with_limitations' : 'complete';
-  report.qualifying = !smoke && !report.qualificationIssues.length;
+  report.qualifying = !smoke && !diagnosticOnly && !report.qualificationIssues.length;
   report.utcEnded = new Date().toISOString();
   await checkpoint({ type: 'end', status: report.status, qualifying: report.qualifying });
 } catch (error) {
@@ -360,5 +512,5 @@ try {
   throw error;
 } finally {
   await stop();
-  sampler.stdin.end();
+  sampler?.stdin.end();
 }

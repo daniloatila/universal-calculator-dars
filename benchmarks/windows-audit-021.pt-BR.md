@@ -14,6 +14,12 @@ As fases fixas de cada execução são ambiente com DARS fechado (3 s), estabili
 
 O ensaio principal preserva a automação completa. As etapas são preenchimento, clique normal do Playwright e espera do resultado conferido, medidos no processo externo. A medição publica p50, p95 e p99 por etapa. Um ensaio separado mede clique no DOM até o resultado, resultado até o quadro seguinte, cliques de localização normais e forçados, e solicitação ao worker até a resposta. A instrumentação temporária registra a inicialização do worker e a capacidade WASM quando informada. Renderização, commits React, execução do worker e agendamento podem se sobrepor. Uma diferença entre percentis de escopos distintos não identifica o tempo de uma camada.
 
+O modo complementar `--diagnostic-only` faz 50 sondagens idênticas por executável e marca a chegada da resposta do worker, a mutação conferida no DOM e o próximo quadro no mesmo relógio do renderizador. O intervalo entre resposta e DOM inclui o processamento JavaScript, o agendamento do React e o commit observado. O quadro é uma referência temporal do renderizador. O modo não executa as fases pareadas de processos e informa quando a saída fica inalterada ou não tem resposta correspondente.
+
+```powershell
+node benchmarks/windows-audit-021.mjs caminho-0.1.1.exe caminho-0.2.0.exe caminho-0.2.1.exe --diagnostic-only
+```
+
 O exemplo Rust mede análise, cálculo e preparação da resposta tipada, além da serialização isolada de uma resposta já calculada. O formato estruturado também codifica o valor de sessão. O ensaio Node mede a chamada JS–WASM e o parse do JSON em intervalos separados. A execução de interface Windows é uma verificação própria.
 
 ```powershell

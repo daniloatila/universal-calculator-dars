@@ -14,6 +14,12 @@ The fixed phases per run are unlaunched ambient (3 s), settling after the first 
 
 The original style of full automation remains the primary readout. Each checked operation is separated into input fill, ordinary Playwright click, and result wait in the outer process. The runner reports the distribution and p50, p95 and p99 for each portion. A separate diagnostic run measures explicit DOM click to result update, result update to a subsequent animation frame, normal versus forced locator clicks and the dedicated worker's dispatch-to-reply time. A temporary test-only worker wrapper observes startup and the optional WASM memory field. Browser rendering, React commits, worker execution and protocol scheduling can overlap. Timer differences between scopes are unsuitable for subtracting pooled percentiles.
 
+The supplemental `--diagnostic-only` run uses 50 identical in-page probes per binary and cuts the interval at the matching Worker result message, the checked DOM mutation and the next animation frame. The renderer timestamps all three events. The result-message boundary includes subsequent JavaScript handling, React scheduling and commit up to the observed mutation. The animation frame is a renderer timing marker. This mode skips the matched process phases and records unchanged and unmatched outputs explicitly.
+
+```powershell
+node benchmarks/windows-audit-021.mjs path-to-0.1.1.exe path-to-0.2.0.exe path-to-0.2.1.exe --diagnostic-only
+```
+
 The Rust example measures parsing, evaluating and preparing the typed display response, then separately serializes a precomputed legacy response. The structured Rust response includes opaque session value encoding. The Node harness observes the JS–WASM structured result boundary and JSON parsing in separate intervals. None of these microbenchmarks is a substitute for the full Windows interface path.
 
 ```powershell
