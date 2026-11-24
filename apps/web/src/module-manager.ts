@@ -1,5 +1,5 @@
 export type ModulePhase = 'unloaded' | 'loading' | 'active' | 'suspending' | 'suspended' | 'terminated' | 'recoverable_failure';
-export type ModuleFailure = 'load_failed' | 'activation_failed' | 'snapshot_failed' | 'disposal_failed' | 'runtime_failed';
+export type ModuleFailure = 'load_failed' | 'activation_failed' | 'startup_timeout' | 'snapshot_failed' | 'disposal_failed' | 'runtime_failed';
 export type ResourceKind = 'task' | 'worker' | 'cache' | 'graphics' | 'other';
 export type ResourceCounts = Readonly<Record<ResourceKind, number>>;
 
@@ -38,8 +38,15 @@ export interface ModuleDescriptor<TInstance, TState> {
   load(): Promise<{ activate(context: ModuleActivation<TState>): TInstance | Promise<TInstance> }>;
 }
 
+export interface ModuleManagerOptions {
+  /** Total deadline for code loading and activation. */
+  readonly startupMs?: number;
+}
+
+export const MODULE_STARTUP_TIMEOUT_MS = 15_000;
+
 type TransitionResult = 'active' | 'suspended' | 'terminated' | 'recoverable_failure' | 'superseded';
-type TransitionKind = 'activate' | 'suspend' | 'terminate' | 'close';
+type TransitionKind = 'activate' | 'suspend' | 'terminate' | 'clear' | 'close';
 type Transition = { kind: TransitionKind; id: string | null; controller: AbortController; result: Promise<TransitionResult> };
 type Entry<TInstance, TState> = {
   descriptor: ModuleDescriptor<TInstance, TState>;
@@ -77,7 +84,12 @@ function waitForModule<T>(work: Promise<T>, signal: AbortSignal): Promise<T> {
 
 export function createModuleManager<TInstance extends ModuleRuntime<TState>, TState>(
   descriptors: readonly ModuleDescriptor<TInstance, TState>[],
+  options: ModuleManagerOptions = {},
 ) {
+  const startupMs = options.startupMs ?? MODULE_STARTUP_TIMEOUT_MS;
+  if (!Number.isInteger(startupMs) || startupMs < 1 || startupMs > MODULE_STARTUP_TIMEOUT_MS) {
+    throw new RangeError('Invalid module startup deadline');
+  }
   const entries = new Map<string, Entry<TInstance, TState>>();
   for (const descriptor of descriptors) {
     if (!descriptor.id || entries.has(descriptor.id)) throw new RangeError('Duplicate or empty module ID');
@@ -182,6 +194,18 @@ export function createModuleManager<TInstance extends ModuleRuntime<TState>, TSt
     };
     const moduleSignal = current.controller.signal;
     const cancel = () => current.controller.abort();
+    const expiresAt = performance.now() + startupMs;
+    let timedOut = false;
+    const expire = () => {
+      if (moduleSignal.aborted) return;
+      timedOut = true;
+      cancel();
+    };
+    const timer = setTimeout(expire, startupMs);
+    function checkStartup() {
+      if (performance.now() >= expiresAt) expire();
+      moduleSignal.throwIfAborted();
+    }
     signal.addEventListener('abort', cancel, { once: true });
     session = current;
     setPhase(entry, 'loading');
@@ -189,9 +213,9 @@ export function createModuleManager<TInstance extends ModuleRuntime<TState>, TSt
     let failure: ModuleFailure = 'load_failed';
     let activation: Promise<TInstance> | undefined;
     try {
-      moduleSignal.throwIfAborted();
+      checkStartup();
       const loaded = await waitForModule(entry.descriptor.load(), moduleSignal);
-      moduleSignal.throwIfAborted();
+      checkStartup();
       failure = 'activation_failed';
       activation = Promise.resolve(loaded.activate({
         signal: moduleSignal,
@@ -200,7 +224,7 @@ export function createModuleManager<TInstance extends ModuleRuntime<TState>, TSt
         reportFailure: () => reportFailure(current),
       }));
       current.instance = await waitForModule(activation, moduleSignal);
-      moduleSignal.throwIfAborted();
+      checkStartup();
       entry.saved = undefined;
       setPhase(entry, 'active');
       return current.failed ? 'recoverable_failure' : 'active';
@@ -213,10 +237,11 @@ export function createModuleManager<TInstance extends ModuleRuntime<TState>, TSt
         }, () => {});
       }
       if (current.failed) return retire(current, 'recoverable_failure', 'runtime_failed');
-      if (!signal.aborted) return retire(current, 'recoverable_failure', failure);
+      if (!signal.aborted) return retire(current, 'recoverable_failure', timedOut ? 'startup_timeout' : failure);
       retire(current, 'suspended');
       return 'superseded';
     } finally {
+      clearTimeout(timer);
       signal.removeEventListener('abort', cancel);
     }
   }
@@ -240,23 +265,24 @@ export function createModuleManager<TInstance extends ModuleRuntime<TState>, TSt
     const controller = new AbortController();
     const result = tail.then(async (): Promise<TransitionResult> => {
       if (controller.signal.aborted) return 'superseded';
-      if (kind === 'close') {
+      if (kind === 'close' || kind === 'clear') {
         const closingEntry = session?.entry;
         const outcome = session ? retire(session, 'terminated') : 'terminated';
         for (const entry of entries.values()) {
           entry.saved = undefined;
+          if (kind === 'clear' && entry.status.phase === 'unloaded') continue;
           if (entry !== closingEntry || outcome !== 'recoverable_failure') {
             entry.status = { id: entry.status.id, phase: 'terminated' };
           }
         }
-        closed = true;
+        closed = kind === 'close';
         publish();
         return outcome;
       }
       if (kind === 'activate' && id !== null) return open(lookup(id), controller.signal);
       const phase = kind === 'terminate' ? 'terminated' : 'suspended';
       const selected = id === null ? undefined : lookup(id);
-      const entry = kind === 'terminate' ? selected ?? session?.entry : session?.entry ?? selected;
+      const entry = selected ?? session?.entry;
       return entry ? stop(entry, phase) : phase;
     });
     const transition: Transition = { kind, id, controller, result };
@@ -266,7 +292,8 @@ export function createModuleManager<TInstance extends ModuleRuntime<TState>, TSt
     }, () => {
       if (pending === transition) pending = undefined;
     });
-    old?.controller.abort();
+    // An explicit local data clear must finish even if a new module is selected meanwhile.
+    if (old?.kind !== 'clear') old?.controller.abort();
     return result;
   }
 
@@ -275,9 +302,11 @@ export function createModuleManager<TInstance extends ModuleRuntime<TState>, TSt
     return closingRequested ? Promise.resolve('superseded' as const) : enqueue('activate', id);
   }
 
-  function suspend() {
+  function suspend(id?: string) {
+    const entry = id === undefined ? undefined : lookup(id);
     if (closingRequested) return Promise.resolve('superseded' as const);
-    return enqueue('suspend', session?.entry.status.id ?? pending?.id ?? null);
+    if (entry && entry !== session?.entry && id !== pending?.id) return Promise.resolve(stop(entry, 'suspended'));
+    return enqueue('suspend', id ?? session?.entry.status.id ?? pending?.id ?? null);
   }
 
   function terminate(id?: string) {
@@ -293,10 +322,21 @@ export function createModuleManager<TInstance extends ModuleRuntime<TState>, TSt
     return closing;
   }
 
+  function clearSession() {
+    if (closingRequested) return Promise.resolve('superseded' as const);
+    return enqueue('clear', null);
+  }
+
+  function failWorkspace(id: string, instance: TInstance) {
+    if (session?.entry.status.id === id && session.instance === instance) reportFailure(session);
+  }
+
   return {
     activate,
     suspend,
     terminate,
+    clearSession,
+    failWorkspace,
     close,
     getSnapshot: () => snapshot,
     getActive: () => session?.entry.status.phase === 'active' && session.instance

@@ -60,7 +60,7 @@ jobs:
         if: runner.os != 'Linux'
         run: |
           cargo build --locked --release -p dars-desktop
-          cargo test --locked -p dars-desktop --lib
+          cargo test --locked -p dars-desktop
   security:
     runs-on: ubuntu-latest
     steps:

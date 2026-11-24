@@ -1,12 +1,12 @@
 # Inteligência operacional
 
-[English](../en/operations.md) · [Evidências do Objetivo 02](../../evidence/objective-02/REPORT.md)
+[English](../en/operations.md) · [Evidências da revisão do Objetivo 02](../../evidence/objective-02/revision-01/REPORT.md)
 
 Abra **Operação** abaixo da calculadora. Escolha **Automático** para deixar o dispositivo selecionar o perfil, ou escolha um perfil pelo nome. Abra **Diagnóstico local** para ver o perfil ativo e o motivo. A escolha manual permanece depois de recarregar. A suspensão da janela e a proteção em situações críticas podem substituí-la temporariamente.
 
 | Perfil | Prazo de worker ocioso | Solicitações ativas e em fila | Entradas no cache de exibição | Intervalo gráfico opcional |
 | --- | ---: | ---: | ---: | ---: |
-| Ultraleve | 1 s | 1 | 0 | Desativado |
+| Ultraleve | 1 s | 1 | 0 | 250 ms, detalhe reduzido |
 | Eficiência | 4 s | 2 | 4 | 100 ms |
 | Equilibrado | 12 s | 4 | 8 | 50 ms |
 | Desempenho | 45 s | 6 | 16 | 34 ms |
@@ -20,11 +20,13 @@ As decisões automáticas usam sinais sustentados, limiares distintos de entrada
 
 O gerenciador importa o módulo selecionado ao ativá-lo. Os estados são não carregado, carregando, ativo, suspendendo, suspenso, encerrado e falha recuperável. Cada geração ativa mantém tarefas canceláveis e recursos que podem ser encerrados. A suspensão retém o estado necessário, cancela as tarefas, libera a posse de workers, gráficos e caches e desmonta a interface. Restaurar cria outra instância com o estado retido. Encerrar descarta esse estado. É possível repetir a ativação após uma falha.
 
-O agendador opcional permite zero, uma, duas, três ou quatro tarefas secundárias, respectivamente, nos cinco perfis. Novas tarefas aguardam o limite de admissão e são canceladas quando o módulo é retirado. O agendador gráfico agrupa pedidos de desenho e cancela os pendentes durante a suspensão.
+O agendador classifica solicitações como essenciais, interativas, secundárias, opcionais, de manutenção ou renderização. Uma vaga reservada continua disponível para trabalho prioritário no Ultraleve. As duas filas são limitadas, e solicitações antigas ganham prioridade. Cada tarefa aceita tem prazo. Tarefas opcionais podem retornar adiamento explícito. Suspender cancela tarefas ativas e pendentes. O agendador gráfico agrupa pedidos e oferece desenho simplificado sob demanda no Ultraleve.
 
 A Standard é o único módulo matemático em produção. Módulos sintéticos leves e pesados são usados nos testes de navegador para verificar troca, workers, buffers e cadência gráfica. A lista de descritores controla quais módulos podem ser importados. Os descritores de teste ficam fora do bundle do produto.
 
 No Windows, a WebView2 pode informar que o documento está visível quando a janela nativa está minimizada. O processo desktop consulta a janela e envia um valor booleano por código fixo do aplicativo. Nenhum comando de gerenciamento de janelas é exposto ao JavaScript. A versão web usa o sinal de visibilidade do documento. [Eventos de janela do Tauri](https://docs.rs/tauri/latest/x86_64-pc-windows-msvc/tauri/enum.WindowEvent.html)
+
+Quando o ambiente oferece `ICoreWebView2_19`, o aplicativo solicita ao WebView2 a meta de memória `LOW` durante a minimização nativa e repõe `NORMAL` ao restaurar a janela. O WebView2 decide como aplicar a meta. O módulo libera os próprios recursos pelo seu ciclo de vida. Nas interfaces anteriores do ambiente, a meta fica indisponível. [Meta de memória do WebView2](https://learn.microsoft.com/en-us/microsoft-edge/webview2/reference/win32/icorewebview2_19?view=webview2-1.0.2849.39)
 
 ## Valores, privacidade e leituras
 
@@ -34,4 +36,6 @@ A **Central de privacidade** exibe os destinos e a retenção dos dados usados p
 
 Limpar a sessão cancela o trabalho e descarta expressões, versões do editor, memória e cálculos concluídos. Redefinir preferências limpa apenas idioma, aparência e perfil do DARS. Os controles de armazenamento do navegador permitem remover os arquivos baixados. Copiar por ação do usuário escreve na área de transferência do sistema. Um provedor nativo do Gerenciador de Credenciais do Windows está disponível para futuros consumidores Rust autorizados. A WebView não recebe operações de credenciais, e o uso atual do aplicativo não armazena segredos de conta. Em outras plataformas, o provedor retorna indisponível. [Armazenamento de credenciais da Microsoft](https://learn.microsoft.com/en-us/windows/win32/api/wincred/ns-wincred-credentialw)
 
-O diagnóstico usa leituras locais. Contagem de processadores lógicos e estimativas de memória vêm do navegador. O atraso de agendamento da thread principal é um sinal de responsividade, separado da latência de interação medida. Uma API gráfica exposta pelo navegador não mede disponibilidade nem velocidade da GPU. O worker pode informar a capacidade alocada da memória linear WebAssembly. A memória JavaScript do navegador e a árvore nativa usam escopos diferentes. Utilização de CPU, temperatura e pressão de memória do sistema ficam indisponíveis quando o runtime não fornece essas leituras.
+O diagnóstico usa leituras locais. Contagem de processadores lógicos e estimativas de memória vêm do navegador. O atraso de agendamento da thread principal é um sinal de responsividade, separado da latência de interação medida. Uma API gráfica exposta pelo navegador não mede disponibilidade nem velocidade da GPU. O worker pode informar a capacidade alocada da memória linear WebAssembly. A memória JavaScript do navegador e a árvore nativa usam escopos diferentes. No Windows, o provedor mede CPU do sistema e do processo desktop, memória física total e disponível, sinal de memória baixa do sistema, arquitetura, processadores lógicos, memória do processo desktop, energia e bateria quando presente. As leituras são locais e reutilizadas por pelo menos dois segundos. O custo da amostra nativa e o ida e volta da WebView são medidos separadamente. Os contadores do processo desktop excluem os auxiliares da WebView2. A leitura térmica fica indisponível no provedor Windows validado. Criar um contexto gráfico comprova o acesso à API, com o adaptador específico fora da coleta.
+
+Cada módulo registrado define apresentação, interface, estado e recursos opcionais. A carga do código e a ativação compartilham um prazo de quinze segundos. Selecionar outro módulo cancela o trabalho substituído. Limpar a sessão descarta os estados dos módulos registrados, incluindo os suspensos. Em macOS, Linux, Android e iOS, o contrato aceita apenas as leituras que o ambiente consegue fornecer. Os sensores nativos foram validados no Windows. [Relatório da revisão](../../evidence/objective-02/revision-01/REPORT.md)

@@ -1,5 +1,5 @@
-import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
-import type { KeyboardEvent } from 'react';
+import { Component, lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
+import type { KeyboardEvent, ReactNode } from 'react';
 import { isAdaptiveSelection } from './adaptive';
 import type { AdaptiveSelection, AdaptiveSnapshot } from './adaptive';
 import { startAdaptive } from './adaptive-browser';
@@ -7,8 +7,9 @@ import { Icon } from './icons';
 import { isLocale, loadMessages, LOCALES, preferredLocale } from './i18n';
 import type { Locale, Messages } from './i18n';
 import { createModuleManager } from './module-manager';
+import type { ModuleManagerOptions } from './module-manager';
 import { primaryModules } from './module-registry';
-import type { PrimaryModule } from './module-registry';
+import type { RegisteredModule } from './module-registry';
 import { getAssetMode, observeAssetMode, packagedAssets } from './offline';
 import type { AssetMode } from './offline';
 import { clearPreferences, readPreference, storedTheme, THEMES, writePreference } from './preferences';
@@ -18,34 +19,41 @@ type Language = { locale: Locale; messages: Messages };
 
 const OperationsPanel = lazy(() => import('./operations-panel'));
 
-function ActiveWorkspace({ runtime, language, adaptive, cacheEntries }: {
-  runtime: PrimaryModule;
-  language: Language;
-  adaptive: ReturnType<typeof startAdaptive> | null;
-  cacheEntries: number;
-}) {
-  const status = useSyncExternalStore(runtime.subscribe, runtime.getStatus);
-  const { Workspace } = runtime;
-  return <Workspace locale={language.locale} messages={language.messages} engineStatus={status}
-    session={runtime.session} cacheEntries={cacheEntries}
-    evaluate={async (...args) => {
-      const started = performance.now();
-      const result = await runtime.evaluate(...args);
-      if (result.ok) adaptive?.recordInteraction(performance.now() - started);
-      return result;
-    }} combine={runtime.combine} />;
+class WorkspaceBoundary extends Component<{ children: ReactNode; onFailure(): void }, { failed: boolean }> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  componentDidCatch() {
+    this.props.onFailure();
+  }
+
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
 }
 
-function applyLanguage(language: Language) {
+function applyLanguage(language: Language, title?: string) {
   document.documentElement.lang = language.locale;
   document.documentElement.dir = LOCALES[language.locale].direction;
-  document.title = `DARS · ${language.messages.pageTitle}`;
+  document.title = title ? 'DARS · ' + title : 'DARS';
 }
 
-export default function App({ initialLanguage }: { initialLanguage: Language }) {
+interface AppProps {
+  initialLanguage: Language;
+  modules?: readonly RegisteredModule[];
+  moduleOptions?: ModuleManagerOptions;
+}
+
+export default function App({ initialLanguage, modules = primaryModules, moduleOptions }: AppProps) {
   const [language, setLanguage] = useState(initialLanguage);
   const [theme, setTheme] = useState(storedTheme);
-  const [manager] = useState(() => createModuleManager(primaryModules));
+  const [manager] = useState(() => createModuleManager(modules, moduleOptions));
+  const [selectedId, setSelectedId] = useState(() => modules[0]?.id ?? null);
+  const [pausedId, setPausedId] = useState<string | null>(null);
+  const selectedModule = useRef(selectedId);
   const [adaptive, setAdaptive] = useState<AdaptiveSnapshot>();
   const [operationsOpen, setOperationsOpen] = useState(false);
   const [assetMode, setAssetMode] = useState<AssetMode>(() => packagedAssets() ? 'packaged' : 'unavailable');
@@ -58,11 +66,16 @@ export default function App({ initialLanguage }: { initialLanguage: Language }) 
   const settingsLabel = useRef<HTMLElement>(null);
   const { locale, messages: m } = language;
   const module = useSyncExternalStore(manager.subscribe, manager.getSnapshot);
-  const active = manager.getActive()?.instance;
-  const resources = operationsOpen ? active?.getResources() : undefined;
-  const phase = module.modules[0]?.phase ?? 'unloaded';
+  const current = manager.getActive();
+  const active = current?.id === selectedId ? current.instance : undefined;
+  const Workspace = active?.Workspace;
+  const description = modules.find(({ id }) => id === selectedId)?.describe(m);
+  const pageTitle = description?.pageTitle ?? description?.title;
+  const resources = operationsOpen ? active?.getResources?.() : undefined;
+  const phase = module.modules.find(({ id }) => id === selectedId)?.phase ?? 'unloaded';
   const visible = adaptive?.signals.visible;
   const suspendWhenHidden = adaptive?.policy.suspendWhenHidden;
+  const recordInteraction = useCallback((ms: number) => adaptiveController.current?.recordInteraction(ms), []);
 
   useEffect(() => {
     const saved = readPreference('profile');
@@ -76,13 +89,13 @@ export default function App({ initialLanguage }: { initialLanguage: Language }) 
   }, [manager]);
 
   useEffect(() => {
-    if (visible === undefined) return;
+    if (visible === undefined || selectedId === null) return;
     if (!visible && suspendWhenHidden) void manager.suspend();
-    else void manager.activate('standard');
-  }, [manager, visible, suspendWhenHidden]);
+    else if (pausedId !== selectedId) void manager.activate(selectedId);
+  }, [manager, selectedId, pausedId, visible, suspendWhenHidden]);
 
   useLayoutEffect(() => {
-    if (adaptive) active?.setPolicy(adaptive.policy);
+    if (adaptive) active?.setPolicy?.(adaptive.policy);
     document.documentElement.dataset.resourceEffects = adaptive?.policy.reducedEffects ? 'reduced' : 'full';
   }, [active, adaptive?.policy]);
 
@@ -91,7 +104,7 @@ export default function App({ initialLanguage }: { initialLanguage: Language }) 
     if (!operationsOpen) adaptiveController.current?.setDiagnostics(false);
   }, [operationsOpen]);
 
-  useEffect(() => applyLanguage(language), [language]);
+  useEffect(() => applyLanguage(language, pageTitle), [language, pageTitle]);
   useEffect(() => { document.documentElement.dataset.theme = theme; }, [theme]);
 
   async function chooseLanguage(value: string) {
@@ -136,9 +149,30 @@ export default function App({ initialLanguage }: { initialLanguage: Language }) 
   }
 
   async function resetSession() {
-    await manager.terminate('standard');
-    if (adaptiveController.current?.getSnapshot().signals.visible) void manager.activate('standard');
-    setAnnouncement(m.operations.sessionCleared);
+    const result = await manager.clearSession();
+    const id = selectedModule.current;
+    setPausedId(null);
+    if (id !== null && adaptiveController.current?.getSnapshot().signals.visible) void manager.activate(id);
+    setAnnouncement(result === 'terminated' ? m.operations.sessionCleared : m.operations.moduleUnavailable);
+  }
+
+  function chooseModule(id: string) {
+    if (!modules.some((module) => module.id === id)) return;
+    selectedModule.current = id;
+    setSelectedId(id);
+    setPausedId(null);
+  }
+
+  function stopModule(action: 'suspend' | 'terminate') {
+    if (selectedId === null) return;
+    setPausedId(selectedId);
+    void manager[action](selectedId);
+  }
+
+  function resumeModule() {
+    if (selectedId === null || !visible) return;
+    setPausedId(null);
+    void manager.activate(selectedId);
   }
 
   async function resetPreferences() {
@@ -205,23 +239,43 @@ export default function App({ initialLanguage }: { initialLanguage: Language }) 
         </div>
       </header>
 
-      <main className="main-container" data-module-phase={phase} data-workers={module.resources.worker} data-profile={adaptive?.profile}>
+      <main className="main-container" data-module-id={selectedId ?? undefined} data-module-phase={phase}
+        data-workers={module.resources.worker} data-profile={adaptive?.profile}>
         <div className="intro">
-          <h1>{m.standard}</h1>
-          <p>{m.description}</p>
+          <h1>{description?.title ?? 'DARS'}</h1>
+          {description?.description && <p>{description.description}</p>}
         </div>
-        {active ? <ActiveWorkspace runtime={active} language={language} adaptive={adaptiveController.current}
-          cacheEntries={adaptive?.policy.cacheEntries ?? 0} />
+        {modules.length > 1 && <div className="privacy-actions">
+          <label>{m.operations.modulePicker}{' '}
+            <select value={selectedId ?? ''} onChange={(event) => chooseModule(event.target.value)}>
+              {modules.map(({ id, describe }) => <option key={id} value={id}>{describe(m).title}</option>)}
+            </select>
+          </label>
+          {phase === 'active' && <button type="button" className="quiet-action"
+            onClick={() => stopModule('suspend')}>{m.operations.moduleSuspend}</button>}
+          {['active', 'suspended', 'recoverable_failure'].includes(phase) &&
+            <button type="button" className="quiet-action" onClick={() => stopModule('terminate')}>{m.operations.moduleEnd}</button>}
+        </div>}
+        {Workspace && active && selectedId !== null
+          ? <WorkspaceBoundary key={selectedId} onFailure={() => manager.failWorkspace(selectedId, active)}>
+            <Workspace locale={locale} messages={m} recordInteraction={recordInteraction} />
+          </WorkspaceBoundary>
           : phase === 'recoverable_failure' ? <div role="status" className="feedback feedback-error">
-            {m.engineUnavailable}{' '}
-            <button type="button" className="quiet-action" onClick={() => void manager.activate('standard')}>{m.operations.retryModule}</button>
+            {m.operations.moduleUnavailable}{' '}
+            <button type="button" className="quiet-action" onClick={resumeModule}>{m.operations.retryModule}</button>
           </div>
-          : <p role="status">{phase === 'suspended' ? m.operations.suspended : m.engineLoading}</p>}
+          : phase === 'suspended' || phase === 'terminated' ? <p role="status">
+            {m.operations[phase]}{' '}
+            {visible && pausedId === selectedId &&
+              <button type="button" className="quiet-action" onClick={resumeModule}>{m.operations.moduleResume}</button>}
+          </p>
+          : <p role="status">{description ? m.operations.moduleStarting : m.operations.moduleUnavailable}</p>}
         <details className="operations" onToggle={(event) => setOperationsOpen(event.currentTarget.open)}>
           <summary>{m.operations.operations}</summary>
           {operationsOpen && adaptive && <Suspense fallback={<p role="status">{m.operations.loading}</p>}>
-            <OperationsPanel locale={locale} messages={m} adaptive={adaptive} phase={phase} workers={module.resources.worker}
-              pending={resources?.pending ?? 0} wasmBytes={resources?.wasmBytes} mode={assetMode} changingMode={changingMode}
+            <OperationsPanel locale={locale} messages={m} adaptive={adaptive} phase={phase}
+              moduleName={description?.title ?? m.operations.unavailable} workers={module.resources.worker}
+              pending={active ? resources?.pending : 0} wasmBytes={resources?.wasmBytes} mode={assetMode} changingMode={changingMode}
               select={selectProfile} setOffline={(value) => void changeOffline(value)}
               setDiagnostics={(open) => adaptiveController.current?.setDiagnostics(open)}
               clearSession={() => void resetSession()} clearPreferences={() => void resetPreferences()} />

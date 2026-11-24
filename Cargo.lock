@@ -518,7 +518,7 @@ dependencies = [
 
 [[package]]
 name = "dars-cli"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "dars-core",
  "serde_json",
@@ -526,7 +526,7 @@ dependencies = [
 
 [[package]]
 name = "dars-core"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "num-bigint",
  "num-integer",
@@ -538,16 +538,19 @@ dependencies = [
 
 [[package]]
 name = "dars-desktop"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
+ "serde",
  "tauri",
  "tauri-build",
+ "webview2-com",
+ "windows-core",
  "windows-sys 0.61.2",
 ]
 
 [[package]]
 name = "dars-wasm"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "dars-core",
  "wasm-bindgen",

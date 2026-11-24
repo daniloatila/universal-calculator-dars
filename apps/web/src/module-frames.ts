@@ -3,19 +3,22 @@ import type { ModuleActivation } from './module-manager';
 
 type FramePolicy = Pick<AdaptivePolicy, 'graphicsFrameIntervalMs'>;
 type FrameScope = Pick<ModuleActivation<unknown>, 'signal' | 'reportFailure'>;
+export type FrameDetail = 'reduced' | 'full';
+const REDUCED_INTERVAL_MS = 250;
 
-function intervalFrom(policy: FramePolicy): number | null {
+function frameSettings(policy: FramePolicy): { interval: number; detail: FrameDetail } {
   const value = policy.graphicsFrameIntervalMs;
-  return value !== null && Number.isFinite(value) && value > 0 ? value : null;
+  if (value === null || !Number.isFinite(value) || value <= 0) return { interval: REDUCED_INTERVAL_MS, detail: 'reduced' };
+  return { interval: value, detail: 'full' };
 }
 
 /** Optional display scheduling for a graphics module. It never schedules idle redraws. */
 export function createModuleFrames(
   scope: FrameScope,
   initialPolicy: FramePolicy,
-  draw: (timestamp: number) => void,
+  draw: (timestamp: number, detail: FrameDetail) => void,
 ) {
-  let interval = intervalFrom(initialPolicy);
+  let settings = frameSettings(initialPolicy);
   let lastDrawAt = -Infinity;
   let dirty = false;
   let closed = scope.signal.aborted;
@@ -35,8 +38,8 @@ export function createModuleFrames(
   }
 
   function schedule() {
-    if (closed || !dirty || interval === null || cancelScheduled) return;
-    const untilEligible = lastDrawAt + interval - performance.now();
+    if (closed || !dirty || cancelScheduled) return;
+    const untilEligible = lastDrawAt + settings.interval - performance.now();
     if (untilEligible > 0) {
       const timer = globalThis.setTimeout(() => {
         cancelScheduled = undefined;
@@ -48,15 +51,15 @@ export function createModuleFrames(
 
     const frame = requestAnimationFrame((timestamp) => {
       cancelScheduled = undefined;
-      if (closed || !dirty || interval === null) return;
+      if (closed || !dirty) return;
       const now = performance.now();
-      if (now - lastDrawAt < interval) {
+      if (now - lastDrawAt < settings.interval) {
         schedule();
         return;
       }
       dirty = false;
       lastDrawAt = now;
-      try { draw(timestamp); }
+      try { draw(timestamp, settings.detail); }
       catch {
         close();
         scope.reportFailure();
@@ -74,9 +77,9 @@ export function createModuleFrames(
       schedule();
     },
     setPolicy(policy: FramePolicy) {
-      const next = intervalFrom(policy);
-      if (closed || interval === next) return;
-      interval = next;
+      const next = frameSettings(policy);
+      if (closed || (settings.interval === next.interval && settings.detail === next.detail)) return;
+      settings = next;
       clearScheduled();
       schedule();
     },

@@ -139,6 +139,83 @@ test('a lazy import abandoned by a newer selection never activates', { timeout: 
   }
 });
 
+test('a loader deadline recovers without activating late imports or retaining a timer', { timeout: 4_000 }, async () => {
+  const late = deferred<Awaited<ReturnType<Descriptor['load']>>>();
+  let staleStarts = 0;
+  const runtime = createModuleManager<Runtime, State>([
+    { id: 'silent-loader', load: () => late.promise },
+    module('fallback', () => ({})),
+  ], { startupMs: 40 });
+  try {
+    assert.equal(await runtime.activate('silent-loader'), 'recoverable_failure');
+    assert.equal(runtime.getSnapshot().modules[0]?.failure, 'startup_timeout');
+    assert.equal(await runtime.activate('fallback'), 'active');
+    late.resolve({ activate() { staleStarts++; return {}; } });
+    await tick();
+    assert.equal(staleStarts, 0);
+    assert.equal(runtime.getActive()?.id, 'fallback');
+  } finally {
+    await runtime.close();
+  }
+});
+
+test('an activation deadline aborts resources and disposes the old completion after retry', { timeout: 4_000 }, async () => {
+  const late = deferred<Runtime>();
+  let activationCount = 0;
+  let exits = 0;
+  let lateDisposals = 0;
+  let oldScope: AbortSignal | undefined;
+  const runtime = createModuleManager<Runtime, State>([module('silent-activation', ({ signal, resources }) => {
+    activationCount++;
+    resources.own('worker', () => { exits++; });
+    if (activationCount > 1) return { value: 42 };
+    oldScope = signal;
+    return late.promise;
+  })], { startupMs: 40 });
+  try {
+    assert.equal(await runtime.activate('silent-activation'), 'recoverable_failure');
+    assert.equal(runtime.getSnapshot().modules[0]?.failure, 'startup_timeout');
+    assert.equal(oldScope?.aborted, true);
+    assert.equal(exits, 1);
+    assert.equal(await runtime.activate('silent-activation'), 'active');
+    late.resolve({ dispose() { lateDisposals++; } });
+    await tick();
+    assert.equal(lateDisposals, 1);
+    assert.equal(runtime.getActive()?.instance.value, 42);
+    assert.deepEqual(runtime.getSnapshot().resources, { ...empty, worker: 1 });
+  } finally {
+    await runtime.close();
+  }
+});
+
+test('global clear remains a barrier when a new selection arrives and removes all retained values', async () => {
+  const editable = (id: string) => module(id, ({ previousState }) => {
+    const instance: Runtime = { value: previousState?.value ?? 0, snapshot: () => ({ value: instance.value ?? 0 }) };
+    return instance;
+  });
+  const runtime = manager(editable('existing'), editable('second'), editable('unused'));
+  try {
+    await runtime.activate('existing');
+    const first = runtime.getActive()?.instance;
+    assert.ok(first);
+    first.value = 8;
+    await runtime.activate('second');
+    const active = runtime.getActive()?.instance;
+    assert.ok(active);
+    active.value = 21;
+    const cleared = runtime.clearSession();
+    const selectedDuringClear = runtime.activate('existing');
+    assert.equal(await cleared, 'terminated');
+    assert.equal(await selectedDuringClear, 'active');
+    assert.equal(runtime.getActive()?.instance.value, 0);
+    assert.equal(runtime.getSnapshot().modules[2]?.phase, 'unloaded');
+    await runtime.activate('second');
+    assert.equal(runtime.getActive()?.instance.value, 0);
+  } finally {
+    await runtime.close();
+  }
+});
+
 test('switching cancels a pending activation and retires resources acquired by a late generation', { timeout: 4_000 }, async () => {
   const started = deferred<ModuleActivation<State>>();
   const late = deferred<Runtime>();

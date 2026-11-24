@@ -19,6 +19,6 @@ The owner approved Objective 01 revision 01 (0.1.1). Its Standard calculator use
 - [Objective 01 revision 01](evidence/objective-01/revision-01/REPORT.md) and [0.1.0 baseline](evidence/objective-01/REPORT.md)
 - [Original mission](PROJECT_SPEC.md) and [English translation](docs/en/mission.md)
 
-Objective 02 development version 0.2.0 adds resource profiles, module suspension, privacy controls and local diagnostics. [Objective 02 evidence](evidence/objective-02/REPORT.md)
+Objective 02 development version 0.2.1 adds native capability readings and strengthens module lifecycle, privacy and resource scheduling. [Objective 02 revision evidence](evidence/objective-02/revision-01/REPORT.md)
 
 DARS uses the [Apache License 2.0](LICENSE).

@@ -2,6 +2,12 @@
 
 [English](../../CHANGELOG.md)
 
+## 0.2.1 · Revisão 01 do Objetivo 02
+
+- Provedor de capacidades Windows com escopo mínimo e diagnóstico local.
+- Registro de módulos desacoplado, limites para inicialização e tarefas e limpeza integral da sessão.
+- Desenho simplificado no Ultraleve e comparações de desempenho nativo.
+
 ## 0.2.0 · Objetivo 02
 
 - Ciclo de vida com um módulo ativo e recuperação dos valores da sessão da Standard em memória.

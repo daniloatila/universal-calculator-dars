@@ -30,6 +30,7 @@ test('adaptive graphics policies change real canvas draw cadence and suspension 
     }, performance.now()).policy;
     type Runtime = ModuleRuntime<undefined> & { frames: ReturnType<typeof createModuleFrames> };
     const draws: number[] = [];
+    const details: ('reduced' | 'full')[] = [];
     let animate = false;
     let renderedColor: number[] | undefined;
     const manager = createModuleManager<Runtime, undefined>([{
@@ -47,8 +48,10 @@ test('adaptive graphics policies change real canvas draw cadence and suspension 
             const context = canvas.getContext('2d');
             if (!context) throw new Error('Canvas2D unavailable in this browser.');
             context.fillStyle = '#345678';
-            const frames = createModuleFrames(scope, policy('ultra_light'), () => {
-              context.fillRect(0, 0, 8, 8);
+            const frames = createModuleFrames(scope, policy('ultra_light'), (_, detail) => {
+              const size = detail === 'reduced' ? 1 : 8;
+              context.fillRect(0, 0, size, size);
+              details.push(detail);
               draws.push(performance.now());
               renderedColor ??= Array.from(context.getImageData(0, 0, 1, 1).data);
               if (animate) frames.invalidate();
@@ -83,6 +86,7 @@ test('adaptive graphics policies change real canvas draw cadence and suspension 
           requestedIntervalMs: selected.graphicsFrameIntervalMs,
           elapsedMs: performance.now() - start,
           draws: draws.length - startDraws,
+          details: [...new Set(details.slice(startDraws))],
         });
       }
       await manager.suspend();
@@ -104,10 +108,11 @@ test('adaptive graphics policies change real canvas draw cadence and suspension 
   const [ultra, efficiency, maximum] = result.windows;
   expect(result.oneShotDraws).toBe(1);
   expect(result.renderedColor).toEqual([0x34, 0x56, 0x78, 255]);
-  expect(ultra).toMatchObject({ profile: 'ultra_light', requestedIntervalMs: null, draws: 0 });
+  expect(ultra).toMatchObject({ profile: 'ultra_light', requestedIntervalMs: null, details: ['reduced'] });
+  expect(ultra?.draws).toBeGreaterThan(0);
   expect(efficiency).toMatchObject({ profile: 'efficiency', requestedIntervalMs: 100 });
   expect(maximum).toMatchObject({ profile: 'maximum', requestedIntervalMs: 17 });
-  expect(efficiency?.draws).toBeGreaterThan(0);
+  expect(efficiency?.draws).toBeGreaterThan(ultra?.draws ?? Infinity);
   expect(maximum?.draws).toBeGreaterThan(efficiency?.draws ?? Infinity);
   expect(result).toMatchObject({ drawsAfterSuspension: 0, phase: 'suspended', ownedGraphics: 0, canvases: 0 });
   await testInfo.attach('graphics-cadence-proof', { body: JSON.stringify(result), contentType: 'application/json' });

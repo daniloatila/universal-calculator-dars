@@ -5,6 +5,7 @@ import { ADAPTIVE_PROFILES, isAdaptiveSelection, updateAdaptive } from '../src/a
 import type { AdaptiveSignals, AdaptiveSnapshot } from '../src/adaptive.ts';
 import { startAdaptive } from '../src/adaptive-browser.ts';
 import type { AdaptiveHost } from '../src/adaptive-browser.ts';
+import { decodeNativeReading } from '../src/adaptive-native.ts';
 
 const standard: AdaptiveSignals = {
   visible: true, runtime: 'web', graphicsApi: 'exposed', batteryApi: 'unavailable',
@@ -232,4 +233,93 @@ test('recent measurement requires repeated slow interactions and ages out', () =
   assert.equal(runtime.getSnapshot().profile, 'balanced');
   assert.equal(runtime.getSnapshot().signals.interactionLatencyMs, undefined);
   runtime.dispose();
+});
+
+
+const windowsReply = {
+  schema: 1, source: 'windows', platform: 'Windows', architecture: 'aarch64',
+  hardwareThreads: 20, nativePhysicalTotalBytes: 32 * 2 ** 30, nativePhysicalAvailableBytes: 24 * 2 ** 30,
+  nativeMemoryPressure: 0.25, nativeLowMemory: false, nativeCpuIntervalMs: 2200,
+  nativeCpuLoad: 0.41, nativeHostCpuOneCore: 0.003, nativeSampleAgeMs: 0,
+  nativeMonitorCostUs: 38, nativeSampleCount: 2, batteryPresent: true, batteryLevel: 0.74,
+  powerSource: 'battery', charging: false, batterySaver: false, nativeWindowState: 'visible',
+};
+
+test('decodes real native fields separately from browser capability hints', () => {
+  const reading = decodeNativeReading(windowsReply);
+  assert.ok(reading);
+  assert.equal(reading.platform, 'Windows');
+  assert.equal(reading.architecture, 'aarch64');
+  assert.equal(reading.hardwareThreads, 20);
+  assert.equal(reading.nativePhysicalAvailableBytes, 24 * 2 ** 30);
+  assert.equal(reading.nativeMemoryPressure, 0.25);
+  assert.equal(reading.nativeLowMemory, false);
+  assert.equal(reading.nativeCpuLoad, 0.41);
+  assert.equal(reading.nativeHostCpuOneCore, 0.003);
+  assert.equal(reading.nativeCpuIntervalMs, 2200);
+  assert.equal(reading.nativeMonitorCostUs, 38);
+  assert.equal(reading.batteryLevel, 0.74);
+  assert.equal(reading.charging, false);
+  assert.equal(reading.powerSource, 'battery');
+});
+
+test('unknown native sensors and malformed metrics never become synthetic readings', () => {
+  assert.equal(decodeNativeReading({ ...windowsReply, schema: 5 }), undefined);
+  assert.equal(decodeNativeReading({ ...windowsReply, platform: 'arbitrary device name' }), undefined);
+  assert.equal(decodeNativeReading({ ...windowsReply, source: 'desktop' }), undefined);
+  assert.equal(decodeNativeReading({ ...windowsReply, nativeSampleAgeMs: 9000 }), undefined);
+  const unknown = decodeNativeReading({
+    ...windowsReply, nativeCpuIntervalMs: null, nativeCpuLoad: 0.8, nativeHostCpuOneCore: 2,
+    nativePhysicalAvailableBytes: Number.POSITIVE_INFINITY, nativeMemoryPressure: 0.8, batteryPresent: false,
+    architecture: 'vendor-specific', thermalState: 101, nativeWindowState: 'not a state', gpuAvailable: 'true',
+  });
+  assert.ok(unknown);
+  assert.equal(unknown.nativeCpuLoad, undefined);
+  assert.equal(unknown.nativeHostCpuOneCore, undefined);
+  assert.equal(unknown.nativePhysicalAvailableBytes, undefined);
+  assert.equal(unknown.nativeMemoryPressure, undefined);
+  assert.equal(unknown.batteryPresent, false);
+  assert.equal(unknown.batteryLevel, undefined);
+  assert.equal(unknown.charging, undefined);
+  assert.equal(unknown.architecture, undefined);
+  assert.equal(unknown.thermalState, undefined);
+  assert.equal(unknown.gpuAvailable, undefined);
+  assert.equal(unknown.nativeWindowState, undefined);
+  const mac = decodeNativeReading({
+    schema: 1, source: 'desktop', platform: 'macOS', nativeMonitorCostUs: 0, nativeSampleCount: 1, nativeSampleAgeMs: 0,
+  });
+  assert.equal(mac?.platform, 'macOS');
+  assert.equal(mac?.nativeCpuLoad, undefined);
+});
+
+test('actual physical memory and AC power outrank limited browser hints', () => {
+  const signals = {
+    ...standard, deviceMemoryGiB: 2, hardwareThreads: 12,
+    nativePhysicalTotalBytes: 16 * 2 ** 30, powerSource: 'ac' as const, batteryLevel: 0.19, charging: false,
+  };
+  const ready = updateAdaptive(undefined, 'auto', signals, 0);
+  assert.equal(ready.profile, 'balanced');
+  assert.equal(ready.reason, 'default');
+  const pressure = updateAdaptive(ready, 'auto', { ...signals, nativeLowMemory: true }, 10);
+  assert.equal(pressure.profile, 'ultra_light');
+  assert.equal(pressure.reason, 'memory_pressure');
+});
+
+test('sustained native CPU pressure requires independent samples and a dwell period', () => {
+  let state = updateAdaptive(undefined, 'auto', { ...workstation, nativeCpuLoad: 0.2, nativeSampleCount: 1 }, 0);
+  const pressure = { ...workstation, nativeCpuLoad: 0.93, nativeSampleCount: 2 };
+  state = updateAdaptive(state, 'auto', pressure, 16_000);
+  assert.equal(state.pending?.readyAt, 24_000);
+  state = updateAdaptive(state, 'auto', pressure, 24_000);
+  assert.equal(state.profile, 'balanced');
+  assert.equal(state.pending?.readyAt, 26_000);
+  state = updateAdaptive(state, 'auto', { ...workstation, nativeCpuLoad: 0.4, nativeSampleCount: 3 }, 26_000);
+  assert.equal(state.pending, undefined);
+  state = updateAdaptive(state, 'auto', { ...pressure, nativeSampleCount: 4 }, 32_000);
+  state = updateAdaptive(state, 'auto', { ...pressure, nativeSampleCount: 5 }, 40_000);
+  assert.equal(state.profile, 'efficiency');
+  assert.equal(state.reason, 'cpu_contention');
+  state = updateAdaptive(state, 'auto', { ...workstation, nativeCpuLoad: 0.2, nativeSampleCount: 6 }, 41_000);
+  state = updateAdaptive(state, 'auto', { ...workstation, nativeCpuLoad: 0.2, nativeSampleCount: 7 }, 61_000);
+  assert.equal(state.profile, 'balanced');
 });

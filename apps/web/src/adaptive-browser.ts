@@ -1,4 +1,6 @@
 import { updateAdaptive } from './adaptive.ts';
+import { decodeNativeReading } from './adaptive-native.ts';
+import type { NativeReading } from './adaptive-native.ts';
 import type { AdaptiveSelection, AdaptiveSignals, AdaptiveSnapshot } from './adaptive.ts';
 
 export interface AdaptiveHost {
@@ -6,6 +8,7 @@ export interface AdaptiveHost {
   now: () => number;
   schedule: (delayMs: number, task: () => void) => () => void;
   listen: (refresh: () => void) => () => void;
+  pollNative?: () => boolean;
 }
 
 interface BatteryStatus extends EventTarget {
@@ -26,6 +29,9 @@ interface BrowserPerformance extends Performance {
 const DIAGNOSTIC_SAMPLE_MS = 10_000;
 const INTERACTION_WINDOW_MS = 45_000;
 const INTERACTION_REFRESH_MS = 10_000;
+const NATIVE_MINIMUM_MS = 2100;
+const NATIVE_TIMEOUT_MS = 1500;
+const NATIVE_STALE_MS = 100_000;
 
 function positive(value: number | undefined): number | undefined {
   return typeof value === 'number' && Number.isFinite(value) && value > 0 ? value : undefined;
@@ -42,11 +48,69 @@ function browserPlatform(navigator: BrowserNavigator): string | undefined {
   return undefined;
 }
 
+function probeWebGl(): boolean | undefined {
+  if (!('WebGLRenderingContext' in window || 'WebGL2RenderingContext' in window)) return;
+  const canvas = document.createElement('canvas');
+  canvas.width = 1;
+  canvas.height = 1;
+  const options: WebGLContextAttributes = {
+    alpha: false, antialias: false, depth: false, stencil: false, failIfMajorPerformanceCaveat: true,
+  };
+  try {
+    const context = (canvas.getContext('webgl2', options) ?? canvas.getContext('webgl', options)) as
+      WebGL2RenderingContext | WebGLRenderingContext | null;
+    context?.getExtension('WEBGL_lose_context')?.loseContext();
+    return context !== null;
+  } catch {
+    return undefined;
+  }
+}
+
 function browserHost(): AdaptiveHost {
-  const desktopWindow = window as Window & { __DARS_WINDOW_MINIMIZED__?: boolean };
+  const desktopWindow = window as Window & {
+    __DARS_WINDOW_MINIMIZED__?: boolean;
+    __TAURI_INTERNALS__?: {
+      invoke(command: 'dars_native_capabilities', payload: Record<string, never>): Promise<unknown>;
+    };
+  };
   const navigator = window.navigator as BrowserNavigator;
   const performance = window.performance as BrowserPerformance;
+  const location = window.location;
+  const desktop = (location.protocol === 'tauri:' && location.hostname === 'localhost') ||
+    ((location.protocol === 'http:' || location.protocol === 'https:') && location.hostname === 'tauri.localhost' && !location.port);
+  const visible = () => document.visibilityState === 'visible' && (!desktop || desktopWindow.__DARS_WINDOW_MINIMIZED__ !== true);
   let battery: BatteryStatus | undefined;
+  let refreshListener: (() => void) | undefined;
+  let observed: { collectedAt: number; reading: NativeReading } | undefined;
+  let lastRequest = -Infinity;
+  let pendingTimeout: number | undefined;
+  let gpuProbeDone = false;
+  let gpuAvailable: boolean | undefined;
+
+  function pollNative(): boolean {
+    const bridge = desktop ? desktopWindow.__TAURI_INTERNALS__ : undefined;
+    const started = performance.now();
+    if (!bridge?.invoke || !visible() || !refreshListener || pendingTimeout !== undefined ||
+        started - lastRequest < NATIVE_MINIMUM_MS) return false;
+    lastRequest = started;
+    const finish = (reply: unknown) => {
+      if (pendingTimeout !== ticket) return;
+      window.clearTimeout(ticket);
+      pendingTimeout = undefined;
+      const completed = performance.now();
+      const reading = decodeNativeReading(reply);
+      if (reading) {
+        reading.nativeRoundTripMs = completed - started;
+        observed = { collectedAt: completed - (reading.nativeSampleAgeMs ?? 0), reading };
+      }
+      refreshListener?.();
+    };
+    const ticket = window.setTimeout(() => finish(undefined), NATIVE_TIMEOUT_MS);
+    pendingTimeout = ticket;
+    // Tauri's bundled core delegates to this exact transport. This app registers one scoped command.
+    void Promise.resolve().then(() => bridge.invoke('dars_native_capabilities', {})).then(finish, () => finish(undefined));
+    return true;
+  }
 
   return {
     now: () => performance.now(),
@@ -54,37 +118,55 @@ function browserHost(): AdaptiveHost {
       const id = window.setTimeout(task, delayMs);
       return () => window.clearTimeout(id);
     },
+    pollNative,
     read(diagnostics) {
+      const present = visible();
+      if (desktop && diagnostics && present && !gpuProbeDone) {
+        gpuProbeDone = true;
+        gpuAvailable = probeWebGl();
+      }
       const heap = performance.memory;
       const limit = positive(heap?.jsHeapSizeLimit);
       const used = positive(heap?.usedJSHeapSize);
       const localHeapPressure = limit && used ? Math.min(1, used / limit) : undefined;
-      const desktop = window.location.protocol === 'tauri:' || window.location.hostname === 'tauri.localhost';
       const level = battery?.level;
+      const native = observed && performance.now() - observed.collectedAt <= NATIVE_STALE_MS ? observed.reading : undefined;
+      const nativePower = native?.nativeSensorSource === 'windows';
+      const nativeWindowState = desktopWindow.__DARS_WINDOW_MINIMIZED__ === true && desktop
+        ? 'minimized' : desktopWindow.__DARS_WINDOW_MINIMIZED__ === false && native?.nativeWindowState === 'minimized'
+          ? undefined : native?.nativeWindowState;
       return {
-        visible: document.visibilityState === 'visible' && (!desktop || desktopWindow.__DARS_WINDOW_MINIMIZED__ !== true),
+        ...native,
+        visible: present,
         runtime: desktop ? 'desktop' : 'web',
-        platform: browserPlatform(navigator),
-        hardwareThreads: positive(navigator.hardwareConcurrency),
+        platform: native?.platform ?? browserPlatform(navigator),
+        hardwareThreads: native?.hardwareThreads ?? positive(navigator.hardwareConcurrency),
         deviceMemoryGiB: positive(navigator.deviceMemory),
         graphicsApi: 'WebGLRenderingContext' in window || 'WebGL2RenderingContext' in window || 'gpu' in navigator
           ? 'exposed' : 'unavailable',
+        gpuAvailable: gpuAvailable ?? native?.gpuAvailable,
         batteryApi: typeof navigator.getBattery === 'function' ? 'exposed' : 'unavailable',
-        batteryLevel: level !== undefined && level >= 0 && level <= 1 ? level : undefined,
-        charging: battery?.charging,
+        batteryLevel: nativePower ? native?.batteryLevel : level !== undefined && level >= 0 && level <= 1 ? level : undefined,
+        charging: nativePower ? native?.charging : battery?.charging,
+        nativeWindowState,
         jsHeapUsedBytes: diagnostics ? used : undefined,
         jsHeapLimitBytes: diagnostics ? limit : undefined,
         jsHeapPressure: localHeapPressure,
       };
     },
     listen(refresh) {
+      refreshListener = refresh;
       let disposed = false;
-      document.addEventListener('visibilitychange', refresh);
-      window.addEventListener('pageshow', refresh);
-      window.addEventListener('dars-window-visibility', refresh);
+      const refreshWindow = () => {
+        refresh();
+        pollNative();
+      };
+      document.addEventListener('visibilitychange', refreshWindow);
+      window.addEventListener('pageshow', refreshWindow);
+      window.addEventListener('dars-window-visibility', refreshWindow);
 
-      if (typeof navigator.getBattery === 'function') {
-        // Battery status is optional and may be denied in a webview or an embedded page.
+      if (typeof navigator.getBattery === 'function' && (!desktop || browserPlatform(navigator) !== 'Windows')) {
+        // Browser battery status is optional. Windows uses the native power reading.
         void Promise.resolve().then(() => navigator.getBattery?.()).then((reading) => {
           if (!reading || disposed) return;
           battery = reading;
@@ -93,15 +175,19 @@ function browserHost(): AdaptiveHost {
           refresh();
         }).catch(() => {});
       }
+      pollNative();
 
       return () => {
         disposed = true;
+        refreshListener = undefined;
+        if (pendingTimeout !== undefined) window.clearTimeout(pendingTimeout);
+        pendingTimeout = undefined;
         battery?.removeEventListener('chargingchange', refresh);
         battery?.removeEventListener('levelchange', refresh);
         battery = undefined;
-        document.removeEventListener('visibilitychange', refresh);
-        window.removeEventListener('pageshow', refresh);
-        window.removeEventListener('dars-window-visibility', refresh);
+        document.removeEventListener('visibilitychange', refreshWindow);
+        window.removeEventListener('pageshow', refreshWindow);
+        window.removeEventListener('dars-window-visibility', refreshWindow);
       };
     },
   };
@@ -153,7 +239,8 @@ export function startAdaptive(
       const at = host.now();
       // This is scheduling delay, including browser throttling and system stalls.
       schedulingDelay = { at, ms: Math.max(0, at - next) };
-      refresh();
+      // Use a current native reading before deciding if a pressure reading persisted.
+      if (!host.pollNative?.()) refresh();
     });
   }
 
@@ -199,6 +286,7 @@ export function startAdaptive(
       diagnostics = open;
       stopTimer();
       refresh(true);
+      if (open) host.pollNative?.();
     },
     recordInteraction(ms: number) {
       if (disposed || !state.signals.visible || !Number.isFinite(ms) || ms < 0) return;

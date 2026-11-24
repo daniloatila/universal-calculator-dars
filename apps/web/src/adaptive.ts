@@ -9,7 +9,23 @@ export type AdaptiveReason =
 
 export interface AdaptiveNativeSignals {
   nativeMemoryPressure?: number;
+  nativeLowMemory?: boolean;
   nativeCpuLoad?: number;
+  nativeCpuIntervalMs?: number;
+  nativeHostCpuOneCore?: number;
+  nativePhysicalTotalBytes?: number;
+  nativePhysicalAvailableBytes?: number;
+  nativeHostPrivateBytes?: number;
+  nativeHostWorkingSetBytes?: number;
+  powerSource?: 'ac' | 'battery';
+  batteryPresent?: boolean;
+  batterySaver?: boolean;
+  nativeWindowState?: 'visible' | 'minimized' | 'hidden';
+  nativeSensorSource?: 'windows' | 'desktop';
+  nativeMonitorCostUs?: number;
+  nativeRoundTripMs?: number;
+  nativeSampleCount?: number;
+  nativeSampleAgeMs?: number;
   thermalState?: 'nominal' | 'warm' | 'severe';
   gpuAvailable?: boolean;
   platform?: string;
@@ -52,7 +68,7 @@ export interface AdaptiveSnapshot extends Target {
   signals: AdaptiveSignals;
   policy: AdaptivePolicy;
   changedAt: number;
-  pending?: Target & { observedAt: number; readyAt: number };
+  pending?: Target & { observedAt: number; readyAt: number; sampleCount?: number };
 }
 
 const policies: Record<AdaptiveProfile, AdaptivePolicy> = {
@@ -94,30 +110,33 @@ function chooseTarget(
   const memoryPressure = Math.max(0, ...observedPressure);
   const memoryLimited = previous?.reason === 'memory_pressure';
   const criticalMemory = memoryLimited && previous.profile === 'ultra_light' ? 0.92 : 0.95;
-  if (memoryPressure >= criticalMemory) return { profile: 'ultra_light', reason: 'memory_pressure' };
+  if (signals.nativeLowMemory === true || memoryPressure >= criticalMemory) return { profile: 'ultra_light', reason: 'memory_pressure' };
   if (signals.thermalState === 'severe') return { profile: 'ultra_light', reason: 'thermal_pressure' };
   if (selection !== 'auto') return { profile: selection, reason: 'manual' };
 
   if (memoryPressure >= (memoryLimited ? 0.75 : 0.85)) return { profile: 'efficiency', reason: 'memory_pressure' };
   if (signals.thermalState === 'warm') return { profile: 'efficiency', reason: 'thermal_pressure' };
   const batteryLimited = previous?.reason === 'low_battery';
-  if (signals.charging === false && signals.batteryLevel !== undefined &&
+  const onBattery = signals.powerSource === undefined ? signals.charging === false : signals.powerSource === 'battery';
+  if (onBattery && signals.batteryLevel !== undefined &&
       signals.batteryLevel <= (batteryLimited ? 0.25 : 0.2)) {
     const criticalBattery = batteryLimited && previous.profile === 'ultra_light' ? 0.15 : 0.1;
     return { profile: signals.batteryLevel <= criticalBattery ? 'ultra_light' : 'efficiency', reason: 'low_battery' };
   }
 
   const threads = signals.hardwareThreads ?? Infinity;
-  const memoryGiB = signals.deviceMemoryGiB ?? Infinity;
-  if (threads <= 2 || memoryGiB <= 2) return { profile: 'ultra_light', reason: 'limited_device' };
+  const memoryGiB = signals.nativePhysicalTotalBytes === undefined
+    ? signals.deviceMemoryGiB : signals.nativePhysicalTotalBytes / 2 ** 30;
+  if (threads <= 2 || (memoryGiB ?? Infinity) <= 2) return { profile: 'ultra_light', reason: 'limited_device' };
 
   const nativeCpuLoad = signals.nativeCpuLoad ?? 0;
   const schedulingDelay = signals.mainThreadDelayMs ?? 0;
   const cpuLimited = previous?.reason === 'cpu_contention' && previous.profile === 'efficiency';
-  if (nativeCpuLoad >= (cpuLimited ? 0.7 : 0.85) || schedulingDelay >= (cpuLimited ? 66 : 100)) {
+  const cpuThreshold = signals.batterySaver ? (cpuLimited ? 0.63 : 0.75) : (cpuLimited ? 0.7 : 0.85);
+  if (nativeCpuLoad >= cpuThreshold || schedulingDelay >= (cpuLimited ? 66 : 100)) {
     return { profile: 'efficiency', reason: 'cpu_contention' };
   }
-  if (threads <= 4 || memoryGiB <= 4) return { profile: 'efficiency', reason: 'limited_device' };
+  if (threads <= 4 || (memoryGiB ?? Infinity) <= 4) return { profile: 'efficiency', reason: 'limited_device' };
   if (nativeCpuLoad >= 0.75 || schedulingDelay >= 50) return { profile: 'balanced', reason: 'cpu_contention' };
 
   if (signals.gpuAvailable === false || signals.graphicsApi === 'unavailable') {
@@ -125,11 +144,11 @@ function chooseTarget(
   }
 
   const latency = signals.interactionLatencyMs ?? 0;
-  if (latency >= 120 && (signals.hardwareThreads ?? 0) >= 12 && (signals.deviceMemoryGiB ?? 0) >= 8 &&
-      (signals.charging === true || (signals.batteryLevel ?? 0) > 0.5)) {
+  if (latency >= 120 && (signals.hardwareThreads ?? 0) >= 12 && (memoryGiB ?? 0) >= 8 &&
+      (signals.powerSource === 'ac' || signals.charging === true || (signals.batteryLevel ?? 0) > 0.5)) {
     return { profile: 'maximum', reason: 'workload_demand' };
   }
-  if (latency >= 65 && (signals.hardwareThreads ?? 0) >= 8 && (signals.deviceMemoryGiB ?? 0) >= 6) {
+  if (latency >= 65 && (signals.hardwareThreads ?? 0) >= 8 && (memoryGiB ?? 0) >= 6) {
     return { profile: 'performance', reason: 'workload_demand' };
   }
   return { profile: 'balanced', reason: 'default' };
@@ -158,14 +177,21 @@ export function updateAdaptive(
 
   const recovering = ADAPTIVE_PROFILES.indexOf(target.profile) > ADAPTIVE_PROFILES.indexOf(previous.profile);
   const hold = recovering ? 20_000 : 8000;
-  const observedAt = previous.pending?.profile === target.profile ? previous.pending.observedAt : now;
+  const pending = previous.pending?.profile === target.profile && previous.pending.reason === target.reason
+    ? previous.pending : undefined;
+  const observedAt = pending?.observedAt ?? now;
+  const needsFreshNativeSample = signals.nativeSampleCount !== undefined &&
+    ((signals.nativeCpuLoad !== undefined && (target.reason === 'cpu_contention' || previous.reason === 'cpu_contention')) ||
+      (signals.nativeMemoryPressure !== undefined && (target.reason === 'memory_pressure' || previous.reason === 'memory_pressure')));
+  const sampleCount = pending?.sampleCount ?? (needsFreshNativeSample ? signals.nativeSampleCount : undefined);
+  const observedAgain = sampleCount === undefined || (signals.nativeSampleCount ?? sampleCount) > sampleCount;
   const readyAt = Math.max(previous.changedAt + 15_000, observedAt + hold);
-  if (now >= readyAt) {
+  if (now >= readyAt && observedAgain) {
     return { ...target, selection, signals, changedAt: now, policy: effectivePolicy(target.profile, signals) };
   }
 
   return {
     ...previous, signals, policy: effectivePolicy(previous.profile, signals),
-    pending: { ...target, observedAt, readyAt },
+    pending: { ...target, observedAt, readyAt: observedAgain ? readyAt : Math.max(readyAt, now + 2000), sampleCount },
   };
 }

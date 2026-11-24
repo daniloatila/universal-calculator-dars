@@ -1,0 +1,8 @@
+{
+  "identifier": "native-sensors",
+  "description": "Read bounded, local capability snapshots from the packaged main window.",
+  "local": true,
+  "windows": ["main"],
+  "webviews": ["main"],
+  "permissions": ["allow-dars-native-capabilities"]
+}

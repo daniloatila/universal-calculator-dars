@@ -2,6 +2,12 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
+## 0.2.1 · Objective 02 revision 01
+
+- Added a scoped Windows capabilities provider and local resource diagnostics.
+- Decoupled module registration and protected startup, session clearing, and secondary task deadlines.
+- Added reduced-detail drawing in Ultra Light and matched native performance comparisons.
+
 ## 0.2.0 · Objective 02
 
 - Added single-active module lifecycle and recovery of in-memory Standard session values.

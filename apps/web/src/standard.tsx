@@ -2,12 +2,11 @@ import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 're
 import type { KeyboardEvent, PointerEvent, ReactNode } from 'react';
 import { changeSign, edit, EMPTY_EDITOR, redo, spliceExpression, undo } from './editor';
 import type { Editor } from './editor';
-import type { Evaluation } from './engine';
+import type { Combine, EngineStatus, Evaluate, Evaluation } from './engine';
 import { Icon } from './icons';
 import { LOCALES } from './i18n';
-import type { Messages } from './i18n';
+import type { Locale, Messages } from './i18n';
 import { isExactDecimal, localizeExpression, normalizeExpression, numberPresentation } from './locale-format';
-import type { ModuleContext } from './module-registry';
 
 type Answer = Extract<Evaluation, { ok: true }>;
 type Completed = { id: number; expression: string; input: string; decimalSeparator: string; answer: Answer };
@@ -32,6 +31,16 @@ type StandardSnapshot = {
 };
 
 export type StandardSession = { current?: StandardSnapshot };
+
+interface StandardProps {
+  locale: Locale;
+  messages: Messages;
+  evaluate: Evaluate;
+  combine: Combine;
+  engineStatus: EngineStatus;
+  session: StandardSession;
+  cacheEntries: number;
+}
 
 const MAX_INPUT = 4_096;
 const HISTORY_LIMIT = 32;
@@ -69,7 +78,7 @@ function errorMessage(code: string, messages: Messages) {
   }
 }
 
-export default function Standard({ locale, messages: m, evaluate, combine, engineStatus, session, cacheEntries }: ModuleContext) {
+export default function Standard({ locale, messages: m, evaluate, combine, engineStatus, session, cacheEntries }: StandardProps) {
   const initial = session.current;
   const inputRef = useRef<HTMLInputElement>(null);
   const editRevision = useRef(initial?.editRevision ?? 0);
