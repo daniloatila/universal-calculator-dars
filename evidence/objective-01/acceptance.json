@@ -1029,15 +1029,16 @@
       },
       "status": "PASS",
       "evidence": [
+        "approval.json",
         "revision-01/REPORT.md",
         "../../PROJECT_STATE.md",
         "../../AGENTS.md",
         "REPORT.md"
       ],
-      "limits": "Only Objective 01 is ready for review. Owner approval is pending and Objective 02 remains NOT_STARTED.",
+      "limits": "The review delivery awaited owner approval. The later explicit owner decision approved Objective 01 and opened Objective 02.",
       "justification": {
-        "en": "Project state and the report record Objective 01 as ready for review and every subsequent objective as not started.",
-        "pt-BR": "O estado do projeto e o relatório registram o Objetivo 01 pronto para revisão e todos os objetivos seguintes como não iniciados."
+        "en": "Objective 01 was delivered for review before the owner explicitly approved it and authorized Objective 02.",
+        "pt-BR": "O Objetivo 01 foi entregue para revisão. Em seguida, o proprietário o aprovou explicitamente e autorizou o Objetivo 02."
       }
     }
   ],
@@ -1052,7 +1053,7 @@
   "revision": {
     "id": "01",
     "acceptance": "revision-01/acceptance.json",
-    "objective_02": "NOT_STARTED"
+    "objective_02_at_review": "NOT_STARTED"
   },
   "approval": "approval.json"
 }

@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "objective": "02",
+  "version": "0.2.0",
+  "status": "READY_FOR_REVIEW",
+  "approved": false,
+  "previous_objective": "APPROVED",
+  "objective_03": "NOT_STARTED",
+  "verified_source_commit": "a90b6502fa4c723512844e5035e67459268e9e83",
+  "authorization": "../objective-01/approval.json",
+  "criteria": [
+    {
+      "id": "DARS-02-GATE",
+      "requirement": {
+        "en": "Record the owner's Objective 01 decision and develop only Objective 02.",
+        "pt-BR": "Registrar a decisão do proprietário para o Objetivo 01 e desenvolver apenas o Objetivo 02."
+      },
+      "status": "PASS",
+      "evidence": [
+        "../objective-01/approval.json",
+        "../../PROJECT_STATE.md"
+      ]
+    },
+    {
+      "id": "DARS-02-LIFECYCLE",
+      "requirement": {
+        "en": "Implement explicit states and a single lazily activated production module.",
+        "pt-BR": "Implementar estados explícitos e um único módulo de produção ativado sob demanda."
+      },
+      "status": "PASS",
+      "evidence": [
+        "browser-resource-proofs.json",
+        "../../apps/web/src/module-manager.ts"
+      ]
+    },
+    {
+      "id": "DARS-02-RESOURCES",
+      "requirement": {
+        "en": "Prove cancellation and release of workers, cache and graphics resources with test modules.",
+        "pt-BR": "Comprovar cancelamento e liberação de workers, caches e gráficos com módulos de teste."
+      },
+      "status": "PASS",
+      "evidence": [
+        "browser-resource-proofs.json",
+        "../../apps/web/tests/module-manager.test.mts"
+      ]
+    },
+    {
+      "id": "DARS-02-RECOVERY",
+      "requirement": {
+        "en": "Preserve arithmetic session state and recover isolated failures.",
+        "pt-BR": "Preservar o estado matemático da sessão e recuperar falhas isoladas."
+      },
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "browser-resource-proofs.json",
+        "benchmarks.json"
+      ]
+    },
+    {
+      "id": "DARS-02-ADAPTIVE",
+      "requirement": {
+        "en": "Implement all five selectable resource policies, deterministic thresholds and hysteresis.",
+        "pt-BR": "Implementar os cinco perfis selecionáveis, limiares determinísticos e histerese."
+      },
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "../../docs/en/operations.md",
+        "../../apps/web/tests/adaptive.test.mts"
+      ]
+    },
+    {
+      "id": "DARS-02-REAL_EFFECTS",
+      "requirement": {
+        "en": "Demonstrate measured idle-worker, scheduling and graphics effects without formula changes.",
+        "pt-BR": "Demonstrar efeitos medidos em workers, agendamento e gráficos, com a matemática preservada."
+      },
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "browser-resource-proofs.json",
+        "../../apps/web/src/module-work.ts"
+      ]
+    },
+    {
+      "id": "DARS-02-ENVIRONMENT",
+      "requirement": {
+        "en": "Exercise real native window state and simulated memory, CPU, battery, thermal and GPU constraints.",
+        "pt-BR": "Exercitar estado real da janela e condições simuladas de memória, CPU, bateria, temperatura e GPU."
+      },
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "browser-resource-proofs.json",
+        "../../apps/web/tests/adaptive.test.mts"
+      ],
+      "limits": "Unavailable operating-system signals are explicitly reported as unavailable."
+    },
+    {
+      "id": "DARS-02-MEMORY",
+      "requirement": {
+        "en": "Measure repeated same-process load, idle, suspension and recovery and compare with 0.1.1.",
+        "pt-BR": "Medir ciclos no mesmo processo e comparar com a referência 0.1.1."
+      },
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "../../benchmarks/windows-adaptive-cycles.pt-BR.md"
+      ],
+      "limits": "The 100 MB increment remains an engineering objective. Finite trials bound the observed behavior."
+    },
+    {
+      "id": "DARS-02-PRIVACY",
+      "requirement": {
+        "en": "Provide local privacy controls, actual destinations and explicit cache-only operation.",
+        "pt-BR": "Fornecer controles locais, destinos reais e modo offline explícito."
+      },
+      "status": "PASS",
+      "evidence": [
+        "security.md",
+        "browser-resource-proofs.json",
+        "../../docs/en/operations.md"
+      ]
+    },
+    {
+      "id": "DARS-02-CREDENTIALS",
+      "requirement": {
+        "en": "Provide an operating-system-backed credential mechanism for future authorized consumers.",
+        "pt-BR": "Oferecer mecanismo de credenciais protegido pelo sistema para futuros consumidores autorizados."
+      },
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "security.md",
+        "../../apps/desktop/src/credentials.rs"
+      ],
+      "limits": "Native provider exercised on Windows. No credential UI and no generic persistence fallback."
+    },
+    {
+      "id": "DARS-02-DIAGNOSTICS",
+      "requirement": {
+        "en": "Expose local diagnostics and actual available signals with bounded sampling.",
+        "pt-BR": "Expor diagnóstico local e sinais disponíveis com amostragem limitada."
+      },
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "browser-resource-proofs.json",
+        "windows-operations.png"
+      ]
+    },
+    {
+      "id": "DARS-02-APPEARANCE",
+      "requirement": {
+        "en": "Keep the navy Dark default and explain retained math values without loss of precision.",
+        "pt-BR": "Manter o Escuro azul-marinho e explicar valores retidos com a precisão preservada."
+      },
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "windows-operations.png",
+        "../../apps/web/tests/standard-revision.spec.ts"
+      ]
+    },
+    {
+      "id": "DARS-02-LOCALES",
+      "requirement": {
+        "en": "Verify all seven locales, RTL, typography fit, numeric formatting and settings persistence.",
+        "pt-BR": "Verificar sete idiomas, RTL, largura, formatação numérica e persistência de preferências."
+      },
+      "status": "PASS",
+      "evidence": [
+        "browser-resource-proofs.json",
+        "tests.json",
+        "compatibility.md"
+      ]
+    },
+    {
+      "id": "DARS-02-REGRESSION",
+      "requirement": {
+        "en": "Repeat all 540 equivalent checks, retain independent oracles and exceed 95 percent core coverage.",
+        "pt-BR": "Repetir os 540 checks equivalentes, manter oráculos independentes e superar 95% de cobertura no núcleo."
+      },
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "compatibility.md",
+        "reproduction.md"
+      ]
+    },
+    {
+      "id": "DARS-02-SECURITY_CI",
+      "requirement": {
+        "en": "Run audited publication checks and verify all CI jobs.",
+        "pt-BR": "Auditar a publicação e confirmar todos os jobs de CI."
+      },
+      "status": "PASS",
+      "evidence": [
+        "ci.json",
+        "security.md"
+      ]
+    },
+    {
+      "id": "DARS-02-DELIVERY",
+      "requirement": {
+        "en": "Ship bilingual development documentation and evidence, and stop at the next approval gate.",
+        "pt-BR": "Entregar documentação bilíngue e evidências de desenvolvimento e parar no próximo ponto de aprovação."
+      },
+      "status": "PASS",
+      "evidence": [
+        "REPORT.md",
+        "changes.md",
+        "../../ROADMAP.md",
+        "../../PROJECT_STATE.md"
+      ]
+    }
+  ]
+}

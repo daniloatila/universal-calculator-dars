@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "objective": "02",
+  "version": "0.2.0",
+  "verified_source_commit": "a90b6502fa4c723512844e5035e67459268e9e83",
+  "environment": {
+    "os": "Windows 11 Pro x64 build 26200",
+    "node": "24.19.0",
+    "rust": "1.100.0",
+    "chrome": "158.0.8127.38",
+    "webview2": "158.0.4370.33"
+  },
+  "suites": [
+    {
+      "id": "rust-core",
+      "passed": 16,
+      "failed": 0,
+      "objective_01_equivalents": 16,
+      "command": "cargo test --locked --workspace"
+    },
+    {
+      "id": "independent-cli-oracle",
+      "passed": 157,
+      "failed": 0,
+      "objective_01_equivalents": 157,
+      "command": "python -B tests/oracle.py target/release/dars.exe"
+    },
+    {
+      "id": "independent-structured-wasm-oracle",
+      "passed": 291,
+      "failed": 0,
+      "objective_01_equivalents": 291,
+      "command": "python -B crates/dars-core/tests/structured-oracle.py"
+    },
+    {
+      "id": "native-wasm-parity",
+      "passed": 20,
+      "failed": 0,
+      "objective_01_equivalents": 20,
+      "command": "node tests/check-targets.mjs target/release/dars.exe"
+    },
+    {
+      "id": "typescript-unit",
+      "passed": 40,
+      "failed": 0,
+      "objective_01_equivalents": 17,
+      "command": "npm test --prefix apps/web"
+    },
+    {
+      "id": "production-chrome",
+      "passed": 23,
+      "failed": 0,
+      "objective_01_equivalents": 16,
+      "command": "npm run test:e2e --prefix apps/web"
+    },
+    {
+      "id": "offline-web",
+      "passed": 10,
+      "failed": 0,
+      "objective_01_equivalents": 10,
+      "command": "node tests/verify-web-offline.mjs"
+    },
+    {
+      "id": "windows-webview2",
+      "passed": 17,
+      "failed": 0,
+      "objective_01_equivalents": 13,
+      "command": "node scripts/verify-desktop.mjs --objective-02"
+    },
+    {
+      "id": "windows-credential-provider",
+      "passed": 2,
+      "failed": 0,
+      "objective_01_equivalents": 0,
+      "command": "cargo test --locked -p dars-desktop --lib -- --include-ignored"
+    }
+  ],
+  "passed": 576,
+  "objective_01_equivalent_checks": 540,
+  "windows_application": {
+    "assertions": 17,
+    "launch_to_first_exact_result_ms": [
+      496,
+      508,
+      518
+    ],
+    "native_visibility": "browser-resource-proofs.json",
+    "visual_evidence": "windows-operations.png"
+  },
+  "coverage": {
+    "lines": {
+      "count": 620,
+      "covered": 613,
+      "percent": 98.87096774193549
+    },
+    "regions": {
+      "count": 743,
+      "covered": 711,
+      "notcovered": 32,
+      "percent": 95.69313593539704
+    },
+    "functions": {
+      "count": 57,
+      "covered": 57,
+      "percent": 100
+    }
+  },
+  "artifacts": {
+    "windows_desktop": {
+      "bytes": 8549376,
+      "sha256": "9b7c2712a9a301c7e31edab34defceed087fb682962677d98aea0ed48e369b1a"
+    },
+    "windows_cli": {
+      "bytes": 478720,
+      "sha256": "76f2b831eaf005d75f53211904bdeacf008bcf2b68f36bec426a5350b6b89fbf"
+    },
+    "web_wasm": {
+      "bytes": 307305,
+      "sha256": "d90bc9d58506ef4d483096a3472180d37de10220e67e4497677ccb175499cec7"
+    },
+    "windows_screenshot": {
+      "bytes": 240401,
+      "sha256": "3742e9b397b2df1b17db9f8a2730ce6ada0b001f53918129fd159cfbbdfae844"
+    }
+  },
+  "browser_proofs": "browser-resource-proofs.json",
+  "static_checks": [
+    "cargo fmt --all --check",
+    "cargo clippy --locked --workspace --all-targets -- -D warnings",
+    "production TypeScript/Vite build"
+  ],
+  "scope_limits": [
+    "The native vault round-trip uses a synthetic credential and is opt-in outside ordinary automated suites.",
+    "Locale and viewport coverage uses desktop Chrome."
+  ],
+  "supplementary_scope": {
+    "operations_accessibility_cases": 2,
+    "native_in_page_timing_cases": 160,
+    "app_build_files_with_identical_hashes_to_native_inputs": 16
+  }
+}

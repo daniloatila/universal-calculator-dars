@@ -1,0 +1,261 @@
+{
+  "lifecycle-resource-proof": {
+    "eagerLoads": [
+      "standard"
+    ],
+    "heavyLoads": 5,
+    "graphicsReleased": 5,
+    "graphicBackend": "webgl",
+    "overlappingPhases": false,
+    "messages": [
+      "started",
+      "started",
+      "started",
+      "started",
+      "started"
+    ],
+    "terminated": 5,
+    "cleared": 5,
+    "memoryBytes": 4194304,
+    "postSwitchStates": [
+      {
+        "activeId": "standard",
+        "resourceCount": 0
+      },
+      {
+        "activeId": "standard",
+        "resourceCount": 0
+      },
+      {
+        "activeId": "standard",
+        "resourceCount": 0
+      },
+      {
+        "activeId": "standard",
+        "resourceCount": 0
+      },
+      {
+        "activeId": "standard",
+        "resourceCount": 0
+      }
+    ],
+    "graphicsRemaining": 0,
+    "recoveredInput": "sqrt(2)%"
+  },
+  "worker-policy-proof": {
+    "retired": {
+      "created": 1,
+      "terminated": 1
+    },
+    "wokeAndRetired": {
+      "created": 2,
+      "terminated": 2
+    },
+    "maximumStart": {
+      "created": 3,
+      "terminated": 2
+    },
+    "maximumAfterUltraWindow": {
+      "created": 3,
+      "terminated": 2
+    },
+    "exactResult": "0.3",
+    "liveWasmBytes": 1179648
+  },
+  "offline-policy-proof": {
+    "online": {
+      "cached": false,
+      "status": 200,
+      "blocked": false
+    },
+    "blocked": {
+      "cached": false,
+      "status": null,
+      "blocked": true
+    },
+    "afterReload": {
+      "cached": false,
+      "status": null,
+      "blocked": true
+    },
+    "restored": {
+      "cached": false,
+      "status": 200,
+      "blocked": false
+    }
+  },
+  "visibility-session-proof": {
+    "source": "Injected document visibility and dispatched the production visibility event.",
+    "suspendedWorkers": 0,
+    "recovered": "100.014142135623730950488",
+    "continued": "200.028284271247461900976",
+    "cleared": true
+  },
+  "localized-operations-proof": [
+    {
+      "locale": "en",
+      "direction": "ltr",
+      "geometry": {
+        "viewport": 320,
+        "root": 320,
+        "panel": 262,
+        "panelContent": 262
+      },
+      "result": "0.3",
+      "externalRequests": 0
+    },
+    {
+      "locale": "pt-BR",
+      "direction": "ltr",
+      "geometry": {
+        "viewport": 320,
+        "root": 320,
+        "panel": 262,
+        "panelContent": 262
+      },
+      "result": "0,3",
+      "externalRequests": 0
+    },
+    {
+      "locale": "zh-CN",
+      "direction": "ltr",
+      "geometry": {
+        "viewport": 320,
+        "root": 320,
+        "panel": 262,
+        "panelContent": 262
+      },
+      "result": "0.3",
+      "externalRequests": 0
+    },
+    {
+      "locale": "hi",
+      "direction": "ltr",
+      "geometry": {
+        "viewport": 320,
+        "root": 320,
+        "panel": 262,
+        "panelContent": 262
+      },
+      "result": "०.३",
+      "externalRequests": 0
+    },
+    {
+      "locale": "es",
+      "direction": "ltr",
+      "geometry": {
+        "viewport": 320,
+        "root": 320,
+        "panel": 262,
+        "panelContent": 262
+      },
+      "result": "0,3",
+      "externalRequests": 0
+    },
+    {
+      "locale": "ar",
+      "direction": "rtl",
+      "geometry": {
+        "viewport": 320,
+        "root": 320,
+        "panel": 262,
+        "panelContent": 262
+      },
+      "result": "٠٫٣",
+      "externalRequests": 0
+    },
+    {
+      "locale": "fr",
+      "direction": "ltr",
+      "geometry": {
+        "viewport": 320,
+        "root": 320,
+        "panel": 262,
+        "panelContent": 262
+      },
+      "result": "0,3",
+      "externalRequests": 0
+    }
+  ],
+  "graphics-cadence-proof": {
+    "oneShotDraws": 1,
+    "renderedColor": [
+      52,
+      86,
+      120,
+      255
+    ],
+    "windows": [
+      {
+        "profile": "ultra_light",
+        "requestedIntervalMs": null,
+        "elapsedMs": 662.7999999998137,
+        "draws": 0
+      },
+      {
+        "profile": "efficiency",
+        "requestedIntervalMs": 100,
+        "elapsedMs": 664.5,
+        "draws": 6
+      },
+      {
+        "profile": "maximum",
+        "requestedIntervalMs": 17,
+        "elapsedMs": 654,
+        "draws": 36
+      }
+    ],
+    "drawsAfterSuspension": 0,
+    "phase": "suspended",
+    "ownedGraphics": 0,
+    "canvases": 0
+  },
+  "windows-native-visibility": {
+    "before": {
+      "visible": "visible",
+      "phase": "active",
+      "workers": 1,
+      "profile": "balanced"
+    },
+    "minimized": {
+      "state": "minimized",
+      "foreground": false
+    },
+    "whileMinimized": {
+      "visible": "visible",
+      "phase": "suspended",
+      "workers": 0,
+      "profile": "ultra_light"
+    },
+    "restored": {
+      "state": "visible",
+      "foreground": false
+    },
+    "after": {
+      "visible": "visible",
+      "phase": "active",
+      "workers": 1,
+      "profile": "balanced"
+    },
+    "passed": true
+  },
+  "expanded_operations_accessibility": {
+    "browser": "158.0.8127.38",
+    "scope": "Expanded Operations, Privacy and Local diagnostics",
+    "rows": [
+      {
+        "locale": "en",
+        "theme": "light",
+        "width": 1120,
+        "violations": []
+      },
+      {
+        "locale": "ar",
+        "theme": "dark",
+        "width": 320,
+        "violations": []
+      }
+    ],
+    "passed": true
+  }
+}
