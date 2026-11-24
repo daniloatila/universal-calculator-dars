@@ -4,13 +4,13 @@
 
 ## Objetivo atual
 
-**Objetivo 01 · Fundação · 0.1.0 · IN_PROGRESS**
+**Objetivo 01 · Fundação · 0.1.0 · READY_FOR_REVIEW**
 
-A missão, o escopo planejado e os critérios de aceitação estão registrados. A implementação e a verificação da fundação estão em andamento. Nenhum objetivo foi aprovado. O [registro de aceitação](../../evidence/objective-01/acceptance.json) indexa as evidências usadas na decisão sobre o Objetivo 01.
+O Objetivo 01 está pronto para revisão do autor. A calculadora Standard foi exercitada no Windows x64 e no navegador. A compilação e a auditoria do CI passaram. O Objetivo 02 aguarda aprovação explícita. [Registro de aceitação](../../evidence/objective-01/acceptance.json)
 
 | Objetivo | Versão planejada | Estado | Evidências |
 | --- | --- | --- | --- |
-| 01 · Fundação | 0.1.0 | IN_PROGRESS | [Objetivo 01](../../evidence/objective-01/REPORT.md) |
+| 01 · Fundação | 0.1.0 | READY_FOR_REVIEW | [Objetivo 01](../../evidence/objective-01/REPORT.md) |
 | 02 · Inteligência operacional | 0.2.0 | NOT_STARTED | `evidence/objective-02/` |
 | 03 · Matemática universal | 0.3.0 | NOT_STARTED | `evidence/objective-03/` |
 | 04 · Finanças e negócios | 0.4.0 | NOT_STARTED | `evidence/objective-04/` |

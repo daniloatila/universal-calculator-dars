@@ -1,0 +1,23 @@
+{
+  "repository": "daniloatila/universal-calculator-dars",
+  "public_url": "https://github.com/daniloatila/universal-calculator-dars",
+  "visibility": "public",
+  "branch": "main",
+  "implementation_commit": "164af9e4fb1719834cbf7858d1dc7781ac9bfacf",
+  "release_count": 0,
+  "tag_count": 0,
+  "secret_scanning": "enabled",
+  "push_protection": "enabled",
+  "audited_source_tree": {
+    "tree_sha": "adb10239544d8da1ab4da6f9fd5d96fcae5acdc1",
+    "commit": "164af9e4fb1719834cbf7858d1dc7781ac9bfacf",
+    "tracked_files": 106,
+    "recognized_secrets": 0,
+    "private_path_patterns": 0,
+    "scanner": "Gitleaks 8.30.1 on staged export"
+  },
+  "prior_work_preserved": {
+    "prior_profile_checkout": "1ad2acc85e297cee9cd79d7b0aa5a9aa67094687",
+    "portfolio_folder_and_local_tools_ignored": true
+  }
+}

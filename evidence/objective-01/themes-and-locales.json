@@ -1,0 +1,142 @@
+{
+  "sourceCommit": "164af9e4fb1719834cbf7858d1dc7781ac9bfacf",
+  "browser": {
+    "product": "Chrome",
+    "version": "158.0.8127.38",
+    "headless": true
+  },
+  "target": "local production Vite static dist built from the source commit",
+  "catalogEvidence": [
+    {
+      "locale": "en",
+      "keys": 65,
+      "asset": "en-C7s7vJwg.js",
+      "sha256": "7e4740d6d2c945e2cf7b71a71e1426c030fb847450f4f9ba5c8e4fee226792e3"
+    },
+    {
+      "locale": "pt-BR",
+      "keys": 65,
+      "asset": "pt-BR-BcDpHLd3.js",
+      "sha256": "2d366d6b102d682f3298880c6bfd72a9d18450e743ce23059be241e7ff39ad48"
+    },
+    {
+      "locale": "zh-CN",
+      "keys": 65,
+      "asset": "zh-CN-DFEsReF-.js",
+      "sha256": "7a4f009200ffcdbb2e4d8dec18c112349c3915ddd391e1ca1c3de1c82ef59168"
+    },
+    {
+      "locale": "hi",
+      "keys": 65,
+      "asset": "hi-Cf3Q84K6.js",
+      "sha256": "de791d6f78c7768ef8844b1cc3480f1f125063f381eeaefe5f77a422fe01fccb"
+    },
+    {
+      "locale": "es",
+      "keys": 65,
+      "asset": "es-CAqFSPJm.js",
+      "sha256": "d643b2c1206a089138fe744b29e994d17f6f3e6901f05718b9920622fc62523e"
+    },
+    {
+      "locale": "ar",
+      "keys": 65,
+      "asset": "ar-zA013kjx.js",
+      "sha256": "ad710473a2e6c9075833d0206f10017ed2f11a6e34195aade6b595306b8b39ac"
+    },
+    {
+      "locale": "fr",
+      "keys": 65,
+      "asset": "fr-Dhj6-NIG.js",
+      "sha256": "483f1ac71c7b36d87cea7f55a87f7cd785157a94461a6d602a67f1e122d1122a"
+    }
+  ],
+  "runtimeEvidence": [
+    {
+      "locale": "en",
+      "detectedFrom": "de-DE",
+      "direction": "ltr",
+      "controlLabels": 24,
+      "arithmetic": "0.3",
+      "localizedDivisionByZero": true
+    },
+    {
+      "locale": "pt-BR",
+      "detectedFrom": "pt-PT",
+      "direction": "ltr",
+      "controlLabels": 24,
+      "arithmetic": "0,3",
+      "localizedDivisionByZero": true
+    },
+    {
+      "locale": "zh-CN",
+      "detectedFrom": "zh-CN",
+      "direction": "ltr",
+      "controlLabels": 24,
+      "arithmetic": "0.3",
+      "localizedDivisionByZero": true
+    },
+    {
+      "locale": "hi",
+      "detectedFrom": "hi-IN",
+      "direction": "ltr",
+      "controlLabels": 24,
+      "arithmetic": "०.३",
+      "localizedDivisionByZero": true
+    },
+    {
+      "locale": "es",
+      "detectedFrom": "es-ES",
+      "direction": "ltr",
+      "controlLabels": 24,
+      "arithmetic": "0,3",
+      "localizedDivisionByZero": true
+    },
+    {
+      "locale": "ar",
+      "detectedFrom": "ar-EG",
+      "direction": "rtl",
+      "controlLabels": 24,
+      "arithmetic": "٠٫٣",
+      "localizedDivisionByZero": true,
+      "rtlLayout": {
+        "calculatorAtInlineStart": true,
+        "expressionsAndKeypadRemainLTR": true,
+        "mobileHorizontalOverflow": false
+      }
+    },
+    {
+      "locale": "fr",
+      "detectedFrom": "fr-FR",
+      "direction": "ltr",
+      "controlLabels": 24,
+      "arithmetic": "0,3",
+      "localizedDivisionByZero": true
+    }
+  ],
+  "themeEvidence": {
+    "name": "oled",
+    "persistedOnReload": true,
+    "colors": {
+      "body": "rgb(0, 0, 0)",
+      "panel": "rgb(8, 10, 8)",
+      "colorScheme": "dark"
+    },
+    "axeViolations": 0,
+    "motionDefault": {
+      "mediaMatches": false,
+      "animation": "dars-qa-motion",
+      "transition": "opacity",
+      "scroll": "smooth"
+    },
+    "reducedMotion": {
+      "mediaMatches": true,
+      "animation": "none",
+      "transition": "none",
+      "scroll": "auto"
+    }
+  },
+  "limitations": [
+    "Current Standard catalogs and rendered controls were verified. Translations were not reviewed by seven independent native-language reviewers.",
+    "The reduced-motion probe tests the authored production CSS rule with a synthetic animation and transition."
+  ]
+}

@@ -8,7 +8,7 @@ DARS is a local-first computation platform by Danilo Átila. Its first milestone
 
 ## Foundation
 
-Objective 01 is in development. Its acceptance record tracks which parts have been demonstrated on real runtimes. The first milestone covers arithmetic, percentages, fractions, powers and square roots, editable expressions, temporary history, memory and a starting CLI.
+Objective 01 (0.1.0) is ready for review. Its Standard calculator works in the browser and a Windows x64 application. It supports arithmetic, percentages, fractions, powers and roots, editable expressions, temporary history, memory and a CLI. The first build uses one Rust math engine across the tested environments.
 
 - [Build from source](docs/en/build.md)
 - [Use Standard](docs/en/standard.md)

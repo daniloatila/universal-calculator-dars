@@ -8,7 +8,7 @@ O DARS é uma plataforma de computação local de Danilo Átila. Seu primeiro ma
 
 ## Fundação
 
-O Objetivo 01 está em desenvolvimento. Seu registro de aceitação acompanha quais partes foram demonstradas em ambientes reais. O primeiro marco abrange aritmética, porcentagens, frações, potências e raízes quadradas, expressões editáveis, histórico temporário, memória e uma CLI inicial.
+O Objetivo 01 (0.1.0) está pronto para revisão. A calculadora Standard funciona no navegador e em um aplicativo Windows x64. Ela oferece aritmética, porcentagens, frações, potências e raízes, expressões editáveis, histórico temporário, memória e uma interface de linha de comando. O primeiro build compartilha um núcleo matemático Rust entre os ambientes testados.
 
 - [Compilar a partir do código-fonte](docs/pt-BR/build.md)
 - [Usar a calculadora Padrão](docs/pt-BR/standard.md)

@@ -1,7 +1,10 @@
 # Alterações · Objetivo 01
 
-- A missão fornecida pelo proprietário foi preservada em [PROJECT_SPEC.md](../../PROJECT_SPEC.md).
-- O [roteiro](../../ROADMAP.md), o [estado](../../PROJECT_STATE.md) e os [critérios](acceptance.json) registram os oito objetivos e a aprovação explícita entre etapas.
-- O [ADR 001](../../docs/adr/0001-shared-calculation-core.md) documenta como desktop, web e CLI usam um núcleo matemático comum.
+Implementação em `main`, na revisão auditada `164af9e4fb1719834cbf7858d1dc7781ac9bfacf`. [Commit](https://github.com/daniloatila/universal-calculator-dars/commit/164af9e4fb1719834cbf7858d1dc7781ac9bfacf)
 
-Registre os componentes concluídos e a revisão exata de cada artefato quando a validação estiver disponível.
+- Missão integral preservada, tradução para o inglês, oito marcos, critérios e aprovação explícita entre etapas. [Missão](../../PROJECT_SPEC.md) · [Tradução](../../docs/en/mission.md) · [Roteiro](../../ROADMAP.md) · [Estado](../../PROJECT_STATE.md)
+- Núcleo Rust com representação exata, aproximação certificada, gramática limitada, aritmética, porcentagens, precedência, potências e raízes. Exportação WASM e CLI JSON usam o mesmo contrato. [Biblioteca](../../crates/dars-core/src/lib.rs) · [Parser](../../crates/dars-core/src/parser.rs) · [CLI](../../crates/dars-cli/src/main.rs) · [WASM](../../crates/dars-wasm/src/lib.rs)
+- Interface React com identidade DARS, teclado virtual e físico, memória, histórico temporário, desfazer, refazer, cópia, temas e internacionalização. O service worker mantém arquivos de produção em cache por versão e carrega idiomas sob demanda. [Standard](../../apps/web/src/standard.tsx) · [Estilos](../../apps/web/src/styles.css) · [Módulos](../../apps/web/src/module-registry.ts) · [Cache](../../apps/web/offline-plugin.mjs)
+- Desktop Windows x64 com Tauri e WebView2 usando os arquivos incorporados da interface web. O cálculo funciona por WebAssembly local e a configuração desktop mantém permissões mínimas. [Aplicativo Tauri](../../apps/desktop/src/main.rs) · [Configuração](../../apps/desktop/tauri.conf.json)
+- Suítes Rust e web, oráculo independente em Python, auditoria de dependências e segredos, comparação CLI e WASM, benchmarks e CI multiplataforma. [Suítes](tests.json) · [Benchmark](benchmarks.json) · [Segurança](security.md) · [Workflow CI](../../.github/workflows/ci.yml)
+- Publicação inicial do código Apache 2.0 em repositório dedicado. O material anterior do portfólio e os binários gerados permanecem locais. [Repositório](https://github.com/daniloatila/universal-calculator-dars) · [Licença](../../LICENSE) · [Manifesto de artefatos](artifacts.json)

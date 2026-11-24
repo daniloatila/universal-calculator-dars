@@ -1,0 +1,56 @@
+{
+  "databaseId": 45487008034,
+  "headSha": "164af9e4fb1719834cbf7858d1dc7781ac9bfacf",
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45487008034",
+  "createdAt": "2026-11-24T21:02:38Z",
+  "updatedAt": "2026-11-24T21:08:02Z",
+  "jobs": [
+    {
+      "name": "security",
+      "id": 138774962679,
+      "conclusion": "success",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45487008034/job/138774962679",
+      "verifiedSteps": [
+        "Run npm audit --prefix apps/web --audit-level=high",
+        "Run cargo audit --deny yanked"
+      ]
+    },
+    {
+      "name": "verify (windows-latest)",
+      "id": 138774962878,
+      "conclusion": "success",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45487008034/job/138774962878",
+      "verifiedSteps": [
+        "Check Rust formatting and core",
+        "Build WebAssembly and frontend",
+        "Build the Windows and macOS desktop targets"
+      ]
+    },
+    {
+      "name": "verify (ubuntu-latest)",
+      "id": 138774963113,
+      "conclusion": "success",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45487008034/job/138774963113",
+      "verifiedSteps": [
+        "Check Rust formatting and core",
+        "Build WebAssembly and frontend",
+        "Compare native and WebAssembly against independent calculations",
+        "Browser verification (Linux)"
+      ]
+    },
+    {
+      "name": "verify (macos-latest)",
+      "id": 138774963121,
+      "conclusion": "success",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45487008034/job/138774963121",
+      "verifiedSteps": [
+        "Check Rust formatting and core",
+        "Build WebAssembly and frontend",
+        "Compare native and WebAssembly against independent calculations",
+        "Build the Windows and macOS desktop targets"
+      ]
+    }
+  ]
+}

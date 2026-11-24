@@ -2,7 +2,7 @@
   "schema_version": 1,
   "objective": "01",
   "version": "0.1.0",
-  "objective_status": "IN_PROGRESS",
+  "objective_status": "READY_FOR_REVIEW",
   "criterion_states": [
     "PENDING",
     "PASS",
@@ -19,8 +19,14 @@
         "en": "Development environment audit",
         "pt-BR": "Auditoria do ambiente de desenvolvimento"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "environment.json"
+      ],
+      "justification": {
+        "en": "The Windows x64 host, toolchain, SDK, WebView2 and developer-tool versions were inventoried.",
+        "pt-BR": "Foram inventariados host Windows x64, toolchain, SDK, WebView2 e versões das ferramentas."
+      }
     },
     {
       "id": "DARS-01-IDENTIFIERS",
@@ -29,8 +35,16 @@
         "en": "Validation of name, repository, and identifier in relevant channels",
         "pt-BR": "Validação de nome, repositório e identificador nos canais relevantes"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "environment.json",
+        "publication.json"
+      ],
+      "limits": "Public observations recorded. They do not reserve app-store identifiers or establish exclusivity.",
+      "justification": {
+        "en": "Repository availability and public npm, crates.io, Play and Apple listings were checked. The qualified repository was then created.",
+        "pt-BR": "A disponibilidade do repositório e as listagens públicas npm, crates.io, Play e Apple foram consultadas. O repositório qualificado foi criado."
+      }
     },
     {
       "id": "DARS-01-ARCHITECTURE",
@@ -39,8 +53,15 @@
         "en": "Documented modular architecture",
         "pt-BR": "Arquitetura modular documentada"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../docs/pt-BR/architecture.md",
+        "../../docs/adr/0001-shared-calculation-core.md"
+      ],
+      "justification": {
+        "en": "The ADR records component boundaries and a shared evaluator. The published implementation follows them.",
+        "pt-BR": "O ADR registra os limites entre componentes e o avaliador compartilhado. A implementação publicada segue essa divisão."
+      }
     },
     {
       "id": "DARS-01-MONOREPO",
@@ -49,8 +70,15 @@
         "en": "Organized monorepo",
         "pt-BR": "Estrutura monorepo organizada"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../Cargo.toml",
+        "../../docs/pt-BR/architecture.md"
+      ],
+      "justification": {
+        "en": "Cargo workspace and the Vite package build from one repository with pinned lockfiles.",
+        "pt-BR": "O workspace Cargo e o pacote Vite compilam no mesmo repositório com lockfiles fixados."
+      }
     },
     {
       "id": "DARS-01-DESIGN_SYSTEM",
@@ -59,8 +87,16 @@
         "en": "Original design system",
         "pt-BR": "Design system original"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../apps/web/src/styles.css",
+        "web-desktop-light.png",
+        "web-mobile-dark.png"
+      ],
+      "justification": {
+        "en": "The shared interface implements visual tokens, live themes, keyboard focus and responsive sizing.",
+        "pt-BR": "A interface compartilhada implementa tokens visuais, temas, foco de teclado e tamanhos responsivos."
+      }
     },
     {
       "id": "DARS-01-VISUAL_ASSETS",
@@ -69,8 +105,16 @@
         "en": "Original lightweight scalable logo and icons",
         "pt-BR": "Logotipo e ícones originais, leves e escaláveis"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../apps/web/public/dars.svg",
+        "../../apps/web/src/icons.tsx",
+        "../../apps/desktop/icons/icon.ico"
+      ],
+      "justification": {
+        "en": "The same original SVG mark supplies the web favicon and the Windows icon assets. The controls use inline vectors.",
+        "pt-BR": "A mesma marca vetorial original fornece o favicon web e os ícones Windows. Os controles usam vetores embutidos."
+      }
     },
     {
       "id": "DARS-01-RESPONSIVE",
@@ -79,8 +123,16 @@
         "en": "Responsive interface and accessibility checks",
         "pt-BR": "Interface responsiva e verificações de acessibilidade"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "web-validation.json",
+        "web-mobile-dark.png",
+        "tests.json"
+      ],
+      "justification": {
+        "en": "Tests covered 320–1280 px, axe checked accessible structure and contrast, and touch was emulated at 390 px.",
+        "pt-BR": "Os testes cobriram 320 a 1.280 px, o axe examinou estrutura e contraste e o toque foi emulado a 390 px."
+      }
     },
     {
       "id": "DARS-01-RUST_CORE",
@@ -89,8 +141,16 @@
         "en": "Independent Rust math engine",
         "pt-BR": "Núcleo matemático independente em Rust"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../crates/dars-core/src/lib.rs",
+        "tests.json",
+        "coverage.json"
+      ],
+      "justification": {
+        "en": "The independent Rust library passed integration tests and reached 458 of 464 instrumented lines.",
+        "pt-BR": "A biblioteca Rust independente passou nos testes de integração e cobriu 458 das 464 linhas instrumentadas."
+      }
     },
     {
       "id": "DARS-01-WASM_BRIDGE",
@@ -99,8 +159,16 @@
         "en": "Working Rust, TypeScript, and WebAssembly integration",
         "pt-BR": "Integração funcional entre Rust, TypeScript e WebAssembly"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../crates/dars-wasm/src/lib.rs",
+        "../../apps/web/src/wasm-worker.ts",
+        "parity.json"
+      ],
+      "justification": {
+        "en": "The generated binding executes the Rust evaluator in a TypeScript-driven worker and passed all 20 native comparisons.",
+        "pt-BR": "O binding gerado executa o avaliador Rust em worker controlado por TypeScript e passou nas 20 comparações nativas."
+      }
     },
     {
       "id": "DARS-01-WINDOWS_APP",
@@ -109,8 +177,16 @@
         "en": "Working Windows desktop application",
         "pt-BR": "Aplicativo desktop funcional no Windows"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "windows-x64.json",
+        "windows-x64.png",
+        "artifacts.json"
+      ],
+      "justification": {
+        "en": "The local Windows executable opened three times and evaluated through a real WebView2 instance.",
+        "pt-BR": "O executável local abriu três vezes no Windows e avaliou expressões na WebView2 real."
+      }
     },
     {
       "id": "DARS-01-WEB_APP",
@@ -119,8 +195,16 @@
         "en": "Working browser application",
         "pt-BR": "Aplicativo web funcional"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "web-validation.json",
+        "artifacts.json"
+      ],
+      "justification": {
+        "en": "The production bundle executed the required Standard workflows in Chromium.",
+        "pt-BR": "O bundle de produção executou os fluxos exigidos da Standard no Chromium."
+      }
     },
     {
       "id": "DARS-01-OTHER_TARGETS",
@@ -129,9 +213,17 @@
         "en": "Initial build evidence for other available targets",
         "pt-BR": "Provas iniciais de compilação para outros alvos disponíveis"
       },
-      "status": "PENDING",
-      "evidence": [],
-      "condition": "when the platform toolchain and prerequisites are available"
+      "status": "PASS",
+      "evidence": [
+        "ci.json",
+        "compatibility.md"
+      ],
+      "condition": "when the platform toolchain and prerequisites are available",
+      "limits": "Compatibility is limited to the actual builds and executions in the CI record.",
+      "justification": {
+        "en": "The remote run built and tested Linux x64 CLI and web, and built macOS arm64 CLI and desktop.",
+        "pt-BR": "A execução remota compilou e testou CLI e web no Linux x64 e compilou CLI e desktop no macOS arm64."
+      }
     },
     {
       "id": "DARS-01-CLI",
@@ -140,8 +232,16 @@
         "en": "Initial CLI",
         "pt-BR": "Estrutura inicial de CLI"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../crates/dars-cli/src/main.rs",
+        "oracle.json",
+        "artifacts.json"
+      ],
+      "justification": {
+        "en": "The native CLI accepts a complete expression, emits JSON and distinguishes success, evaluation error and invalid invocation.",
+        "pt-BR": "A CLI nativa aceita uma expressão completa, emite JSON e distingue sucesso, erro matemático e invocação inválida."
+      }
     },
     {
       "id": "DARS-01-LOCALIZATION",
@@ -150,8 +250,16 @@
         "en": "Initial internationalization infrastructure",
         "pt-BR": "Infraestrutura inicial de internacionalização"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../apps/web/src/i18n.ts",
+        "web-offline.json",
+        "themes-and-locales.json"
+      ],
+      "justification": {
+        "en": "Seven catalogs matched their compiled chunks. Locale choice, numeric formatting, fallbacks and RTL were exercised.",
+        "pt-BR": "Sete catálogos corresponderam aos chunks compilados. Foram exercitados idioma, formatação numérica, fallback e RTL."
+      }
     },
     {
       "id": "DARS-01-SECURITY",
@@ -160,8 +268,17 @@
         "en": "Initial security design and privacy checks",
         "pt-BR": "Estrutura inicial de segurança e verificações de privacidade"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "security.md",
+        "rust-audit.json",
+        "npm-audit.json",
+        "publication.json"
+      ],
+      "justification": {
+        "en": "The scoped scanner, dependency audits, CSP boundaries and no-external-request checks passed for the delivered targets.",
+        "pt-BR": "A varredura de segredos, as auditorias de dependências, os limites de CSP e os testes sem pedidos externos passaram para os alvos entregues."
+      }
     },
     {
       "id": "DARS-01-MODULE_INTERFACE",
@@ -170,8 +287,15 @@
         "en": "Stable initial interface for future modules",
         "pt-BR": "Interface inicial estável para módulos futuros"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../apps/web/src/module-registry.ts",
+        "../../docs/pt-BR/architecture.md"
+      ],
+      "justification": {
+        "en": "A typed loader and module context connect Standard to a shared evaluation API without making the module part of the app shell.",
+        "pt-BR": "Um carregador tipado e o contexto do módulo conectam Standard à API de avaliação sem misturar o módulo à estrutura do aplicativo."
+      }
     },
     {
       "id": "DARS-01-CI",
@@ -180,8 +304,15 @@
         "en": "Continuous integration",
         "pt-BR": "Integração contínua"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../.github/workflows/ci.yml",
+        "ci.json"
+      ],
+      "justification": {
+        "en": "All four jobs completed successfully for the exact implementation commit.",
+        "pt-BR": "Os quatro jobs terminaram com sucesso para o commit exato da implementação."
+      }
     },
     {
       "id": "DARS-01-BILINGUAL_DOCS",
@@ -190,8 +321,17 @@
         "en": "Equivalent English and Brazilian Portuguese documentation",
         "pt-BR": "Documentação equivalente em inglês e português brasileiro"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../README.md",
+        "../../README.pt-BR.md",
+        "../../docs/en/mission.md",
+        "../../PROJECT_SPEC.md"
+      ],
+      "justification": {
+        "en": "The original mission and its translation, both READMEs and the paired documentation were checked for internal links.",
+        "pt-BR": "A missão original, sua tradução, os dois READMEs e a documentação paralela tiveram seus links internos conferidos."
+      }
     },
     {
       "id": "DARS-01-INDEPENDENT_ORACLE",
@@ -200,8 +340,15 @@
         "en": "Independent mathematical verification environment and execution",
         "pt-BR": "Ambiente e execução de verificações matemáticas independentes"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "oracle.json",
+        "../../tests/oracle.py"
+      ],
+      "justification": {
+        "en": "Python Decimal and Fraction independently matched 157 CLI cases.",
+        "pt-BR": "Decimal e Fraction do Python corresponderam de forma independente a 157 casos da CLI."
+      }
     },
     {
       "id": "DARS-01-ARITHMETIC",
@@ -210,8 +357,15 @@
         "en": "Arithmetic",
         "pt-BR": "Operações aritméticas"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "oracle.json"
+      ],
+      "justification": {
+        "en": "Addition, subtraction, multiplication and division passed exact reference vectors and generated cases.",
+        "pt-BR": "Soma, subtração, multiplicação e divisão passaram por referências exatas e casos gerados."
+      }
     },
     {
       "id": "DARS-01-PERCENT",
@@ -220,8 +374,16 @@
         "en": "Percentages",
         "pt-BR": "Porcentagens"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "oracle.json",
+        "../../docs/pt-BR/standard.md"
+      ],
+      "justification": {
+        "en": "Direct additive percentages and postfix scaling were checked against Fraction and engine vectors.",
+        "pt-BR": "Porcentagens aditivas diretas e escala pós-fixa foram comparadas ao Fraction e aos vetores do motor."
+      }
     },
     {
       "id": "DARS-01-FRACTIONS",
@@ -230,8 +392,15 @@
         "en": "Fractions",
         "pt-BR": "Frações"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "parity.json"
+      ],
+      "justification": {
+        "en": "Rational operations produce normalized exact fractions across CLI and WASM.",
+        "pt-BR": "As operações racionais produzem frações exatas normalizadas na CLI e no WASM."
+      }
     },
     {
       "id": "DARS-01-EXPONENTS",
@@ -240,8 +409,16 @@
         "en": "Powers",
         "pt-BR": "Potências"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "oracle.json",
+        "parity.json"
+      ],
+      "justification": {
+        "en": "Positive, negative and bounded rational powers were exercised with oracle and parser tests.",
+        "pt-BR": "Potências positivas, negativas e racionais limitadas foram exercitadas pelo oráculo e nos testes do parser."
+      }
     },
     {
       "id": "DARS-01-ROOTS",
@@ -250,8 +427,16 @@
         "en": "Roots",
         "pt-BR": "Raízes"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "oracle.json",
+        "parity.json"
+      ],
+      "justification": {
+        "en": "Perfect roots remain exact and irrational roots were checked against independent high-precision Decimal values.",
+        "pt-BR": "Raízes perfeitas permanecem exatas e raízes irracionais foram comparadas a Decimal de alta precisão."
+      }
     },
     {
       "id": "DARS-01-PARENTHESES",
@@ -260,8 +445,16 @@
         "en": "Parentheses",
         "pt-BR": "Parênteses"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "oracle.json",
+        "windows-x64.json"
+      ],
+      "justification": {
+        "en": "Nested grouping and grouping-related failures were checked. Windows directly returned 27 for 9*(1+2).",
+        "pt-BR": "Foram testados agrupamentos aninhados e suas falhas. O Windows retornou 27 para 9*(1+2)."
+      }
     },
     {
       "id": "DARS-01-PRECEDENCE",
@@ -270,8 +463,15 @@
         "en": "Operator precedence",
         "pt-BR": "Ordem de precedência"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "parity.json"
+      ],
+      "justification": {
+        "en": "The parser checks operator priority and right-associative powers in test vectors and native/WASM comparisons.",
+        "pt-BR": "O parser verifica prioridade de operações e associatividade à direita de potências em vetores e na comparação CLI/WASM."
+      }
     },
     {
       "id": "DARS-01-NEGATIVES",
@@ -280,8 +480,16 @@
         "en": "Negative numbers",
         "pt-BR": "Números negativos"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "oracle.json",
+        "parity.json"
+      ],
+      "justification": {
+        "en": "Sign and negative operands were covered by exact vectors and seeded comparisons.",
+        "pt-BR": "Sinal e operandos negativos foram cobertos por vetores exatos e comparações com semente fixa."
+      }
     },
     {
       "id": "DARS-01-MEMORY",
@@ -290,8 +498,15 @@
         "en": "Calculator memory",
         "pt-BR": "Memória da calculadora"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "../../apps/web/tests/standard.spec.ts"
+      ],
+      "justification": {
+        "en": "Browser automation stored, recalled and added a value to calculator memory.",
+        "pt-BR": "A automação no navegador armazenou, recuperou e somou um valor à memória."
+      }
     },
     {
       "id": "DARS-01-TEMPORARY_HISTORY",
@@ -300,8 +515,16 @@
         "en": "Temporary history",
         "pt-BR": "Histórico temporário"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "../../apps/web/tests/standard.spec.ts",
+        "security.md"
+      ],
+      "justification": {
+        "en": "Completed calculations entered session history and the state reset on reload. Failed expressions were excluded.",
+        "pt-BR": "Cálculos concluídos entraram no histórico da sessão, que se esvaziou ao recarregar. Expressões inválidas ficaram de fora."
+      }
     },
     {
       "id": "DARS-01-UNDO_REDO",
@@ -310,8 +533,15 @@
         "en": "Undo and redo",
         "pt-BR": "Desfazer e refazer"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "../../apps/web/tests/standard.spec.ts"
+      ],
+      "justification": {
+        "en": "Browser tests exercised undo and redo for keypad and keyboard edits.",
+        "pt-BR": "Testes no navegador exercitaram desfazer e refazer em edições por teclado e botões da calculadora."
+      }
     },
     {
       "id": "DARS-01-COPY",
@@ -320,8 +550,17 @@
         "en": "Result copying",
         "pt-BR": "Cópia de resultados"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "../../apps/web/tests/standard.spec.ts",
+        "../../docs/pt-BR/standard.md"
+      ],
+      "limits": "Copy was executed in Chromium. An exact result re-enters the parser subject to its input limits.",
+      "justification": {
+        "en": "The Chromium E2E case wrote and read the active result through the clipboard permission granted to that test.",
+        "pt-BR": "O cenário Chromium gravou e leu o resultado ativo na área de transferência com a permissão concedida ao ensaio."
+      }
     },
     {
       "id": "DARS-01-KEYBOARD",
@@ -330,8 +569,15 @@
         "en": "Keyboard input",
         "pt-BR": "Entrada por teclado"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "../../apps/web/tests/standard.spec.ts"
+      ],
+      "justification": {
+        "en": "Tests exercised typed input, Enter to calculate and keyboard editing actions.",
+        "pt-BR": "Os testes exercitaram digitação, Enter para calcular e edição pelo teclado."
+      }
     },
     {
       "id": "DARS-01-EDITING",
@@ -340,8 +586,15 @@
         "en": "Editable expressions",
         "pt-BR": "Expressões editáveis"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "../../apps/web/tests/unit.test.mts"
+      ],
+      "justification": {
+        "en": "The editor handles caret insertion, whole-expression editing and a bounded history of edits.",
+        "pt-BR": "O editor admite inserção no cursor, edição da expressão inteira e histórico limitado de edições."
+      }
     },
     {
       "id": "DARS-01-EXACT_APPROXIMATE",
@@ -350,8 +603,16 @@
         "en": "Exact and approximate representation",
         "pt-BR": "Representação exata e aproximada"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "web-validation.json",
+        "parity.json"
+      ],
+      "justification": {
+        "en": "1/3 was shown as an exact fraction and a marked 24-digit approximation. A finite exact decimal kept its exact label.",
+        "pt-BR": "1/3 foi exibido como fração exata e aproximação sinalizada de 24 dígitos. Um decimal finito exato preservou a indicação de exatidão."
+      }
     },
     {
       "id": "DARS-01-ERRORS",
@@ -360,8 +621,16 @@
         "en": "Correct error handling",
         "pt-BR": "Tratamento correto de erros"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "windows-x64.json",
+        "oracle.json"
+      ],
+      "justification": {
+        "en": "Domain, syntax, limit and division errors were differentiated and the interface recovered for the next calculation.",
+        "pt-BR": "Erros de domínio, sintaxe, limite e divisão foram distinguidos e a interface voltou a calcular após o erro."
+      }
     },
     {
       "id": "DARS-01-PARSER",
@@ -370,8 +639,16 @@
         "en": "Safe parser with explicit grammar, structured expressions, and limits",
         "pt-BR": "Parser seguro, gramática explícita, representação estruturada e limites"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../crates/dars-core/src/parser.rs",
+        "../../docs/pt-BR/standard.md",
+        "tests.json"
+      ],
+      "justification": {
+        "en": "The bounded grammar builds a typed expression tree. Vectors and 2,500 input mutations tested malformed or adversarial cases.",
+        "pt-BR": "A gramática limitada constrói uma árvore tipada. Vetores e 2.500 mutações testaram entradas malformadas ou adversariais."
+      }
     },
     {
       "id": "DARS-01-OFFLINE",
@@ -380,8 +657,16 @@
         "en": "Basic calculations with no internet",
         "pt-BR": "Cálculos básicos executados sem internet"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "web-offline.json",
+        "windows-x64.json",
+        "security.md"
+      ],
+      "justification": {
+        "en": "The Windows app calculated in offline mode and the production web build reloaded and calculated through its own cache.",
+        "pt-BR": "O aplicativo Windows calculou offline e o build web de produção recarregou e calculou usando seu próprio cache."
+      }
     },
     {
       "id": "DARS-01-DECIMAL_EXACT",
@@ -390,8 +675,16 @@
         "en": "0.1 + 0.2 returns an exact 0.3",
         "pt-BR": "0,1 + 0,2 retorna 0,3 com exatidão"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "parity.json",
+        "windows-x64.json",
+        "web-offline.json"
+      ],
+      "justification": {
+        "en": "The engine returns 3/10 exactly and the user interface displays 0.3 or 0,3 according to locale.",
+        "pt-BR": "O motor devolve 3/10 exatamente e a interface exibe 0.3 ou 0,3 de acordo com o idioma."
+      }
     },
     {
       "id": "DARS-01-RATIONAL_EXACT",
@@ -400,8 +693,18 @@
         "en": "1/3 represented as an exact rational",
         "pt-BR": "1/3 representado como fração exata"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "parity.json",
+        "oracle.json",
+        "tests.json",
+        "windows-exact.json"
+      ],
+      "limits": "The exact representation is 1/3; the decimal representation is explicitly approximate.",
+      "justification": {
+        "en": "The local Windows build displayed 1/3 in its Exact mode. Native and WASM agreed on the rational output.",
+        "pt-BR": "O executável Windows exibiu 1/3 no modo Exato. CLI e WASM concordaram quanto à representação racional."
+      }
     },
     {
       "id": "DARS-01-DIVISION_BY_ZERO",
@@ -410,8 +713,16 @@
         "en": "Division by zero is handled correctly",
         "pt-BR": "A divisão por zero é tratada corretamente"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "oracle.json",
+        "windows-x64.json",
+        "tests.json"
+      ],
+      "justification": {
+        "en": "The CLI and WASM emitted division_by_zero, and the product UI showed a recoverable error.",
+        "pt-BR": "CLI e WASM emitiram division_by_zero e a interface exibiu um erro recuperável."
+      }
     },
     {
       "id": "DARS-01-CROSS_RUNTIME",
@@ -420,8 +731,17 @@
         "en": "Consistent results across all tested environments",
         "pt-BR": "Resultados consistentes entre ambientes efetivamente testados"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "parity.json",
+        "windows-x64.json",
+        "tests.json",
+        "ci.json"
+      ],
+      "justification": {
+        "en": "Native and WASM output matched on Windows, Linux and macOS. The Windows and browser interfaces computed the shared cases.",
+        "pt-BR": "As saídas nativa e WASM coincidiram em Windows, Linux e macOS. As interfaces Windows e web calcularam casos em comum."
+      }
     },
     {
       "id": "DARS-01-AUTOMATED_TESTS",
@@ -430,8 +750,16 @@
         "en": "Applicable automated tests pass",
         "pt-BR": "Os testes automatizados aplicáveis passam"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "coverage.json",
+        "ci.json"
+      ],
+      "justification": {
+        "en": "The local evidence counts 219 successful checks and the relevant cloud jobs completed successfully.",
+        "pt-BR": "As evidências locais somam 219 verificações bem-sucedidas e os jobs remotos pertinentes passaram."
+      }
     },
     {
       "id": "DARS-01-BENCHMARK_MEMORY",
@@ -440,8 +768,16 @@
         "en": "Initial memory benchmark",
         "pt-BR": "Benchmark inicial de memória"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "windows-x64.json"
+      ],
+      "limits": "Tree working-set sum includes WebView2 children and can count shared pages more than once.",
+      "justification": {
+        "en": "The Windows host process and full process tree were sampled separately, as was Node WASM RSS.",
+        "pt-BR": "Foram amostrados separadamente o processo Windows, a árvore completa e o RSS do WASM em Node."
+      }
     },
     {
       "id": "DARS-01-BENCHMARK_CPU",
@@ -450,8 +786,15 @@
         "en": "Initial CPU benchmark",
         "pt-BR": "Benchmark inicial de CPU"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "windows-x64.json"
+      ],
+      "justification": {
+        "en": "A short real Windows idle sample and CPU times for 2,400 Node WASM evaluations were recorded.",
+        "pt-BR": "Foram registrados ociosidade curta real do Windows e tempos de CPU de 2.400 avaliações WASM em Node."
+      }
     },
     {
       "id": "DARS-01-BENCHMARK_STARTUP",
@@ -460,8 +803,15 @@
         "en": "Initial startup benchmark",
         "pt-BR": "Benchmark inicial de inicialização"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "windows-x64.json"
+      ],
+      "justification": {
+        "en": "Three real Windows launches measured time through the first result. WASM initialization was measured separately.",
+        "pt-BR": "Três aberturas reais de Windows mediram até o primeiro resultado. A inicialização do WASM foi medida à parte."
+      }
     },
     {
       "id": "DARS-01-BENCHMARK_SIZE",
@@ -470,8 +820,15 @@
         "en": "Initial artifact size benchmark",
         "pt-BR": "Benchmark inicial de tamanho dos artefatos"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "artifacts.json"
+      ],
+      "justification": {
+        "en": "Exact byte counts were recorded for the tested desktop, CLI, WASM and web bundle.",
+        "pt-BR": "Foram registrados tamanhos exatos do desktop, CLI, WASM e bundle web testados."
+      }
     },
     {
       "id": "DARS-01-BENCHMARK_LATENCY",
@@ -480,8 +837,15 @@
         "en": "Initial latency benchmark",
         "pt-BR": "Benchmark inicial de latência"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "../../benchmarks/baseline.mjs"
+      ],
+      "justification": {
+        "en": "The baseline records warmed evaluation latency and its median, p95 and p99 across 2,400 samples.",
+        "pt-BR": "A linha de base registra latência de avaliações pré-aquecidas e mediana, p95 e p99 em 2.400 amostras."
+      }
     },
     {
       "id": "DARS-01-FOUNDATION_DOCS",
@@ -490,8 +854,17 @@
         "en": "Complete foundation documentation",
         "pt-BR": "Documentação completa da fundação"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../README.md",
+        "../../README.pt-BR.md",
+        "../../docs/pt-BR/architecture.md",
+        "../../docs/pt-BR/security.md"
+      ],
+      "justification": {
+        "en": "The bilingual foundation docs cover architecture, usage, compilation, numeric semantics, security and known limits.",
+        "pt-BR": "A documentação bilíngue cobre arquitetura, uso, compilação, semântica numérica, segurança e limites conhecidos."
+      }
     },
     {
       "id": "DARS-01-REPRODUCTION",
@@ -500,8 +873,16 @@
         "en": "Reproducible installation and use instructions",
         "pt-BR": "Instruções reproduzíveis de instalação e execução"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "reproduction.md",
+        "../../docs/pt-BR/build.md",
+        "ci.json"
+      ],
+      "justification": {
+        "en": "Documented commands match the local verification and the remote jobs built from a clean checkout.",
+        "pt-BR": "Os comandos documentados correspondem à validação local e os jobs remotos compilaram de checkout limpo."
+      }
     },
     {
       "id": "DARS-01-PUBLIC_REPOSITORY",
@@ -510,8 +891,14 @@
         "en": "Dedicated public repository containing reviewed source",
         "pt-BR": "Repositório público dedicado com o código auditado"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "publication.json"
+      ],
+      "justification": {
+        "en": "GitHub confirmed the requested repository is public and its main branch contains the audited source.",
+        "pt-BR": "O GitHub confirmou o repositório solicitado como público e a branch main com o código auditado."
+      }
     },
     {
       "id": "DARS-01-SOURCE_PRIVACY",
@@ -520,8 +907,15 @@
         "en": "Publication free of secrets, private data, or planned features presented as delivered",
         "pt-BR": "Publicação sem segredos, dados privados ou funcionalidades planejadas anunciadas como prontas"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "publication.json",
+        "security.md"
+      ],
+      "justification": {
+        "en": "Gitleaks and targeted private-path checks were run on the staged source tree. Only reviewed code and evidence were published.",
+        "pt-BR": "O Gitleaks e a verificação de caminhos privados foram executados na árvore preparada. Foram publicados código e evidências revisados."
+      }
     },
     {
       "id": "DARS-01-NO_STABLE_RELEASE",
@@ -530,8 +924,15 @@
         "en": "No stable end-user release in Objective 01",
         "pt-BR": "Objetivo 01 sem release estável para usuários finais"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "publication.json",
+        "compatibility.md"
+      ],
+      "justification": {
+        "en": "The public repository reported zero release entries and zero tags. The local executable is a validation build.",
+        "pt-BR": "O repositório público informou zero releases e zero tags. O executável local é um build de validação."
+      }
     },
     {
       "id": "DARS-01-ARTIFACT_AND_EVIDENCE",
@@ -540,8 +941,16 @@
         "en": "Working app, report, and evidence manifest with hashes",
         "pt-BR": "Aplicativo funcional, relatório e manifesto de evidências com hashes"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "artifacts.json",
+        "windows-x64.json",
+        "REPORT.md"
+      ],
+      "justification": {
+        "en": "The local executable and web build worked and the report references measured hashes, captures and reproduction commands.",
+        "pt-BR": "O executável local e o build web funcionaram e o relatório referencia hashes medidos, capturas e comandos de reprodução."
+      }
     },
     {
       "id": "DARS-01-PRESERVE_PRIOR_WORK",
@@ -550,8 +959,16 @@
         "en": "Earlier work preserved and scope limited to DARS",
         "pt-BR": "Trabalho anterior preservado e escopo limitado ao DARS"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../.gitignore",
+        "publication.json",
+        "changes.md"
+      ],
+      "justification": {
+        "en": "Portfolio evidence and local tooling are outside the source tree. The prior profile checkout retained its verified head.",
+        "pt-BR": "O portfólio e as ferramentas locais estão fora da árvore publicada. O checkout do perfil conservou o commit anteriormente verificado."
+      }
     },
     {
       "id": "DARS-01-REVIEW_GATE",
@@ -560,8 +977,19 @@
         "en": "Stop at delivery and require explicit approval before Objective 02",
         "pt-BR": "Parar após a entrega e exigir aprovação explícita antes do Objetivo 02"
       },
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS",
+      "evidence": [
+        "../../PROJECT_STATE.md",
+        "../../AGENTS.md",
+        "REPORT.md"
+      ],
+      "limits": "Only Objective 01 is ready for review. Owner approval is pending and Objective 02 remains NOT_STARTED.",
+      "justification": {
+        "en": "Project state and the report record Objective 01 as ready for review and every subsequent objective as not started.",
+        "pt-BR": "O estado do projeto e o relatório registram o Objetivo 01 pronto para revisão e todos os objetivos seguintes como não iniciados."
+      }
     }
-  ]
+  ],
+  "implementation_commit": "164af9e4fb1719834cbf7858d1dc7781ac9bfacf",
+  "approved": false
 }

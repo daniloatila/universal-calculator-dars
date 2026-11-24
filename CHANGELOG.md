@@ -2,7 +2,7 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
-## Unreleased
+## 0.1.0 · Objective 01 review
 
 - Recorded the original mission, eight planned milestones, and the evidence and approval process.
-- Started Objective 01, the foundation and first working Standard calculator.
+- Built and validated the Standard calculator with a shared Rust engine across Windows x64, web and CLI. Published the audited source and evidence for owner review.

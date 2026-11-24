@@ -1,0 +1,12 @@
+{
+  "app": "Windows x64 DARS release-profile executable",
+  "webview2Version": "158.0.4370.33",
+  "mode": "CDP offline after local asset loading",
+  "checks": {
+    "decimalExpansion": "0.333333333333333333333333",
+    "exactRational": "1/3",
+    "exactSelected": true,
+    "clipboardApiAvailable": true
+  },
+  "note": "Clipboard writes were verified in browser E2E, not repeated on the host clipboard during this desktop probe."
+}
