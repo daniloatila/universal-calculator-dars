@@ -7,7 +7,7 @@ use num_traits::{One, Signed, ToPrimitive, Zero};
 
 use crate::Error;
 
-const MAX_BITS: u64 = 8192;
+pub(crate) const MAX_BITS: u64 = 8192;
 const MAX_POWER: u32 = 10_000;
 const MAX_DEGREE: u32 = 64;
 const WORKING_DIGITS: i32 = 52;

@@ -1,0 +1,16 @@
+{
+  "revision": "ea26c7f9d4d870d1ee06a8b95f60854d0da059d3",
+  "runtime": "Chrome 158.0.8127.38",
+  "original_static_artifact_hashes_matched": [
+    "web_entry",
+    "web_worker",
+    "web_wasm"
+  ],
+  "input": "MS 100, type sqrt(2)%, M+, MR, evaluate",
+  "directRecall": "sqrt(2)%((100)+(sqrt(2)%))",
+  "directError": "This expression is incomplete or invalid.",
+  "recalledAfterClear": "(100)+(sqrt(2)%)",
+  "actualMPlus": "101.414213562373095048802",
+  "expected": "100.014142135623730950488",
+  "ordinaryFractionChainingControl": "1/2 + 2 -> 2.5"
+}

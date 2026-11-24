@@ -4,13 +4,13 @@
 
 ## Current objective
 
-**Objective 01 · Foundation · 0.1.0 · READY_FOR_REVIEW**
+**Objective 01 · Foundation · 0.1.1 · IN_PROGRESS**
 
-Objective 01 is ready for owner review. The Standard calculator was exercised on Windows x64 and in the browser. The CI build and audit succeeded. The acknowledgement gate remains open. [Objective 01 acceptance record](evidence/objective-01/acceptance.json)
+Revision 01 is verifying the Standard memory fix, worker recovery and Windows performance measurements. Objective 02 requires explicit owner approval. [Revision 01](evidence/objective-01/revision-01/REPORT.md) · [0.1.0 baseline](evidence/objective-01/REPORT.md)
 
 | Objective | Planned version | State | Evidence |
 | --- | --- | --- | --- |
-| 01 · Foundation | 0.1.0 | READY_FOR_REVIEW | [Objective 01](evidence/objective-01/REPORT.md) |
+| 01 · Foundation | 0.1.1 | IN_PROGRESS | [Revision 01](evidence/objective-01/revision-01/REPORT.md) |
 | 02 · Operational intelligence | 0.2.0 | NOT_STARTED | `evidence/objective-02/` |
 | 03 · Universal mathematics | 0.3.0 | NOT_STARTED | `evidence/objective-03/` |
 | 04 · Finance and business | 0.4.0 | NOT_STARTED | `evidence/objective-04/` |

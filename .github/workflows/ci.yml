@@ -48,6 +48,7 @@ jobs:
         run: |
           python3 tests/oracle.py target/release/dars
           node tests/check-targets.mjs target/release/dars
+          python3 -B crates/dars-core/tests/structured-oracle.py
       - name: Browser verification (Linux)
         if: runner.os == 'Linux'
         working-directory: apps/web

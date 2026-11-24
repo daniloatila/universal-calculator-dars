@@ -10,14 +10,19 @@ import type { ModuleContext } from './module-registry';
 
 type Answer = Extract<Evaluation, { ok: true }>;
 type Completed = { id: number; expression: string; input: string; decimalSeparator: string; answer: Answer };
-type Memory = { input: string; answer: Answer };
 type Mode = 'exact' | 'decimal';
 type MemoryAction = 'store' | 'add' | 'subtract';
+type Operation = { kind: 'evaluation' | 'memory'; controller: AbortController };
 
 const MAX_INPUT = 4_096;
 const HISTORY_LIMIT = 32;
-const ZERO: Answer = { ok: true, exact: '0', approximate: '0' };
+const BINDING_LIMIT = 256;
+const ZERO = { exact: '0', approximate: '0' };
 const encoder = new TextEncoder();
+
+function referenceIds(input: string): string[] {
+  return Array.from(input.matchAll(/@[0-9]+/g), (match) => match[0].slice(1));
+}
 
 function errorMessage(code: string, messages: Messages) {
   switch (code) {
@@ -32,31 +37,38 @@ function errorMessage(code: string, messages: Messages) {
     case 'invalid_character':
     case 'invalid_number':
     case 'unexpected_token':
-    case 'missing_parenthesis': return messages.invalidExpression;
+    case 'missing_parenthesis':
+    case 'invalid_reference':
+    case 'missing_binding': return messages.invalidExpression;
+    case 'invalid_bindings':
+    case 'invalid_value':
     case 'engine_unavailable': return messages.engineUnavailable;
+    case 'engine_timeout': return messages.engineTimeout;
+    case 'engine_busy': return messages.engineBusy;
+    case 'engine_cancelled': return messages.engineCancelled;
     default: return messages.unknownError;
   }
 }
 
-function reusableValue(input: string, answer: Answer) {
-  // A large computed result may exceed the engine's per-literal digit budget.
-  return answer.exact && !/\d{257}/.test(answer.exact) ? answer.exact : input;
-}
-
-export default function Standard({ locale, messages: m, evaluate, engineStatus }: ModuleContext) {
+export default function Standard({ locale, messages: m, evaluate, combine, engineStatus }: ModuleContext) {
   const inputRef = useRef<HTMLInputElement>(null);
   const editRevision = useRef(0);
-  const running = useRef(false);
+  const historyRevision = useRef(0);
+  const memorySource = useRef<number | null>(null);
+  const recalled = useRef<{ expression: string; revision: number } | null>(null);
+  const operation = useRef<Operation | null>(null);
   const nextId = useRef(0);
+  const nextBinding = useRef(0);
+  const bindings = useRef(new Map<string, Answer>());
   const expressionId = useId();
   const [editor, setEditor] = useState(EMPTY_EDITOR);
   const [completed, setCompleted] = useState<Completed | null>(null);
   const [history, setHistory] = useState<Completed[]>([]);
-  const [memory, setMemory] = useState<Memory | null>(null);
+  const [memory, setMemory] = useState<Answer | null>(null);
   const [mode, setMode] = useState<Mode>('decimal');
   const [error, setError] = useState<string | null>(null);
   const [feedback, setFeedback] = useState('');
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState<Operation['kind'] | null>(null);
   const numbers = useMemo(() => numberPresentation(LOCALES[locale].format), [locale]);
   const previousDecimal = useRef(numbers.decimal);
 
@@ -65,12 +77,29 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
     previousDecimal.current = numbers.decimal;
     if (oldSeparator === numbers.decimal) return;
     const convert = (value: string) => localizeExpression(normalizeExpression(value, oldSeparator), numbers.decimal);
+    if (recalled.current) recalled.current.expression = convert(recalled.current.expression);
     setEditor((previous) => ({
       before: previous.before.map(convert),
       expression: convert(previous.expression),
       after: previous.after.map(convert),
     }));
   }, [numbers.decimal]);
+
+  useEffect(() => {
+    // Editor versions and history keep their original immutable value references alive.
+    if (!bindings.current.size) return;
+    const expressions = [editor.expression, ...editor.before, ...editor.after].filter((entry) => entry.includes('@'));
+    const live = new Set(expressions.flatMap((entry) => referenceIds(normalizeExpression(entry, numbers.decimal))));
+    for (const entry of history) for (const id of referenceIds(entry.input)) live.add(id);
+    if (completed) for (const id of referenceIds(completed.input)) live.add(id);
+    for (const id of bindings.current.keys()) if (!live.has(id)) bindings.current.delete(id);
+  }, [editor, history, completed, memory, numbers.decimal]);
+
+  useEffect(() => () => {
+    const current = operation.current;
+    operation.current = null;
+    current?.controller.abort();
+  }, []);
 
   const answer = completed?.answer ?? ZERO;
   const displayMode = mode === 'exact' && answer.exact === null ? 'decimal' : mode;
@@ -82,8 +111,18 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
   const ready = engineStatus === 'ready' && !busy;
   const inputAvailable = ready && Boolean(editor.expression.trim());
 
+  function cancelActive() {
+    const current = operation.current;
+    if (!current) return;
+    operation.current = null;
+    current.controller.abort();
+    setBusy(null);
+  }
+
   function resetResult() {
     editRevision.current++;
+    recalled.current = null;
+    cancelActive();
     setCompleted(null);
     setError(null);
     setFeedback('');
@@ -92,7 +131,7 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
   function updateExpression(expression: string, caret?: number) {
     if (expression.length > MAX_INPUT || encoder.encode(normalizeExpression(expression, numbers.decimal)).length > MAX_INPUT) {
       setError('input_limit');
-      return;
+      return false;
     }
     if (expression !== editor.expression) {
       resetResult();
@@ -101,6 +140,7 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
     if (caret !== undefined) {
       window.requestAnimationFrame(() => inputRef.current?.setSelectionRange(caret, caret));
     }
+    return true;
   }
 
   function editStep(direction: 'undo' | 'redo') {
@@ -114,9 +154,40 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
     return entry.decimalSeparator === numbers.decimal ? entry.expression : localizeExpression(entry.input, numbers.decimal);
   }
 
+  function expressionBindings(input: string): Record<string, string> {
+    const resolved: Record<string, string> = {};
+    for (const id of referenceIds(input)) {
+      const stored = bindings.current.get(id);
+      if (stored) resolved[id] = stored.value;
+    }
+    return resolved;
+  }
+
+  function applyValue(value: Answer, apply: (expression: string) => boolean) {
+    if (value.exact && !/\d{257}/.test(value.exact)) return apply(value.exact);
+    for (const [id, existing] of bindings.current) if (existing === value) return apply(`@${id}`);
+    if (bindings.current.size >= BINDING_LIMIT) {
+      setError('complexity_limit');
+      return false;
+    }
+    const id = String(++nextBinding.current);
+    bindings.current.set(id, value);
+    if (apply(`@${id}`)) return true;
+    bindings.current.delete(id);
+    return false;
+  }
+
   function insert(fragment: string, continues = false, wrap = false) {
     if (completed && continues) {
-      const expression = `(${visibleExpression(completed)})${fragment}`;
+      applyValue(completed.answer, (value) => {
+        const expression = `(${value})${fragment}`;
+        return updateExpression(expression, expression.length);
+      });
+      return;
+    }
+    if (continues && recalled.current?.revision === editRevision.current &&
+        recalled.current.expression === editor.expression) {
+      const expression = `(${editor.expression})${fragment}`;
       updateExpression(expression, expression.length);
       return;
     }
@@ -131,7 +202,7 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
       ? `${fragment}${editor.expression.slice(start, end)})`
       : fragment;
     const update = spliceExpression(editor.expression, start, end, value);
-    updateExpression(update.expression, update.caret);
+    return updateExpression(update.expression, update.caret);
   }
 
   function backspace() {
@@ -142,30 +213,34 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
     updateExpression(update.expression, update.caret);
   }
 
-  async function run<T>(work: () => Promise<T>) {
-    if (running.current || engineStatus !== 'ready') return;
-    running.current = true;
-    setBusy(true);
+  async function run(kind: Operation['kind'], work: (signal: AbortSignal, isCurrent: () => boolean) => Promise<void>) {
+    if (operation.current || engineStatus !== 'ready') return;
+    const current = { kind, controller: new AbortController() };
+    const isCurrent = () => operation.current === current;
+    operation.current = current;
+    setBusy(kind);
     setError(null);
     setFeedback('');
     try {
-      await work();
+      await work(current.controller.signal, isCurrent);
     } catch {
-      setError('engine_unavailable');
+      if (isCurrent()) setError('engine_unavailable');
     } finally {
-      running.current = false;
-      setBusy(false);
+      if (isCurrent()) {
+        operation.current = null;
+        setBusy(null);
+      }
     }
   }
 
   function evaluateExpression() {
     if (!editor.expression.trim()) return;
     const expression = editor.expression;
-    const revision = editRevision.current;
     const input = normalizeExpression(expression, numbers.decimal);
-    void run(async () => {
-      const result = await evaluate(input);
-      if (revision !== editRevision.current) return;
+    const revision = historyRevision.current;
+    void run('evaluation', async (signal, isCurrent) => {
+      const result = await evaluate(input, expressionBindings(input), signal);
+      if (!isCurrent()) return;
       if (!result.ok) {
         setCompleted(null);
         setError(result.code);
@@ -173,7 +248,7 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
       }
       const current = { id: ++nextId.current, expression, input, decimalSeparator: numbers.decimal, answer: result };
       setCompleted(current);
-      setHistory((entries) => [current, ...entries].slice(0, HISTORY_LIMIT));
+      if (historyRevision.current === revision) setHistory((entries) => [current, ...entries].slice(0, HISTORY_LIMIT));
     });
   }
 
@@ -181,49 +256,54 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
     const expression = editor.expression;
     if (!expression.trim()) return;
     const input = normalizeExpression(expression, numbers.decimal);
-    void run(async () => {
-      const current = completed?.input === input ? completed.answer : await evaluate(input);
+    void run('memory', async (signal, isCurrent) => {
+      const current = completed?.input === input ? completed.answer : await evaluate(input, expressionBindings(input), signal);
+      if (!isCurrent()) return;
       if (!current.ok) {
         setError(current.code);
         return;
       }
 
-      const value = reusableValue(input, current);
-      if (action === 'store') {
-        setMemory({ input: value, answer: current });
-        return;
-      }
-
-      const sign = action === 'add' ? '+' : '-';
-      const combined = `(${memory?.input ?? '0'})${sign}(${value})`;
-      const result = await evaluate(combined);
+      const result = action === 'store' ? current : await combine(memory?.value ?? '', current.value, action === 'subtract', signal);
+      if (!isCurrent()) return;
       if (!result.ok) {
         setError(result.code);
         return;
       }
-      setMemory({ input: reusableValue(combined, result), answer: result });
+      memorySource.current = editRevision.current;
+      setMemory(result);
     });
   }
 
   function recallMemory() {
     if (!memory) return;
-    const localized = localizeExpression(memory.input, numbers.decimal);
-    if (!editor.expression.length || completed) {
-      updateExpression(localized, localized.length);
-      return;
-    }
-    // Parentheses keep recalled fractions and expressions intact when inserted into another expression.
-    insert(`(${localized})`);
+    applyValue(memory, (value) => {
+      if (!editor.expression.length || completed || memorySource.current === editRevision.current) {
+        if (!updateExpression(value, value.length)) return false;
+        recalled.current = { expression: value, revision: editRevision.current };
+        return true;
+      }
+      // Parentheses preserve recalled rational values in an existing expression.
+      return insert(`(${value})`) ?? false;
+    });
+  }
+
+  function clearMemory() {
+    if (operation.current?.kind === 'memory') cancelActive();
+    memorySource.current = null;
+    setMemory(null);
+    setFeedback(m.memoryCleared);
   }
 
   async function copy() {
     if (!completed) return;
+    const revision = editRevision.current;
     const plain = rawResult.replaceAll('.', numbers.decimal);
     try {
       await navigator.clipboard.writeText(plain);
-      setFeedback(m.copied);
+      if (editRevision.current === revision) setFeedback(m.copied);
     } catch {
-      setFeedback(m.copyFailed);
+      if (editRevision.current === revision) setFeedback(m.copyFailed);
     }
   }
 
@@ -306,18 +386,22 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
               : engineStatus === 'unavailable' ? m.engineUnavailable
               : busy ? m.working : feedback}
           </div>
+          {busy && key(m.cancelCalculation, m.cancelCalculation, () => {
+            cancelActive();
+            setFeedback(m.engineCancelled);
+          }, 'quiet-action')}
         </div>
 
         <div className="control-panel">
           <div className="memory-control" role="group" aria-label={m.memory}>
             <span className={`memory-status${memory ? ' memory-filled' : ''}`}
-              title={memory ? numbers.format(memory.answer.exact ?? memory.answer.approximate) : m.emptyMemory}>
+              title={memory ? numbers.format(memory.exact ?? memory.approximate) : m.emptyMemory}>
               <span aria-hidden="true">M</span>
               <span className="visually-hidden">
-                {memory ? `${m.memory}: ${numbers.format(memory.answer.exact ?? memory.answer.approximate)}` : m.emptyMemory}
+                {memory ? `${m.memory}: ${numbers.format(memory.exact ?? memory.approximate)}` : m.emptyMemory}
               </span>
             </span>
-            {key(m.clearMemory, 'MC', () => { setMemory(null); setFeedback(m.memoryCleared); }, 'memory-key', !memory)}
+            {key(m.clearMemory, 'MC', clearMemory, 'memory-key', !memory && busy !== 'memory')}
             {key(m.recallMemory, 'MR', recallMemory, 'memory-key', !memory)}
             {key(m.storeMemory, 'MS', () => updateMemory('store'), 'memory-key', !inputAvailable)}
             {key(m.addMemory, 'M+', () => updateMemory('add'), 'memory-key', !inputAvailable)}
@@ -351,7 +435,11 @@ export default function Standard({ locale, messages: m, evaluate, engineStatus }
           <Icon name="clock" size={19}/>
           <h2 id="history-title">{m.history}</h2>
           <button type="button" className="icon-button history-clear" aria-label={m.clearHistory} title={m.clearHistory}
-            disabled={!history.length} onClick={() => { setHistory([]); setFeedback(m.historyCleared); }}>
+            disabled={!history.length && busy !== 'evaluation'} onClick={() => {
+              historyRevision.current++;
+              setHistory([]);
+              setFeedback(m.historyCleared);
+            }}>
             <Icon name="trash" size={17}/>
           </button>
         </div>

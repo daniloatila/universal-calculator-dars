@@ -10,8 +10,12 @@ import { setTimeout as delay } from "node:timers/promises";
 const bridge = createRequire(new URL("../apps/web/package.json", import.meta.url));
 const { chromium, expect } = bridge("@playwright/test");
 const executable = fileURLToPath(new URL("../target/release/dars-desktop.exe", import.meta.url));
-const artifactRoot = fileURLToPath(new URL("../artifacts/objective-01/", import.meta.url));
-const evidenceRoot = new URL("../evidence/objective-01/", import.meta.url);
+const revised = process.argv.includes("--revision-01");
+const evidenceRoot = new URL(
+  revised ? "../artifacts/objective-01/revision-01/desktop-verification/" : "../artifacts/objective-01/desktop-verification/",
+  import.meta.url,
+);
+const artifactRoot = fileURLToPath(evidenceRoot);
 await mkdir(artifactRoot, { recursive: true });
 
 async function debuggerEndpoint(profile, process) {
@@ -98,7 +102,27 @@ async function checkDesktop(record) {
     await expression.press("Enter");
     await expect(result).toHaveText("9.33333333333333333333333");
     assert.deepEqual([...external], []);
-    await page.screenshot({ path: fileURLToPath(new URL("windows-x64.png", evidenceRoot)) });
+    if (revised) {
+      await expression.fill("100");
+      await page.getByRole("button", { name: "Store in memory", exact: true }).click();
+      await expect(page.getByRole("button", { name: "Recall memory", exact: true })).toBeEnabled();
+      await expression.fill("sqrt(2)%");
+      const addToMemory = page.getByRole("button", { name: "Add to memory", exact: true });
+      await addToMemory.click();
+      await expect(addToMemory).toBeEnabled();
+      await page.getByRole("button", { name: "Recall memory", exact: true }).click();
+      await expect(expression).toHaveValue(/^@\d+$/);
+      await calculate.click();
+      await expect(result).toHaveText("100.014142135623730950488");
+      await writeFile(new URL("windows-memory.png", evidenceRoot), await page.screenshot(), { flush: true });
+      await page.getByRole("button", { name: "Clear memory", exact: true }).click();
+      await expect(page.getByRole("button", { name: "Recall memory", exact: true })).toBeDisabled();
+      await expression.fill("200+10%");
+      await calculate.click();
+      await expect(result).toHaveText("220");
+      assert.deepEqual([...external], []);
+    }
+    await writeFile(new URL("windows-x64.png", evidenceRoot), await page.screenshot(), { flush: true });
 
     const initial = processTree(processHandle.pid);
     const idleStart = performance.now();
@@ -115,7 +139,7 @@ async function checkDesktop(record) {
       desktopHostWorkingSetBytes: final.find((row) => row.pid === processHandle.pid).rss,
       totalProcessTreeWorkingSetBytes: memory,
       processTreeCount: final.length,
-      passed: 5,
+      passed: revised ? 10 : 5,
       failed: 0,
     };
   } finally {
@@ -136,5 +160,5 @@ const results = {
   ...initial,
   launchToFirstResultSamplesMs: [initial, ...repeated].map((sample) => sample.launchToFirstResultMs),
 };
-await writeFile(new URL("windows-x64.json", evidenceRoot), JSON.stringify(results, null, 2) + "\n");
+await writeFile(new URL("windows-x64.json", evidenceRoot), JSON.stringify(results, null, 2) + "\n", { flush: true });
 console.log(JSON.stringify(results));

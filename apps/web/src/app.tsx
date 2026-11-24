@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { startEngine } from './engine';
-import type { Evaluate } from './engine';
+import type { Combine, EngineStatus, Evaluate } from './engine';
 import { Icon } from './icons';
 import { isLocale, loadMessages, LOCALES } from './i18n';
 import type { Locale, Messages } from './i18n';
@@ -12,6 +12,7 @@ import type { Theme } from './preferences';
 type Language = { locale: Locale; messages: Messages };
 
 const unavailable: Evaluate = async () => ({ ok: false, code: 'engine_unavailable' });
+const unavailableCombine: Combine = async () => ({ ok: false, code: 'engine_unavailable' });
 const activeModule = resolveModule('standard');
 
 function applyLanguage(language: Language) {
@@ -23,9 +24,10 @@ function applyLanguage(language: Language) {
 export default function App({ initialLanguage }: { initialLanguage: Language }) {
   const [language, setLanguage] = useState(initialLanguage);
   const [theme, setTheme] = useState(storedTheme);
-  const [engineStatus, setEngineStatus] = useState<'loading' | 'ready' | 'unavailable'>('loading');
+  const [engineStatus, setEngineStatus] = useState<EngineStatus>('loading');
   const [announcement, setAnnouncement] = useState('');
   const evaluation = useRef<Evaluate>(unavailable);
+  const combination = useRef<Combine>(unavailableCombine);
   const languageRequest = useRef(0);
   const settings = useRef<HTMLDetailsElement>(null);
   const settingsLabel = useRef<HTMLElement>(null);
@@ -34,6 +36,7 @@ export default function App({ initialLanguage }: { initialLanguage: Language }) 
   useEffect(() => {
     const engine = startEngine(setEngineStatus);
     evaluation.current = engine.evaluate;
+    combination.current = engine.combine;
     return () => engine.close();
   }, []);
 
@@ -113,7 +116,9 @@ export default function App({ initialLanguage }: { initialLanguage: Language }) 
           <p>{m.description}</p>
         </div>
         <Suspense fallback={<p role="status">{m.engineLoading}</p>}>
-          <Workspace locale={locale} messages={m} engineStatus={engineStatus} evaluate={(input) => evaluation.current(input)} />
+          <Workspace locale={locale} messages={m} engineStatus={engineStatus}
+            evaluate={(input, bindings, signal) => evaluation.current(input, bindings, signal)}
+            combine={(left, right, subtract, signal) => combination.current(left, right, subtract, signal)} />
         </Suspense>
         <footer className="site-footer">
           <p lang="en">Compute anything. Anywhere.</p>

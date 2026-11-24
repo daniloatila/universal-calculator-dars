@@ -1,12 +1,13 @@
 import { lazy } from 'react';
-import type { Evaluate } from './engine';
+import type { Combine, EngineStatus, Evaluate } from './engine';
 import type { Locale, Messages } from './i18n';
 
 export interface ModuleContext {
   locale: Locale;
   messages: Messages;
   evaluate: Evaluate;
-  engineStatus: 'loading' | 'ready' | 'unavailable';
+  combine: Combine;
+  engineStatus: EngineStatus;
 }
 
 const modules = {

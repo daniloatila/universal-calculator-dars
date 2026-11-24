@@ -8,8 +8,11 @@
 
 mod arithmetic;
 mod parser;
+mod stored_value;
 
+use arithmetic::{Operator, Value};
 use serde::Serialize;
+use stored_value::Bindings;
 
 /// An expression failure. The serialized identifiers are stable at the engine boundary.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
@@ -27,6 +30,10 @@ pub enum Error {
     ComplexityLimit,
     MagnitudeLimit,
     PrecisionLimit,
+    InvalidReference,
+    MissingBinding,
+    InvalidBindings,
+    InvalidValue,
 }
 
 /// The engine's host-independent response. Decimal text always uses a dot.
@@ -46,7 +53,9 @@ pub enum Evaluation {
 
 /// Evaluate a bounded Standard expression without any implicit float conversion.
 pub fn evaluate(input: &str) -> Evaluation {
-    match parser::parse(input).and_then(|expression| expression.evaluate()?.display()) {
+    let result = parser::parse(input, false)
+        .and_then(|expression| expression.evaluate(&mut Bindings::default())?.display());
+    match result {
         Ok((exact, approximate)) => Evaluation::Value {
             ok: true,
             exact,
@@ -58,6 +67,64 @@ pub fn evaluate(input: &str) -> Evaluation {
 
 /// Evaluate using the identical JSON contract on native and WebAssembly hosts.
 pub fn evaluate_json(input: &str) -> String {
+    json(&evaluate(input))
+}
+
+/// Evaluate with a bounded table of absolute values referenced as `@ID`.
+/// The binding table is a JSON object with decimal IDs and opaque values
+/// returned by this API. The legacy evaluator does not accept references.
+pub fn evaluate_value_json(input: &str, bindings_json: &str) -> String {
+    let result = parser::parse(input, true)
+        .and_then(|expression| expression.evaluate(&mut Bindings::decode(bindings_json)?));
+    display_value(result)
+}
+
+/// Add or subtract stored values independently of expression syntax.
+/// An absent left value (empty string) selects the additive identity.
+pub fn combine_values_json(left: &str, right: &str, subtract: bool) -> String {
+    let combine = || {
+        let b = stored_value::decode(right)?;
+        if left.is_empty() {
+            return Ok(if subtract { b.negate() } else { b });
+        }
+        let a = stored_value::decode(left)?;
+        a.apply(
+            if subtract {
+                Operator::Subtract
+            } else {
+                Operator::Add
+            },
+            &b,
+        )
+    };
+    display_value(combine())
+}
+
+#[derive(Serialize)]
+struct ValueDisplay {
+    ok: bool,
+    exact: Option<String>,
+    approximate: String,
+    value: String,
+}
+
+fn display_value(result: Result<Value, Error>) -> String {
+    let response = result.and_then(|value| {
+        let (exact, approximate) = value.display()?;
+        Ok(ValueDisplay {
+            ok: true,
+            exact,
+            approximate,
+            value: stored_value::encode(&value),
+        })
+    });
+    match response {
+        Ok(display) => json(&display),
+        Err(code) => json(&Evaluation::Failure { ok: false, code }),
+    }
+}
+
+fn json<T: Serialize>(value: &T) -> String {
     // All fields use infallible JSON data types and a String destination.
-    serde_json::to_string(&evaluate(input)).expect("serializing a DARS result")
+    serde_json::to_string(value).expect("serializing a DARS result")
 }

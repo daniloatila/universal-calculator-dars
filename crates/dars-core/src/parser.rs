@@ -4,6 +4,7 @@ use num_traits::Zero;
 use crate::{
     Error,
     arithmetic::{Operator, Rational, Value, power_of_ten},
+    stored_value::{Bindings, reference_id},
 };
 
 const MAX_BYTES: usize = 4096;
@@ -14,6 +15,7 @@ const MAX_NESTING: usize = 48;
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum Token<'a> {
     Number(&'a str),
+    Reference(u32),
     Add,
     Subtract,
     Multiply,
@@ -32,6 +34,7 @@ enum Token<'a> {
 
 struct Lexer<'a> {
     remaining: &'a str,
+    allow_references: bool,
 }
 
 impl<'a> Lexer<'a> {
@@ -62,6 +65,7 @@ impl<'a> Lexer<'a> {
 
         self.remaining = &self.remaining[first.len_utf8()..];
         match first {
+            '@' if self.allow_references => self.reference(),
             '+' => Ok(Token::Add),
             '-' | '−' => Ok(Token::Subtract),
             '*' | '×' => Ok(Token::Multiply),
@@ -74,6 +78,19 @@ impl<'a> Lexer<'a> {
             '√' => Ok(Token::Radical),
             _ => Err(Error::InvalidCharacter),
         }
+    }
+
+    fn reference(&mut self) -> Result<Token<'a>, Error> {
+        let length = self
+            .remaining
+            .bytes()
+            .take_while(u8::is_ascii_digit)
+            .count();
+        let (id, rest) = self.remaining.split_at(length);
+        self.remaining = rest;
+        reference_id(id)
+            .map(Token::Reference)
+            .ok_or(Error::InvalidReference)
     }
 
     fn number(&mut self) -> Result<Token<'a>, Error> {
@@ -99,6 +116,7 @@ impl<'a> Lexer<'a> {
 #[derive(PartialEq, Eq)]
 pub(crate) enum Expression<'a> {
     Number(&'a str),
+    Reference(u32),
     Signed {
         negative: bool,
         inner: Box<Self>,
@@ -130,19 +148,22 @@ impl Expression<'_> {
         }
     }
 
-    pub(crate) fn evaluate(&self) -> Result<Value, Error> {
+    pub(crate) fn evaluate(&self, bindings: &mut Bindings<'_>) -> Result<Value, Error> {
         match self {
             Self::Number(literal) => decimal_literal(literal).map(Value::Exact),
+            Self::Reference(id) => bindings.resolve(*id),
             Self::Signed { negative, inner } => {
-                let value = inner.evaluate()?;
+                let value = inner.evaluate(bindings)?;
                 Ok(if *negative { value.negate() } else { value })
             }
-            Self::Percent(inner) => inner.evaluate()?.percent(),
+            Self::Percent(inner) => inner.evaluate(bindings)?.percent(),
             Self::Root { radicand, degree } => {
-                let value = radicand.evaluate()?;
+                let value = radicand.evaluate(bindings)?;
                 let degree = match degree {
                     Degree::Fixed(n) => *n,
-                    Degree::Expression(expression) => expression.evaluate()?.root_degree()?,
+                    Degree::Expression(expression) => {
+                        expression.evaluate(bindings)?.root_degree()?
+                    }
                 };
                 value.root(degree)
             }
@@ -151,7 +172,7 @@ impl Expression<'_> {
                 left,
                 right,
             } => {
-                let lhs = left.evaluate()?;
+                let lhs = left.evaluate(bindings)?;
                 // Equal, valid subexpressions cancel exactly. The relative
                 // percentage rule can make the operands numerically unequal.
                 if matches!(operator, Operator::Subtract)
@@ -160,7 +181,7 @@ impl Expression<'_> {
                 {
                     return Ok(Value::Exact(Rational::zero()));
                 }
-                let mut rhs = right.evaluate()?;
+                let mut rhs = right.evaluate(bindings)?;
                 if matches!(operator, Operator::Add | Operator::Subtract)
                     && right.is_relative_percent()
                 {
@@ -243,6 +264,7 @@ impl<'a> Parser<'a> {
         let first = self.advance()?;
         let mut lhs = match first {
             Token::Number(number) => self.node(Expression::Number(number))?,
+            Token::Reference(id) => self.node(Expression::Reference(id))?,
             Token::Add | Token::Subtract => {
                 let inner = Box::new(self.expression(5, depth + 1)?);
                 self.node(Expression::Signed {
@@ -295,11 +317,14 @@ impl<'a> Parser<'a> {
     }
 }
 
-pub(crate) fn parse(input: &str) -> Result<Expression<'_>, Error> {
+pub(crate) fn parse(input: &str, allow_references: bool) -> Result<Expression<'_>, Error> {
     if input.len() > MAX_BYTES {
         return Err(Error::InputLimit);
     }
-    let mut lexer = Lexer { remaining: input };
+    let mut lexer = Lexer {
+        remaining: input,
+        allow_references,
+    };
     let first = lexer.next()?;
     if first == Token::End {
         return Err(Error::EmptyExpression);
