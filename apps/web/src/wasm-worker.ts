@@ -7,18 +7,18 @@ function send(message: EvaluationResponse) {
 
 async function start() {
   try {
-    await init();
+    const { memory } = await init();
     self.addEventListener('message', ({ data }: MessageEvent<EvaluationRequest>) => {
       try {
         const json = data.type === 'evaluate'
           ? evaluate_value_json(data.input, JSON.stringify(data.bindings))
           : combine_values_json(data.left, data.right, data.subtract);
-        send({ type: 'result', id: data.id, result: JSON.parse(json) as Evaluation });
+        send({ type: 'result', id: data.id, result: JSON.parse(json) as Evaluation, wasmBytes: memory.buffer.byteLength });
       } catch {
         send({ type: 'unavailable' });
       }
     });
-    send({ type: 'ready' });
+    send({ type: 'ready', wasmBytes: memory.buffer.byteLength });
   } catch {
     send({ type: 'unavailable' });
   }

@@ -16,3 +16,5 @@ Os marcos descrevem o escopo planejado. A missão original reúne os requisitos 
 | 08 · Auditoria global e lançamento | 1.0.0 | Auditoria dos 25 módulos, otimização, documentação open source completa e preparação da distribuição final | Verificar metas medidas e as plataformas declaradas, resolver os bloqueios de lançamento e obter aprovação explícita antes da release estável. |
 
 Consulte o [estado do projeto](project-state.md) para saber qual é o objetivo vigente. Relatórios e decisões de aprovação permanecem junto às evidências de cada objetivo.
+
+O Objetivo 01 foi aprovado na versão 0.1.1. O relatório do Objetivo 02 acompanha a entrega em desenvolvimento 0.2.0. [Aprovação do Objetivo 01](../../evidence/objective-01/approval.json) · [Relatório do Objetivo 02](../../evidence/objective-02/REPORT.md)

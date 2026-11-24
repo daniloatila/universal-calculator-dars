@@ -23,3 +23,5 @@ The calculator's evaluation path stays on the device. Telemetry, tracking, adver
 - Keep published reports free of secrets, personal paths, and raw logs. Inspect the tracked tree before source publication. Check pinned tool versions, locked dependencies, third-party licenses and known advisories.
 
 See [Objective 01 security evidence](../../evidence/objective-01/security.md) for the observed checks, findings and limits.
+
+Objective 02 adds the same-origin cache policy, local diagnostics and a Windows credential provider reserved for authorized native consumers. [Privacy center and security boundaries](operations.md#values-privacy-and-readings)

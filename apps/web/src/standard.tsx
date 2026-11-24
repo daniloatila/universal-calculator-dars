@@ -1,6 +1,7 @@
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent, PointerEvent, ReactNode } from 'react';
 import { changeSign, edit, EMPTY_EDITOR, redo, spliceExpression, undo } from './editor';
+import type { Editor } from './editor';
 import type { Evaluation } from './engine';
 import { Icon } from './icons';
 import { LOCALES } from './i18n';
@@ -13,6 +14,24 @@ type Completed = { id: number; expression: string; input: string; decimalSeparat
 type Mode = 'exact' | 'decimal';
 type MemoryAction = 'store' | 'add' | 'subtract';
 type Operation = { kind: 'evaluation' | 'memory'; controller: AbortController };
+type Recalled = { expression: string; revision: number };
+
+type StandardSnapshot = {
+  editor: Editor;
+  completed: Completed | null;
+  history: Completed[];
+  memory: Answer | null;
+  mode: Mode;
+  decimal: string;
+  editRevision: number;
+  memorySource: number | null;
+  recalled: Recalled | null;
+  nextId: number;
+  nextBinding: number;
+  bindings: Map<string, Answer>;
+};
+
+export type StandardSession = { current?: StandardSnapshot };
 
 const MAX_INPUT = 4_096;
 const HISTORY_LIMIT = 32;
@@ -50,27 +69,53 @@ function errorMessage(code: string, messages: Messages) {
   }
 }
 
-export default function Standard({ locale, messages: m, evaluate, combine, engineStatus }: ModuleContext) {
+export default function Standard({ locale, messages: m, evaluate, combine, engineStatus, session, cacheEntries }: ModuleContext) {
+  const initial = session.current;
   const inputRef = useRef<HTMLInputElement>(null);
-  const editRevision = useRef(0);
+  const editRevision = useRef(initial?.editRevision ?? 0);
   const historyRevision = useRef(0);
-  const memorySource = useRef<number | null>(null);
-  const recalled = useRef<{ expression: string; revision: number } | null>(null);
+  const memorySource = useRef(initial?.memorySource ?? null);
+  const recalled = useRef(initial?.recalled ?? null);
   const operation = useRef<Operation | null>(null);
-  const nextId = useRef(0);
-  const nextBinding = useRef(0);
-  const bindings = useRef(new Map<string, Answer>());
+  const nextId = useRef(initial?.nextId ?? 0);
+  const nextBinding = useRef(initial?.nextBinding ?? 0);
+  const [retainedBindings] = useState(() => initial?.bindings ?? new Map<string, Answer>());
+  const bindings = useRef(retainedBindings);
   const expressionId = useId();
-  const [editor, setEditor] = useState(EMPTY_EDITOR);
-  const [completed, setCompleted] = useState<Completed | null>(null);
-  const [history, setHistory] = useState<Completed[]>([]);
-  const [memory, setMemory] = useState<Answer | null>(null);
-  const [mode, setMode] = useState<Mode>('decimal');
+  const referenceHelpId = useId();
+  const [editor, setEditor] = useState(initial?.editor ?? EMPTY_EDITOR);
+  const [completed, setCompleted] = useState(initial?.completed ?? null);
+  const [history, setHistory] = useState(initial?.history ?? []);
+  const [memory, setMemory] = useState(initial?.memory ?? null);
+  const [mode, setMode] = useState<Mode>(initial?.mode ?? 'decimal');
   const [error, setError] = useState<string | null>(null);
   const [feedback, setFeedback] = useState('');
   const [busy, setBusy] = useState<Operation['kind'] | null>(null);
   const numbers = useMemo(() => numberPresentation(LOCALES[locale].format), [locale]);
-  const previousDecimal = useRef(numbers.decimal);
+  const previousDecimal = useRef(initial?.decimal ?? numbers.decimal);
+  const format = useMemo(() => {
+    if (!cacheEntries) return numbers.format;
+    const cache = new Map<string, string>();
+    return (value: string) => {
+      const cached = cache.get(value);
+      if (cached !== undefined) return cached;
+      const formatted = numbers.format(value);
+      if (cache.size >= cacheEntries) {
+        const oldest = cache.keys().next().value;
+        if (oldest !== undefined) cache.delete(oldest);
+      }
+      cache.set(value, formatted);
+      return formatted;
+    };
+  }, [numbers, cacheEntries]);
+
+  useLayoutEffect(() => {
+    session.current = {
+      editor, completed, history, memory, mode, decimal: previousDecimal.current,
+      editRevision: editRevision.current, memorySource: memorySource.current, recalled: recalled.current,
+      nextId: nextId.current, nextBinding: nextBinding.current, bindings: bindings.current,
+    };
+  });
 
   useEffect(() => {
     const oldSeparator = previousDecimal.current;
@@ -104,11 +149,12 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
   const answer = completed?.answer ?? ZERO;
   const displayMode = mode === 'exact' && answer.exact === null ? 'decimal' : mode;
   const rawResult = displayMode === 'exact' ? (answer.exact ?? answer.approximate) : answer.approximate;
-  const formattedResult = numbers.format(rawResult);
+  const formattedResult = format(rawResult);
   const resultSize = formattedResult.length > 35 ? ' result-long' : formattedResult.length > 17 ? ' result-compact' : '';
   const alternate = displayMode === 'exact' ? answer.approximate : answer.exact;
   const decimalIsExact = isExactDecimal(answer.exact, answer.approximate);
-  const ready = engineStatus === 'ready' && !busy;
+  const acceptsWork = engineStatus === 'ready' || engineStatus === 'idle';
+  const ready = acceptsWork && !busy;
   const inputAvailable = ready && Boolean(editor.expression.trim());
 
   function cancelActive() {
@@ -214,7 +260,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
   }
 
   async function run(kind: Operation['kind'], work: (signal: AbortSignal, isCurrent: () => boolean) => Promise<void>) {
-    if (operation.current || engineStatus !== 'ready') return;
+    if (operation.current || !acceptsWork) return;
     const current = { kind, controller: new AbortController() };
     const isCurrent = () => operation.current === current;
     operation.current = current;
@@ -332,6 +378,10 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
   }
 
   const digit = (value: number) => key(String(value), numbers.digits[value], () => insert(numbers.digits[value] ?? String(value)));
+  const visibleReferences = [...new Set(referenceIds(editor.expression))].flatMap((id) => {
+    const value = bindings.current.get(id);
+    return value ? [{ id, value }] : [];
+  });
 
   return (
     <div className="workspace">
@@ -356,7 +406,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
             <div className="result-detail">
               {completed && alternate && alternate !== rawResult && <>
                 <span>{displayMode === 'exact' ? (decimalIsExact ? m.decimal : m.approximate) : m.exact}</span>
-                <bdi>{numbers.format(alternate)}</bdi>
+                <bdi>{format(alternate)}</bdi>
               </>}
             </div>
             <button type="button" className="quiet-action copy-action" aria-label={m.copy}
@@ -377,8 +427,13 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
           <input ref={inputRef} id={expressionId} name="expression" type="text" inputMode="text"
             className="expression-input" value={editor.expression} placeholder={numbers.digits[0] ?? '0'}
             autoComplete="off" autoCorrect="off" spellCheck={false} dir="ltr"
-            aria-invalid={Boolean(error)} aria-describedby={error ? 'feedback' : undefined}
+            aria-invalid={Boolean(error)} aria-describedby={[error && 'feedback', visibleReferences.length && referenceHelpId].filter(Boolean).join(' ') || undefined}
             onChange={(event) => updateExpression(event.target.value)} onKeyDown={onExpressionKey}/>
+          {visibleReferences.length > 0 && <ul id={referenceHelpId} className="value-references" aria-label={m.operations.retainedValues}>
+            {visibleReferences.map(({ id, value }) => <li key={id}>
+              <bdi>@{id} {value.exact === null ? '≈' : '='} {format(value.exact ?? value.approximate)}</bdi>
+            </li>)}
+          </ul>}
           <div id="feedback" className={`feedback${error || engineStatus === 'unavailable' ? ' feedback-error' : ''}`}
             role="status" aria-atomic="true">
             {error ? errorMessage(error, m)
@@ -395,10 +450,10 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
         <div className="control-panel">
           <div className="memory-control" role="group" aria-label={m.memory}>
             <span className={`memory-status${memory ? ' memory-filled' : ''}`}
-              title={memory ? numbers.format(memory.exact ?? memory.approximate) : m.emptyMemory}>
+              title={memory ? format(memory.exact ?? memory.approximate) : m.emptyMemory}>
               <span aria-hidden="true">M</span>
               <span className="visually-hidden">
-                {memory ? `${m.memory}: ${numbers.format(memory.exact ?? memory.approximate)}` : m.emptyMemory}
+                {memory ? `${m.memory}: ${format(memory.exact ?? memory.approximate)}` : m.emptyMemory}
               </span>
             </span>
             {key(m.clearMemory, 'MC', clearMemory, 'memory-key', !memory && busy !== 'memory')}
@@ -452,7 +507,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
                   aria-label={`${m.useHistory}: ${expression}`}
                   onClick={() => { updateExpression(expression, expression.length); inputRef.current?.focus(); }}>
                   <bdi className="history-expression">{expression}</bdi>
-                  <bdi className="history-result">{numbers.format(entry.answer.exact ?? entry.answer.approximate)}</bdi>
+                  <bdi className="history-result">{format(entry.answer.exact ?? entry.answer.approximate)}</bdi>
                   <Icon name="arrow" size={15}/>
                 </button>
               </li>;

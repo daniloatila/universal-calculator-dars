@@ -10,9 +10,11 @@ import { setTimeout as delay } from "node:timers/promises";
 const bridge = createRequire(new URL("../apps/web/package.json", import.meta.url));
 const { chromium, expect } = bridge("@playwright/test");
 const executable = fileURLToPath(new URL("../target/release/dars-desktop.exe", import.meta.url));
-const revised = process.argv.includes("--revision-01");
+const operational = process.argv.includes("--objective-02");
+const revised = operational || process.argv.includes("--revision-01");
 const evidenceRoot = new URL(
-  revised ? "../artifacts/objective-01/revision-01/desktop-verification/" : "../artifacts/objective-01/desktop-verification/",
+  operational ? "../artifacts/objective-02/desktop-verification/"
+    : revised ? "../artifacts/objective-01/revision-01/desktop-verification/" : "../artifacts/objective-01/desktop-verification/",
   import.meta.url,
 );
 const artifactRoot = fileURLToPath(evidenceRoot);
@@ -128,6 +130,15 @@ async function checkDesktop(record) {
       await expect(result).toHaveText("220");
       assert.deepEqual([...external], []);
     }
+    if (operational) {
+      await page.getByText("Operations", { exact: true }).click();
+      await expect(page.getByRole("heading", { name: "Privacy center" })).toBeVisible();
+      await expect(page.getByText("Assets packaged on this device", { exact: true }).first()).toBeVisible();
+      await page.getByText("Local diagnostics", { exact: true }).click();
+      await expect(page.getByTestId("effective-profile")).toBeVisible();
+      await writeFile(new URL("windows-operations.png", evidenceRoot), await page.screenshot({ fullPage: true }), { flush: true });
+      assert.deepEqual([...external], []);
+    }
     await writeFile(new URL("windows-x64.png", evidenceRoot), await page.screenshot(), { flush: true });
 
     const initial = processTree(processHandle.pid);
@@ -145,7 +156,7 @@ async function checkDesktop(record) {
       desktopHostWorkingSetBytes: final.find((row) => row.pid === processHandle.pid).rss,
       totalProcessTreeWorkingSetBytes: memory,
       processTreeCount: final.length,
-      passed: revised ? 13 : 5,
+      passed: operational ? 17 : revised ? 13 : 5,
       failed: 0,
     };
   } finally {

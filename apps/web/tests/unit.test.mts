@@ -39,15 +39,24 @@ test('browser language resolution has explicit regional fallback and rejects unk
   assert.equal(isLocale('fr'), true);
 });
 
-test('the seven locale catalogs provide each current Standard message', () => {
-  function catalog(locale: string): Record<string, string> {
-    return JSON.parse(readFileSync(new URL(`../src/locales/${locale}.json`, import.meta.url), 'utf8'));
+test('the seven locale catalogs provide each Standard and operational message', () => {
+  function messageKeys(messages: Record<string, unknown>, parent = ''): string[] {
+    return Object.entries(messages).flatMap(([key, value]) => {
+      const path = parent ? `${parent}.${key}` : key;
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        return messageKeys(value as Record<string, unknown>, path);
+      }
+      assert.equal(typeof value, 'string', path);
+      assert.ok((value as string).trim(), path);
+      return [path];
+    }).sort();
   }
-  const keys = Object.keys(catalog('en')).sort();
+  function catalog(locale: string): string[] {
+    return messageKeys(JSON.parse(readFileSync(new URL(`../src/locales/${locale}.json`, import.meta.url), 'utf8')));
+  }
+  const keys = catalog('en');
   for (const locale of Object.keys(LOCALES)) {
-    const messages = catalog(locale);
-    assert.deepEqual(Object.keys(messages).sort(), keys);
-    assert.ok(Object.values(messages).every((message) => message.trim().length > 0));
+    assert.deepEqual(catalog(locale), keys);
   }
 });
 

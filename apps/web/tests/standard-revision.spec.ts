@@ -29,6 +29,7 @@ test('MR immediately after M+ recalls an irrational absolute percentage without 
   await memory(page, 'Add to memory', 'sqrt(2)%');
   await button(page, 'Recall memory').click();
   await expect(input(page)).toHaveValue(/^@\d+$/);
+  await expect(page.getByRole('list', { name: 'Saved values in this expression' })).toContainText('≈ 100.014142135623730950488');
   await calculate(page);
   await expect(result(page)).toHaveText('100.014142135623730950488');
   await expect(page.getByText('Approximate', { exact: true })).toBeVisible();

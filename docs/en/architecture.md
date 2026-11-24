@@ -51,3 +51,5 @@ Startup failures, worker faults, malformed responses and timeouts trigger recove
 The engine is isolated from I/O and the host environment. Modules receive a narrow evaluation adapter. Standard uses the shared Rust evaluator and owns session-local state. Future modules can introduce different contracts at their own boundaries.
 
 See [Standard calculation semantics](standard.md) for the expression grammar, rounding, and resource bounds. See [ADR 001](../adr/0001-shared-calculation-core.md) for the architectural decision.
+
+Objective 02 documents activation scopes, worker retirement and the data boundary. [Operational contract](operations.md)

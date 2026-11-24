@@ -2,6 +2,13 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
+## 0.2.0 · Objective 02
+
+- Added single-active module lifecycle and recovery of in-memory Standard session values.
+- Added five resource profiles, native window suspension and idle worker restart on demand.
+- Added the privacy center, explicit cache-only web mode and localized diagnostics.
+- Added readable labels for retained mathematical values without changing their calculation representation.
+
 ## 0.1.1 · Objective 01 revision 01
 
 - Stored exact rational values and enclosed approximations independently of the original expression. Memory and result reuse preserve their value in percentage expressions.

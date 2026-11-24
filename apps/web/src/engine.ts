@@ -2,8 +2,11 @@ export type Evaluation =
   | { ok: true; exact: string | null; approximate: string; value: string }
   | { ok: false; code: string };
 
-export type EngineStatus = 'loading' | 'ready' | 'unavailable';
+export type EngineStatus = 'loading' | 'ready' | 'idle' | 'unavailable';
 export type Bindings = Record<string, string>;
+
+export type EnginePolicy = { workerIdleMs: number | null; pendingJobs: number };
+export type EngineResources = { workers: number; started: number; stopped: number; pending: number; wasmBytes?: number };
 
 type Operation =
   | { type: 'evaluate'; input: string; bindings: Bindings }
@@ -12,9 +15,9 @@ type Operation =
 export type EvaluationRequest = Operation & { id: number };
 
 export type EvaluationResponse =
-  | { type: 'ready' }
+  | { type: 'ready'; wasmBytes?: number }
   | { type: 'unavailable' }
-  | { type: 'result'; id: number; result: Evaluation };
+  | { type: 'result'; id: number; result: Evaluation; wasmBytes?: number };
 
 export type Evaluate = (expression: string, bindings?: Bindings, signal?: AbortSignal) => Promise<Evaluation>;
 export type Combine = (left: string, right: string, subtract: boolean, signal?: AbortSignal) => Promise<Evaluation>;
@@ -29,9 +32,13 @@ export const ENGINE_LIMITS = {
 
 export type EngineWorker = Pick<Worker, 'onmessage' | 'onmessageerror' | 'onerror' | 'postMessage' | 'terminate'>;
 type ScheduledAction = (action: () => void, delayMs: number) => () => void;
-type EngineDependencies = { createWorker: () => EngineWorker; schedule: ScheduledAction };
+type EngineDependencies = {
+  createWorker: () => EngineWorker;
+  schedule: ScheduledAction;
+  ownWorker: (worker: EngineWorker) => () => void;
+};
 
-type WorkerGeneration = { worker: EngineWorker; cancelStartup?: () => void };
+type WorkerGeneration = { worker: EngineWorker; release: () => void; cancelStartup?: () => void };
 type Job = {
   request: EvaluationRequest;
   resolve: (result: Evaluation) => void;
@@ -62,11 +69,16 @@ const scheduleTimer: ScheduledAction = (action, delayMs) => {
 };
 
 export function startEngine(setStatus: (status: EngineStatus) => void, dependencies: Partial<EngineDependencies> = {}) {
-  const { createWorker = createBrowserWorker, schedule = scheduleTimer } = dependencies;
+  const { createWorker = createBrowserWorker, schedule = scheduleTimer, ownWorker = (worker) => () => worker.terminate() } = dependencies;
   const queue: Job[] = [];
   let workerGeneration: WorkerGeneration | undefined;
   let active: Job | undefined;
   let cancelRecovery: (() => void) | undefined;
+  let cancelIdle: (() => void) | undefined;
+  let policy: EnginePolicy = { workerIdleMs: null, pendingJobs: ENGINE_LIMITS.pendingJobs };
+  let started = 0;
+  let stopped = 0;
+  let wasmBytes: number | undefined;
   let nextId = 0;
   let restarts = 0;
   let closed = false;
@@ -80,15 +92,32 @@ export function startEngine(setStatus: (status: EngineStatus) => void, dependenc
   }
 
   function disposeWorker() {
+    cancelIdle?.();
+    cancelIdle = undefined;
     const previous = workerGeneration;
     workerGeneration = undefined;
+    wasmBytes = undefined;
     if (!previous) return;
 
     previous.cancelStartup?.();
     previous.worker.onmessage = null;
     previous.worker.onerror = null;
     previous.worker.onmessageerror = null;
-    previous.worker.terminate();
+    previous.release();
+    stopped++;
+  }
+
+  function scheduleIdle() {
+    cancelIdle?.();
+    cancelIdle = undefined;
+    if (policy.workerIdleMs === null || status !== 'ready' || active || queue.length || !workerGeneration) return;
+    cancelIdle = schedule(() => {
+      cancelIdle = undefined;
+      if (status === 'ready' && !active && !queue.length) {
+        disposeWorker();
+        publishStatus('idle');
+      }
+    }, policy.workerIdleMs);
   }
 
   function settle(job: Job, result: Evaluation) {
@@ -124,8 +153,13 @@ export function startEngine(setStatus: (status: EngineStatus) => void, dependenc
     if (closed || status !== 'ready' || !workerGeneration || active) return;
     const generation = workerGeneration;
     const job = queue.shift();
-    if (!job) return;
+    if (!job) {
+      scheduleIdle();
+      return;
+    }
 
+    cancelIdle?.();
+    cancelIdle = undefined;
     active = job;
     job.cancelDeadline = schedule(() => {
       if (workerGeneration === generation && active === job) recover(TIMEOUT);
@@ -148,8 +182,9 @@ export function startEngine(setStatus: (status: EngineStatus) => void, dependenc
       return;
     }
 
-    const generation: WorkerGeneration = { worker };
+    const generation: WorkerGeneration = { worker, release: ownWorker(worker) };
     workerGeneration = generation;
+    started++;
     function fail() {
       if (workerGeneration === generation) recover(UNAVAILABLE);
     }
@@ -164,6 +199,7 @@ export function startEngine(setStatus: (status: EngineStatus) => void, dependenc
       const data = event.data as EvaluationResponse | null;
       if (data?.type === 'ready') {
         if (status !== 'loading') return;
+        wasmBytes = validMemory(data.wasmBytes);
         generation.cancelStartup?.();
         publishStatus('ready');
         pump();
@@ -174,6 +210,7 @@ export function startEngine(setStatus: (status: EngineStatus) => void, dependenc
           return;
         }
         // A protocol-valid response (including a mathematical error) proves that the worker recovered.
+        wasmBytes = validMemory(data.wasmBytes) ?? wasmBytes;
         restarts = 0;
         settleActive(data.result);
         pump();
@@ -187,7 +224,7 @@ export function startEngine(setStatus: (status: EngineStatus) => void, dependenc
   function submit(operation: Operation, signal?: AbortSignal): Promise<Evaluation> {
     if (signal?.aborted) return Promise.resolve(CANCELLED);
     if (closed || status === 'unavailable') return Promise.resolve(UNAVAILABLE);
-    if (queue.length + Number(Boolean(active)) >= ENGINE_LIMITS.pendingJobs) return Promise.resolve(BUSY);
+    if (queue.length + Number(Boolean(active)) >= policy.pendingJobs) return Promise.resolve(BUSY);
 
     return new Promise((resolve) => {
       const job: Job = { request: { ...operation, id: ++nextId }, resolve };
@@ -212,6 +249,10 @@ export function startEngine(setStatus: (status: EngineStatus) => void, dependenc
         job.removeAbortListener = () => signal.removeEventListener('abort', abort);
       }
       queue.push(job);
+      if (status === 'idle') {
+        publishStatus('loading');
+        spawnWorker();
+      }
       pump();
     });
   }
@@ -228,6 +269,23 @@ export function startEngine(setStatus: (status: EngineStatus) => void, dependenc
   const evaluate: Evaluate = (input, bindings = {}, signal) => submit({ type: 'evaluate', input, bindings: { ...bindings } }, signal);
   const combine: Combine = (left, right, subtract, signal) => submit({ type: 'combine', left, right, subtract }, signal);
 
+  function setPolicy(next: EnginePolicy) {
+    if (closed || (next.workerIdleMs === policy.workerIdleMs && next.pendingJobs === policy.pendingJobs)) return;
+    policy = {
+      workerIdleMs: next.workerIdleMs === null ? null : Math.max(0, next.workerIdleMs),
+      pendingJobs: Math.min(ENGINE_LIMITS.pendingJobs, Math.max(1, Math.floor(next.pendingJobs))),
+    };
+    scheduleIdle();
+  }
+
+  function getResources(): EngineResources {
+    return { workers: Number(Boolean(workerGeneration)), started, stopped, pending: queue.length + Number(Boolean(active)), wasmBytes };
+  }
+
   spawnWorker();
-  return { evaluate, combine, close };
+  return { evaluate, combine, close, setPolicy, getResources };
+}
+
+function validMemory(bytes: number | undefined): number | undefined {
+  return bytes !== undefined && Number.isSafeInteger(bytes) && bytes > 0 && bytes <= 2 ** 32 ? bytes : undefined;
 }

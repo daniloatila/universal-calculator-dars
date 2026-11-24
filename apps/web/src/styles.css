@@ -471,3 +471,64 @@ button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-v
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+
+:root[data-resource-effects=reduced] { --shadow: none; }
+:root[data-resource-effects=reduced] body { background: var(--background); }
+
+.operations {
+  margin-block-start: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 0 16px;
+}
+.operations summary {
+  cursor: pointer;
+  padding-block: 12px;
+  font-weight: 630;
+}
+.operations-content {
+  display: grid;
+  gap: 16px;
+  border-block-start: 1px solid var(--line);
+  padding-block: 12px;
+}
+.operations-content h2 { font-size: 1.02rem; margin: 0 0 9px; }
+.operations-content h3 { font-size: .88rem; margin: 0 0 4px; }
+.operations-content p { margin: 4px 0; color: var(--muted); font-size: .85rem; line-height: 1.5; }
+.operations-profile label, .offline-control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: .9rem;
+}
+.operations-profile select {
+  min-height: 38px;
+  max-width: 100%;
+  padding-inline: 7px;
+  border: 1px solid var(--line-prominent);
+  border-radius: 7px;
+  background: var(--raised);
+}
+.privacy-grid, .diagnostics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 10px;
+}
+.privacy-grid > section, .diagnostics-grid > div {
+  min-width: 0;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--display);
+}
+.privacy-actions { display: flex; align-items: start; flex-wrap: wrap; gap: 5px; margin-block-start: 6px; }
+.privacy-actions button { border-color: var(--line-prominent); white-space: normal; }
+.operations-origin { color: var(--muted); overflow-wrap: anywhere; font-family: var(--mono); font-size: .8rem; }
+.local-diagnostics { border-block-start: 1px solid var(--line); }
+.diagnostics-grid { margin-block: 9px 3px; font-size: .84rem; }
+.diagnostics-grid dt { color: var(--muted); }
+.diagnostics-grid dd { margin: 4px 0 0; overflow-wrap: anywhere; }
+.value-references { margin: 5px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 5px; list-style: none; }
+.value-references li { max-width: 100%; padding: 2px 6px; background: var(--tint); color: var(--accent); border-radius: 5px; font: .78rem var(--mono); overflow-wrap: anywhere; }

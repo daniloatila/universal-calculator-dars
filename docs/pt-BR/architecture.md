@@ -51,3 +51,5 @@ Falhas de inicialização ou do worker, respostas malformadas e estouros de praz
 O núcleo fica isolado de operações de entrada e saída e do ambiente hospedeiro. Cada módulo recebe uma interface de avaliação restrita. O Standard usa o avaliador compartilhado em Rust e controla seu estado temporário. Módulos futuros podem adotar contratos próprios nos respectivos limites.
 
 Veja a gramática das expressões, o arredondamento e os limites de recursos na [semântica dos cálculos Standard](standard.md). A decisão de arquitetura está no [ADR 001](../adr/0001-shared-calculation-core.md).
+
+O Objetivo 02 documenta os escopos de ativação, o encerramento do worker e as fronteiras de dados. [Contrato operacional](operations.md)

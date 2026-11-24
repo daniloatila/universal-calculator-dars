@@ -16,3 +16,5 @@ Milestones describe planned scope. The original mission contains their detailed 
 | 08 · Global audit and launch | 1.0.0 | Audit across 25 modules, optimize, complete open-source documentation and prepare final distribution | Verify measured objectives and published platform claims, resolve launch blockers and obtain explicit approval before stable release. |
 
 See [PROJECT_STATE.md](PROJECT_STATE.md) for the current gate. Review reports and approval records belong with each objective's evidence.
+
+Objective 01 was approved at 0.1.1. Objective 02 evidence records development of 0.2.0. [Objective 01 approval](evidence/objective-01/approval.json) · [Objective 02 report](evidence/objective-02/REPORT.md)

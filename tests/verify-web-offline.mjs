@@ -74,7 +74,7 @@ try {
   assert.equal(served, before, "No successful static server request while offline.");
 
   await context.setOffline(false);
-  await page.locator("summary").click();
+  await page.locator("summary.settings-label").click();
   await page.getByRole("combobox", { name: "Language", exact: true }).selectOption("pt-BR");
   await expect(page.locator("html")).toHaveAttribute("lang", "pt-BR");
   await page.waitForFunction(async () => {

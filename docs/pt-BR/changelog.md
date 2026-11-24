@@ -2,6 +2,13 @@
 
 [English](../../CHANGELOG.md)
 
+## 0.2.0 · Objetivo 02
+
+- Ciclo de vida com um módulo ativo e recuperação dos valores da sessão da Standard em memória.
+- Cinco perfis de recursos, suspensão nativa e retomada do worker sob demanda.
+- Central de privacidade, modo web explícito para usar apenas o cache e diagnóstico traduzido.
+- Rótulos legíveis para valores matemáticos retidos, com a mesma representação no cálculo.
+
 ## 0.1.1 · Revisão 01 do Objetivo 01
 
 - Armazenamento de racionais exatos e aproximações por intervalo independentemente da expressão original. A memória e a reutilização de resultados preservam seu valor em expressões percentuais.

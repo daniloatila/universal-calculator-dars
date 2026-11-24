@@ -8,14 +8,17 @@ O DARS é uma plataforma de computação local de Danilo Átila. Seu primeiro ma
 
 ## Fundação
 
-A revisão 01 do Objetivo 01 (0.1.1) está pronta para auditoria independente. A calculadora Standard usa o mesmo núcleo matemático Rust no aplicativo Windows x64, no navegador e na interface de linha de comando. Ela oferece aritmética, porcentagens, frações, potências e raízes, expressões editáveis, histórico temporário e memória de valores avaliados. O tema Escuro em azul-marinho abre por padrão em perfis novos.
+O proprietário aprovou a revisão 01 do Objetivo 01 (0.1.1). A calculadora Standard usa o mesmo núcleo matemático Rust no aplicativo Windows x64, no navegador e na interface de linha de comando. Ela oferece aritmética, porcentagens, frações, potências e raízes, expressões editáveis, histórico temporário e memória de valores avaliados. O tema Escuro em azul-marinho abre por padrão em perfis novos.
 
 - [Compilar a partir do código-fonte](docs/pt-BR/build.md)
 - [Usar a calculadora Padrão](docs/pt-BR/standard.md)
+- [Operação, privacidade e diagnóstico](docs/pt-BR/operations.md)
 - [Arquitetura e contrato numérico](docs/pt-BR/architecture.md)
 - [Projeto de privacidade e segurança](docs/pt-BR/security.md)
 - [Roteiro](docs/pt-BR/roadmap.md) e [estado do projeto](docs/pt-BR/project-state.md)
 - [Revisão 01 do Objetivo 01](evidence/objective-01/revision-01/REPORT.md) e [linha de base 0.1.0](evidence/objective-01/REPORT.md)
 - [Missão original](PROJECT_SPEC.md) e [tradução para o inglês](docs/en/mission.md)
+
+A versão de desenvolvimento 0.2.0 do Objetivo 02 acrescenta perfis de recursos, suspensão de módulos, controles de privacidade e diagnóstico local. [Evidências do Objetivo 02](evidence/objective-02/REPORT.md)
 
 O DARS usa a [licença Apache 2.0](LICENSE).

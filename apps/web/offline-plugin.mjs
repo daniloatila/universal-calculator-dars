@@ -41,14 +41,18 @@ export default function offlinePrecache() {
 const scope = self.registration.scope;
 const cachePrefix = \`dars-static:\${scope}:\`;
 const cacheName = cachePrefix + ${JSON.stringify(hash.digest("hex"))};
+const policyCache = \`dars-policy:\${scope}\`;
+const offlineKey = new URL(".dars-local/offline", scope).href;
 const indexUrl = new URL("index.html", scope).href;
 const initialUrls = ${JSON.stringify(eagerFiles)}.map((path) => new URL(path, scope).href);
 const localeFiles = ${JSON.stringify(deferredLocales)};
 const localeUrls = new Set(Object.values(localeFiles).map((path) => new URL(path, scope).href));
 const assetUrls = new Set([...initialUrls, ...localeUrls]);
+let offlineMode = caches.open(policyCache).then((cache) => cache.match(offlineKey)).then(Boolean).catch(() => false);
 
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
+    if (await offlineMode) throw new Error("Static downloads are disabled by local policy.");
     const cache = await caches.open(cacheName);
     await cache.addAll(initialUrls.map((url) => new Request(url, {cache: "reload", credentials: "same-origin"})));
   })());
@@ -64,14 +68,18 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   const request = event.request;
-  if (request.method !== "GET") return;
   const documentRequest = request.mode === "navigate" && (request.url === scope || request.url === indexUrl);
-  if (!documentRequest && !assetUrls.has(request.url)) return;
+  if (request.method !== "GET" || (!documentRequest && !assetUrls.has(request.url))) {
+    event.respondWith((async () => await offlineMode ? Response.error() : fetch(request))());
+    return;
+  }
   const key = documentRequest ? indexUrl : request;
   event.respondWith((async () => {
     const cache = await caches.open(cacheName);
-    const cached = await cache.match(key);
+    // This cache contains versioned, same-origin build files. Their bytes are independent of the browser's CORS Origin header.
+    const cached = await cache.match(key, {ignoreVary: true});
     if (cached) return cached;
+    if (await offlineMode) return Response.error();
     const response = await fetch(request);
     if (localeUrls.has(request.url) && response.ok) {
       await cache.put(request, response.clone()).catch(() => undefined);
@@ -82,11 +90,35 @@ self.addEventListener("fetch", (event) => {
 
 self.addEventListener("message", (event) => {
   const message = event.data;
+  if (message?.type === "dars-static-policy" && event.ports[0]) {
+    const port = event.ports[0];
+    const source = event.source;
+    if (!source?.url?.startsWith(scope)) return;
+    if (typeof message.offline === "boolean") {
+      const before = offlineMode;
+      offlineMode = before.then(async (prior) => {
+        try {
+          const cache = await caches.open(policyCache);
+          if (message.offline) await cache.put(offlineKey, new Response("1"));
+          else await cache.delete(offlineKey);
+          const clients = await self.clients.matchAll({type: "window"});
+          for (const client of clients) {
+            if (client.url.startsWith(scope)) client.postMessage({type: "dars-static-policy", offline: message.offline});
+          }
+          return message.offline;
+        } catch {
+          return prior;
+        }
+      });
+    }
+    event.waitUntil(offlineMode.then((offline) => port.postMessage({offline})));
+    return;
+  }
   if (message?.type !== "dars-cache-locale" || !Object.hasOwn(localeFiles, message.locale)) return;
   const url = new URL(localeFiles[message.locale], scope).href;
   event.waitUntil((async () => {
     const cache = await caches.open(cacheName);
-    if (!(await cache.match(url))) await cache.add(url);
+    if (!(await offlineMode) && !(await cache.match(url, {ignoreVary: true}))) await cache.add(url);
   })());
 });
 `.trimStart();

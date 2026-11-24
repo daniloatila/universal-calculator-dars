@@ -23,3 +23,5 @@ O cálculo ocorre no dispositivo. Telemetria, rastreamento, anúncios, contas, m
 - Mantenha segredos, caminhos pessoais e logs brutos fora dos relatórios publicados. Inspecione os arquivos versionados antes da publicação. Confira versões fixadas de ferramentas, dependências com lockfile, licenças de terceiros e alertas conhecidos.
 
 Veja as [evidências de segurança do Objetivo 01](../../evidence/objective-01/security.md) para os testes executados, resultados e limites observados.
+
+O Objetivo 02 acrescenta a política de cache de mesma origem, diagnóstico local e um provedor Windows reservado a consumidores nativos autorizados. [Central de privacidade e limites](operations.md#valores-privacidade-e-leituras)
