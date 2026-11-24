@@ -21,5 +21,5 @@ export function writePreference(key: 'language' | 'theme', value: string) {
 
 export function storedTheme(): Theme {
   const saved = readPreference('theme');
-  return THEMES.find((theme) => theme === saved) ?? 'system';
+  return THEMES.find((theme) => theme === saved) ?? 'dark';
 }

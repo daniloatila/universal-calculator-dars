@@ -134,9 +134,36 @@ test('production calculator confines assets to its own origin', async ({ page, b
 });
 
 for (const colorScheme of ['light', 'dark'] as const) {
+  test(`the default is dark on a ${colorScheme} system and an explicit theme survives reload`, async ({ browser, page, baseURL }) => {
+    const firstPaint = await browser.newPage({ baseURL, colorScheme, javaScriptEnabled: false });
+    try {
+      await firstPaint.goto('/');
+      await expect(firstPaint.locator('html')).toHaveAttribute('data-theme', 'dark');
+      await expect(firstPaint.locator('body')).toHaveCSS('background-color', 'rgb(10, 20, 39)');
+    } finally {
+      await firstPaint.close();
+    }
+
+    await page.emulateMedia({ colorScheme });
+    await ready(page);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(10, 20, 39)');
+    await page.getByText('Settings', { exact: true }).click();
+    const theme = colorScheme === 'light' ? 'system' : 'light';
+    await page.getByRole('combobox', { name: 'Appearance', exact: true }).selectOption(theme);
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(239, 244, 251)');
+  });
+
   test(`the ${colorScheme} layout is responsive and satisfies automated axe checks`, async ({ page }) => {
     await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' });
     await ready(page);
+    if (colorScheme === 'light') {
+      await page.getByText('Settings', { exact: true }).click();
+      await page.getByRole('combobox', { name: 'Appearance', exact: true }).selectOption('light');
+      await page.getByText('Settings', { exact: true }).click();
+    }
     for (const width of [320, 390, 768, 1280]) {
       await page.setViewportSize({ width, height: 900 });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);

@@ -89,6 +89,11 @@ async function checkDesktop(record) {
     await calculate.click();
     await expect(result).toHaveText("0.3", { timeout: 8_000 });
     const launchToFirstResultMs = Math.round(performance.now() - started);
+    if (revised) {
+      await page.emulateMedia({ colorScheme: "light" });
+      await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+      await expect(page.locator("body")).toHaveCSS("background-color", "rgb(10, 20, 39)");
+    }
     if (!record) return { launchToFirstResultMs };
 
     await context.setOffline(true);
@@ -114,6 +119,7 @@ async function checkDesktop(record) {
       await expect(expression).toHaveValue(/^@\d+$/);
       await calculate.click();
       await expect(result).toHaveText("100.014142135623730950488");
+      await expect(page.locator("header .brand-mark rect")).toHaveCSS("fill", "rgb(141, 204, 255)");
       await writeFile(new URL("windows-memory.png", evidenceRoot), await page.screenshot(), { flush: true });
       await page.getByRole("button", { name: "Clear memory", exact: true }).click();
       await expect(page.getByRole("button", { name: "Recall memory", exact: true })).toBeDisabled();
@@ -139,7 +145,7 @@ async function checkDesktop(record) {
       desktopHostWorkingSetBytes: final.find((row) => row.pid === processHandle.pid).rss,
       totalProcessTreeWorkingSetBytes: memory,
       processTreeCount: final.length,
-      passed: revised ? 10 : 5,
+      passed: revised ? 13 : 5,
       failed: 0,
     };
   } finally {

@@ -81,7 +81,12 @@ export default function App({ initialLanguage }: { initialLanguage: Language }) 
       <header className="site-header">
         <div className="header-inner">
           <div className="brand">
-            <img src={`${import.meta.env.BASE_URL}dars.svg`} alt="" width="38" height="38"/>
+            <svg className="brand-mark" width="38" height="38" viewBox="0 0 48 48" aria-hidden="true">
+              <rect width="48" height="48" rx="12" fill="var(--accent-key)" />
+              <path d="M13 13h8a11 11 0 0 1 0 22h-8V13Zm5 15 10-9" fill="none" stroke="var(--accent-ink)"
+                strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              <circle cx="28" cy="19" r="2.4" fill="var(--accent-ink)" />
+            </svg>
             <span>DARS</span>
           </div>
           <div className="header-actions">
