@@ -4,14 +4,14 @@
 
 ## Current objective
 
-**Objective 01 · Foundation · 0.1.1 · READY_FOR_REVIEW**
+**Objective 02 · Operational intelligence · 0.2.0 · IN_PROGRESS**
 
-Revision 01 verified the Standard memory fix, worker recovery, the navy Dark default and Windows performance measurements. Objective 02 requires explicit owner approval. [Revision 01](evidence/objective-01/revision-01/REPORT.md) · [0.1.0 baseline](evidence/objective-01/REPORT.md)
+The owner approved Objective 01 on 2026-11-24 following the independent assessment of 95/100 and authorized Objective 02. The reviewed 0.1.1 delivery remains the comparison baseline. [Approval record](evidence/objective-01/approval.json) · [Revision 01](evidence/objective-01/revision-01/REPORT.md) · [Objective 02 report](evidence/objective-02/REPORT.md)
 
 | Objective | Planned version | State | Evidence |
 | --- | --- | --- | --- |
-| 01 · Foundation | 0.1.1 | READY_FOR_REVIEW | [Revision 01](evidence/objective-01/revision-01/REPORT.md) |
-| 02 · Operational intelligence | 0.2.0 | NOT_STARTED | `evidence/objective-02/` |
+| 01 · Foundation | 0.1.1 | APPROVED | [Approval](evidence/objective-01/approval.json) · [Revision 01](evidence/objective-01/revision-01/REPORT.md) |
+| 02 · Operational intelligence | 0.2.0 | IN_PROGRESS | [Report](evidence/objective-02/REPORT.md) |
 | 03 · Universal mathematics | 0.3.0 | NOT_STARTED | `evidence/objective-03/` |
 | 04 · Finance and business | 0.4.0 | NOT_STARTED | `evidence/objective-04/` |
 | 05 · Science, engineering and data | 0.5.0 | NOT_STARTED | `evidence/objective-05/` |

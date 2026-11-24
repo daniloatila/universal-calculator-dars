@@ -4,14 +4,14 @@
 
 ## Objetivo atual
 
-**Objetivo 01 · Fundação · 0.1.1 · READY_FOR_REVIEW**
+**Objetivo 02 · Inteligência operacional · 0.2.0 · IN_PROGRESS**
 
-A revisão 01 verificou a correção da memória da Standard, a recuperação do worker, o tema Escuro azul-marinho por padrão e as medições de desempenho no Windows. O Objetivo 02 requer aprovação explícita do autor. [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) · [Linha de base 0.1.0](../../evidence/objective-01/REPORT.md)
+Em 24/11/2026, o proprietário aprovou o Objetivo 01 após a avaliação independente de 95/100 e autorizou o Objetivo 02. A entrega 0.1.1 revisada é a referência comparativa. [Aprovação](../../evidence/objective-01/approval.json) · [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) · [Relatório do Objetivo 02](../../evidence/objective-02/REPORT.md)
 
 | Objetivo | Versão planejada | Estado | Evidências |
 | --- | --- | --- | --- |
-| 01 · Fundação | 0.1.1 | READY_FOR_REVIEW | [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) |
-| 02 · Inteligência operacional | 0.2.0 | NOT_STARTED | `evidence/objective-02/` |
+| 01 · Fundação | 0.1.1 | APPROVED | [Aprovação](../../evidence/objective-01/approval.json) · [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) |
+| 02 · Inteligência operacional | 0.2.0 | IN_PROGRESS | [Relatório](../../evidence/objective-02/REPORT.md) |
 | 03 · Matemática universal | 0.3.0 | NOT_STARTED | `evidence/objective-03/` |
 | 04 · Finanças e negócios | 0.4.0 | NOT_STARTED | `evidence/objective-04/` |
 | 05 · Ciência, engenharia e dados | 0.5.0 | NOT_STARTED | `evidence/objective-05/` |
