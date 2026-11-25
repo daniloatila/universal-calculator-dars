@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "objective": "02",
+  "revision": "01",
+  "version": "0.2.1",
+  "verified_source_commit": "1183df897d8042f01fdc3f43947ebcc27cd48c7e",
+  "windows_executable_sha256": "45967b9fac2fd0a111f35eaa3b6cad2640326753eb544040fe2c9c128918a91c",
+  "prior_total": 576,
+  "repeated_suite_total": 589,
+  "previous_equivalent_passed": 576,
+  "additional_checks_in_repeated_suites": 13,
+  "additional_native_rust_tests": 5,
+  "total_distinct_counted_checks": 594,
+  "scope_note": "The live native capability scenario, performance observations, build checks and CI repetitions are tracked separately. The isolated Credential Manager command includes the identifier/size test also run by the workspace command and is counted only here.",
+  "suites": [
+    {
+      "id": "rust_core",
+      "prior": 16,
+      "passed": 16,
+      "failed": 0,
+      "command": "cargo test --locked --workspace"
+    },
+    {
+      "id": "cli_independent_oracle",
+      "prior": 157,
+      "passed": 157,
+      "failed": 0,
+      "command": "python -B tests/oracle.py target/release/dars.exe"
+    },
+    {
+      "id": "wasm_structured_independent_oracle",
+      "prior": 291,
+      "passed": 291,
+      "failed": 0,
+      "command": "python -B crates/dars-core/tests/structured-oracle.py"
+    },
+    {
+      "id": "cli_wasm_parity",
+      "prior": 20,
+      "passed": 20,
+      "failed": 0,
+      "command": "node tests/check-targets.mjs target/release/dars.exe"
+    },
+    {
+      "id": "typescript_node",
+      "prior": 40,
+      "passed": 51,
+      "failed": 0,
+      "command": "npm test --prefix apps/web"
+    },
+    {
+      "id": "physical_windows_chrome",
+      "prior": 23,
+      "passed": 25,
+      "failed": 0,
+      "command": "npm run test:e2e --prefix apps/web"
+    },
+    {
+      "id": "browser_explicit_offline",
+      "prior": 10,
+      "passed": 10,
+      "failed": 0,
+      "command": "node tests/verify-web-offline.mjs"
+    },
+    {
+      "id": "native_windows_webview2_ui",
+      "prior": 17,
+      "passed": 17,
+      "failed": 0,
+      "command": "node scripts/verify-desktop.mjs --objective-02-revision"
+    },
+    {
+      "id": "native_windows_provider_credentials",
+      "prior": 2,
+      "passed": 2,
+      "failed": 0,
+      "command": "cargo test --locked -p dars-desktop --lib -- --include-ignored"
+    },
+    {
+      "id": "native_windows_sensor_rust",
+      "prior": 0,
+      "passed": 5,
+      "failed": 0,
+      "command": "cargo test --locked --workspace"
+    }
+  ],
+  "core_coverage": {
+    "command": "cargo llvm-cov --locked -p dars-core --json --summary-only --output-path coverage.json",
+    "lines": {
+      "covered": 613,
+      "total": 620,
+      "percent": 98.87096774193549
+    },
+    "regions": {
+      "covered": 711,
+      "total": 743,
+      "percent": 95.69313593539704
+    },
+    "functions": {
+      "covered": 57,
+      "total": 57,
+      "percent": 100
+    },
+    "branch_coverage_instrumented": false
+  },
+  "checks": {
+    "cargo_fmt": "passed",
+    "cargo_clippy_workspace_all_targets_deny_warnings": "passed",
+    "windows_release_build": "passed",
+    "production_web_build": "passed",
+    "typescript_typecheck": "passed",
+    "staged_source_gitleaks": "passed"
+  },
+  "windows_live_sensor": {
+    "status": "passed",
+    "evidence": "benchmarks.json",
+    "windows_credential_fixture_removed": true
+  },
+  "definition": "Reported counts are test assertions or cases as grouped in each original suite. They are not a count of distinct expressions."
+}

@@ -1,0 +1,56 @@
+{
+  "conclusion": "success",
+  "event": "push",
+  "headSha": "9158f7727e40b9ec168c6ccd63901e239b9f04fe",
+  "jobs": [
+    {
+      "completedAt": "2026-11-24T23:42:51Z",
+      "conclusion": "success",
+      "databaseId": 138861707098,
+      "name": "verify (macos-latest)",
+      "startedAt": "2026-11-24T23:40:46Z",
+      "status": "completed",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45511972848/job/138861707098"
+    },
+    {
+      "completedAt": "2026-11-24T23:44:05Z",
+      "conclusion": "success",
+      "databaseId": 138861707311,
+      "name": "security",
+      "startedAt": "2026-11-24T23:40:46Z",
+      "status": "completed",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45511972848/job/138861707311"
+    },
+    {
+      "completedAt": "2026-11-24T23:47:36Z",
+      "conclusion": "success",
+      "databaseId": 138861707334,
+      "name": "verify (windows-latest)",
+      "startedAt": "2026-11-24T23:40:47Z",
+      "status": "completed",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45511972848/job/138861707334"
+    },
+    {
+      "completedAt": "2026-11-24T23:42:57Z",
+      "conclusion": "success",
+      "databaseId": 138861707480,
+      "name": "verify (ubuntu-latest)",
+      "startedAt": "2026-11-24T23:40:47Z",
+      "status": "completed",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45511972848/job/138861707480"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45511972848",
+  "dependency_audit": {
+    "npm_reported_vulnerabilities": 0,
+    "cargo_audit_deny_yanked": "success",
+    "rustsec_warning_ids": [
+      "RUSTSEC-2024-0370",
+      "RUSTSEC-2024-0429",
+      "RUSTSEC-2026-0543"
+    ]
+  },
+  "runtime_source_commit": "1183df897d8042f01fdc3f43947ebcc27cd48c7e",
+  "runtime_ci_url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45511054525"
+}

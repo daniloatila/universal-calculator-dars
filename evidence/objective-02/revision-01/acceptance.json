@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "objective": "02",
+  "revision": "01",
+  "version": "0.2.1",
+  "independent_score_reported_for_0.2.0": 88,
+  "status": "READY_FOR_REVIEW",
+  "approved": false,
+  "previous_objective": "APPROVED",
+  "objective_03": "NOT_STARTED",
+  "stable_release_published": false,
+  "verified_source_commit": "1183df897d8042f01fdc3f43947ebcc27cd48c7e",
+  "criteria": [
+    {
+      "id": "DARS-02-R01-NATIVE",
+      "requirement": {
+        "en": "Validate structured native capability readings on Windows.",
+        "pt-BR": "Validar as leituras estruturadas de capacidades nativas no Windows."
+      },
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "compatibility.md",
+        "security.md"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-ADAPTIVE",
+      "requirement": {
+        "en": "Demonstrate automatic behavior using physical and simulated conditions.",
+        "pt-BR": "Demonstrar comportamento automático com condições reais e simuladas."
+      },
+      "status": "PASS",
+      "evidence": [
+        "benchmarks.json",
+        "regression.md"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-SENSOR_LIMITS",
+      "requirement": {
+        "en": "State unsupported, partial and estimated readings explicitly.",
+        "pt-BR": "Identificar leituras indisponíveis, parciais e estimadas."
+      },
+      "status": "PASS",
+      "evidence": [
+        "compatibility.md",
+        "security.md"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-LATENCY",
+      "requirement": {
+        "en": "Resolve or explain the measured regression with a verifiable interaction impact.",
+        "pt-BR": "Resolver ou explicar a regressão medida com impacto de interação verificável."
+      },
+      "status": "PASS",
+      "evidence": [
+        "REPORT.md",
+        "benchmarks.json",
+        "reproduction.md"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-MEMORY",
+      "requirement": {
+        "en": "Investigate memory with comparable phases and sustained repeated cycles.",
+        "pt-BR": "Investigar memória em fases comparáveis e ciclos repetidos sustentados."
+      },
+      "status": "PASS",
+      "evidence": [
+        "REPORT.md",
+        "benchmarks.json",
+        "reproduction.md"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-DECOUPLING",
+      "requirement": {
+        "en": "Keep the operational shell independent of Standard-specific state and resources.",
+        "pt-BR": "Manter a interface operacional independente dos estados e recursos internos do Standard."
+      },
+      "status": "PASS",
+      "evidence": [
+        "regression.md",
+        "../../../apps/web/src/module-registry.ts",
+        "../../../apps/web/src/module-manager.ts"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-MULTIPLE_MODULES",
+      "requirement": {
+        "en": "Exercise two heterogeneous test modules in the real application shell.",
+        "pt-BR": "Exercitar dois módulos de teste heterogêneos na interface real."
+      },
+      "status": "PASS",
+      "evidence": [
+        "module-shell.json",
+        "../../../apps/web/tests/module-shell.spec.ts"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-SCHEDULING",
+      "requirement": {
+        "en": "Bound essential and optional work and retain useful reduced-cost rendering.",
+        "pt-BR": "Limitar tarefas essenciais e opcionais e manter renderização útil em modo reduzido."
+      },
+      "status": "PASS",
+      "evidence": [
+        "regression.md",
+        "../../../apps/web/tests/module-work.test.mts",
+        "../../../apps/web/tests/module-frames.spec.ts"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-MATH",
+      "requirement": {
+        "en": "Preserve mathematical accuracy and core coverage.",
+        "pt-BR": "Preservar precisão matemática e cobertura do núcleo."
+      },
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "regression.md"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-PRIVACY",
+      "requirement": {
+        "en": "Preserve permissions, offline policy, protected credentials and session clearing.",
+        "pt-BR": "Preservar permissões, política offline, credenciais protegidas e limpeza da sessão."
+      },
+      "status": "PASS",
+      "evidence": [
+        "security.md",
+        "tests.json"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-REGRESSION",
+      "requirement": {
+        "en": "Repeat the 576 previous checks or mapped equivalents.",
+        "pt-BR": "Repetir as 576 verificações anteriores ou equivalentes rastreados."
+      },
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "regression.md"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-CI",
+      "requirement": {
+        "en": "Verify successful GitHub Actions on the audited source.",
+        "pt-BR": "Confirmar GitHub Actions aprovado no código auditado."
+      },
+      "status": "PASS",
+      "evidence": [
+        "ci.json"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-DOCS",
+      "requirement": {
+        "en": "Keep bilingual documentation, seven locale packs and the default navy theme.",
+        "pt-BR": "Manter documentação bilíngue, sete idiomas e tema azul-marinho padrão."
+      },
+      "status": "PASS",
+      "evidence": [
+        "REPORT.md",
+        "REPORT.pt-BR.md",
+        "regression.md",
+        "windows-operations.png"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-WINDOWS",
+      "requirement": {
+        "en": "Verify the Windows executable with an actual WebView2 session.",
+        "pt-BR": "Verificar o executável Windows em uma sessão real do WebView2."
+      },
+      "status": "PASS",
+      "evidence": [
+        "compatibility.md",
+        "tests.json",
+        "windows-operations.png"
+      ]
+    },
+    {
+      "id": "DARS-02-R01-PUBLICATION",
+      "requirement": {
+        "en": "Publish only the reviewed source and evidence and retain the objective gates.",
+        "pt-BR": "Publicar apenas o código e as evidências revisadas preservando o ponto de aprovação."
+      },
+      "status": "PASS",
+      "evidence": [
+        "REPORT.md",
+        "../../../PROJECT_STATE.md",
+        "../../objective-01/approval.json"
+      ]
+    }
+  ],
+  "limits": {
+    "memory_target_under_100_mb_incremental": "not established on the measured host",
+    "physical_platform": "Windows x64, other product platform conclusions constrained to CI and browser checks",
+    "os_thermal_and_gpu_hardware": "unavailable in the validated Windows provider",
+    "gate": "An independent review of the revision and explicit owner approval remain pending."
+  }
+}

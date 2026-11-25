@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "objective": "02",
+  "revision": "01",
+  "version": "0.2.1",
+  "prior_assessment_reported": 88,
+  "findings": [
+    {
+      "id": "R01-01",
+      "area": "native_capabilities",
+      "disposition": "verified_with_platform_limits",
+      "observed_0_2_0": "Windows forwarded native minimization. CPU, memory pressure and thermal fields used an internal contract without a Windows provider.",
+      "resolution": "Use local Win32 reads through a single validated Tauri capability and distinguish unauthenticated browser hints, verified context creation, and missing native signals.",
+      "evidence": [
+        "benchmarks.json",
+        "security.md",
+        "compatibility.md"
+      ]
+    },
+    {
+      "id": "R01-02",
+      "area": "latency",
+      "disposition": "current_matched_regression_not_reproduced",
+      "observed_0_2_0": "The historical median increased from 31.88 ms to 48.87 ms in the external automation metric.",
+      "resolution": "Use mirrored three-version measurements and check math, encoding, WebAssembly, worker, renderer and driver boundaries with the same expression sequence. Keep the historical readings in the record.",
+      "evidence": [
+        "REPORT.md",
+        "benchmarks.json",
+        "reproduction.md"
+      ]
+    },
+    {
+      "id": "R01-03",
+      "area": "process_tree_memory",
+      "disposition": "minimized_memory_mitigated_basic_target_open",
+      "observed_0_2_0": "Historical minimized private commit increased by 32.09 MiB. The host contribution fell while the helper contribution rose.",
+      "resolution": "Measure long cyclic operation and the mirrored comparison. Read back the optional WebView2 LOW target on real minimization and NORMAL on restoration. Attribute the observed process-tree difference to helper processes where counters support that conclusion.",
+      "evidence": [
+        "REPORT.md",
+        "benchmarks.json",
+        "reproduction.md"
+      ]
+    },
+    {
+      "id": "R01-04",
+      "area": "module_coupling",
+      "disposition": "verified",
+      "observed_0_2_0": "The App shell and manager used Standard-specific state and identifiers. A non-resolving descriptor remained in loading until external cancellation.",
+      "resolution": "Introduce typed registration with lifecycle ownership, global clearing and an activation deadline. Exercise distinct state shapes with the real App shell and independent async failures.",
+      "bounded_baseline_observation": {
+        "status_at_75_ms": "loading",
+        "had_startup_deadline": false,
+        "closed_scope_to_settle": true
+      },
+      "evidence": [
+        "module-shell.json",
+        "regression.md",
+        "../../../apps/web/src/module-registry.ts"
+      ]
+    },
+    {
+      "id": "R01-05",
+      "area": "scheduling_and_frames",
+      "disposition": "verified",
+      "observed_0_2_0": "An eligible secondary operation in Ultra Light did not start and stayed pending until its scope closed. Ultra Light disabled the optional drawing scheduler.",
+      "resolution": "Protect a foreground slot, bound queue and operation lifetime, provide explicit deferral and make simplified redraws demand-driven.",
+      "bounded_baseline_observation": {
+        "duration_ms": 75,
+        "starts": 0,
+        "had_task_deadline": false,
+        "closed_scope_to_settle": true
+      },
+      "evidence": [
+        "regression.md",
+        "../../../apps/web/tests/module-work.test.mts",
+        "../../../apps/web/tests/module-frames.spec.ts"
+      ]
+    },
+    {
+      "id": "R01-06",
+      "area": "privacy_and_dependencies",
+      "disposition": "verified_with_transitive_warnings",
+      "observed_0_2_0": "The application trust boundary is the local packaged WebView. The credential provider is Rust-only.",
+      "resolution": "Keep the only added native permission local and scoped to the fixed command. Repeat offline verification, credential deletion and publication audit. Retain visible transitive dependency warnings.",
+      "evidence": [
+        "security.md",
+        "tests.json",
+        "ci.json"
+      ]
+    }
+  ],
+  "open_limits": [
+    "Incremental basic-mode memory below 100 MB is not established in the measured Windows environment.",
+    "Reliable native temperature and GPU hardware capability were unavailable on the measured Windows provider.",
+    "The host/backend, runtime and test isolation evidence covers Windows x64. Other platforms have the scopes recorded in compatibility.md.",
+    "The independently reported score concerns 0.2.0. The 0.2.1 revision awaits a separate independent review."
+  ]
+}

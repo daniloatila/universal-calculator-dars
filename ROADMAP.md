@@ -17,4 +17,4 @@ Milestones describe planned scope. The original mission contains their detailed 
 
 See [PROJECT_STATE.md](PROJECT_STATE.md) for the current gate. Review reports and approval records belong with each objective's evidence.
 
-Objective 01 was approved at 0.1.1. Objective 02 evidence records development of 0.2.0. [Objective 01 approval](evidence/objective-01/approval.json) · [Objective 02 report](evidence/objective-02/REPORT.md)
+Objective 01 was approved at 0.1.1. Objective 02 revision 01 covers the 0.2.1 development build. [Objective 01 approval](evidence/objective-01/approval.json) · [Objective 02 revision 01](evidence/objective-02/revision-01/REPORT.md) · [Historical 0.2.0 delivery](evidence/objective-02/REPORT.md)

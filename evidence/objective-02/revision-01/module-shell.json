@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "browser": "installed Chrome on Windows",
+  "fixture_only": true,
+  "suite": "apps/web/tests/module-shell.spec.ts",
+  "cases": [
+    {
+      "title": "the real app shell selects heterogeneous modules and globally clears both active and suspended state",
+      "result": "passed",
+      "asserted": {
+        "generic-module-shell-proof": {
+          "imported": [
+            "note",
+            "chart"
+          ],
+          "started": 4,
+          "stopped": 3,
+          "disposals": 3,
+          "cacheBudget": 4,
+          "waiting": false
+        }
+      }
+    },
+    {
+      "title": "the same app shell isolates a hung module, retries and disposes a late runtime",
+      "result": "passed",
+      "asserted": {
+        "module-shell-recovery-proof": {
+          "imported": [
+            "note",
+            "chart"
+          ],
+          "started": 2,
+          "stopped": 2,
+          "disposals": 2,
+          "cacheBudget": 8,
+          "waiting": false
+        }
+      }
+    }
+  ]
+}

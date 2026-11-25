@@ -17,4 +17,4 @@ Os marcos descrevem o escopo planejado. A missão original reúne os requisitos 
 
 Consulte o [estado do projeto](project-state.md) para saber qual é o objetivo vigente. Relatórios e decisões de aprovação permanecem junto às evidências de cada objetivo.
 
-O Objetivo 01 foi aprovado na versão 0.1.1. O relatório do Objetivo 02 acompanha a entrega em desenvolvimento 0.2.0. [Aprovação do Objetivo 01](../../evidence/objective-01/approval.json) · [Relatório do Objetivo 02](../../evidence/objective-02/REPORT.md)
+O Objetivo 01 foi aprovado na versão 0.1.1. A revisão 01 do Objetivo 02 cobre a versão de desenvolvimento 0.2.1. [Aprovação do Objetivo 01](../../evidence/objective-01/approval.json) · [Revisão 01 do Objetivo 02](../../evidence/objective-02/revision-01/REPORT.pt-BR.md) · [Entrega histórica 0.2.0](../../evidence/objective-02/REPORT.md)
