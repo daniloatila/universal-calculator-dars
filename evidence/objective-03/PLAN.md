@@ -14,7 +14,7 @@ The 0.2.2 delivery is the accepted baseline. Each internal stage records its mat
 | 6 | Discrete Mathematics | INTERNALLY_ACCEPTED · [Verification](discrete-mathematics/verification.md) · [Superseded CI run](discrete-mathematics/ci.json) |
 | 7 | Programmer | INTERNALLY_ACCEPTED · [Verification](programmer/verification.md) · [CI](programmer/ci.json) |
 | 8 | Converter | INTERNALLY_ACCEPTED · [Verification](converter/verification.md) · [CI](converter/ci.json) |
-| 9 | Date & Time | INTERNALLY_ACCEPTED · [Verification](date-time/verification.md) |
-| Audit | Integrated Objective 03 | NOT_STARTED |
+| 9 | Date & Time | INTERNALLY_ACCEPTED · [Verification](date-time/verification.md) · [CI](date-time/ci.json) |
+| Audit | Integrated Objective 03 | IN_PROGRESS |
 
 The global audit repeats the baseline's 602 mapped checks, exercises all ten modules and seven locales, and verifies Windows, browser, CLI/WASM, CI, security, offline operation, performance, memory and publication. [Baseline regressions](../objective-02/revision-02/tests.json) · [Windows memory debt and protocol](../objective-02/revision-02/memory-debt.md)

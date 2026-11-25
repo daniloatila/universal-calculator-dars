@@ -16,6 +16,19 @@ fn main() -> ExitCode {
         eprintln!("Usage: dars tool \"REQUEST_JSON\"");
         return ExitCode::from(2);
     }
+    if expression == "standard-record" {
+        let input = args.next();
+        let bindings = args.next();
+        let input = input.as_deref().and_then(std::ffi::OsStr::to_str);
+        let bindings = bindings
+            .as_deref()
+            .map_or(Some("{}"), std::ffi::OsStr::to_str);
+        if let (Some(input), Some(bindings), None) = (input, bindings, args.next()) {
+            return emit(dars_core::evaluate_value_record_json(input, bindings));
+        }
+        eprintln!("Usage: dars standard-record \"EXPRESSION\" [\"BINDINGS_JSON\"]");
+        return ExitCode::from(2);
+    }
     if args.next().is_some() {
         eprintln!("Pass the complete expression as one argument.");
         return ExitCode::from(2);
@@ -27,7 +40,7 @@ fn main() -> ExitCode {
     match expression {
         "-h" | "--help" => {
             println!(
-                "Usage: dars \"EXPRESSION\"\n       dars tool \"REQUEST_JSON\"\nPrint a DARS result as JSON."
+                "Usage: dars \"EXPRESSION\"\n       dars tool \"REQUEST_JSON\"\n       dars standard-record \"EXPRESSION\" [\"BINDINGS_JSON\"]\nPrint a DARS result as JSON."
             )
         }
         "-V" | "--version" => println!("dars {}", env!("CARGO_PKG_VERSION")),

@@ -33,8 +33,8 @@ export default function offlinePrecache() {
         }
         const deferredAssets = new Set(Object.values(deferredLocales));
         for (const file of files) {
-          // Modules use these chunk names for their lazy workspaces, workers and WASM.
-          if (/^assets\/(?:tool-|calculation-proof-|dars_tool_wasm)/.test(file)) deferredAssets.add(file);
+          // Advanced workspaces and their engines are deferred. The shared record viewer belongs to Standard too.
+          if (/^assets\/(?:tool-|dars_tool_wasm)/.test(file)) deferredAssets.add(file);
         }
         const eagerFiles = files.filter((file) => !deferredAssets.has(file));
         const hash = createHash("sha256");

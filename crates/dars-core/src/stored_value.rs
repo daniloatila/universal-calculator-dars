@@ -56,6 +56,13 @@ impl<'a> Bindings<'a> {
         binding.decoded = Some(value.clone());
         Ok(value)
     }
+
+    pub(crate) fn used_values(&self) -> impl Iterator<Item = (u32, &'a str)> + '_ {
+        self.0
+            .iter()
+            .filter(|(_, binding)| binding.decoded.is_some())
+            .map(|(&id, binding)| (id, binding.encoded))
+    }
 }
 
 impl<'de> Deserialize<'de> for Bindings<'de> {

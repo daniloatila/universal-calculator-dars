@@ -3,12 +3,14 @@ import type { KeyboardEvent, PointerEvent, ReactNode } from 'react';
 import { changeSign, edit, EMPTY_EDITOR, redo, spliceExpression, undo } from './editor';
 import type { Editor } from './editor';
 import type { Combine, EngineStatus, Evaluate, Evaluation } from './engine';
+import type { CalculationProof } from './calculation-proof';
 import { Icon } from './icons';
 import { LOCALES } from './i18n';
 import type { Locale, Messages } from './i18n';
 import { isExactDecimal, localizeExpression, normalizeExpression, numberPresentation } from './locale-format';
+import StandardCalculationProof from './standard-calculation-proof';
 
-type Answer = Extract<Evaluation, { ok: true }>;
+type Answer = Omit<Extract<Evaluation, { ok: true }>, 'proof'>;
 type Completed = { id: number; expression: string; input: string; decimalSeparator: string; answer: Answer };
 type Mode = 'exact' | 'decimal';
 type MemoryAction = 'store' | 'add' | 'subtract';
@@ -18,6 +20,7 @@ type Recalled = { expression: string; revision: number };
 type StandardSnapshot = {
   editor: Editor;
   completed: Completed | null;
+  proof: CalculationProof | null;
   history: Completed[];
   memory: Answer | null;
   mode: Mode;
@@ -94,6 +97,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
   const referenceHelpId = useId();
   const [editor, setEditor] = useState(initial?.editor ?? EMPTY_EDITOR);
   const [completed, setCompleted] = useState(initial?.completed ?? null);
+  const [proof, setProof] = useState(initial?.proof ?? null);
   const [history, setHistory] = useState(initial?.history ?? []);
   const [memory, setMemory] = useState(initial?.memory ?? null);
   const [mode, setMode] = useState<Mode>(initial?.mode ?? 'decimal');
@@ -120,7 +124,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
 
   useLayoutEffect(() => {
     session.current = {
-      editor, completed, history, memory, mode, decimal: previousDecimal.current,
+      editor, completed, proof, history, memory, mode, decimal: previousDecimal.current,
       editRevision: editRevision.current, memorySource: memorySource.current, recalled: recalled.current,
       nextId: nextId.current, nextBinding: nextBinding.current, bindings: bindings.current,
     };
@@ -179,6 +183,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
     recalled.current = null;
     cancelActive();
     setCompleted(null);
+    setProof(null);
     setError(null);
     setFeedback('');
   }
@@ -294,15 +299,18 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
     const input = normalizeExpression(expression, numbers.decimal);
     const revision = historyRevision.current;
     void run('evaluation', async (signal, isCurrent) => {
-      const result = await evaluate(input, expressionBindings(input), signal);
+      const result = await evaluate(input, expressionBindings(input), signal, expression);
       if (!isCurrent()) return;
       if (!result.ok) {
         setCompleted(null);
+        setProof(null);
         setError(result.code);
         return;
       }
-      const current = { id: ++nextId.current, expression, input, decimalSeparator: numbers.decimal, answer: result };
+      const { proof: record, ...answer } = result;
+      const current = { id: ++nextId.current, expression, input, decimalSeparator: numbers.decimal, answer };
       setCompleted(current);
+      setProof(record ?? null);
       if (historyRevision.current === revision) setHistory((entries) => [current, ...entries].slice(0, HISTORY_LIMIT));
     });
   }
@@ -531,6 +539,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
         )}
         <div className="history-note"><Icon name="lock" size={16}/><span>{m.temporary}</span></div>
       </aside>
+      <StandardCalculationProof proof={proof} locale={locale} messages={m.standardRecord} />
     </div>
   );
 }

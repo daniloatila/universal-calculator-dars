@@ -17,7 +17,7 @@ const expression = (page: Page) => page.getByRole('textbox', { name: 'Expression
 const result = (page: Page) => page.getByTestId('calculus-result');
 const operation = (page: Page, name: Operation) =>
   page.getByRole('button', { name: en.calculus.operations[name], exact: true });
-const advanced = /\/assets\/(?:tool-|calculation-proof-|dars_tool_wasm)/;
+const advanced = /\/assets\/(?:tool-|dars_tool_wasm)/;
 
 async function calculus(page: Page) {
   await picker(page).selectOption('calculus');

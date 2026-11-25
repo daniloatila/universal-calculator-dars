@@ -68,6 +68,19 @@
   "memoryCleared": "Memory cleared",
   "historyCleared": "History cleared",
   "languageChanged": "Switched to English",
+  "standardRecord": {
+    "title": "Calculation record",
+    "loading": "Loading the record viewer…",
+    "unavailable": "The record viewer is unavailable.",
+    "evaluate": "Evaluate expression",
+    "real": "Real numbers",
+    "exactMethod": "Exact rational evaluation",
+    "approximateMethod": "Certified interval evaluation",
+    "rounding": "Nearest, ties to even",
+    "bindingsLimit": "Retained values exceed the portable replay size limit.",
+    "normalizedWhitespace": "Control whitespace was replaced by spaces in the recorded expression.",
+    "originalLimit": "The original display expression exceeds the portable text limits."
+  },
   "tools": {
     "navigation": "Choose a tool",
     "search": "Search tools",

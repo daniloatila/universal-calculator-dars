@@ -6,6 +6,8 @@
   border-radius: .85rem;
 }
 
+.standard-proof { grid-column: 1 / -1; }
+
 .calculation-proof > summary {
   min-block-size: 2.75rem;
   padding: .7rem .9rem;

@@ -8,6 +8,7 @@
 
 mod arithmetic;
 mod parser;
+mod proof;
 mod stored_value;
 
 use arithmetic::{Operator, Value};
@@ -79,6 +80,21 @@ pub fn evaluate_value_json(input: &str, bindings_json: &str) -> String {
     display_value(result)
 }
 
+/// Evaluate once and append a portable Calculation Proof to the structured response.
+pub fn evaluate_value_record_json(input: &str, bindings_json: &str) -> String {
+    let evaluate = || {
+        let expression = parser::parse(input, true)?;
+        let mut bindings = Bindings::decode(bindings_json)?;
+        let value = expression.evaluate(&mut bindings)?;
+        let display = ValueDisplay::new(&value)?;
+        Ok(proof::record(input, &bindings, &value, display))
+    };
+    match evaluate() {
+        Ok(record) => record,
+        Err(code) => json(&Evaluation::Failure { ok: false, code }),
+    }
+}
+
 /// Add or subtract stored values independently of expression syntax.
 /// An absent left value (empty string) selects the additive identity.
 pub fn combine_values_json(left: &str, right: &str, subtract: bool) -> String {
@@ -108,17 +124,20 @@ struct ValueDisplay {
     value: String,
 }
 
-fn display_value(result: Result<Value, Error>) -> String {
-    let response = result.and_then(|value| {
+impl ValueDisplay {
+    fn new(value: &Value) -> Result<Self, Error> {
         let (exact, approximate) = value.display()?;
-        Ok(ValueDisplay {
+        Ok(Self {
             ok: true,
             exact,
             approximate,
-            value: stored_value::encode(&value),
+            value: stored_value::encode(value),
         })
-    });
-    match response {
+    }
+}
+
+fn display_value(result: Result<Value, Error>) -> String {
+    match result.and_then(|value| ValueDisplay::new(&value)) {
         Ok(display) => json(&display),
         Err(code) => json(&Evaluation::Failure { ok: false, code }),
     }

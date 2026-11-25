@@ -21,7 +21,7 @@ const amount = (page: Page) => page.getByRole('textbox', { name: c.amount, exact
 const category = (page: Page) => page.getByRole('combobox', { name: c.category, exact: true });
 const unit = (page: Page, side: 'from' | 'to') =>
   page.getByRole('combobox', { name: side === 'from' ? c.fromUnit : c.toUnit, exact: true });
-const advanced = /\/assets\/(?:tool-|calculation-proof-|dars_tool_wasm)/u;
+const advanced = /\/assets\/(?:tool-|dars_tool_wasm)/u;
 
 async function openWorkspace(page: Page) {
   await picker(page).selectOption('converter');

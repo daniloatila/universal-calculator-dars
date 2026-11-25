@@ -68,6 +68,19 @@
   "memoryCleared": "存储已清除",
   "historyCleared": "历史记录已清除",
   "languageChanged": "已切换为简体中文",
+  "standardRecord": {
+    "title": "计算记录",
+    "loading": "正在加载记录查看器…",
+    "unavailable": "记录查看器不可用。",
+    "evaluate": "计算表达式",
+    "real": "实数",
+    "exactMethod": "精确有理数计算",
+    "approximateMethod": "经认证的区间计算",
+    "rounding": "就近舍入，居中时舍入到偶数",
+    "bindingsLimit": "保留值超出可移植重放的大小限制。",
+    "normalizedWhitespace": "记录表达式中的控制空白字符已替换为空格。",
+    "originalLimit": "原始显示表达式超出可移植文本限制。"
+  },
   "tools": {
     "navigation": "选择工具",
     "search": "搜索工具",

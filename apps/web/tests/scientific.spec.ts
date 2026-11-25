@@ -9,7 +9,7 @@ import hi from '../src/locales/hi.json' with { type: 'json' };
 import pt from '../src/locales/pt-BR.json' with { type: 'json' };
 import zh from '../src/locales/zh-CN.json' with { type: 'json' };
 
-const advancedAsset = /\/assets\/(?:tool-|calculation-proof-|dars_tool_wasm)/;
+const advancedAsset = /\/assets\/(?:tool-|dars_tool_wasm)/;
 const picker = (page: Page) => page.getByRole('combobox', { name: 'Module', exact: true });
 const expression = (page: Page) => page.getByRole('textbox', { name: 'Expression', exact: true });
 const result = (page: Page) => page.getByTestId('scientific-result');

@@ -68,6 +68,19 @@
   "memoryCleared": "Memória limpa",
   "historyCleared": "Histórico limpo",
   "languageChanged": "Idioma alterado para português",
+  "standardRecord": {
+    "title": "Registro de cálculo",
+    "loading": "Carregando o visualizador de registros…",
+    "unavailable": "O visualizador de registros está indisponível.",
+    "evaluate": "Avaliar expressão",
+    "real": "Números reais",
+    "exactMethod": "Avaliação racional exata",
+    "approximateMethod": "Avaliação por intervalos certificados",
+    "rounding": "Para o mais próximo, com empates para o par",
+    "bindingsLimit": "Os valores retidos excedem o limite portátil para reprodução.",
+    "normalizedWhitespace": "Espaços de controle foram substituídos por espaços comuns na expressão registrada.",
+    "originalLimit": "A expressão original exibida excede os limites de texto do registro portátil."
+  },
   "tools": {
     "navigation": "Escolher ferramenta",
     "search": "Buscar ferramentas",

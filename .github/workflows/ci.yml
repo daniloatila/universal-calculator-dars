@@ -48,6 +48,7 @@ jobs:
         run: |
           python3 tests/oracle.py target/release/dars
           node tests/check-targets.mjs target/release/dars
+          node tests/check-standard-record-targets.mjs target/release/dars
           node tests/check-scientific-targets.mjs target/release/dars
           node tests/check-algebra-targets.mjs target/release/dars
           node tests/check-calculus-targets.mjs target/release/dars

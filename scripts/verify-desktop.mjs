@@ -10,12 +10,14 @@ import { setTimeout as delay } from "node:timers/promises";
 const bridge = createRequire(new URL("../apps/web/package.json", import.meta.url));
 const { chromium, expect } = bridge("@playwright/test");
 const executable = fileURLToPath(new URL("../target/release/dars-desktop.exe", import.meta.url));
+const universalReview = process.argv.includes("--objective-03");
 const recoveryRevision = process.argv.includes("--objective-02-revision-02");
 const operationalRevision = recoveryRevision || process.argv.includes("--objective-02-revision");
-const operational = operationalRevision || process.argv.includes("--objective-02");
+const operational = universalReview || operationalRevision || process.argv.includes("--objective-02");
 const revised = operational || process.argv.includes("--revision-01");
 const evidenceRoot = new URL(
-  recoveryRevision ? "../artifacts/objective-02/revision-02/desktop-verification/"
+  universalReview ? "../artifacts/objective-03/integrated-platform/desktop-verification/"
+    : recoveryRevision ? "../artifacts/objective-02/revision-02/desktop-verification/"
     : operationalRevision ? "../artifacts/objective-02/revision-01/desktop-verification/"
     : operational ? "../artifacts/objective-02/desktop-verification/"
     : revised ? "../artifacts/objective-01/revision-01/desktop-verification/" : "../artifacts/objective-01/desktop-verification/",

@@ -10,7 +10,7 @@ import pt from '../src/locales/pt-BR.json' with { type: 'json' };
 import zh from '../src/locales/zh-CN.json' with { type: 'json' };
 
 type Operation = keyof typeof en.algebra.operations;
-const advancedAsset = /\/assets\/(?:tool-|calculation-proof-|dars_tool_wasm)/;
+const advancedAsset = /\/assets\/(?:tool-|dars_tool_wasm)/;
 const picker = (page: Page) => page.getByRole('combobox', { name: 'Module', exact: true });
 const result = (page: Page) => page.getByTestId('algebra-result');
 

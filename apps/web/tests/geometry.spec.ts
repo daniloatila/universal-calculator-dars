@@ -19,7 +19,7 @@ const coordinates = (page: Page) => page.getByRole('textbox', { name: g.coordina
 const operation = (page: Page, name: Operation) => page.getByRole('button', { name: g.operations[name], exact: true });
 const calculate = (page: Page) => page.getByRole('button', { name: en.calculate, exact: true }).click();
 const useExample = (page: Page) => page.getByRole('button', { name: g.useExample, exact: true }).click();
-const advanced = /\/assets\/(?:tool-|calculation-proof-|dars_tool_wasm|module-frames)/u;
+const advanced = /\/assets\/(?:tool-|dars_tool_wasm|module-frames)/u;
 
 async function openWorkspace(page: Page) {
   await picker(page).selectOption('geometry');

@@ -11,7 +11,7 @@ pub(crate) const MAX_BITS: u64 = 8192;
 const MAX_POWER: u32 = 10_000;
 const MAX_DEGREE: u32 = 64;
 const WORKING_DIGITS: i32 = 52;
-const DISPLAY_DIGITS: i32 = 24;
+pub(crate) const DISPLAY_DIGITS: i32 = 24;
 
 pub(crate) type Rational = BigRational;
 
@@ -198,6 +198,19 @@ impl Value {
             Self::Interval { .. } => None,
         };
         Ok((exact, approximation))
+    }
+
+    /// An absolute bound for an interval whose two endpoints passed display certification.
+    pub(crate) fn certified_display_error_bound(&self) -> Option<String> {
+        let Self::Interval { lower, upper } = self else {
+            return None;
+        };
+        let largest = lower.abs().max(upper.abs());
+        let exponent = decimal_exponent(largest.numer(), largest.denom()) - DISPLAY_DIGITS;
+        // Both endpoints round to the displayed value. Each rounding error is
+        // at most half its decimal grid spacing, so the entire interval meets
+        // the larger of the two bounds.
+        Some(format!("5e{exponent}"))
     }
 }
 

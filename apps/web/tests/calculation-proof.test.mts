@@ -89,6 +89,26 @@ test('a record preserves literal labels without interpreting markup or URLs', ()
   assert.equal(parseCalculationProof({ ...scientificRecord, result: '\uD800' }), null);
 });
 
+test('only Standard evaluation can carry bounded opaque value bindings', () => {
+  const standard = {
+    ...scientificRecord, module: 'standard', operation: 'evaluate',
+    expression: '(@1)×2', normalized: '(@1)*2', standard_bindings: { '1': '{"value":"opaque"}' },
+  } as const;
+  const json = serializeCalculationProof(standard);
+  assert.deepEqual(parseCalculationProofFile(json), standard);
+  assert.equal(parseCalculationProof({ ...standard, module: 'scientific' }), null);
+  assert.equal(parseCalculationProof({ ...standard, operation: 'combine' }), null);
+  const opaque = standard.standard_bindings['1'];
+  for (const bindings of [
+    {}, { '00': opaque }, { '01': opaque }, { '4294967296': opaque }, { '0': opaque },
+    { '1': {} }, { '1': '' }, { '1': 'π' }, { '1': 'a\nb' }, { '1': 'x'.repeat(10_001) },
+    { ['__proto__']: opaque },
+    Object.fromEntries(Array.from({ length: 10 }, (_, index) => [index + 1, 'x'.repeat(10_000)])),
+    Object.fromEntries(Array.from({ length: 257 }, (_, index) => [index + 1, 'x'])),
+  ]) assert.equal(parseCalculationProof({ ...standard, standard_bindings: bindings }), null);
+  assert.equal(parseCalculationProofFile(json.replace('"1":', '"1":"opaque", "\\u0031":')), null);
+});
+
 test('all seven locales include labels for the full record and exactness', () => {
   assert.equal(Object.keys(proofLabels).length, 7);
   for (const locale of Object.values(proofLabels)) {

@@ -68,6 +68,19 @@
   "memoryCleared": "Mémoire effacée",
   "historyCleared": "Historique effacé",
   "languageChanged": "Langue réglée sur le français",
+  "standardRecord": {
+    "title": "Registre de calcul",
+    "loading": "Chargement du visualiseur…",
+    "unavailable": "Le visualiseur de registres est indisponible.",
+    "evaluate": "Évaluer l’expression",
+    "real": "Nombres réels",
+    "exactMethod": "Évaluation rationnelle exacte",
+    "approximateMethod": "Évaluation par intervalles certifiés",
+    "rounding": "Au plus proche, égalités au pair",
+    "bindingsLimit": "Les valeurs conservées dépassent la taille autorisée pour la reproduction dans un fichier portable.",
+    "normalizedWhitespace": "Les blancs de contrôle ont été remplacés par des espaces dans l’expression enregistrée.",
+    "originalLimit": "L’expression affichée d’origine dépasse les limites de texte portable."
+  },
   "tools": {
     "navigation": "Choisir un outil",
     "search": "Rechercher des outils",

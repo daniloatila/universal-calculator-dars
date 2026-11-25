@@ -20,7 +20,7 @@ const operation = (page: Page, name: Operation) => button(page, d.operations[nam
 const field = (page: Page, name: Field) => page.getByRole('textbox', { name: d.fields[name], exact: true });
 const calculate = (page: Page) => button(page, en.calculate).click();
 const example = (page: Page) => button(page, d.useExample).click();
-const advanced = /\/assets\/(?:tool-|calculation-proof-|dars_tool_wasm)/u;
+const advanced = /\/assets\/(?:tool-|dars_tool_wasm)/u;
 const difference = 'days=2; weeks=0; remaining_days=2';
 const firstFold = 'local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier';
 const secondFold = 'local=2024-11-03T06:30:00; utc=2024-11-03T06:30:00Z; from_offset=-05:00; to_offset=+00:00; from_dst=false; to_dst=false; resolution=later';

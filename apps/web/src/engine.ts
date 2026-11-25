@@ -1,5 +1,7 @@
+import type { CalculationProof } from './calculation-proof';
+
 export type Evaluation =
-  | { ok: true; exact: string | null; approximate: string; value: string }
+  | { ok: true; exact: string | null; approximate: string; value: string; proof?: CalculationProof }
   | { ok: false; code: string };
 
 export type EngineStatus = 'loading' | 'ready' | 'idle' | 'unavailable';
@@ -9,7 +11,7 @@ export type EnginePolicy = { workerIdleMs: number | null; pendingJobs: number };
 export type EngineResources = { workers: number; started: number; stopped: number; pending: number; wasmBytes?: number };
 
 type Operation =
-  | { type: 'evaluate'; input: string; bindings: Bindings }
+  | { type: 'evaluate'; input: string; bindings: Bindings; originalExpression?: string }
   | { type: 'combine'; left: string; right: string; subtract: boolean };
 
 export type EvaluationRequest = Operation & { id: number };
@@ -19,7 +21,7 @@ export type EvaluationResponse =
   | { type: 'unavailable' }
   | { type: 'result'; id: number; result: Evaluation; wasmBytes?: number };
 
-export type Evaluate = (expression: string, bindings?: Bindings, signal?: AbortSignal) => Promise<Evaluation>;
+export type Evaluate = (expression: string, bindings?: Bindings, signal?: AbortSignal, originalExpression?: string) => Promise<Evaluation>;
 export type Combine = (left: string, right: string, subtract: boolean, signal?: AbortSignal) => Promise<Evaluation>;
 
 export const ENGINE_LIMITS = {
@@ -266,7 +268,10 @@ export function startEngine(setStatus: (status: EngineStatus) => void, dependenc
     for (const job of queue.splice(0)) settle(job, UNAVAILABLE);
   }
 
-  const evaluate: Evaluate = (input, bindings = {}, signal) => submit({ type: 'evaluate', input, bindings: { ...bindings } }, signal);
+  const evaluate: Evaluate = (input, bindings = {}, signal, originalExpression) => submit({
+    type: 'evaluate', input, bindings: { ...bindings },
+    ...(originalExpression === undefined ? {} : { originalExpression }),
+  }, signal);
   const combine: Combine = (left, right, subtract, signal) => submit({ type: 'combine', left, right, subtract }, signal);
 
   function setPolicy(next: EnginePolicy) {

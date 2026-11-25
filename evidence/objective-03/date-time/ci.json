@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "commit": "e104801ebb9263faf1d8120621a2471ce3ba942f",
+  "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45649140032",
+  "event": "push",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "verify (windows-latest)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify (macos-latest)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "security",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

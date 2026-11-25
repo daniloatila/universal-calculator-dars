@@ -20,7 +20,7 @@ const cell = (page: Page, name: 'A' | 'B', row: number, column: number) =>
   page.getByRole('textbox', { name: `${name}[${row},${column}]`, exact: true });
 const calculate = (page: Page) => page.getByRole('button', { name: en.calculate, exact: true }).click();
 const useExample = (page: Page) => page.getByRole('button', { name: m.useExample, exact: true }).click();
-const advanced = /\/assets\/(?:tool-|calculation-proof-|dars_tool_wasm)/u;
+const advanced = /\/assets\/(?:tool-|dars_tool_wasm)/u;
 
 async function openWorkspace(page: Page) {
   await picker(page).selectOption('linear-algebra');

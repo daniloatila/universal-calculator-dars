@@ -21,7 +21,7 @@ const field = (page: Page, name: keyof typeof p.fields) => page.getByRole('textb
 const width = (page: Page) => page.getByRole('textbox', { name: p.bitWidth, exact: true });
 const inputBase = (page: Page) => page.getByRole('combobox', { name: p.inputBase, exact: true });
 const signed = (page: Page) => page.getByRole('checkbox', { name: p.signed, exact: true });
-const advance = /\/assets\/(?:tool-|calculation-proof-|dars_tool_wasm)/u;
+const advance = /\/assets\/(?:tool-|dars_tool_wasm)/u;
 
 async function openWorkspace(page: Page) {
   await picker(page).selectOption('programmer');

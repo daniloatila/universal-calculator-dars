@@ -13,6 +13,7 @@ export interface CalculationProof {
   expression: string;
   normalized: string;
   variables: Readonly<Record<string, string>>;
+  standard_bindings?: Readonly<Record<string, string>>;
   units: Readonly<Record<string, string>>;
   options: Readonly<Record<string, string | boolean | number>>;
   domain: string;
@@ -78,13 +79,25 @@ function isTextList(value: unknown): boolean {
   return true;
 }
 
+function isStandardBindings(value: unknown): boolean {
+  if (!isRecord(value)) return false;
+  const entries = Object.entries(value);
+  return entries.length > 0 && entries.length <= 256 &&
+    entries.every(([id, entry]) => /^[1-9][0-9]{0,9}$/u.test(id) && Number(id) <= 4_294_967_295 &&
+      typeof entry === 'string' && entry.length <= 10_000 && /^[\x20-\x7e]+$/u.test(entry)) &&
+    utf8.encode(JSON.stringify(value)).byteLength <= 96 * 1024;
+}
+
 /** Validate a local file record or the structured result received from a dedicated worker. */
 export function parseCalculationProof(value: unknown): CalculationProof | null {
-  if (!isRecord(value) || Object.keys(value).length !== fields.length ||
+  if (!isRecord(value)) return null;
+  const hasBindings = Object.hasOwn(value, 'standard_bindings');
+  if (Object.keys(value).length !== fields.length + Number(hasBindings) ||
     !fields.every((field) => Object.hasOwn(value, field))) return null;
   if (value.schema !== 1 || !modules.some((module) => module === value.module) ||
     !exactness.some((kind) => kind === value.exactness)) return null;
   if (!isIdentifier(value.operation, 64)) return null;
+  if (hasBindings && (value.module !== 'standard' || value.operation !== 'evaluate' || !isStandardBindings(value.standard_bindings))) return null;
   if (!isText(value.expression, 4096) || !isText(value.normalized, 8192) ||
     !isText(value.result, 32768) || value.result.length === 0 ||
     !isText(value.domain, 2048) || !isText(value.method, 2048) ||

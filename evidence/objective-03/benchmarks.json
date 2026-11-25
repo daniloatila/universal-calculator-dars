@@ -1,0 +1,557 @@
+{
+  "schema": 1,
+  "scope": "Same interactive Windows device and WebView2, fresh profiles, no shared page deduplication.",
+  "windows_executable": {
+    "bytes": 13644800,
+    "sha256": "8c2da09e07fa9e5a95bf3e068105b63a2e1e860582fb371dcc0bd4ace4db3d88",
+    "authenticode": "NotSigned"
+  },
+  "webview2": "158.0.4370.33",
+  "windows_pair": "paired-windows.json",
+  "candidate_standard": {
+    "standard_visible": {
+      "phase": "standard_visible",
+      "samples": 6,
+      "seconds": 5.088725049999999,
+      "process_medians_bytes": {
+        "tree": {
+          "workingSetBytes": 393842688,
+          "privateWorkingSetBytes": 103645184,
+          "privateBytes": 249147392,
+          "sharedCommitBytes": 90210304,
+          "sharedWorkingSetBytes": 290254848
+        },
+        "host": {
+          "workingSetBytes": 27381760,
+          "privateWorkingSetBytes": 4681728,
+          "privateBytes": 6778880,
+          "sharedCommitBytes": 5169152,
+          "sharedWorkingSetBytes": 22700032
+        },
+        "auxiliary": {
+          "workingSetBytes": 366460928,
+          "privateWorkingSetBytes": 98963456,
+          "privateBytes": 242368512,
+          "sharedCommitBytes": 85041152,
+          "sharedWorkingSetBytes": 267554816
+        }
+      },
+      "system_physical_delta_from_ambient_bytes": 173662208,
+      "system_physical_delta_from_closed_bytes": 123363328,
+      "workers_at_end": 1,
+      "processes_at_end": 7,
+      "cpu_one_logical_percent": 2.456410962899244
+    },
+    "standard_load": {
+      "phase": "standard_load",
+      "samples": 6,
+      "seconds": 5.098646099999998,
+      "process_medians_bytes": {
+        "tree": {
+          "workingSetBytes": 408371200,
+          "privateWorkingSetBytes": 116887552,
+          "privateBytes": 269549568,
+          "sharedCommitBytes": 90210304,
+          "sharedWorkingSetBytes": 291483648
+        },
+        "host": {
+          "workingSetBytes": 27381760,
+          "privateWorkingSetBytes": 4681728,
+          "privateBytes": 6778880,
+          "sharedCommitBytes": 5169152,
+          "sharedWorkingSetBytes": 22700032
+        },
+        "auxiliary": {
+          "workingSetBytes": 380989440,
+          "privateWorkingSetBytes": 112205824,
+          "privateBytes": 262770688,
+          "sharedCommitBytes": 85041152,
+          "sharedWorkingSetBytes": 268783616
+        }
+      },
+      "system_physical_delta_from_ambient_bytes": 185544704,
+      "system_physical_delta_from_closed_bytes": 135245824,
+      "workers_at_end": 1,
+      "processes_at_end": 7,
+      "cpu_one_logical_percent": 14.096879561811523
+    },
+    "standard_idle": {
+      "phase": "standard_idle",
+      "samples": 6,
+      "seconds": 5.095377049999999,
+      "process_medians_bytes": {
+        "tree": {
+          "workingSetBytes": 408055808,
+          "privateWorkingSetBytes": 116477952,
+          "privateBytes": 260153344,
+          "sharedCommitBytes": 90210304,
+          "sharedWorkingSetBytes": 291573760
+        },
+        "host": {
+          "workingSetBytes": 27381760,
+          "privateWorkingSetBytes": 4681728,
+          "privateBytes": 6778880,
+          "sharedCommitBytes": 5169152,
+          "sharedWorkingSetBytes": 22700032
+        },
+        "auxiliary": {
+          "workingSetBytes": 380674048,
+          "privateWorkingSetBytes": 111796224,
+          "privateBytes": 253374464,
+          "sharedCommitBytes": 85041152,
+          "sharedWorkingSetBytes": 268873728
+        }
+      },
+      "system_physical_delta_from_ambient_bytes": 186003456,
+      "system_physical_delta_from_closed_bytes": 135704576,
+      "workers_at_end": 1,
+      "processes_at_end": 7,
+      "cpu_one_logical_percent": 0
+    },
+    "standard_minimized": {
+      "phase": "standard_minimized",
+      "samples": 6,
+      "seconds": 5.105675049999998,
+      "process_medians_bytes": {
+        "tree": {
+          "workingSetBytes": 327430144,
+          "privateWorkingSetBytes": 82399232,
+          "privateBytes": 213053440,
+          "sharedCommitBytes": 86364160,
+          "sharedWorkingSetBytes": 244592640
+        },
+        "host": {
+          "workingSetBytes": 27406336,
+          "privateWorkingSetBytes": 4685824,
+          "privateBytes": 6782976,
+          "sharedCommitBytes": 5169152,
+          "sharedWorkingSetBytes": 22720512
+        },
+        "auxiliary": {
+          "workingSetBytes": 300023808,
+          "privateWorkingSetBytes": 77713408,
+          "privateBytes": 206270464,
+          "sharedCommitBytes": 81195008,
+          "sharedWorkingSetBytes": 221872128
+        }
+      },
+      "system_physical_delta_from_ambient_bytes": 192327680,
+      "system_physical_delta_from_closed_bytes": 142028800,
+      "workers_at_end": 0,
+      "processes_at_end": 7,
+      "cpu_one_logical_percent": 1.8361920623992716
+    },
+    "standard_restored": {
+      "phase": "standard_restored",
+      "samples": 6,
+      "seconds": 5.069500550000001,
+      "process_medians_bytes": {
+        "tree": {
+          "workingSetBytes": 374898688,
+          "privateWorkingSetBytes": 98738176,
+          "privateBytes": 264069120,
+          "sharedCommitBytes": 86364160,
+          "sharedWorkingSetBytes": 276140032
+        },
+        "host": {
+          "workingSetBytes": 27398144,
+          "privateWorkingSetBytes": 4677632,
+          "privateBytes": 6774784,
+          "sharedCommitBytes": 5169152,
+          "sharedWorkingSetBytes": 22720512
+        },
+        "auxiliary": {
+          "workingSetBytes": 347500544,
+          "privateWorkingSetBytes": 94060544,
+          "privateBytes": 257294336,
+          "sharedCommitBytes": 81195008,
+          "sharedWorkingSetBytes": 253419520
+        }
+      },
+      "system_physical_delta_from_ambient_bytes": 160759808,
+      "system_physical_delta_from_closed_bytes": 110460928,
+      "workers_at_end": 1,
+      "processes_at_end": 7,
+      "cpu_one_logical_percent": 0
+    }
+  },
+  "baseline_standard": {
+    "standard_visible": {
+      "phase": "standard_visible",
+      "samples": 6,
+      "seconds": 5.0902628,
+      "process_medians_bytes": {
+        "tree": {
+          "workingSetBytes": 391491584,
+          "privateWorkingSetBytes": 106164224,
+          "privateBytes": 247095296,
+          "sharedCommitBytes": 90275840,
+          "sharedWorkingSetBytes": 285483008
+        },
+        "host": {
+          "workingSetBytes": 26824704,
+          "privateWorkingSetBytes": 4218880,
+          "privateBytes": 5853184,
+          "sharedCommitBytes": 5169152,
+          "sharedWorkingSetBytes": 22605824
+        },
+        "auxiliary": {
+          "workingSetBytes": 364666880,
+          "privateWorkingSetBytes": 101945344,
+          "privateBytes": 241242112,
+          "sharedCommitBytes": 85106688,
+          "sharedWorkingSetBytes": 262877184
+        }
+      },
+      "system_physical_delta_from_ambient_bytes": 163573760,
+      "system_physical_delta_from_closed_bytes": 161361920,
+      "workers_at_end": 1,
+      "processes_at_end": 7,
+      "cpu_one_logical_percent": 0.9208758337585243
+    },
+    "standard_load": {
+      "phase": "standard_load",
+      "samples": 6,
+      "seconds": 5.096534750000001,
+      "process_medians_bytes": {
+        "tree": {
+          "workingSetBytes": 405258240,
+          "privateWorkingSetBytes": 118681600,
+          "privateBytes": 257146880,
+          "sharedCommitBytes": 90275840,
+          "sharedWorkingSetBytes": 286576640
+        },
+        "host": {
+          "workingSetBytes": 26824704,
+          "privateWorkingSetBytes": 4218880,
+          "privateBytes": 5853184,
+          "sharedCommitBytes": 5169152,
+          "sharedWorkingSetBytes": 22605824
+        },
+        "auxiliary": {
+          "workingSetBytes": 378433536,
+          "privateWorkingSetBytes": 114462720,
+          "privateBytes": 251293696,
+          "sharedCommitBytes": 85106688,
+          "sharedWorkingSetBytes": 263970816
+        }
+      },
+      "system_physical_delta_from_ambient_bytes": 177111040,
+      "system_physical_delta_from_closed_bytes": 174899200,
+      "workers_at_end": 1,
+      "processes_at_end": 7,
+      "cpu_one_logical_percent": 6.131617173806182
+    },
+    "standard_idle": {
+      "phase": "standard_idle",
+      "samples": 6,
+      "seconds": 5.1047856,
+      "process_medians_bytes": {
+        "tree": {
+          "workingSetBytes": 405164032,
+          "privateWorkingSetBytes": 118501376,
+          "privateBytes": 253259776,
+          "sharedCommitBytes": 90275840,
+          "sharedWorkingSetBytes": 286662656
+        },
+        "host": {
+          "workingSetBytes": 26824704,
+          "privateWorkingSetBytes": 4218880,
+          "privateBytes": 5853184,
+          "sharedCommitBytes": 5169152,
+          "sharedWorkingSetBytes": 22605824
+        },
+        "auxiliary": {
+          "workingSetBytes": 378339328,
+          "privateWorkingSetBytes": 114282496,
+          "privateBytes": 247406592,
+          "sharedCommitBytes": 85106688,
+          "sharedWorkingSetBytes": 264056832
+        }
+      },
+      "system_physical_delta_from_ambient_bytes": 177098752,
+      "system_physical_delta_from_closed_bytes": 174886912,
+      "workers_at_end": 1,
+      "processes_at_end": 7,
+      "cpu_one_logical_percent": 1.2243413317887437
+    },
+    "standard_minimized": {
+      "phase": "standard_minimized",
+      "samples": 6,
+      "seconds": 5.104296999999999,
+      "process_medians_bytes": {
+        "tree": {
+          "workingSetBytes": 337420288,
+          "privateWorkingSetBytes": 86487040,
+          "privateBytes": 213471232,
+          "sharedCommitBytes": 86298624,
+          "sharedWorkingSetBytes": 245006336
+        },
+        "host": {
+          "workingSetBytes": 26849280,
+          "privateWorkingSetBytes": 4222976,
+          "privateBytes": 5857280,
+          "sharedCommitBytes": 5169152,
+          "sharedWorkingSetBytes": 22626304
+        },
+        "auxiliary": {
+          "workingSetBytes": 310571008,
+          "privateWorkingSetBytes": 82264064,
+          "privateBytes": 207613952,
+          "sharedCommitBytes": 81129472,
+          "sharedWorkingSetBytes": 222380032
+        }
+      },
+      "system_physical_delta_from_ambient_bytes": 166043648,
+      "system_physical_delta_from_closed_bytes": 163831808,
+      "workers_at_end": 0,
+      "processes_at_end": 7,
+      "cpu_one_logical_percent": 2.4489170594892897
+    },
+    "standard_restored": {
+      "phase": "standard_restored",
+      "samples": 6,
+      "seconds": 5.100921900000001,
+      "process_medians_bytes": {
+        "tree": {
+          "workingSetBytes": 374231040,
+          "privateWorkingSetBytes": 102834176,
+          "privateBytes": 263102464,
+          "sharedCommitBytes": 86298624,
+          "sharedWorkingSetBytes": 271392768
+        },
+        "host": {
+          "workingSetBytes": 26861568,
+          "privateWorkingSetBytes": 4235264,
+          "privateBytes": 5869568,
+          "sharedCommitBytes": 5169152,
+          "sharedWorkingSetBytes": 22626304
+        },
+        "auxiliary": {
+          "workingSetBytes": 347369472,
+          "privateWorkingSetBytes": 98598912,
+          "privateBytes": 257232896,
+          "sharedCommitBytes": 81129472,
+          "sharedWorkingSetBytes": 248766464
+        }
+      },
+      "system_physical_delta_from_ambient_bytes": 173559808,
+      "system_physical_delta_from_closed_bytes": 171347968,
+      "workers_at_end": 1,
+      "processes_at_end": 7,
+      "cpu_one_logical_percent": 1.2252687107403073
+    }
+  },
+  "native_mixed": [
+    {
+      "module": "programmer",
+      "profile": "ultra_light",
+      "interactionMilliseconds": {
+        "count": 4,
+        "p50": 48.35680000000866,
+        "p95": 118.04240000000573,
+        "p99": 118.04240000000573
+      },
+      "recoveryMilliseconds": 58.15460000000894,
+      "draftRetained": true,
+      "resultRetained": true,
+      "liveWorkersAfterResult": 0
+    },
+    {
+      "module": "calculus",
+      "profile": "efficiency",
+      "interactionMilliseconds": {
+        "count": 4,
+        "p50": 52.347200000003795,
+        "p95": 59.17720000000554,
+        "p99": 59.17720000000554
+      },
+      "recoveryMilliseconds": 52.8466999999946,
+      "draftRetained": true,
+      "resultRetained": true,
+      "liveWorkersAfterResult": 0
+    },
+    {
+      "module": "date-time",
+      "profile": "balanced",
+      "interactionMilliseconds": {
+        "count": 4,
+        "p50": 55.174400000003516,
+        "p95": 64.06110000000626,
+        "p99": 64.06110000000626
+      },
+      "recoveryMilliseconds": 53.236799999998766,
+      "draftRetained": true,
+      "resultRetained": true,
+      "liveWorkersAfterResult": 0
+    },
+    {
+      "module": "linear-algebra",
+      "profile": "performance",
+      "interactionMilliseconds": {
+        "count": 4,
+        "p50": 64.9152000000031,
+        "p95": 74.21850000000268,
+        "p99": 74.21850000000268
+      },
+      "recoveryMilliseconds": 71.85890000000654,
+      "draftRetained": true,
+      "resultRetained": true,
+      "liveWorkersAfterResult": 0
+    },
+    {
+      "module": "scientific",
+      "profile": "maximum",
+      "interactionMilliseconds": {
+        "count": 4,
+        "p50": 51.26810000000114,
+        "p95": 56.36109999999462,
+        "p99": 56.36109999999462
+      },
+      "recoveryMilliseconds": 71.56560000000172,
+      "draftRetained": true,
+      "resultRetained": true,
+      "liveWorkersAfterResult": 0
+    }
+  ],
+  "observed_workers": {
+    "opened": 31,
+    "closed": 31,
+    "peakObserved": 1
+  },
+  "advanced_wasm": {
+    "scientific": {
+      "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+      "wasmBytes": 679427,
+      "wasmSha256": "c092f576092ca200a36912ecdbe8c603e70b184e394dbb5fb04bb6cb0621c031",
+      "observedWasmLinearBytes": 1179648,
+      "wasmInitializationMs": 13.868400000000001,
+      "interactions": 120,
+      "warmupPerExpression": 10,
+      "milliseconds": {
+        "p50": 0.10209999999995034,
+        "p95": 0.823599999999999,
+        "p99": 0.856899999999996
+      }
+    },
+    "algebra": {
+      "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+      "wasmBytes": 623420,
+      "wasmSha256": "27f9134bf56cc016923e88c4f704362ba71c4384cc01eb8f1b841a5be79b392e",
+      "observedWasmLinearBytes": 1179648,
+      "wasmInitializationMs": 13.718400000000003,
+      "interactions": 120,
+      "warmupPerExpression": 10,
+      "milliseconds": {
+        "p50": 0.05480000000000018,
+        "p95": 0.10480000000001155,
+        "p99": 0.19990000000001373
+      }
+    },
+    "calculus": {
+      "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+      "wasmBytes": 611608,
+      "wasmSha256": "3d83cd0956a6a7b7eb11c30edd46313473cd88107e7498e89b8dcd931e60441d",
+      "observedWasmLinearBytes": 1179648,
+      "wasmInitializationMs": 16.442700000000002,
+      "interactions": 120,
+      "warmupPerExpression": 10,
+      "milliseconds": {
+        "p50": 0.04230000000001155,
+        "p95": 0.1701999999999657,
+        "p99": 0.20949999999999136
+      }
+    },
+    "linear-algebra": {
+      "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+      "wasmBytes": 526230,
+      "wasmSha256": "596e7f81c3925745216110e6e72d50561adce6bbbccab374b1eef301a2e033c4",
+      "observedWasmLinearBytes": 1179648,
+      "wasmInitializationMs": 12.127400000000002,
+      "interactions": 120,
+      "warmupPerExpression": 10,
+      "milliseconds": {
+        "p50": 0.02719999999999345,
+        "p95": 0.04099999999999682,
+        "p99": 0.06909999999999172
+      }
+    },
+    "geometry": {
+      "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+      "wasmBytes": 475570,
+      "wasmSha256": "8a394c4c6a923089a4524538a87f6553c324c1fda34636d0c76da6be42ed6436",
+      "observedWasmLinearBytes": 1179648,
+      "wasmInitializationMs": 11.398699999999998,
+      "interactions": 120,
+      "warmupPerExpression": 10,
+      "milliseconds": {
+        "p50": 0.03530000000000655,
+        "p95": 0.1220000000000141,
+        "p99": 0.13679999999999382
+      }
+    },
+    "discrete-mathematics": {
+      "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+      "wasmBytes": 448155,
+      "wasmSha256": "29996979aa0922abfaef28f12b67501d2017b4200b3737df6386667337a74b03",
+      "observedWasmLinearBytes": 1179648,
+      "wasmInitializationMs": 13.625699999999998,
+      "interactions": 120,
+      "warmupPerExpression": 10,
+      "milliseconds": {
+        "p50": 0.017600000000015825,
+        "p95": 0.04040000000003374,
+        "p99": 0.06740000000002055
+      }
+    },
+    "programmer": {
+      "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+      "wasmBytes": 280707,
+      "wasmSha256": "d5b4dbb216b46f7f74c48b8ffaa12d406c744c508abe2e5622f2284e357251dc",
+      "observedWasmLinearBytes": 1179648,
+      "wasmInitializationMs": 11.851800000000004,
+      "interactions": 120,
+      "warmupPerExpression": 10,
+      "milliseconds": {
+        "p50": 0.012600000000020373,
+        "p95": 0.04610000000002401,
+        "p99": 0.05150000000003274
+      }
+    },
+    "converter": {
+      "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+      "wasmBytes": 350230,
+      "wasmSha256": "77b45c5d60b0d5ed0a03c533bbebdc8b992c7c6e266d4f78a9d693caceed340a",
+      "observedWasmLinearBytes": 1179648,
+      "wasmInitializationMs": 12.791900000000002,
+      "interactions": 120,
+      "warmupPerExpression": 10,
+      "milliseconds": {
+        "p50": 0.017400000000009186,
+        "p95": 0.028700000000014825,
+        "p99": 0.05620000000004666
+      }
+    },
+    "date-time": {
+      "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+      "wasmBytes": 556597,
+      "wasmSha256": "4c81d033f8d451a3afdc907a19946fed731cc3bb7bb44adb60fd7b27244ccd5b",
+      "observedWasmLinearBytes": 1441792,
+      "wasmInitializationMs": 12.630599999999998,
+      "interactions": 120,
+      "warmupPerExpression": 10,
+      "milliseconds": {
+        "p50": 0.016400000000032833,
+        "p95": 0.0362999999999829,
+        "p99": 0.06209999999998672
+      }
+    }
+  },
+  "assets": "assets.json",
+  "windows_screenshot_sha256": "6ee6a6420ade4b13de89760941eb8f51949504bc5a7e7cd7a2545e99b3bd0d41",
+  "basic_desktop_incremental_ram": {
+    "threshold_bytes": 100000000,
+    "status": "unverified",
+    "shared_resident_attribution": "aggregate only, may count mappings more than once"
+  }
+}

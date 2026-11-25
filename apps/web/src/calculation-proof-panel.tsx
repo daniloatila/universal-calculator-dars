@@ -10,7 +10,7 @@ import type { Locale } from './i18n';
 import './calculation-proof.css';
 
 const fieldOrder: readonly (keyof CalculationProof)[] = [
-  'result', 'exactness', 'module', 'operation', 'expression', 'normalized', 'variables', 'units', 'options',
+  'result', 'exactness', 'module', 'operation', 'expression', 'normalized', 'variables', 'standard_bindings', 'units', 'options',
   'domain', 'method', 'formula', 'precision', 'tolerance', 'rounding', 'error_bound', 'assumptions',
   'constraints', 'references', 'schema', 'engine_version', 'algorithm_version',
 ];
@@ -26,6 +26,9 @@ function FieldValue({ record, field, locale, format, localizeText }: {
 }): ReactNode {
   if (field === 'exactness') return proofLabels[locale].exactness[record.exactness];
   const value = record[field];
+  if (field === 'standard_bindings') {
+    return <bdi dir="ltr">{Object.keys(record.standard_bindings ?? {}).map((id) => `@${id}`).join(', ')}</bdi>;
+  }
   const display = (text: string) => localizeText?.(field, text) ?? localizeProofText(locale, record.module, field, text);
   if (Array.isArray(value)) {
     if (!value.length) return '—';
@@ -58,11 +61,13 @@ function downloadProof(proof: CalculationProof) {
   }
 }
 
-export function CalculationProofPanel({ proof, locale, localizeText }: {
+type ProofProps = {
   proof?: CalculationProof | null;
   locale: Locale;
   localizeText?: ProofTextPresentation;
-}) {
+};
+
+export function CalculationProofContents({ proof, locale, localizeText }: ProofProps) {
   const labels = proofLabels[locale];
   const format = new Intl.NumberFormat(LOCALES[locale].format, { useGrouping: false });
   const [imported, setImported] = useState<CalculationProof | null>(null);
@@ -101,9 +106,7 @@ export function CalculationProofPanel({ proof, locale, localizeText }: {
     setNotice(null);
   }
 
-  return <details className="calculation-proof">
-    <summary>{labels.title}</summary>
-    <div className="calculation-proof-body">
+  return <div className="calculation-proof-body">
       <div className="calculation-proof-actions">
         <input ref={fileInput} type="file" accept=".json,application/json" hidden
           data-testid="proof-import-file" onChange={(event) => void openFile(event)} />
@@ -118,13 +121,19 @@ export function CalculationProofPanel({ proof, locale, localizeText }: {
           {' '}{imported ? labels.unverified : labels.scope}
         </p>
         <dl className="calculation-proof-fields">
-          {fieldOrder.map((field) => <div key={field}>
+          {fieldOrder.filter((field) => field !== 'standard_bindings' || record.standard_bindings).map((field) => <div key={field}>
             <dt>{labels.fields[field]}</dt>
             <dd><FieldValue record={record} field={field} locale={locale} format={format}
               localizeText={imported ? undefined : localizeText} /></dd>
           </div>)}
         </dl>
       </> : <p className="calculation-proof-source">{labels.empty}</p>}
-    </div>
+  </div>;
+}
+
+export function CalculationProofPanel(props: ProofProps) {
+  return <details className="calculation-proof">
+    <summary>{proofLabels[props.locale].title}</summary>
+    <CalculationProofContents {...props} />
   </details>;
 }

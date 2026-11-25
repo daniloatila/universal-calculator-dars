@@ -31,6 +31,7 @@ export async function runWindowsToolBenchmark(suite, argument = process.argv[2])
   const data = {
     status: 'in_progress',
     method: 'Interactive Windows WebView2. Fresh profile, ordered checked calculations, Win32 sampling of host and auxiliary processes.',
+    ...(suite.label ? { label: suite.label } : {}),
     executableSha256: hashes(await readFile(executable)),
     environment: { release: release(), processor: cpus()[0]?.model, logicalProcessors: cpus().length, physicalBytes: totalmem() },
     phases: {},
@@ -68,8 +69,12 @@ export async function runWindowsToolBenchmark(suite, argument = process.argv[2])
 
   function totals(sample, predicate) {
     const rows = sample.tree.filter(predicate);
-    return Object.fromEntries(['workingSetBytes', 'privateWorkingSetBytes', 'privateBytes', 'sharedCommitBytes']
+    const result = Object.fromEntries(['workingSetBytes', 'privateWorkingSetBytes', 'privateBytes', 'sharedCommitBytes']
       .map((key) => [key, rows.reduce((n, row) => n + row[key], 0)]));
+    if (suite.audit) {
+      result.sharedWorkingSetBytes = rows.reduce((n, row) => n + Math.max(0, row.workingSetBytes - row.privateWorkingSetBytes), 0);
+    }
+    return result;
   }
 
   async function checkpoint() {
@@ -101,7 +106,7 @@ export async function runWindowsToolBenchmark(suite, argument = process.argv[2])
     }));
     data.phases[name] = {
       state, count, intervalSeconds: (last.timeMs - first.timeMs) / 1000, processMemory,
-      cpuOneLogicalPercent: 100 * cpuTicks / 10000 / (last.timeMs - first.timeMs),
+      cpuOneLogicalPercent: first.timeMs === last.timeMs ? null : 100 * cpuTicks / 10000 / (last.timeMs - first.timeMs),
       systemPhysicalBytes: quantiles(rows.map((row) => row.system.physicalInUseBytes)),
       systemCommitBytes: quantiles(rows.map((row) => row.system.committedBytes)),
       workersAtEnd: pid ? page.workers().length : 0,
@@ -122,6 +127,21 @@ export async function runWindowsToolBenchmark(suite, argument = process.argv[2])
     return performance.now() - started;
   }
 
+  async function closeAndFinish() {
+    assert.equal(hashes(await readFile(executable)), data.executableSha256);
+    await native('close');
+    await expect.poll(() => app.exitCode === null, { timeout: 5000 }).toBe(false);
+    const exitObserved = performance.now();
+    await expect.poll(async () => (await native('sample', app.pid)).tree.length, { timeout: 5000 }).toBe(0);
+    data.descendantsClearedAfterExitMs = performance.now() - exitObserved;
+    await samplePhase('after_close', 'missing', app.pid);
+    assert.equal(data.phases.after_close.processesAtEnd, 0);
+    data.status = 'complete';
+    await checkpoint();
+    console.log(JSON.stringify({ status: data.status, label: data.label, phases: Object.keys(data.phases), interactions: data.interactions.length }));
+    return data;
+  }
+
   try {
     assert((await receive()).ready);
     await samplePhase('ambient', 'missing', 0);
@@ -133,18 +153,33 @@ export async function runWindowsToolBenchmark(suite, argument = process.argv[2])
     });
     let port;
     while (performance.now() - started < 15000 && app.exitCode === null && !port) {
-      try { [port] = (await readFile(join(profile, 'EBWebView', 'DevToolsActivePort'), 'utf8')).split(/\s+/u); }
-      catch (error) { if (error.code !== 'ENOENT') throw error; }
+      try {
+        const [value] = (await readFile(join(profile, 'EBWebView', 'DevToolsActivePort'), 'utf8')).split(/\s+/u);
+        if (/^\d{1,5}$/u.test(value) && Number(value) > 0 && Number(value) <= 65535) port = value;
+      } catch (error) {
+        if (!['ENOENT', 'EBUSY'].includes(error.code)) throw error;
+      }
       if (!port) await delay(35);
     }
-    assert(/^\d{1,5}$/u.test(port ?? ''), 'WebView2 debugging port absent.');
+    assert(port, 'WebView2 debugging port absent.');
     browser = await chromium.connectOverCDP('http://127.0.0.1:' + port);
     const [context] = browser.contexts();
     page = context.pages()[0] ?? await context.waitForEvent('page');
     data.webview = browser.version();
+    if (suite.audit) {
+      await expect(page.getByRole('textbox', { name: 'Expression', exact: true })).toBeVisible();
+      await samplePhase('startup_visible', 'visible', app.pid, 1);
+    }
     await calculate({ expression: '0.1+0.2', expected: '0.3' }, 'result');
     data.startupToCheckedStandardMs = performance.now() - started;
     await samplePhase('standard_visible', 'visible', app.pid);
+
+    if (suite.audit) {
+      await suite.audit({ page, expect, data, quantiles, calculateStandard: (example) => calculate(example, 'result'),
+        sample: (name, state, count) => samplePhase(name, state, app.pid, count),
+        action: (name) => native(name), screenshot: (name) => page.screenshot({ path: join(run, name) }) });
+      return await closeAndFinish();
+    }
 
     let workersOpened = 0;
     let workersClosed = 0;
@@ -193,17 +228,7 @@ export async function runWindowsToolBenchmark(suite, argument = process.argv[2])
     data[suite.workersKey] = { opened: workersOpened, closed: workersClosed };
     await chooser.selectOption('standard');
     await expect(page.getByTestId('result')).toHaveText('0.3');
-    assert.equal(hashes(await readFile(executable)), data.executableSha256);
-    await native('close');
-    await expect.poll(() => app.exitCode === null, { timeout: 5000 }).toBe(false);
-    const exitObserved = performance.now();
-    await expect.poll(async () => (await native('sample', app.pid)).tree.length, { timeout: 5000 }).toBe(0);
-    data.descendantsClearedAfterExitMs = performance.now() - exitObserved;
-    await samplePhase('after_close', 'missing', app.pid);
-    assert.equal(data.phases.after_close.processesAtEnd, 0);
-    data.status = 'complete';
-    await checkpoint();
-    console.log(JSON.stringify({ status: data.status, phases: Object.keys(data.phases), interactions: data.interactions.length }));
+    return await closeAndFinish();
   } finally {
     if (app?.exitCode === null) {
       try { await native('close'); } catch { /* The owned test process is closed below. */ }

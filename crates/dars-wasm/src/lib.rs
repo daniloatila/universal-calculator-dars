@@ -12,6 +12,12 @@ pub fn evaluate_value_json(expression: &str, bindings_json: &str) -> String {
     dars_core::evaluate_value_json(expression, bindings_json)
 }
 
+/// Evaluate an expression with opaque numeric bindings and return its Calculation Proof.
+#[wasm_bindgen]
+pub fn evaluate_value_record_json(expression: &str, bindings_json: &str) -> String {
+    dars_core::evaluate_value_record_json(expression, bindings_json)
+}
+
 /// Add or subtract two opaque values, using zero when the left value is absent.
 #[wasm_bindgen]
 pub fn combine_values_json(left: &str, right: &str, subtract: bool) -> String {

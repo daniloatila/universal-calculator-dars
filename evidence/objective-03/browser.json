@@ -1,0 +1,606 @@
+{
+  "browser": "installed Chrome on Windows",
+  "browser_version": "158.0.8127.38",
+  "expected": 93,
+  "outcomes": [
+    {
+      "title": "Algebra runs its nine operations, exposes domain restrictions and preserves module state",
+      "duration_ms": 2430,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra changes solution domains and keeps restrictions when verifying excluded values",
+      "duration_ms": 942,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra controls are localized in seven languages and retain an accessible 320 px RTL layout",
+      "duration_ms": 1728,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra prepares only its own resources and calculates after offline reload",
+      "duration_ms": 1060,
+      "status": "passed"
+    },
+    {
+      "title": "switching modules terminates an admitted Algebra worker and allows a fresh calculation",
+      "duration_ms": 451,
+      "status": "passed"
+    },
+    {
+      "title": "a real Scientific result exports a versioned local calculation record and reopens it as an import",
+      "duration_ms": 587,
+      "status": "passed"
+    },
+    {
+      "title": "the local proof viewer rejects malformed or oversized bytes and treats imported markup as text",
+      "duration_ms": 395,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus performs higher and partial derivatives, integrals and a Taylor expansion",
+      "duration_ms": 1334,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus distinguishes limits, unsupported primitives and undefined integrals",
+      "duration_ms": 910,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus exposes numerical tolerance and an uncertified estimate in its downloadable proof",
+      "duration_ms": 900,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus localizes operation controls, numeric parameters and the narrow RTL layout",
+      "duration_ms": 2142,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus prepares one isolated WASM lazily and calculates after offline reload",
+      "duration_ms": 1025,
+      "status": "passed"
+    },
+    {
+      "title": "switching modules stops a pending Calculus worker and keeps the draft",
+      "duration_ms": 538,
+      "status": "passed"
+    },
+    {
+      "title": "Converter supports all seventeen unit categories and retains selections when returning",
+      "duration_ms": 2612,
+      "status": "passed"
+    },
+    {
+      "title": "Converter distinguishes exact and approximate factors, offsets and fuel reciprocals",
+      "duration_ms": 1206,
+      "status": "passed"
+    },
+    {
+      "title": "Converter applies manual currency rates with four date statuses and no provider request",
+      "duration_ms": 924,
+      "status": "passed"
+    },
+    {
+      "title": "Converter exports exact manual-rate provenance and captures an explicitly expired result",
+      "duration_ms": 717,
+      "status": "passed"
+    },
+    {
+      "title": "Converter supports seven locales and accessible narrow RTL unit and currency forms",
+      "duration_ms": 2183,
+      "status": "passed"
+    },
+    {
+      "title": "Converter loads one isolated WASM on demand and supports manual currency offline",
+      "duration_ms": 1085,
+      "status": "passed"
+    },
+    {
+      "title": "cancels unfinished work and retains the amount after switching modules",
+      "duration_ms": 532,
+      "status": "passed"
+    },
+    {
+      "title": "Date & Time handles all eight operations and restores both workspaces",
+      "duration_ms": 1990,
+      "status": "passed"
+    },
+    {
+      "title": "Date & Time separates signed civil periods and absolute nanosecond durations",
+      "duration_ms": 1168,
+      "status": "passed"
+    },
+    {
+      "title": "Date & Time applies supplied weekdays, holidays and deadline counting bases",
+      "duration_ms": 1243,
+      "status": "passed"
+    },
+    {
+      "title": "Date & Time resolves repeated local times and rejects skipped local times for every policy",
+      "duration_ms": 1023,
+      "status": "passed"
+    },
+    {
+      "title": "Date & Time exports bundled time-zone provenance with exact offsets and DST flags",
+      "duration_ms": 914,
+      "status": "passed"
+    },
+    {
+      "title": "Date & Time supports seven locales and accessible 320 px RTL calendar controls",
+      "duration_ms": 2346,
+      "status": "passed"
+    },
+    {
+      "title": "Date & Time loads one isolated bundled WASM on demand and converts zones offline",
+      "duration_ms": 1192,
+      "status": "passed"
+    },
+    {
+      "title": "cancels pending work and restores the date draft after switching modules",
+      "duration_ms": 549,
+      "status": "passed"
+    },
+    {
+      "title": "Discrete Mathematics runs all sixteen operations and restores state after switching modules",
+      "duration_ms": 3456,
+      "status": "passed"
+    },
+    {
+      "title": "Discrete Mathematics handles repetition, modular inverse and exact sequence modes",
+      "duration_ms": 1225,
+      "status": "passed"
+    },
+    {
+      "title": "Discrete Mathematics retains exact integer tokens and recognizes an empty set",
+      "duration_ms": 1144,
+      "status": "passed"
+    },
+    {
+      "title": "Discrete Mathematics renders safe truth tables, inserts operators and pages 256 assignments",
+      "duration_ms": 1419,
+      "status": "passed"
+    },
+    {
+      "title": "Discrete Mathematics distinguishes deterministic and probable primality and exports the record",
+      "duration_ms": 1182,
+      "status": "passed"
+    },
+    {
+      "title": "Discrete Mathematics supports seven languages and an accessible narrow RTL workspace",
+      "duration_ms": 3849,
+      "status": "passed"
+    },
+    {
+      "title": "Discrete Mathematics loads its worker and WASM on demand and works offline",
+      "duration_ms": 1472,
+      "status": "passed"
+    },
+    {
+      "title": "cancels a pending worker explicitly and restores a draft on switching modules",
+      "duration_ms": 1291,
+      "status": "passed"
+    },
+    {
+      "title": "Geometry runs eleven planar, solid and Cartesian operations with exact results",
+      "duration_ms": 2821,
+      "status": "passed"
+    },
+    {
+      "title": "Geometry preserves 3D distance, exact radians, segment relations and domain errors",
+      "duration_ms": 1630,
+      "status": "passed"
+    },
+    {
+      "title": "Geometry draws one-shot adaptive diagrams and releases the canvas when switching modules",
+      "duration_ms": 1860,
+      "status": "passed"
+    },
+    {
+      "title": "Geometry exports power-aware unit metadata with exact symbolic values",
+      "duration_ms": 965,
+      "status": "passed"
+    },
+    {
+      "title": "Geometry localizes dimension inputs and diagrams across seven accessible locales",
+      "duration_ms": 2370,
+      "status": "passed"
+    },
+    {
+      "title": "Geometry loads one dedicated WASM on demand and calculates after offline reload",
+      "duration_ms": 1267,
+      "status": "passed"
+    },
+    {
+      "title": "switching modules terminates unfinished work and retains the geometry draft",
+      "duration_ms": 555,
+      "status": "passed"
+    },
+    {
+      "title": "Standard opens the shared Proof viewer offline on first use without loading advanced engines",
+      "duration_ms": 1074,
+      "status": "passed"
+    },
+    {
+      "title": "Standard exports localized originals and retained @ bindings and imports as inert text",
+      "duration_ms": 1122,
+      "status": "passed"
+    },
+    {
+      "title": "All ten workspaces calculate individually across five profiles with one worker and searchable navigation",
+      "duration_ms": 2345,
+      "status": "passed"
+    },
+    {
+      "title": "Standard record and navigation are available in seven languages with touch and accessible RTL",
+      "duration_ms": 2088,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra runs all fourteen operations and preserves Standard and adaptive behavior",
+      "duration_ms": 2351,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra edits, pastes and resizes matrices by keyboard while retaining exact integer text",
+      "duration_ms": 630,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra distinguishes incompatible, indeterminate, singular and invalid input",
+      "duration_ms": 809,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra shows observed numerical diagnostics and exports canonical proof",
+      "duration_ms": 782,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra localizes controls and decimal cells with accessible 320 px RTL and wide grids",
+      "duration_ms": 2212,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra loads one isolated WASM on demand and recalculates offline",
+      "duration_ms": 1062,
+      "status": "passed"
+    },
+    {
+      "title": "switching modules terminates unfinished work and retains the matrix draft",
+      "duration_ms": 550,
+      "status": "passed"
+    },
+    {
+      "title": "adaptive graphics policies change real canvas draw cadence and suspension stops drawing",
+      "duration_ms": 2611,
+      "status": "passed"
+    },
+    {
+      "title": "browser fixtures switch through the module manager and release workers, cache and canvas resources",
+      "duration_ms": 1321,
+      "status": "passed"
+    },
+    {
+      "title": "the real app shell selects heterogeneous modules and globally clears both active and suspended state",
+      "duration_ms": 1255,
+      "status": "passed"
+    },
+    {
+      "title": "the same app shell isolates a hung module, retries and disposes a late runtime",
+      "duration_ms": 1490,
+      "status": "passed"
+    },
+    {
+      "title": "real Workers time out, release foreground capacity, and return valid successors in every adaptive profile",
+      "duration_ms": 11101,
+      "status": "passed"
+    },
+    {
+      "title": "real scheduler Workers recover from secondary hangs and release in-flight jobs on cancel, suspend, and switch",
+      "duration_ms": 3757,
+      "status": "passed"
+    },
+    {
+      "title": "resource profiles retire and wake a real worker without changing exact math",
+      "duration_ms": 12721,
+      "status": "passed"
+    },
+    {
+      "title": "offline mode persists through reload and blocks a real uncached same-origin request",
+      "duration_ms": 1200,
+      "status": "passed"
+    },
+    {
+      "title": "visibility suspension recovers exact session state and the privacy action discards it",
+      "duration_ms": 922,
+      "status": "passed"
+    },
+    {
+      "title": "reset preferences clears DARS settings while preserving unrelated browser keys",
+      "duration_ms": 758,
+      "status": "passed"
+    },
+    {
+      "title": "operations, privacy and diagnostics fit 320 px and retain preferences in all seven locales",
+      "duration_ms": 8914,
+      "status": "passed"
+    },
+    {
+      "title": "Programmer runs all eleven operations with fixed-width results in four bases",
+      "duration_ms": 1915,
+      "status": "passed"
+    },
+    {
+      "title": "Programmer distinguishes raw patterns, signed values, over-width shifts and rejected inputs",
+      "duration_ms": 1043,
+      "status": "passed"
+    },
+    {
+      "title": "Programmer preserves wide integer text and pages the full 1024-bit word",
+      "duration_ms": 1009,
+      "status": "passed"
+    },
+    {
+      "title": "Programmer exports and reopens the exact width and decimal-count rotation proof",
+      "duration_ms": 614,
+      "status": "passed"
+    },
+    {
+      "title": "Programmer supports seven locales and accessible RTL bit positions at 320 px",
+      "duration_ms": 2062,
+      "status": "passed"
+    },
+    {
+      "title": "Programmer loads only its worker and WASM on demand and calculates offline",
+      "duration_ms": 942,
+      "status": "passed"
+    },
+    {
+      "title": "cancels unfinished work and resumes the input after switching modules",
+      "duration_ms": 562,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific computes the required vectors and preserves Standard and adaptive behavior",
+      "duration_ms": 1480,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific options control working precision and engineering notation and expose domain failures",
+      "duration_ms": 563,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific normalizes localized input and keeps its controls within a narrow RTL layout",
+      "duration_ms": 1597,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific assets are absent on initial opening and remain usable after explicit offline preparation",
+      "duration_ms": 962,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific cancels an admitted worker and calculates on a fresh worker",
+      "duration_ms": 463,
+      "status": "passed"
+    },
+    {
+      "title": "MR immediately after M+ recalls an irrational absolute percentage without relative re-evaluation",
+      "duration_ms": 786,
+      "status": "passed"
+    },
+    {
+      "title": "M−, negatives and large exact values survive recall, explicit percentages and powers",
+      "duration_ms": 851,
+      "status": "passed"
+    },
+    {
+      "title": "a sequence of irrational additions preserves the original history value through MC, undo and locale change",
+      "duration_ms": 1608,
+      "status": "passed"
+    },
+    {
+      "title": "MC aborts a pending memory operation and late results cannot overwrite the next value",
+      "duration_ms": 670,
+      "status": "passed"
+    },
+    {
+      "title": "editing or explicitly cancelling rejects stale work and clearing history keeps it empty after an older result",
+      "duration_ms": 531,
+      "status": "passed"
+    },
+    {
+      "title": "Standard calculates exact decimal and rational results, precedence and roots through WASM",
+      "duration_ms": 558,
+      "status": "passed"
+    },
+    {
+      "title": "errors are recoverable and failed calculations are excluded from history",
+      "duration_ms": 441,
+      "status": "passed"
+    },
+    {
+      "title": "keypad insertion, keyboard editing, undo and redo operate on the expression",
+      "duration_ms": 530,
+      "status": "passed"
+    },
+    {
+      "title": "memory, result copying and history use session state only",
+      "duration_ms": 643,
+      "status": "passed"
+    },
+    {
+      "title": "regional decimal input, RTL and language/theme preferences work across reload",
+      "duration_ms": 724,
+      "status": "passed"
+    },
+    {
+      "title": "production calculator confines assets to its own origin",
+      "duration_ms": 329,
+      "status": "passed"
+    },
+    {
+      "title": "the default is dark on a light system and an explicit theme survives reload",
+      "duration_ms": 633,
+      "status": "passed"
+    },
+    {
+      "title": "the light layout is responsive and satisfies automated axe checks",
+      "duration_ms": 1006,
+      "status": "passed"
+    },
+    {
+      "title": "the default is dark on a dark system and an explicit theme survives reload",
+      "duration_ms": 626,
+      "status": "passed"
+    },
+    {
+      "title": "the dark layout is responsive and satisfies automated axe checks",
+      "duration_ms": 944,
+      "status": "passed"
+    },
+    {
+      "title": "a hung production worker hits its deadline, terminates and restores calculation without reload",
+      "duration_ms": 5858,
+      "status": "passed"
+    }
+  ],
+  "additional_offline_harness": {
+    "passed": 10,
+    "failed": 0
+  },
+  "observations": {
+    "integrated-offline-standard-proof": {
+      "proofResult": "1/3",
+      "offlineFirstUse": true,
+      "viewerWasPrecached": true,
+      "requestedAdvancedAssets": []
+    },
+    "integrated-standard-proof": {
+      "localizedOriginal": "0,5×2",
+      "replayInput": "(@1)*2",
+      "bindingIds": [
+        "1"
+      ],
+      "precision": 24,
+      "errorBound": "5e-24",
+      "importWorkerCalls": 0,
+      "persistedRecords": 0,
+      "externalRequests": []
+    },
+    "integrated-module-matrix": {
+      "modules": [
+        {
+          "id": "standard",
+          "profile": "ultra_light",
+          "milliseconds": 49.241900000000896
+        },
+        {
+          "id": "scientific",
+          "profile": "ultra_light",
+          "milliseconds": 136.2202000000034
+        },
+        {
+          "id": "algebra",
+          "profile": "efficiency",
+          "milliseconds": 79.91010000000097
+        },
+        {
+          "id": "calculus",
+          "profile": "efficiency",
+          "milliseconds": 80.26290000000154
+        },
+        {
+          "id": "linear-algebra",
+          "profile": "balanced",
+          "milliseconds": 80.76510000000417
+        },
+        {
+          "id": "geometry",
+          "profile": "balanced",
+          "milliseconds": 82.1851999999999
+        },
+        {
+          "id": "discrete-mathematics",
+          "profile": "performance",
+          "milliseconds": 90.57009999999718
+        },
+        {
+          "id": "programmer",
+          "profile": "performance",
+          "milliseconds": 66.59569999999803
+        },
+        {
+          "id": "converter",
+          "profile": "maximum",
+          "milliseconds": 77.44030000000203
+        },
+        {
+          "id": "date-time",
+          "profile": "maximum",
+          "milliseconds": 88.452200000007
+        }
+      ],
+      "profiles": [
+        "ultra_light",
+        "efficiency",
+        "balanced",
+        "performance",
+        "maximum"
+      ],
+      "maximumConcurrentWorkers": 1,
+      "externalRequests": [],
+      "advancedRequests": [
+        "/assets/dars_tool_wasm_bg-BTTsud00.wasm",
+        "/assets/dars_tool_wasm_bg-Bz_0_Fuh.wasm",
+        "/assets/dars_tool_wasm_bg-C7G-JJog.wasm",
+        "/assets/dars_tool_wasm_bg-CN3xnb3t.wasm",
+        "/assets/dars_tool_wasm_bg-CwwvpRyx.wasm",
+        "/assets/dars_tool_wasm_bg-CxfkYNd9.wasm",
+        "/assets/dars_tool_wasm_bg-Dp47BdUa.wasm",
+        "/assets/dars_tool_wasm_bg-V2jLrzde.wasm",
+        "/assets/dars_tool_wasm_bg-_FpePnSb.wasm",
+        "/assets/tool-algebra-runtime-DKHYJEkX.css",
+        "/assets/tool-algebra-runtime-DgTrol1X.js",
+        "/assets/tool-algebra-worker-BPTS3T8g.js",
+        "/assets/tool-calculus-runtime-C3FJJ4P6.css",
+        "/assets/tool-calculus-runtime-dHKxY1IC.js",
+        "/assets/tool-calculus-worker-DT7urGSE.js",
+        "/assets/tool-converter-runtime-D5IWtZ33.css",
+        "/assets/tool-converter-runtime-DsnV4xWb.js",
+        "/assets/tool-converter-worker-DfRIRLE1.js",
+        "/assets/tool-date-time-runtime-BCIHpPqC.css",
+        "/assets/tool-date-time-runtime-D2FdiRmE.js",
+        "/assets/tool-date-time-worker-C3RIE65f.js",
+        "/assets/tool-discrete-runtime-C3qIV5yI.js",
+        "/assets/tool-discrete-runtime-R3qGs_8X.css",
+        "/assets/tool-discrete-worker-DyXWJi77.js",
+        "/assets/tool-geometry-runtime-BZgvwkas.css",
+        "/assets/tool-geometry-runtime-DGlCK4hs.js",
+        "/assets/tool-geometry-worker-oZ7KY7jv.js",
+        "/assets/tool-linear-algebra-runtime-DXuxgvjz.js",
+        "/assets/tool-linear-algebra-runtime-g3aGf1K5.css",
+        "/assets/tool-linear-algebra-worker-BSMrFl_g.js",
+        "/assets/tool-programmer-runtime-B2d4kNfG.css",
+        "/assets/tool-programmer-runtime-DK5kCE0s.js",
+        "/assets/tool-programmer-worker-D1KvubZN.js",
+        "/assets/tool-runtime-T4LDPihe.js",
+        "/assets/tool-scientific-runtime-Dvq8Y0H4.js",
+        "/assets/tool-scientific-runtime-f7zYoXzB.css",
+        "/assets/tool-scientific-worker-D90OMOlo.js"
+      ]
+    }
+  },
+  "standard_wasm_asset": "/assets/dars_wasm_bg-BmEkoylJ.wasm",
+  "standard_wasm_sha256": "3ab358a01d87af5478c3ee3acb849f66402ff5c386eb02eb048e1eef29ce9d55",
+  "standard_wasm_size": 333031,
+  "standard_proof_screenshot_sha256": "5c6def4e3893ad8bf14018e5672b3b39726a79197e7edb2cc49838d2f787d901",
+  "standard_proof_screenshot_px": [
+    1280,
+    1817
+  ]
+}

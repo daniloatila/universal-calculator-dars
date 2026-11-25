@@ -2,7 +2,7 @@
 
 [English](contract.md) · [Esquema estrutural](schema.v1.json)
 
-O esquema 1 preserva o contexto de execução de um cálculo concluído. O registro reúne a operação solicitada, a expressão de entrada, a representação matemática, as configurações, o domínio, o método, o resultado e sua classificação de exatidão. Os módulos avançados já implementados geram registros pelo mesmo contrato Rust. O esquema também reconhece os identificadores reservados para módulos planejados. [Contrato do motor](../../../crates/dars-universal/src/lib.rs)
+O esquema 1 preserva o contexto de execução de um cálculo concluído. O registro reúne a operação solicitada, a expressão de entrada, a representação matemática, as configurações, o domínio, o método, o resultado e sua classificação de exatidão. Os dez módulos de produção compartilham o formato. A avaliação explícita do Standard mantém a resposta numérica existente e acrescenta o registro. [Contrato do motor avançado](../../../crates/dars-universal/src/lib.rs) · [Motor Standard](../../../crates/dars-core/src/lib.rs)
 
 O **registro de execução** descreve o cálculo realizado. Uma **explicação** esclarece o método matemático. A **verificação de solução** aplica critérios independentes ao resultado. Uma **demonstração formal** exige premissas e deduções justificadas. O registro fornece a origem da execução e elementos para reproduzi-la. O campo de precisão registra a precisão numérica utilizada. O limite de erro tem campo próprio e depende do valor fornecido pelo motor.
 
@@ -13,11 +13,24 @@ O **registro de execução** descreve o cálculo realizado. Uma **explicação**
 | `schema`, `module`, `operation` | Versão do formato e identidade da operação. |
 | `expression`, `normalized` | Entrada original e representação matemática do motor. |
 | `variables`, `units`, `options` | Variáveis nomeadas, unidades e configurações escalares. Objetos vazios representam grupos vazios. |
+| `standard_bindings` | Valores opacos armazenados e usados por `evaluate` no Standard, quando presentes. As chaves são identificadores decimais positivos `u32` canônicos. |
 | `domain`, `method`, `formula` | Domínio, método registrado e fórmula quando disponível. |
 | `result`, `exactness`, `precision` | Resultado em texto, classificação exata, simbólica ou aproximada e precisão registrada quando aplicável. |
 | `tolerance`, `rounding`, `error_bound` | Configurações numéricas e limite declarados. O valor `null` indica que o motor não forneceu aquele valor. |
 | `assumptions`, `constraints`, `references` | Premissas, restrições e identificadores de referências. |
 | `engine_version`, `algorithm_version` | Versões do motor e da implementação da operação. |
+
+No Standard, calcule `sqrt(2)` e abra **Registro de cálculo**. O registro identifica um intervalo certificado, arredonda o resultado exibido para 24 algarismos significativos com desempate para o par e informa um limite absoluto de erro certificado. Uma avaliação racional tem classificação exata. Quando a expressão utiliza valores armazenados `@id`, o registro portátil inclui somente os vínculos usados. O motor indica quando esses vínculos excedem o limite portátil. [Testes de registros do Standard](../../../crates/dars-core/tests/calculation_proof.rs) · [Aritmética e medidas de erro](https://dlmf.nist.gov/3.1)
+
+Para reproduzir um registro Standard, use a expressão normalizada e os valores opacos exportados no comando explícito da CLI. Use a mesma versão do motor e compare resultado, exatidão e limite certificado. Se os vínculos ultrapassarem o limite portátil, a reprodução depende dos vínculos do contexto original. [Verificações do Standard na CLI e no WASM](../../../tests/check-standard-record-targets.mjs)
+
+```powershell
+$record = Get-Content -Raw -Encoding utf8 -LiteralPath dars-calculation-record.json | ConvertFrom-Json
+$bindings = if ($null -eq $record.standard_bindings) { '{}' } else {
+    ConvertTo-Json -InputObject $record.standard_bindings -Depth 3 -Compress
+}
+cargo run --locked -q -p dars-cli -- standard-record $record.normalized $bindings
+```
 
 No exemplo do Científico, calcule `sin(90°)`. Abra **Registro de cálculo**, selecione **Baixar JSON** e use **Abrir JSON local** para inspecionar esse arquivo. O resultado é `1`, classificado como exato. Para conferir o cálculo, use a mesma entrada matemática, o módulo e as configurações registradas na CLI compilada com o lockfile.
 
@@ -60,7 +73,7 @@ Em Datas e Horários, informe `2024-11-03T01:30:00` em `America/New_York` e conv
 
 ## Formato e validação local
 
-O arquivo é um objeto JSON independente em UTF-8. O navegador lê até 128 KiB, exige UTF-8 válido, rejeita nomes repetidos mesmo quando escritos com escapes e aceita apenas os campos próprios esperados. Os limites de comprimento do JSON Schema contam caracteres. O aplicativo também aplica limites em bytes UTF-8 por campo, rejeita sequências Unicode malformadas e limita a profundidade de estruturas a dois níveis. A expressão tem limite de 4.096 bytes. A expressão normalizada tem limite de 8.192 bytes e o resultado, de 32.768 bytes. Os mapas têm até 16 entradas e as listas têm até 32 itens. [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/json-schema-validation) · [Validador do aplicativo](../../../apps/web/src/calculation-proof.ts)
+O arquivo é um objeto JSON independente em UTF-8. O navegador lê até 128 KiB, exige UTF-8 válido, rejeita nomes repetidos mesmo quando escritos com escapes e aceita apenas os campos próprios esperados. Os limites de comprimento do JSON Schema contam caracteres. O aplicativo também aplica limites em bytes UTF-8 por campo, rejeita sequências Unicode malformadas e limita a profundidade de estruturas a dois níveis. A expressão tem limite de 4.096 bytes. A expressão normalizada tem limite de 8.192 bytes e o resultado, de 32.768 bytes. Cada mapa comum tem até 16 entradas e cada lista tem até 32. Os vínculos opcionais do Standard admitem até 256 identificadores e valores ASCII imprimíveis de até 10.000 bytes por entrada. O aplicativo aplica também o limite de 96 KiB ao JSON compacto desses vínculos. [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/json-schema-validation) · [Validador do aplicativo](../../../apps/web/src/calculation-proof.ts)
 
 Um arquivo aberto aparece como **Registro importado**, com os valores identificados como não verificados. Expressões e referências são exibidas como texto literal, inclusive se parecerem marcação ou links. Abrir o arquivo exibe o registro sem executar o cálculo, gravar preferências ou consultar servidores. O download cria um arquivo JSON local. O registro importado fica no componente da área de trabalho. Ao fechá-lo, o registro do cálculo atual volta a ser exibido. [Visualizador local](../../../apps/web/src/calculation-proof-panel.tsx)
 
@@ -72,6 +85,6 @@ npm run build --prefix apps/web
 npm run test:e2e --prefix apps/web -- calculation-proof.spec.ts
 ```
 
-Gere antes os arquivos WASM do Científico. A suíte Node confere o formato, a ida e volta do registro, nomes repetidos, limites, texto Unicode e a cobertura das etiquetas nos sete idiomas. A suíte de navegador confere a exportação do Científico, a reabertura do arquivo, arquivos grandes e UTF-8 inválido, a exibição literal e o tratamento local. [Suíte Node](../../../apps/web/tests/calculation-proof.test.mts) · [Suíte de navegador](../../../apps/web/tests/calculation-proof.spec.ts)
+Gere antes os arquivos WASM. A suíte Node confere o formato, a ida e volta do registro, nomes repetidos, limites, texto Unicode e a cobertura das etiquetas nos sete idiomas. As suítes de navegador conferem exportação, reabertura do arquivo, arquivos grandes, UTF-8 inválido, exibição literal e tratamento local. A auditoria também cobre a exportação no navegador e os recursos para reprodução do Standard. [Suíte Node](../../../apps/web/tests/calculation-proof.test.mts) · [Suítes de navegador](../../../apps/web/tests)
 
-As verificações focadas passaram no Node (8 testes) e no Chrome instalado (2 testes na rota de produção do Científico). O pacote Python `jsonschema` 4.25.1 validou o metaesquema Draft 2020-12 e concordou com o validador do aplicativo em 10 casos estruturais representativos. Os testes do aplicativo cobrem limites UTF-8, rejeição de nomes repetidos e exibição literal no navegador. [Validador independente](https://pypi.org/project/jsonschema/4.25.1/)
+As verificações iniciais do Científico passaram no Node (8 testes) e no Chrome instalado (2 testes). O pacote Python `jsonschema` 4.25.1 validou o metaesquema Draft 2020-12 original e 10 casos estruturais representativos. O `Test-Json` do PowerShell 7.6.9 aceitou duas saídas reais da CLI release no esquema atualizado, incluindo um registro Standard com o maior identificador `u32` de vínculo. Também rejeitou sete estruturas ou contextos inválidos de vínculos. [Validador independente inicial](https://pypi.org/project/jsonschema/4.25.1/) · [Registro integrado de testes](../tests.json)

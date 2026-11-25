@@ -19,7 +19,7 @@ const field = (page: Page, name: Field) => page.getByRole('textbox', { name: d.f
 const button = (page: Page, name: string) => page.getByRole('button', { name, exact: true });
 const calculate = (page: Page) => button(page, en.calculate).click();
 const useExample = (page: Page) => button(page, d.useExample).click();
-const advanced = /\/assets\/(?:tool-|calculation-proof-|dars_tool_wasm)/u;
+const advanced = /\/assets\/(?:tool-|dars_tool_wasm)/u;
 const implicationTable = '{"variables":["A","B"],"rows":[[0,0,1],[0,1,1],[1,0,0],[1,1,1]]}';
 
 async function openWorkspace(page: Page) {
