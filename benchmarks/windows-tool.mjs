@@ -15,7 +15,7 @@ export async function runWindowsToolBenchmark(suite, argument = process.argv[2])
   const require = createRequire(new URL('../apps/web/package.json', import.meta.url));
   const { chromium, expect } = require('@playwright/test');
   const executable = resolve(root, argument ?? 'target/release/dars-desktop.exe');
-  const base = join(root, 'artifacts', 'objective-03', suite.module);
+  const base = join(root, 'artifacts', suite.artifactObjective ?? 'objective-03', suite.module);
   await mkdir(base, { recursive: true });
   const run = await mkdtemp(join(base, 'windows-'));
   const sampler = spawn('pwsh.exe', [

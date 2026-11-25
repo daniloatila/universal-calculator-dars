@@ -537,7 +537,7 @@ dependencies = [
 
 [[package]]
 name = "dars-cli"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "dars-core",
  "dars-universal",
@@ -546,7 +546,7 @@ dependencies = [
 
 [[package]]
 name = "dars-core"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "num-bigint",
  "num-integer",
@@ -558,7 +558,7 @@ dependencies = [
 
 [[package]]
 name = "dars-desktop"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "serde",
  "tauri",
@@ -570,7 +570,7 @@ dependencies = [
 
 [[package]]
 name = "dars-tool-wasm"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "dars-universal",
  "wasm-bindgen",
@@ -578,7 +578,7 @@ dependencies = [
 
 [[package]]
 name = "dars-universal"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "astro-float-num",
  "jiff 1.0.3",
@@ -594,7 +594,7 @@ dependencies = [
 
 [[package]]
 name = "dars-wasm"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "dars-core",
  "wasm-bindgen",

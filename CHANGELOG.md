@@ -2,6 +2,13 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
+## 0.4.0 · Objective 04 review candidate
+
+- Added five financial and business workspaces with rational monetary arithmetic, currency scales and explicit rounding.
+- Added local investment projections, amortization schedules, dated Brazilian tax rules and business analysis.
+- Extended Calculation Proof to preserve financial assumptions and added local scenario comparison and replay.
+- Validate the candidate against the shared runtime and the 0.3.1 reference. [Objective 04 evidence](evidence/objective-04/REPORT.md)
+
 ## 0.3.1 · Objective 03 locale review
 
 - Editable fields retain their original notation when the interface language changes. An inline hint explains the notation and how to clear it. Matrix cells and other independently edited inputs retain separate origins.

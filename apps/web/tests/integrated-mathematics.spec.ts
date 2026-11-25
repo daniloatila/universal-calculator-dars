@@ -277,7 +277,7 @@ test.describe('localized touch workspace', () => {
       await languages.selectOption(locale);
       await expect(page.locator('html')).toHaveAttribute('lang', locale);
       const localPicker = page.getByRole('combobox', { name: messages.operations.modulePicker, exact: true });
-      await expect(localPicker.locator('option')).toHaveCount(10);
+      await expect(localPicker.locator('option')).toHaveCount(15);
       await expect(record(page).locator('summary')).toHaveText(messages.standardRecord.title);
       const search = page.getByRole('searchbox', { name: messages.tools.search, exact: true });
       await search.fill(messages.dateTime.title);

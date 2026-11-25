@@ -1,0 +1,26 @@
+{
+  "module": "investment",
+  "status": "passed",
+  "engine_version": "0.4.0",
+  "platform": "windows",
+  "runtime": "native-debug-cli",
+  "oracle": "tests/verify-investment-business.py",
+  "oracle_sha256": "c602a40935df3c530259c20a21dabed7cf31d269925215b0215d8b91302b14e9",
+  "count": 49,
+  "categories": {
+    "b3_di_participation": 4,
+    "bcb_anniversary_at_month_end": 2,
+    "bcb_published_savings": 2,
+    "bounded_page": 2,
+    "calendar_periods": 1,
+    "fees_tax_reinvestment": 3,
+    "fixed_cash_flow": 12,
+    "nominal_and_real": 1,
+    "rejected": 10,
+    "rounding_presentation": 2,
+    "savings_selic_threshold": 5,
+    "treasury_maturity": 3,
+    "variable_cash_flow": 1,
+    "zero_denominator": 1
+  }
+}

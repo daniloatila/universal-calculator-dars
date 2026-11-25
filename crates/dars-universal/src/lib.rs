@@ -14,6 +14,8 @@ mod converter;
 mod date_time;
 #[cfg(feature = "discrete-mathematics")]
 mod discrete_mathematics;
+#[cfg(feature = "finance")]
+mod finance;
 #[cfg(feature = "geometry")]
 mod geometry;
 #[cfg(feature = "linear_algebra")]
@@ -300,6 +302,10 @@ fn dispatch(
                 "https://docs.rs/astro-float-num/0.3.6/astro_float_num/",
             ],
         )),
+        #[cfg(feature = "finance")]
+        module if finance::MODULES.contains(&module) => {
+            finance::dispatch(module, &request.operation, &request.input, &request.options)
+        }
         _ => Err(MathError::Unsupported),
     }
 }
@@ -348,8 +354,16 @@ fn execute(input: &str) -> Result<Value, MathError> {
     };
     let mut units = result.units;
     let rounds_significant_digits = matches!(request.module.as_str(), "scientific" | "converter");
-    let rounding = (rounds_significant_digits && result.exactness == Exactness::Approximate)
+    let mut rounding = (rounds_significant_digits && result.exactness == Exactness::Approximate)
         .then_some("nearest, ties to even");
+    if matches!(result.domain, "financial_decimal" | "brazil_tax_simulation") {
+        rounding = match result.variables.get("rounding_policy").map(String::as_str) {
+            Some("half_even") => Some("monetary presentation: nearest, ties to even"),
+            Some("half_up") => Some("monetary presentation: nearest, ties away from zero"),
+            Some("toward_zero") => Some("monetary presentation: toward zero"),
+            _ => None,
+        };
+    }
     if request.module == "scientific" {
         let angle = request
             .options

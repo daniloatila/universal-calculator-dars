@@ -1,0 +1,23 @@
+{
+  "module": "business",
+  "status": "passed",
+  "engine_version": "0.4.0",
+  "platform": "windows",
+  "runtime": "native-debug-cli",
+  "oracle": "tests/verify-investment-business.py",
+  "oracle_sha256": "c602a40935df3c530259c20a21dabed7cf31d269925215b0215d8b91302b14e9",
+  "count": 38,
+  "categories": {
+    "accrual_margins": 1,
+    "bounded_page": 1,
+    "break_even": 4,
+    "budget_cash_and_sensitivity": 3,
+    "cash_cycle": 2,
+    "cvm_156": 2,
+    "indicators": 2,
+    "pricing": 7,
+    "quote_rounding": 3,
+    "rejected": 9,
+    "undefined_base": 4
+  }
+}

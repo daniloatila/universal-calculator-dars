@@ -92,6 +92,39 @@ try {
   await expect(page.locator("html")).toHaveAttribute("lang", "pt-BR");
   assert.deepEqual([...external], [], "No external page requests.");
   console.log(JSON.stringify({ suite: "production-web-offline-and-lazy-locales", passed: 10, failed: 0 }));
+
+  await context.setOffline(false);
+  await page.locator("summary.settings-label").click();
+  await page.getByRole("combobox", { name: "Idioma", exact: true }).selectOption("en");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  const finance = [
+    ["financial", "irr", /0\.1/], ["investment", "project", /1,367\.25/],
+    ["loans", "sac", /1,000\.00/], ["tax", "br_irrf", /382\.88/],
+    ["business", "price", /125\.00/],
+  ];
+  async function replayFinance() {
+    for (const [module, operation, expected] of finance) {
+      await page.getByRole("combobox", { name: "Module", exact: true }).selectOption(module);
+      await page.getByTestId("finance-operation").selectOption(operation);
+      await page.getByRole("button", { name: "Load example", exact: true }).click();
+      await page.getByRole("button", { name: "Calculate", exact: true }).click();
+      await expect(page.getByTestId("finance-result")).toContainText(expected);
+    }
+  }
+  await replayFinance();
+  await page.waitForFunction(async () => {
+    const names = (await caches.keys()).filter((name) => name.startsWith("dars-static:"));
+    const requests = (await Promise.all(names.map(async (name) => (await caches.open(name)).keys()))).flat();
+    return ["financial", "investment", "loans", "tax", "business"].every((module) =>
+      requests.some((request) => new URL(request.url).pathname.includes(`/tool-${module}-worker-`)));
+  });
+  const warmed = served;
+  await context.setOffline(true);
+  assert((await page.reload())?.fromServiceWorker());
+  await replayFinance();
+  assert.equal(served, warmed, "Finance assets and calculations remain local in the warmed offline session.");
+  assert.deepEqual([...external], [], "No external requests during financial calculations.");
+  console.log(JSON.stringify({ suite: "production-finance-offline", modules: finance.map(([module]) => module), passed: finance.length, failed: 0 }));
 } finally {
   await browser?.close();
   await new Promise((done) => server.close(done));

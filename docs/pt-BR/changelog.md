@@ -2,6 +2,13 @@
 
 [English](../../CHANGELOG.md)
 
+## 0.4.0 · Candidata à revisão do Objetivo 04
+
+- Incluídas cinco ferramentas financeiras e empresariais com aritmética racional, unidades monetárias e arredondamento explícito.
+- Adicionadas projeções de investimento, tabelas de amortização, regras tributárias brasileiras com vigência e análise empresarial.
+- Ampliada a prova de cálculo para preservar premissas financeiras, com comparação e reprodução local de cenários.
+- Validação da candidata no ambiente compartilhado e frente à referência 0.3.1. [Evidências do Objetivo 04](../../evidence/objective-04/REPORT.pt-BR.md)
+
 ## 0.3.1 · Revisão de idioma do Objetivo 03
 
 - As entradas mantêm a notação em que foram preenchidas ao mudar o idioma da interface. O aviso no campo indica a notação retida e como limpá-la. Células da matriz e outros campos editáveis mantêm origens independentes.

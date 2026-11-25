@@ -5,7 +5,7 @@ export const MAX_CALCULATION_PROOF_BYTES = 128 * 1024;
 
 const modules = [
   'standard', 'scientific', 'algebra', 'calculus', 'linear-algebra', 'linear_algebra', 'geometry',
-  'discrete-mathematics', 'programmer', 'converter', 'date-time',
+  'discrete-mathematics', 'programmer', 'converter', 'date-time', 'financial', 'investment', 'loans', 'tax', 'business',
 ] as const;
 const exactness = ['exact', 'symbolic', 'approximate'] as const;
 

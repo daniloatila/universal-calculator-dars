@@ -2,6 +2,8 @@ import type { ComponentType } from 'react';
 import type { AdaptivePolicy } from './adaptive';
 import type { Locale, Messages } from './i18n';
 import type { ModuleDescriptor, ModuleRuntime } from './module-manager';
+import { financeModules } from './finance-modules';
+import type { FinanceState } from './tool-finance-runtime';
 
 export interface ModuleWorkspaceProps {
   locale: Locale;
@@ -130,4 +132,12 @@ export const primaryModules: readonly RegisteredModule[] = [
     }),
     load: () => import('./tool-date-time-runtime'),
   }),
+  ...financeModules.map((id) => registerModule<FinanceState>({
+    id,
+    describe: (messages) => messages.finance.modules[id],
+    async load() {
+      const { activateFinance } = await import('./tool-finance-runtime');
+      return { activate: (scope) => activateFinance(id, scope) };
+    },
+  })),
 ];

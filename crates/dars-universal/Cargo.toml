@@ -1,12 +1,12 @@
 [package]
 name = "dars-universal"
-version = "0.3.1"
+version = "0.4.0"
 edition = "2024"
 license = "Apache-2.0"
 publish = false
 
 [features]
-default = ["scientific", "algebra", "calculus", "linear_algebra", "geometry", "discrete-mathematics", "programmer", "converter", "date-time"]
+default = ["scientific", "algebra", "calculus", "linear_algebra", "geometry", "discrete-mathematics", "programmer", "converter", "date-time", "financial", "investment", "loans", "tax", "business"]
 scientific = ["dep:astro-float-num", "dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
 algebra = ["dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
 calculus = ["dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
@@ -15,11 +15,17 @@ geometry = ["dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-tr
 discrete-mathematics = ["dep:num-bigint", "dep:num-integer", "dep:num-traits"]
 programmer = ["dep:num-bigint", "dep:num-traits"]
 converter = ["dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
-date-time = ["dep:jiff", "dep:jiff-tzdb"]
+date-time = ["dep:jiff", "jiff/tzdb-bundle-always", "dep:jiff-tzdb"]
+financial = ["finance", "dep:astro-float-num"]
+investment = ["finance"]
+loans = ["finance", "dep:astro-float-num"]
+tax = ["finance"]
+business = ["finance"]
+finance = ["dep:jiff", "dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
 
 [dependencies]
 astro-float-num = { version = "=0.3.6", default-features = false, features = ["std"], optional = true }
-jiff = { version = "=1.0.3", default-features = false, features = ["std", "tzdb-bundle-always"], optional = true }
+jiff = { version = "=1.0.3", default-features = false, features = ["std"], optional = true }
 jiff-tzdb = { version = "=1.0.0", optional = true }
 nalgebra = { version = "=0.35.0", default-features = false, features = ["std"], optional = true }
 num-bigint = { version = "0.4.8", optional = true }
