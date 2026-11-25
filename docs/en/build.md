@@ -27,7 +27,7 @@ cargo build --locked --release -p dars-desktop
 
 Tauri embeds the same `apps/web/dist` assets used by the web build. Rebuild the web assets after changes to the interface or Rust evaluator. This command produces a Windows executable for local review. [Compatibility results](../../evidence/objective-03/compatibility.md)
 
-The full workspace lint check verified locally on Windows uses the release profile.
+The full workspace lint command was verified locally for 0.3.0 and on the hosted Windows runner for 0.3.1. When local App Control blocks a build helper, consult the revision evidence and verify the review artifact against its source commit and digest. [Windows integrity evidence](../../evidence/objective-03/revision-01/security.md) · [Revision reproduction](../../evidence/objective-03/revision-01/reproduction.md)
 
 ```powershell
 cargo clippy --locked --workspace --release --all-targets -- -D warnings

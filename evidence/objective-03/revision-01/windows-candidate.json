@@ -1,0 +1,64 @@
+{
+  "version": "0.3.1",
+  "executable_sha256": "80ff0a020fd25a0c2ec8aebd19f84361297ea9d55cbc6f7d4b90d6f24168885a",
+  "webview2": "158.0.4370.33",
+  "cases": [
+    {
+      "from": "en",
+      "to": "pt-BR",
+      "expression": "log(8,2)",
+      "old": {
+        "canonical": "3",
+        "original": "log(8,2)",
+        "normalized": "log(8,2)",
+        "expressionLocale": "English",
+        "engineVersion": "0.3.1"
+      },
+      "repeated": {
+        "canonical": "3",
+        "original": "log(8,2)",
+        "normalized": "log(8,2)",
+        "expressionLocale": "English",
+        "engineVersion": "0.3.1"
+      }
+    },
+    {
+      "from": "pt-BR",
+      "to": "en",
+      "expression": "log(8;2)",
+      "old": {
+        "canonical": "3",
+        "original": "log(8;2)",
+        "normalized": "log(8,2)",
+        "expressionLocale": "Português (Brasil)",
+        "engineVersion": "0.3.1"
+      },
+      "repeated": {
+        "canonical": "3",
+        "original": "log(8;2)",
+        "normalized": "log(8,2)",
+        "expressionLocale": "Português (Brasil)",
+        "engineVersion": "0.3.1"
+      }
+    },
+    {
+      "from": "pt-BR",
+      "to": "en",
+      "expression": "log(8,2)",
+      "old": {
+        "canonical": "0.91381385238371668972315074469267",
+        "original": "log(8,2)",
+        "normalized": "log(8.2)",
+        "expressionLocale": "Português (Brasil)",
+        "engineVersion": "0.3.1"
+      },
+      "repeated": {
+        "canonical": "0.91381385238371668972315074469267",
+        "original": "log(8,2)",
+        "normalized": "log(8.2)",
+        "expressionLocale": "Português (Brasil)",
+        "engineVersion": "0.3.1"
+      }
+    }
+  ]
+}

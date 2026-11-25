@@ -1,0 +1,17 @@
+{
+  "runner": "GitHub Actions windows-latest",
+  "run_id": 45665744240,
+  "job_id": 139387280752,
+  "sensors_passed": 5,
+  "credentials_passed": 2,
+  "tests": [
+    "capabilities::tests::cached_sample_is_bounded_and_current_window_state_is_reported",
+    "capabilities::tests::capabilities_origin_is_local_to_the_packaged_origin",
+    "capabilities::tests::win32_counters_observe_the_local_host_with_normal_permissions",
+    "capabilities::windows::tests::unavailable_and_absent_battery_are_not_reported_as_charged",
+    "capabilities::windows::tests::windows_idle_is_excluded_and_invalid_counters_remain_unavailable",
+    "credentials::tests::accepts_only_bounded_ids_and_blobs",
+    "credentials::tests::windows_credential_manager_round_trip"
+  ],
+  "full_workspace_release_clippy": "passed"
+}

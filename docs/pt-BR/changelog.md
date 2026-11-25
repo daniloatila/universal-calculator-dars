@@ -2,6 +2,12 @@
 
 [English](../../CHANGELOG.md)
 
+## 0.3.1 · Revisão de idioma do Objetivo 03
+
+- As entradas mantêm a notação em que foram preenchidas ao mudar o idioma da interface. O aviso no campo indica a notação retida e como limpá-la. Células da matriz e outros campos editáveis mantêm origens independentes.
+- Cada gramática trata seus separadores numéricos, de argumentos, matrizes, conjuntos e calendários. O registro de cálculo pode indicar o idioma da expressão original junto aos dados canônicos de reprodução.
+- A matriz de sete idiomas compara requisições normalizadas e registros matemáticos das dez ferramentas. [Relatório da revisão](../../evidence/objective-03/revision-01/REPORT.pt-BR.md)
+
 ## 0.3.0 · Revisão do Objetivo 03
 
 - Incluídas as ferramentas Scientific, Álgebra, Cálculo, Álgebra Linear, Geometria, Matemática Discreta, Programador, Conversor e Data e Hora, com avaliadores Rust limitados e verificações matemáticas independentes.

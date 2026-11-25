@@ -1,0 +1,889 @@
+{
+  "browser": "installed Chrome on Windows",
+  "browser_version": "158.0.8127.38",
+  "expected": 146,
+  "outcomes": [
+    {
+      "file": "algebra.spec.ts",
+      "title": "Algebra runs its nine operations, exposes domain restrictions and preserves module state",
+      "duration_ms": 1922,
+      "status": "passed"
+    },
+    {
+      "file": "algebra.spec.ts",
+      "title": "Algebra changes solution domains and keeps restrictions when verifying excluded values",
+      "duration_ms": 1018,
+      "status": "passed"
+    },
+    {
+      "file": "algebra.spec.ts",
+      "title": "Algebra controls are localized in seven languages and retain an accessible 320 px RTL layout",
+      "duration_ms": 1705,
+      "status": "passed"
+    },
+    {
+      "file": "algebra.spec.ts",
+      "title": "Algebra prepares only its own resources and calculates after offline reload",
+      "duration_ms": 1067,
+      "status": "passed"
+    },
+    {
+      "file": "algebra.spec.ts",
+      "title": "switching modules terminates an admitted Algebra worker and allows a fresh calculation",
+      "duration_ms": 491,
+      "status": "passed"
+    },
+    {
+      "file": "calculation-proof.spec.ts",
+      "title": "a real Scientific result exports a versioned local calculation record and reopens it as an import",
+      "duration_ms": 617,
+      "status": "passed"
+    },
+    {
+      "file": "calculation-proof.spec.ts",
+      "title": "the local proof viewer rejects malformed or oversized bytes and treats imported markup as text",
+      "duration_ms": 415,
+      "status": "passed"
+    },
+    {
+      "file": "calculus.spec.ts",
+      "title": "Calculus performs higher and partial derivatives, integrals and a Taylor expansion",
+      "duration_ms": 1387,
+      "status": "passed"
+    },
+    {
+      "file": "calculus.spec.ts",
+      "title": "Calculus distinguishes limits, unsupported primitives and undefined integrals",
+      "duration_ms": 965,
+      "status": "passed"
+    },
+    {
+      "file": "calculus.spec.ts",
+      "title": "Calculus exposes numerical tolerance and an uncertified estimate in its downloadable proof",
+      "duration_ms": 926,
+      "status": "passed"
+    },
+    {
+      "file": "calculus.spec.ts",
+      "title": "Calculus localizes operation controls, numeric parameters and the narrow RTL layout",
+      "duration_ms": 2130,
+      "status": "passed"
+    },
+    {
+      "file": "calculus.spec.ts",
+      "title": "Calculus prepares one isolated WASM lazily and calculates after offline reload",
+      "duration_ms": 981,
+      "status": "passed"
+    },
+    {
+      "file": "calculus.spec.ts",
+      "title": "switching modules stops a pending Calculus worker and keeps the draft",
+      "duration_ms": 477,
+      "status": "passed"
+    },
+    {
+      "file": "converter.spec.ts",
+      "title": "Converter supports all seventeen unit categories and retains selections when returning",
+      "duration_ms": 2387,
+      "status": "passed"
+    },
+    {
+      "file": "converter.spec.ts",
+      "title": "Converter distinguishes exact and approximate factors, offsets and fuel reciprocals",
+      "duration_ms": 934,
+      "status": "passed"
+    },
+    {
+      "file": "converter.spec.ts",
+      "title": "Converter applies manual currency rates with four date statuses and no provider request",
+      "duration_ms": 882,
+      "status": "passed"
+    },
+    {
+      "file": "converter.spec.ts",
+      "title": "Converter exports exact manual-rate provenance and captures an explicitly expired result",
+      "duration_ms": 704,
+      "status": "passed"
+    },
+    {
+      "file": "converter.spec.ts",
+      "title": "Converter retains independently localized currency amount and rate with literal quote metadata",
+      "duration_ms": 968,
+      "status": "passed"
+    },
+    {
+      "file": "converter.spec.ts",
+      "title": "Converter supports seven locales and accessible narrow RTL unit and currency forms",
+      "duration_ms": 2113,
+      "status": "passed"
+    },
+    {
+      "file": "converter.spec.ts",
+      "title": "Converter loads one isolated WASM on demand and supports manual currency offline",
+      "duration_ms": 1067,
+      "status": "passed"
+    },
+    {
+      "file": "converter.spec.ts",
+      "title": "cancels unfinished work and retains the amount after switching modules",
+      "duration_ms": 511,
+      "status": "passed"
+    },
+    {
+      "file": "date-time.spec.ts",
+      "title": "Date & Time handles all eight operations and restores both workspaces",
+      "duration_ms": 1691,
+      "status": "passed"
+    },
+    {
+      "file": "date-time.spec.ts",
+      "title": "Date & Time separates signed civil periods and absolute nanosecond durations",
+      "duration_ms": 789,
+      "status": "passed"
+    },
+    {
+      "file": "date-time.spec.ts",
+      "title": "Date & Time applies supplied weekdays, holidays and deadline counting bases",
+      "duration_ms": 920,
+      "status": "passed"
+    },
+    {
+      "file": "date-time.spec.ts",
+      "title": "Date & Time resolves repeated local times and rejects skipped local times for every policy",
+      "duration_ms": 786,
+      "status": "passed"
+    },
+    {
+      "file": "date-time.spec.ts",
+      "title": "Date & Time exports bundled time-zone provenance with exact offsets and DST flags",
+      "duration_ms": 752,
+      "status": "passed"
+    },
+    {
+      "file": "date-time.spec.ts",
+      "title": "Date & Time supports seven locales and accessible 320 px RTL calendar controls",
+      "duration_ms": 2110,
+      "status": "passed"
+    },
+    {
+      "file": "date-time.spec.ts",
+      "title": "Date & Time loads one isolated bundled WASM on demand and converts zones offline",
+      "duration_ms": 1104,
+      "status": "passed"
+    },
+    {
+      "file": "date-time.spec.ts",
+      "title": "cancels pending work and restores the date draft after switching modules",
+      "duration_ms": 541,
+      "status": "passed"
+    },
+    {
+      "file": "discrete-mathematics.spec.ts",
+      "title": "Discrete Mathematics runs all sixteen operations and restores state after switching modules",
+      "duration_ms": 2678,
+      "status": "passed"
+    },
+    {
+      "file": "discrete-mathematics.spec.ts",
+      "title": "Discrete Mathematics handles repetition, modular inverse and exact sequence modes",
+      "duration_ms": 1009,
+      "status": "passed"
+    },
+    {
+      "file": "discrete-mathematics.spec.ts",
+      "title": "Discrete Mathematics retains exact integer tokens and recognizes an empty set",
+      "duration_ms": 597,
+      "status": "passed"
+    },
+    {
+      "file": "discrete-mathematics.spec.ts",
+      "title": "Discrete Mathematics renders safe truth tables, inserts operators and pages 256 assignments",
+      "duration_ms": 887,
+      "status": "passed"
+    },
+    {
+      "file": "discrete-mathematics.spec.ts",
+      "title": "Discrete Mathematics distinguishes deterministic and probable primality and exports the record",
+      "duration_ms": 673,
+      "status": "passed"
+    },
+    {
+      "file": "discrete-mathematics.spec.ts",
+      "title": "Discrete Mathematics supports seven languages and an accessible narrow RTL workspace",
+      "duration_ms": 2029,
+      "status": "passed"
+    },
+    {
+      "file": "discrete-mathematics.spec.ts",
+      "title": "Discrete Mathematics loads its worker and WASM on demand and works offline",
+      "duration_ms": 1059,
+      "status": "passed"
+    },
+    {
+      "file": "discrete-mathematics.spec.ts",
+      "title": "cancels a pending worker explicitly and restores a draft on switching modules",
+      "duration_ms": 504,
+      "status": "passed"
+    },
+    {
+      "file": "geometry.spec.ts",
+      "title": "Geometry runs eleven planar, solid and Cartesian operations with exact results",
+      "duration_ms": 1584,
+      "status": "passed"
+    },
+    {
+      "file": "geometry.spec.ts",
+      "title": "Geometry preserves 3D distance, exact radians, segment relations and domain errors",
+      "duration_ms": 987,
+      "status": "passed"
+    },
+    {
+      "file": "geometry.spec.ts",
+      "title": "Geometry draws one-shot adaptive diagrams and releases the canvas when switching modules",
+      "duration_ms": 1382,
+      "status": "passed"
+    },
+    {
+      "file": "geometry.spec.ts",
+      "title": "Geometry exports power-aware unit metadata with exact symbolic values",
+      "duration_ms": 581,
+      "status": "passed"
+    },
+    {
+      "file": "geometry.spec.ts",
+      "title": "Geometry preserves coordinate block delimiters and independent dimension notation through a language change",
+      "duration_ms": 809,
+      "status": "passed"
+    },
+    {
+      "file": "geometry.spec.ts",
+      "title": "Geometry localizes dimension inputs and diagrams across seven accessible locales",
+      "duration_ms": 2197,
+      "status": "passed"
+    },
+    {
+      "file": "geometry.spec.ts",
+      "title": "Geometry loads one dedicated WASM on demand and calculates after offline reload",
+      "duration_ms": 1057,
+      "status": "passed"
+    },
+    {
+      "file": "geometry.spec.ts",
+      "title": "switching modules terminates unfinished work and retains the geometry draft",
+      "duration_ms": 469,
+      "status": "passed"
+    },
+    {
+      "file": "integrated-mathematics.spec.ts",
+      "title": "Standard opens the shared Proof viewer offline on first use without loading advanced engines",
+      "duration_ms": 915,
+      "status": "passed"
+    },
+    {
+      "file": "integrated-mathematics.spec.ts",
+      "title": "Standard exports localized originals and retained @ bindings and imports as inert text",
+      "duration_ms": 937,
+      "status": "passed"
+    },
+    {
+      "file": "integrated-mathematics.spec.ts",
+      "title": "All ten workspaces calculate individually across five profiles with one worker and searchable navigation",
+      "duration_ms": 2239,
+      "status": "passed"
+    },
+    {
+      "file": "integrated-mathematics.spec.ts",
+      "title": "Standard record and navigation are available in seven languages with touch and accessible RTL",
+      "duration_ms": 2060,
+      "status": "passed"
+    },
+    {
+      "file": "linear-algebra.spec.ts",
+      "title": "Linear algebra runs all fourteen operations and preserves Standard and adaptive behavior",
+      "duration_ms": 2228,
+      "status": "passed"
+    },
+    {
+      "file": "linear-algebra.spec.ts",
+      "title": "Linear algebra edits, pastes and resizes matrices by keyboard while retaining exact integer text",
+      "duration_ms": 565,
+      "status": "passed"
+    },
+    {
+      "file": "linear-algebra.spec.ts",
+      "title": "Linear algebra keeps pasted cell notation across locale changes and supports mixed-origin cells",
+      "duration_ms": 881,
+      "status": "passed"
+    },
+    {
+      "file": "linear-algebra.spec.ts",
+      "title": "Linear algebra distinguishes incompatible, indeterminate, singular and invalid input",
+      "duration_ms": 770,
+      "status": "passed"
+    },
+    {
+      "file": "linear-algebra.spec.ts",
+      "title": "Linear algebra shows observed numerical diagnostics and exports canonical proof",
+      "duration_ms": 799,
+      "status": "passed"
+    },
+    {
+      "file": "linear-algebra.spec.ts",
+      "title": "Linear algebra localizes controls and decimal cells with accessible 320 px RTL and wide grids",
+      "duration_ms": 2270,
+      "status": "passed"
+    },
+    {
+      "file": "linear-algebra.spec.ts",
+      "title": "Linear algebra loads one isolated WASM on demand and recalculates offline",
+      "duration_ms": 1051,
+      "status": "passed"
+    },
+    {
+      "file": "linear-algebra.spec.ts",
+      "title": "switching modules terminates unfinished work and retains the matrix draft",
+      "duration_ms": 479,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix en → pt-BR: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4757,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix en → zh-CN: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4844,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix en → hi: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4862,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix en → es: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4662,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix en → ar: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4617,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix en → fr: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4659,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix pt-BR → en: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4638,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix pt-BR → zh-CN: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4902,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix pt-BR → hi: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 5067,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix pt-BR → es: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4848,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix pt-BR → ar: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4984,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix pt-BR → fr: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4833,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix zh-CN → en: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 5071,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix zh-CN → pt-BR: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 5068,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix zh-CN → hi: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 5073,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix zh-CN → es: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4953,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix zh-CN → ar: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 5028,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix zh-CN → fr: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 5000,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix hi → en: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4807,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix hi → pt-BR: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4952,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix hi → zh-CN: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 5003,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix hi → es: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4885,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix hi → ar: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4845,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix hi → fr: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4822,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix es → en: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4691,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix es → pt-BR: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4710,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix es → zh-CN: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4734,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix es → hi: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4741,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix es → ar: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4772,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix es → fr: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4764,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix ar → en: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4849,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix ar → pt-BR: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4844,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix ar → zh-CN: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4975,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix ar → hi: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4985,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix ar → es: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4744,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix ar → fr: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4719,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix fr → en: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4625,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix fr → pt-BR: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4627,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix fr → zh-CN: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4866,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix fr → hi: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4917,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix fr → es: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 4915,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "locale matrix fr → ar: all ten mathematical requests and proofs are invariant",
+      "duration_ms": 5064,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "language changes before first evaluation and during a held real request preserve Scientific notation and portable proof",
+      "duration_ms": 960,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "an explicitly suspended Scientific draft survives language changes, preference reset and warm offline catalogs",
+      "duration_ms": 2159,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "incomplete notation and an ambiguous civil time remain explicit errors across language changes",
+      "duration_ms": 1048,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "independently edited currency amount retains the rate notation, dates and unmodified source text",
+      "duration_ms": 1377,
+      "status": "passed"
+    },
+    {
+      "file": "locale-transitions.spec.ts",
+      "title": "numeric set members and working-calendar dates preserve their grammar while malformed names remain invalid",
+      "duration_ms": 1710,
+      "status": "passed"
+    },
+    {
+      "file": "module-frames.spec.ts",
+      "title": "adaptive graphics policies change real canvas draw cadence and suspension stops drawing",
+      "duration_ms": 2579,
+      "status": "passed"
+    },
+    {
+      "file": "module-manager.spec.ts",
+      "title": "browser fixtures switch through the module manager and release workers, cache and canvas resources",
+      "duration_ms": 1323,
+      "status": "passed"
+    },
+    {
+      "file": "module-shell.spec.ts",
+      "title": "the real app shell selects heterogeneous modules and globally clears both active and suspended state",
+      "duration_ms": 1313,
+      "status": "passed"
+    },
+    {
+      "file": "module-shell.spec.ts",
+      "title": "the same app shell isolates a hung module, retries and disposes a late runtime",
+      "duration_ms": 1501,
+      "status": "passed"
+    },
+    {
+      "file": "module-shell.spec.ts",
+      "title": "real Workers time out, release foreground capacity, and return valid successors in every adaptive profile",
+      "duration_ms": 11075,
+      "status": "passed"
+    },
+    {
+      "file": "module-shell.spec.ts",
+      "title": "real scheduler Workers recover from secondary hangs and release in-flight jobs on cancel, suspend, and switch",
+      "duration_ms": 3758,
+      "status": "passed"
+    },
+    {
+      "file": "operations.spec.ts",
+      "title": "resource profiles retire and wake a real worker without changing exact math",
+      "duration_ms": 12613,
+      "status": "passed"
+    },
+    {
+      "file": "operations.spec.ts",
+      "title": "offline mode persists through reload and blocks a real uncached same-origin request",
+      "duration_ms": 1186,
+      "status": "passed"
+    },
+    {
+      "file": "operations.spec.ts",
+      "title": "visibility suspension recovers exact session state and the privacy action discards it",
+      "duration_ms": 935,
+      "status": "passed"
+    },
+    {
+      "file": "operations.spec.ts",
+      "title": "reset preferences clears DARS settings while preserving unrelated browser keys",
+      "duration_ms": 757,
+      "status": "passed"
+    },
+    {
+      "file": "operations.spec.ts",
+      "title": "operations, privacy and diagnostics fit 320 px and retain preferences in all seven locales",
+      "duration_ms": 9012,
+      "status": "passed"
+    },
+    {
+      "file": "programmer.spec.ts",
+      "title": "Programmer runs all eleven operations with fixed-width results in four bases",
+      "duration_ms": 1849,
+      "status": "passed"
+    },
+    {
+      "file": "programmer.spec.ts",
+      "title": "Programmer distinguishes raw patterns, signed values, over-width shifts and rejected inputs",
+      "duration_ms": 1060,
+      "status": "passed"
+    },
+    {
+      "file": "programmer.spec.ts",
+      "title": "Programmer preserves wide integer text and pages the full 1024-bit word",
+      "duration_ms": 1048,
+      "status": "passed"
+    },
+    {
+      "file": "programmer.spec.ts",
+      "title": "Programmer exports and reopens the exact width and decimal-count rotation proof",
+      "duration_ms": 610,
+      "status": "passed"
+    },
+    {
+      "file": "programmer.spec.ts",
+      "title": "Programmer supports seven locales and accessible RTL bit positions at 320 px",
+      "duration_ms": 2099,
+      "status": "passed"
+    },
+    {
+      "file": "programmer.spec.ts",
+      "title": "Programmer loads only its worker and WASM on demand and calculates offline",
+      "duration_ms": 1053,
+      "status": "passed"
+    },
+    {
+      "file": "programmer.spec.ts",
+      "title": "cancels unfinished work and resumes the input after switching modules",
+      "duration_ms": 581,
+      "status": "passed"
+    },
+    {
+      "file": "scientific.spec.ts",
+      "title": "Scientific computes the required vectors and preserves Standard and adaptive behavior",
+      "duration_ms": 1729,
+      "status": "passed"
+    },
+    {
+      "file": "scientific.spec.ts",
+      "title": "Scientific options control working precision and engineering notation and expose domain failures",
+      "duration_ms": 685,
+      "status": "passed"
+    },
+    {
+      "file": "scientific.spec.ts",
+      "title": "Scientific preserves log(8,2) and its proof across en → pt-BR",
+      "duration_ms": 1027,
+      "status": "passed"
+    },
+    {
+      "file": "scientific.spec.ts",
+      "title": "Scientific preserves log(8;2) and its proof across pt-BR → en",
+      "duration_ms": 995,
+      "status": "passed"
+    },
+    {
+      "file": "scientific.spec.ts",
+      "title": "Scientific preserves log(8,2) and its proof across pt-BR → en",
+      "duration_ms": 925,
+      "status": "passed"
+    },
+    {
+      "file": "scientific.spec.ts",
+      "title": "Scientific normalizes localized input and keeps its controls within a narrow RTL layout",
+      "duration_ms": 1894,
+      "status": "passed"
+    },
+    {
+      "file": "scientific.spec.ts",
+      "title": "Scientific assets are absent on initial opening and remain usable after explicit offline preparation",
+      "duration_ms": 1019,
+      "status": "passed"
+    },
+    {
+      "file": "scientific.spec.ts",
+      "title": "Scientific cancels an admitted worker and calculates on a fresh worker",
+      "duration_ms": 478,
+      "status": "passed"
+    },
+    {
+      "file": "standard-revision.spec.ts",
+      "title": "MR immediately after M+ recalls an irrational absolute percentage without relative re-evaluation",
+      "duration_ms": 996,
+      "status": "passed"
+    },
+    {
+      "file": "standard-revision.spec.ts",
+      "title": "M−, negatives and large exact values survive recall, explicit percentages and powers",
+      "duration_ms": 1186,
+      "status": "passed"
+    },
+    {
+      "file": "standard-revision.spec.ts",
+      "title": "a sequence of irrational additions preserves the original history value through MC, undo and locale change",
+      "duration_ms": 1968,
+      "status": "passed"
+    },
+    {
+      "file": "standard-revision.spec.ts",
+      "title": "MC aborts a pending memory operation and late results cannot overwrite the next value",
+      "duration_ms": 860,
+      "status": "passed"
+    },
+    {
+      "file": "standard-revision.spec.ts",
+      "title": "editing or explicitly cancelling rejects stale work and clearing history keeps it empty after an older result",
+      "duration_ms": 765,
+      "status": "passed"
+    },
+    {
+      "file": "standard.spec.ts",
+      "title": "Standard calculates exact decimal and rational results, precedence and roots through WASM",
+      "duration_ms": 677,
+      "status": "passed"
+    },
+    {
+      "file": "standard.spec.ts",
+      "title": "errors are recoverable and failed calculations are excluded from history",
+      "duration_ms": 557,
+      "status": "passed"
+    },
+    {
+      "file": "standard.spec.ts",
+      "title": "keypad insertion, keyboard editing, undo and redo operate on the expression",
+      "duration_ms": 583,
+      "status": "passed"
+    },
+    {
+      "file": "standard.spec.ts",
+      "title": "memory, result copying and history use session state only",
+      "duration_ms": 772,
+      "status": "passed"
+    },
+    {
+      "file": "standard.spec.ts",
+      "title": "regional decimal input, RTL and language/theme preferences work across reload",
+      "duration_ms": 946,
+      "status": "passed"
+    },
+    {
+      "file": "standard.spec.ts",
+      "title": "production calculator confines assets to its own origin",
+      "duration_ms": 396,
+      "status": "passed"
+    },
+    {
+      "file": "standard.spec.ts",
+      "title": "the default is dark on a light system and an explicit theme survives reload",
+      "duration_ms": 838,
+      "status": "passed"
+    },
+    {
+      "file": "standard.spec.ts",
+      "title": "the light layout is responsive and satisfies automated axe checks",
+      "duration_ms": 1250,
+      "status": "passed"
+    },
+    {
+      "file": "standard.spec.ts",
+      "title": "the default is dark on a dark system and an explicit theme survives reload",
+      "duration_ms": 710,
+      "status": "passed"
+    },
+    {
+      "file": "standard.spec.ts",
+      "title": "the dark layout is responsive and satisfies automated axe checks",
+      "duration_ms": 988,
+      "status": "passed"
+    },
+    {
+      "file": "worker.spec.ts",
+      "title": "a hung production worker hits its deadline, terminates and restores calculation without reload",
+      "duration_ms": 5894,
+      "status": "passed"
+    }
+  ],
+  "browser_report_sha256": "bcaf3858268569f7be3df7c51530be664d6d3ee102a27f9294dc3633a08dc784",
+  "production_index_sha256": "863c8ecefd0c47c01a4093eb64ac74cc85747ea473fe1e972435a3ef56547516",
+  "additional_offline_harness": {
+    "passed": 10,
+    "failed": 0
+  }
+}

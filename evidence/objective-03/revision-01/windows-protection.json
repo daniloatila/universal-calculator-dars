@@ -26,5 +26,15 @@
     "mode": "Normal",
     "settings_or_exclusions_changed": false
   },
-  "historical_debug_clippy": "../windows-protection.json"
+  "historical_debug_clippy": "../windows-protection.json",
+  "after_local_execution": {
+    "checked_at": "2026-11-25T14:46:40-03:00",
+    "since": "2026-11-25T14:25:30-03:00",
+    "relevant_integrity_blocks": 0,
+    "defender_detection_or_asr_events": 0,
+    "antivirus": true,
+    "real_time": true,
+    "tamper": true,
+    "desktop_processes": 0
+  }
 }

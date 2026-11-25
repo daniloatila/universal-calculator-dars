@@ -4,12 +4,12 @@
 
 [Português brasileiro](README.pt-BR.md)
 
-DARS is a local-first computation platform by Danilo Átila. Version 0.3.0 brings ten workspaces to a shared Windows and browser interface, with mathematical results from Rust and a native command-line interface.
+DARS is a local-first computation platform by Danilo Átila. It brings ten workspaces to a shared Windows and browser interface, with mathematical results from Rust and a native command-line interface. The 0.3.1 review revision preserves editable input notation across interface language changes.
 
 - **Arithmetic and analysis** — Standard, Scientific, Algebra, Calculus and Linear Algebra.
 - **Specialized tools** — Geometry, Discrete Mathematics, Programmer, Converter and Date & Time.
 
-The active workspace loads its own mathematical resources. Calculation records can be inspected and downloaded locally. Standard is available offline after the web shell is prepared, and advanced workspaces become available offline once their resources are cached. [0.3.0 review report](evidence/objective-03/REPORT.md) · [Module verification](evidence/objective-03/PLAN.md) · [Calculation records](evidence/objective-03/calculation-proof/contract.md)
+The active workspace loads its own mathematical resources. Calculation records can be inspected and downloaded locally. Standard is available offline after the web shell is prepared, and advanced workspaces become available offline once their resources are cached. [0.3.1 locale audit](evidence/objective-03/revision-01/REPORT.md) · [0.3.0 audit](evidence/objective-03/REPORT.md) · [Calculation records](evidence/objective-03/calculation-proof/contract.md)
 
 ## Foundation
 

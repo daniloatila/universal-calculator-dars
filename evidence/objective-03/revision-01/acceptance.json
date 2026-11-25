@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "objective": "03",
+  "revision": "01",
+  "version": "0.3.1",
+  "status": "READY_FOR_REVIEW",
+  "historical_independent_score": {
+    "version": "0.3.0",
+    "score": 90,
+    "approved": false
+  },
+  "audited_source_commit": "2a8e0f5a174afe850f245b2ae4cc8e974119bf5d",
+  "review_branch": "codex/objective-03-universal-mathematics",
+  "earlier_objectives": {
+    "01": "APPROVED",
+    "02": {
+      "status": "APPROVED",
+      "score": 95
+    }
+  },
+  "next_objective": {
+    "id": "04",
+    "status": "NOT_STARTED"
+  },
+  "criteria": [
+    {
+      "id": "scientific_logarithms_preserved",
+      "status": "VERIFIED",
+      "evidence": [
+        "windows-baseline.json",
+        "windows-candidate.json",
+        "locale-transition-matrix.json"
+      ]
+    },
+    {
+      "id": "meaning_preserved_across_locales",
+      "status": "VERIFIED",
+      "evidence": [
+        "locale-transition-matrix.json",
+        "findings.json"
+      ]
+    },
+    {
+      "id": "active_and_suspended_state",
+      "status": "VERIFIED",
+      "evidence": [
+        "locale-transition-matrix.json",
+        "benchmarks.json"
+      ]
+    },
+    {
+      "id": "invalid_and_ambiguous_input",
+      "status": "VERIFIED",
+      "evidence": [
+        "locale-transition-matrix.json",
+        "findings.json"
+      ]
+    },
+    {
+      "id": "ten_workspaces",
+      "status": "VERIFIED",
+      "evidence": [
+        "locale-transition-matrix.json"
+      ]
+    },
+    {
+      "id": "seven_locales",
+      "status": "VERIFIED",
+      "evidence": [
+        "locale-transition-matrix.json",
+        "browser.json"
+      ]
+    },
+    {
+      "id": "proof_integrity",
+      "status": "VERIFIED",
+      "evidence": [
+        "schema.v1.json",
+        "locale-transition-matrix.json",
+        "windows-candidate.json"
+      ]
+    },
+    {
+      "id": "regression",
+      "status": "VERIFIED",
+      "evidence": [
+        "tests.json",
+        "regression.md"
+      ]
+    },
+    {
+      "id": "windows_protections",
+      "status": "VERIFIED",
+      "evidence": [
+        "windows-protection.json",
+        "security.md"
+      ]
+    },
+    {
+      "id": "windows_functional",
+      "status": "VERIFIED",
+      "evidence": [
+        "windows-ui.json",
+        "windows-candidate.json",
+        "windows-artifact.json",
+        "benchmarks.json"
+      ]
+    },
+    {
+      "id": "bilingual_documentation",
+      "status": "VERIFIED",
+      "evidence": [
+        "REPORT.md",
+        "REPORT.pt-BR.md"
+      ]
+    },
+    {
+      "id": "four_actions_jobs",
+      "status": "VERIFIED",
+      "evidence": [
+        "ci.json"
+      ]
+    },
+    {
+      "id": "audited_publication",
+      "status": "VERIFIED",
+      "evidence": [
+        "ci.json",
+        "reproduction.md"
+      ]
+    }
+  ],
+  "remaining_limits": [
+    "The local 0.3.1 Cargo release build was blocked by an enforced code-integrity policy. Windows review provenance is tracked separately.",
+    "The incremental physical RAM target remains open under the approved memory-debt protocol.",
+    "The review binary is unsigned. Stable distribution with an approved signature belongs to Objective 07."
+  ]
+}

@@ -27,7 +27,7 @@ cargo build --locked --release -p dars-desktop
 
 O Tauri incorpora os mesmos arquivos de `apps/web/dist` usados no build web. Gere novamente os arquivos web após alterações na interface ou no avaliador Rust. O comando gera um executável Windows para revisão local. [Evidências de compatibilidade](../../evidence/objective-03/compatibility.pt-BR.md)
 
-A revisão de lint de todo o workspace verificada localmente no Windows usa o perfil `release`.
+O comando de lint de todo o workspace foi verificado localmente na 0.3.0 e no runner Windows hospedado na 0.3.1. Quando o Controle de Aplicativos local bloquear um auxiliar de compilação, consulte as evidências da revisão e confira o artefato de revisão pelo commit e pelo hash. [Evidências de integridade](../../evidence/objective-03/revision-01/security.pt-BR.md) · [Reprodução da revisão](../../evidence/objective-03/revision-01/reproduction.md)
 
 ```powershell
 cargo clippy --locked --workspace --release --all-targets -- -D warnings

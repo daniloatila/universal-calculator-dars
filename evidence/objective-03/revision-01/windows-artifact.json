@@ -1,0 +1,55 @@
+{
+  "workflow_run": "45665744240",
+  "artifact_id": 15048137470,
+  "archive_sha256": "a5d91f31ff1223047f866100f470014e2cd37c30364772dc62297c77be19e329",
+  "retention_expires_utc": "2026-11-26T17:43:45Z",
+  "schema": 1,
+  "commit": "2a8e0f5a174afe850f245b2ae4cc8e974119bf5d",
+  "run_id": "45665744240",
+  "run_attempt": "1",
+  "target": "windows-x64",
+  "bytes": 13646848,
+  "sha256": "80ff0a020fd25a0c2ec8aebd19f84361297ea9d55cbc6f7d4b90d6f24168885a",
+  "packaged_wasm": [
+    {
+      "name": "dars_tool_wasm_bg-BgHmdPq5.wasm",
+      "sha256": "89b9c5a0e7e4288752f190b536a0290ca1873a4f229072e741271e2d630975ad"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BozrREF1.wasm",
+      "sha256": "e5725bdef520e3f4221478baad9ba3689ea5a50bf0f6351b818a666955dd18a0"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BTfNcHGM.wasm",
+      "sha256": "ff66b03efd65677272bc51911bc82a5f846a4ea7c752c21ff4dae9a7cde647cf"
+    },
+    {
+      "name": "dars_tool_wasm_bg-ClLzPjqO.wasm",
+      "sha256": "c29277c45e6f3f62f484107168051fbec2839077495eb7f368a0872531cb98e1"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CMU5I0O_.wasm",
+      "sha256": "b34d3ab382843607c4f2cf166d7e29178672668a4ba9de4a271c116e8cf87fbb"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CPz0UMxA.wasm",
+      "sha256": "875b406984b29ac80ee8b6f2df8c9fe391acfb98044cbc9cb273496ce825938b"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DTnj-BLH.wasm",
+      "sha256": "5a4edec0e693a6da9ae891cc2c4936d88e5a4fed98fc91a77e7471079a7f5658"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DXlmk6CF.wasm",
+      "sha256": "ac19188a162016df591e69b17e60d42613d3a646252734115c1e92014b186ad7"
+    },
+    {
+      "name": "dars_tool_wasm_bg-KO_qMZVe.wasm",
+      "sha256": "ad51b6e5a0fb3faf4ad891ee4b6a4f6fc084b57b1d2dcf85aad3336b663c674e"
+    },
+    {
+      "name": "dars_wasm_bg-DVvxw-8s.wasm",
+      "sha256": "ee8e1ef133c3333be8b805a5aa7584eeb5e853dc91d5592e55f1b103da2cdf96"
+    }
+  ]
+}

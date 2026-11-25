@@ -2,6 +2,12 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
+## 0.3.1 · Objective 03 locale review
+
+- Editable fields retain their original notation when the interface language changes. An inline hint explains the notation and how to clear it. Matrix cells and other independently edited inputs retain separate origins.
+- Each grammar handles its own numeric, argument, row, set and calendar delimiters. Calculation Proof can carry the original expression locale alongside canonical replay data.
+- Added a seven-language matrix that compares normalized requests and mathematical records for all ten workspaces. [Revision report](evidence/objective-03/revision-01/REPORT.md)
+
 ## 0.3.0 · Objective 03 review
 
 - Added the Scientific, Algebra, Calculus, Linear Algebra, Geometry, Discrete Mathematics, Programmer, Converter and Date & Time workspaces with bounded Rust evaluators and independent mathematical checks.

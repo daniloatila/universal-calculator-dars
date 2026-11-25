@@ -1,0 +1,3921 @@
+{
+  "schema": 1,
+  "scope": "Representative grammar fixtures, submitted to the actual browser Web Workers. One pre-change and one post-change computation per module and directed pair. No expressions edited between those computations.",
+  "languages": [
+    "en",
+    "pt-BR",
+    "zh-CN",
+    "hi",
+    "es",
+    "ar",
+    "fr"
+  ],
+  "workspaces": [
+    "standard",
+    "scientific",
+    "algebra",
+    "calculus",
+    "linear-algebra",
+    "geometry",
+    "discrete-mathematics",
+    "programmer",
+    "converter",
+    "date-time"
+  ],
+  "browser_report_sha256": "bcaf3858268569f7be3df7c51530be664d6d3ee102a27f9294dc3633a08dc784",
+  "directed_pairs_passed": 42,
+  "module_pairs_passed": 420,
+  "pairs": [
+    {
+      "source": "en",
+      "target": "pt-BR",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proofSha256": "53926a1c7acbd74405bbb6fcc4e6a60857eaf1bf4e7069692516835e76604202"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proofSha256": "395a0775240dd1ccbc6a52b53ecdd94654db473f40a8e603773b6741fe080569"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proofSha256": "53308c5629d289e49afeaa5dfdb331ca88d0d8fa1cf5324c7c376867c386ec18"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proofSha256": "dc5c4c54015091cd359e3aa18d0b1f61e7035ea6d6c72abe51bec2ac1e127f0e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proofSha256": "6427b7340205ec0c74c95d06e7b6c767997b6c338580e855a1e715863411c5fd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proofSha256": "5620585fd1b19427ab21e8eed59dd22df172bc796fa9c2e9d6f745c3ea98986d"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "e8d5e68673576a77f9805c38e59809dc43cd1563055928643292af14f70e4484",
+      "duration_ms": 4757
+    },
+    {
+      "source": "en",
+      "target": "zh-CN",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proofSha256": "53926a1c7acbd74405bbb6fcc4e6a60857eaf1bf4e7069692516835e76604202"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proofSha256": "395a0775240dd1ccbc6a52b53ecdd94654db473f40a8e603773b6741fe080569"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proofSha256": "53308c5629d289e49afeaa5dfdb331ca88d0d8fa1cf5324c7c376867c386ec18"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proofSha256": "dc5c4c54015091cd359e3aa18d0b1f61e7035ea6d6c72abe51bec2ac1e127f0e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proofSha256": "6427b7340205ec0c74c95d06e7b6c767997b6c338580e855a1e715863411c5fd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proofSha256": "5620585fd1b19427ab21e8eed59dd22df172bc796fa9c2e9d6f745c3ea98986d"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "cd2d8a66943a1723141145f500cdc34067c07b3655f67d0d96f705a58f29be4d",
+      "duration_ms": 4844
+    },
+    {
+      "source": "en",
+      "target": "hi",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proofSha256": "53926a1c7acbd74405bbb6fcc4e6a60857eaf1bf4e7069692516835e76604202"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proofSha256": "395a0775240dd1ccbc6a52b53ecdd94654db473f40a8e603773b6741fe080569"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proofSha256": "53308c5629d289e49afeaa5dfdb331ca88d0d8fa1cf5324c7c376867c386ec18"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proofSha256": "dc5c4c54015091cd359e3aa18d0b1f61e7035ea6d6c72abe51bec2ac1e127f0e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proofSha256": "6427b7340205ec0c74c95d06e7b6c767997b6c338580e855a1e715863411c5fd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proofSha256": "5620585fd1b19427ab21e8eed59dd22df172bc796fa9c2e9d6f745c3ea98986d"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "d148e2873c8db1beafe1b72ac5d53027c80ac2041c1aa06c0018026f7d2f062a",
+      "duration_ms": 4862
+    },
+    {
+      "source": "en",
+      "target": "es",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proofSha256": "53926a1c7acbd74405bbb6fcc4e6a60857eaf1bf4e7069692516835e76604202"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proofSha256": "395a0775240dd1ccbc6a52b53ecdd94654db473f40a8e603773b6741fe080569"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proofSha256": "53308c5629d289e49afeaa5dfdb331ca88d0d8fa1cf5324c7c376867c386ec18"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proofSha256": "dc5c4c54015091cd359e3aa18d0b1f61e7035ea6d6c72abe51bec2ac1e127f0e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proofSha256": "6427b7340205ec0c74c95d06e7b6c767997b6c338580e855a1e715863411c5fd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proofSha256": "5620585fd1b19427ab21e8eed59dd22df172bc796fa9c2e9d6f745c3ea98986d"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "053a954f62f98dbf51ffc10ba72fddb2aa7059f1d348a5a46e0d6a6fd22f3ee0",
+      "duration_ms": 4662
+    },
+    {
+      "source": "en",
+      "target": "ar",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proofSha256": "53926a1c7acbd74405bbb6fcc4e6a60857eaf1bf4e7069692516835e76604202"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proofSha256": "395a0775240dd1ccbc6a52b53ecdd94654db473f40a8e603773b6741fe080569"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proofSha256": "53308c5629d289e49afeaa5dfdb331ca88d0d8fa1cf5324c7c376867c386ec18"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proofSha256": "dc5c4c54015091cd359e3aa18d0b1f61e7035ea6d6c72abe51bec2ac1e127f0e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proofSha256": "6427b7340205ec0c74c95d06e7b6c767997b6c338580e855a1e715863411c5fd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proofSha256": "5620585fd1b19427ab21e8eed59dd22df172bc796fa9c2e9d6f745c3ea98986d"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "a6b595c66dd27a8173b1702a02a170cb16d61e8e80144af5435a3c435f2d5e7e",
+      "duration_ms": 4617
+    },
+    {
+      "source": "en",
+      "target": "fr",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proofSha256": "53926a1c7acbd74405bbb6fcc4e6a60857eaf1bf4e7069692516835e76604202"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proofSha256": "395a0775240dd1ccbc6a52b53ecdd94654db473f40a8e603773b6741fe080569"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proofSha256": "53308c5629d289e49afeaa5dfdb331ca88d0d8fa1cf5324c7c376867c386ec18"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proofSha256": "dc5c4c54015091cd359e3aa18d0b1f61e7035ea6d6c72abe51bec2ac1e127f0e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proofSha256": "6427b7340205ec0c74c95d06e7b6c767997b6c338580e855a1e715863411c5fd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proofSha256": "5620585fd1b19427ab21e8eed59dd22df172bc796fa9c2e9d6f745c3ea98986d"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "f9fc100a60c93be2dd95a70df5593b8d601d1997f1c6f12682c64d06db25a976",
+      "duration_ms": 4659
+    },
+    {
+      "source": "pt-BR",
+      "target": "en",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "6e13646d9f4c179719aa279afec6281cca858b1d55803a810c4390d678f8374f",
+      "duration_ms": 4638
+    },
+    {
+      "source": "pt-BR",
+      "target": "zh-CN",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "6db92ef31fc7eea8df273503e4a8fc626e085692b31cf331afce0dabaf88317f",
+      "duration_ms": 4902
+    },
+    {
+      "source": "pt-BR",
+      "target": "hi",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "877e8abb785db20aee61dcbd45f447890672493eee952a1482f73a9e0d2d7d1f",
+      "duration_ms": 5067
+    },
+    {
+      "source": "pt-BR",
+      "target": "es",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "ef7328ffb78877e8e4d389eb22d16857a77ab9057d2cf40b29a5af97a1d9ed83",
+      "duration_ms": 4848
+    },
+    {
+      "source": "pt-BR",
+      "target": "ar",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "dd2191609fd99a5d0018060250f33927c4915bc45edea52ed3722bfef06f1d39",
+      "duration_ms": 4984
+    },
+    {
+      "source": "pt-BR",
+      "target": "fr",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "ffe5400b879696413215cdf5018f8a047e0d53b57613562093df2323a50c064a",
+      "duration_ms": 4833
+    },
+    {
+      "source": "zh-CN",
+      "target": "en",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proofSha256": "79c87623db68c2714b92324552cbbe75898a9f22eff8aad41760a6f2810e010d"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proofSha256": "ad8aecb437285f951083aaa12f280a66b3e694c49a05f95a7bfcfe137c26da3d"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proofSha256": "4a732db4bac637b3f3ce5b1c0ae97ec78a8a88068d1bd0a711398bde49e6f8b1"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proofSha256": "3c44228990684bf17a7a6087179d1458c729e26b37b0940a32e5bba0011ae248"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proofSha256": "118cd311a329ad75f5f497e671326e96fc3d3fb9a20cccfa97dd5b65855ac288"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proofSha256": "47177f09bc5abf62fab76b4c68c25ac2d1577258814303647d1abf2c7f326b7f"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proofSha256": "82cab50fe0a6593a53a1da4ca94f755212ccc0ae68a17d41c03dcb2db6f5e49d"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proofSha256": "5cc38bae1cc9e83604ac4bd315156a4f302cfba842ec2c0112daf5e944e099f9"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proofSha256": "37975eaefff5b59340d6330a1548d4a2d033d2ae91937b60d6566e1cc186ddfd"
+        }
+      ],
+      "pairSha256": "db63dc79d88c83893a08c051cd33ea35634eaa775d3685fc12e6143ce42b0674",
+      "duration_ms": 5071
+    },
+    {
+      "source": "zh-CN",
+      "target": "pt-BR",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proofSha256": "79c87623db68c2714b92324552cbbe75898a9f22eff8aad41760a6f2810e010d"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proofSha256": "ad8aecb437285f951083aaa12f280a66b3e694c49a05f95a7bfcfe137c26da3d"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proofSha256": "4a732db4bac637b3f3ce5b1c0ae97ec78a8a88068d1bd0a711398bde49e6f8b1"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proofSha256": "3c44228990684bf17a7a6087179d1458c729e26b37b0940a32e5bba0011ae248"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proofSha256": "118cd311a329ad75f5f497e671326e96fc3d3fb9a20cccfa97dd5b65855ac288"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proofSha256": "47177f09bc5abf62fab76b4c68c25ac2d1577258814303647d1abf2c7f326b7f"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proofSha256": "82cab50fe0a6593a53a1da4ca94f755212ccc0ae68a17d41c03dcb2db6f5e49d"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proofSha256": "5cc38bae1cc9e83604ac4bd315156a4f302cfba842ec2c0112daf5e944e099f9"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proofSha256": "37975eaefff5b59340d6330a1548d4a2d033d2ae91937b60d6566e1cc186ddfd"
+        }
+      ],
+      "pairSha256": "040e0a8f5e74622557a13781773b667ab691b5e52edcce288c9f92c9ce2d103a",
+      "duration_ms": 5068
+    },
+    {
+      "source": "zh-CN",
+      "target": "hi",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proofSha256": "79c87623db68c2714b92324552cbbe75898a9f22eff8aad41760a6f2810e010d"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proofSha256": "ad8aecb437285f951083aaa12f280a66b3e694c49a05f95a7bfcfe137c26da3d"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proofSha256": "4a732db4bac637b3f3ce5b1c0ae97ec78a8a88068d1bd0a711398bde49e6f8b1"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proofSha256": "3c44228990684bf17a7a6087179d1458c729e26b37b0940a32e5bba0011ae248"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proofSha256": "118cd311a329ad75f5f497e671326e96fc3d3fb9a20cccfa97dd5b65855ac288"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proofSha256": "47177f09bc5abf62fab76b4c68c25ac2d1577258814303647d1abf2c7f326b7f"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proofSha256": "82cab50fe0a6593a53a1da4ca94f755212ccc0ae68a17d41c03dcb2db6f5e49d"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proofSha256": "5cc38bae1cc9e83604ac4bd315156a4f302cfba842ec2c0112daf5e944e099f9"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proofSha256": "37975eaefff5b59340d6330a1548d4a2d033d2ae91937b60d6566e1cc186ddfd"
+        }
+      ],
+      "pairSha256": "f58420c77229f56d185d4beebaea25e4ebe97a70972004bd814a6478c8949ff5",
+      "duration_ms": 5073
+    },
+    {
+      "source": "zh-CN",
+      "target": "es",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proofSha256": "79c87623db68c2714b92324552cbbe75898a9f22eff8aad41760a6f2810e010d"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proofSha256": "ad8aecb437285f951083aaa12f280a66b3e694c49a05f95a7bfcfe137c26da3d"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proofSha256": "4a732db4bac637b3f3ce5b1c0ae97ec78a8a88068d1bd0a711398bde49e6f8b1"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proofSha256": "3c44228990684bf17a7a6087179d1458c729e26b37b0940a32e5bba0011ae248"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proofSha256": "118cd311a329ad75f5f497e671326e96fc3d3fb9a20cccfa97dd5b65855ac288"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proofSha256": "47177f09bc5abf62fab76b4c68c25ac2d1577258814303647d1abf2c7f326b7f"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proofSha256": "82cab50fe0a6593a53a1da4ca94f755212ccc0ae68a17d41c03dcb2db6f5e49d"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proofSha256": "5cc38bae1cc9e83604ac4bd315156a4f302cfba842ec2c0112daf5e944e099f9"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proofSha256": "37975eaefff5b59340d6330a1548d4a2d033d2ae91937b60d6566e1cc186ddfd"
+        }
+      ],
+      "pairSha256": "20a85a9f9d0f70dd747df096f77221a2b4dc6f5f43928aa01f8502c543e2538d",
+      "duration_ms": 4953
+    },
+    {
+      "source": "zh-CN",
+      "target": "ar",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proofSha256": "79c87623db68c2714b92324552cbbe75898a9f22eff8aad41760a6f2810e010d"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proofSha256": "ad8aecb437285f951083aaa12f280a66b3e694c49a05f95a7bfcfe137c26da3d"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proofSha256": "4a732db4bac637b3f3ce5b1c0ae97ec78a8a88068d1bd0a711398bde49e6f8b1"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proofSha256": "3c44228990684bf17a7a6087179d1458c729e26b37b0940a32e5bba0011ae248"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proofSha256": "118cd311a329ad75f5f497e671326e96fc3d3fb9a20cccfa97dd5b65855ac288"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proofSha256": "47177f09bc5abf62fab76b4c68c25ac2d1577258814303647d1abf2c7f326b7f"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proofSha256": "82cab50fe0a6593a53a1da4ca94f755212ccc0ae68a17d41c03dcb2db6f5e49d"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proofSha256": "5cc38bae1cc9e83604ac4bd315156a4f302cfba842ec2c0112daf5e944e099f9"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proofSha256": "37975eaefff5b59340d6330a1548d4a2d033d2ae91937b60d6566e1cc186ddfd"
+        }
+      ],
+      "pairSha256": "cacb326b9e88eb9aeee16ec0e60634619d83b746a318d16383359680aff0708d",
+      "duration_ms": 5028
+    },
+    {
+      "source": "zh-CN",
+      "target": "fr",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proofSha256": "79c87623db68c2714b92324552cbbe75898a9f22eff8aad41760a6f2810e010d"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proofSha256": "ad8aecb437285f951083aaa12f280a66b3e694c49a05f95a7bfcfe137c26da3d"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proofSha256": "4a732db4bac637b3f3ce5b1c0ae97ec78a8a88068d1bd0a711398bde49e6f8b1"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proofSha256": "3c44228990684bf17a7a6087179d1458c729e26b37b0940a32e5bba0011ae248"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proofSha256": "118cd311a329ad75f5f497e671326e96fc3d3fb9a20cccfa97dd5b65855ac288"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proofSha256": "47177f09bc5abf62fab76b4c68c25ac2d1577258814303647d1abf2c7f326b7f"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proofSha256": "82cab50fe0a6593a53a1da4ca94f755212ccc0ae68a17d41c03dcb2db6f5e49d"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proofSha256": "5cc38bae1cc9e83604ac4bd315156a4f302cfba842ec2c0112daf5e944e099f9"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proofSha256": "37975eaefff5b59340d6330a1548d4a2d033d2ae91937b60d6566e1cc186ddfd"
+        }
+      ],
+      "pairSha256": "837ad6a299da842fa210fb50bac7225ef23a007f296d16f362c54e45de6102db",
+      "duration_ms": 5000
+    },
+    {
+      "source": "hi",
+      "target": "en",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proofSha256": "5abedb668b51c8ad2c7fd11d1a27ff0e81b511299b1f926d9456e5a1a523ac0e"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proofSha256": "4aa609f2e5709168289b442b43a36e06265609ec926ef541a403d2cfc3a08679"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proofSha256": "a9bddc62d0c2b24c452f4e49b6485b259228d7523848ba6a5dd2381f42858dc7"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proofSha256": "c520192b2c3c7c85f187851b2dd1d5de8e36cef444bb28d5b79b893232ed4ec8"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proofSha256": "ac7835329088f6633b04751a415d747848655b274aadac79208052e149990ddd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proofSha256": "7031062c2cf54188d8e9cefb8bee61b086959a346a5c800f4c1824e2ede7ecc3"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proofSha256": "2a820a41ab0fec41871604dfdad855856c0c82177b171315d1150c89f55c29fd"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proofSha256": "321779f3df881a3c8e85ee697dd527634f8c32bb5058ffa183346b90edfa42e1"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proofSha256": "92eb35843a22c2a7e6b767926deb077d1bf02f7aab8b911744f6d5348fa6dbde"
+        }
+      ],
+      "pairSha256": "e6b4a2574264d9a13a9fc9c7f172dc9960fa3cc5be884cac3dfa3b74e6641a6b",
+      "duration_ms": 4807
+    },
+    {
+      "source": "hi",
+      "target": "pt-BR",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proofSha256": "5abedb668b51c8ad2c7fd11d1a27ff0e81b511299b1f926d9456e5a1a523ac0e"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proofSha256": "4aa609f2e5709168289b442b43a36e06265609ec926ef541a403d2cfc3a08679"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proofSha256": "a9bddc62d0c2b24c452f4e49b6485b259228d7523848ba6a5dd2381f42858dc7"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proofSha256": "c520192b2c3c7c85f187851b2dd1d5de8e36cef444bb28d5b79b893232ed4ec8"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proofSha256": "ac7835329088f6633b04751a415d747848655b274aadac79208052e149990ddd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proofSha256": "7031062c2cf54188d8e9cefb8bee61b086959a346a5c800f4c1824e2ede7ecc3"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proofSha256": "2a820a41ab0fec41871604dfdad855856c0c82177b171315d1150c89f55c29fd"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proofSha256": "321779f3df881a3c8e85ee697dd527634f8c32bb5058ffa183346b90edfa42e1"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proofSha256": "92eb35843a22c2a7e6b767926deb077d1bf02f7aab8b911744f6d5348fa6dbde"
+        }
+      ],
+      "pairSha256": "456233389f3456253aee9689b40f374a391af96c265049c6783b88c24f078fec",
+      "duration_ms": 4952
+    },
+    {
+      "source": "hi",
+      "target": "zh-CN",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proofSha256": "5abedb668b51c8ad2c7fd11d1a27ff0e81b511299b1f926d9456e5a1a523ac0e"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proofSha256": "4aa609f2e5709168289b442b43a36e06265609ec926ef541a403d2cfc3a08679"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proofSha256": "a9bddc62d0c2b24c452f4e49b6485b259228d7523848ba6a5dd2381f42858dc7"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proofSha256": "c520192b2c3c7c85f187851b2dd1d5de8e36cef444bb28d5b79b893232ed4ec8"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proofSha256": "ac7835329088f6633b04751a415d747848655b274aadac79208052e149990ddd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proofSha256": "7031062c2cf54188d8e9cefb8bee61b086959a346a5c800f4c1824e2ede7ecc3"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proofSha256": "2a820a41ab0fec41871604dfdad855856c0c82177b171315d1150c89f55c29fd"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proofSha256": "321779f3df881a3c8e85ee697dd527634f8c32bb5058ffa183346b90edfa42e1"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proofSha256": "92eb35843a22c2a7e6b767926deb077d1bf02f7aab8b911744f6d5348fa6dbde"
+        }
+      ],
+      "pairSha256": "4310da707f76d572aa1ad0adc2f30e1d41453ef4b578a951c8b04c0855cb1745",
+      "duration_ms": 5003
+    },
+    {
+      "source": "hi",
+      "target": "es",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proofSha256": "5abedb668b51c8ad2c7fd11d1a27ff0e81b511299b1f926d9456e5a1a523ac0e"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proofSha256": "4aa609f2e5709168289b442b43a36e06265609ec926ef541a403d2cfc3a08679"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proofSha256": "a9bddc62d0c2b24c452f4e49b6485b259228d7523848ba6a5dd2381f42858dc7"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proofSha256": "c520192b2c3c7c85f187851b2dd1d5de8e36cef444bb28d5b79b893232ed4ec8"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proofSha256": "ac7835329088f6633b04751a415d747848655b274aadac79208052e149990ddd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proofSha256": "7031062c2cf54188d8e9cefb8bee61b086959a346a5c800f4c1824e2ede7ecc3"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proofSha256": "2a820a41ab0fec41871604dfdad855856c0c82177b171315d1150c89f55c29fd"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proofSha256": "321779f3df881a3c8e85ee697dd527634f8c32bb5058ffa183346b90edfa42e1"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proofSha256": "92eb35843a22c2a7e6b767926deb077d1bf02f7aab8b911744f6d5348fa6dbde"
+        }
+      ],
+      "pairSha256": "174c911af8618e3a163cd7ddb2a587647c723a39a83c4066cd22c249eb6926c8",
+      "duration_ms": 4885
+    },
+    {
+      "source": "hi",
+      "target": "ar",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proofSha256": "5abedb668b51c8ad2c7fd11d1a27ff0e81b511299b1f926d9456e5a1a523ac0e"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proofSha256": "4aa609f2e5709168289b442b43a36e06265609ec926ef541a403d2cfc3a08679"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proofSha256": "a9bddc62d0c2b24c452f4e49b6485b259228d7523848ba6a5dd2381f42858dc7"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proofSha256": "c520192b2c3c7c85f187851b2dd1d5de8e36cef444bb28d5b79b893232ed4ec8"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proofSha256": "ac7835329088f6633b04751a415d747848655b274aadac79208052e149990ddd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proofSha256": "7031062c2cf54188d8e9cefb8bee61b086959a346a5c800f4c1824e2ede7ecc3"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proofSha256": "2a820a41ab0fec41871604dfdad855856c0c82177b171315d1150c89f55c29fd"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proofSha256": "321779f3df881a3c8e85ee697dd527634f8c32bb5058ffa183346b90edfa42e1"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proofSha256": "92eb35843a22c2a7e6b767926deb077d1bf02f7aab8b911744f6d5348fa6dbde"
+        }
+      ],
+      "pairSha256": "a5eaea43f332e3a23698eddbdc1c51ea86822cf3864141998479238266c3f5e4",
+      "duration_ms": 4845
+    },
+    {
+      "source": "hi",
+      "target": "fr",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proofSha256": "5abedb668b51c8ad2c7fd11d1a27ff0e81b511299b1f926d9456e5a1a523ac0e"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proofSha256": "4aa609f2e5709168289b442b43a36e06265609ec926ef541a403d2cfc3a08679"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proofSha256": "a9bddc62d0c2b24c452f4e49b6485b259228d7523848ba6a5dd2381f42858dc7"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proofSha256": "c520192b2c3c7c85f187851b2dd1d5de8e36cef444bb28d5b79b893232ed4ec8"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proofSha256": "ac7835329088f6633b04751a415d747848655b274aadac79208052e149990ddd"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proofSha256": "7031062c2cf54188d8e9cefb8bee61b086959a346a5c800f4c1824e2ede7ecc3"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proofSha256": "2a820a41ab0fec41871604dfdad855856c0c82177b171315d1150c89f55c29fd"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proofSha256": "321779f3df881a3c8e85ee697dd527634f8c32bb5058ffa183346b90edfa42e1"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proofSha256": "92eb35843a22c2a7e6b767926deb077d1bf02f7aab8b911744f6d5348fa6dbde"
+        }
+      ],
+      "pairSha256": "517a5ca5ff3c1617c6582f36273df6d23400a9ea06609583a4d6150007d4d04d",
+      "duration_ms": 4822
+    },
+    {
+      "source": "es",
+      "target": "en",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "fe64bd14fd180d60c7b52d274e7a8470f173a8f7c9141ea0f0773e3af3cf24ef",
+      "duration_ms": 4691
+    },
+    {
+      "source": "es",
+      "target": "pt-BR",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "d5e14632ea6218a3da17acb1b4c24ddf29634f24dd1010a9e550795d4ddaf5d7",
+      "duration_ms": 4710
+    },
+    {
+      "source": "es",
+      "target": "zh-CN",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "fa53b1d61484e2134631002e2f3b2bcd4480255d7382460d4e5ae5b3d1dde848",
+      "duration_ms": 4734
+    },
+    {
+      "source": "es",
+      "target": "hi",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "9482c5a844a6a86fc1aad1fa901686e53c67161b4f289fa38c6d28dd4d407fdc",
+      "duration_ms": 4741
+    },
+    {
+      "source": "es",
+      "target": "ar",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "02a799610948f5edd43ed51e3c88d3c07eb3ad2168948554067b67225d86822f",
+      "duration_ms": 4772
+    },
+    {
+      "source": "es",
+      "target": "fr",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "6f187d4c6e2440fabeb300b4f5c3f46c81a0bdf3000aa337b527e9a440569bac",
+      "duration_ms": 4764
+    },
+    {
+      "source": "ar",
+      "target": "en",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proofSha256": "3c0710e3c53db8a4764bfc01b1e52ec7409c274e47990c93f9803a358fffff28"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proofSha256": "a5ff3f1421b677750262657821d7b90155d7de4a9f3a71ed8113b4f267670682"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proofSha256": "71aae8a89a01c267a28b45a8d7b499ed2abe4fd79f7d91e7fcdd996ce8a814fa"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proofSha256": "7652daeb06940670e66358e0f5f2ec2634f146bb581420d87ab1d521c67fb60e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proofSha256": "7fb0701fc127df13d7c85ee61fa852bc53f2772ee05b90c75d3e7a30719400b2"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proofSha256": "692629a5e32bfe600ea8aac523cd68f94334f62c921d42cecdd9313363f1fdb1"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proofSha256": "865b36c81c56fe073fa442fe92cac94e612f56c4bda7e5b868e287ef381063a1"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proofSha256": "d1e78709820f4864ef9a0a6205f43595899cb09a89a1651b66f78ffc4a66d55e"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proofSha256": "c8b12ed5849a02d145fba23442ae90e79c135cec7dcd9805a3fd72261be0e01f"
+        }
+      ],
+      "pairSha256": "138d71151e9f4c7bfcd3798c8fad27e92c3da462692a1c3fd0bb3a74da812c88",
+      "duration_ms": 4849
+    },
+    {
+      "source": "ar",
+      "target": "pt-BR",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proofSha256": "3c0710e3c53db8a4764bfc01b1e52ec7409c274e47990c93f9803a358fffff28"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proofSha256": "a5ff3f1421b677750262657821d7b90155d7de4a9f3a71ed8113b4f267670682"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proofSha256": "71aae8a89a01c267a28b45a8d7b499ed2abe4fd79f7d91e7fcdd996ce8a814fa"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proofSha256": "7652daeb06940670e66358e0f5f2ec2634f146bb581420d87ab1d521c67fb60e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proofSha256": "7fb0701fc127df13d7c85ee61fa852bc53f2772ee05b90c75d3e7a30719400b2"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proofSha256": "692629a5e32bfe600ea8aac523cd68f94334f62c921d42cecdd9313363f1fdb1"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proofSha256": "865b36c81c56fe073fa442fe92cac94e612f56c4bda7e5b868e287ef381063a1"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proofSha256": "d1e78709820f4864ef9a0a6205f43595899cb09a89a1651b66f78ffc4a66d55e"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proofSha256": "c8b12ed5849a02d145fba23442ae90e79c135cec7dcd9805a3fd72261be0e01f"
+        }
+      ],
+      "pairSha256": "5c2277d7971e67fc2ef5657ed996dad84425b8617bb02e095b562e22d1436871",
+      "duration_ms": 4844
+    },
+    {
+      "source": "ar",
+      "target": "zh-CN",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proofSha256": "3c0710e3c53db8a4764bfc01b1e52ec7409c274e47990c93f9803a358fffff28"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proofSha256": "a5ff3f1421b677750262657821d7b90155d7de4a9f3a71ed8113b4f267670682"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proofSha256": "71aae8a89a01c267a28b45a8d7b499ed2abe4fd79f7d91e7fcdd996ce8a814fa"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proofSha256": "7652daeb06940670e66358e0f5f2ec2634f146bb581420d87ab1d521c67fb60e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proofSha256": "7fb0701fc127df13d7c85ee61fa852bc53f2772ee05b90c75d3e7a30719400b2"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proofSha256": "692629a5e32bfe600ea8aac523cd68f94334f62c921d42cecdd9313363f1fdb1"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proofSha256": "865b36c81c56fe073fa442fe92cac94e612f56c4bda7e5b868e287ef381063a1"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proofSha256": "d1e78709820f4864ef9a0a6205f43595899cb09a89a1651b66f78ffc4a66d55e"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proofSha256": "c8b12ed5849a02d145fba23442ae90e79c135cec7dcd9805a3fd72261be0e01f"
+        }
+      ],
+      "pairSha256": "1e6f1b9c8da070b3970e8deb3ee65695293c1370d1ec08303718b2f055293a2c",
+      "duration_ms": 4975
+    },
+    {
+      "source": "ar",
+      "target": "hi",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proofSha256": "3c0710e3c53db8a4764bfc01b1e52ec7409c274e47990c93f9803a358fffff28"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proofSha256": "a5ff3f1421b677750262657821d7b90155d7de4a9f3a71ed8113b4f267670682"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proofSha256": "71aae8a89a01c267a28b45a8d7b499ed2abe4fd79f7d91e7fcdd996ce8a814fa"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proofSha256": "7652daeb06940670e66358e0f5f2ec2634f146bb581420d87ab1d521c67fb60e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proofSha256": "7fb0701fc127df13d7c85ee61fa852bc53f2772ee05b90c75d3e7a30719400b2"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proofSha256": "692629a5e32bfe600ea8aac523cd68f94334f62c921d42cecdd9313363f1fdb1"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proofSha256": "865b36c81c56fe073fa442fe92cac94e612f56c4bda7e5b868e287ef381063a1"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proofSha256": "d1e78709820f4864ef9a0a6205f43595899cb09a89a1651b66f78ffc4a66d55e"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proofSha256": "c8b12ed5849a02d145fba23442ae90e79c135cec7dcd9805a3fd72261be0e01f"
+        }
+      ],
+      "pairSha256": "a8d82b2b6a17829193c8b14d459c6b96a1f3580820ebb688cdab0ad16d1deb12",
+      "duration_ms": 4985
+    },
+    {
+      "source": "ar",
+      "target": "es",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proofSha256": "3c0710e3c53db8a4764bfc01b1e52ec7409c274e47990c93f9803a358fffff28"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proofSha256": "a5ff3f1421b677750262657821d7b90155d7de4a9f3a71ed8113b4f267670682"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proofSha256": "71aae8a89a01c267a28b45a8d7b499ed2abe4fd79f7d91e7fcdd996ce8a814fa"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proofSha256": "7652daeb06940670e66358e0f5f2ec2634f146bb581420d87ab1d521c67fb60e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proofSha256": "7fb0701fc127df13d7c85ee61fa852bc53f2772ee05b90c75d3e7a30719400b2"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proofSha256": "692629a5e32bfe600ea8aac523cd68f94334f62c921d42cecdd9313363f1fdb1"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proofSha256": "865b36c81c56fe073fa442fe92cac94e612f56c4bda7e5b868e287ef381063a1"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proofSha256": "d1e78709820f4864ef9a0a6205f43595899cb09a89a1651b66f78ffc4a66d55e"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proofSha256": "c8b12ed5849a02d145fba23442ae90e79c135cec7dcd9805a3fd72261be0e01f"
+        }
+      ],
+      "pairSha256": "4976c349a90b5b9240e2c487315fd7b86e9f6c27801513fcb639db72ea8ba2ed",
+      "duration_ms": 4744
+    },
+    {
+      "source": "ar",
+      "target": "fr",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proofSha256": "3c0710e3c53db8a4764bfc01b1e52ec7409c274e47990c93f9803a358fffff28"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proofSha256": "a5ff3f1421b677750262657821d7b90155d7de4a9f3a71ed8113b4f267670682"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proofSha256": "71aae8a89a01c267a28b45a8d7b499ed2abe4fd79f7d91e7fcdd996ce8a814fa"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proofSha256": "7652daeb06940670e66358e0f5f2ec2634f146bb581420d87ab1d521c67fb60e"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proofSha256": "7fb0701fc127df13d7c85ee61fa852bc53f2772ee05b90c75d3e7a30719400b2"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proofSha256": "692629a5e32bfe600ea8aac523cd68f94334f62c921d42cecdd9313363f1fdb1"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proofSha256": "865b36c81c56fe073fa442fe92cac94e612f56c4bda7e5b868e287ef381063a1"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proofSha256": "d1e78709820f4864ef9a0a6205f43595899cb09a89a1651b66f78ffc4a66d55e"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proofSha256": "c8b12ed5849a02d145fba23442ae90e79c135cec7dcd9805a3fd72261be0e01f"
+        }
+      ],
+      "pairSha256": "b55e167d84c096d1668f3daf37cfdb6aecfeb9f91b84f8999000e722e19af79c",
+      "duration_ms": 4719
+    },
+    {
+      "source": "fr",
+      "target": "en",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "09f576e230f1c01fa6d253549fb54b06f4298b3a32dbeb32d738939d8fad8e50",
+      "duration_ms": 4625
+    },
+    {
+      "source": "fr",
+      "target": "pt-BR",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "48926041a02b15f6557ad22fcdaaf423cbe8e030e044f7a0a94727a0919fd009",
+      "duration_ms": 4627
+    },
+    {
+      "source": "fr",
+      "target": "zh-CN",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "4ce93875084edd6cd5d628e095ab115630b6d898a6c9a5e1f6b8d03558ef8216",
+      "duration_ms": 4866
+    },
+    {
+      "source": "fr",
+      "target": "hi",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "7075ceb1694c42660720f0896ff5d1440b5e31d1ecb8665a2d92530bd7fa5bc2",
+      "duration_ms": 4917
+    },
+    {
+      "source": "fr",
+      "target": "es",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "6d794e1ce0482bc75fd0436e055a7d72a1f824fcb4e6feceb338dd8eea4790ff",
+      "duration_ms": 4915
+    },
+    {
+      "source": "fr",
+      "target": "ar",
+      "browser": {
+        "channel": "chrome",
+        "version": "158.0.8127.38"
+      },
+      "modules": [
+        {
+          "module": "standard",
+          "operation": "evaluate",
+          "normalized": "9007199254740993.125+0.125",
+          "result": "36028797018963973/4",
+          "requestSha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proofSha256": "91b11e8d563b45a5bdc208edfe83c74f7e56ecbb771da2d5b8cc5395a71b48d3"
+        },
+        {
+          "module": "scientific",
+          "operation": "evaluate",
+          "normalized": "log(8,2)",
+          "result": "3",
+          "requestSha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proofSha256": "bfbfb4125220981d8b5246a890943704f7437b9777c9911b8ca399831e264083"
+        },
+        {
+          "module": "algebra",
+          "operation": "system",
+          "normalized": "x+y=1.5; x-y=0.5",
+          "result": "x=1; y=1/2",
+          "requestSha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proofSha256": "7635a55ce021545b8a28401d1f3018525fcc09ffb81f1a5d41551fd7bc79cc24"
+        },
+        {
+          "module": "calculus",
+          "operation": "numerical_integral",
+          "normalized": "x",
+          "result": "0.125",
+          "requestSha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proofSha256": "79284ef8fe644e9639551fe19e78851d3898d9bdaeed27809da4c07e86a43ea0"
+        },
+        {
+          "module": "linear-algebra",
+          "operation": "determinant",
+          "normalized": "0.5 0\n0 1",
+          "result": "1/2",
+          "requestSha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proofSha256": "cfc0612b6f4f4b018097a31f64d8ab57a72ad63852314bb8c5ca878abed479e1"
+        },
+        {
+          "module": "geometry",
+          "operation": "distance",
+          "normalized": "0 0;1.5 2",
+          "result": "distance=5/2",
+          "requestSha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proofSha256": "6c5d11f6e5b8582fd3021ff61e66f69619214006ccf5923fb8d46d827af5f04a"
+        },
+        {
+          "module": "discrete-mathematics",
+          "operation": "set_union",
+          "normalized": "9007199254740993 alpha-1|9007199254740992",
+          "result": "[9007199254740992,9007199254740993,\"alpha-1\"]",
+          "requestSha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proofSha256": "297776ebe7f2522b18f74f55ec670aa697a89bef999350a699726ace304e1e68"
+        },
+        {
+          "module": "programmer",
+          "operation": "convert",
+          "normalized": "F0",
+          "result": "binary=000011110000; octal=0360; decimal=240; hexadecimal=0F0",
+          "requestSha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proofSha256": "2a8830660c3e347d50854d3fd3932782ba8b5e2a563c2bb7fa74530b8b1ee185"
+        },
+        {
+          "module": "converter",
+          "operation": "currency",
+          "normalized": "1.25",
+          "result": "amount=25/8; status=within_validity",
+          "requestSha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proofSha256": "a57df3af46d5d465ba5408b0bd02ffbe94fbba820253989e36815803c87c686b"
+        },
+        {
+          "module": "date-time",
+          "operation": "timezone",
+          "normalized": "2024-11-03T01:30:00",
+          "result": "local=2024-11-03T05:30:00; utc=2024-11-03T05:30:00Z; from_offset=-04:00; to_offset=+00:00; from_dst=true; to_dst=false; resolution=earlier",
+          "requestSha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proofSha256": "25518001ddc3b62eab357b33cfc35ab4576794e006e41def7a17cc098f418427"
+        }
+      ],
+      "pairSha256": "1d245886c527f58efe0feabf31db9620d22156c834f45d253a1fcba3ecc37ed8",
+      "duration_ms": 5064
+    }
+  ],
+  "lifecycle": [
+    {
+      "title": "language changes before first evaluation and during a held real request preserve Scientific notation and portable proof",
+      "status": "passed",
+      "duration_ms": 960
+    },
+    {
+      "title": "an explicitly suspended Scientific draft survives language changes, preference reset and warm offline catalogs",
+      "status": "passed",
+      "duration_ms": 2159
+    },
+    {
+      "title": "incomplete notation and an ambiguous civil time remain explicit errors across language changes",
+      "status": "passed",
+      "duration_ms": 1048
+    },
+    {
+      "title": "independently edited currency amount retains the rate notation, dates and unmodified source text",
+      "status": "passed",
+      "duration_ms": 1377
+    },
+    {
+      "title": "numeric set members and working-calendar dates preserve their grammar while malformed names remain invalid",
+      "status": "passed",
+      "duration_ms": 1710
+    }
+  ]
+}

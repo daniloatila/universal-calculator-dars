@@ -1,0 +1,354 @@
+{
+  "schema": 1,
+  "version": "0.3.1",
+  "tested_commit": "2a8e0f5a174afe850f245b2ae4cc8e974119bf5d",
+  "baseline_0_2_2": {
+    "passed": 602,
+    "failed": 0,
+    "suites": [
+      {
+        "id": "rust_core",
+        "baseline": 16,
+        "rerun": 16,
+        "failed": 0
+      },
+      {
+        "id": "cli_independent_oracle",
+        "baseline": 157,
+        "rerun": 157,
+        "failed": 0
+      },
+      {
+        "id": "wasm_structured_independent_oracle",
+        "baseline": 291,
+        "rerun": 291,
+        "failed": 0
+      },
+      {
+        "id": "cli_wasm_parity",
+        "baseline": 20,
+        "rerun": 20,
+        "failed": 0
+      },
+      {
+        "id": "typescript_node",
+        "baseline": 57,
+        "rerun": 57,
+        "failed": 0
+      },
+      {
+        "id": "physical_windows_chrome",
+        "baseline": 27,
+        "rerun": 27,
+        "failed": 0
+      },
+      {
+        "id": "browser_explicit_offline",
+        "baseline": 10,
+        "rerun": 10,
+        "failed": 0
+      },
+      {
+        "id": "native_windows_webview2_ui",
+        "baseline": 17,
+        "rerun": 17,
+        "failed": 0
+      },
+      {
+        "id": "native_windows_provider_credentials",
+        "baseline": 2,
+        "rerun": 2,
+        "failed": 0
+      },
+      {
+        "id": "native_windows_sensor_rust",
+        "baseline": 5,
+        "rerun": 5,
+        "failed": 0
+      }
+    ]
+  },
+  "rust": {
+    "standard": 21,
+    "universal": 68,
+    "windows_sensors": 5,
+    "windows_credentials": 2
+  },
+  "node": {
+    "passed": 69,
+    "failed": 0
+  },
+  "browser": {
+    "chrome_passed": 146,
+    "standalone_offline_passed": 10,
+    "directed_pairs": 42,
+    "module_pairs": 420,
+    "lifecycle_cases": 5,
+    "browser_report_sha256": "bcaf3858268569f7be3df7c51530be664d6d3ee102a27f9294dc3633a08dc784"
+  },
+  "independent_math": {
+    "advanced": 2355,
+    "advanced_by_suite": {
+      "scientific": {
+        "suite": "scientific-sympy-mpmath",
+        "passed": 102,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "mpmath": "1.3.0",
+        "oracle_digits": 125
+      },
+      "algebra": {
+        "suite": "algebra-sympy",
+        "passed": 184,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "cases": {
+          "expand": 17,
+          "factor": 18,
+          "inequality": 21,
+          "normalized replay": 7,
+          "polynomial": 5,
+          "rejected": 37,
+          "simplify": 15,
+          "solve": 31,
+          "substitute": 9,
+          "system": 13,
+          "verify": 11
+        }
+      },
+      "calculus": {
+        "suite": "calculus-sympy-mpmath",
+        "passed": 210,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "mpmath": "1.3.0",
+        "cases": {
+          "antiderivative": 15,
+          "derivative": 27,
+          "integral": 23,
+          "limit": 39,
+          "normalized replay": 6,
+          "numerical integral": 19,
+          "rejected": 60,
+          "series": 20,
+          "untrusted display text": 1
+        }
+      },
+      "linear-algebra": {
+        "suite": "linear-algebra-sympy-numpy-scipy",
+        "passed": 223,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "numpy": "2.5.1",
+        "scipy": "1.18.1",
+        "cases": {
+          "add": 10,
+          "cross": 8,
+          "determinant": 9,
+          "dot": 9,
+          "eigenvalues": 18,
+          "eigenvectors": 18,
+          "inverse": 6,
+          "lu": 12,
+          "multiply": 11,
+          "normalized replay": 6,
+          "qr": 15,
+          "rank": 14,
+          "rejected": 50,
+          "solve": 14,
+          "subtract": 9,
+          "transpose": 13,
+          "untrusted display text": 1
+        }
+      },
+      "geometry": {
+        "suite": "geometry-sympy",
+        "passed": 159,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "cases": {
+          "angle": 22,
+          "circle": 5,
+          "cone": 4,
+          "cylinder": 4,
+          "distance": 11,
+          "normalized replay": 6,
+          "polygon": 13,
+          "prism": 5,
+          "rectangle": 13,
+          "rejected": 46,
+          "segments": 16,
+          "sphere": 4,
+          "triangle": 9,
+          "untrusted display text": 1
+        }
+      },
+      "discrete-mathematics": {
+        "suite": "discrete-mathematics-python-sympy",
+        "passed": 289,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "cases": {
+          "arrangements": 20,
+          "combinations": 20,
+          "factor": 14,
+          "gcd": 9,
+          "lcm": 9,
+          "logic": 15,
+          "modular": 23,
+          "normalized replay": 10,
+          "permutations": 14,
+          "prime": 22,
+          "rejected": 59,
+          "sequence": 24,
+          "set_difference": 6,
+          "set_intersection": 7,
+          "set_subset": 7,
+          "set_symmetric_difference": 6,
+          "set_union": 9,
+          "truth_table": 14,
+          "untrusted display text": 1
+        }
+      },
+      "programmer": {
+        "suite": "programmer-python-integers",
+        "passed": 368,
+        "failed": 0,
+        "python": "3.14.7",
+        "cases": {
+          "and": 10,
+          "convert": 91,
+          "normalized replay": 6,
+          "not": 22,
+          "or": 10,
+          "rejected": 51,
+          "rotate_left": 22,
+          "rotate_right": 22,
+          "shift_left": 30,
+          "shift_right_arithmetic": 31,
+          "shift_right_logical": 30,
+          "twos_complement": 25,
+          "untrusted display text": 1,
+          "xor": 17
+        }
+      },
+      "converter": {
+        "suite": "converter-fraction-decimal-sympy",
+        "passed": 342,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "cases": {
+          "absolute_temperature": 20,
+          "acceleration": 8,
+          "angle": 13,
+          "approximate pressure": 11,
+          "area": 17,
+          "currency expired": 1,
+          "currency not_yet_valid": 2,
+          "currency unverified_validity": 1,
+          "currency within_validity": 12,
+          "digital_storage": 22,
+          "energy": 12,
+          "force": 8,
+          "fuel": 16,
+          "length": 18,
+          "mass": 9,
+          "normalized replay": 8,
+          "power": 7,
+          "pressure": 13,
+          "rejected": 68,
+          "speed": 9,
+          "temperature_difference": 9,
+          "time": 11,
+          "transfer_rate": 25,
+          "untrusted display text": 1,
+          "volume": 21
+        }
+      },
+      "date-time": {
+        "suite": "date-time-datetime-calendar-zoneinfo",
+        "passed": 403,
+        "failed": 0,
+        "tzdata": "2026.6",
+        "iana_tzdb": "2026f",
+        "cases": {
+          "age": 18,
+          "business_days": 32,
+          "calendar": 30,
+          "deadline": 29,
+          "difference": 27,
+          "duration": 29,
+          "identical full record replays": 8,
+          "period": 21,
+          "structured rejections": 143,
+          "timezone": 44,
+          "untrusted display text": 1,
+          "zone gaps and overlaps rejected": 21
+        }
+      },
+      "scientific-complex": {
+        "suite": "scientific-complex-mpmath",
+        "passed": 75,
+        "failed": 0,
+        "cases": {
+          "principal_values": 41,
+          "composed": 18,
+          "real_policy": 7,
+          "bounded_rejections": 9
+        },
+        "mpmath": "1.3.0",
+        "oracle_decimal_digits": 105,
+        "requested_significant_digits": 32,
+        "component_relative_tolerance": "2e-29 with 1e-400 scale floor"
+      }
+    },
+    "legacy_standard": 157,
+    "wasm_structured_standard": 291
+  },
+  "cli_wasm": {
+    "advanced": 305,
+    "advanced_isolation": 37,
+    "advanced_by_suite": {
+      "scientific": 19,
+      "algebra": 28,
+      "calculus": 27,
+      "linear-algebra": 30,
+      "geometry": 32,
+      "discrete-mathematics": 38,
+      "programmer": 36,
+      "converter": 46,
+      "date-time": 49
+    },
+    "standard": 20,
+    "standard_proof": {
+      "suite": "standard-record-cli-wasm",
+      "passed": 9,
+      "replays": 5,
+      "failed": 0
+    }
+  },
+  "proof_schema": {
+    "annotated": true,
+    "unannotated": true,
+    "invalid_rejected": true,
+    "older": true
+  },
+  "line_coverage": {
+    "standard": {
+      "covered": 726,
+      "total": 733,
+      "percent": 99.04502046384721
+    },
+    "universal": {
+      "covered": 10189,
+      "total": 10495,
+      "percent": 97.08432586946165
+    }
+  },
+  "windows": {
+    "ui_passed": 17,
+    "locale_replay_cases": 3,
+    "provenance": "windows-artifact.json",
+    "execution_environment": "local Windows 11 with installed WebView2"
+  }
+}

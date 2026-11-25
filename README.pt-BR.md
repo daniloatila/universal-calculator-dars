@@ -4,12 +4,12 @@
 
 [English](README.md)
 
-O DARS é uma plataforma de computação local de Danilo Átila. A versão 0.3.0 reúne dez ferramentas na interface compartilhada entre Windows e navegador, com resultados calculados em Rust e uma linha de comando nativa.
+O DARS é uma plataforma de computação local de Danilo Átila. Reúne dez ferramentas na interface compartilhada entre Windows e navegador, com resultados calculados em Rust e uma linha de comando nativa. A revisão 0.3.1 preserva a notação dos campos editáveis ao mudar o idioma da interface.
 
 - **Aritmética e análise** — Standard, Scientific, Álgebra, Cálculo e Álgebra Linear.
 - **Ferramentas especializadas** — Geometria, Matemática Discreta, Programador, Conversor e Data e Hora.
 
-A ferramenta ativa carrega seus próprios recursos matemáticos. Os registros de cálculo podem ser consultados e baixados localmente. A Standard funciona offline após a preparação da interface web, e as ferramentas avançadas ficam disponíveis offline quando seus recursos entram no cache. [Relatório de revisão da 0.3.0](evidence/objective-03/REPORT.pt-BR.md) · [Verificação dos módulos](evidence/objective-03/PLAN.pt-BR.md) · [Registros de cálculo](evidence/objective-03/calculation-proof/contract.pt-BR.md)
+A ferramenta ativa carrega seus próprios recursos matemáticos. Os registros de cálculo podem ser consultados e baixados localmente. A Standard funciona offline após a preparação da interface web, e as ferramentas avançadas ficam disponíveis offline quando seus recursos entram no cache. [Auditoria de idioma da 0.3.1](evidence/objective-03/revision-01/REPORT.pt-BR.md) · [Auditoria da 0.3.0](evidence/objective-03/REPORT.pt-BR.md) · [Registros de cálculo](evidence/objective-03/calculation-proof/contract.pt-BR.md)
 
 ## Fundação
 

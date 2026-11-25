@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "objective": "03",
+  "revision": "01",
+  "previous_version": "0.3.0",
+  "candidate_version": "0.3.1",
+  "independent_baseline_assessment": { "score": 90, "out_of": 100, "approval": "pending" },
+  "baseline": {
+    "audited_source_commit": "c3af4870b6fe781f1b7526995fcd3761791aeead",
+    "evidence_commit": "9e491d266b73e357046483aa8ff8aa45daf2103f",
+    "windows_sha256": "8c2da09e07fa9e5a95bf3e068105b63a2e1e860582fb371dcc0bd4ace4db3d88",
+    "webview2": "158.0.4370.33",
+    "observation": "windows-baseline.json"
+  },
+  "candidate": {
+    "source_commit": "2a8e0f5a174afe850f245b2ae4cc8e974119bf5d",
+    "windows_sha256": "80ff0a020fd25a0c2ec8aebd19f84361297ea9d55cbc6f7d4b90d6f24168885a",
+    "windows_observation": "windows-candidate.json",
+    "chrome_observation": "browser.json",
+    "transition_matrix": "locale-transition-matrix.json"
+  },
+  "findings": [
+    {
+      "id": "DARS-03-R01-01",
+      "severity": "high",
+      "baseline_evidence": "confirmed_by_windows_execution",
+      "title": "Scientific reinterprets unchanged function arguments after a locale change",
+      "cause": "The retained expression lacked origin metadata and submission used the current display locale decimal separator.",
+      "cases": [
+        {
+          "from": "en", "to": "pt-BR", "original": "log(8,2)",
+          "first": { "normalized": "log(8,2)", "result": "3", "exactness": "exact" },
+          "repeated": { "normalized": "log(8.2)", "result": "0.91381385238371668972315074469267", "exactness": "approximate" },
+          "meaning_changed": true
+        },
+        {
+          "from": "pt-BR", "to": "en", "original": "log(8;2)",
+          "first": { "normalized": "log(8,2)", "result": "3", "exactness": "exact" },
+          "repeated": { "normalized": "log(8,2)", "result": "3", "exactness": "exact" },
+          "meaning_changed": false
+        },
+        {
+          "from": "pt-BR", "to": "en", "original": "log(8,2)",
+          "first": { "normalized": "log(8.2)", "result": "0.91381385238371668972315074469267", "exactness": "approximate" },
+          "repeated": { "normalized": "log(8,2)", "result": "3", "exactness": "exact" },
+          "meaning_changed": true
+        }
+      ],
+      "remediation": "Keep expression origin in the draft and apply the Scientific grammar at submission.",
+      "candidate_status": "verified_in_chrome_and_local_windows"
+    },
+    {
+      "id": "DARS-03-R01-02",
+      "severity": "high",
+      "baseline_evidence": "source_review",
+      "title": "Display locale was coupled to numeric normalization in retained editor states",
+      "cause": "Several workspaces kept raw numeric text and took punctuation rules from rendering. Standard had a distinct locale effect that rewrote existing editor text and edit history.",
+      "remediation": "Retain each editable field's notation or apply its locale-independent grammar. Keep structure, identifiers, metadata and mathematical numbers in their existing roles. Carry notation through active and suspended workspaces.",
+      "candidate_status": "verified_across_ten_representative_browser_workspaces"
+    },
+    {
+      "id": "DARS-03-R01-03",
+      "severity": "medium",
+      "baseline_evidence": "source_review_and_scientific_observation",
+      "title": "The original expression alone did not identify its locale-specific syntax",
+      "cause": "Schema 1 already retained canonical input for replay. Its original expression could be ambiguous to an independent reader without its draft notation.",
+      "remediation": "Preserve canonical replay fields and add optional expression_locale provenance to new browser records within the existing size bound. Continue accepting earlier schema 1 records.",
+      "candidate_status": "verified_record_preservation_in_chrome_and_local_windows"
+    }
+  ]
+}
