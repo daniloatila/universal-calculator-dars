@@ -34,3 +34,16 @@ run(bindingTool, [
   "--out-dir", join(root, "apps", "web", "src", "wasm"),
   "--out-name", "dars_wasm",
 ]);
+
+for (const tool of ["scientific"]) {
+  run("cargo", [
+    "build", "--locked", "--release", "-p", "dars-tool-wasm", "--target", "wasm32-unknown-unknown",
+    "--no-default-features", "--features", tool,
+  ]);
+  run(bindingTool, [
+    join(target, "wasm32-unknown-unknown", "release", "dars_tool_wasm.wasm"),
+    "--target", "web",
+    "--out-dir", join(root, "apps", "web", "src", "tool-wasm", tool),
+    "--out-name", "dars_tool_wasm",
+  ]);
+}

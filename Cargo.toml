@@ -1,6 +1,6 @@
 [workspace]
-members = ["apps/desktop", "crates/dars-cli", "crates/dars-core", "crates/dars-wasm"]
-default-members = ["crates/dars-cli", "crates/dars-core", "crates/dars-wasm"]
+members = ["apps/desktop", "crates/dars-cli", "crates/dars-core", "crates/dars-wasm", "crates/dars-universal", "crates/dars-tool-wasm"]
+default-members = ["crates/dars-cli", "crates/dars-core", "crates/dars-wasm", "crates/dars-universal", "crates/dars-tool-wasm"]
 resolver = "3"
 
 [profile.release]

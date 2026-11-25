@@ -8,6 +8,7 @@ import { isLocale, loadMessages, LOCALES, preferredLocale } from './i18n';
 import type { Locale, Messages } from './i18n';
 import { createModuleManager } from './module-manager';
 import type { ModuleManagerOptions } from './module-manager';
+import ModuleNavigation from './module-navigation';
 import { primaryModules } from './module-registry';
 import type { RegisteredModule } from './module-registry';
 import { getAssetMode, observeAssetMode, packagedAssets } from './offline';
@@ -245,17 +246,13 @@ export default function App({ initialLanguage, modules = primaryModules, moduleO
           <h1>{description?.title ?? 'DARS'}</h1>
           {description?.description && <p>{description.description}</p>}
         </div>
-        {modules.length > 1 && <div className="privacy-actions">
-          <label>{m.operations.modulePicker}{' '}
-            <select value={selectedId ?? ''} onChange={(event) => chooseModule(event.target.value)}>
-              {modules.map(({ id, describe }) => <option key={id} value={id}>{describe(m).title}</option>)}
-            </select>
-          </label>
+        {modules.length > 1 && <ModuleNavigation modules={modules} selectedId={selectedId}
+          locale={locale} messages={m} select={chooseModule}>
           {phase === 'active' && <button type="button" className="quiet-action"
             onClick={() => stopModule('suspend')}>{m.operations.moduleSuspend}</button>}
           {['active', 'suspended', 'recoverable_failure'].includes(phase) &&
             <button type="button" className="quiet-action" onClick={() => stopModule('terminate')}>{m.operations.moduleEnd}</button>}
-        </div>}
+        </ModuleNavigation>}
         {Workspace && active && selectedId !== null
           ? <WorkspaceBoundary key={selectedId} onFailure={() => manager.failWorkspace(selectedId, active)}>
             <Workspace locale={locale} messages={m} recordInteraction={recordInteraction} />
@@ -283,7 +280,7 @@ export default function App({ initialLanguage, modules = primaryModules, moduleO
         </details>
         <footer className="site-footer">
           <p lang="en">Compute anything. Anywhere.</p>
-          <p className="keyboard-hint">{m.keyboardHint}</p>
+          {description?.keyboardHint && <p className="keyboard-hint">{description.keyboardHint}</p>}
         </footer>
       </main>
       <span className="visually-hidden" role="status">{announcement}</span>

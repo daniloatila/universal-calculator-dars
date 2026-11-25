@@ -1,6 +1,6 @@
 [package]
 name = "dars-cli"
-version = "0.2.2"
+version = "0.3.0"
 edition = "2024"
 license = "Apache-2.0"
 publish = false
@@ -11,4 +11,5 @@ path = "src/main.rs"
 
 [dependencies]
 dars-core = { path = "../dars-core" }
+dars-universal = { path = "../dars-universal" }
 serde_json = "1.0"

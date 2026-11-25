@@ -176,6 +176,33 @@ button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-v
   line-height: 1.08;
 }
 .intro p { margin: 9px 0 0; color: var(--muted); font-size: .98rem; line-height: 1.5; }
+.module-navigation {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-block-end: 18px;
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+}
+.module-navigation-picker, .module-navigation-actions { display: flex; align-items: end; flex-wrap: wrap; gap: 9px; }
+.module-navigation-picker { flex: 1; min-inline-size: 0; }
+.module-navigation-picker label { display: grid; gap: 4px; min-inline-size: 0; color: var(--muted); font-size: .76rem; font-weight: 640; }
+.module-navigation-picker :is(select, input) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  min-block-size: 39px;
+  padding-inline: 10px;
+  border: 1px solid var(--line-prominent);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--display);
+  font-size: .9rem;
+}
+.module-navigation-actions .quiet-action { min-block-size: 39px; border-color: var(--line-prominent); white-space: normal; }
 .workspace {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(235px, 34%);

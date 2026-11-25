@@ -31,7 +31,12 @@ export default function offlinePrecache() {
         if (Object.keys(deferredLocales).length !== 6) {
           throw new Error("The offline build expects six separately loaded non-English locale chunks.");
         }
-        const eagerFiles = files.filter((file) => !Object.values(deferredLocales).includes(file));
+        const deferredAssets = new Set(Object.values(deferredLocales));
+        for (const file of files) {
+          // Modules use these chunk names for their lazy workspaces, workers and WASM.
+          if (/^assets\/(?:tool-|calculation-proof-|dars_tool_wasm)/.test(file)) deferredAssets.add(file);
+        }
+        const eagerFiles = files.filter((file) => !deferredAssets.has(file));
         const hash = createHash("sha256");
         for (const file of files) {
           const bytes = await readFile(join(destination, file));
@@ -46,8 +51,8 @@ const offlineKey = new URL(".dars-local/offline", scope).href;
 const indexUrl = new URL("index.html", scope).href;
 const initialUrls = ${JSON.stringify(eagerFiles)}.map((path) => new URL(path, scope).href);
 const localeFiles = ${JSON.stringify(deferredLocales)};
-const localeUrls = new Set(Object.values(localeFiles).map((path) => new URL(path, scope).href));
-const assetUrls = new Set([...initialUrls, ...localeUrls]);
+const deferredUrls = ${JSON.stringify([...deferredAssets])}.map((path) => new URL(path, scope).href);
+const assetUrls = new Set([...initialUrls, ...deferredUrls]);
 let offlineMode = caches.open(policyCache).then((cache) => cache.match(offlineKey)).then(Boolean).catch(() => false);
 
 self.addEventListener("install", (event) => {
@@ -81,7 +86,7 @@ self.addEventListener("fetch", (event) => {
     if (cached) return cached;
     if (await offlineMode) return Response.error();
     const response = await fetch(request);
-    if (localeUrls.has(request.url) && response.ok) {
+    if (response.ok) {
       await cache.put(request, response.clone()).catch(() => undefined);
     }
     return response;

@@ -1,6 +1,6 @@
 {
   "name": "dars-web",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "private": true,
   "license": "Apache-2.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview --host 127.0.0.1 --strictPort",
-    "test": "node --experimental-strip-types --test tests/unit.test.mts tests/worker.test.mts tests/module-manager.test.mts tests/adaptive.test.mts tests/module-work.test.mts",
+    "test": "node --experimental-strip-types --test tests/unit.test.mts tests/worker.test.mts tests/module-manager.test.mts tests/adaptive.test.mts tests/module-work.test.mts tests/calculation-proof.test.mts",
     "test:e2e": "playwright test"
   },
   "dependencies": {

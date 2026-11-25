@@ -1,0 +1,26 @@
+import type { CalculationProof } from '../../src/calculation-proof';
+
+export const scientificRecord = {
+  schema: 1,
+  module: 'scientific',
+  operation: 'sin',
+  expression: '90°',
+  normalized: 'sin(π/2)',
+  variables: {},
+  units: { angle: 'deg' },
+  options: { angle: 'deg', precision: 34, complex: false },
+  domain: 'real',
+  method: 'known angle',
+  formula: 'sin(π/2) = 1',
+  result: '1',
+  exactness: 'exact',
+  precision: null,
+  tolerance: null,
+  rounding: null,
+  error_bound: null,
+  assumptions: [],
+  constraints: [],
+  references: [],
+  engine_version: '0.3.0',
+  algorithm_version: 'scientific:sin/1',
+} satisfies CalculationProof;

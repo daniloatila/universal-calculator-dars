@@ -24,6 +24,7 @@ interface ModuleDescription {
   title: string;
   description: string;
   pageTitle?: string;
+  keyboardHint?: string;
 }
 
 type Presentation = { describe(messages: Messages): ModuleDescription };
@@ -53,7 +54,16 @@ export const primaryModules: readonly RegisteredModule[] = [
     id: 'standard',
     describe: (messages) => ({
       title: messages.standard, description: messages.description, pageTitle: messages.pageTitle,
+      keyboardHint: messages.keyboardHint,
     }),
     load: () => import('./standard-runtime'),
+  }),
+  registerModule({
+    id: 'scientific',
+    describe: (messages) => ({
+      title: messages.scientific.title, description: messages.scientific.description,
+      keyboardHint: messages.scientific.keyboardHint,
+    }),
+    load: () => import('./tool-scientific-runtime'),
   }),
 ];

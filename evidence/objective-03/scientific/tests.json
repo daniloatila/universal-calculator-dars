@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "status": "local_pass",
+  "approvedBaseline": "b584228003dbd74acfda01cc18a6f0fa380db1a7",
+  "tests": {
+    "rustStandard": {
+      "passed": 16,
+      "command": "cargo test --locked"
+    },
+    "rustUniversal": {
+      "passed": 9,
+      "command": "cargo test --locked"
+    },
+    "node": {
+      "passed": 65,
+      "command": "npm test --prefix apps/web"
+    },
+    "chrome": {
+      "passed": 34,
+      "command": "DARS_BROWSER_CHANNEL=chrome npm run test:e2e --prefix apps/web"
+    },
+    "chromeOffline": {
+      "passed": 10,
+      "command": "node tests/verify-web-offline.mjs"
+    },
+    "standardOracle": {
+      "passed": 157,
+      "command": "python tests/oracle.py target/release/dars"
+    },
+    "standardParity": {
+      "passed": 20,
+      "command": "node tests/check-targets.mjs target/release/dars"
+    },
+    "standardStructured": {
+      "passed": 291,
+      "command": "python crates/dars-core/tests/structured-oracle.py"
+    },
+    "scientificOracle": {
+      "suite": "scientific-sympy-mpmath",
+      "passed": 102,
+      "failed": 0,
+      "sympy": "1.14.0",
+      "mpmath": "1.3.0",
+      "oracle_digits": 125
+    },
+    "scientificComplexOracle": {
+      "suite": "scientific-complex-mpmath",
+      "passed": 75,
+      "failed": 0,
+      "cases": {
+        "principal_values": 41,
+        "composed": 18,
+        "real_policy": 7,
+        "bounded_rejections": 9
+      },
+      "mpmath": "1.3.0",
+      "oracle_decimal_digits": 105,
+      "requested_significant_digits": 32,
+      "component_relative_tolerance": "2e-29 with 1e-400 scale floor"
+    },
+    "scientificParity": {
+      "suite": "scientific-cli-wasm",
+      "passed": 19,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 678019,
+        "wasmSha256": "49cebbb780ad371d0443a81d95f586118b5e22111ad3477f33495ebff6bda3ad",
+        "observedWasmLinearBytes": 1179648,
+        "wasmInitializationMs": 15.300399999999996,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.1150000000000091,
+          "p95": 0.9963999999999942,
+          "p99": 1.3201999999999998
+        }
+      }
+    }
+  },
+  "lineCoverage": {
+    "tool": "cargo-llvm-cov with native unit and CLI oracles",
+    "standard": {
+      "covered": 613,
+      "total": 620
+    },
+    "universal": {
+      "covered": 1795,
+      "total": 1873
+    },
+    "scientific": {
+      "covered": 978,
+      "total": 1023
+    },
+    "scientificDecimal": {
+      "covered": 118,
+      "total": 120
+    },
+    "scientificNumeric": {
+      "covered": 387,
+      "total": 400
+    },
+    "scientificSyntax": {
+      "covered": 168,
+      "total": 176
+    },
+    "envelope": {
+      "covered": 144,
+      "total": 154
+    }
+  }
+}

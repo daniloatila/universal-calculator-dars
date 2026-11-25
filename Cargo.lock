@@ -33,6 +33,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2cb931c189b85683d69a5cfad41d4d418671e1ac413dd209f3f2fc31e3cfd902"
 
 [[package]]
+name = "astro-float-num"
+version = "0.3.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "86887daca11d02e0b04f37a9cb81888aae881397fb48ff66494e356aea97554a"
+dependencies = [
+ "itertools",
+ "lazy_static",
+]
+
+[[package]]
 name = "atk"
 version = "0.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -518,15 +528,16 @@ dependencies = [
 
 [[package]]
 name = "dars-cli"
-version = "0.2.2"
+version = "0.3.0"
 dependencies = [
  "dars-core",
+ "dars-universal",
  "serde_json",
 ]
 
 [[package]]
 name = "dars-core"
-version = "0.2.2"
+version = "0.3.0"
 dependencies = [
  "num-bigint",
  "num-integer",
@@ -538,7 +549,7 @@ dependencies = [
 
 [[package]]
 name = "dars-desktop"
-version = "0.2.2"
+version = "0.3.0"
 dependencies = [
  "serde",
  "tauri",
@@ -549,8 +560,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "dars-tool-wasm"
+version = "0.3.0"
+dependencies = [
+ "dars-universal",
+ "wasm-bindgen",
+]
+
+[[package]]
+name = "dars-universal"
+version = "0.3.0"
+dependencies = [
+ "astro-float-num",
+ "num-bigint",
+ "num-integer",
+ "num-rational",
+ "num-traits",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "dars-wasm"
-version = "0.2.2"
+version = "0.3.0"
 dependencies = [
  "dars-core",
  "wasm-bindgen",
@@ -739,6 +771,12 @@ name = "dyn-clone"
 version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d0881ea181b1df73ff77ffaaf9c7544ecc11e82fba9b5f27b262a3c73a332555"
+
+[[package]]
+name = "either"
+version = "1.19.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0e9c71c2167ca323c882b99918929403426e2373ea17242ff5653e0d5e1058be"
 
 [[package]]
 name = "embed-resource"
@@ -1516,6 +1554,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "791930b43c0d5973160d90a8f3894509f2b273430f5c5c73b668636d0287c5c0"
 
 [[package]]
+name = "itertools"
+version = "0.10.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b0fd2260e829bddf4cb6ea802289de2f86d6a7a690192fbe91b3f46e0f2c8473"
+dependencies = [
+ "either",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1734,6 +1781,12 @@ dependencies = [
  "bitflags 2.13.2",
  "serde",
 ]
+
+[[package]]
+name = "lazy_static"
+version = "1.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "20870f649af7073d53e38067b2a84312175d56ea15217e1b15bc83506ec50afb"
 
 [[package]]
 name = "libc"

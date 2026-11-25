@@ -1,0 +1,17 @@
+[package]
+name = "dars-tool-wasm"
+version = "0.3.0"
+edition = "2024"
+license = "Apache-2.0"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["scientific"]
+scientific = ["dars-universal/scientific"]
+
+[dependencies]
+dars-universal = { path = "../dars-universal", default-features = false }
+wasm-bindgen = "=0.2.130"

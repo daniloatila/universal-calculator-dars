@@ -6,7 +6,7 @@ The 0.2.2 delivery is the accepted baseline. Each internal stage records its mat
 
 | Stage | Module | State |
 | --- | --- | --- |
-| 1 | Scientific | IN_PROGRESS |
+| 1 | Scientific | INTERNALLY_ACCEPTED · [Verification](scientific/verification.md) |
 | 2 | Algebra | NOT_STARTED |
 | 3 | Calculus | NOT_STARTED |
 | 4 | Linear Algebra | NOT_STARTED |
