@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { CalculationProofPanel } from './calculation-proof-panel';
 import type { CalculationProof } from './calculation-proof';
 import { LOCALES } from './i18n';
-import { normalizeExpression, numberPresentation } from './locale-format';
+import { normalizeSignedDigits, numberPresentation } from './locale-format';
 import type { ModuleActivation } from './module-manager';
 import type { ModuleWorkspaceProps, PrimaryModule } from './module-registry';
 import { defaultWeekdays, exampleDrafts, fields, fromDefault, operations, periodFields, placeholder, toDefault, weekdays, zones } from './tool-date-time-input';
@@ -40,8 +40,10 @@ export function activate(scope: ModuleActivation<DateTimeState>): PrimaryModule<
     const complete = fields[operation].every((name) => draft.values[name]?.trim()) &&
       (operation !== 'deadline' || Boolean(draft.values.count?.trim())) &&
       (operation !== 'timezone' || Boolean((draft.from ?? fromDefault).trim() && (draft.to ?? toDefault).trim()));
-    const normalize = (value: string) => normalizeExpression(value.trim(), number.decimal)
-      .replaceAll('：', ':').replaceAll('Ｔ', 'T').replaceAll('Ｚ', 'Z');
+    const normalize = (value: string) => normalizeSignedDigits(value.trim());
+    const normalizeDateTime = (value: string) => normalize(value)
+      .replaceAll('：', ':').replaceAll('Ｔ', 'T').replaceAll('Ｚ', 'Z')
+      .replace(/(T\d{2}:\d{2}:\d{2})[,٫．](?=\d)/u, '$1.');
 
     function abandon() {
       const handle = current.current;
@@ -84,7 +86,7 @@ export function activate(scope: ModuleActivation<DateTimeState>): PrimaryModule<
         return;
       }
       const original_input = raw.join('|');
-      const input = raw.map(normalize).join('|');
+      const input = raw.map(normalizeDateTime).join('|');
       const options: Record<string, string> = {};
       if (operation === 'period') {
         for (const name of periodFields) {

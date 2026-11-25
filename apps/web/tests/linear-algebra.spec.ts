@@ -108,6 +108,53 @@ test('Linear algebra edits, pastes and resizes matrices by keyboard while retain
   await expect(result(page)).toContainText('9,007,199,254,740,993');
 });
 
+test('Linear algebra keeps pasted cell notation across locale changes and supports mixed-origin cells', async ({ page }) => {
+  await page.goto('/');
+  await openWorkspace(page);
+  await page.locator('details.settings summary').click();
+  const language = page.locator('details.settings select').first();
+  await language.selectOption('pt-BR');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
+  const first = cell(page, 'A', 1, 1);
+  const last = cell(page, 'A', 2, 2);
+  await pasteMatrix(first, '1,25 0;0 2,5');
+  await first.press('Control+Enter');
+  await expect(result(page)).toHaveAttribute('data-canonical', '25/8');
+
+  await language.selectOption('en');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(first).toHaveValue('1,25');
+  await expect(first).toHaveAttribute('lang', 'pt-BR');
+  await expect(page.locator('#linear-input-notation-pt-BR')).toBeVisible();
+  const recalculation = page.waitForEvent('worker');
+  await calculate(page);
+  await recalculation;
+  await expect(result(page)).toHaveAttribute('data-canonical', '25/8');
+
+  await last.press('End');
+  await last.press('0');
+  await expect(last).toHaveValue('2,50');
+  await expect(last).toHaveAttribute('lang', 'pt-BR');
+  await calculate(page);
+  await expect(result(page)).toHaveAttribute('data-canonical', '25/8');
+
+  await last.fill('');
+  await last.fill('2.5');
+  await expect(last).toHaveAttribute('lang', 'en');
+  await expect(first).toHaveAttribute('lang', 'pt-BR');
+  await calculate(page);
+  await expect(result(page)).toHaveAttribute('data-canonical', '25/8');
+  const panel = page.locator('.calculation-proof');
+  await panel.locator('summary').click();
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    panel.getByRole('button', { name: 'Download JSON', exact: true }).click(),
+  ]);
+  const proof = parseCalculationProofFile(await readFile(await download.path(), 'utf8'));
+  expect(proof).toMatchObject({ expression: '1,25 0\n0 2.5', normalized: '1.25 0\n0 2.5', result: '25/8' });
+  expect(proof).not.toHaveProperty('expression_locale');
+});
+
 test('Linear algebra distinguishes incompatible, indeterminate, singular and invalid input', async ({ page }) => {
   await page.goto('/');
   await openWorkspace(page);
@@ -199,6 +246,7 @@ test('Linear algebra localizes controls and decimal cells with accessible 320 px
     await expect(page.getByRole('group', { name: a.operation, exact: true })).toBeVisible();
     const [value, one, two] = local[locale as keyof typeof local];
     const input = page.getByRole('textbox', { name: `A[${one},${one}]`, exact: true });
+    await input.fill('');
     await input.fill(value);
     await page.getByRole('textbox', { name: `A[${two},${two}]`, exact: true }).fill(one);
     await input.press('Control+Enter');

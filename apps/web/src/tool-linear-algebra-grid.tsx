@@ -1,16 +1,19 @@
 import { useRef } from 'react';
 import type { ClipboardEvent, KeyboardEvent } from 'react';
-import type { Messages } from './i18n';
+import type { Locale, Messages } from './i18n';
+import { editLocalizedDraft } from './locale-format';
+import type { LocalizedDraft } from './locale-format';
 
 export const maxDimension = 12;
 const dimensions = Array.from({ length: maxDimension }, (_, index) => index + 1);
 const maxCellLength = 256;
 
 export type Matrix = readonly (readonly string[])[];
+export type DraftMatrix = readonly (readonly (LocalizedDraft | undefined)[])[];
 
-export function resizeMatrix(matrix: Matrix, rows: number, columns: number): Matrix {
+export function resizeMatrix(matrix: DraftMatrix, rows: number, columns: number): DraftMatrix {
   return Array.from({ length: rows }, (_, row) => Array.from(
-    { length: columns }, (_, column) => matrix[row]?.[column] ?? '',
+    { length: columns }, (_, column) => matrix[row]?.[column],
   ));
 }
 
@@ -19,12 +22,13 @@ function pastedRows(text: string) {
     (line.includes('\t') ? line.split('\t') : line.trim().split(/\s+/u)).map((cell) => cell.trim()));
 }
 
-export function MatrixGrid({ name, matrix, messages, formatCount, update, onError }: {
+export function MatrixGrid({ name, matrix, locale, messages, formatCount, update, onError }: {
   name: 'A' | 'B';
-  matrix: Matrix;
+  matrix: DraftMatrix;
+  locale: Locale;
   messages: Messages['linearAlgebra'];
   formatCount: (value: number) => string;
-  update: (matrix: Matrix) => void;
+  update: (matrix: DraftMatrix) => void;
   onError: (code: 'limit' | 'invalid_block') => void;
 }) {
   const rows = matrix.length;
@@ -75,7 +79,10 @@ export function MatrixGrid({ name, matrix, messages, formatCount, update, onErro
     }
     const next = resizeMatrix(matrix, nextRows, nextColumns).map((cells, index) => {
       const pasted = values[index - row];
-      return pasted ? cells.map((cell, offset) => pasted[offset - column] ?? cell) : cells;
+      return pasted ? cells.map((cell, offset) => {
+        const value = pasted[offset - column];
+        return value === undefined ? cell : editLocalizedDraft(undefined, value, locale);
+      }) : cells;
     });
     update(next);
   }
@@ -102,11 +109,13 @@ export function MatrixGrid({ name, matrix, messages, formatCount, update, onErro
         <tbody>{matrix.map((cells, row) => <tr key={row}>
           <th scope="row">{formatCount(row + 1)}</th>
           {cells.map((value, column) => <td key={column}>
-            <input type="text" value={value} placeholder="0" maxLength={maxCellLength} dir="ltr"
+            <input type="text" value={value?.text ?? ''} placeholder="0" maxLength={maxCellLength} dir="ltr"
+              lang={value?.locale ?? locale}
               aria-label={`${name}[${formatCount(row + 1)},${formatCount(column + 1)}]`}
+              aria-describedby={value?.text.trim() && value.locale !== locale ? `linear-input-notation-${value.locale}` : undefined}
               spellCheck={false} autoComplete="off" autoCapitalize="off"
               onChange={(event) => {
-                const next = event.currentTarget.value;
+                const next = editLocalizedDraft(value, event.currentTarget.value, locale);
                 update(matrix.map((entries, index) => index === row
                   ? entries.map((cell, offset) => offset === column ? next : cell) : entries));
               }}

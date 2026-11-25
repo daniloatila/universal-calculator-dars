@@ -182,6 +182,45 @@ test('Geometry exports power-aware unit metadata with exact symbolic values', as
   });
 });
 
+test('Geometry preserves coordinate block delimiters and independent dimension notation through a language change', async ({ page }) => {
+  await page.goto('/');
+  await openWorkspace(page);
+  await operation(page, 'prism').click();
+  const originalCoordinates = '0 0；3.5 0؛0 4';
+  await coordinates(page).fill(originalCoordinates);
+  await page.locator('details.settings summary').click();
+  const language = page.locator('details.settings select').first();
+  await language.selectOption('pt-BR');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
+  const localizedCoordinates = page.getByRole('textbox', { name: pt.geometry.coordinates, exact: true });
+  await expect(localizedCoordinates).toHaveValue(originalCoordinates);
+  await expect(localizedCoordinates).toHaveAttribute('lang', 'en');
+  await expect(page.locator('#geometry-input-notation-en')).toBeVisible();
+  await page.getByRole('textbox', { name: pt.geometry.dimensions.height, exact: true }).fill('2,25');
+  await page.getByRole('button', { name: pt.calculate, exact: true }).click();
+  await expect(result(page)).toHaveAttribute('data-canonical', /(^|; )volume=63\/4$/u);
+  const canonical = await result(page).getAttribute('data-canonical');
+
+  await language.selectOption('en');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(coordinates(page)).toHaveValue(originalCoordinates);
+  await expect(page.getByRole('textbox', { name: g.dimensions.height, exact: true })).toHaveAttribute('lang', 'pt-BR');
+  const recalculation = page.waitForEvent('worker');
+  await calculate(page);
+  await recalculation;
+  await expect(result(page)).toHaveAttribute('data-canonical', canonical!);
+
+  const panel = page.locator('.calculation-proof');
+  await panel.locator('summary').click();
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    panel.getByRole('button', { name: 'Download JSON', exact: true }).click(),
+  ]);
+  const proof = parseCalculationProofFile(await readFile(await download.path(), 'utf8'));
+  expect(proof).toMatchObject({ expression: `${originalCoordinates}|2,25`, normalized: '0 0;3.5 0;0 4|2.25', result: canonical });
+  expect(proof).not.toHaveProperty('expression_locale');
+});
+
 test('Geometry localizes dimension inputs and diagrams across seven accessible locales', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 940 });
   await page.goto('/');
@@ -198,6 +237,7 @@ test('Geometry localizes dimension inputs and diagrams across seven accessible l
     await expect(page.getByRole('heading', { name: geo.title, exact: true })).toBeVisible();
     await expect(page.getByRole('img', { name: geo.sketch.replace('{shape}', geo.operations.rectangle), exact: true })).toBeVisible();
     const width = page.getByRole('textbox', { name: geo.dimensions.width, exact: true });
+    await width.fill('');
     await width.fill(local[locale] ?? '0.5');
     await page.getByRole('textbox', { name: geo.dimensions.length, exact: true }).fill('2');
     await width.press('Control+Enter');

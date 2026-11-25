@@ -174,7 +174,9 @@ test('Calculus localizes operation controls, numeric parameters and the narrow R
     await expect(page.getByRole('heading', { name: messages.calculus.title, exact: true })).toBeVisible();
     await expect(page.getByRole('group', { name: messages.calculus.operation, exact: true })).toBeVisible();
     await expect(page.getByRole('group', { name: messages.calculus.parameters, exact: true })).toBeVisible();
-    await page.getByRole('textbox', { name: messages.calculus.fields.upper, exact: true }).fill(localBounds[locale] ?? '0.5');
+    const upper = page.getByRole('textbox', { name: messages.calculus.fields.upper, exact: true });
+    await upper.fill('');
+    await upper.fill(localBounds[locale] ?? '0.5');
     const draft = page.getByRole('textbox', { name: messages.expression, exact: true });
     await draft.fill('x');
     await draft.press('Control+Enter');

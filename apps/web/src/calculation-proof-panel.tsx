@@ -10,7 +10,7 @@ import type { Locale } from './i18n';
 import './calculation-proof.css';
 
 const fieldOrder: readonly (keyof CalculationProof)[] = [
-  'result', 'exactness', 'module', 'operation', 'expression', 'normalized', 'variables', 'standard_bindings', 'units', 'options',
+  'result', 'exactness', 'module', 'operation', 'expression', 'expression_locale', 'normalized', 'variables', 'standard_bindings', 'units', 'options',
   'domain', 'method', 'formula', 'precision', 'tolerance', 'rounding', 'error_bound', 'assumptions',
   'constraints', 'references', 'schema', 'engine_version', 'algorithm_version',
 ];
@@ -26,6 +26,7 @@ function FieldValue({ record, field, locale, format, localizeText }: {
 }): ReactNode {
   if (field === 'exactness') return proofLabels[locale].exactness[record.exactness];
   const value = record[field];
+  if (field === 'expression_locale') return record.expression_locale && <bdi>{LOCALES[record.expression_locale].name}</bdi>;
   if (field === 'standard_bindings') {
     return <bdi dir="ltr">{Object.keys(record.standard_bindings ?? {}).map((id) => `@${id}`).join(', ')}</bdi>;
   }
@@ -42,6 +43,7 @@ function FieldValue({ record, field, locale, format, localizeText }: {
       <bdi>{key}</bdi> = <bdi>{display(String(entry))}</bdi>
     </li>)}</ul>;
   }
+  if (field === 'expression' || field === 'normalized' || field === 'formula') return <bdi>{String(value)}</bdi>;
   return <bdi>{typeof value === 'number' ? format.format(value) : display(String(value))}</bdi>;
 }
 
@@ -121,7 +123,7 @@ export function CalculationProofContents({ proof, locale, localizeText }: ProofP
           {' '}{imported ? labels.unverified : labels.scope}
         </p>
         <dl className="calculation-proof-fields">
-          {fieldOrder.filter((field) => field !== 'standard_bindings' || record.standard_bindings).map((field) => <div key={field}>
+          {fieldOrder.filter((field) => record[field] !== undefined).map((field) => <div key={field}>
             <dt>{labels.fields[field]}</dt>
             <dd><FieldValue record={record} field={field} locale={locale} format={format}
               localizeText={imported ? undefined : localizeText} /></dd>

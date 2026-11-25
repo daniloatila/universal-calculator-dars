@@ -1,7 +1,41 @@
+import { LOCALES } from './i18n.ts';
+import type { Locale } from './i18n.ts';
+
 const digitSets = ['٠١٢٣٤٥٦٧٨٩', '۰۱۲۳۴۵۶۷۸۹', '०१२३४५६७८९', '０１２３４５６７８９'];
 const digits = new Map(
   digitSets.flatMap((set) => Array.from(set, (character, index) => [character, String(index)] as const)),
 );
+
+export type LocalizedDraft = { text: string; locale: Locale };
+
+const decimalByLocale = new Map<Locale, string>();
+
+export function localizedDecimal(locale: Locale): string {
+  let decimal = decimalByLocale.get(locale);
+  if (decimal === undefined) {
+    decimal = new Intl.NumberFormat(LOCALES[locale].format).formatToParts(1.5)
+      .find((part) => part.type === 'decimal')?.value ?? '.';
+    decimalByLocale.set(locale, decimal);
+  }
+  return decimal;
+}
+
+// A nonempty draft keeps its interpretation until explicitly cleared or replaced by an example.
+export function editLocalizedDraft(previous: LocalizedDraft | undefined, text: string, locale: Locale): LocalizedDraft {
+  return { text, locale: text.trim() && previous?.text.trim() ? previous.locale : locale };
+}
+
+export function draftDecimal(draft: LocalizedDraft): string {
+  return localizedDecimal(draft.locale);
+}
+
+export function normalizeDigits(text: string): string {
+  return text.replace(/\p{Nd}/gu, (character) => digits.get(character) ?? character);
+}
+
+export function normalizeSignedDigits(text: string): string {
+  return normalizeDigits(text).replace(/[−－]/gu, '-').replaceAll('＋', '+');
+}
 
 const operatorReplacements: Readonly<Record<string, string>> = {
   '−': '-',
@@ -19,12 +53,19 @@ const operatorReplacements: Readonly<Record<string, string>> = {
   '．': '.',
 };
 
+export function normalizeMathText(expression: string, decimalSeparator: string): string {
+  const tokens = /(?:\p{Nd}+(?:[.,٫．]\p{Nd}*)?|[.,٫．]\p{Nd}+)(?:[eE][+＋\-−－]?\p{Nd}+)?|[\p{L}_][\p{L}\p{Nd}_]*|./gsu;
+  return expression.replace(tokens, (token) => {
+    if (/^[\p{L}_]/u.test(token)) return token;
+    return Array.from(token, (character) => {
+      if (character === decimalSeparator || character === '٫') return '.';
+      return digits.get(character) ?? operatorReplacements[character] ?? character;
+    }).join('');
+  });
+}
+
 export function normalizeExpression(expression: string, decimalSeparator: string): string {
-  return Array.from(expression, (character) => {
-    if (character === decimalSeparator || character === '٫') return '.';
-    if (character === ';' || character === '؛') return ',';
-    return digits.get(character) ?? operatorReplacements[character] ?? character;
-  }).join('');
+  return normalizeMathText(expression, decimalSeparator).replace(/[;؛]/gu, ',');
 }
 
 export function localizeExpression(expression: string, decimalSeparator: string): string {

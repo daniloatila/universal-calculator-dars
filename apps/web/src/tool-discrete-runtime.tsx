@@ -2,10 +2,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { CalculationProofPanel } from './calculation-proof-panel';
 import type { CalculationProof } from './calculation-proof';
 import { LOCALES } from './i18n';
-import { normalizeExpression, numberPresentation } from './locale-format';
+import { numberPresentation } from './locale-format';
 import type { ModuleActivation } from './module-manager';
 import type { ModuleWorkspaceProps, PrimaryModule } from './module-registry';
-import { combinatorics, encodeExpression, exampleValues, fieldsFor, groupList, groups, modularModes, sequenceModes } from './tool-discrete-input';
+import { combinatorics, encodeExpression, exampleValues, fieldsFor, groupList, groups, modularModes, normalizeDiscreteField, sequenceModes } from './tool-discrete-input';
 import type { Draft, Field, Group, ModularMode, Operation, SequenceMode } from './tool-discrete-input';
 import { DiscreteResult } from './tool-discrete-result';
 import { activateTool } from './tool-runtime';
@@ -100,7 +100,7 @@ export function activate(scope: ModuleActivation<DiscreteState>): PrimaryModule<
     async function calculate() {
       if (current.current || !complete) return;
       const values = entries.map((name) => draft.values[name]?.trim() ?? '');
-      const normalized = values.map((value) => normalizeExpression(value, presentation.decimal));
+      const normalized = entries.map((field, index) => normalizeDiscreteField(field, values[index] ?? ''));
       if (entries.some((name, index) => !multiline.has(name) && /\s/u.test(normalized[index] ?? ''))) {
         update({});
         setNotice('invalid_input');

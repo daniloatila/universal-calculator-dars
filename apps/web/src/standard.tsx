@@ -1,30 +1,32 @@
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent, PointerEvent, ReactNode } from 'react';
-import { changeSign, edit, EMPTY_EDITOR, redo, spliceExpression, undo } from './editor';
+import { changeSign, edit, redo, spliceExpression, undo } from './editor';
 import type { Editor } from './editor';
 import type { Combine, EngineStatus, Evaluate, Evaluation } from './engine';
 import type { CalculationProof } from './calculation-proof';
+import { withExpressionLocale } from './calculation-proof';
 import { Icon } from './icons';
 import { LOCALES } from './i18n';
 import type { Locale, Messages } from './i18n';
-import { isExactDecimal, localizeExpression, normalizeExpression, numberPresentation } from './locale-format';
+import InputNotation from './input-notation';
+import { draftDecimal, editLocalizedDraft, isExactDecimal, normalizeExpression, numberPresentation } from './locale-format';
+import type { LocalizedDraft } from './locale-format';
 import StandardCalculationProof from './standard-calculation-proof';
 
 type Answer = Omit<Extract<Evaluation, { ok: true }>, 'proof'>;
-type Completed = { id: number; expression: string; input: string; decimalSeparator: string; answer: Answer };
+type Completed = { id: number; expression: string; input: string; locale: Locale; answer: Answer };
 type Mode = 'exact' | 'decimal';
 type MemoryAction = 'store' | 'add' | 'subtract';
 type Operation = { kind: 'evaluation' | 'memory'; controller: AbortController };
 type Recalled = { expression: string; revision: number };
 
 type StandardSnapshot = {
-  editor: Editor;
+  editor: Editor<LocalizedDraft>;
   completed: Completed | null;
   proof: CalculationProof | null;
   history: Completed[];
   memory: Answer | null;
   mode: Mode;
-  decimal: string;
   editRevision: number;
   memorySource: number | null;
   recalled: Recalled | null;
@@ -95,7 +97,12 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
   const bindings = useRef(retainedBindings);
   const expressionId = useId();
   const referenceHelpId = useId();
-  const [editor, setEditor] = useState(initial?.editor ?? EMPTY_EDITOR);
+  const notationId = useId();
+  const [editor, setEditor] = useState<Editor<LocalizedDraft>>(() => initial?.editor ?? {
+    before: [], expression: { text: '', locale }, after: [],
+  });
+  const expression = editor.expression.text;
+  const notation = expression.trim() ? editor.expression.locale : locale;
   const [completed, setCompleted] = useState(initial?.completed ?? null);
   const [proof, setProof] = useState(initial?.proof ?? null);
   const [history, setHistory] = useState(initial?.history ?? []);
@@ -105,7 +112,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
   const [feedback, setFeedback] = useState('');
   const [busy, setBusy] = useState<Operation['kind'] | null>(null);
   const numbers = useMemo(() => numberPresentation(LOCALES[locale].format), [locale]);
-  const previousDecimal = useRef(initial?.decimal ?? numbers.decimal);
+  const inputNumbers = useMemo(() => numberPresentation(LOCALES[notation].format), [notation]);
   const format = useMemo(() => {
     if (!cacheEntries) return numbers.format;
     const cache = new Map<string, string>();
@@ -124,34 +131,21 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
 
   useLayoutEffect(() => {
     session.current = {
-      editor, completed, proof, history, memory, mode, decimal: previousDecimal.current,
+      editor, completed, proof, history, memory, mode,
       editRevision: editRevision.current, memorySource: memorySource.current, recalled: recalled.current,
       nextId: nextId.current, nextBinding: nextBinding.current, bindings: bindings.current,
     };
   });
 
   useEffect(() => {
-    const oldSeparator = previousDecimal.current;
-    previousDecimal.current = numbers.decimal;
-    if (oldSeparator === numbers.decimal) return;
-    const convert = (value: string) => localizeExpression(normalizeExpression(value, oldSeparator), numbers.decimal);
-    if (recalled.current) recalled.current.expression = convert(recalled.current.expression);
-    setEditor((previous) => ({
-      before: previous.before.map(convert),
-      expression: convert(previous.expression),
-      after: previous.after.map(convert),
-    }));
-  }, [numbers.decimal]);
-
-  useEffect(() => {
     // Editor versions and history keep their original immutable value references alive.
     if (!bindings.current.size) return;
-    const expressions = [editor.expression, ...editor.before, ...editor.after].filter((entry) => entry.includes('@'));
-    const live = new Set(expressions.flatMap((entry) => referenceIds(normalizeExpression(entry, numbers.decimal))));
+    const expressions = [editor.expression, ...editor.before, ...editor.after].filter((entry) => entry.text.includes('@'));
+    const live = new Set(expressions.flatMap((entry) => referenceIds(normalizeExpression(entry.text, draftDecimal(entry)))));
     for (const entry of history) for (const id of referenceIds(entry.input)) live.add(id);
     if (completed) for (const id of referenceIds(completed.input)) live.add(id);
     for (const id of bindings.current.keys()) if (!live.has(id)) bindings.current.delete(id);
-  }, [editor, history, completed, memory, numbers.decimal]);
+  }, [editor, history, completed, memory]);
 
   useEffect(() => () => {
     const current = operation.current;
@@ -168,7 +162,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
   const decimalIsExact = isExactDecimal(answer.exact, answer.approximate);
   const acceptsWork = engineStatus === 'ready' || engineStatus === 'idle';
   const ready = acceptsWork && !busy;
-  const inputAvailable = ready && Boolean(editor.expression.trim());
+  const inputAvailable = ready && Boolean(expression.trim());
 
   function cancelActive() {
     const current = operation.current;
@@ -188,14 +182,15 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
     setFeedback('');
   }
 
-  function updateExpression(expression: string, caret?: number) {
-    if (expression.length > MAX_INPUT || encoder.encode(normalizeExpression(expression, numbers.decimal)).length > MAX_INPUT) {
+  function updateExpression(text: string, caret?: number, source?: Locale) {
+    const next = source === undefined ? editLocalizedDraft(editor.expression, text, locale) : { text, locale: source };
+    if (text.length > MAX_INPUT || encoder.encode(normalizeExpression(text, draftDecimal(next))).length > MAX_INPUT) {
       setError('input_limit');
       return false;
     }
-    if (expression !== editor.expression) {
+    if (text !== expression || next.locale !== editor.expression.locale) {
       resetResult();
-      setEditor((previous) => edit(previous, expression));
+      setEditor((previous) => edit(previous, next));
     }
     if (caret !== undefined) {
       window.requestAnimationFrame(() => inputRef.current?.setSelectionRange(caret, caret));
@@ -208,10 +203,6 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
     if (next === editor) return;
     resetResult();
     setEditor(next);
-  }
-
-  function visibleExpression(entry: Completed) {
-    return entry.decimalSeparator === numbers.decimal ? entry.expression : localizeExpression(entry.input, numbers.decimal);
   }
 
   function expressionBindings(input: string): Record<string, string> {
@@ -246,9 +237,9 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
       return;
     }
     if (continues && recalled.current?.revision === editRevision.current &&
-        recalled.current.expression === editor.expression) {
-      const expression = `(${editor.expression})${fragment}`;
-      updateExpression(expression, expression.length);
+        recalled.current.expression === expression) {
+      const continued = `(${expression})${fragment}`;
+      updateExpression(continued, continued.length);
       return;
     }
     if (completed && !wrap && /^[0-9\p{Nd}.,٫(]$/u.test(fragment)) {
@@ -256,20 +247,20 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
       return;
     }
     const input = inputRef.current;
-    const start = input?.selectionStart ?? editor.expression.length;
+    const start = input?.selectionStart ?? expression.length;
     const end = input?.selectionEnd ?? start;
     const value = wrap && start < end
-      ? `${fragment}${editor.expression.slice(start, end)})`
+      ? `${fragment}${expression.slice(start, end)})`
       : fragment;
-    const update = spliceExpression(editor.expression, start, end, value);
+    const update = spliceExpression(expression, start, end, value);
     return updateExpression(update.expression, update.caret);
   }
 
   function backspace() {
     const input = inputRef.current;
-    const start = input?.selectionStart ?? editor.expression.length;
+    const start = input?.selectionStart ?? expression.length;
     const end = input?.selectionEnd ?? start;
-    const update = spliceExpression(editor.expression, start === end ? Math.max(0, start - 1) : start, end, '');
+    const update = spliceExpression(expression, start === end ? Math.max(0, start - 1) : start, end, '');
     updateExpression(update.expression, update.caret);
   }
 
@@ -294,9 +285,8 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
   }
 
   function evaluateExpression() {
-    if (!editor.expression.trim()) return;
-    const expression = editor.expression;
-    const input = normalizeExpression(expression, numbers.decimal);
+    if (!expression.trim()) return;
+    const input = normalizeExpression(expression, inputNumbers.decimal);
     const revision = historyRevision.current;
     void run('evaluation', async (signal, isCurrent) => {
       const result = await evaluate(input, expressionBindings(input), signal, expression);
@@ -308,17 +298,16 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
         return;
       }
       const { proof: record, ...answer } = result;
-      const current = { id: ++nextId.current, expression, input, decimalSeparator: numbers.decimal, answer };
+      const current = { id: ++nextId.current, expression, input, locale: notation, answer };
       setCompleted(current);
-      setProof(record ?? null);
+      setProof(record ? withExpressionLocale(record, notation) : null);
       if (historyRevision.current === revision) setHistory((entries) => [current, ...entries].slice(0, HISTORY_LIMIT));
     });
   }
 
   function updateMemory(action: MemoryAction) {
-    const expression = editor.expression;
     if (!expression.trim()) return;
-    const input = normalizeExpression(expression, numbers.decimal);
+    const input = normalizeExpression(expression, inputNumbers.decimal);
     void run('memory', async (signal, isCurrent) => {
       const current = completed?.input === input ? completed.answer : await evaluate(input, expressionBindings(input), signal);
       if (!isCurrent()) return;
@@ -341,7 +330,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
   function recallMemory() {
     if (!memory) return;
     applyValue(memory, (value) => {
-      if (!editor.expression.length || completed || memorySource.current === editRevision.current) {
+      if (!expression.length || completed || memorySource.current === editRevision.current) {
         if (!updateExpression(value, value.length)) return false;
         recalled.current = { expression: value, revision: editRevision.current };
         return true;
@@ -394,8 +383,8 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
       title={label} disabled={disabled} onClick={action}>{content}</button>;
   }
 
-  const digit = (value: number) => key(String(value), numbers.digits[value], () => insert(numbers.digits[value] ?? String(value)));
-  const visibleReferences = [...new Set(referenceIds(editor.expression))].flatMap((id) => {
+  const digit = (value: number) => key(String(value), inputNumbers.digits[value], () => insert(inputNumbers.digits[value] ?? String(value)));
+  const visibleReferences = [...new Set(referenceIds(normalizeExpression(expression, inputNumbers.decimal)))].flatMap((id) => {
     const value = bindings.current.get(id);
     return value ? [{ id, value }] : [];
   });
@@ -416,7 +405,7 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
                 title={answer.exact === null ? m.noExact : undefined} onClick={() => setMode('exact')}>{m.exact}</button>
             </div>
           </div>
-          <output data-testid="result" className={`result-value${resultSize}`} aria-label={m.result} aria-live="polite" aria-atomic="true" dir="ltr">
+          <output data-testid="result" data-canonical={proof?.result} className={`result-value${resultSize}`} aria-label={m.result} aria-live="polite" aria-atomic="true" dir="ltr">
             {error && !completed ? '—' : formattedResult}
           </output>
           <div className="display-secondary">
@@ -442,10 +431,11 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
             </div>
           </div>
           <input ref={inputRef} id={expressionId} name="expression" type="text" inputMode="text"
-            className="expression-input" value={editor.expression} placeholder={numbers.digits[0] ?? '0'}
+            className="expression-input" value={expression} placeholder={inputNumbers.digits[0] ?? '0'}
             autoComplete="off" autoCorrect="off" spellCheck={false} dir="ltr"
-            aria-invalid={Boolean(error)} aria-describedby={[error && 'feedback', visibleReferences.length && referenceHelpId].filter(Boolean).join(' ') || undefined}
+            aria-invalid={Boolean(error)} aria-describedby={[error && 'feedback', visibleReferences.length && referenceHelpId, notation !== locale && notationId].filter(Boolean).join(' ') || undefined}
             onChange={(event) => updateExpression(event.target.value)} onKeyDown={onExpressionKey}/>
+          <InputNotation origin={notation} locale={locale} messages={m} id={notationId} />
           {visibleReferences.length > 0 && <ul id={referenceHelpId} className="value-references" aria-label={m.operations.retainedValues}>
             {visibleReferences.map(({ id, value }) => <li key={id}>
               <bdi>@{id} {value.exact === null ? '≈' : '='} {format(value.exact ?? value.approximate)}</bdi>
@@ -494,9 +484,9 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
             {key(m.subtract, '−', () => insert('-', true), 'key key-operator')}
             {digit(1)}{digit(2)}{digit(3)}
             {key(m.add, '+', () => insert('+', true), 'key key-operator')}
-            {key(m.changeSign, '±', () => updateExpression(changeSign(editor.expression)), 'key key-function')}
+            {key(m.changeSign, '±', () => updateExpression(changeSign(expression)), 'key key-function')}
             {digit(0)}
-            {key(m.decimal, numbers.decimal, () => insert(numbers.decimal))}
+            {key(m.decimal, inputNumbers.decimal, () => insert(inputNumbers.decimal))}
             {key(m.calculate, '=', evaluateExpression, 'key key-equals', !inputAvailable)}
           </div>
         </div>
@@ -518,11 +508,11 @@ export default function Standard({ locale, messages: m, evaluate, combine, engin
         {history.length ? (
           <ol className="history-list">
             {history.map((entry) => {
-              const expression = visibleExpression(entry);
+              const { expression } = entry;
               return <li key={entry.id}>
                 <button type="button" className="history-entry"
                   aria-label={`${m.useHistory}: ${expression}`}
-                  onClick={() => { updateExpression(expression, expression.length); inputRef.current?.focus(); }}>
+                  onClick={() => { updateExpression(expression, expression.length, entry.locale); inputRef.current?.focus(); }}>
                   <bdi className="history-expression">{expression}</bdi>
                   <bdi className="history-result">{format(entry.answer.exact ?? entry.answer.approximate)}</bdi>
                   <Icon name="arrow" size={15}/>

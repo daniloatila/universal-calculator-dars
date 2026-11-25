@@ -1,3 +1,6 @@
+import { draftDecimal, normalizeMathText } from './locale-format';
+import type { LocalizedDraft } from './locale-format';
+
 export const operations = [
   'rectangle', 'circle', 'triangle', 'polygon', 'sphere', 'cylinder', 'cone', 'prism',
   'distance', 'angle', 'segments',
@@ -6,7 +9,8 @@ export type Operation = typeof operations[number];
 export const units = ['u', 'mm', 'cm', 'm', 'km', 'in', 'ft', 'yd', 'mi'] as const;
 export type Unit = typeof units[number];
 export type Dimension = 'width' | 'length' | 'radius' | 'height' | 'sideA' | 'sideB' | 'sideC';
-export type Draft = { dimensions: Partial<Record<Dimension, string>>; coordinates?: string };
+type GeometryFields<Value> = { dimensions: Partial<Record<Dimension, Value>>; coordinates?: Value };
+export type Draft = GeometryFields<LocalizedDraft>;
 
 export const dimensions: Readonly<Record<Operation, readonly Dimension[]>> = {
   rectangle: ['width', 'length'], circle: ['radius'], triangle: ['sideA', 'sideB', 'sideC'], polygon: [],
@@ -16,7 +20,7 @@ export const dimensions: Readonly<Record<Operation, readonly Dimension[]>> = {
 export const coordinateOperations = new Set<Operation>(['polygon', 'prism', 'distance', 'angle', 'segments']);
 const rightTriangle = '0 0\n3 0\n0 4';
 const rectangularBase = '0 0\n4 0\n4 3\n0 3';
-export const examples: Readonly<Record<Operation, Draft>> = {
+export const examples: Readonly<Record<Operation, GeometryFields<string>>> = {
   rectangle: { dimensions: { width: '3', length: '4' } },
   circle: { dimensions: { radius: '2' } },
   triangle: { dimensions: { sideA: '3', sideB: '4', sideC: '5' } },
@@ -30,17 +34,25 @@ export const examples: Readonly<Record<Operation, Draft>> = {
   segments: { dimensions: {}, coordinates: '0 0\n4 4\n0 4\n4 0' },
 };
 
-export function normalizedRows(text: string, normalize: (value: string) => string): string {
-  return text.split(/([;؛；])/u).map((entry, index) => index % 2 ? ';' : normalize(entry)).join('');
+export function normalizedDimension(field: LocalizedDraft): string {
+  return normalizeMathText(field.text.trim(), draftDecimal(field));
 }
 
-export function expressionFor(operation: Operation, draft: Draft, normalize?: (value: string) => string): string {
+export function normalizedRows(field: LocalizedDraft | undefined): string {
+  if (!field) return '';
+  const decimal = draftDecimal(field);
+  // Row breaks are geometry delimiters, separate from decimal marks.
+  return field.text.split(/([;؛；])/u).map((entry, index) =>
+    index % 2 ? ';' : normalizeMathText(entry, decimal)).join('');
+}
+
+export function expressionFor(operation: Operation, draft: Draft, representation: 'original' | 'canonical'): string {
   const scalar = dimensions[operation].map((name) => {
-    const value = draft.dimensions[name]?.trim() ?? '';
-    return normalize?.(value) ?? value;
+    const field = draft.dimensions[name];
+    return field && representation === 'canonical' ? normalizedDimension(field) : field?.text.trim() ?? '';
   }).join(' ');
   if (!coordinateOperations.has(operation)) return scalar;
-  const coordinates = draft.coordinates ?? '';
-  const basis = (normalize ? normalizedRows(coordinates, normalize) : coordinates).trim();
+  const coordinates = representation === 'canonical' ? normalizedRows(draft.coordinates) : draft.coordinates?.text ?? '';
+  const basis = coordinates.trim();
   return operation === 'prism' ? `${basis}|${scalar}` : basis;
 }

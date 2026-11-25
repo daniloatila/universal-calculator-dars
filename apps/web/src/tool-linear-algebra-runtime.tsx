@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CalculationProofPanel } from './calculation-proof-panel';
+import { withExpressionLocale } from './calculation-proof';
 import type { CalculationProof } from './calculation-proof';
 import { LOCALES } from './i18n';
-import { localizeExpression, normalizeExpression, numberPresentation } from './locale-format';
+import InputNotation from './input-notation';
+import { draftDecimal, editLocalizedDraft, localizeExpression, normalizeMathText, numberPresentation } from './locale-format';
+import type { LocalizedDraft } from './locale-format';
 import type { ModuleActivation } from './module-manager';
 import type { ModuleWorkspaceProps, PrimaryModule } from './module-registry';
 import { MatrixGrid, resizeMatrix } from './tool-linear-algebra-grid';
-import type { Matrix } from './tool-linear-algebra-grid';
+import type { DraftMatrix, Matrix } from './tool-linear-algebra-grid';
 import { LinearResult } from './tool-linear-algebra-result';
 import { activateTool } from './tool-runtime';
 import './tool-linear-algebra.css';
@@ -22,13 +25,13 @@ const toleranceOperations = new Set<Operation>(['eigenvalues', 'eigenvectors', '
 const toleranceDefault = '1e-10';
 const utf8 = new TextEncoder();
 const maxInputBytes = 4096;
-const matrixSeparators = /[\s;؛；|]/u;
+const matrixSeparators = /[\s,;؛；|]/u;
 
 type MatrixSlot = 'matrixA' | 'matrixB' | 'vectorA' | 'vectorB' | 'rightHand';
 type LinearState = {
   operation: Operation;
-  matrices: Record<MatrixSlot, Matrix>;
-  tolerance: string;
+  matrices: Record<MatrixSlot, DraftMatrix>;
+  tolerance?: LocalizedDraft;
   proof?: CalculationProof;
 };
 
@@ -58,12 +61,10 @@ const startState: LinearState = {
     matrixA: resizeMatrix([], 2, 2), matrixB: resizeMatrix([], 2, 2),
     vectorA: resizeMatrix([], 3, 1), vectorB: resizeMatrix([], 3, 1), rightHand: resizeMatrix([], 2, 1),
   },
-  tolerance: toleranceDefault,
 };
 
-function matrixText(matrices: readonly Matrix[], normalize: (cell: string) => string): string {
-  return matrices.map((matrix) => matrix.map((cells) => cells.map((cell) =>
-    normalize(cell.trim() || '0')).join(' ')).join('\n')).join('|');
+function matrixText(matrices: readonly Matrix[]): string {
+  return matrices.map((matrix) => matrix.map((cells) => cells.join(' ')).join('\n')).join('|');
 }
 
 export function activate(scope: ModuleActivation<LinearState>): PrimaryModule<LinearState> {
@@ -82,6 +83,10 @@ export function activate(scope: ModuleActivation<LinearState>): PrimaryModule<Li
     const right = vectors.has(operation) ? 'vectorB' : operation === 'solve' ? 'rightHand' : 'matrixB';
     const paired = pairs.has(operation);
     const activeMatrices = paired ? [matrices[left], matrices[right]] : [matrices[left]];
+    const showTolerance = toleranceOperations.has(operation);
+    const origins = new Set(activeMatrices.flat(2).flatMap((cell) => cell?.text.trim() ? [cell.locale] : []));
+    const expressionOrigin = origins.size === 1 ? origins.values().next().value : undefined;
+    if (showTolerance && tolerance?.text.trim()) origins.add(tolerance.locale);
 
     function abandon() {
       const calculation = current.current;
@@ -103,21 +108,22 @@ export function activate(scope: ModuleActivation<LinearState>): PrimaryModule<Li
       commit({ ...state, ...changes, proof: undefined });
     }
 
-    function updateMatrix(slot: MatrixSlot, matrix: Matrix) {
+    function updateMatrix(slot: MatrixSlot, matrix: DraftMatrix) {
       update({ matrices: { ...matrices, [slot]: matrix } });
     }
 
     function setExample() {
       const [exampleA, exampleB] = examples[operation];
-      const localize = (matrix: Matrix) => matrix.map((row) => row.map((cell) => localizeExpression(cell, presentation.decimal)));
+      const localize = (matrix: Matrix) => matrix.map((row) => row.map((cell) =>
+        editLocalizedDraft(undefined, localizeExpression(cell, presentation.decimal), locale)));
       update({
         matrices: { ...matrices, [left]: localize(exampleA), ...(exampleB ? { [right]: localize(exampleB) } : {}) },
-        tolerance: toleranceDefault,
+        tolerance: undefined,
       });
     }
 
     function clear() {
-      const blank = (matrix: Matrix) => resizeMatrix([], matrix.length, matrix[0]!.length);
+      const blank = (matrix: DraftMatrix) => resizeMatrix([], matrix.length, matrix[0]!.length);
       update({ matrices: {
         ...matrices, [left]: blank(matrices[left]), ...(paired ? { [right]: blank(matrices[right]) } : {}),
       } });
@@ -125,14 +131,15 @@ export function activate(scope: ModuleActivation<LinearState>): PrimaryModule<Li
 
     async function calculate() {
       if (current.current) return;
-      if (activeMatrices.some((matrix) => matrix.some((cells) => cells.some((cell) =>
-        matrixSeparators.test(cell.trim()) || matrixSeparators.test(normalizeExpression(cell.trim(), presentation.decimal)))))) {
+      const normalized = activeMatrices.map((matrix) => matrix.map((row) => row.map((cell) =>
+        cell ? normalizeMathText(cell.text.trim() || '0', draftDecimal(cell)) : '0')));
+      if (normalized.flat(2).some((cell) => matrixSeparators.test(cell))) {
         update({});
         setNotice('invalid_cell');
         return;
       }
-      const original = matrixText(activeMatrices, (cell) => cell);
-      const value = matrixText(activeMatrices, (cell) => normalizeExpression(cell, presentation.decimal));
+      const original = matrixText(activeMatrices.map((matrix) => matrix.map((row) => row.map((cell) => cell?.text.trim() || '0'))));
+      const value = matrixText(normalized);
       if (utf8.encode(original).byteLength > maxInputBytes || utf8.encode(value).byteLength > maxInputBytes) {
         update({});
         setNotice('limit');
@@ -143,8 +150,9 @@ export function activate(scope: ModuleActivation<LinearState>): PrimaryModule<Li
       setPending(true);
       setNotice(undefined);
       commit({ ...state, proof: undefined });
-      const options: Record<string, string> = toleranceOperations.has(operation)
-        ? { tolerance: normalizeExpression(tolerance, presentation.decimal).trim() } : {};
+      const options: Record<string, string> = showTolerance ? {
+        tolerance: tolerance ? normalizeMathText(tolerance.text.trim(), draftDecimal(tolerance)) : toleranceDefault,
+      } : {};
       const start = performance.now();
       const reply = await runtime.submit({
         schema: 1,
@@ -160,7 +168,8 @@ export function activate(scope: ModuleActivation<LinearState>): PrimaryModule<Li
       if (reply.status === 'completed') {
         if (reply.value.ok) {
           recordInteraction(performance.now() - start);
-          commit({ ...state, proof: reply.value.proof });
+          const record = reply.value.proof;
+          commit({ ...state, proof: expressionOrigin ? withExpressionLocale(record, expressionOrigin) : record });
         } else setNotice(reply.value.code);
       } else setNotice(reply.status);
     }
@@ -240,16 +249,20 @@ export function activate(scope: ModuleActivation<LinearState>): PrimaryModule<Li
         <form className="linear-card" onSubmit={(event) => { event.preventDefault(); void calculate(); }}>
           <p className="linear-operation-hint">{c.hints[operation]}</p>
           <div className="linear-operands">
-            <MatrixGrid key={left} name="A" matrix={matrices[left]} messages={c} formatCount={formatCount}
+            <MatrixGrid key={left} name="A" matrix={matrices[left]} locale={locale} messages={c} formatCount={formatCount}
               update={(matrix) => updateMatrix(left, matrix)} onError={setNotice} />
-            {paired && <MatrixGrid key={right} name="B" matrix={matrices[right]} messages={c} formatCount={formatCount}
+            {paired && <MatrixGrid key={right} name="B" matrix={matrices[right]} locale={locale} messages={c} formatCount={formatCount}
               update={(matrix) => updateMatrix(right, matrix)} onError={setNotice} />}
           </div>
           <p className="linear-grid-hint">{c.gridHint}</p>
-          {toleranceOperations.has(operation) && <label className="linear-tolerance">{c.tolerance}
-            <input type="text" dir="ltr" value={tolerance} maxLength={256} autoComplete="off"
-              onChange={(event) => update({ tolerance: event.currentTarget.value })} />
+          {showTolerance && <label className="linear-tolerance">{c.tolerance}
+            <input type="text" dir="ltr" value={tolerance?.text ?? toleranceDefault} lang={tolerance?.locale ?? locale}
+              maxLength={256} autoComplete="off"
+              aria-describedby={tolerance?.text && tolerance.locale !== locale ? `linear-input-notation-${tolerance.locale}` : undefined}
+              onChange={(event) => update({ tolerance: editLocalizedDraft(tolerance, event.currentTarget.value, locale) })} />
           </label>}
+          {[...origins].map((origin) => <InputNotation key={origin} origin={origin} locale={locale} messages={m}
+            id={`linear-input-notation-${origin}`} />)}
           <div className="linear-actions">
             <button type="submit" className="linear-primary" disabled={pending}>{m.calculate}</button>
             {pending && <button type="button" className="quiet-action" onClick={cancel}>{m.cancelCalculation}</button>}

@@ -68,6 +68,9 @@
   "memoryCleared": "Memória limpa",
   "historyCleared": "Histórico limpo",
   "languageChanged": "Idioma alterado para português",
+  "inputNotation": {
+    "retained": "Usa a notação de {language} (decimal {decimal}). Limpe o campo para usar a notação atual."
+  },
   "standardRecord": {
     "title": "Registro de cálculo",
     "loading": "Carregando o visualizador de registros…",

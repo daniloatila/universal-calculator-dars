@@ -1,6 +1,9 @@
+import { readFile } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { parseCalculationProofFile } from '../src/calculation-proof';
+import { proofLabels } from '../src/calculation-proof-labels';
 import ar from '../src/locales/ar.json' with { type: 'json' };
 import en from '../src/locales/en.json' with { type: 'json' };
 import es from '../src/locales/es.json' with { type: 'json' };
@@ -91,6 +94,50 @@ test('Scientific options control working precision and engineering notation and 
   await expect(result(page)).not.toHaveAttribute('data-canonical', /./);
 });
 
+for (const [from, to, original, source, destination, normalized, expected, exactness] of [
+  ['en', 'pt-BR', 'log(8,2)', en, pt, 'log(8,2)', '3', 'exact'],
+  ['pt-BR', 'en', 'log(8;2)', pt, en, 'log(8,2)', '3', 'exact'],
+  ['pt-BR', 'en', 'log(8,2)', pt, en, 'log(8.2)', /^0\.913813852/u, 'approximate'],
+] as const) {
+  test(`Scientific preserves ${original} and its proof across ${from} → ${to}`, async ({ page }) => {
+    await page.goto('/');
+    await scientific(page);
+    await page.locator('details.settings summary').click();
+    const languages = page.locator('details.settings select').first();
+    await languages.selectOption(from);
+    await expect(page.locator('html')).toHaveAttribute('lang', from);
+
+    const entered = page.getByRole('textbox', { name: source.expression, exact: true });
+    await entered.fill(original);
+    await entered.press('Enter');
+    await expect(result(page)).toHaveAttribute('data-canonical', expected);
+
+    const panel = page.locator('.calculation-proof');
+    await panel.locator('summary').click();
+    async function readProof(language: typeof from) {
+      const [download] = await Promise.all([
+        page.waitForEvent('download'),
+        panel.getByRole('button', { name: proofLabels[language].exportFile, exact: true }).click(),
+      ]);
+      return parseCalculationProofFile(await readFile(await download.path(), 'utf8'));
+    }
+    const proof = await readProof(from);
+    expect(proof).toMatchObject({ expression: original, expression_locale: from,
+      normalized, result: typeof expected === 'string' ? expected : expect.stringMatching(expected), exactness });
+
+    await languages.selectOption(to);
+    await expect(page.locator('html')).toHaveAttribute('lang', to);
+    const retained = page.getByRole('textbox', { name: destination.expression, exact: true });
+    await expect(retained).toHaveValue(original);
+    await expect(retained).toHaveAttribute('aria-describedby', /scientific-input-notation/u);
+    expect(await readProof(to)).toEqual(proof);
+
+    await Promise.all([page.waitForEvent('worker'), retained.press('Enter')]);
+    await expect(result(page)).toHaveAttribute('data-canonical', expected);
+    expect(await readProof(to)).toEqual(proof);
+  });
+}
+
 test('Scientific normalizes localized input and keeps its controls within a narrow RTL layout', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 920 });
   await page.goto('/');
@@ -105,6 +152,7 @@ test('Scientific normalizes localized input and keeps its controls within a narr
   await page.getByRole('combobox', { name: pt.language, exact: true }).selectOption('ar');
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
   const arabicExpression = page.getByRole('textbox', { name: ar.expression, exact: true });
+  await arabicExpression.fill('');
   await arabicExpression.fill('sin(٩٠°)+٠٫٥');
   await arabicExpression.press('Enter');
   await expect(result(page)).toHaveAttribute('data-canonical', /^(3\/2|1\.5)$/);

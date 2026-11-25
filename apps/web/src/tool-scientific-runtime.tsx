@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { CalculationProofPanel } from './calculation-proof-panel';
+import { withExpressionLocale } from './calculation-proof';
 import type { CalculationProof } from './calculation-proof';
 import { spliceExpression } from './editor';
 import { LOCALES } from './i18n';
-import { localizeExpression, normalizeExpression, numberPresentation } from './locale-format';
+import InputNotation from './input-notation';
+import { draftDecimal, editLocalizedDraft, localizeExpression, normalizeDigits, normalizeExpression, numberPresentation } from './locale-format';
+import type { LocalizedDraft } from './locale-format';
 import type { ModuleActivation } from './module-manager';
 import type { ModuleWorkspaceProps, PrimaryModule } from './module-registry';
 import { activateTool } from './tool-runtime';
@@ -13,10 +16,10 @@ import './tool-scientific.css';
 type Angle = 'rad' | 'deg' | 'grad';
 type Notation = 'auto' | 'scientific' | 'engineering';
 type ScientificInput = {
-  expression: string;
+  expression?: LocalizedDraft;
   angle: Angle;
   notation: Notation;
-  precision: string;
+  precision?: LocalizedDraft;
   complex: boolean;
 };
 type ScientificState = { input: ScientificInput; proof?: CalculationProof };
@@ -25,8 +28,9 @@ type Notice = 'domain' | 'limit' | 'invalid' | 'unsupported' | 'convergence' | '
 
 const INPUT_LIMIT = 4096;
 const utf8 = new TextEncoder();
+const DEFAULT_PRECISION = '32';
 const initialInput: ScientificInput = {
-  expression: '', angle: 'rad', notation: 'auto', precision: '32', complex: false,
+  angle: 'rad', notation: 'auto', complex: false,
 };
 const functions = {
   trigonometry: ['sin', 'cos', 'tan', 'asin', 'acos', 'atan'],
@@ -64,6 +68,14 @@ export function activate(scope: ModuleActivation<ScientificState>): PrimaryModul
     const presentation = useMemo(() => numberPresentation(LOCALES[locale].format), [locale]);
     const s = m.scientific;
     const { input, proof } = state;
+    const expression = input.expression?.text ?? '';
+    const expressionOrigin = expression.trim() ? input.expression?.locale : undefined;
+    const precisionOrigin = input.precision?.text.trim() ? input.precision.locale : undefined;
+    const expressionLocale = expressionOrigin ?? locale;
+    const notation = useMemo(() => expressionLocale === locale ? presentation
+      : numberPresentation(LOCALES[expressionLocale].format), [expressionLocale, locale, presentation]);
+    const retainedExpressionNotation = expressionLocale !== locale;
+    const retainedPrecisionNotation = precisionOrigin && precisionOrigin !== locale;
 
     function abort() {
       const controller = active.current;
@@ -86,12 +98,12 @@ export function activate(scope: ModuleActivation<ScientificState>): PrimaryModul
       replace({ input: { ...input, ...update } });
     }
 
-    function edit(expression: string) {
-      if (expression.length > INPUT_LIMIT || utf8.encode(expression).byteLength > INPUT_LIMIT) {
+    function edit(text: string, fromExample = false) {
+      if (text.length > INPUT_LIMIT || utf8.encode(text).byteLength > INPUT_LIMIT) {
         setNotice('limit');
         return false;
       }
-      change({ expression });
+      change({ expression: editLocalizedDraft(fromExample ? undefined : input.expression, text, locale) });
       return true;
     }
 
@@ -99,9 +111,9 @@ export function activate(scope: ModuleActivation<ScientificState>): PrimaryModul
       const element = inputElement.current;
       if (!element) return;
       const { selectionStart, selectionEnd } = element;
-      const selected = input.expression.slice(selectionStart, selectionEnd);
+      const selected = expression.slice(selectionStart, selectionEnd);
       const text = wrap ? fragment + '(' + (selected ? selected + ')' : '') : fragment;
-      const replacement = spliceExpression(input.expression, selectionStart, selectionEnd, text);
+      const replacement = spliceExpression(expression, selectionStart, selectionEnd, text);
       if (!edit(replacement.expression)) return;
       element.focus();
       requestAnimationFrame(() => element.setSelectionRange(replacement.caret, replacement.caret));
@@ -114,8 +126,9 @@ export function activate(scope: ModuleActivation<ScientificState>): PrimaryModul
     }
 
     async function calculate() {
-      if (active.current || !input.expression.trim()) return;
-      const precision = normalizeExpression(input.precision, presentation.decimal);
+      const draft = input.expression;
+      if (active.current || !draft?.text.trim()) return;
+      const precision = input.precision ? normalizeDigits(input.precision.text) : DEFAULT_PRECISION;
       if (!/^\d{1,2}$/u.test(precision) || Number(precision) < 8 || Number(precision) > 80) {
         setNotice('precision');
         return;
@@ -130,8 +143,8 @@ export function activate(scope: ModuleActivation<ScientificState>): PrimaryModul
         schema: 1,
         module: 'scientific',
         operation: 'evaluate',
-        input: normalizeExpression(input.expression, presentation.decimal),
-        original_input: input.expression,
+        input: normalizeExpression(draft.text, draftDecimal(draft)),
+        original_input: draft.text,
         options: { angle: input.angle, notation: input.notation, precision: Number(precision), complex: input.complex },
       }, controller.signal);
       if (active.current !== controller || scope.signal.aborted) return;
@@ -140,7 +153,7 @@ export function activate(scope: ModuleActivation<ScientificState>): PrimaryModul
       if (result.status === 'completed') {
         if (result.value.ok) {
           recordInteraction(performance.now() - started);
-          replace({ input, proof: result.value.proof });
+          replace({ input, proof: withExpressionLocale(result.value.proof, draft.locale) });
         } else setNotice(classifyError(result.value.code));
       } else {
         setNotice(result.status === 'timed_out' ? 'timeout' : result.status === 'cancelled' ? 'cancelled'
@@ -171,13 +184,13 @@ export function activate(scope: ModuleActivation<ScientificState>): PrimaryModul
       unsupported: m.tools.unsupported, convergence: m.tools.convergence, precision: s.precisionError,
       unavailable: m.tools.engineUnavailable, timeout: m.engineTimeout, cancelled: m.engineCancelled, busy: m.engineBusy,
     };
-    const sign = presentation.decimal === ',' ? ';' : presentation.decimal === '٫' ? '؛' : ',';
-    const digits = presentation.digits;
+    const sign = notation.decimal === ',' ? ';' : notation.decimal === '٫' ? '؛' : ',';
+    const digits = notation.digits;
     const keys = [
       digits[7], digits[8], digits[9], '÷', '(', ')',
       digits[4], digits[5], digits[6], '×', 'π', 'e',
       digits[1], digits[2], digits[3], '−', 'i', 'τ',
-      digits[0], presentation.decimal, sign, '+', '^', '!',
+      digits[0], notation.decimal, sign, '+', '^', '!',
     ].filter((key): key is string => key !== undefined);
 
     return <section className="scientific-workspace" aria-label={s.title} onKeyDown={(event) => {
@@ -201,10 +214,14 @@ export function activate(scope: ModuleActivation<ScientificState>): PrimaryModul
               <option value="auto">{s.automatic}</option><option value="scientific">{s.scientific}</option><option value="engineering">{s.engineering}</option>
             </select>
           </label>
-          <label>{s.precision}
-            <input inputMode="numeric" maxLength={2} dir="ltr" value={input.precision}
-              onChange={(event) => change({ precision: event.currentTarget.value })} />
-          </label>
+          <div>
+            <label>{s.precision}
+              <input inputMode="numeric" maxLength={2} dir="ltr" value={input.precision?.text ?? DEFAULT_PRECISION}
+                aria-describedby={retainedPrecisionNotation ? 'scientific-precision-notation' : undefined}
+                onChange={(event) => change({ precision: editLocalizedDraft(input.precision, event.currentTarget.value, locale) })} />
+            </label>
+            <InputNotation origin={precisionOrigin} locale={locale} messages={m} id="scientific-precision-notation" />
+          </div>
           <label>{s.numberMode}
             <select value={input.complex ? 'complex' : 'real'} onChange={(event) => change({ complex: event.currentTarget.value === 'complex' })}>
               <option value="real">{s.real}</option><option value="complex">{s.complex}</option>
@@ -213,15 +230,17 @@ export function activate(scope: ModuleActivation<ScientificState>): PrimaryModul
         </div>
         <label className="scientific-expression">{m.expression}
           <textarea ref={inputElement} dir="ltr" spellCheck={false} autoCapitalize="off" autoComplete="off" rows={3}
-            value={input.expression} onKeyDown={keyboard} aria-describedby="scientific-input-help"
+            value={expression} onKeyDown={keyboard}
+            aria-describedby={retainedExpressionNotation ? 'scientific-input-help scientific-input-notation' : 'scientific-input-help'}
             onChange={(event) => edit(event.currentTarget.value)} />
         </label>
         <p className="scientific-help" id="scientific-input-help">{s.separators.replace('{separator}', sign)}</p>
+        <InputNotation origin={expressionOrigin} locale={locale} messages={m} id="scientific-input-notation" />
         <div className="scientific-examples">
           <span>{m.tools.examples}</span>
-          {examples.map((expression) => <button key={expression} type="button" className="quiet-action" dir="ltr"
-            onClick={() => { edit(localizeExpression(expression, presentation.decimal)); inputElement.current?.focus(); }}>
-            {localizeExpression(expression, presentation.decimal)}
+          {examples.map((example) => <button key={example} type="button" className="quiet-action" dir="ltr"
+            onClick={() => { edit(localizeExpression(example, presentation.decimal), true); inputElement.current?.focus(); }}>
+            {localizeExpression(example, presentation.decimal)}
           </button>)}
         </div>
         <div className="scientific-keys">
@@ -239,8 +258,8 @@ export function activate(scope: ModuleActivation<ScientificState>): PrimaryModul
           </fieldset>
         </div>
         <div className="scientific-actions">
-          <button type="submit" className="scientific-submit" disabled={working || !input.expression.trim()}>{m.calculate}</button>
-          <button type="button" className="quiet-action" disabled={!input.expression && !proof}
+          <button type="submit" className="scientific-submit" disabled={working || !expression.trim()}>{m.calculate}</button>
+          <button type="button" className="quiet-action" disabled={!expression && !proof}
             onClick={() => { edit(''); inputElement.current?.focus(); }}>{m.clear}</button>
           {working && <button type="button" className="quiet-action" onClick={cancel}>{m.cancelCalculation}</button>}
         </div>

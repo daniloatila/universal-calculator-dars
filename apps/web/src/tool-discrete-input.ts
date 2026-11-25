@@ -60,3 +60,27 @@ export function encodeExpression(group: Group, operation: Operation, values: rea
   if (group === 'sets' || operation === 'logic' && values[1]) return values.join('|');
   return values.join(' ').trim();
 }
+import { normalizeDigits, normalizeSignedDigits } from './locale-format';
+
+
+export function normalizeDiscreteField(field: Field, value: string): string {
+  switch (field) {
+    case 'leftSet':
+    case 'rightSet':
+      return value.replace(/\S+/gu, (atom) => /^[+＋\-−－]?\p{Nd}+$/u.test(atom) ? normalizeSignedDigits(atom) : atom);
+    case 'proposition':
+      return value.replace(/[\p{L}_][\p{L}\p{Nd}_]*|\p{Nd}+|[（）＾－]/gu, (token) => {
+        switch (token) {
+          case '（': return '(';
+          case '）': return ')';
+          case '＾': return '^';
+          case '－': return '-';
+          default: return /^\p{Nd}/u.test(token) ? normalizeDigits(token) : token;
+        }
+      });
+    case 'assignments':
+      return value.replace(/=(\p{Nd}+)(?=\s|$)/gu, (_, digits: string) => '=' + normalizeDigits(digits));
+    default:
+      return normalizeSignedDigits(value);
+  }
+}

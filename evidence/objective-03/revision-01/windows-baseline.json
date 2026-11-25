@@ -1,0 +1,64 @@
+{
+  "version": "0.3.0",
+  "executable_sha256": "8c2da09e07fa9e5a95bf3e068105b63a2e1e860582fb371dcc0bd4ace4db3d88",
+  "webview2": "158.0.4370.33",
+  "cases": [
+    {
+      "from": "en",
+      "to": "pt-BR",
+      "expression": "log(8,2)",
+      "old": {
+        "canonical": "3",
+        "original": "log(8,2)",
+        "normalized": "log(8,2)",
+        "expressionLocale": null,
+        "engineVersion": "0.3.0"
+      },
+      "repeated": {
+        "canonical": "0.91381385238371668972315074469267",
+        "original": "log(8,2)",
+        "normalized": "log(8.2)",
+        "expressionLocale": null,
+        "engineVersion": "0.3.0"
+      }
+    },
+    {
+      "from": "pt-BR",
+      "to": "en",
+      "expression": "log(8;2)",
+      "old": {
+        "canonical": "3",
+        "original": "log(8;2)",
+        "normalized": "log(8,2)",
+        "expressionLocale": null,
+        "engineVersion": "0.3.0"
+      },
+      "repeated": {
+        "canonical": "3",
+        "original": "log(8;2)",
+        "normalized": "log(8,2)",
+        "expressionLocale": null,
+        "engineVersion": "0.3.0"
+      }
+    },
+    {
+      "from": "pt-BR",
+      "to": "en",
+      "expression": "log(8,2)",
+      "old": {
+        "canonical": "0.91381385238371668972315074469267",
+        "original": "log(8,2)",
+        "normalized": "log(8.2)",
+        "expressionLocale": null,
+        "engineVersion": "0.3.0"
+      },
+      "repeated": {
+        "canonical": "3",
+        "original": "log(8,2)",
+        "normalized": "log(8,2)",
+        "expressionLocale": null,
+        "engineVersion": "0.3.0"
+      }
+    }
+  ]
+}

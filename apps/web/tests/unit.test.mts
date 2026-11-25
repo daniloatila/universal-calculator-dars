@@ -3,13 +3,33 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { changeSign, edit, EMPTY_EDITOR, redo, spliceExpression, undo } from '../src/editor.ts';
 import { isLocale, LOCALES, preferredLocale } from '../src/i18n.ts';
-import { isExactDecimal, localizeExpression, normalizeExpression, numberPresentation } from '../src/locale-format.ts';
+import { draftDecimal, editLocalizedDraft, isExactDecimal, localizeExpression, normalizeExpression,
+  normalizeMathText, normalizeSignedDigits, numberPresentation } from '../src/locale-format.ts';
 
 test('localized expressions retain mathematical symbols and function separators', () => {
   assert.equal(normalizeExpression('√(٠,٤٩)−root(８;३)×۲', ','), '√(0.49)-root(8,3)*2');
   assert.equal(normalizeExpression('٠٫٢٪÷١٠', '٫'), '0.2%/10');
   assert.equal(localizeExpression('root(0.125,3)', ','), 'root(0,125;3)');
   assert.equal(localizeExpression('root(0.125,3)', '.'), 'root(0.125,3)');
+});
+
+test('a nonempty draft and its undo history retain the originating notation', () => {
+  const english = editLocalizedDraft(undefined, 'log(8,2)', 'en');
+  const edited = editLocalizedDraft(english, 'log(8,', 'pt-BR');
+  assert.equal(edited.locale, 'en');
+  assert.equal(normalizeExpression(edited.text, draftDecimal(edited)), 'log(8,');
+  const empty = editLocalizedDraft(edited, '', 'pt-BR');
+  const portuguese = editLocalizedDraft(empty, 'log(8,2)', 'pt-BR');
+  assert.equal(normalizeExpression(portuguese.text, draftDecimal(portuguese)), 'log(8.2)');
+  const history = edit(edit({ before: [], expression: english, after: [] }, empty), portuguese);
+  assert.deepEqual(undo(undo(history)).expression, english);
+  assert.deepEqual(redo(undo(history)).expression, portuguese);
+});
+
+test('symbolic token normalization keeps identifier spellings and each grammar’s delimiters', () => {
+  assert.equal(normalizeMathText('x१+١٫٢e−३;y２=４,٥', ','), 'x१+1.2e-3;y２=4.5');
+  assert.equal(normalizeMathText('١ ٢; ३ ４|٥ ٦', '٫'), '1 2; 3 4|5 6');
+  assert.equal(normalizeSignedDigits('−१२,٣'), '-12,3');
 });
 
 test('localized display preserves values far beyond Number precision', () => {

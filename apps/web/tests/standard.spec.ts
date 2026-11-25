@@ -106,6 +106,7 @@ test('regional decimal input, RTL and language/theme preferences work across rel
   await page.getByRole('combobox', { name: 'Aparência', exact: true }).selectOption('oled');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'oled');
   await page.getByText('Configurações', { exact: true }).click();
+  await page.getByRole('textbox', { name: 'Expressão' }).clear();
   await calculate(page, '0,1+0,2', 'Expressão');
   await expect(page.getByTestId('result')).toHaveText('0,3');
   await calculate(page, 'root(0,125;3)', 'Expressão');
@@ -113,8 +114,12 @@ test('regional decimal input, RTL and language/theme preferences work across rel
   await page.getByText('Configurações', { exact: true }).click();
   await page.getByRole('combobox', { name: 'Idioma', exact: true }).selectOption('ar');
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
-  await expect(page.getByRole('textbox', { name: 'التعبير' })).toHaveValue('root(0٫125,3)');
+  const arabicInput = page.getByRole('textbox', { name: 'التعبير' });
+  await expect(arabicInput).toHaveValue('root(0,125;3)');
   await page.getByText('الإعدادات', { exact: true }).click();
+  await arabicInput.press('Enter');
+  await expect(page.getByTestId('result')).toHaveText('٠٫٥');
+  await arabicInput.clear();
   await calculate(page, '١٫٢٥+٢٫٧٥', 'التعبير');
   await expect(page.getByTestId('result')).toHaveText('٤');
   await page.reload();

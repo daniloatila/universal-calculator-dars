@@ -181,6 +181,56 @@ test('Converter exports exact manual-rate provenance and captures an explicitly 
   });
 });
 
+test('Converter retains independently localized currency amount and rate with literal quote metadata', async ({ page }) => {
+  await page.goto('/');
+  await openWorkspace(page);
+  await button(page, c.currency).click();
+  await page.locator('details.settings summary').click();
+  const language = page.locator('details.settings select').first();
+  await language.selectOption('pt-BR');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
+  await page.getByRole('textbox', { name: pt.converter.amount, exact: true }).fill('2,25');
+  const source = 'Cotação, São Paulo; ١٫٥';
+  await page.getByRole('textbox', { name: pt.converter.rateSource, exact: true }).fill(source);
+  await page.getByLabel(pt.converter.rateDate, { exact: true }).fill('2024-01-10');
+  await page.getByLabel(pt.converter.validUntil, { exact: true }).fill('2024-01-31');
+  await page.getByLabel(pt.converter.referenceDate, { exact: true }).fill('2024-01-31');
+
+  await language.selectOption('hi');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'hi');
+  await page.getByRole('textbox', { name: hi.converter.exchangeRate, exact: true }).fill('२.५');
+  await button(page, hi.calculate).click();
+  const canonical = 'amount=45/8; status=within_validity';
+  await expect(result(page)).toHaveAttribute('data-canonical', canonical);
+
+  await language.selectOption('en');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(amount(page)).toHaveValue('2,25');
+  await expect(amount(page)).toHaveAttribute('lang', 'pt-BR');
+  const rate = page.getByRole('textbox', { name: c.exchangeRate, exact: true });
+  await expect(rate).toHaveValue('२.५');
+  await expect(rate).toHaveAttribute('lang', 'hi');
+  await expect(page.getByRole('textbox', { name: c.rateSource, exact: true })).toHaveValue(source);
+  await expect(page.getByLabel(c.referenceDate, { exact: true })).toHaveValue('2024-01-31');
+  const recalculation = page.waitForEvent('worker');
+  await button(page, en.calculate).click();
+  await recalculation;
+  await expect(result(page)).toHaveAttribute('data-canonical', canonical);
+
+  const panel = page.locator('.calculation-proof');
+  await panel.locator('summary').click();
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    panel.getByRole('button', { name: 'Download JSON', exact: true }).click(),
+  ]);
+  const proof = parseCalculationProofFile(await readFile(await download.path(), 'utf8'));
+  expect(proof).toMatchObject({
+    expression: '2,25', normalized: '2.25', expression_locale: 'pt-BR', result: canonical,
+    options: { rate: '2.5', source, as_of: '2024-01-10', valid_until: '2024-01-31', reference_date: '2024-01-31' },
+    units: { from: 'USD', to: 'BRL' },
+  });
+});
+
 test('Converter supports seven locales and accessible narrow RTL unit and currency forms', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 940 });
   await page.goto('/');
@@ -197,6 +247,7 @@ test('Converter supports seven locales and accessible narrow RTL unit and curren
     await expect(page.getByRole('heading', { name: localized.title, exact: true })).toBeVisible();
     await expect(page.getByRole('combobox', { name: localized.fromUnit, exact: true }).locator('option[value="m"]')).toHaveText(`m · ${localized.unitNames.m}`);
     const input = page.getByRole('textbox', { name: localized.amount, exact: true });
+    await input.fill('');
     await input.fill(variants[locale] ?? '1.25');
     await input.press('Control+Enter');
     await expect(result(page)).toHaveAttribute('data-canonical', '125');

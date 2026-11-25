@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CalculationProofPanel } from './calculation-proof-panel';
+import { withExpressionLocale } from './calculation-proof';
 import type { CalculationProof } from './calculation-proof';
 import { LOCALES } from './i18n';
-import { normalizeExpression, numberPresentation } from './locale-format';
+import InputNotation from './input-notation';
+import { draftDecimal, editLocalizedDraft, normalizeMathText, numberPresentation } from './locale-format';
+import type { LocalizedDraft } from './locale-format';
 import type { ModuleActivation } from './module-manager';
 import type { ModuleWorkspaceProps, PrimaryModule } from './module-registry';
 import { catalog, categoryList, currencies, defaultPairs, unitSymbol } from './tool-converter-catalog';
@@ -11,18 +14,25 @@ import { activateTool } from './tool-runtime';
 import './tool-converter.css';
 
 type Mode = 'convert' | 'currency';
-type CurrencyDraft = Pair & { amount: string; rate: string; source: string; as_of: string; valid_until: string; reference_date: string };
+type CurrencyDraft = Pair & {
+  amount?: LocalizedDraft;
+  rate?: LocalizedDraft;
+  source: string;
+  as_of: string;
+  valid_until: string;
+  reference_date: string;
+};
 type ConverterState = {
   mode: Mode;
   category: Category;
-  amount: string;
+  amount?: LocalizedDraft;
   pairs: Partial<Record<Category, Pair>>;
   currency: CurrencyDraft;
   proof?: CalculationProof;
 };
 
 const initialCurrency: CurrencyDraft = {
-  amount: '', from: 'USD', to: 'BRL', rate: '', source: '', as_of: '', valid_until: '', reference_date: '',
+  from: 'USD', to: 'BRL', source: '', as_of: '', valid_until: '', reference_date: '',
 };
 const maxAmountBytes = 4096;
 const utf8 = new TextEncoder();
@@ -39,7 +49,7 @@ const validityConstraints = {
 
 export function activate(scope: ModuleActivation<ConverterState>): PrimaryModule<ConverterState> {
   const engine = activateTool(scope, () => new Worker(new URL('./tool-converter-worker.ts', import.meta.url), { type: 'module' }));
-  let retained: ConverterState = scope.previousState ?? { mode: 'convert', category: 'length', amount: '', pairs: {}, currency: initialCurrency };
+  let retained: ConverterState = scope.previousState ?? { mode: 'convert', category: 'length', pairs: {}, currency: initialCurrency };
 
   function Workspace({ locale, messages: m, recordInteraction }: ModuleWorkspaceProps) {
     const [state, setState] = useState(retained);
@@ -53,9 +63,15 @@ export function activate(scope: ModuleActivation<ConverterState>): PrimaryModule
     const pair = pairs[category] ?? defaultPairs[category];
     const isCurrency = mode === 'currency';
     const draftAmount = isCurrency ? currency.amount : amount;
-    const complete = draftAmount.trim() && (!isCurrency ||
-      (currency.rate.trim() && currency.source.trim() && currency.as_of && currency.reference_date));
-    const normalize = (value: string) => normalizeExpression(value.trim(), number.decimal);
+    const complete = draftAmount?.text.trim() && (!isCurrency ||
+      (currency.rate?.text.trim() && currency.source.trim() && currency.as_of && currency.reference_date));
+    const origins = new Set([draftAmount, ...(isCurrency ? [currency.rate] : [])].flatMap((field) =>
+      field?.text.trim() ? [field.locale] : []));
+
+    function inputHelp(field: LocalizedDraft | undefined) {
+      return field?.text.trim() && field.locale !== locale
+        ? `converter-input-help converter-input-notation-${field.locale}` : 'converter-input-help';
+    }
 
     function abandon() {
       const job = current.current;
@@ -87,17 +103,19 @@ export function activate(scope: ModuleActivation<ConverterState>): PrimaryModule
     function example() {
       if (isCurrency) {
         changeCurrency({
-          amount: '25', from: 'USD', to: 'BRL', rate: '5', source: c.exampleSource,
+          amount: editLocalizedDraft(undefined, '25', locale), from: 'USD', to: 'BRL',
+          rate: editLocalizedDraft(undefined, '5', locale), source: c.exampleSource,
           as_of: '2024-01-10', valid_until: '2024-01-31', reference_date: '2024-02-01',
         });
-      } else update({ pairs: { ...pairs, [category]: defaultPairs[category] }, amount: category === 'temperature' ? '0' : '1' });
+      } else update({ pairs: { ...pairs, [category]: defaultPairs[category] },
+        amount: editLocalizedDraft(undefined, category === 'temperature' ? '0' : '1', locale) });
     }
 
     async function calculate() {
-      if (current.current || !complete) return;
-      const original_input = draftAmount.trim();
-      const input = normalize(original_input);
-      const rate = normalize(currency.rate);
+      if (current.current || !complete || !draftAmount) return;
+      const original_input = draftAmount.text.trim();
+      const input = normalizeMathText(original_input, draftDecimal(draftAmount));
+      const rate = currency.rate ? normalizeMathText(currency.rate.text.trim(), draftDecimal(currency.rate)) : '';
       if (utf8.encode(original_input).byteLength > maxAmountBytes || utf8.encode(input).byteLength > maxAmountBytes ||
           (isCurrency && (utf8.encode(rate).byteLength > 256 || utf8.encode(currency.source.trim()).byteLength > 80))) {
         update({});
@@ -122,7 +140,7 @@ export function activate(scope: ModuleActivation<ConverterState>): PrimaryModule
       if (response.status === 'completed') {
         if (response.value.ok) {
           recordInteraction(performance.now() - start);
-          commit({ ...state, proof: response.value.proof });
+          commit({ ...state, proof: withExpressionLocale(response.value.proof, draftAmount.locale) });
         } else setNotice(response.value.code);
       } else setNotice(response.status);
     }
@@ -221,22 +239,26 @@ export function activate(scope: ModuleActivation<ConverterState>): PrimaryModule
               </select>
             </label>}
             <label className="converter-field">{c.amount}
-              <input type="text" dir="ltr" className="converter-numeric" value={draftAmount} maxLength={maxAmountBytes}
-                spellCheck={false} autoComplete="off" aria-describedby="converter-input-help"
-                onChange={(event) => isCurrency ? changeCurrency({ amount: event.currentTarget.value }) : update({ amount: event.currentTarget.value })} />
+              <input type="text" dir="ltr" className="converter-numeric" value={draftAmount?.text ?? ''} maxLength={maxAmountBytes}
+                lang={draftAmount?.locale ?? locale} spellCheck={false} autoComplete="off" aria-describedby={inputHelp(draftAmount)}
+                onChange={(event) => {
+                  const next = editLocalizedDraft(draftAmount, event.currentTarget.value, locale);
+                  if (isCurrency) changeCurrency({ amount: next });
+                  else update({ amount: next });
+                }} />
             </label>
           </div>
           {isCurrency ? <>
             <div className="converter-fields converter-currency-line">{currencyInput('from')}{currencyInput('to')}</div>
             <div className="converter-quote-fields">
               <p className="converter-direction">{c.direction}
-                {' '}<bdi dir="ltr">1 {currency.from} = {currency.rate.trim() || '…'} {currency.to}</bdi>
+                {' '}<bdi dir="ltr">1 {currency.from} = {currency.rate?.text.trim() || '…'} {currency.to}</bdi>
               </p>
               <div className="converter-fields">
                 <label className="converter-field">{c.exchangeRate}
-                  <input type="text" dir="ltr" className="converter-numeric" value={currency.rate} maxLength={256}
-                    spellCheck={false} autoComplete="off" aria-describedby="converter-input-help"
-                    onChange={(event) => changeCurrency({ rate: event.currentTarget.value })} />
+                  <input type="text" dir="ltr" className="converter-numeric" value={currency.rate?.text ?? ''} maxLength={256}
+                    lang={currency.rate?.locale ?? locale} spellCheck={false} autoComplete="off" aria-describedby={inputHelp(currency.rate)}
+                    onChange={(event) => changeCurrency({ rate: editLocalizedDraft(currency.rate, event.currentTarget.value, locale) })} />
                 </label>
                 <label className="converter-field">{c.rateSource}
                   <input type="text" dir="auto" value={currency.source} maxLength={80} autoComplete="off"
@@ -256,11 +278,13 @@ export function activate(scope: ModuleActivation<ConverterState>): PrimaryModule
             {unitInput('to')}
           </div>}
           <p className="converter-hint" id="converter-input-help">{isCurrency ? c.manualHint : c.hints[category]}</p>
+          {[...origins].map((origin) => <InputNotation key={origin} origin={origin} locale={locale} messages={m}
+            id={`converter-input-notation-${origin}`} />)}
           <div className="converter-actions">
             <button className="converter-primary" type="submit" disabled={pending || !complete}>{m.calculate}</button>
             {pending && <button type="button" className="quiet-action" onClick={cancel}>{m.cancelCalculation}</button>}
             <button type="button" className="quiet-action" onClick={example}>{c.useExample}</button>
-            <button type="button" className="quiet-action" onClick={() => isCurrency ? update({ currency: initialCurrency }) : update({ amount: '' })}>{m.clear}</button>
+            <button type="button" className="quiet-action" onClick={() => isCurrency ? update({ currency: initialCurrency }) : update({ amount: undefined })}>{m.clear}</button>
           </div>
           <p className="converter-notice" role="status" data-error={Boolean(notice && notice !== 'cancelled') || undefined}>
             {pending ? m.working : notice ? (Object.hasOwn(messages, notice) ? messages[notice] : m.tools.engineUnavailable) : ''}

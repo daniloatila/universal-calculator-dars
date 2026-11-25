@@ -28,6 +28,7 @@ export const proofLabels: Record<Locale, ProofLabels> = {
     fields: {
       schema: 'Schema', module: 'Module', operation: 'Operation', expression: 'Original expression',
       normalized: 'Normalized expression', variables: 'Variables', units: 'Units', options: 'Options',
+      expression_locale: "Original expression locale",
       standard_bindings: 'Retained value bindings',
       domain: 'Domain', method: 'Method', formula: 'Formula', result: 'Result', exactness: 'Exactness',
       precision: 'Precision', tolerance: 'Tolerance', rounding: 'Rounding', error_bound: 'Error bound',
@@ -45,6 +46,7 @@ export const proofLabels: Record<Locale, ProofLabels> = {
     fields: {
       schema: 'Esquema', module: 'Módulo', operation: 'Operação', expression: 'Expressão original',
       normalized: 'Expressão normalizada', variables: 'Variáveis', units: 'Unidades', options: 'Opções',
+      expression_locale: "Idioma da expressão original",
       standard_bindings: 'Referências a valores retidos',
       domain: 'Domínio', method: 'Método', formula: 'Fórmula', result: 'Resultado', exactness: 'Exatidão',
       precision: 'Precisão', tolerance: 'Tolerância', rounding: 'Arredondamento', error_bound: 'Limite do erro',
@@ -62,6 +64,7 @@ export const proofLabels: Record<Locale, ProofLabels> = {
     fields: {
       schema: '架构版本', module: '模块', operation: '运算', expression: '原始表达式',
       normalized: '规范化表达式', variables: '变量', units: '单位', options: '选项',
+      expression_locale: "原始表达式的语言",
       standard_bindings: '保留值绑定',
       domain: '定义域', method: '方法', formula: '公式', result: '结果', exactness: '精确性',
       precision: '精度', tolerance: '容差', rounding: '舍入', error_bound: '误差界',
@@ -79,6 +82,7 @@ export const proofLabels: Record<Locale, ProofLabels> = {
     fields: {
       schema: 'स्कीमा', module: 'मॉड्यूल', operation: 'संक्रिया', expression: 'मूल व्यंजक',
       normalized: 'मानकीकृत व्यंजक', variables: 'चर', units: 'इकाइयाँ', options: 'विकल्प',
+      expression_locale: "मूल व्यंजक की भाषा",
       standard_bindings: 'सुरक्षित मानों के बंधन',
       domain: 'परिभाषा क्षेत्र', method: 'विधि', formula: 'सूत्र', result: 'परिणाम', exactness: 'सटीकता',
       precision: 'परिशुद्धता', tolerance: 'सहनशीलता', rounding: 'पूर्णांकन', error_bound: 'त्रुटि सीमा',
@@ -96,6 +100,7 @@ export const proofLabels: Record<Locale, ProofLabels> = {
     fields: {
       schema: 'Esquema', module: 'Módulo', operation: 'Operación', expression: 'Expresión original',
       normalized: 'Expresión normalizada', variables: 'Variables', units: 'Unidades', options: 'Opciones',
+      expression_locale: "Idioma de la expresión original",
       standard_bindings: 'Referencias a valores retenidos',
       domain: 'Dominio', method: 'Método', formula: 'Fórmula', result: 'Resultado', exactness: 'Exactitud',
       precision: 'Precisión', tolerance: 'Tolerancia', rounding: 'Redondeo', error_bound: 'Cota de error',
@@ -113,6 +118,7 @@ export const proofLabels: Record<Locale, ProofLabels> = {
     fields: {
       schema: 'المخطط', module: 'الوحدة', operation: 'العملية', expression: 'التعبير الأصلي',
       normalized: 'التعبير الموحّد', variables: 'المتغيرات', units: 'وحدات القياس', options: 'الخيارات',
+      expression_locale: "لغة التعبير الأصلي",
       standard_bindings: 'ارتباطات القيم المحتفظ بها',
       domain: 'المجال', method: 'الطريقة', formula: 'الصيغة', result: 'النتيجة', exactness: 'نوع النتيجة',
       precision: 'مستوى الدقة', tolerance: 'هامش السماح', rounding: 'التقريب', error_bound: 'حد الخطأ',
@@ -130,6 +136,7 @@ export const proofLabels: Record<Locale, ProofLabels> = {
     fields: {
       schema: 'Schéma', module: 'Module', operation: 'Opération', expression: 'Expression originale',
       normalized: 'Expression normalisée', variables: 'Variables', units: 'Unités', options: 'Options',
+      expression_locale: "Langue de l’expression d’origine",
       standard_bindings: 'Références aux valeurs conservées',
       domain: 'Domaine', method: 'Méthode', formula: 'Formule', result: 'Résultat', exactness: 'Exactitude',
       precision: 'Précision', tolerance: 'Tolérance', rounding: 'Arrondi', error_bound: 'Borne d’erreur',

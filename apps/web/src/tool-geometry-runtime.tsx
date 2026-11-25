@@ -1,13 +1,15 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { AdaptivePolicy } from './adaptive';
 import { CalculationProofPanel } from './calculation-proof-panel';
+import { withExpressionLocale } from './calculation-proof';
 import type { CalculationProof } from './calculation-proof';
 import { LOCALES } from './i18n';
-import { localizeExpression, normalizeExpression, numberPresentation } from './locale-format';
+import InputNotation from './input-notation';
+import { editLocalizedDraft, localizeExpression, numberPresentation } from './locale-format';
 import type { ModuleActivation } from './module-manager';
 import type { ModuleWorkspaceProps, PrimaryModule } from './module-registry';
 import { GeometryDiagram } from './tool-geometry-diagram';
-import { coordinateOperations, dimensions, examples, expressionFor, normalizedRows, operations, units } from './tool-geometry-input';
+import { coordinateOperations, dimensions, examples, expressionFor, normalizedDimension, normalizedRows, operations, units } from './tool-geometry-input';
 import type { Draft, Operation, Unit } from './tool-geometry-input';
 import { activateTool } from './tool-runtime';
 import './tool-geometry.css';
@@ -55,11 +57,16 @@ export function activate(scope: ModuleActivation<GeometryState>): PrimaryModule<
     const g = m.geometry;
     const { operation, unit, angle, drafts, proof } = state;
     const draft = drafts[operation] ?? noDraft;
-    const coordinates = draft.coordinates ?? '';
+    const coordinateField = draft.coordinates;
+    const coordinates = coordinateField?.text ?? '';
     const hasCoordinates = coordinateOperations.has(operation);
     const complete = (!hasCoordinates || coordinates.trim().length > 0) &&
-      dimensions[operation].every((name) => draft.dimensions[name]?.trim());
-    const normalize = (value: string) => normalizeExpression(value, presentation.decimal);
+      dimensions[operation].every((name) => draft.dimensions[name]?.text.trim());
+    const origins = new Set(dimensions[operation].flatMap((name) => {
+      const field = draft.dimensions[name];
+      return field?.text.trim() ? [field.locale] : [];
+    }));
+    if (hasCoordinates && coordinateField?.text.trim()) origins.add(coordinateField.locale);
 
     function abandon() {
       const calculation = current.current;
@@ -81,7 +88,7 @@ export function activate(scope: ModuleActivation<GeometryState>): PrimaryModule<
     }
 
     function updateDraft(next: Draft) {
-      if (next.coordinates && utf8.encode(next.coordinates).byteLength > maxBytes) {
+      if (next.coordinates && utf8.encode(next.coordinates.text).byteLength > maxBytes) {
         setNotice('limit');
         return;
       }
@@ -90,7 +97,7 @@ export function activate(scope: ModuleActivation<GeometryState>): PrimaryModule<
 
     function useExample() {
       const example = examples[operation];
-      const localize = (value: string) => localizeExpression(value, presentation.decimal);
+      const localize = (value: string) => editLocalizedDraft(undefined, localizeExpression(value, presentation.decimal), locale);
       updateDraft({
         dimensions: Object.fromEntries(Object.entries(example.dimensions).map(([name, value]) => [name, localize(value)])),
         ...(example.coordinates ? { coordinates: localize(example.coordinates) } : {}),
@@ -99,13 +106,14 @@ export function activate(scope: ModuleActivation<GeometryState>): PrimaryModule<
 
     async function calculate() {
       if (current.current || !complete) return;
-      if (dimensions[operation].some((name) => /[\s;|,]/u.test(normalize(draft.dimensions[name]!.trim())))) {
+      if (dimensions[operation].some((name) => /[\s;|,]/u.test(normalizedDimension(draft.dimensions[name]!)))) {
         update({});
         setNotice('invalid_input');
         return;
       }
-      const original_input = expressionFor(operation, draft);
-      const input = expressionFor(operation, draft, normalize);
+      const original_input = expressionFor(operation, draft, 'original');
+      const input = expressionFor(operation, draft, 'canonical');
+      const origin = origins.size === 1 ? origins.values().next().value : undefined;
       if (utf8.encode(original_input).byteLength > maxBytes || utf8.encode(input).byteLength > maxBytes) {
         update({});
         setNotice('limit');
@@ -125,7 +133,8 @@ export function activate(scope: ModuleActivation<GeometryState>): PrimaryModule<
       if (reply.status === 'completed') {
         if (reply.value.ok) {
           recordInteraction(performance.now() - start);
-          commit({ ...state, proof: reply.value.proof });
+          const record = reply.value.proof;
+          commit({ ...state, proof: origin ? withExpressionLocale(record, origin) : record });
         } else setNotice(reply.value.code);
       } else setNotice(reply.status);
     }
@@ -202,18 +211,29 @@ export function activate(scope: ModuleActivation<GeometryState>): PrimaryModule<
             </label>}
           </div>
           {dimensions[operation].length > 0 && <div className="geometry-fields geometry-dimensions">
-            {dimensions[operation].map((name) => <label key={name}>{g.dimensions[name]}
-              <input dir="ltr" type="text" maxLength={256} value={draft.dimensions[name] ?? ''}
-                autoComplete="off" spellCheck={false} aria-describedby="geometry-input-help"
-                onChange={(event) => updateDraft({ ...draft, dimensions: { ...draft.dimensions, [name]: event.currentTarget.value } })} />
-            </label>)}
+            {dimensions[operation].map((name) => {
+              const field = draft.dimensions[name];
+              return <label key={name}>{g.dimensions[name]}
+                <input dir="ltr" type="text" maxLength={256} value={field?.text ?? ''} lang={field?.locale ?? locale}
+                  autoComplete="off" spellCheck={false}
+                  aria-describedby={field?.text.trim() && field.locale !== locale
+                    ? `geometry-input-help geometry-input-notation-${field.locale}` : 'geometry-input-help'}
+                  onChange={(event) => updateDraft({ ...draft, dimensions: { ...draft.dimensions,
+                    [name]: editLocalizedDraft(field, event.currentTarget.value, locale) } })} />
+              </label>;
+            })}
           </div>}
           {hasCoordinates && <label className="geometry-coordinates">{g.coordinates}
             <textarea dir="ltr" rows={operation === 'distance' ? 3 : 5} maxLength={maxBytes} value={coordinates}
-              autoComplete="off" spellCheck={false} aria-describedby="geometry-input-help"
-              onChange={(event) => updateDraft({ ...draft, coordinates: event.currentTarget.value })} />
+              lang={coordinateField?.locale ?? locale} autoComplete="off" spellCheck={false}
+              aria-describedby={coordinateField?.text.trim() && coordinateField.locale !== locale
+                ? `geometry-input-help geometry-input-notation-${coordinateField.locale}` : 'geometry-input-help'}
+              onChange={(event) => updateDraft({ ...draft, coordinates:
+                editLocalizedDraft(coordinateField, event.currentTarget.value, locale) })} />
           </label>}
           <p className="geometry-hint" id="geometry-input-help">{g.hints[operation]}</p>
+          {[...origins].map((origin) => <InputNotation key={origin} origin={origin} locale={locale} messages={m}
+            id={`geometry-input-notation-${origin}`} />)}
           <div className="geometry-actions">
             <button className="geometry-primary" type="submit" disabled={pending || !complete}>{m.calculate}</button>
             {pending && <button type="button" className="quiet-action" onClick={cancel}>{m.cancelCalculation}</button>}
@@ -226,7 +246,7 @@ export function activate(scope: ModuleActivation<GeometryState>): PrimaryModule<
         </form>
         <div className="geometry-card geometry-result-card">
           <GeometryDiagram scope={scope} policy={framePolicy} operation={operation}
-            coordinateText={hasCoordinates ? normalizedRows(coordinates, normalize) : ''} title={g.sketch.replace('{shape}', g.operations[operation])}
+            coordinateText={hasCoordinates ? normalizedRows(draft.coordinates) : ''} title={g.sketch.replace('{shape}', g.operations[operation])}
             caption={operation === 'distance' || operation === 'angle' ? g.projection : g.diagramCaption} />
           <div className="geometry-result-heading">
             <strong id="geometry-result-label">{m.result}</strong>

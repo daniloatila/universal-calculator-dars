@@ -68,6 +68,9 @@
   "memoryCleared": "Memory cleared",
   "historyCleared": "History cleared",
   "languageChanged": "Switched to English",
+  "inputNotation": {
+    "retained": "Uses {language} notation (decimal {decimal}). Clear the field to use the current notation."
+  },
   "standardRecord": {
     "title": "Calculation record",
     "loading": "Loading the record viewer…",

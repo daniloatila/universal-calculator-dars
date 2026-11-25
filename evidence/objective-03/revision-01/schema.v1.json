@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DARS Calculation Proof record, schema 1",
+  "description": "Structural schema. DARS also enforces UTF-8 byte caps, duplicate-name rejection and Unicode scalar shape when importing, including a 96 KiB compact JSON cap for standard_bindings.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "module",
+    "operation",
+    "expression",
+    "normalized",
+    "variables",
+    "units",
+    "options",
+    "domain",
+    "method",
+    "formula",
+    "result",
+    "exactness",
+    "precision",
+    "tolerance",
+    "rounding",
+    "error_bound",
+    "assumptions",
+    "constraints",
+    "references",
+    "engine_version",
+    "algorithm_version"
+  ],
+  "if": {
+    "required": ["standard_bindings"]
+  },
+  "then": {
+    "properties": {
+      "module": { "const": "standard" },
+      "operation": { "const": "evaluate" }
+    }
+  },
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "module": {
+      "enum": [
+        "standard",
+        "scientific",
+        "algebra",
+        "calculus",
+        "linear-algebra",
+        "linear_algebra",
+        "geometry",
+        "discrete-mathematics",
+        "programmer",
+        "converter",
+        "date-time"
+      ]
+    },
+    "operation": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}(?![\\s\\S])"
+    },
+    "expression": {
+      "$ref": "#/$defs/text",
+      "maxLength": 4096
+    },
+    "expression_locale": {
+      "description": "Optional editor provenance when the original expression uses one known notation. Replay uses normalized expression and mathematical options.",
+      "enum": ["en", "pt-BR", "zh-CN", "hi", "es", "ar", "fr"]
+    },
+    "normalized": {
+      "$ref": "#/$defs/text",
+      "maxLength": 8192
+    },
+    "variables": {
+      "$ref": "#/$defs/textMap"
+    },
+    "standard_bindings": {
+      "description": "Optional Standard replay values in the engine's opaque serialized format. Property names are canonical positive decimal u32 identifiers.",
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 256,
+      "propertyNames": {
+        "pattern": "^(?:[1-9][0-9]{0,8}|[1-3][0-9]{9}|4(?:[01][0-9]{8}|2[0-8][0-9]{7}|29[0-3][0-9]{6}|294[0-8][0-9]{5}|2949[0-5][0-9]{4}|29496[0-6][0-9]{3}|294967[01][0-9]{2}|2949672[0-8][0-9]|29496729[0-5]))(?![\\s\\S])"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 10000,
+        "pattern": "^[ -~]+(?![\\s\\S])"
+      }
+    },
+    "units": {
+      "$ref": "#/$defs/textMap"
+    },
+    "options": {
+      "$ref": "#/$defs/options"
+    },
+    "domain": {
+      "$ref": "#/$defs/text",
+      "maxLength": 2048
+    },
+    "method": {
+      "$ref": "#/$defs/text",
+      "maxLength": 2048
+    },
+    "formula": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/text",
+          "maxLength": 8192
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "result": {
+      "$ref": "#/$defs/text",
+      "maxLength": 32768,
+      "minLength": 1
+    },
+    "exactness": {
+      "enum": [
+        "exact",
+        "symbolic",
+        "approximate"
+      ]
+    },
+    "precision": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "tolerance": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/text",
+          "maxLength": 512
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rounding": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/text",
+          "maxLength": 512
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "error_bound": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/text",
+          "maxLength": 512
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "assumptions": {
+      "$ref": "#/$defs/textList"
+    },
+    "constraints": {
+      "$ref": "#/$defs/textList"
+    },
+    "references": {
+      "$ref": "#/$defs/textList"
+    },
+    "engine_version": {
+      "$ref": "#/$defs/text",
+      "maxLength": 128
+    },
+    "algorithm_version": {
+      "$ref": "#/$defs/text",
+      "maxLength": 128
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "not": {
+        "pattern": "[\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F\\u007F-\\u009F\\u061C\\u200E\\u200F\\u202A-\\u202E\\u2066-\\u2069]"
+      }
+    },
+    "textMap": {
+      "type": "object",
+      "maxProperties": 16,
+      "propertyNames": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/text",
+            "maxLength": 32,
+            "minLength": 1
+          },
+          {
+            "not": {
+              "enum": [
+                "__proto__",
+                "constructor",
+                "prototype"
+              ]
+            }
+          }
+        ]
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/text",
+        "maxLength": 256
+      }
+    },
+    "options": {
+      "type": "object",
+      "maxProperties": 16,
+      "propertyNames": {
+        "allOf": [
+          {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,31}(?![\\s\\S])"
+          },
+          {
+            "not": {
+              "enum": [
+                "__proto__",
+                "constructor",
+                "prototype"
+              ]
+            }
+          }
+        ]
+      },
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/text",
+            "maxLength": 256
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        ]
+      }
+    },
+    "textList": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "$ref": "#/$defs/text",
+        "maxLength": 2048
+      }
+    }
+  }
+}

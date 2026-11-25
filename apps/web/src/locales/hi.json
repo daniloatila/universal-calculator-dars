@@ -68,6 +68,9 @@
   "memoryCleared": "मेमोरी साफ़ हुई",
   "historyCleared": "इतिहास मिट गया",
   "languageChanged": "भाषा हिन्दी में बदली गई",
+  "inputNotation": {
+    "retained": "{language} की संख्या पद्धति (दशमलव {decimal}) लागू है। वर्तमान पद्धति के लिए फ़ील्ड खाली करें।"
+  },
   "standardRecord": {
     "title": "गणना रिकॉर्ड",
     "loading": "रिकॉर्ड दर्शक लोड हो रहा है…",

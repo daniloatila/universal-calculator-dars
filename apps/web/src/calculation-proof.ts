@@ -1,3 +1,6 @@
+import { isLocale } from './i18n.ts';
+import type { Locale } from './i18n.ts';
+
 export const MAX_CALCULATION_PROOF_BYTES = 128 * 1024;
 
 const modules = [
@@ -11,6 +14,7 @@ export interface CalculationProof {
   module: (typeof modules)[number];
   operation: string;
   expression: string;
+  expression_locale?: Locale;
   normalized: string;
   variables: Readonly<Record<string, string>>;
   standard_bindings?: Readonly<Record<string, string>>;
@@ -92,8 +96,10 @@ function isStandardBindings(value: unknown): boolean {
 export function parseCalculationProof(value: unknown): CalculationProof | null {
   if (!isRecord(value)) return null;
   const hasBindings = Object.hasOwn(value, 'standard_bindings');
-  if (Object.keys(value).length !== fields.length + Number(hasBindings) ||
+  const hasLocale = Object.hasOwn(value, 'expression_locale');
+  if (Object.keys(value).length !== fields.length + Number(hasBindings) + Number(hasLocale) ||
     !fields.every((field) => Object.hasOwn(value, field))) return null;
+  if (hasLocale && (typeof value.expression_locale !== 'string' || !isLocale(value.expression_locale))) return null;
   if (value.schema !== 1 || !modules.some((module) => module === value.module) ||
     !exactness.some((kind) => kind === value.exactness)) return null;
   if (!isIdentifier(value.operation, 64)) return null;
@@ -113,6 +119,12 @@ export function parseCalculationProof(value: unknown): CalculationProof | null {
   if (!isTextList(value.assumptions) || !isTextList(value.constraints) || !isTextList(value.references)) return null;
   return utf8.encode(JSON.stringify(value)).byteLength <= MAX_CALCULATION_PROOF_BYTES
     ? value as unknown as CalculationProof : null;
+}
+
+/** Record input provenance without modifying any evaluator fields or exceeding the portable bound. */
+export function withExpressionLocale(proof: CalculationProof, locale: Locale): CalculationProof {
+  const annotated = { ...proof, expression_locale: locale };
+  return utf8.encode(JSON.stringify(annotated)).byteLength <= MAX_CALCULATION_PROOF_BYTES ? annotated : proof;
 }
 
 // JSON.parse defines the JSON grammar. This pass rules out ambiguous duplicate fields,

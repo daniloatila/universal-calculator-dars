@@ -68,6 +68,9 @@
   "memoryCleared": "存储已清除",
   "historyCleared": "历史记录已清除",
   "languageChanged": "已切换为简体中文",
+  "inputNotation": {
+    "retained": "使用{language}的记法（小数分隔符 {decimal}）。清空输入框即可使用当前记法。"
+  },
   "standardRecord": {
     "title": "计算记录",
     "loading": "正在加载记录查看器…",

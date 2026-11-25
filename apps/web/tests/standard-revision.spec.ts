@@ -107,6 +107,7 @@ test('a sequence of irrational additions preserves the original history value th
   await page.getByText('Configurações', { exact: true }).click();
   await calculate(page, undefined, 'Calcular');
   await expect(result(page)).toHaveText('100,28284271247461900976');
+  await input(page).clear();
   await memory(page, 'Somar à memória', '0,5%');
   await button(page, 'Recuperar memória').click();
   await calculate(page, undefined, 'Calcular');

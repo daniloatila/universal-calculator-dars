@@ -123,6 +123,7 @@ test('Algebra controls are localized in seven languages and retain an accessible
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     const localized = localInputs[locale];
     if (localized) {
+      await draft.fill('');
       await draft.fill(localized);
       await draft.press('Control+Enter');
       await expect(result(page)).toHaveAttribute('data-canonical', '5/2');

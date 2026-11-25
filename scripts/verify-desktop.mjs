@@ -3,20 +3,25 @@ import { strict as assert } from "node:assert";
 import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { performance } from "node:perf_hooks";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { setTimeout as delay } from "node:timers/promises";
 
 const bridge = createRequire(new URL("../apps/web/package.json", import.meta.url));
 const { chromium, expect } = bridge("@playwright/test");
-const executable = fileURLToPath(new URL("../target/release/dars-desktop.exe", import.meta.url));
-const universalReview = process.argv.includes("--objective-03");
+const executableFlag = process.argv.indexOf("--exe");
+const executable = executableFlag === -1
+  ? fileURLToPath(new URL("../target/release/dars-desktop.exe", import.meta.url))
+  : resolve(process.argv[executableFlag + 1]);
+const localeRevision = process.argv.includes("--objective-03-revision-01");
+const universalReview = localeRevision || process.argv.includes("--objective-03");
 const recoveryRevision = process.argv.includes("--objective-02-revision-02");
 const operationalRevision = recoveryRevision || process.argv.includes("--objective-02-revision");
 const operational = universalReview || operationalRevision || process.argv.includes("--objective-02");
 const revised = operational || process.argv.includes("--revision-01");
 const evidenceRoot = new URL(
-  universalReview ? "../artifacts/objective-03/integrated-platform/desktop-verification/"
+  localeRevision ? "../artifacts/objective-03/revision-01/desktop-verification/"
+    : universalReview ? "../artifacts/objective-03/integrated-platform/desktop-verification/"
     : recoveryRevision ? "../artifacts/objective-02/revision-02/desktop-verification/"
     : operationalRevision ? "../artifacts/objective-02/revision-01/desktop-verification/"
     : operational ? "../artifacts/objective-02/desktop-verification/"

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
   MAX_CALCULATION_PROOF_BYTES, parseCalculationProof, parseCalculationProofFile,
-  serializeCalculationProof,
+  serializeCalculationProof, withExpressionLocale,
 } from '../src/calculation-proof.ts';
 import { localizeProofText, proofLabels } from '../src/calculation-proof-labels.ts';
 import { scientificRecord } from './fixtures/calculation-proof.ts';
@@ -15,6 +15,17 @@ test('a valid local record round-trips through the published JSON fields', () =>
     result: '0.8414709848078965066525023216302990',
   } as const;
   assert.deepEqual(parseCalculationProofFile(serializeCalculationProof(approximate)), approximate);
+});
+
+test('optional source-locale metadata preserves the original and normalized proof fields', () => {
+  const proof = withExpressionLocale(scientificRecord, 'pt-BR');
+  assert.deepEqual(parseCalculationProofFile(serializeCalculationProof(proof)), {
+    ...scientificRecord, expression_locale: 'pt-BR',
+  });
+  assert.equal(parseCalculationProof({ ...scientificRecord, expression_locale: 'pt-PT' }), null);
+  assert.equal(parseCalculationProof({ ...scientificRecord, expression_locale: ['en'] }), null);
+  assert.equal(parseCalculationProofFile(JSON.stringify(proof).replace('"expression_locale":"pt-BR"',
+    '"expression_locale":"pt-BR","expression_locale":"en"')), null);
 });
 
 test('schema, fields, module and operation use bounded exact shapes', () => {

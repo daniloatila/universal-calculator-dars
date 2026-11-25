@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "local_build": {
+    "version": "0.3.1",
+    "command": "cargo build --locked --release -p dars-desktop",
+    "status": "blocked",
+    "error": 4551,
+    "policy": "VerifiedAndReputableDesktop",
+    "target": "dars-desktop Tauri build_script_build.exe",
+    "events": [
+      {
+        "id": 3033,
+        "at": "2026-11-25T14:25:17.305-03:00"
+      },
+      {
+        "id": 3077,
+        "at": "2026-11-25T14:25:17.338-03:00"
+      }
+    ]
+  },
+  "local_protection": {
+    "recorded_at": "2026-11-25T14:29:37-03:00",
+    "antivirus": true,
+    "real_time": true,
+    "tamper": true,
+    "mode": "Normal",
+    "settings_or_exclusions_changed": false
+  },
+  "historical_debug_clippy": "../windows-protection.json"
+}

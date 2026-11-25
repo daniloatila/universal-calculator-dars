@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CalculationProofPanel } from './calculation-proof-panel';
+import { withExpressionLocale } from './calculation-proof';
 import type { CalculationProof } from './calculation-proof';
 import { LOCALES } from './i18n';
-import { localizeExpression, normalizeExpression, numberPresentation } from './locale-format';
+import InputNotation from './input-notation';
+import { draftDecimal, editLocalizedDraft, localizeExpression, normalizeMathText, numberPresentation } from './locale-format';
+import type { LocalizedDraft } from './locale-format';
 import type { ModuleActivation } from './module-manager';
 import type { ModuleWorkspaceProps, PrimaryModule } from './module-registry';
 import { activateTool } from './tool-runtime';
@@ -14,7 +17,7 @@ type Domain = 'real' | 'complex';
 type AlgebraState = {
   operation: Operation;
   domain: Domain;
-  drafts: Partial<Record<Operation, string>>;
+  drafts: Partial<Record<Operation, LocalizedDraft>>;
   proof?: CalculationProof;
 };
 
@@ -32,8 +35,9 @@ const examples: Readonly<Record<Operation, string>> = {
 const byteCount = new TextEncoder();
 const maxBytes = 4096;
 
-function normalizedInput(original: string, decimal: string) {
-  return original.split(/[;؛；]/u).map((statement) => normalizeExpression(statement, decimal)).join(';')
+function normalizedInput(draft: LocalizedDraft) {
+  const decimal = draftDecimal(draft);
+  return normalizeMathText(draft.text, decimal).replace(/[؛；]/gu, ';')
     .replaceAll('≤', '<=').replaceAll('≥', '>=').replaceAll('＝', '=');
 }
 
@@ -50,7 +54,10 @@ export function activate(scope: ModuleActivation<AlgebraState>): PrimaryModule<A
     const presentation = useMemo(() => numberPresentation(LOCALES[locale].format), [locale]);
     const a = m.algebra;
     const { operation, domain, drafts, proof } = state;
-    const expression = drafts[operation] ?? '';
+    const draft = drafts[operation];
+    const expression = draft?.text ?? '';
+    const expressionOrigin = expression.trim() ? draft?.locale : undefined;
+    const retainedNotation = expressionOrigin && expressionOrigin !== locale;
     const example = localizeExpression(examples[operation], presentation.decimal);
 
     function abandon() {
@@ -73,16 +80,17 @@ export function activate(scope: ModuleActivation<AlgebraState>): PrimaryModule<A
       commit({ ...state, ...changes, proof: undefined });
     }
 
-    function changeExpression(value: string) {
+    function changeExpression(value: string, fromExample = false) {
       if (value.length > maxBytes || byteCount.encode(value).byteLength > maxBytes) {
         setNotice('limit');
         return;
       }
-      update({ drafts: { ...drafts, [operation]: value } });
+      const next = editLocalizedDraft(fromExample ? undefined : draft, value, locale);
+      update({ drafts: { ...drafts, [operation]: next } });
     }
 
     async function calculate() {
-      if (current.current || !expression.trim()) return;
+      if (current.current || !draft?.text.trim()) return;
       const controller = new AbortController();
       current.current = controller;
       setPending(true);
@@ -93,8 +101,8 @@ export function activate(scope: ModuleActivation<AlgebraState>): PrimaryModule<A
         schema: 1,
         module: 'algebra',
         operation,
-        input: normalizedInput(expression, presentation.decimal),
-        original_input: expression,
+        input: normalizedInput(draft),
+        original_input: draft.text,
         options: { domain },
       }, controller.signal);
       if (scope.signal.aborted || current.current !== controller) return;
@@ -103,7 +111,7 @@ export function activate(scope: ModuleActivation<AlgebraState>): PrimaryModule<A
       if (reply.status === 'completed') {
         if (reply.value.ok) {
           recordInteraction(performance.now() - start);
-          commit({ ...state, proof: reply.value.proof });
+          commit({ ...state, proof: withExpressionLocale(reply.value.proof, draft.locale) });
         } else setNotice(reply.value.code);
       } else setNotice(reply.status);
     }
@@ -144,7 +152,7 @@ export function activate(scope: ModuleActivation<AlgebraState>): PrimaryModule<A
             </select>
           </label>
           <button type="button" className="quiet-action algebra-example" onClick={() => {
-            changeExpression(example);
+            changeExpression(example, true);
             input.current?.focus();
           }}>
             {m.tools.examples} <bdi dir="ltr">{example}</bdi>
@@ -153,7 +161,8 @@ export function activate(scope: ModuleActivation<AlgebraState>): PrimaryModule<A
         <label className="algebra-expression">{a.inputs[operation]}
           <textarea ref={input} rows={operation === 'system' || operation === 'substitute' ? 6 : 4}
             dir="ltr" spellCheck={false} autoComplete="off" autoCapitalize="off" value={expression}
-            aria-describedby="algebra-input-help" onChange={(event) => changeExpression(event.currentTarget.value)}
+            aria-describedby={retainedNotation ? 'algebra-input-help algebra-input-notation' : 'algebra-input-help'}
+            onChange={(event) => changeExpression(event.currentTarget.value)}
             onKeyDown={(event) => {
               if (!event.nativeEvent.isComposing && event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
                 event.preventDefault();
@@ -162,6 +171,7 @@ export function activate(scope: ModuleActivation<AlgebraState>): PrimaryModule<A
             }} />
         </label>
         <p id="algebra-input-help" className="algebra-hint">{a.hints[operation]}</p>
+        <InputNotation origin={expressionOrigin} locale={locale} messages={m} id="algebra-input-notation" />
         <div className="algebra-actions">
           <button type="submit" className="algebra-primary" disabled={pending || !expression.trim()}>{m.calculate}</button>
           {pending && <button type="button" className="quiet-action" onClick={cancel}>{m.cancelCalculation}</button>}

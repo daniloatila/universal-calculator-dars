@@ -68,6 +68,9 @@
   "memoryCleared": "Mémoire effacée",
   "historyCleared": "Historique effacé",
   "languageChanged": "Langue réglée sur le français",
+  "inputNotation": {
+    "retained": "Utilise la notation {language} (séparateur décimal {decimal}). Effacez le champ pour utiliser la notation actuelle."
+  },
   "standardRecord": {
     "title": "Registre de calcul",
     "loading": "Chargement du visualiseur…",

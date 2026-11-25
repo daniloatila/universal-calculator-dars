@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { CalculationProofPanel } from './calculation-proof-panel';
 import type { CalculationProof } from './calculation-proof';
 import { LOCALES } from './i18n';
-import { normalizeExpression, numberPresentation } from './locale-format';
+import { normalizeSignedDigits, numberPresentation } from './locale-format';
 import type { ModuleActivation } from './module-manager';
 import type { ModuleWorkspaceProps, PrimaryModule } from './module-registry';
 import { BitPreview, decodeWord, RadixValues } from './tool-programmer-result';
@@ -66,7 +66,7 @@ export function activate(scope: ModuleActivation<ProgrammerState>): PrimaryModul
     const draft = drafts[operation] ?? noDraft;
     const fields: Field[] = paired.has(operation) ? ['value', 'secondValue'] : shifted.has(operation) ? ['value', 'count'] : ['value'];
     const complete = fields.every((field) => draft[field]?.trim());
-    const normalized = (text: string) => normalizeExpression(text.trim(), presentation.decimal);
+    const normalized = (text: string) => normalizeSignedDigits(text.trim());
     const widthText = normalized(width);
     const wordWidth = /^\d{1,4}$/u.test(widthText) ? Number(widthText) : 0;
     const word = useMemo(() => decodeWord(proof?.result), [proof]);

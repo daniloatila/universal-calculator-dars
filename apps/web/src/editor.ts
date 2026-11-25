@@ -1,10 +1,10 @@
 const UNDO_LIMIT = 80;
 
-export type Editor = { before: string[]; expression: string; after: string[] };
+export type Editor<T = string> = { before: T[]; expression: T; after: T[] };
 
 export const EMPTY_EDITOR: Editor = { before: [], expression: '', after: [] };
 
-export function edit(editor: Editor, expression: string): Editor {
+export function edit<T>(editor: Editor<T>, expression: T): Editor<T> {
   if (expression === editor.expression) return editor;
   return {
     before: [...editor.before, editor.expression].slice(-UNDO_LIMIT),
@@ -13,7 +13,7 @@ export function edit(editor: Editor, expression: string): Editor {
   };
 }
 
-export function undo(editor: Editor): Editor {
+export function undo<T>(editor: Editor<T>): Editor<T> {
   const previous = editor.before.at(-1);
   if (previous === undefined) return editor;
   return {
@@ -23,7 +23,7 @@ export function undo(editor: Editor): Editor {
   };
 }
 
-export function redo(editor: Editor): Editor {
+export function redo<T>(editor: Editor<T>): Editor<T> {
   const [next, ...after] = editor.after;
   if (next === undefined) return editor;
   return { before: [...editor.before, editor.expression], expression: next, after };

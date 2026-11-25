@@ -68,6 +68,9 @@
   "memoryCleared": "تم مسح الذاكرة",
   "historyCleared": "تم مسح السجل",
   "languageChanged": "تم تغيير اللغة إلى العربية",
+  "inputNotation": {
+    "retained": "يستخدم تدوين {language} (الفاصل العشري {decimal}). أفرغ الحقل لاستخدام التدوين الحالي."
+  },
   "standardRecord": {
     "title": "سجل الحساب",
     "loading": "جارٍ تحميل عارض السجلات…",
