@@ -2,6 +2,13 @@
 
 [English](../../CHANGELOG.md)
 
+## 0.3.0 · Revisão do Objetivo 03
+
+- Incluídas as ferramentas Scientific, Álgebra, Cálculo, Álgebra Linear, Geometria, Matemática Discreta, Programador, Conversor e Data e Hora, com avaliadores Rust limitados e verificações matemáticas independentes.
+- Incluídas a busca entre dez ferramentas, a separação dos arquivos WASM avançados e a integração com cinco perfis adaptativos e sete idiomas.
+- Incluídos registros locais de cálculo versionados com classificação, métodos, opções e dados de reprodução. Registros abertos do disco são mostrados como texto sem verificação de autoria ou resultado.
+- Ampliadas as evidências no Windows e no navegador para cobrir troca de ferramentas, suspensão, preparação offline, encerramento de workers e medições comparáveis de memória. [Etapas do Objetivo 03](../../evidence/objective-03/PLAN.pt-BR.md)
+
 ## 0.2.2 · Revisão 02 do Objetivo 02
 
 - Encerramento do worker dedicado de uma tarefa expirada ou cancelada antes da admissão da sucessora.

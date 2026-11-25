@@ -1,4 +1,4 @@
-# Build the foundation from source
+# Build DARS from source
 
 [Português brasileiro](../pt-BR/build.md)
 
@@ -25,27 +25,33 @@ cargo build --locked --release -p dars-desktop
 .\target\release\dars-desktop.exe
 ```
 
-Tauri embeds the same `apps/web/dist` assets used by the web build. Rebuild the web assets before rebuilding after changes to the interface or Rust evaluator. This command builds a development-stage Windows executable. Platform support is limited to the claims backed by the [compatibility results](../../evidence/objective-01/compatibility.md).
+Tauri embeds the same `apps/web/dist` assets used by the web build. Rebuild the web assets after changes to the interface or Rust evaluator. This command produces a Windows executable for local review. [Compatibility results](../../evidence/objective-03/compatibility.md)
+
+The full workspace lint check verified locally on Windows uses the release profile.
+
+```powershell
+cargo clippy --locked --workspace --release --all-targets -- -D warnings
+```
 
 ## CLI
 
 ```sh
 cargo run --locked -p dars-cli -- "0.1 + 0.2"
-cargo run --locked -p dars-cli -- "1 / 3"
-cargo run --locked -p dars-cli -- "1 / 0"
+cargo run --locked -p dars-cli -- standard-record "1 / 3"
+cargo run --locked -p dars-cli -- tool '{"schema":1,"module":"scientific","operation":"evaluate","input":"sin(90°)"}'
 ```
 
-Pass the expression as one quoted argument. Evaluation prints a JSON result to standard output. Exit code 0 indicates a result, 1 an evaluation error, and 2 invalid invocation. `--help` and `--version` print text.
+Pass the expression or advanced request JSON as one quoted argument. Evaluation prints JSON to standard output. Exit code 0 indicates a result, 1 an evaluation error, and 2 invalid invocation. `--help` and `--version` print text. [Calculation record and replay](../../evidence/objective-03/calculation-proof/contract.md)
 
 ## Tests
 
 Build the web assets first so the desktop crate can embed them. Then run:
 
 ```sh
-cargo test --workspace --locked
+cargo test --locked
 npm test --prefix apps/web
 npm exec --prefix apps/web -- playwright install chromium
 npm run test:e2e --prefix apps/web
 ```
 
-See the [objective reproduction notes](../../evidence/objective-01/reproduction.md) for the platform-specific validation and benchmark runs.
+The reproduction notes cover the locked toolchain, independent oracles, CLI/WASM parity, actual Windows and browser checks, and benchmarks. [Objective 03 reproduction](../../evidence/objective-03/reproduction.md)

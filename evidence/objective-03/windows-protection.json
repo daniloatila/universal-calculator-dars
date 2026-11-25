@@ -1,18 +1,33 @@
 {
   "schema": 1,
-  "observed_local_interval": ["2026-11-25T10:56:31-03:00", "2026-11-25T10:56:39-03:00"],
+  "observed_local_interval": [
+    "2026-11-25T10:56:31-03:00",
+    "2026-11-25T10:56:39-03:00"
+  ],
   "log": "Microsoft-Windows-CodeIntegrity/Operational",
   "event_id": 3077,
   "record_count": 6,
   "recorded_policy": "VerifiedAndReputableDesktop",
   "loader": "clippy-driver.exe",
   "unsigned_build_libraries": [
-    { "name": "serde_derive-f8b77dc6109ace60.dll", "events": 1 },
-    { "name": "serde_with_macros-d409d3f3e588e18d.dll", "events": 5 }
+    {
+      "name": "serde_derive-f8b77dc6109ace60.dll",
+      "events": 1
+    },
+    {
+      "name": "serde_with_macros-d409d3f3e588e18d.dll",
+      "events": 5
+    }
   ],
   "workspace_debug_clippy": "interrupted by Windows with OS error 4551",
-  "later_verified_operations": ["default-member Clippy", "locked release build", "Windows WebView2 execution", "Git push"],
-  "latest_check_local": "2026-11-25T13:06:09-03:00",
+  "later_verified_operations": [
+    "default-member Clippy",
+    "workspace-wide Clippy in release profile",
+    "locked release build",
+    "Windows WebView2 execution",
+    "Git push"
+  ],
+  "latest_check_local": "2026-11-25T13:12:14-03:00",
   "later_interval_start_local": "2026-11-25T10:58:00-03:00",
   "later_relevant_code_integrity_blocks": 0,
   "later_defender_detection_or_asr_events": 0,
@@ -22,5 +37,11 @@
     "tamper_protection_enabled": true,
     "mode": "Normal"
   },
-  "protection_or_exclusion_changes": false
+  "protection_or_exclusion_changes": false,
+  "workspace_release_clippy": {
+    "command": "cargo clippy --locked --workspace --release --all-targets -- -D warnings",
+    "status": "passed",
+    "elapsed_seconds": 30.68,
+    "verified_executable_hash_unchanged": true
+  }
 }

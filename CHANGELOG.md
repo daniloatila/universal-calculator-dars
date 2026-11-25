@@ -2,6 +2,13 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
+## 0.3.0 · Objective 03 review
+
+- Added the Scientific, Algebra, Calculus, Linear Algebra, Geometry, Discrete Mathematics, Programmer, Converter and Date & Time workspaces with bounded Rust evaluators and independent mathematical checks.
+- Added searchable navigation for ten workspaces, separate advanced WASM assets, five adaptive profiles and seven interface languages.
+- Added versioned local calculation records with explicit classification, methods, settings and replay information. Records opened from disk are shown as unverified text.
+- Extended Windows and browser evidence to cover module switching, suspension, offline preparation, worker teardown and comparable memory measurements. [Objective 03 stages](evidence/objective-03/PLAN.md)
+
 ## 0.2.2 · Objective 02 revision 02
 
 - Terminate the dedicated worker of an expired or cancelled module job before admitting its successor.

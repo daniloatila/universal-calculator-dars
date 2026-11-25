@@ -4,7 +4,12 @@
 
 [English](README.md)
 
-O DARS é uma plataforma de computação local de Danilo Átila. Seu primeiro marco é uma calculadora Standard com núcleo independente em Rust e uma interface compartilhada entre Windows e navegador.
+O DARS é uma plataforma de computação local de Danilo Átila. A versão 0.3.0 reúne dez ferramentas na interface compartilhada entre Windows e navegador, com resultados calculados em Rust e uma linha de comando nativa.
+
+- **Aritmética e análise** — Standard, Scientific, Álgebra, Cálculo e Álgebra Linear.
+- **Ferramentas especializadas** — Geometria, Matemática Discreta, Programador, Conversor e Data e Hora.
+
+A ferramenta ativa carrega seus próprios recursos matemáticos. Os registros de cálculo podem ser consultados e baixados localmente. A Standard funciona offline após a preparação da interface web, e as ferramentas avançadas ficam disponíveis offline quando seus recursos entram no cache. [Relatório de revisão da 0.3.0](evidence/objective-03/REPORT.pt-BR.md) · [Verificação dos módulos](evidence/objective-03/PLAN.pt-BR.md) · [Registros de cálculo](evidence/objective-03/calculation-proof/contract.pt-BR.md)
 
 ## Fundação
 
@@ -19,6 +24,6 @@ O proprietário aprovou a revisão 01 do Objetivo 01 (0.1.1). A calculadora Stan
 - [Revisão 01 do Objetivo 01](evidence/objective-01/revision-01/REPORT.md) e [linha de base 0.1.0](evidence/objective-01/REPORT.md)
 - [Missão original](PROJECT_SPEC.md) e [tradução para o inglês](docs/en/mission.md)
 
-A versão de desenvolvimento 0.2.2 do Objetivo 02 recupera a capacidade do agendador quando uma tarefa isolada deixa de responder. [Revisão 02 do Objetivo 02](evidence/objective-02/revision-02/REPORT.pt-BR.md) · [Capacidades nativas e desempenho](evidence/objective-02/revision-01/REPORT.pt-BR.md)
+A versão aprovada 0.2.2 do Objetivo 02 recupera a capacidade do agendador quando uma tarefa isolada deixa de responder e serve de referência para a regressão. [Revisão 02 do Objetivo 02](evidence/objective-02/revision-02/REPORT.pt-BR.md) · [Capacidades nativas e desempenho](evidence/objective-02/revision-01/REPORT.pt-BR.md)
 
 O DARS usa a [licença Apache 2.0](LICENSE).

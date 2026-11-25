@@ -15,6 +15,6 @@ A entrega 0.2.2 é a base aprovada. Registre em cada etapa a especificação mat
 | 7 | Programador | INTERNALLY_ACCEPTED · [Verificação](programmer/verification.pt-BR.md) · [CI](programmer/ci.json) |
 | 8 | Conversor | INTERNALLY_ACCEPTED · [Verificação](converter/verification.pt-BR.md) · [CI](converter/ci.json) |
 | 9 | Data e Hora | INTERNALLY_ACCEPTED · [Verificação](date-time/verification.pt-BR.md) · [CI](date-time/ci.json) |
-| Auditoria | Objetivo 03 integrado | IN_PROGRESS |
+| Auditoria | Objetivo 03 integrado | READY_FOR_REVIEW · [Relatório](REPORT.pt-BR.md) · [Aceitação](acceptance.json) · [CI](ci.json) |
 
 A auditoria global repete as 602 verificações rastreadas, exercita os dez módulos e sete idiomas e valida Windows, navegador, CLI/WASM, CI, segurança, modo offline, desempenho, memória e publicação. [Regressão de referência](../objective-02/revision-02/tests.json) · [Dívida e protocolo de memória no Windows](../objective-02/revision-02/memory-debt.pt-BR.md)

@@ -1,0 +1,198 @@
+{
+  "schema": 1,
+  "objective": "03",
+  "version": "0.3.0",
+  "status": "READY_FOR_REVIEW",
+  "audited_source_commit": "c3af4870b6fe781f1b7526995fcd3761791aeead",
+  "review_branch": "codex/objective-03-universal-mathematics",
+  "earlier_objectives": {
+    "01": "APPROVED",
+    "02": {
+      "status": "APPROVED",
+      "score": 95
+    }
+  },
+  "next_objective": {
+    "id": "04",
+    "status": "NOT_STARTED"
+  },
+  "criteria": [
+    {
+      "id": "nine_advanced_modules",
+      "status": "VERIFIED",
+      "evidence": [
+        "PLAN.md",
+        "changes.md",
+        "REPORT.md"
+      ]
+    },
+    {
+      "id": "standard_functionality",
+      "status": "VERIFIED",
+      "evidence": [
+        "regression.md",
+        "windows-ui.json"
+      ]
+    },
+    {
+      "id": "ten_workspaces",
+      "status": "VERIFIED",
+      "evidence": [
+        "browser.json",
+        "compatibility.md"
+      ]
+    },
+    {
+      "id": "selected_workspace_resources",
+      "status": "VERIFIED",
+      "evidence": [
+        "browser.json",
+        "paired-windows.json"
+      ]
+    },
+    {
+      "id": "independent_mathematics",
+      "status": "VERIFIED",
+      "evidence": [
+        "tests.json",
+        "PLAN.md"
+      ]
+    },
+    {
+      "id": "published_mathematical_limits",
+      "status": "VERIFIED",
+      "evidence": [
+        "PLAN.md",
+        "dependencies.md"
+      ]
+    },
+    {
+      "id": "calculation_proof",
+      "status": "VERIFIED",
+      "evidence": [
+        "calculation-proof/contract.md",
+        "calculation-proof/schema.v1.json",
+        "standard-proof.png"
+      ]
+    },
+    {
+      "id": "resource_lifecycle",
+      "status": "VERIFIED",
+      "evidence": [
+        "paired-windows.json",
+        "benchmarks.json",
+        "browser.json"
+      ]
+    },
+    {
+      "id": "five_adaptive_profiles",
+      "status": "VERIFIED",
+      "evidence": [
+        "paired-windows.json",
+        "browser.json"
+      ]
+    },
+    {
+      "id": "seven_locales",
+      "status": "VERIFIED",
+      "evidence": [
+        "browser.json",
+        "compatibility.md"
+      ]
+    },
+    {
+      "id": "security_privacy",
+      "status": "VERIFIED",
+      "evidence": [
+        "security.md",
+        "windows-protection.json",
+        "ci.json"
+      ]
+    },
+    {
+      "id": "version_0_2_2_regression",
+      "status": "VERIFIED",
+      "evidence": [
+        "tests.json",
+        "regression.md"
+      ]
+    },
+    {
+      "id": "published_benchmarks",
+      "status": "VERIFIED",
+      "evidence": [
+        "benchmarks.json",
+        "assets.json",
+        "paired-windows.json"
+      ]
+    },
+    {
+      "id": "updated_memory_debt",
+      "status": "VERIFIED",
+      "evidence": [
+        "memory-debt.md",
+        "memory-debt.pt-BR.md"
+      ]
+    },
+    {
+      "id": "native_windows_executable",
+      "status": "VERIFIED",
+      "evidence": [
+        "windows-ui.json",
+        "paired-windows.json",
+        "standard-proof-windows.png"
+      ]
+    },
+    {
+      "id": "installed_browser",
+      "status": "VERIFIED",
+      "evidence": [
+        "browser.json",
+        "standard-proof.png"
+      ]
+    },
+    {
+      "id": "cli_wasm_compatibility",
+      "status": "VERIFIED",
+      "evidence": [
+        "tests.json",
+        "compatibility.md",
+        "reproduction.md"
+      ]
+    },
+    {
+      "id": "four_github_actions_jobs",
+      "status": "VERIFIED",
+      "evidence": [
+        "ci.json"
+      ]
+    },
+    {
+      "id": "bilingual_documentation",
+      "status": "VERIFIED",
+      "evidence": [
+        "REPORT.md",
+        "REPORT.pt-BR.md",
+        "reproduction.md",
+        "reproduction.pt-BR.md"
+      ]
+    },
+    {
+      "id": "source_evidence_publication",
+      "status": "VERIFIED",
+      "evidence": [
+        "PLAN.md",
+        "tests.json",
+        "assets.json",
+        "ci.json"
+      ]
+    }
+  ],
+  "remaining_limits": [
+    "The target of less than 100,000,000 bytes incremental desktop RAM remains unverified. Shared pages lack exclusive attribution.",
+    "Extended retention and sustained-growth classification remain in the authorized pre-1.0 audit.",
+    "The packaged Windows artifact was verified locally. The macOS result is a hosted build and test result.",
+    "Default-member Clippy and workspace-wide release Clippy passed locally. An earlier Windows policy blocked unsigned debug procedural macros during workspace-wide Clippy.",
+    "The Windows review artifact is unsigned. A stable release requires its own approval."
+  ]
+}

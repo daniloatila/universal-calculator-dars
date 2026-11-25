@@ -17,8 +17,8 @@ Milestones describe planned scope. The original mission contains their detailed 
 
 See [PROJECT_STATE.md](PROJECT_STATE.md) for the current gate. Review reports and approval records belong with each objective's evidence.
 
-Objectives 01 and 02 were approved at 0.1.1 and 0.2.2. Objective 03 proceeds through nine internal stages, followed by the global audit. [Objective 01 approval](evidence/objective-01/approval.json) · [Objective 02 approval](evidence/objective-02/approval.json) · [Objective 03 stage gates](evidence/objective-03/PLAN.md)
+Objectives 01 and 02 were approved at 0.1.1 and 0.2.2. Objective 03 completed its nine internal stages and integrated audit and awaits independent review. [Objective 01 approval](evidence/objective-01/approval.json) · [Objective 02 approval](evidence/objective-02/approval.json) · [Objective 03 audit](evidence/objective-03/REPORT.md)
 
 ## Windows memory follow-up
 
-Every authorized objective from 03 through 08 includes a comparable Windows memory check. The target of less than 100 MB of incremental RAM in visible basic desktop mode remains open. The pre-1.0 audit will investigate the increase in private commit observed across repeated cycles and document its disposition before stable release. [Memory debt and investigation protocol](evidence/objective-02/revision-02/memory-debt.md)
+Every authorized objective from 03 through 08 includes a comparable Windows memory check. The target of less than 100 MB of incremental RAM in visible basic desktop mode remains open after the 0.3.0 paired checks. The pre-1.0 audit will investigate the increase in private commit observed across repeated cycles and document its disposition before stable release. [0.3.0 memory measurements](evidence/objective-03/memory-debt.md) · [Investigation protocol](evidence/objective-02/revision-02/memory-debt.md)
