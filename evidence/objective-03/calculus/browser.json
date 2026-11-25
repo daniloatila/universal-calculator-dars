@@ -1,0 +1,288 @@
+{
+  "browser": "installed Chrome on Windows",
+  "expected": 45,
+  "outcomes": [
+    {
+      "title": "Algebra runs its nine operations, exposes domain restrictions and preserves module state",
+      "duration_ms": 2603,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra changes solution domains and keeps restrictions when verifying excluded values",
+      "duration_ms": 1084,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra controls are localized in seven languages and retain an accessible 320 px RTL layout",
+      "duration_ms": 1626,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra prepares only its own resources and calculates after offline reload",
+      "duration_ms": 1145,
+      "status": "passed"
+    },
+    {
+      "title": "switching modules terminates an admitted Algebra worker and allows a fresh calculation",
+      "duration_ms": 531,
+      "status": "passed"
+    },
+    {
+      "title": "a real Scientific result exports a versioned local calculation record and reopens it as an import",
+      "duration_ms": 640,
+      "status": "passed"
+    },
+    {
+      "title": "the local proof viewer rejects malformed or oversized bytes and treats imported markup as text",
+      "duration_ms": 437,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus performs higher and partial derivatives, integrals and a Taylor expansion",
+      "duration_ms": 1544,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus distinguishes limits, unsupported primitives and undefined integrals",
+      "duration_ms": 1213,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus exposes numerical tolerance and an uncertified estimate in its downloadable proof",
+      "duration_ms": 1214,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus localizes operation controls, numeric parameters and the narrow RTL layout",
+      "duration_ms": 2470,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus prepares one isolated WASM lazily and calculates after offline reload",
+      "duration_ms": 1197,
+      "status": "passed"
+    },
+    {
+      "title": "switching modules stops a pending Calculus worker and keeps the draft",
+      "duration_ms": 566,
+      "status": "passed"
+    },
+    {
+      "title": "adaptive graphics policies change real canvas draw cadence and suspension stops drawing",
+      "duration_ms": 2619,
+      "status": "passed"
+    },
+    {
+      "title": "browser fixtures switch through the module manager and release workers, cache and canvas resources",
+      "duration_ms": 1328,
+      "status": "passed"
+    },
+    {
+      "title": "the real app shell selects heterogeneous modules and globally clears both active and suspended state",
+      "duration_ms": 1798,
+      "status": "passed"
+    },
+    {
+      "title": "the same app shell isolates a hung module, retries and disposes a late runtime",
+      "duration_ms": 2303,
+      "status": "passed"
+    },
+    {
+      "title": "real Workers time out, release foreground capacity, and return valid successors in every adaptive profile",
+      "duration_ms": 11630,
+      "status": "passed"
+    },
+    {
+      "title": "real scheduler Workers recover from secondary hangs and release in-flight jobs on cancel, suspend, and switch",
+      "duration_ms": 4306,
+      "status": "passed"
+    },
+    {
+      "title": "resource profiles retire and wake a real worker without changing exact math",
+      "duration_ms": 12624,
+      "status": "passed"
+    },
+    {
+      "title": "offline mode persists through reload and blocks a real uncached same-origin request",
+      "duration_ms": 1175,
+      "status": "passed"
+    },
+    {
+      "title": "visibility suspension recovers exact session state and the privacy action discards it",
+      "duration_ms": 893,
+      "status": "passed"
+    },
+    {
+      "title": "reset preferences clears DARS settings while preserving unrelated browser keys",
+      "duration_ms": 708,
+      "status": "passed"
+    },
+    {
+      "title": "operations, privacy and diagnostics fit 320 px and retain preferences in all seven locales",
+      "duration_ms": 8410,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific computes the required vectors and preserves Standard and adaptive behavior",
+      "duration_ms": 1371,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific options control working precision and engineering notation and expose domain failures",
+      "duration_ms": 534,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific normalizes localized input and keeps its controls within a narrow RTL layout",
+      "duration_ms": 1511,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific assets are absent on initial opening and remain usable after explicit offline preparation",
+      "duration_ms": 892,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific cancels an admitted worker and calculates on a fresh worker",
+      "duration_ms": 409,
+      "status": "passed"
+    },
+    {
+      "title": "MR immediately after M+ recalls an irrational absolute percentage without relative re-evaluation",
+      "duration_ms": 704,
+      "status": "passed"
+    },
+    {
+      "title": "M−, negatives and large exact values survive recall, explicit percentages and powers",
+      "duration_ms": 850,
+      "status": "passed"
+    },
+    {
+      "title": "a sequence of irrational additions preserves the original history value through MC, undo and locale change",
+      "duration_ms": 1600,
+      "status": "passed"
+    },
+    {
+      "title": "MC aborts a pending memory operation and late results cannot overwrite the next value",
+      "duration_ms": 662,
+      "status": "passed"
+    },
+    {
+      "title": "editing or explicitly cancelling rejects stale work and clearing history keeps it empty after an older result",
+      "duration_ms": 533,
+      "status": "passed"
+    },
+    {
+      "title": "Standard calculates exact decimal and rational results, precedence and roots through WASM",
+      "duration_ms": 544,
+      "status": "passed"
+    },
+    {
+      "title": "errors are recoverable and failed calculations are excluded from history",
+      "duration_ms": 415,
+      "status": "passed"
+    },
+    {
+      "title": "keypad insertion, keyboard editing, undo and redo operate on the expression",
+      "duration_ms": 505,
+      "status": "passed"
+    },
+    {
+      "title": "memory, result copying and history use session state only",
+      "duration_ms": 617,
+      "status": "passed"
+    },
+    {
+      "title": "regional decimal input, RTL and language/theme preferences work across reload",
+      "duration_ms": 619,
+      "status": "passed"
+    },
+    {
+      "title": "production calculator confines assets to its own origin",
+      "duration_ms": 300,
+      "status": "passed"
+    },
+    {
+      "title": "the default is dark on a light system and an explicit theme survives reload",
+      "duration_ms": 587,
+      "status": "passed"
+    },
+    {
+      "title": "the light layout is responsive and satisfies automated axe checks",
+      "duration_ms": 981,
+      "status": "passed"
+    },
+    {
+      "title": "the default is dark on a dark system and an explicit theme survives reload",
+      "duration_ms": 559,
+      "status": "passed"
+    },
+    {
+      "title": "the dark layout is responsive and satisfies automated axe checks",
+      "duration_ms": 818,
+      "status": "passed"
+    },
+    {
+      "title": "a hung production worker hits its deadline, terminates and restores calculation without reload",
+      "duration_ms": 5770,
+      "status": "passed"
+    }
+  ],
+  "observations": {
+    "calculus-interaction-observations": {
+      "activationMs": 45.20049999999992,
+      "observations": [
+        {
+          "operation": "derivative",
+          "throughBrowserMs": 110.01180000000022
+        },
+        {
+          "operation": "derivative",
+          "throughBrowserMs": 110.5688999999993
+        },
+        {
+          "operation": "antiderivative",
+          "throughBrowserMs": 118.19409999999971
+        },
+        {
+          "operation": "integral",
+          "throughBrowserMs": 131.78420000000006
+        },
+        {
+          "operation": "series",
+          "throughBrowserMs": 115.32330000000002
+        }
+      ],
+      "scope": "Playwright actions + scheduler, worker, WASM and result DOM"
+    },
+    "calculus-numerical-proof": {
+      "exactness": "approximate",
+      "result": "0.746824132812621",
+      "tolerance": "1e-9",
+      "error_bound": null,
+      "estimate": "Estimated absolute quadrature error (uncertified): 2.0937278473465154e-10"
+    },
+    "calculus-offline-proof": {
+      "initialRequests": [],
+      "initialCache": [],
+      "prepared": [
+        "/assets/dars_tool_wasm_bg-BrQo2n_l.wasm",
+        "/assets/tool-calculus-runtime-C3FJJ4P6.css",
+        "/assets/tool-calculus-runtime-Ce1ictuy.js",
+        "/assets/tool-calculus-worker-CJjNi9NG.js",
+        "/assets/tool-runtime-DClbGS6P.js",
+        "/assets/tool-runtime-Dli0aaFn.css"
+      ],
+      "offlineCanonical": "3*x^2",
+      "otherToolAssets": []
+    }
+  },
+  "calculus_wasm_asset": "/assets/dars_tool_wasm_bg-BrQo2n_l.wasm",
+  "calculus_wasm_sha256": "419b3355b3e2695a91c484bed1dd3bcab2a77c29176a52628ac8bebf0429cbce",
+  "calculus_wasm_size": 612178,
+  "calculus_screenshot_sha256": "c289e92300a8f4a799aa22a16cc795581b6c33018453c9fcf561e1700121045e",
+  "calculus_screenshot_px": [
+    1280,
+    945
+  ]
+}

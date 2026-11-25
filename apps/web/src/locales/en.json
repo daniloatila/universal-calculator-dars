@@ -150,6 +150,67 @@
       "verify": "Enter the equation first, followed by candidate assignments separated by semicolons."
     }
   },
+  "calculus": {
+    "title": "Calculus",
+    "description": "Differentiate, integrate, find limits and build Taylor series.",
+    "keyboardHint": "Use Ctrl+Enter or ⌘+Enter to calculate and Escape to cancel.",
+    "operation": "Calculus operation",
+    "parameters": "Calculation parameters",
+    "useExample": "Use example",
+    "symbolic": "Exact symbolic",
+    "restrictions": "Domain and convergence",
+    "noLimit": "Limit does not exist",
+    "estimatedError": "Estimated error (uncertified)",
+    "expansionPoint": "Expansion point",
+    "operations": {
+      "derivative": "Derivative",
+      "antiderivative": "Antiderivative",
+      "integral": "Definite integral",
+      "limit": "Limit",
+      "series": "Taylor series",
+      "numerical_integral": "Numerical integral"
+    },
+    "fields": {
+      "variable": "Variable",
+      "order": "Derivative order",
+      "lower": "Lower bound",
+      "upper": "Upper bound",
+      "point": "Approach point",
+      "side": "Approach direction",
+      "terms": "Series terms",
+      "tolerance": "Error tolerance"
+    },
+    "proof": {
+      "realVariable": "Real variable",
+      "workingPrecision": "Working precision is not a certified error bound.",
+      "realDomain": "Real numbers",
+      "limitFormula": "lim f(x) from each requested side",
+      "entireSeries": "Taylor series converges for every real input.",
+      "localSeries": "Taylor series converges in a neighborhood of the expansion point.",
+      "radiusSeries": "Taylor series converges when {condition}.",
+      "methods": {
+        "derivative": "Symbolic differentiation",
+        "antiderivative": "Supported symbolic integration rules",
+        "integral": "Fundamental theorem of calculus",
+        "limit": "Leading terms on each side of the limit",
+        "series": "Truncated Taylor coefficients",
+        "numerical_integral": "Adaptive Simpson’s quadrature"
+      }
+    },
+    "sides": {
+      "both": "Both sides",
+      "left": "From the left",
+      "right": "From the right"
+    },
+    "hints": {
+      "derivative": "Choose a variable for a partial derivative. Other variables are held constant.",
+      "antiderivative": "Find a symbolic antiderivative when supported. The result includes the integration constant C.",
+      "integral": "Use finite bounds such as 0 or 1/2. This operation looks for an exact result.",
+      "limit": "Use a rational approach point, +∞ or −∞. At a finite point, choose a direction or compare both sides.",
+      "series": "Use a rational expansion point. The O term indicates the order of the omitted terms.",
+      "numerical_integral": "Enter finite bounds and a tolerance from 1e-12 to 1e-3. The calculation gives an approximation and an error estimate."
+    }
+  },
   "operations": {
     "operations": "Operations",
     "privacy": "Privacy center",

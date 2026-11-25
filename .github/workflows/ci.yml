@@ -50,6 +50,7 @@ jobs:
           node tests/check-targets.mjs target/release/dars
           node tests/check-scientific-targets.mjs target/release/dars
           node tests/check-algebra-targets.mjs target/release/dars
+          node tests/check-calculus-targets.mjs target/release/dars
           python3 -B crates/dars-core/tests/structured-oracle.py
       - name: Verify advanced mathematics with independent references
         if: runner.os == 'Linux'
@@ -59,6 +60,7 @@ jobs:
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-scientific.py target/release/dars
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-scientific-complex.py target/release/dars
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-algebra.py target/release/dars
+          "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-calculus.py target/release/dars
       - name: Browser verification (Linux)
         if: runner.os == 'Linux'
         working-directory: apps/web

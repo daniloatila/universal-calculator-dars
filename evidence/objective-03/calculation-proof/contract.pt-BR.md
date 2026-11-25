@@ -2,7 +2,7 @@
 
 [English](contract.md) · [Esquema estrutural](schema.v1.json)
 
-O esquema 1 preserva o contexto de execução de um cálculo concluído. O registro reúne a operação solicitada, a expressão de entrada, a representação matemática, as configurações, o domínio, o método, o resultado e sua classificação de exatidão. O Científico e a Álgebra geram registros pelo mesmo contrato Rust. O esquema comum também reconhece os identificadores dos outros módulos do projeto. [Contrato do motor](../../../crates/dars-universal/src/lib.rs)
+O esquema 1 preserva o contexto de execução de um cálculo concluído. O registro reúne a operação solicitada, a expressão de entrada, a representação matemática, as configurações, o domínio, o método, o resultado e sua classificação de exatidão. Científico, Álgebra e Cálculo geram registros pelo mesmo contrato Rust. O esquema comum também reconhece os identificadores dos outros módulos do projeto. [Contrato do motor](../../../crates/dars-universal/src/lib.rs)
 
 O **registro de execução** descreve o cálculo realizado. Uma **explicação** esclarece o método matemático. A **verificação de solução** aplica critérios independentes ao resultado. Uma **demonstração formal** exige premissas e deduções justificadas. O registro fornece a origem da execução e elementos para reproduzi-la. O campo de precisão registra a precisão numérica utilizada. O limite de erro tem campo próprio e depende do valor fornecido pelo motor.
 
@@ -43,6 +43,8 @@ cargo run --locked -q -p dars-cli -- tool $request
 ```
 
 Em Álgebra, resolva `x/x=1` no domínio real. O registro identifica `x` como variável real, conserva `x != 0` e mantém a estrutura da expressão na entrada normalizada. Simplificar antes de registrar essa entrada faria a exclusão desaparecer na reprodução. A suíte da CLI verificou registros idênticos ao reproduzir sete casos de Álgebra, incluindo restrições ativas e valores atribuídos a variáveis. [Oráculo de Álgebra](../../../tests/verify-algebra.py)
+
+Em Cálculo, integre `exp(-x^2)` numericamente entre `0` e `1`, com tolerância absoluta `1e-10`. O registro identifica a quadratura adaptativa de Simpson, informa a tolerância solicitada e apresenta nas restrições a estimativa de erro absoluto. O campo do limite de erro certificado fica `null`. A suíte verifica a precisão numérica de forma independente e compara os registros completos na reprodução. [Oráculo de Cálculo](../../../tests/verify-calculus.py)
 
 ## Formato e validação local
 

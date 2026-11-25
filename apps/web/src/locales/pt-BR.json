@@ -150,6 +150,67 @@
       "verify": "Digite a equação seguida dos valores candidatos, separados por ponto e vírgula."
     }
   },
+  "calculus": {
+    "title": "Cálculo",
+    "description": "Calcule derivadas, integrais, limites e séries de Taylor.",
+    "keyboardHint": "Use Ctrl+Enter ou ⌘+Enter para calcular e Escape para cancelar.",
+    "operation": "Operação de cálculo",
+    "parameters": "Parâmetros do cálculo",
+    "useExample": "Usar exemplo",
+    "symbolic": "Exato simbólico",
+    "restrictions": "Domínio e convergência",
+    "noLimit": "O limite não existe",
+    "estimatedError": "Erro estimado (não certificado)",
+    "expansionPoint": "Ponto de expansão",
+    "operations": {
+      "derivative": "Derivada",
+      "antiderivative": "Primitiva",
+      "integral": "Integral definida",
+      "limit": "Limite",
+      "series": "Série de Taylor",
+      "numerical_integral": "Integral numérica"
+    },
+    "fields": {
+      "variable": "Variável",
+      "order": "Ordem da derivada",
+      "lower": "Limite inferior",
+      "upper": "Limite superior",
+      "point": "Ponto de aproximação",
+      "side": "Direção de aproximação",
+      "terms": "Termos da série",
+      "tolerance": "Tolerância de erro"
+    },
+    "proof": {
+      "realVariable": "Variável real",
+      "workingPrecision": "A precisão de trabalho não é um limite de erro certificado.",
+      "realDomain": "Números reais",
+      "limitFormula": "lim f(x) pelo lado solicitado",
+      "entireSeries": "A série de Taylor converge para todo valor real.",
+      "localSeries": "A série de Taylor converge em uma vizinhança do ponto de expansão.",
+      "radiusSeries": "A série de Taylor converge quando {condition}.",
+      "methods": {
+        "derivative": "Derivação simbólica",
+        "antiderivative": "Regras de integração simbólica disponíveis",
+        "integral": "Teorema fundamental do cálculo",
+        "limit": "Termos dominantes em cada lado do limite",
+        "series": "Coeficientes da série de Taylor truncada",
+        "numerical_integral": "Quadratura adaptativa de Simpson"
+      }
+    },
+    "sides": {
+      "both": "Ambos os lados",
+      "left": "Pela esquerda",
+      "right": "Pela direita"
+    },
+    "hints": {
+      "derivative": "Escolha uma variável para a derivada parcial. As demais são tratadas como constantes.",
+      "antiderivative": "Encontre uma primitiva simbólica quando houver suporte. O resultado inclui a constante de integração C.",
+      "integral": "Use limites finitos como 0 ou 1/2. Esta operação procura um resultado exato.",
+      "limit": "Use um ponto racional, +∞ ou −∞. Em um ponto finito, escolha uma direção ou compare os dois lados.",
+      "series": "Use um ponto de expansão racional. O termo O indica a ordem dos termos omitidos.",
+      "numerical_integral": "Informe limites finitos e uma tolerância entre 1e-12 e 1e-3. O cálculo fornece uma aproximação e uma estimativa de erro."
+    }
+  },
   "operations": {
     "operations": "Operação",
     "privacy": "Central de privacidade",

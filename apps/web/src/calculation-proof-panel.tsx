@@ -15,15 +15,18 @@ const fieldOrder: readonly (keyof CalculationProof)[] = [
   'constraints', 'references', 'schema', 'engine_version', 'algorithm_version',
 ];
 
-function FieldValue({ record, field, locale, format }: {
+type ProofTextPresentation = (field: keyof CalculationProof, text: string) => string;
+
+function FieldValue({ record, field, locale, format, localizeText }: {
   record: CalculationProof;
   field: keyof CalculationProof;
   locale: Locale;
   format: Intl.NumberFormat;
+  localizeText?: ProofTextPresentation;
 }): ReactNode {
   if (field === 'exactness') return proofLabels[locale].exactness[record.exactness];
   const value = record[field];
-  const display = (text: string) => localizeProofText(locale, record.module, field, text);
+  const display = (text: string) => localizeText?.(field, text) ?? localizeProofText(locale, record.module, field, text);
   if (Array.isArray(value)) {
     if (!value.length) return '—';
     return <ul>{value.map((item, index) => <li key={index}><bdi>{display(item)}</bdi></li>)}</ul>;
@@ -55,9 +58,10 @@ function downloadProof(proof: CalculationProof) {
   }
 }
 
-export function CalculationProofPanel({ proof, locale }: {
+export function CalculationProofPanel({ proof, locale, localizeText }: {
   proof?: CalculationProof | null;
   locale: Locale;
+  localizeText?: ProofTextPresentation;
 }) {
   const labels = proofLabels[locale];
   const format = new Intl.NumberFormat(LOCALES[locale].format, { useGrouping: false });
@@ -116,7 +120,8 @@ export function CalculationProofPanel({ proof, locale }: {
         <dl className="calculation-proof-fields">
           {fieldOrder.map((field) => <div key={field}>
             <dt>{labels.fields[field]}</dt>
-            <dd><FieldValue record={record} field={field} locale={locale} format={format} /></dd>
+            <dd><FieldValue record={record} field={field} locale={locale} format={format}
+              localizeText={imported ? undefined : localizeText} /></dd>
           </div>)}
         </dl>
       </> : <p className="calculation-proof-source">{labels.empty}</p>}

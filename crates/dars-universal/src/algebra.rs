@@ -99,6 +99,7 @@ impl Answer {
             formula: None,
             precision: None,
             error_bound: None,
+            tolerance: None,
             constraints: self.constraints.into_iter().collect(),
             variables,
         }

@@ -74,4 +74,12 @@ export const primaryModules: readonly RegisteredModule[] = [
     }),
     load: () => import('./tool-algebra-runtime'),
   }),
+  registerModule({
+    id: 'calculus',
+    describe: (messages) => ({
+      title: messages.calculus.title, description: messages.calculus.description,
+      keyboardHint: messages.calculus.keyboardHint,
+    }),
+    load: () => import('./tool-calculus-runtime'),
+  }),
 ];

@@ -1095,6 +1095,7 @@ pub(crate) fn evaluate(
         formula: expression.formula(),
         precision,
         error_bound: None,
+        tolerance: None,
         constraints,
     })
 }

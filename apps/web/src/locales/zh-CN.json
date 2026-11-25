@@ -150,6 +150,67 @@
       "verify": "先输入方程，再输入候选赋值，各部分用分号分隔。"
     }
   },
+  "calculus": {
+    "title": "微积分",
+    "description": "计算导数、积分和极限，并展开泰勒级数。",
+    "keyboardHint": "按 Ctrl+Enter 或 ⌘+Enter 计算，按 Esc 取消。",
+    "operation": "微积分运算",
+    "parameters": "计算参数",
+    "useExample": "使用示例",
+    "symbolic": "精确符号结果",
+    "restrictions": "定义域与收敛性",
+    "noLimit": "极限不存在",
+    "estimatedError": "估计误差（未经认证）",
+    "expansionPoint": "展开点",
+    "operations": {
+      "derivative": "导数",
+      "antiderivative": "原函数",
+      "integral": "定积分",
+      "limit": "极限",
+      "series": "泰勒级数",
+      "numerical_integral": "数值积分"
+    },
+    "fields": {
+      "variable": "变量",
+      "order": "导数阶数",
+      "lower": "积分下限",
+      "upper": "积分上限",
+      "point": "趋近点",
+      "side": "趋近方向",
+      "terms": "级数项数",
+      "tolerance": "误差容限"
+    },
+    "proof": {
+      "realVariable": "实数变量",
+      "workingPrecision": "计算精度不构成经过认证的误差界。",
+      "realDomain": "实数",
+      "limitFormula": "从指定方向求 lim f(x)",
+      "entireSeries": "泰勒级数对所有实数输入收敛。",
+      "localSeries": "泰勒级数在展开点的邻域内收敛。",
+      "radiusSeries": "当 {condition} 时泰勒级数收敛。",
+      "methods": {
+        "derivative": "符号求导",
+        "antiderivative": "受支持的符号积分规则",
+        "integral": "微积分基本定理",
+        "limit": "极限各侧的首项",
+        "series": "截断泰勒展开的系数",
+        "numerical_integral": "自适应辛普森求积"
+      }
+    },
+    "sides": {
+      "both": "双侧",
+      "left": "从左侧",
+      "right": "从右侧"
+    },
+    "hints": {
+      "derivative": "选择一个变量求偏导数。其余变量视为常量。",
+      "antiderivative": "在支持的情况下求符号原函数。结果包含积分常数 C。",
+      "integral": "输入有限的积分上下限，例如 0 或 1/2。此运算会尝试求精确结果。",
+      "limit": "输入有理数趋近点、+∞ 或 −∞。在有限点可选择单侧趋近，也可比较两侧。",
+      "series": "输入有理数展开点。O 项表示省略项的阶数。",
+      "numerical_integral": "输入有限的积分上下限以及 1e-12 到 1e-3 之间的容限。结果给出近似值和误差估计。"
+    }
+  },
   "operations": {
     "operations": "运行管理",
     "privacy": "隐私中心",

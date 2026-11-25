@@ -150,6 +150,67 @@
       "verify": "Saisissez l’équation puis les affectations candidates, séparées par des points-virgules."
     }
   },
+  "calculus": {
+    "title": "Analyse",
+    "description": "Calculez des dérivées, des intégrales, des limites et des séries de Taylor.",
+    "keyboardHint": "Utilisez Ctrl+Entrée ou ⌘+Entrée pour calculer et Échap pour annuler.",
+    "operation": "Opération d’analyse",
+    "parameters": "Paramètres du calcul",
+    "useExample": "Utiliser l’exemple",
+    "symbolic": "Symbolique exact",
+    "restrictions": "Domaine et convergence",
+    "noLimit": "La limite n’existe pas",
+    "estimatedError": "Erreur estimée (non certifiée)",
+    "expansionPoint": "Point de développement",
+    "operations": {
+      "derivative": "Dérivée",
+      "antiderivative": "Primitive",
+      "integral": "Intégrale définie",
+      "limit": "Limite",
+      "series": "Série de Taylor",
+      "numerical_integral": "Intégrale numérique"
+    },
+    "fields": {
+      "variable": "Variable",
+      "order": "Ordre de la dérivée",
+      "lower": "Borne inférieure",
+      "upper": "Borne supérieure",
+      "point": "Point d’approche",
+      "side": "Sens d’approche",
+      "terms": "Termes de la série",
+      "tolerance": "Tolérance d’erreur"
+    },
+    "proof": {
+      "realVariable": "Variable réelle",
+      "workingPrecision": "La précision de calcul ne constitue pas une borne d’erreur certifiée.",
+      "realDomain": "Nombres réels",
+      "limitFormula": "lim f(x) par le côté demandé",
+      "entireSeries": "La série de Taylor converge pour toute valeur réelle.",
+      "localSeries": "La série de Taylor converge dans un voisinage du point de développement.",
+      "radiusSeries": "La série de Taylor converge lorsque {condition}.",
+      "methods": {
+        "derivative": "Dérivation symbolique",
+        "antiderivative": "Règles d’intégration symbolique prises en charge",
+        "integral": "Théorème fondamental de l’analyse",
+        "limit": "Termes dominants de chaque côté de la limite",
+        "series": "Coefficients de Taylor tronqués",
+        "numerical_integral": "Quadrature adaptative de Simpson"
+      }
+    },
+    "sides": {
+      "both": "Des deux côtés",
+      "left": "Par la gauche",
+      "right": "Par la droite"
+    },
+    "hints": {
+      "derivative": "Choisissez une variable pour la dérivée partielle. Les autres sont traitées comme des constantes.",
+      "antiderivative": "Calculez une primitive symbolique dans les cas pris en charge. Le résultat inclut la constante d’intégration C.",
+      "integral": "Utilisez des bornes finies telles que 0 ou 1/2. Cette opération cherche un résultat exact.",
+      "limit": "Utilisez un point rationnel, +∞ ou −∞. À un point fini, choisissez un sens ou comparez les deux côtés.",
+      "series": "Utilisez un point de développement rationnel. Le terme O indique l’ordre des termes omis.",
+      "numerical_integral": "Saisissez des bornes finies et une tolérance entre 1e-12 et 1e-3. Le calcul donne une approximation et une estimation de l’erreur."
+    }
+  },
   "operations": {
     "operations": "Fonctionnement",
     "privacy": "Centre de confidentialité",

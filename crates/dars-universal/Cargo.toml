@@ -6,9 +6,10 @@ license = "Apache-2.0"
 publish = false
 
 [features]
-default = ["scientific", "algebra"]
+default = ["scientific", "algebra", "calculus"]
 scientific = ["dep:astro-float-num", "dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
 algebra = ["dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
+calculus = ["dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
 
 [dependencies]
 astro-float-num = { version = "=0.3.6", default-features = false, features = ["std"], optional = true }

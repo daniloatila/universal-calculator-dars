@@ -7,8 +7,8 @@ The 0.2.2 delivery is the accepted baseline. Each internal stage records its mat
 | Stage | Module | State |
 | --- | --- | --- |
 | 1 | Scientific | INTERNALLY_ACCEPTED · [Verification](scientific/verification.md) · [CI](scientific/ci.json) |
-| 2 | Algebra | INTERNALLY_ACCEPTED · [Verification](algebra/verification.md) |
-| 3 | Calculus | NOT_STARTED |
+| 2 | Algebra | INTERNALLY_ACCEPTED · [Verification](algebra/verification.md) · [CI](algebra/ci.json) |
+| 3 | Calculus | INTERNALLY_ACCEPTED · [Verification](calculus/verification.md) |
 | 4 | Linear Algebra | NOT_STARTED |
 | 5 | Geometry | NOT_STARTED |
 | 6 | Discrete Mathematics | NOT_STARTED |

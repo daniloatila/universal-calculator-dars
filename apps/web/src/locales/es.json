@@ -150,6 +150,67 @@
       "verify": "Introduce la ecuación seguida de las asignaciones candidatas, separadas por punto y coma."
     }
   },
+  "calculus": {
+    "title": "Cálculo",
+    "description": "Calcula derivadas, integrales, límites y series de Taylor.",
+    "keyboardHint": "Usa Ctrl+Enter o ⌘+Enter para calcular y Escape para cancelar.",
+    "operation": "Operación de cálculo",
+    "parameters": "Parámetros del cálculo",
+    "useExample": "Usar ejemplo",
+    "symbolic": "Exacto simbólico",
+    "restrictions": "Dominio y convergencia",
+    "noLimit": "El límite no existe",
+    "estimatedError": "Error estimado (no certificado)",
+    "expansionPoint": "Punto de expansión",
+    "operations": {
+      "derivative": "Derivada",
+      "antiderivative": "Primitiva",
+      "integral": "Integral definida",
+      "limit": "Límite",
+      "series": "Serie de Taylor",
+      "numerical_integral": "Integral numérica"
+    },
+    "fields": {
+      "variable": "Variable",
+      "order": "Orden de la derivada",
+      "lower": "Límite inferior",
+      "upper": "Límite superior",
+      "point": "Punto de aproximación",
+      "side": "Dirección de aproximación",
+      "terms": "Términos de la serie",
+      "tolerance": "Tolerancia de error"
+    },
+    "proof": {
+      "realVariable": "Variable real",
+      "workingPrecision": "La precisión de trabajo no es una cota de error certificada.",
+      "realDomain": "Números reales",
+      "limitFormula": "lim f(x) por el lado solicitado",
+      "entireSeries": "La serie de Taylor converge para todos los valores reales.",
+      "localSeries": "La serie de Taylor converge en un entorno del punto de expansión.",
+      "radiusSeries": "La serie de Taylor converge cuando {condition}.",
+      "methods": {
+        "derivative": "Derivación simbólica",
+        "antiderivative": "Reglas de integración simbólica disponibles",
+        "integral": "Teorema fundamental del cálculo",
+        "limit": "Términos dominantes en cada lado del límite",
+        "series": "Coeficientes de Taylor truncados",
+        "numerical_integral": "Cuadratura adaptativa de Simpson"
+      }
+    },
+    "sides": {
+      "both": "Ambos lados",
+      "left": "Por la izquierda",
+      "right": "Por la derecha"
+    },
+    "hints": {
+      "derivative": "Elige una variable para la derivada parcial. Las demás se tratan como constantes.",
+      "antiderivative": "Obtén una primitiva simbólica cuando esté disponible. El resultado incluye la constante de integración C.",
+      "integral": "Usa límites finitos como 0 o 1/2. Esta operación busca un resultado exacto.",
+      "limit": "Usa un punto racional, +∞ o −∞. En un punto finito, elige una dirección o compara ambos lados.",
+      "series": "Usa un punto de expansión racional. El término O indica el orden de los términos omitidos.",
+      "numerical_integral": "Introduce límites finitos y una tolerancia entre 1e-12 y 1e-3. El cálculo proporciona una aproximación y una estimación del error."
+    }
+  },
   "operations": {
     "operations": "Operación",
     "privacy": "Centro de privacidad",

@@ -6,6 +6,8 @@ use std::collections::BTreeMap;
 
 #[cfg(feature = "algebra")]
 mod algebra;
+#[cfg(feature = "calculus")]
+mod calculus;
 #[cfg(feature = "scientific")]
 mod scientific;
 
@@ -47,6 +49,7 @@ pub struct Computation {
     pub domain: &'static str,
     pub formula: Option<&'static str>,
     pub precision: Option<u32>,
+    pub tolerance: Option<String>,
     pub error_bound: Option<String>,
     pub constraints: Vec<String>,
     pub variables: BTreeMap<String, String>,
@@ -160,6 +163,16 @@ fn dispatch(
             "algebra/1",
             &["https://dlmf.nist.gov/1.11"],
         )),
+        #[cfg(feature = "calculus")]
+        "calculus" => Ok((
+            calculus::evaluate(
+                &request.operation,
+                &request.input,
+                &Value::Object(request.options.clone()),
+            )?,
+            "calculus/1",
+            &["https://dlmf.nist.gov/1.4", "https://dlmf.nist.gov/3.5"],
+        )),
         #[cfg(feature = "scientific")]
         "scientific" => Ok((
             scientific::evaluate(
@@ -250,7 +263,7 @@ fn execute(input: &str) -> Result<Value, MathError> {
         result: &result.result,
         exactness: result.exactness,
         precision: result.precision,
-        tolerance: None,
+        tolerance: result.tolerance.as_deref(),
         rounding,
         error_bound: result.error_bound.as_deref(),
         assumptions,
