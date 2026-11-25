@@ -826,6 +826,159 @@
       "workingPrecision": "Working precision is not a certified error bound."
     }
   },
+  "dateTime": {
+    "title": "Date & Time",
+    "description": "Compare civil dates, count business days, and convert timestamp offsets and time zones.",
+    "keyboardHint": "Use Ctrl+Enter or ⌘+Enter to calculate and Escape to cancel.",
+    "operation": "Date and time operation",
+    "useExample": "Use example",
+    "invalid": "Enter valid ISO dates or timestamps and check the calendar or time zone settings.",
+    "domainError": "Check that the dates, period and calendar settings are within the operation’s domain.",
+    "ambiguous": "This local time occurs twice. Choose the earlier or later instant, or enter another time.",
+    "nonexistent": "This local time is skipped during a transition. Enter another local time.",
+    "workingWeekError": "Select at least one working weekday.",
+    "holidayLimit": "Enter up to 23 exclusions in YYYY-MM-DD format.",
+    "monthOverflow": "Month-end handling",
+    "clamp": "Clamp to the last valid day",
+    "rejectMonth": "Reject an invalid day",
+    "deadlineBasis": "Deadline basis",
+    "businessBasis": "Business days",
+    "civilBasis": "Civil days",
+    "workCalendar": "Working calendar",
+    "holidays": "Holiday dates (optional)",
+    "calendarHint": "Select the working weekdays and enter your own exclusions. Separate dates with line breaks or commas.",
+    "fromZone": "From time zone",
+    "toZone": "To time zone",
+    "disambiguation": "Transition resolution",
+    "tzdbVersion": "Time-zone data version",
+    "tzdbFormat": "Time-zone data format",
+    "tzdbPolicy": "Daylight-saving flags follow IANA rearguard data.",
+    "calendarVersion": "Working calendar version",
+    "operations": {
+      "difference": "Date difference",
+      "age": "Age",
+      "period": "Add or subtract a period",
+      "calendar": "Calendar",
+      "business_days": "Business days",
+      "deadline": "Deadline",
+      "timezone": "Time zone conversion",
+      "duration": "Elapsed duration"
+    },
+    "fields": {
+      "start": "Start date",
+      "end": "End date",
+      "birth": "Birth date",
+      "asOf": "Date at which to calculate age",
+      "date": "Date",
+      "instantStart": "Start timestamp",
+      "instantEnd": "End timestamp",
+      "local": "Local date and time",
+      "years": "Years",
+      "months": "Months",
+      "weeks": "Weeks",
+      "days": "Days",
+      "count": "Day count"
+    },
+    "weekdays": {
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday",
+      "7": "Sunday"
+    },
+    "transition": {
+      "reject": "Reject repeated times",
+      "earlier": "Resolve earlier",
+      "later": "Resolve later"
+    },
+    "resolution": {
+      "unambiguous": "Unambiguous",
+      "earlier": "Earlier resolution",
+      "later": "Later resolution"
+    },
+    "output": {
+      "days": "Days",
+      "weeks": "Whole weeks",
+      "remaining_days": "Remaining days",
+      "years": "Years",
+      "months": "Months",
+      "total_days": "Total days",
+      "date": "Date",
+      "weekday": "Weekday (ISO)",
+      "day_of_year": "Day of year",
+      "iso_year": "ISO week-year",
+      "iso_week": "ISO week",
+      "leap_year": "Leap year",
+      "days_in_month": "Days in month",
+      "business_days": "Business days",
+      "local": "Local time in destination",
+      "utc": "UTC instant",
+      "from_offset": "Source UTC offset",
+      "to_offset": "Destination UTC offset",
+      "from_dst": "Source daylight saving",
+      "to_dst": "Destination daylight saving",
+      "resolution": "Resolution",
+      "seconds": "Elapsed seconds"
+    },
+    "hints": {
+      "difference": "Use two dates in YYYY-MM-DD format. The signed interval is expressed in civil days, whole weeks and remaining days.",
+      "age": "Enter a birth date and a date at which to calculate age. The result counts complete calendar years and months.",
+      "period": "Enter signed years, months, weeks or days. Calendar years and months apply before weeks and days.",
+      "calendar": "Enter a civil date to show its ISO weekday, week-year, week number and leap-year status.",
+      "business_days": "Count selected weekdays after the start date through the end date. Reversing the range changes the sign.",
+      "deadline": "Count days from the start date, excluding that date. Business deadlines use the selected working calendar.",
+      "timezone": "Enter a local timestamp such as 2024-11-03T01:30:00 and IANA time-zone names or UTC. Choose how to resolve repeated times. A skipped time requires a different local time.",
+      "duration": "Enter two RFC3339 timestamps with seconds and Z or a numeric UTC offset. The result is elapsed time to nanosecond precision."
+    },
+    "boolean": {
+      "true": "Yes",
+      "false": "No"
+    },
+    "proof": {
+      "methods": {
+        "gregorian_civil_day_difference": "Gregorian civil-day difference",
+        "clamped_gregorian_age": "Age with calendar month-end adjustment",
+        "gregorian_period_arithmetic": "Gregorian period arithmetic",
+        "iso_week_calendar": "ISO week calendar",
+        "custom_business_day_count": "Custom business-day count",
+        "custom_business_deadline": "Business deadline on a custom calendar",
+        "gregorian_civil_deadline": "Gregorian civil deadline",
+        "iana_bundled_timezone_conversion": "Bundled IANA time-zone conversion",
+        "rfc3339_nanosecond_duration": "RFC3339 duration to the nanosecond"
+      },
+      "domains": {
+        "civil_date": "Civil dates",
+        "zoned_datetime": "Zoned date and time",
+        "absolute_time": "Absolute time"
+      },
+      "constraints": {
+        "Proleptic Gregorian calendar": "Proleptic Gregorian calendar",
+        "Business calendar uses only the supplied weekday and holiday rules": "The working calendar applies your selected weekdays and entered exclusions.",
+        "Weeks truncate toward zero with a signed remainder": "Weeks truncate toward zero with a signed remainder.",
+        "Age uses completed clamped months before residual days": "The age counts complete calendar months with month-end adjustment, then remaining days.",
+        "Business-day interval excludes the earlier day and includes the later day": "The business-day interval excludes the earlier date and includes the later date.",
+        "Deadline excludes the starting day when count is nonzero": "A nonzero deadline count excludes the starting day.",
+        "Nonexistent local times are rejected": "A skipped local time requires another input.",
+        "Explicit offsets define the UTC instants": "Explicit offsets define the instants in UTC."
+      },
+      "formulas": {
+        "age = completed calendar months plus remaining days": "Age equals complete calendar months plus remaining days.",
+        "ISO week 1 contains January 4 and starts Monday": "ISO week 1 starts on Monday and contains January 4.",
+        "signed count of eligible dates in (earlier,later]": "Signed count of eligible dates after the earlier date through the later date.",
+        "first date reached after abs(count) eligible days in the specified direction": "Date reached after counting eligible days in the chosen direction."
+      },
+      "units": {
+        "day": "Day",
+        "week": "Week",
+        "month": "Month",
+        "year": "Year",
+        "business_day": "Business day",
+        "s": "Seconds"
+      }
+    }
+  },
   "operations": {
     "operations": "Operations",
     "privacy": "Privacy center",

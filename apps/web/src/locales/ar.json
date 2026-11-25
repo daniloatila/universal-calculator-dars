@@ -826,6 +826,159 @@
       "workingPrecision": "دقة الحساب ليست حدًا معتمدًا للخطأ."
     }
   },
+  "dateTime": {
+    "title": "التاريخ والوقت",
+    "description": "قارن التواريخ المدنية واحسب أيام العمل وحوّل إزاحات الوقت والمناطق الزمنية.",
+    "keyboardHint": "اضغط على Ctrl+Enter أو ⌘+Enter للحساب وعلى Escape للإلغاء.",
+    "operation": "عملية التاريخ والوقت",
+    "useExample": "استخدام المثال",
+    "invalid": "أدخل تواريخ أو طوابع زمنية صالحة بصيغة ISO وتحقّق من إعدادات التقويم أو المنطقة الزمنية.",
+    "domainError": "تحقّق من أن التواريخ والفترة وإعدادات التقويم ضمن مجال العملية.",
+    "ambiguous": "يحدث هذا الوقت المحلي مرتين. اختر اللحظة السابقة أو اللاحقة أو أدخل وقتًا آخر.",
+    "nonexistent": "يُتخطّى هذا الوقت المحلي خلال الانتقال. أدخل وقتًا محليًا آخر.",
+    "workingWeekError": "اختر يوم عمل أسبوعيًا واحدًا على الأقل.",
+    "holidayLimit": "أدخل حتى 23 تاريخًا مستبعدًا بصيغة YYYY-MM-DD.",
+    "monthOverflow": "معالجة نهاية الشهر",
+    "clamp": "التعديل إلى آخر يوم صالح",
+    "rejectMonth": "رفض اليوم غير الصالح",
+    "deadlineBasis": "أساس الموعد النهائي",
+    "businessBasis": "أيام العمل",
+    "civilBasis": "الأيام المدنية",
+    "workCalendar": "تقويم العمل",
+    "holidays": "تواريخ العطلات (اختياري)",
+    "calendarHint": "اختر أيام العمل الأسبوعية وأدخل التواريخ المستبعدة. افصل التواريخ بأسطر جديدة أو فواصل.",
+    "fromZone": "المنطقة الزمنية للمصدر",
+    "toZone": "المنطقة الزمنية للوجهة",
+    "disambiguation": "معالجة الانتقال",
+    "tzdbVersion": "إصدار بيانات المناطق الزمنية",
+    "tzdbFormat": "صيغة بيانات المناطق الزمنية",
+    "tzdbPolicy": "تتبع مؤشرات التوقيت الصيفي بيانات IANA بصيغة rearguard.",
+    "calendarVersion": "إصدار تقويم العمل",
+    "operations": {
+      "difference": "فرق التواريخ",
+      "age": "العمر",
+      "period": "إضافة فترة أو طرحها",
+      "calendar": "التقويم",
+      "business_days": "أيام العمل",
+      "deadline": "الموعد النهائي",
+      "timezone": "تحويل المنطقة الزمنية",
+      "duration": "المدة المنقضية"
+    },
+    "fields": {
+      "start": "تاريخ البدء",
+      "end": "تاريخ الانتهاء",
+      "birth": "تاريخ الميلاد",
+      "asOf": "تاريخ حساب العمر",
+      "date": "التاريخ",
+      "instantStart": "الطابع الزمني للبدء",
+      "instantEnd": "الطابع الزمني للانتهاء",
+      "local": "التاريخ والوقت المحليان",
+      "years": "السنوات",
+      "months": "الأشهر",
+      "weeks": "الأسابيع",
+      "days": "الأيام",
+      "count": "عدد الأيام"
+    },
+    "weekdays": {
+      "1": "الاثنين",
+      "2": "الثلاثاء",
+      "3": "الأربعاء",
+      "4": "الخميس",
+      "5": "الجمعة",
+      "6": "السبت",
+      "7": "الأحد"
+    },
+    "transition": {
+      "reject": "رفض الأوقات المكرّرة",
+      "earlier": "استخدام الوقت السابق",
+      "later": "استخدام الوقت اللاحق"
+    },
+    "resolution": {
+      "unambiguous": "بلا التباس",
+      "earlier": "الحل السابق",
+      "later": "الحل اللاحق"
+    },
+    "output": {
+      "days": "الأيام",
+      "weeks": "الأسابيع الكاملة",
+      "remaining_days": "الأيام المتبقية",
+      "years": "السنوات",
+      "months": "الأشهر",
+      "total_days": "إجمالي الأيام",
+      "date": "التاريخ",
+      "weekday": "يوم الأسبوع (ISO)",
+      "day_of_year": "يوم السنة",
+      "iso_year": "سنة أسبوع ISO",
+      "iso_week": "أسبوع ISO",
+      "leap_year": "سنة كبيسة",
+      "days_in_month": "أيام الشهر",
+      "business_days": "أيام العمل",
+      "local": "الوقت المحلي في الوجهة",
+      "utc": "اللحظة بالتوقيت العالمي",
+      "from_offset": "إزاحة المصدر عن UTC",
+      "to_offset": "إزاحة الوجهة عن UTC",
+      "from_dst": "التوقيت الصيفي في المصدر",
+      "to_dst": "التوقيت الصيفي في الوجهة",
+      "resolution": "معالجة الانتقال",
+      "seconds": "الثواني المنقضية"
+    },
+    "hints": {
+      "difference": "أدخل تاريخين بصيغة YYYY-MM-DD. يُعرض الفرق ذو الإشارة بالأيام المدنية والأسابيع الكاملة والأيام المتبقية.",
+      "age": "أدخل تاريخ الميلاد وتاريخ حساب العمر. تحسب النتيجة السنوات والأشهر التقويمية الكاملة.",
+      "period": "أدخل سنوات أو أشهرًا أو أسابيع أو أيامًا بإشارة. تُطبّق السنوات والأشهر التقويمية قبل الأسابيع والأيام.",
+      "calendar": "أدخل تاريخًا مدنيًا لعرض يوم الأسبوع وسنته ورقمه حسب ISO وحالة السنة الكبيسة.",
+      "business_days": "احسب أيام العمل المختارة بعد تاريخ البدء وحتى تاريخ الانتهاء شاملًا. يعكس عكس المدة إشارة النتيجة.",
+      "deadline": "احسب الأيام بدءًا من تاريخ البدء دون احتسابه. تستخدم مواعيد العمل تقويم العمل المحدد.",
+      "timezone": "أدخل طابعًا زمنيًا محليًا مثل 2024-11-03T01:30:00 ومناطق IANA أو UTC. اختر طريقة معالجة الأوقات المكرّرة. إذا كان الوقت متخطّى، فأدخل وقتًا محليًا آخر.",
+      "duration": "أدخل طابعين زمنيين بصيغة RFC3339 مع الثواني وZ أو إزاحة رقمية عن UTC. النتيجة هي المدة المنقضية بدقة النانوثانية."
+    },
+    "boolean": {
+      "true": "نعم",
+      "false": "لا"
+    },
+    "proof": {
+      "methods": {
+        "gregorian_civil_day_difference": "فرق الأيام المدنية الغريغورية",
+        "clamped_gregorian_age": "العمر مع تعديل نهاية الشهر",
+        "gregorian_period_arithmetic": "حساب الفترات الغريغورية",
+        "iso_week_calendar": "تقويم الأسابيع ISO",
+        "custom_business_day_count": "حساب أيام العمل المخصّصة",
+        "custom_business_deadline": "موعد عمل بالتقويم المخصّص",
+        "gregorian_civil_deadline": "موعد مدني غريغوري",
+        "iana_bundled_timezone_conversion": "تحويل المناطق الزمنية ببيانات IANA المضمّنة",
+        "rfc3339_nanosecond_duration": "مدة RFC3339 بدقة النانوثانية"
+      },
+      "domains": {
+        "civil_date": "تواريخ مدنية",
+        "zoned_datetime": "تاريخ ووقت بمنطقة زمنية",
+        "absolute_time": "وقت مطلق"
+      },
+      "constraints": {
+        "Proleptic Gregorian calendar": "التقويم الغريغوري الاستباقي",
+        "Business calendar uses only the supplied weekday and holiday rules": "يطبّق تقويم العمل أيام الأسبوع المحددة والتواريخ المستبعدة المدخلة.",
+        "Weeks truncate toward zero with a signed remainder": "يُقطع عدد الأسابيع باتجاه الصفر ويحتفظ الباقي بإشارته.",
+        "Age uses completed clamped months before residual days": "يحسب العمر الأشهر الكاملة مع تعديل نهاية الشهر، ثم الأيام المتبقية.",
+        "Business-day interval excludes the earlier day and includes the later day": "تستبعد فترة أيام العمل التاريخ السابق وتشمل التاريخ اللاحق.",
+        "Deadline excludes the starting day when count is nonzero": "يستبعد عدد أيام الموعد غير الصفري تاريخ البدء.",
+        "Nonexistent local times are rejected": "يتطلب الوقت المحلي المتخطّى إدخال وقت آخر.",
+        "Explicit offsets define the UTC instants": "تحدّد الإزاحات الصريحة اللحظات بتوقيت UTC."
+      },
+      "formulas": {
+        "age = completed calendar months plus remaining days": "العمر يساوي الأشهر التقويمية الكاملة مضافًا إليها الأيام المتبقية.",
+        "ISO week 1 contains January 4 and starts Monday": "يبدأ الأسبوع 1 وفق ISO يوم الاثنين ويشمل 4 يناير.",
+        "signed count of eligible dates in (earlier,later]": "عدد التواريخ المؤهلة بإشارة بعد التاريخ السابق وحتى التاريخ اللاحق شاملًا.",
+        "first date reached after abs(count) eligible days in the specified direction": "التاريخ الناتج بعد عدّ الأيام المؤهلة في الاتجاه المختار."
+      },
+      "units": {
+        "day": "يوم",
+        "week": "أسبوع",
+        "month": "شهر",
+        "year": "سنة",
+        "business_day": "يوم عمل",
+        "s": "ثوانٍ"
+      }
+    }
+  },
   "operations": {
     "operations": "التشغيل",
     "privacy": "مركز الخصوصية",

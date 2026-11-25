@@ -826,6 +826,159 @@
       "workingPrecision": "La precisión de trabajo no es una cota de error certificada."
     }
   },
+  "dateTime": {
+    "title": "Fecha y hora",
+    "description": "Compara fechas civiles, cuenta días hábiles y convierte desfases horarios y zonas.",
+    "keyboardHint": "Usa Ctrl+Enter o ⌘+Enter para calcular y Escape para cancelar.",
+    "operation": "Operación de fecha y hora",
+    "useExample": "Usar ejemplo",
+    "invalid": "Introduce fechas u horas ISO válidas y comprueba el calendario o las zonas horarias.",
+    "domainError": "Comprueba que las fechas, el periodo y el calendario estén en el dominio de la operación.",
+    "ambiguous": "Esta hora local ocurre dos veces. Elige el instante anterior o posterior, o introduce otra hora.",
+    "nonexistent": "Esta hora local se omite durante una transición. Introduce otra hora local.",
+    "workingWeekError": "Selecciona al menos un día laborable de la semana.",
+    "holidayLimit": "Introduce hasta 23 exclusiones en formato YYYY-MM-DD.",
+    "monthOverflow": "Fin de mes",
+    "clamp": "Ajustar al último día válido",
+    "rejectMonth": "Rechazar un día no válido",
+    "deadlineBasis": "Base del plazo",
+    "businessBasis": "Días hábiles",
+    "civilBasis": "Días naturales",
+    "workCalendar": "Calendario laboral",
+    "holidays": "Festivos (opcional)",
+    "calendarHint": "Elige los días laborables e introduce tus exclusiones. Separa las fechas con saltos de línea o comas.",
+    "fromZone": "Zona horaria de origen",
+    "toZone": "Zona horaria de destino",
+    "disambiguation": "Resolución de transición",
+    "tzdbVersion": "Versión de datos de zonas horarias",
+    "tzdbFormat": "Formato de datos de zonas horarias",
+    "tzdbPolicy": "Los indicadores de horario de verano siguen los datos IANA en formato rearguard.",
+    "calendarVersion": "Versión del calendario laboral",
+    "operations": {
+      "difference": "Diferencia entre fechas",
+      "age": "Edad",
+      "period": "Añadir o restar un periodo",
+      "calendar": "Calendario",
+      "business_days": "Días hábiles",
+      "deadline": "Plazo",
+      "timezone": "Conversión de zona horaria",
+      "duration": "Duración transcurrida"
+    },
+    "fields": {
+      "start": "Fecha inicial",
+      "end": "Fecha final",
+      "birth": "Fecha de nacimiento",
+      "asOf": "Fecha para calcular la edad",
+      "date": "Fecha",
+      "instantStart": "Marca de tiempo inicial",
+      "instantEnd": "Marca de tiempo final",
+      "local": "Fecha y hora local",
+      "years": "Años",
+      "months": "Meses",
+      "weeks": "Semanas",
+      "days": "Días",
+      "count": "Número de días"
+    },
+    "weekdays": {
+      "1": "Lunes",
+      "2": "Martes",
+      "3": "Miércoles",
+      "4": "Jueves",
+      "5": "Viernes",
+      "6": "Sábado",
+      "7": "Domingo"
+    },
+    "transition": {
+      "reject": "Rechazar horas repetidas",
+      "earlier": "Resolver con la hora anterior",
+      "later": "Resolver con la hora posterior"
+    },
+    "resolution": {
+      "unambiguous": "Sin ambigüedad",
+      "earlier": "Resolución anterior",
+      "later": "Resolución posterior"
+    },
+    "output": {
+      "days": "Días",
+      "weeks": "Semanas completas",
+      "remaining_days": "Días restantes",
+      "years": "Años",
+      "months": "Meses",
+      "total_days": "Total de días",
+      "date": "Fecha",
+      "weekday": "Día de la semana (ISO)",
+      "day_of_year": "Día del año",
+      "iso_year": "Año de la semana ISO",
+      "iso_week": "Semana ISO",
+      "leap_year": "Año bisiesto",
+      "days_in_month": "Días del mes",
+      "business_days": "Días hábiles",
+      "local": "Hora local en destino",
+      "utc": "Instante UTC",
+      "from_offset": "Desfase UTC de origen",
+      "to_offset": "Desfase UTC de destino",
+      "from_dst": "Horario de verano en origen",
+      "to_dst": "Horario de verano en destino",
+      "resolution": "Resolución",
+      "seconds": "Segundos transcurridos"
+    },
+    "hints": {
+      "difference": "Usa dos fechas en formato YYYY-MM-DD. El intervalo con signo se expresa en días naturales, semanas completas y días restantes.",
+      "age": "Introduce la fecha de nacimiento y la fecha para calcular la edad. El resultado cuenta años y meses completos del calendario.",
+      "period": "Introduce años, meses, semanas o días con signo. Los años y meses del calendario se aplican antes que las semanas y días.",
+      "calendar": "Introduce una fecha civil para consultar el día, año y número de semana ISO y el estado bisiesto.",
+      "business_days": "Cuenta los días seleccionados después de la fecha inicial hasta la fecha final inclusive. Invertir el intervalo cambia el signo.",
+      "deadline": "Cuenta días desde la fecha inicial, sin incluirla. Los plazos hábiles usan el calendario laboral elegido.",
+      "timezone": "Introduce una hora local, como 2024-11-03T01:30:00, y zonas IANA o UTC. Elige cómo resolver las horas repetidas. Para una hora omitida, introduce otra hora local.",
+      "duration": "Introduce dos marcas RFC3339 con segundos y Z o un desfase UTC numérico. El resultado es el tiempo transcurrido con precisión de nanosegundos."
+    },
+    "boolean": {
+      "true": "Sí",
+      "false": "No"
+    },
+    "proof": {
+      "methods": {
+        "gregorian_civil_day_difference": "Diferencia de días civiles gregorianos",
+        "clamped_gregorian_age": "Edad con ajuste de fin de mes",
+        "gregorian_period_arithmetic": "Aritmética de periodos gregorianos",
+        "iso_week_calendar": "Calendario de semanas ISO",
+        "custom_business_day_count": "Recuento personalizado de días hábiles",
+        "custom_business_deadline": "Plazo hábil en un calendario personalizado",
+        "gregorian_civil_deadline": "Plazo civil gregoriano",
+        "iana_bundled_timezone_conversion": "Conversión de zona con datos IANA integrados",
+        "rfc3339_nanosecond_duration": "Duración RFC3339 con precisión de nanosegundos"
+      },
+      "domains": {
+        "civil_date": "Fechas civiles",
+        "zoned_datetime": "Fecha y hora con zona",
+        "absolute_time": "Tiempo absoluto"
+      },
+      "constraints": {
+        "Proleptic Gregorian calendar": "Calendario gregoriano proléptico",
+        "Business calendar uses only the supplied weekday and holiday rules": "El calendario laboral aplica los días seleccionados y las exclusiones indicadas.",
+        "Weeks truncate toward zero with a signed remainder": "Las semanas se truncan hacia cero y el resto conserva el signo.",
+        "Age uses completed clamped months before residual days": "La edad cuenta los meses completos ajustados a fin de mes y después los días restantes.",
+        "Business-day interval excludes the earlier day and includes the later day": "El intervalo hábil excluye la fecha anterior e incluye la posterior.",
+        "Deadline excludes the starting day when count is nonzero": "Un plazo distinto de cero excluye la fecha inicial.",
+        "Nonexistent local times are rejected": "Una hora local omitida requiere otra entrada.",
+        "Explicit offsets define the UTC instants": "Los desfases explícitos definen los instantes en UTC."
+      },
+      "formulas": {
+        "age = completed calendar months plus remaining days": "La edad equivale a los meses naturales completos más los días restantes.",
+        "ISO week 1 contains January 4 and starts Monday": "La semana ISO 1 empieza el lunes y contiene el 4 de enero.",
+        "signed count of eligible dates in (earlier,later]": "Recuento con signo de las fechas válidas después de la anterior hasta la posterior inclusive.",
+        "first date reached after abs(count) eligible days in the specified direction": "Fecha alcanzada al contar los días elegibles en la dirección indicada."
+      },
+      "units": {
+        "day": "Día",
+        "week": "Semana",
+        "month": "Mes",
+        "year": "Año",
+        "business_day": "Día hábil",
+        "s": "Segundos"
+      }
+    }
+  },
   "operations": {
     "operations": "Operación",
     "privacy": "Centro de privacidad",

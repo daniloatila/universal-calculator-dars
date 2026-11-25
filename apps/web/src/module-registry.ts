@@ -122,4 +122,12 @@ export const primaryModules: readonly RegisteredModule[] = [
     }),
     load: () => import('./tool-converter-runtime'),
   }),
+  registerModule({
+    id: 'date-time',
+    describe: (messages) => ({
+      title: messages.dateTime.title, description: messages.dateTime.description,
+      keyboardHint: messages.dateTime.keyboardHint,
+    }),
+    load: () => import('./tool-date-time-runtime'),
+  }),
 ];

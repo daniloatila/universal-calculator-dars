@@ -826,6 +826,159 @@
       "workingPrecision": "La précision de calcul ne constitue pas une borne d’erreur certifiée."
     }
   },
+  "dateTime": {
+    "title": "Date et heure",
+    "description": "Comparez des dates civiles, comptez des jours ouvrés et convertissez des décalages et des fuseaux horaires.",
+    "keyboardHint": "Utilisez Ctrl+Entrée ou ⌘+Entrée pour calculer et Échap pour annuler.",
+    "operation": "Opération de date et heure",
+    "useExample": "Utiliser l’exemple",
+    "invalid": "Saisissez des dates ou horodatages ISO valides et vérifiez le calendrier ou les fuseaux.",
+    "domainError": "Vérifiez que les dates, la période et le calendrier respectent le domaine de l’opération.",
+    "ambiguous": "Cette heure locale se produit deux fois. Choisissez l’instant antérieur ou postérieur, ou saisissez une autre heure.",
+    "nonexistent": "Cette heure locale est sautée pendant une transition. Saisissez une autre heure locale.",
+    "workingWeekError": "Choisissez au moins un jour de travail dans la semaine.",
+    "holidayLimit": "Saisissez jusqu’à 23 exclusions au format YYYY-MM-DD.",
+    "monthOverflow": "Gestion de fin de mois",
+    "clamp": "Ajuster au dernier jour valide",
+    "rejectMonth": "Rejeter un jour invalide",
+    "deadlineBasis": "Base de l’échéance",
+    "businessBasis": "Jours ouvrés",
+    "civilBasis": "Jours calendaires",
+    "workCalendar": "Calendrier de travail",
+    "holidays": "Dates fériées (facultatif)",
+    "calendarHint": "Sélectionnez les jours travaillés et saisissez vos exclusions. Séparez les dates par des retours à la ligne ou des virgules.",
+    "fromZone": "Fuseau horaire d’origine",
+    "toZone": "Fuseau horaire de destination",
+    "disambiguation": "Résolution de la transition",
+    "tzdbVersion": "Version des données de fuseaux",
+    "tzdbFormat": "Format des données de fuseaux",
+    "tzdbPolicy": "Les indicateurs d’heure d’été suivent les données IANA au format rearguard.",
+    "calendarVersion": "Version du calendrier de travail",
+    "operations": {
+      "difference": "Différence entre dates",
+      "age": "Âge",
+      "period": "Ajouter ou soustraire une période",
+      "calendar": "Calendrier",
+      "business_days": "Jours ouvrés",
+      "deadline": "Échéance",
+      "timezone": "Conversion de fuseau horaire",
+      "duration": "Durée écoulée"
+    },
+    "fields": {
+      "start": "Date de début",
+      "end": "Date de fin",
+      "birth": "Date de naissance",
+      "asOf": "Date de calcul de l’âge",
+      "date": "Date",
+      "instantStart": "Horodatage initial",
+      "instantEnd": "Horodatage final",
+      "local": "Date et heure locale",
+      "years": "Années",
+      "months": "Mois",
+      "weeks": "Semaines",
+      "days": "Jours",
+      "count": "Nombre de jours"
+    },
+    "weekdays": {
+      "1": "Lundi",
+      "2": "Mardi",
+      "3": "Mercredi",
+      "4": "Jeudi",
+      "5": "Vendredi",
+      "6": "Samedi",
+      "7": "Dimanche"
+    },
+    "transition": {
+      "reject": "Rejeter les heures répétées",
+      "earlier": "Utiliser l’heure antérieure",
+      "later": "Utiliser l’heure postérieure"
+    },
+    "resolution": {
+      "unambiguous": "Sans ambiguïté",
+      "earlier": "Résolution antérieure",
+      "later": "Résolution postérieure"
+    },
+    "output": {
+      "days": "Jours",
+      "weeks": "Semaines complètes",
+      "remaining_days": "Jours restants",
+      "years": "Années",
+      "months": "Mois",
+      "total_days": "Total de jours",
+      "date": "Date",
+      "weekday": "Jour de semaine (ISO)",
+      "day_of_year": "Jour de l’année",
+      "iso_year": "Année de la semaine ISO",
+      "iso_week": "Semaine ISO",
+      "leap_year": "Année bissextile",
+      "days_in_month": "Jours dans le mois",
+      "business_days": "Jours ouvrés",
+      "local": "Heure locale à destination",
+      "utc": "Instant UTC",
+      "from_offset": "Décalage UTC d’origine",
+      "to_offset": "Décalage UTC de destination",
+      "from_dst": "Heure d’été à l’origine",
+      "to_dst": "Heure d’été à destination",
+      "resolution": "Résolution",
+      "seconds": "Secondes écoulées"
+    },
+    "hints": {
+      "difference": "Saisissez deux dates au format YYYY-MM-DD. L’intervalle signé s’exprime en jours calendaires, semaines complètes et jours restants.",
+      "age": "Saisissez la date de naissance et la date de calcul de l’âge. Le résultat compte les années et mois calendaires complets.",
+      "period": "Saisissez des années, mois, semaines ou jours signés. Les années et mois calendaires s’appliquent avant les semaines et jours.",
+      "calendar": "Saisissez une date civile pour vérifier le jour, l’année et le numéro de semaine ISO ainsi que le statut bissextile.",
+      "business_days": "Comptez les jours sélectionnés après la date de début jusqu’à la date de fin incluse. Inverser l’intervalle change le signe.",
+      "deadline": "Comptez les jours à partir de la date de début, en l’excluant. Les échéances ouvrées suivent le calendrier de travail choisi.",
+      "timezone": "Saisissez un horodatage local comme 2024-11-03T01:30:00 et des noms de fuseaux IANA ou UTC. Choisissez comment résoudre les heures répétées. Une heure sautée exige de saisir une autre heure locale.",
+      "duration": "Saisissez deux horodatages RFC3339 avec secondes et Z ou un décalage UTC numérique. Le résultat indique la durée écoulée à la nanoseconde."
+    },
+    "boolean": {
+      "true": "Oui",
+      "false": "Non"
+    },
+    "proof": {
+      "methods": {
+        "gregorian_civil_day_difference": "Écart en jours civils grégoriens",
+        "clamped_gregorian_age": "Âge avec ajustement de fin de mois",
+        "gregorian_period_arithmetic": "Arithmétique des périodes grégoriennes",
+        "iso_week_calendar": "Calendrier des semaines ISO",
+        "custom_business_day_count": "Décompte personnalisé des jours ouvrés",
+        "custom_business_deadline": "Échéance ouvrée sur un calendrier personnalisé",
+        "gregorian_civil_deadline": "Échéance civile grégorienne",
+        "iana_bundled_timezone_conversion": "Conversion avec les données IANA intégrées",
+        "rfc3339_nanosecond_duration": "Durée RFC3339 à la nanoseconde"
+      },
+      "domains": {
+        "civil_date": "Dates civiles",
+        "zoned_datetime": "Date et heure avec fuseau",
+        "absolute_time": "Temps absolu"
+      },
+      "constraints": {
+        "Proleptic Gregorian calendar": "Calendrier grégorien proleptique",
+        "Business calendar uses only the supplied weekday and holiday rules": "Le calendrier de travail applique les jours sélectionnés et les exclusions saisies.",
+        "Weeks truncate toward zero with a signed remainder": "Les semaines sont tronquées vers zéro et le reste conserve son signe.",
+        "Age uses completed clamped months before residual days": "L’âge compte les mois calendaires complets ajustés en fin de mois et les jours restants.",
+        "Business-day interval excludes the earlier day and includes the later day": "L’intervalle exclut la date la plus ancienne et inclut la plus récente.",
+        "Deadline excludes the starting day when count is nonzero": "Un décompte d’échéance non nul exclut la date de départ.",
+        "Nonexistent local times are rejected": "Une heure locale sautée exige une autre saisie.",
+        "Explicit offsets define the UTC instants": "Les décalages explicites définissent les instants UTC."
+      },
+      "formulas": {
+        "age = completed calendar months plus remaining days": "L’âge correspond aux mois calendaires complets et aux jours restants.",
+        "ISO week 1 contains January 4 and starts Monday": "La semaine ISO 1 commence le lundi et contient le 4 janvier.",
+        "signed count of eligible dates in (earlier,later]": "Nombre signé de dates admissibles après la plus ancienne jusqu’à la plus récente incluse.",
+        "first date reached after abs(count) eligible days in the specified direction": "Date atteinte après avoir compté les jours admissibles dans le sens choisi."
+      },
+      "units": {
+        "day": "Jour",
+        "week": "Semaine",
+        "month": "Mois",
+        "year": "Année",
+        "business_day": "Jour ouvré",
+        "s": "Secondes"
+      }
+    }
+  },
   "operations": {
     "operations": "Fonctionnement",
     "privacy": "Centre de confidentialité",

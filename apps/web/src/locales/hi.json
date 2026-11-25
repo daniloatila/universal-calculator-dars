@@ -826,6 +826,159 @@
       "workingPrecision": "कार्यशील परिशुद्धता प्रमाणित त्रुटि सीमा नहीं है।"
     }
   },
+  "dateTime": {
+    "title": "दिनांक और समय",
+    "description": "नागरिक तिथियों की तुलना करें, कार्यदिवस गिनें और समयांतर व समय क्षेत्र बदलें।",
+    "keyboardHint": "गणना के लिए Ctrl+Enter या ⌘+Enter और रद्द करने के लिए Escape दबाएँ।",
+    "operation": "दिनांक और समय संक्रिया",
+    "useExample": "उदाहरण इस्तेमाल करें",
+    "invalid": "मान्य ISO तिथियाँ या समय-मुद्राएँ दर्ज करें तथा कैलेंडर या समय क्षेत्र जाँचें।",
+    "domainError": "जाँचें कि तिथियाँ, अवधि और कैलेंडर सेटिंग संक्रिया के परिभाषा क्षेत्र में हों।",
+    "ambiguous": "यह स्थानीय समय दो बार आता है। पहले या बाद का क्षण चुनें, या दूसरा समय दें।",
+    "nonexistent": "संक्रमण के दौरान यह स्थानीय समय छूट जाता है। कोई दूसरा स्थानीय समय दर्ज करें।",
+    "workingWeekError": "कम से कम एक साप्ताहिक कार्यदिवस चुनें।",
+    "holidayLimit": "YYYY-MM-DD प्रारूप में अधिकतम 23 अपवर्जन दर्ज करें।",
+    "monthOverflow": "माह के अंत का प्रबंधन",
+    "clamp": "अंतिम मान्य दिन पर समायोजित करें",
+    "rejectMonth": "अमान्य दिन अस्वीकार करें",
+    "deadlineBasis": "समय-सीमा का आधार",
+    "businessBasis": "कार्यदिवस",
+    "civilBasis": "नागरिक दिन",
+    "workCalendar": "कार्य कैलेंडर",
+    "holidays": "अवकाश की तिथियाँ (वैकल्पिक)",
+    "calendarHint": "कार्यदिवस चुनें और अपनी अपवर्जित तिथियाँ दर्ज करें। तिथियों को नई पंक्तियों या अल्पविराम से अलग करें।",
+    "fromZone": "स्रोत समय क्षेत्र",
+    "toZone": "लक्ष्य समय क्षेत्र",
+    "disambiguation": "संक्रमण का समाधान",
+    "tzdbVersion": "समय क्षेत्र डेटा संस्करण",
+    "tzdbFormat": "समय क्षेत्र डेटा प्रारूप",
+    "tzdbPolicy": "ग्रीष्मकालीन समय के संकेत IANA rearguard डेटा का उपयोग करते हैं।",
+    "calendarVersion": "कार्य कैलेंडर संस्करण",
+    "operations": {
+      "difference": "तिथियों का अंतर",
+      "age": "आयु",
+      "period": "अवधि जोड़ें या घटाएँ",
+      "calendar": "कैलेंडर",
+      "business_days": "कार्यदिवस",
+      "deadline": "समय-सीमा",
+      "timezone": "समय क्षेत्र परिवर्तन",
+      "duration": "बीती अवधि"
+    },
+    "fields": {
+      "start": "आरंभ तिथि",
+      "end": "अंत तिथि",
+      "birth": "जन्म तिथि",
+      "asOf": "आयु निकालने की तिथि",
+      "date": "तिथि",
+      "instantStart": "आरंभ समय-मुद्रा",
+      "instantEnd": "अंत समय-मुद्रा",
+      "local": "स्थानीय दिनांक और समय",
+      "years": "वर्ष",
+      "months": "माह",
+      "weeks": "सप्ताह",
+      "days": "दिन",
+      "count": "दिनों की संख्या"
+    },
+    "weekdays": {
+      "1": "सोमवार",
+      "2": "मंगलवार",
+      "3": "बुधवार",
+      "4": "गुरुवार",
+      "5": "शुक्रवार",
+      "6": "शनिवार",
+      "7": "रविवार"
+    },
+    "transition": {
+      "reject": "दोहराए समय अस्वीकार करें",
+      "earlier": "पहला समय चुनें",
+      "later": "बाद का समय चुनें"
+    },
+    "resolution": {
+      "unambiguous": "असंदिग्ध",
+      "earlier": "पहले का समाधान",
+      "later": "बाद का समाधान"
+    },
+    "output": {
+      "days": "दिन",
+      "weeks": "पूरे सप्ताह",
+      "remaining_days": "शेष दिन",
+      "years": "वर्ष",
+      "months": "माह",
+      "total_days": "कुल दिन",
+      "date": "तिथि",
+      "weekday": "सप्ताह का दिन (ISO)",
+      "day_of_year": "वर्ष का दिन",
+      "iso_year": "ISO सप्ताह-वर्ष",
+      "iso_week": "ISO सप्ताह",
+      "leap_year": "अधिवर्ष",
+      "days_in_month": "माह में दिन",
+      "business_days": "कार्यदिवस",
+      "local": "लक्ष्य का स्थानीय समय",
+      "utc": "UTC क्षण",
+      "from_offset": "स्रोत UTC अंतर",
+      "to_offset": "लक्ष्य UTC अंतर",
+      "from_dst": "स्रोत का ग्रीष्मकालीन समय",
+      "to_dst": "लक्ष्य का ग्रीष्मकालीन समय",
+      "resolution": "समाधान",
+      "seconds": "बीते सेकंड"
+    },
+    "hints": {
+      "difference": "YYYY-MM-DD प्रारूप में दो तिथियाँ दें। चिह्नित अंतर नागरिक दिनों, पूरे सप्ताहों और शेष दिनों में है।",
+      "age": "जन्म तिथि और आयु निकालने की तिथि दें। परिणाम पूरे कैलेंडर वर्ष और माह गिनता है।",
+      "period": "चिह्न सहित वर्ष, माह, सप्ताह या दिन दें। पहले कैलेंडर वर्ष और माह, फिर सप्ताह और दिन लागू होते हैं।",
+      "calendar": "ISO वार, सप्ताह-वर्ष, सप्ताह संख्या और अधिवर्ष स्थिति देखने के लिए नागरिक तिथि दें।",
+      "business_days": "आरंभ तिथि के बाद से अंत तिथि तक चुने हुए वार गिनें। उलटा अंतराल चिह्न बदलता है।",
+      "deadline": "आरंभ तिथि को छोड़कर दिन गिनें। कार्यदिवस की समय-सीमाएँ चुने हुए कार्य कैलेंडर का उपयोग करती हैं।",
+      "timezone": "2024-11-03T01:30:00 जैसी स्थानीय समय-मुद्रा और IANA समय क्षेत्र या UTC दें। दोहराए समय का समाधान चुनें। छूटे समय के लिए दूसरा स्थानीय समय दें।",
+      "duration": "सेकंड और Z या संख्यात्मक UTC अंतर सहित दो RFC3339 समय-मुद्राएँ दें। परिणाम नैनोसेकंड तक का बीता समय है।"
+    },
+    "boolean": {
+      "true": "हाँ",
+      "false": "नहीं"
+    },
+    "proof": {
+      "methods": {
+        "gregorian_civil_day_difference": "ग्रेगोरियन नागरिक दिनों का अंतर",
+        "clamped_gregorian_age": "माह के अंत के समायोजन के साथ आयु",
+        "gregorian_period_arithmetic": "ग्रेगोरियन अवधि अंकगणित",
+        "iso_week_calendar": "ISO सप्ताह कैलेंडर",
+        "custom_business_day_count": "अनुकूलित कार्यदिवस गणना",
+        "custom_business_deadline": "अनुकूलित कैलेंडर की कार्यदिवस समय-सीमा",
+        "gregorian_civil_deadline": "ग्रेगोरियन नागरिक समय-सीमा",
+        "iana_bundled_timezone_conversion": "अंतर्निहित IANA समय क्षेत्र परिवर्तन",
+        "rfc3339_nanosecond_duration": "नैनोसेकंड तक RFC3339 अवधि"
+      },
+      "domains": {
+        "civil_date": "नागरिक तिथियाँ",
+        "zoned_datetime": "समय क्षेत्र सहित दिनांक और समय",
+        "absolute_time": "निरपेक्ष समय"
+      },
+      "constraints": {
+        "Proleptic Gregorian calendar": "प्राक्-विस्तारित ग्रेगोरियन कैलेंडर",
+        "Business calendar uses only the supplied weekday and holiday rules": "कार्य कैलेंडर चुने हुए वार और दर्ज अपवर्जित तिथियाँ इस्तेमाल करता है।",
+        "Weeks truncate toward zero with a signed remainder": "सप्ताह शून्य की ओर काटे जाते हैं और शेष का चिह्न बना रहता है।",
+        "Age uses completed clamped months before residual days": "आयु में माह के अंत का समायोजन करके पूरे माह और फिर शेष दिन गिने जाते हैं।",
+        "Business-day interval excludes the earlier day and includes the later day": "कार्यदिवस अंतराल पहली तिथि छोड़ता है और बाद की तिथि शामिल करता है।",
+        "Deadline excludes the starting day when count is nonzero": "अशून्य समय-सीमा गणना आरंभ का दिन छोड़ती है।",
+        "Nonexistent local times are rejected": "छूटे स्थानीय समय के लिए दूसरा इनपुट चाहिए।",
+        "Explicit offsets define the UTC instants": "स्पष्ट समयांतर UTC क्षण निर्धारित करते हैं।"
+      },
+      "formulas": {
+        "age = completed calendar months plus remaining days": "आयु पूरे कैलेंडर माह और शेष दिनों के बराबर है।",
+        "ISO week 1 contains January 4 and starts Monday": "ISO सप्ताह 1 सोमवार से शुरू होता है और उसमें 4 जनवरी आती है।",
+        "signed count of eligible dates in (earlier,later]": "पहली तिथि के बाद से अंतिम तिथि तक पात्र तिथियों की चिह्नित गणना।",
+        "first date reached after abs(count) eligible days in the specified direction": "चुनी हुई दिशा में पात्र दिनों की गणना के बाद प्राप्त तिथि।"
+      },
+      "units": {
+        "day": "दिन",
+        "week": "सप्ताह",
+        "month": "माह",
+        "year": "वर्ष",
+        "business_day": "कार्यदिवस",
+        "s": "सेकंड"
+      }
+    }
+  },
   "operations": {
     "operations": "संचालन",
     "privacy": "गोपनीयता केंद्र",

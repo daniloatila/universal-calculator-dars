@@ -18,6 +18,7 @@ geometry = ["dars-universal/geometry"]
 discrete-mathematics = ["dars-universal/discrete-mathematics"]
 programmer = ["dars-universal/programmer"]
 converter = ["dars-universal/converter"]
+date-time = ["dars-universal/date-time"]
 
 [dependencies]
 dars-universal = { path = "../dars-universal", default-features = false }

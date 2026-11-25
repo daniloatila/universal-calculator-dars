@@ -826,6 +826,159 @@
       "workingPrecision": "计算精度不构成经过认证的误差界。"
     }
   },
+  "dateTime": {
+    "title": "日期与时间",
+    "description": "比较民用日期、计算工作日，并在带偏移量的时间戳和时区之间换算。",
+    "keyboardHint": "按 Ctrl+Enter 或 ⌘+Enter 计算，按 Esc 取消。",
+    "operation": "日期与时间操作",
+    "useExample": "使用示例",
+    "invalid": "请输入有效的 ISO 日期或时间戳，并检查日历或时区设置。",
+    "domainError": "请检查日期、时段和日历设置是否在该运算的定义域内。",
+    "ambiguous": "此本地时间出现两次。请选择较早或较晚的时刻，或输入其他时间。",
+    "nonexistent": "此本地时间在转换时被跳过。请输入其他本地时间。",
+    "workingWeekError": "请至少选择一个工作日。",
+    "holidayLimit": "最多输入 23 个排除日期，格式为 YYYY-MM-DD。",
+    "monthOverflow": "月末处理",
+    "clamp": "调整至最后一个有效日期",
+    "rejectMonth": "遇到无效日期时拒绝",
+    "deadlineBasis": "期限计数方式",
+    "businessBasis": "工作日",
+    "civilBasis": "自然日",
+    "workCalendar": "工作日历",
+    "holidays": "节假日（可选）",
+    "calendarHint": "请选择每周工作日并输入排除日期。日期用换行或逗号分隔。",
+    "fromZone": "源时区",
+    "toZone": "目标时区",
+    "disambiguation": "转换处理方式",
+    "tzdbVersion": "时区数据版本",
+    "tzdbFormat": "时区数据格式",
+    "tzdbPolicy": "夏令时标志遵循 IANA rearguard 格式数据。",
+    "calendarVersion": "工作日历版本",
+    "operations": {
+      "difference": "日期差",
+      "age": "年龄",
+      "period": "加减时段",
+      "calendar": "日历",
+      "business_days": "工作日",
+      "deadline": "期限",
+      "timezone": "时区换算",
+      "duration": "经过的时长"
+    },
+    "fields": {
+      "start": "起始日期",
+      "end": "结束日期",
+      "birth": "出生日期",
+      "asOf": "计算年龄的参考日期",
+      "date": "日期",
+      "instantStart": "起始时间戳",
+      "instantEnd": "结束时间戳",
+      "local": "本地日期与时间",
+      "years": "年",
+      "months": "月",
+      "weeks": "周",
+      "days": "天",
+      "count": "天数"
+    },
+    "weekdays": {
+      "1": "星期一",
+      "2": "星期二",
+      "3": "星期三",
+      "4": "星期四",
+      "5": "星期五",
+      "6": "星期六",
+      "7": "星期日"
+    },
+    "transition": {
+      "reject": "拒绝重复的时间",
+      "earlier": "采用较早时间",
+      "later": "采用较晚时间"
+    },
+    "resolution": {
+      "unambiguous": "无歧义",
+      "earlier": "采用较早时间",
+      "later": "采用较晚时间"
+    },
+    "output": {
+      "days": "天",
+      "weeks": "整周",
+      "remaining_days": "余下天数",
+      "years": "年",
+      "months": "月",
+      "total_days": "总天数",
+      "date": "日期",
+      "weekday": "星期（ISO）",
+      "day_of_year": "年内天数",
+      "iso_year": "ISO 周所属年份",
+      "iso_week": "ISO 周",
+      "leap_year": "闰年",
+      "days_in_month": "月内天数",
+      "business_days": "工作日",
+      "local": "目标本地时间",
+      "utc": "UTC 时刻",
+      "from_offset": "源时区 UTC 偏移",
+      "to_offset": "目标时区 UTC 偏移",
+      "from_dst": "源时区夏令时",
+      "to_dst": "目标时区夏令时",
+      "resolution": "处理方式",
+      "seconds": "经过的秒数"
+    },
+    "hints": {
+      "difference": "输入两个 YYYY-MM-DD 格式的日期。带正负号的区间以自然日、整周和余下天数表示。",
+      "age": "输入出生日期和计算年龄的日期。结果按日历计算完整的年和月。",
+      "period": "输入带正负号的年、月、周或天。先计算日历的年和月，再加减周和天。",
+      "calendar": "输入民用日期，以查询 ISO 星期、周所属年份、周数及闰年状态。",
+      "business_days": "从起始日期之后计数至结束日期，包含结束日期。反转区间会改变结果的正负号。",
+      "deadline": "从起始日期开始计数，起始日期不计入。工作日期限使用选定的工作日历。",
+      "timezone": "输入本地时间戳（例如 2024-11-03T01:30:00）和 IANA 时区名或 UTC。请选择如何处理重复时间。遇到跳过的时间时，请输入其他本地时间。",
+      "duration": "输入两个包含秒和 Z 或数字 UTC 偏移的 RFC3339 时间戳。结果为纳秒精度的经过时长。"
+    },
+    "boolean": {
+      "true": "是",
+      "false": "否"
+    },
+    "proof": {
+      "methods": {
+        "gregorian_civil_day_difference": "格里高利历自然日差",
+        "clamped_gregorian_age": "按月末调整计算年龄",
+        "gregorian_period_arithmetic": "格里高利历时段运算",
+        "iso_week_calendar": "ISO 周历",
+        "custom_business_day_count": "自定义工作日计数",
+        "custom_business_deadline": "按自定义日历计算工作日期限",
+        "gregorian_civil_deadline": "格里高利历自然日期限",
+        "iana_bundled_timezone_conversion": "使用内置 IANA 数据换算时区",
+        "rfc3339_nanosecond_duration": "纳秒精度的 RFC3339 时长"
+      },
+      "domains": {
+        "civil_date": "民用日期",
+        "zoned_datetime": "带时区的日期与时间",
+        "absolute_time": "绝对时间"
+      },
+      "constraints": {
+        "Proleptic Gregorian calendar": "前推格里高利历",
+        "Business calendar uses only the supplied weekday and holiday rules": "工作日历使用你选定的每周工作日和输入的排除日期。",
+        "Weeks truncate toward zero with a signed remainder": "整周数向零截断，余数带正负号。",
+        "Age uses completed clamped months before residual days": "年龄先按月末调整计算完整月数，再计算剩余天数。",
+        "Business-day interval excludes the earlier day and includes the later day": "工作日区间包含较晚日期，排除较早日期。",
+        "Deadline excludes the starting day when count is nonzero": "期限计数非零时，起始日不计入。",
+        "Nonexistent local times are rejected": "遇到跳过的本地时间时，请输入其他时间。",
+        "Explicit offsets define the UTC instants": "显式偏移量决定 UTC 时刻。"
+      },
+      "formulas": {
+        "age = completed calendar months plus remaining days": "年龄为完整日历月数加余下天数。",
+        "ISO week 1 contains January 4 and starts Monday": "ISO 第 1 周从星期一开始，包含 1 月 4 日。",
+        "signed count of eligible dates in (earlier,later]": "带正负号的可计入日期数量，从较早日期之后至较晚日期。",
+        "first date reached after abs(count) eligible days in the specified direction": "按选定方向计完符合条件的天数后到达的日期。"
+      },
+      "units": {
+        "day": "日",
+        "week": "周",
+        "month": "月",
+        "year": "年",
+        "business_day": "工作日",
+        "s": "秒"
+      }
+    }
+  },
   "operations": {
     "operations": "运行管理",
     "privacy": "隐私中心",

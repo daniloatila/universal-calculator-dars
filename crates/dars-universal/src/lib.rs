@@ -10,6 +10,8 @@ mod algebra;
 mod calculus;
 #[cfg(feature = "converter")]
 mod converter;
+#[cfg(feature = "date-time")]
+mod date_time;
 #[cfg(feature = "discrete-mathematics")]
 mod discrete_mathematics;
 #[cfg(feature = "geometry")]
@@ -39,6 +41,8 @@ pub enum MathError {
     InvalidInput,
     Domain,
     Singular,
+    AmbiguousLocalTime,
+    NonexistentLocalTime,
     Limit,
     Unsupported,
     NoConvergence,
@@ -214,6 +218,26 @@ fn dispatch(
                     &Value::Object(request.options.clone()),
                 )?,
                 "converter/1",
+                references,
+            ))
+        }
+        #[cfg(feature = "date-time")]
+        "date-time" => {
+            let references: &[&str] = match request.operation.as_str() {
+                "timezone" => &["https://www.iana.org/time-zones/releases/2026f"],
+                "duration" => &["https://www.rfc-editor.org/rfc/rfc3339.html"],
+                _ => &[
+                    "https://www.iso.org/iso-8601-date-and-time-format.html",
+                    "https://aa.usno.navy.mil/faq/leap_years",
+                ],
+            };
+            Ok((
+                date_time::evaluate(
+                    &request.operation,
+                    &request.input,
+                    &Value::Object(request.options.clone()),
+                )?,
+                "date-time/1",
                 references,
             ))
         }
