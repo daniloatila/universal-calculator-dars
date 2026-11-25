@@ -114,4 +114,12 @@ export const primaryModules: readonly RegisteredModule[] = [
     }),
     load: () => import('./tool-programmer-runtime'),
   }),
+  registerModule({
+    id: 'converter',
+    describe: (messages) => ({
+      title: messages.converter.title, description: messages.converter.description,
+      keyboardHint: messages.converter.keyboardHint,
+    }),
+    load: () => import('./tool-converter-runtime'),
+  }),
 ];

@@ -6,7 +6,7 @@ license = "Apache-2.0"
 publish = false
 
 [features]
-default = ["scientific", "algebra", "calculus", "linear_algebra", "geometry", "discrete-mathematics", "programmer"]
+default = ["scientific", "algebra", "calculus", "linear_algebra", "geometry", "discrete-mathematics", "programmer", "converter"]
 scientific = ["dep:astro-float-num", "dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
 algebra = ["dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
 calculus = ["dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
@@ -14,6 +14,7 @@ linear_algebra = ["dep:nalgebra", "dep:num-bigint", "dep:num-integer", "dep:num-
 geometry = ["dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
 discrete-mathematics = ["dep:num-bigint", "dep:num-integer", "dep:num-traits"]
 programmer = ["dep:num-bigint", "dep:num-traits"]
+converter = ["dep:num-bigint", "dep:num-integer", "dep:num-rational", "dep:num-traits"]
 
 [dependencies]
 astro-float-num = { version = "=0.3.6", default-features = false, features = ["std"], optional = true }

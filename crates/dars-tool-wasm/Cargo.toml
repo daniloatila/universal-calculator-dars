@@ -17,6 +17,7 @@ linear_algebra = ["dars-universal/linear_algebra"]
 geometry = ["dars-universal/geometry"]
 discrete-mathematics = ["dars-universal/discrete-mathematics"]
 programmer = ["dars-universal/programmer"]
+converter = ["dars-universal/converter"]
 
 [dependencies]
 dars-universal = { path = "../dars-universal", default-features = false }

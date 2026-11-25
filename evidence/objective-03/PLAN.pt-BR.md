@@ -11,9 +11,9 @@ A entrega 0.2.2 é a base aprovada. Registre em cada etapa a especificação mat
 | 3 | Cálculo | INTERNALLY_ACCEPTED · [Verificação](calculus/verification.pt-BR.md) · [CI](calculus/ci.json) |
 | 4 | Álgebra Linear | INTERNALLY_ACCEPTED · [Verificação](linear-algebra/verification.pt-BR.md) · [CI](linear-algebra/ci.json) |
 | 5 | Geometria | INTERNALLY_ACCEPTED · [Verificação](geometry/verification.pt-BR.md) · [CI](geometry/ci.json) |
-| 6 | Matemática Discreta | INTERNALLY_ACCEPTED · [Verificação](discrete-mathematics/verification.pt-BR.md) |
-| 7 | Programador | INTERNALLY_ACCEPTED · [Verificação](programmer/verification.pt-BR.md) |
-| 8 | Conversor | NOT_STARTED |
+| 6 | Matemática Discreta | INTERNALLY_ACCEPTED · [Verificação](discrete-mathematics/verification.pt-BR.md) · [CI substituído](discrete-mathematics/ci.json) |
+| 7 | Programador | INTERNALLY_ACCEPTED · [Verificação](programmer/verification.pt-BR.md) · [CI](programmer/ci.json) |
+| 8 | Conversor | INTERNALLY_ACCEPTED · [Verificação](converter/verification.pt-BR.md) |
 | 9 | Data e Hora | NOT_STARTED |
 | Auditoria | Objetivo 03 integrado | NOT_STARTED |
 

@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "tests": {
+    "rust": {
+      "standard": 16,
+      "universal": 59
+    },
+    "node": {
+      "passed": 65
+    },
+    "chrome": {
+      "offline": 10,
+      "full": 81
+    },
+    "standard": {
+      "oracle": 157,
+      "structured": 291,
+      "parity": 20
+    },
+    "scientific": {
+      "isolation": 1,
+      "oracle": 177,
+      "parity": 19
+    },
+    "algebra": {
+      "isolation": 1,
+      "oracle": 184,
+      "parity": 28
+    },
+    "calculus": {
+      "isolation": 2,
+      "oracle": 210,
+      "parity": 27
+    },
+    "linearAlgebra": {
+      "isolation": 3,
+      "oracle": 223,
+      "parity": 30
+    },
+    "geometry": {
+      "isolation": 4,
+      "oracle": 159,
+      "parity": 32
+    },
+    "discreteMathematics": {
+      "isolation": 5,
+      "oracle": 289,
+      "parity": 38
+    },
+    "programmer": {
+      "isolation": 6,
+      "oracle": 368,
+      "parity": 36
+    },
+    "converterOracle": {
+      "suite": "converter-fraction-decimal-sympy",
+      "passed": 342,
+      "failed": 0,
+      "sympy": "1.14.0",
+      "cases": {
+        "absolute_temperature": 20,
+        "acceleration": 8,
+        "angle": 13,
+        "approximate pressure": 11,
+        "area": 17,
+        "currency expired": 1,
+        "currency not_yet_valid": 2,
+        "currency unverified_validity": 1,
+        "currency within_validity": 12,
+        "digital_storage": 22,
+        "energy": 12,
+        "force": 8,
+        "fuel": 16,
+        "length": 18,
+        "mass": 9,
+        "normalized replay": 8,
+        "power": 7,
+        "pressure": 13,
+        "rejected": 68,
+        "speed": 9,
+        "temperature_difference": 9,
+        "time": 11,
+        "transfer_rate": 25,
+        "untrusted display text": 1,
+        "volume": 21
+      }
+    },
+    "converterParity": {
+      "suite": "converter-cli-wasm",
+      "passed": 46,
+      "isolationChecks": 7,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 349947,
+        "wasmSha256": "11b22623e6cb3397874641f3bf0a783e4cc8b684bc4c2b630315e08e6d2d2265",
+        "observedWasmLinearBytes": 1179648,
+        "wasmInitializationMs": 12.128599999999999,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.018100000000004002,
+          "p95": 0.03149999999999409,
+          "p99": 0.07010000000002492
+        }
+      }
+    }
+  },
+  "coverage": {
+    "method": "cargo-llvm-cov combined workspace unit tests and native CLI independent oracles",
+    "standard": {
+      "total": 620,
+      "covered": 613
+    },
+    "universal": {
+      "total": 9501,
+      "covered": 9198
+    },
+    "converter": {
+      "total": 799,
+      "compileTimeOnlyLines": 37,
+      "runtimeLines": 762,
+      "covered": 742
+    }
+  }
+}

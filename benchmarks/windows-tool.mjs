@@ -196,6 +196,9 @@ export async function runWindowsToolBenchmark(suite, argument = process.argv[2])
     assert.equal(hashes(await readFile(executable)), data.executableSha256);
     await native('close');
     await expect.poll(() => app.exitCode === null, { timeout: 5000 }).toBe(false);
+    const exitObserved = performance.now();
+    await expect.poll(async () => (await native('sample', app.pid)).tree.length, { timeout: 5000 }).toBe(0);
+    data.descendantsClearedAfterExitMs = performance.now() - exitObserved;
     await samplePhase('after_close', 'missing', app.pid);
     assert.equal(data.phases.after_close.processesAtEnd, 0);
     data.status = 'complete';

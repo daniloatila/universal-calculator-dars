@@ -1,0 +1,152 @@
+.converter-workspace { display: grid; gap: 16px; }
+.converter-card {
+  min-inline-size: 0;
+  padding: clamp(12px, 3vw, 21px);
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+.converter-navigation {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.converter-navigation button {
+  min-inline-size: 0;
+  min-block-size: 44px;
+  padding: 6px 8px;
+  color: var(--muted);
+  background: var(--display);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: .89rem;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.converter-navigation button:hover, .converter-navigation button[aria-pressed=true] {
+  color: var(--text);
+  background: var(--tint);
+}
+.converter-navigation button[aria-pressed=true] {
+  border-color: var(--line-prominent);
+  box-shadow: inset 0 -2px var(--accent);
+}
+.converter-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.09fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+}
+.converter-fields, .converter-units {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 142px), 1fr));
+  align-items: end;
+  gap: 11px;
+}
+.converter-units {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  margin-block-start: 12px;
+}
+.converter-field {
+  display: grid;
+  gap: 6px;
+  min-inline-size: 0;
+  color: var(--muted);
+  font-size: .87rem;
+  font-weight: 650;
+}
+.converter-field :is(input, select) {
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 44px;
+  padding: 8px 10px;
+  color: var(--text);
+  background: var(--display);
+  border: 1px solid var(--line-prominent);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.converter-field .converter-numeric { font-family: var(--mono); }
+.converter-currency-line { margin-block: 12px; }
+.converter-quote-fields {
+  display: grid;
+  gap: 10px;
+  margin-block: 12px;
+  padding-block: 12px;
+  border-block: 1px solid var(--line);
+}
+.converter-direction, .converter-hint, .converter-notice, .converter-exact, .converter-dates {
+  margin-block: 9px 12px;
+  color: var(--muted);
+  font-size: .86rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.converter-direction { margin-block: 0; }
+.converter-notice { min-block-size: 1.2em; margin-block-end: 0; }
+.converter-notice[data-error] { color: var(--error); }
+.converter-actions, .converter-result-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.converter-actions button, .converter-units button { min-block-size: 44px; }
+.converter-primary {
+  padding-inline: 16px;
+  color: var(--accent-ink);
+  background: var(--accent-key);
+  border: 1px solid var(--accent-key);
+  border-radius: 9px;
+  font-weight: 690;
+}
+.converter-primary:hover:not(:disabled) { background: var(--accent-key-hover); }
+.converter-primary:disabled { opacity: .56; }
+.converter-result-heading {
+  justify-content: space-between;
+  margin-block-end: 8px;
+  color: var(--muted);
+  font-size: .86rem;
+}
+.converter-result-heading span { color: var(--accent); }
+.converter-result {
+  min-block-size: 78px;
+  margin-block-end: 11px;
+  padding: 12px 13px;
+  background: var(--display);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+.converter-value { font: 620 clamp(1rem, 2.7vw, 1.62rem)/1.4 var(--mono); }
+.converter-exact { margin-block: 5px 0; }
+.converter-rate-status {
+  margin-block: 0 11px;
+  padding: 10px;
+  color: var(--text);
+  background: var(--tint);
+  border-inline-start: 3px solid var(--accent);
+  border-radius: 6px;
+  font-size: .88rem;
+}
+.converter-rate-status[data-stale] { border-inline-start-color: var(--error); }
+.converter-dates { margin-block-start: 0; }
+.converter-dates div {
+  display: grid;
+  grid-template-columns: minmax(75px, .8fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 7px;
+  padding-block: 5px;
+}
+.converter-dates div + div { border-block-start: 1px solid var(--line); }
+.converter-dates dd { margin: 0; color: var(--text); }
+
+@media (max-width: 715px) {
+  .converter-layout { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 420px) {
+  .converter-units { grid-template-columns: minmax(0, 1fr); }
+  .converter-units button { justify-self: start; }
+}

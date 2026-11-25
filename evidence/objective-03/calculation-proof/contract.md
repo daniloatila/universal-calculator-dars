@@ -54,6 +54,8 @@ In Discrete Mathematics, `97` produces a deterministic primality result. Passing
 
 In Programmer, enter `81` in hexadecimal with an eight-bit word and signed decimal display. Shifting right by one bit produces hexadecimal `40` with zero fill and `C0` with sign extension. Both records retain the word width and the specified shift operation alongside their four exact representations. [Programmer oracle](../../../tests/verify-programmer.py)
 
+In Converter, `1 MB` becomes exactly `15625/16384 MiB`. The record retains both unit codes and the conversion model. A manual currency record also retains the entered rate, source, dates and status evaluated on the selected reference date. The suite verifies this date comparison and tests the deliberately approximate reference factor for conventional `mmHg`. [Converter oracle](../../../tests/verify-converter.py)
+
 ## Local format and validation
 
 The interchange file is a standalone UTF-8 JSON object. Browsers read at most 128 KiB, require valid UTF-8, reject repeated names even through escapes, and accept only the expected own fields. JSON Schema length limits describe characters. The application additionally enforces UTF-8 byte limits for each field, rejects malformed Unicode scalar sequences, and applies a two-level container limit. Request text has a 4,096-byte bound. Normalized text has an 8,192-byte bound and result text has a 32,768-byte bound. Map entries are limited to 16. Lists are limited to 32 entries. [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/json-schema-validation) · [Application validator](../../../apps/web/src/calculation-proof.ts)

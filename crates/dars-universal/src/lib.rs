@@ -8,6 +8,8 @@ use std::collections::BTreeMap;
 mod algebra;
 #[cfg(feature = "calculus")]
 mod calculus;
+#[cfg(feature = "converter")]
+mod converter;
 #[cfg(feature = "discrete-mathematics")]
 mod discrete_mathematics;
 #[cfg(feature = "geometry")]
@@ -193,6 +195,28 @@ fn dispatch(
             "calculus/1",
             &["https://dlmf.nist.gov/1.4", "https://dlmf.nist.gov/3.5"],
         )),
+        #[cfg(feature = "converter")]
+        "converter" => {
+            let references: &[&str] = if request.operation == "currency" {
+                &[
+                    "https://www.six-group.com/en/products-services/financial-information/market-reference-data/data-standards.html",
+                ]
+            } else {
+                &[
+                    "https://www.bipm.org/en/publications/si-brochure",
+                    "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors",
+                ]
+            };
+            Ok((
+                converter::evaluate(
+                    &request.operation,
+                    &request.input,
+                    &Value::Object(request.options.clone()),
+                )?,
+                "converter/1",
+                references,
+            ))
+        }
         #[cfg(feature = "discrete-mathematics")]
         "discrete-mathematics" => Ok((
             discrete_mathematics::evaluate(
@@ -299,7 +323,9 @@ fn execute(input: &str) -> Result<Value, MathError> {
         &[]
     };
     let mut units = result.units;
-    let mut rounding = None;
+    let rounds_significant_digits = matches!(request.module.as_str(), "scientific" | "converter");
+    let rounding = (rounds_significant_digits && result.exactness == Exactness::Approximate)
+        .then_some("nearest, ties to even");
     if request.module == "scientific" {
         let angle = request
             .options
@@ -307,9 +333,6 @@ fn execute(input: &str) -> Result<Value, MathError> {
             .and_then(Value::as_str)
             .unwrap_or("rad");
         units.insert("angle".to_owned(), angle.to_owned());
-        if result.exactness == Exactness::Approximate {
-            rounding = Some("nearest, ties to even");
-        }
     }
     Ok(json!({ "ok": true, "proof": Proof {
         schema: SCHEMA,

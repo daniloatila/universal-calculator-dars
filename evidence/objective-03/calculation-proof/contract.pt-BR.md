@@ -54,6 +54,8 @@ Em Matemática Discreta, `97` produz um resultado determinístico de primalidade
 
 Em Programador, use `81` em hexadecimal com uma palavra de oito bits e exibição decimal com sinal. O deslocamento de um bit à direita produz `40` em hexadecimal com preenchimento por zeros e `C0` com extensão do sinal. Os dois registros guardam a largura, a operação de deslocamento e as quatro representações exatas. [Oráculo de Programador](../../../tests/verify-programmer.py)
 
+No Conversor, `1 MB` corresponde exatamente a `15625/16384 MiB`. O registro guarda as duas unidades e o modelo de conversão. O registro de uma taxa de câmbio manual também guarda a taxa, a fonte, as datas e a situação avaliada na data de referência escolhida. A suíte confere essa comparação de datas e testa o fator de referência aproximado para `mmHg` convencional. [Oráculo do Conversor](../../../tests/verify-converter.py)
+
 ## Formato e validação local
 
 O arquivo é um objeto JSON independente em UTF-8. O navegador lê até 128 KiB, exige UTF-8 válido, rejeita nomes repetidos mesmo quando escritos com escapes e aceita apenas os campos próprios esperados. Os limites de comprimento do JSON Schema contam caracteres. O aplicativo também aplica limites em bytes UTF-8 por campo, rejeita sequências Unicode malformadas e limita a profundidade de estruturas a dois níveis. A expressão tem limite de 4.096 bytes. A expressão normalizada tem limite de 8.192 bytes e o resultado, de 32.768 bytes. Os mapas têm até 16 entradas e as listas têm até 32 itens. [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/json-schema-validation) · [Validador do aplicativo](../../../apps/web/src/calculation-proof.ts)
