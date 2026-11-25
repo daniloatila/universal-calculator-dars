@@ -3,7 +3,7 @@
   "status": "passed",
   "engine_version": "0.4.0",
   "platform": "windows",
-  "runtime": "native-debug-cli",
+  "runtime": "native-release-cli",
   "oracle": "tests/verify-investment-business.py",
   "oracle_sha256": "c602a40935df3c530259c20a21dabed7cf31d269925215b0215d8b91302b14e9",
   "count": 49,
@@ -22,5 +22,7 @@
     "treasury_maturity": 3,
     "variable_cash_flow": 1,
     "zero_denominator": 1
-  }
+  },
+  "cli_sha256": "bd662aaece6cecdc6f6a2ed60362a41b99f1a31bca2be6d0c0e532bf2bfd4683",
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da"
 }

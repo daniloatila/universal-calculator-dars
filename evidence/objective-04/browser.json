@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "browser": "Chrome 158.0.8127.38",
+  "pass": 160,
+  "failed": 0,
+  "legacy": 146,
+  "finance": 14,
+  "finance_profiles": {
+    "checks": [
+      {
+        "profile": "ultra_light",
+        "module": "financial",
+        "operation": "irr"
+      },
+      {
+        "profile": "ultra_light",
+        "module": "investment",
+        "operation": "project"
+      },
+      {
+        "profile": "ultra_light",
+        "module": "loans",
+        "operation": "sac"
+      },
+      {
+        "profile": "ultra_light",
+        "module": "tax",
+        "operation": "br_irrf"
+      },
+      {
+        "profile": "ultra_light",
+        "module": "business",
+        "operation": "price"
+      },
+      {
+        "profile": "efficiency",
+        "module": "financial",
+        "operation": "irr"
+      },
+      {
+        "profile": "efficiency",
+        "module": "investment",
+        "operation": "project"
+      },
+      {
+        "profile": "efficiency",
+        "module": "loans",
+        "operation": "sac"
+      },
+      {
+        "profile": "efficiency",
+        "module": "tax",
+        "operation": "br_irrf"
+      },
+      {
+        "profile": "efficiency",
+        "module": "business",
+        "operation": "price"
+      },
+      {
+        "profile": "balanced",
+        "module": "financial",
+        "operation": "irr"
+      },
+      {
+        "profile": "balanced",
+        "module": "investment",
+        "operation": "project"
+      },
+      {
+        "profile": "balanced",
+        "module": "loans",
+        "operation": "sac"
+      },
+      {
+        "profile": "balanced",
+        "module": "tax",
+        "operation": "br_irrf"
+      },
+      {
+        "profile": "balanced",
+        "module": "business",
+        "operation": "price"
+      },
+      {
+        "profile": "performance",
+        "module": "financial",
+        "operation": "irr"
+      },
+      {
+        "profile": "performance",
+        "module": "investment",
+        "operation": "project"
+      },
+      {
+        "profile": "performance",
+        "module": "loans",
+        "operation": "sac"
+      },
+      {
+        "profile": "performance",
+        "module": "tax",
+        "operation": "br_irrf"
+      },
+      {
+        "profile": "performance",
+        "module": "business",
+        "operation": "price"
+      },
+      {
+        "profile": "maximum",
+        "module": "financial",
+        "operation": "irr"
+      },
+      {
+        "profile": "maximum",
+        "module": "investment",
+        "operation": "project"
+      },
+      {
+        "profile": "maximum",
+        "module": "loans",
+        "operation": "sac"
+      },
+      {
+        "profile": "maximum",
+        "module": "tax",
+        "operation": "br_irrf"
+      },
+      {
+        "profile": "maximum",
+        "module": "business",
+        "operation": "price"
+      }
+    ],
+    "counts": {
+      "active": 0,
+      "max": 1,
+      "initializations": 26,
+      "finance": 25
+    },
+    "external": []
+  },
+  "finance_cases": [
+    "finance drafts retain their source notation across six destinations from en",
+    "finance drafts retain their source notation across six destinations from pt-BR",
+    "finance drafts retain their source notation across six destinations from zh-CN",
+    "finance drafts retain their source notation across six destinations from hi",
+    "finance drafts retain their source notation across six destinations from es",
+    "finance drafts retain their source notation across six destinations from ar",
+    "finance drafts retain their source notation across six destinations from fr",
+    "five financial workspaces calculate under all adaptive profiles without simultaneous workers",
+    "cash-flow roots, currency scales, loan ledgers, and markup survive the complete UI",
+    "scenario differences exclude undefined percentages and replay exported drafts locally",
+    "business projections expose sensitivity and later pages",
+    "dated flows keep monetary values paired through reorder and deletion",
+    "the narrow RTL finance workspace keeps forms and ledger accessible",
+    "mixed-source fields survive digit paste, module suspension and preference reset"
+  ]
+}

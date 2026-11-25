@@ -1,0 +1,17 @@
+{
+  "suite": "windows-x64-tauri-webview2",
+  "method": "Independent WebView2 profiles. Launch-to-first-result measured through the UI using a test-only CDP session. Sum of working sets can include shared pages. CDP offline mode was applied after startup.",
+  "launchToFirstResultMs": 546,
+  "idleSampleMs": 2977,
+  "idleCpuOneCorePct": 1.05,
+  "desktopHostWorkingSetBytes": 26472448,
+  "totalProcessTreeWorkingSetBytes": 428965888,
+  "processTreeCount": 7,
+  "passed": 17,
+  "failed": 0,
+  "launchToFirstResultSamplesMs": [
+    546,
+    598,
+    636
+  ]
+}

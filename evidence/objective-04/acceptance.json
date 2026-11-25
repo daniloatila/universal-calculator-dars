@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "objective": "04",
+  "version": "0.4.0",
+  "status": "READY_FOR_REVIEW",
+  "approved_previous_objective": "03",
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "review_branch": "codex/objective-04-finance-and-business",
+  "criteria": [
+    {
+      "id": "financial",
+      "status": "verified",
+      "evidence": "financial/methods.md"
+    },
+    {
+      "id": "investment",
+      "status": "verified",
+      "evidence": "investment/README.md"
+    },
+    {
+      "id": "loans",
+      "status": "verified",
+      "evidence": "loans/methods.md"
+    },
+    {
+      "id": "tax",
+      "status": "verified",
+      "evidence": "tax/rules.md"
+    },
+    {
+      "id": "business",
+      "status": "verified",
+      "evidence": "business/README.md"
+    },
+    {
+      "id": "scenario_comparator",
+      "status": "verified",
+      "evidence": "browser.json"
+    },
+    {
+      "id": "fifteen_modules",
+      "status": "verified",
+      "evidence": "windows-artifact.json"
+    },
+    {
+      "id": "decimal_and_rounding",
+      "status": "verified",
+      "evidence": "changes.md"
+    },
+    {
+      "id": "independent_oracles",
+      "status": "verified",
+      "evidence": "tests.json"
+    },
+    {
+      "id": "proof_and_replay",
+      "status": "verified",
+      "evidence": "browser.json"
+    },
+    {
+      "id": "seven_locales_and_input_notation",
+      "status": "verified",
+      "evidence": "locale-transition-matrix.json"
+    },
+    {
+      "id": "five_profiles",
+      "status": "verified",
+      "evidence": "browser.json"
+    },
+    {
+      "id": "lazy_loading_and_worker_limits",
+      "status": "verified",
+      "evidence": "cli-wasm.json"
+    },
+    {
+      "id": "offline",
+      "status": "verified",
+      "evidence": "tests.json"
+    },
+    {
+      "id": "security_and_privacy",
+      "status": "verified",
+      "evidence": "security.md"
+    },
+    {
+      "id": "regression",
+      "status": "verified",
+      "evidence": "tests.json"
+    },
+    {
+      "id": "performance_and_memory_follow_up",
+      "status": "verified",
+      "evidence": "benchmarks.json"
+    },
+    {
+      "id": "windows",
+      "status": "verified",
+      "evidence": "desktop.json"
+    },
+    {
+      "id": "browser",
+      "status": "verified",
+      "evidence": "browser.json"
+    },
+    {
+      "id": "ci",
+      "status": "verified",
+      "evidence": "ci.json"
+    },
+    {
+      "id": "bilingual_documentation",
+      "status": "verified",
+      "evidence": "REPORT.pt-BR.md"
+    }
+  ],
+  "open_follow_up": {
+    "incremental_physical_ram_target": "unverified",
+    "distribution_signing": "objective_07"
+  },
+  "next_objective": {
+    "id": "05",
+    "status": "NOT_STARTED"
+  }
+}

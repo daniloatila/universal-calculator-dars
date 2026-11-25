@@ -1,0 +1,19 @@
+{
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "runtime": "native-release-cli",
+  "cli_sha256": "bd662aaece6cecdc6f6a2ed60362a41b99f1a31bca2be6d0c0e532bf2bfd4683",
+  "checks": {
+    "br_ibs_cbs": 14,
+    "br_icms": 7,
+    "br_inss": 36,
+    "br_investment_tax": 127,
+    "br_iof": 93,
+    "br_irpf": 22,
+    "br_irrf": 2,
+    "br_payroll": 36,
+    "receita_official_fixtures": 4,
+    "rejected": 21
+  },
+  "count": 362,
+  "ok": true
+}

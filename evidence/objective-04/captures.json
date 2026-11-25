@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "synthetic_inputs": true,
+  "browser": "Chrome 158.0.8127.38",
+  "locale": "pt-BR",
+  "theme": "dark",
+  "files": [
+    {
+      "path": "captures/chrome-business.png",
+      "sha256": "35a00c0ee858d9f0216f0db4aebcd3fa0b0a3a671e985d50bdd18ff42af6f5f9"
+    },
+    {
+      "path": "captures/chrome-financial.png",
+      "sha256": "15a38267046a568956261f49f50a71c05b5f717c363d408fb0ec59de8f85a78f"
+    },
+    {
+      "path": "captures/chrome-investment.png",
+      "sha256": "f77770507271dcf457ba36f46c26f614789ffa8d6cb987ad98d318d422a251d4"
+    },
+    {
+      "path": "captures/chrome-loans.png",
+      "sha256": "5c83638b76fe823ee509c2141fc1dae723b23bef18373fe2a6d9912d9db1cf1f"
+    },
+    {
+      "path": "captures/chrome-tax.png",
+      "sha256": "0f4e060b8c4630aa2a2712cb2ade2ebd8f8fd12d17db8e2dd74abc0c215dd0a3"
+    }
+  ],
+  "windows_webview2": "158.0.4370.33",
+  "windows_files": [
+    {
+      "path": "captures/baseline-standard.png",
+      "sha256": "b23a3d77b62e16848cdd7f277f3ba4037a4b9d2e00e69b707b99513fb2eead0e"
+    },
+    {
+      "path": "captures/candidate-business.png",
+      "sha256": "c90b871d6788f741a8d7e33ad68a5ba9a2bed0127c22a337321f3fe7bb2b3f3f"
+    },
+    {
+      "path": "captures/candidate-financial.png",
+      "sha256": "1b0392aff69be21ba410284611e0c807305858c25605d2a4746e7fd0362fe55f"
+    },
+    {
+      "path": "captures/candidate-investment.png",
+      "sha256": "af80684a6d12ebb37107d04607473820ce98ac4edd3c6c79fe08357667ef4228"
+    },
+    {
+      "path": "captures/candidate-loans.png",
+      "sha256": "dee00658f525595b3069b84ce32cc9a8cb77cded8c465246793692b9b434a54e"
+    },
+    {
+      "path": "captures/candidate-standard.png",
+      "sha256": "b23a3d77b62e16848cdd7f277f3ba4037a4b9d2e00e69b707b99513fb2eead0e"
+    },
+    {
+      "path": "captures/candidate-tax.png",
+      "sha256": "23cbf1ae0b776985d8e5a242b1fa68f6608596766a64256e88d600c45d996613"
+    }
+  ]
+}

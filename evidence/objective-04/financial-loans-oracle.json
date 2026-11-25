@@ -1,7 +1,8 @@
 {
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
   "status": "pass",
   "seed": 4102026,
-  "cli_sha256": "3309ea0a62b35933e99053416f6491cc0854b32359491bda97089a89e4a76a8a",
+  "cli_sha256": "bd662aaece6cecdc6f6a2ed60362a41b99f1a31bca2be6d0c0e532bf2bfd4683",
   "total": 128,
   "checks": {
     "financial.annuity_future_value": 12,

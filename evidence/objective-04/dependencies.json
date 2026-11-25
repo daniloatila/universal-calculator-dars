@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "new_third_party_rust_packages": 0,
+  "cargo_lock_sha256": "b57aa2421278d71981b90789272c9ff5138b4a0a120a2fbcf0d2e299ba6edca1",
+  "npm_lock_sha256": "7fb803cad8463e0cb238c1fea950878c1fa154f0ce9ad8ba80cecc5bab9f17f3",
+  "finance_implementation_packages": [
+    {
+      "name": "astro-float-num",
+      "version": "0.3.6",
+      "checksum": "86887daca11d02e0b04f37a9cb81888aae881397fb48ff66494e356aea97554a"
+    },
+    {
+      "name": "jiff",
+      "version": "1.0.3",
+      "checksum": "107f2e89536b6818514025f6787b0d94d819e54fe3b40365275fc753de485b3f"
+    },
+    {
+      "name": "num-bigint",
+      "version": "0.4.8",
+      "checksum": "c89e69e7e0f03bea5ef08013795c25018e101932225a656383bd384495ecc367"
+    },
+    {
+      "name": "num-integer",
+      "version": "0.1.47",
+      "checksum": "7ce2d95d4b3734dc35aa2f45e1aa22cd416814592a4f9d9205e11affd5b8e10b"
+    },
+    {
+      "name": "num-rational",
+      "version": "0.4.2",
+      "checksum": "f83d14da390562dca69fc84082e73e548e1ad308d24accdedd2720017cb37824"
+    },
+    {
+      "name": "num-traits",
+      "version": "0.2.19",
+      "checksum": "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
+    },
+    {
+      "name": "serde",
+      "version": "1.0.229",
+      "checksum": "4148590afebada386688f18773da617792bf2ef03ffc1e4cbd2b1d45b023e0ba"
+    },
+    {
+      "name": "serde_json",
+      "version": "1.0.154",
+      "checksum": "e7e9cc8b1b85264074fbcc02a88680c4096b1e47df8f739dceb03bf482f04bd6"
+    },
+    {
+      "name": "wasm-bindgen",
+      "version": "0.2.130",
+      "checksum": "a0181c14ddd6c7b8b0b0132a5f1ea2f32be0d893cd3ea97b6e3b28886b8a3d1c"
+    }
+  ]
+}

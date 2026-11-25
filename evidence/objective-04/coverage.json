@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "tool": "cargo-llvm-cov 0.9.2, Windows x64 release",
+  "workload": {
+    "universal_rust_unit_tests": 86,
+    "finance_independent_cli_cases": 577
+  },
+  "coverage_scope": "Instrumented test and public CLI request paths. Lines weighted by instrumented source count.",
+  "finance": {
+    "lines": 3402,
+    "covered": 3255,
+    "percent": 95.68,
+    "files": [
+      {
+        "file": "crates/dars-universal/src/finance/business.rs",
+        "lines": 518,
+        "covered": 508,
+        "percent": 98.07
+      },
+      {
+        "file": "crates/dars-universal/src/finance/financial.rs",
+        "lines": 697,
+        "covered": 651,
+        "percent": 93.4
+      },
+      {
+        "file": "crates/dars-universal/src/finance/financial/cash_flow.rs",
+        "lines": 83,
+        "covered": 71,
+        "percent": 85.54
+      },
+      {
+        "file": "crates/dars-universal/src/finance/financial/numeric.rs",
+        "lines": 161,
+        "covered": 151,
+        "percent": 93.79
+      },
+      {
+        "file": "crates/dars-universal/src/finance/financial/roots.rs",
+        "lines": 216,
+        "covered": 207,
+        "percent": 95.83
+      },
+      {
+        "file": "crates/dars-universal/src/finance/investment.rs",
+        "lines": 541,
+        "covered": 517,
+        "percent": 95.56
+      },
+      {
+        "file": "crates/dars-universal/src/finance/loans.rs",
+        "lines": 505,
+        "covered": 488,
+        "percent": 96.63
+      },
+      {
+        "file": "crates/dars-universal/src/finance/mod.rs",
+        "lines": 295,
+        "covered": 290,
+        "percent": 98.31
+      },
+      {
+        "file": "crates/dars-universal/src/finance/tax.rs",
+        "lines": 372,
+        "covered": 365,
+        "percent": 98.12
+      },
+      {
+        "file": "crates/dars-universal/src/finance/tax/rules.rs",
+        "lines": 14,
+        "covered": 7,
+        "percent": 50.0
+      }
+    ]
+  },
+  "historical_source": {
+    "standard": {
+      "lines": 733,
+      "covered": 726,
+      "percent": 99.05
+    },
+    "universal_without_finance": {
+      "lines": 10504,
+      "covered": 10198,
+      "percent": 97.09
+    },
+    "workload": {
+      "standard_tests": 21,
+      "universal_tests": 86,
+      "standard_cli_cases": 157,
+      "advanced_cli_cases": 2355
+    },
+    "scope": "Existing Rust Standard and Universal source paths, excluding the new finance subtree from Universal."
+  }
+}

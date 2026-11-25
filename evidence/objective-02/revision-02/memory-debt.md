@@ -39,3 +39,7 @@ Before the run, define a noise tolerance per counter as the greater of 5 MiB and
 | Confirmed leak | A matched reproduction and allocation or resource traces identify persistent growth from objects or resources that should be released. Verify the lifecycle step or fix that stops the growth under the same workload. Record unresolved attribution when the instrumentation cannot identify the retained resource. |
 
 Record the classified pattern, measurement sensitivity, incremental target result and any remaining deviation before stable release. The 0.2.2 review reused the 0.2.1 measurement ledger for this debt record. The extended run is planned for the pre-release audit.
+
+## Objective 04 follow-up
+
+Two paired Windows measurements compared the audited 0.3.1 Standard workspace with 0.4.0 on WebView2 158.0.4370.33. At visible Standard idle, the tree private resident medians were 102,719,488 → 103,960,576 bytes in the first pair and 106,807,296 → 104,046,592 bytes in the second. The tree private commit medians were 247,025,664 → 248,455,168 bytes and 251,256,832 → 248,639,488 bytes. Both 0.4.0 runs closed all five temporary finance workers and left zero processes after closing the application. File caches stayed in their existing state. The observations leave the incremental physical RAM target and the extended retention experiment open. [First pair](../../objective-04/desktop.json) · [Second pair](../../objective-04/desktop-repeat.json)

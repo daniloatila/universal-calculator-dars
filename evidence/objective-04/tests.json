@@ -1,0 +1,536 @@
+{
+  "schema": 1,
+  "version": "0.4.0",
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "counts_are_separate": true,
+  "historical_0_2_2_baseline": 602,
+  "baseline_suites": [
+    {
+      "id": "rust_core",
+      "mapped": 16
+    },
+    {
+      "id": "cli_independent_oracle",
+      "mapped": 157
+    },
+    {
+      "id": "wasm_structured_independent_oracle",
+      "mapped": 291
+    },
+    {
+      "id": "cli_wasm_parity",
+      "mapped": 20
+    },
+    {
+      "id": "typescript_node",
+      "mapped": 57
+    },
+    {
+      "id": "physical_windows_chrome",
+      "mapped": 27
+    },
+    {
+      "id": "browser_explicit_offline",
+      "mapped": 10
+    },
+    {
+      "id": "native_windows_webview2_ui",
+      "mapped": 17
+    },
+    {
+      "id": "native_windows_provider_credentials",
+      "mapped": 2
+    },
+    {
+      "id": "native_windows_sensor_rust",
+      "mapped": 5
+    }
+  ],
+  "rust": {
+    "standard": 21,
+    "universal": 86,
+    "windows_capabilities_and_credentials": {
+      "capabilities": 5,
+      "credentials": 2,
+      "evidence": "ci.json"
+    }
+  },
+  "node": {
+    "pass": 69,
+    "failed": 0
+  },
+  "browser": {
+    "chrome": 160,
+    "legacy": 146,
+    "finance": 14,
+    "directed_pairs": 42,
+    "legacy_proof_comparisons": 420,
+    "finance_proof_comparisons": 210,
+    "offline": [
+      {
+        "suite": "production-web-offline-and-lazy-locales",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "suite": "production-finance-offline",
+        "modules": [
+          "financial",
+          "investment",
+          "loans",
+          "tax",
+          "business"
+        ],
+        "passed": 5,
+        "failed": 0
+      }
+    ],
+    "adaptive_module_profile_checks": 25
+  },
+  "independent_math": {
+    "advanced": 2355,
+    "by_suite": {
+      "scientific": {
+        "suite": "scientific-sympy-mpmath",
+        "passed": 102,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "mpmath": "1.3.0",
+        "oracle_digits": 125
+      },
+      "scientific-complex": {
+        "suite": "scientific-complex-mpmath",
+        "passed": 75,
+        "failed": 0,
+        "cases": {
+          "principal_values": 41,
+          "composed": 18,
+          "real_policy": 7,
+          "bounded_rejections": 9
+        },
+        "mpmath": "1.3.0",
+        "oracle_decimal_digits": 105,
+        "requested_significant_digits": 32,
+        "component_relative_tolerance": "2e-29 with 1e-400 scale floor"
+      },
+      "algebra": {
+        "suite": "algebra-sympy",
+        "passed": 184,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "cases": {
+          "expand": 17,
+          "factor": 18,
+          "inequality": 21,
+          "normalized replay": 7,
+          "polynomial": 5,
+          "rejected": 37,
+          "simplify": 15,
+          "solve": 31,
+          "substitute": 9,
+          "system": 13,
+          "verify": 11
+        }
+      },
+      "calculus": {
+        "suite": "calculus-sympy-mpmath",
+        "passed": 210,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "mpmath": "1.3.0",
+        "cases": {
+          "antiderivative": 15,
+          "derivative": 27,
+          "integral": 23,
+          "limit": 39,
+          "normalized replay": 6,
+          "numerical integral": 19,
+          "rejected": 60,
+          "series": 20,
+          "untrusted display text": 1
+        }
+      },
+      "linear-algebra": {
+        "suite": "linear-algebra-sympy-numpy-scipy",
+        "passed": 223,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "numpy": "2.5.1",
+        "scipy": "1.18.1",
+        "cases": {
+          "add": 10,
+          "cross": 8,
+          "determinant": 9,
+          "dot": 9,
+          "eigenvalues": 18,
+          "eigenvectors": 18,
+          "inverse": 6,
+          "lu": 12,
+          "multiply": 11,
+          "normalized replay": 6,
+          "qr": 15,
+          "rank": 14,
+          "rejected": 50,
+          "solve": 14,
+          "subtract": 9,
+          "transpose": 13,
+          "untrusted display text": 1
+        }
+      },
+      "geometry": {
+        "suite": "geometry-sympy",
+        "passed": 159,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "cases": {
+          "angle": 22,
+          "circle": 5,
+          "cone": 4,
+          "cylinder": 4,
+          "distance": 11,
+          "normalized replay": 6,
+          "polygon": 13,
+          "prism": 5,
+          "rectangle": 13,
+          "rejected": 46,
+          "segments": 16,
+          "sphere": 4,
+          "triangle": 9,
+          "untrusted display text": 1
+        }
+      },
+      "discrete-mathematics": {
+        "suite": "discrete-mathematics-python-sympy",
+        "passed": 289,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "cases": {
+          "arrangements": 20,
+          "combinations": 20,
+          "factor": 14,
+          "gcd": 9,
+          "lcm": 9,
+          "logic": 15,
+          "modular": 23,
+          "normalized replay": 10,
+          "permutations": 14,
+          "prime": 22,
+          "rejected": 59,
+          "sequence": 24,
+          "set_difference": 6,
+          "set_intersection": 7,
+          "set_subset": 7,
+          "set_symmetric_difference": 6,
+          "set_union": 9,
+          "truth_table": 14,
+          "untrusted display text": 1
+        }
+      },
+      "programmer": {
+        "suite": "programmer-python-integers",
+        "passed": 368,
+        "failed": 0,
+        "python": "3.14.7",
+        "cases": {
+          "and": 10,
+          "convert": 91,
+          "normalized replay": 6,
+          "not": 22,
+          "or": 10,
+          "rejected": 51,
+          "rotate_left": 22,
+          "rotate_right": 22,
+          "shift_left": 30,
+          "shift_right_arithmetic": 31,
+          "shift_right_logical": 30,
+          "twos_complement": 25,
+          "untrusted display text": 1,
+          "xor": 17
+        }
+      },
+      "converter": {
+        "suite": "converter-fraction-decimal-sympy",
+        "passed": 342,
+        "failed": 0,
+        "sympy": "1.14.0",
+        "cases": {
+          "absolute_temperature": 20,
+          "acceleration": 8,
+          "angle": 13,
+          "approximate pressure": 11,
+          "area": 17,
+          "currency expired": 1,
+          "currency not_yet_valid": 2,
+          "currency unverified_validity": 1,
+          "currency within_validity": 12,
+          "digital_storage": 22,
+          "energy": 12,
+          "force": 8,
+          "fuel": 16,
+          "length": 18,
+          "mass": 9,
+          "normalized replay": 8,
+          "power": 7,
+          "pressure": 13,
+          "rejected": 68,
+          "speed": 9,
+          "temperature_difference": 9,
+          "time": 11,
+          "transfer_rate": 25,
+          "untrusted display text": 1,
+          "volume": 21
+        }
+      },
+      "date-time": {
+        "suite": "date-time-datetime-calendar-zoneinfo",
+        "passed": 403,
+        "failed": 0,
+        "tzdata": "2026.6",
+        "iana_tzdb": "2026f",
+        "cases": {
+          "age": 18,
+          "business_days": 32,
+          "calendar": 30,
+          "deadline": 29,
+          "difference": 27,
+          "duration": 29,
+          "identical full record replays": 8,
+          "period": 21,
+          "structured rejections": 143,
+          "timezone": 44,
+          "untrusted display text": 1,
+          "zone gaps and overlaps rejected": 21
+        }
+      }
+    },
+    "standard": {
+      "suite": "python-fraction-decimal-oracle",
+      "passed": 157,
+      "failed": 0
+    },
+    "structured_wasm": {
+      "suite": "fraction-decimal-structured-wasm",
+      "passed": 291,
+      "failed": 0,
+      "referencePrecision": 180
+    }
+  },
+  "cli_wasm": {
+    "standard": {
+      "suite": "native-wasm-result-parity",
+      "passed": 20,
+      "failed": 0
+    },
+    "standard_proof": {
+      "suite": "standard-record-cli-wasm",
+      "passed": 9,
+      "replays": 5,
+      "failed": 0
+    },
+    "advanced_comparisons": 305,
+    "advanced_isolation": 37,
+    "by_suite": {
+      "scientific": {
+        "suite": "scientific-cli-wasm",
+        "passed": 19,
+        "isolationChecks": 1,
+        "failed": 0,
+        "measurement": {
+          "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+          "wasmBytes": 680569,
+          "wasmSha256": "08c0b02b4b01a679dcf19c2282b0c0304cc09567cf9b53526f2a6d4bdbcc148e",
+          "observedWasmLinearBytes": 1179648,
+          "wasmInitializationMs": 13.002399999999994,
+          "interactions": 120,
+          "warmupPerExpression": 10,
+          "milliseconds": {
+            "p50": 0.10779999999999745,
+            "p95": 0.9376999999999498,
+            "p99": 1.328800000000001
+          }
+        }
+      },
+      "algebra": {
+        "suite": "algebra-cli-wasm",
+        "passed": 28,
+        "isolationChecks": 1,
+        "failed": 0,
+        "measurement": {
+          "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+          "wasmBytes": 624319,
+          "wasmSha256": "ce5c603186522a2657043b2033098db13c231c9f364d65fee9cd293ad76104f9",
+          "observedWasmLinearBytes": 1179648,
+          "wasmInitializationMs": 15.612900000000003,
+          "interactions": 120,
+          "warmupPerExpression": 10,
+          "milliseconds": {
+            "p50": 0.053799999999966985,
+            "p95": 0.0928000000000111,
+            "p99": 0.12430000000000518
+          }
+        }
+      },
+      "calculus": {
+        "suite": "calculus-cli-wasm",
+        "passed": 27,
+        "isolationChecks": 2,
+        "failed": 0,
+        "measurement": {
+          "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+          "wasmBytes": 612571,
+          "wasmSha256": "9c67e44d1e0054c6ae6e157bfeb8c3d9067f195663b5faa0f52373303cd8e18e",
+          "observedWasmLinearBytes": 1179648,
+          "wasmInitializationMs": 14.542200000000001,
+          "interactions": 120,
+          "warmupPerExpression": 10,
+          "milliseconds": {
+            "p50": 0.04570000000001073,
+            "p95": 0.1581000000000472,
+            "p99": 0.23020000000002483
+          }
+        }
+      },
+      "linear-algebra": {
+        "suite": "linear_algebra-cli-wasm",
+        "passed": 30,
+        "isolationChecks": 3,
+        "failed": 0,
+        "measurement": {
+          "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+          "wasmBytes": 526737,
+          "wasmSha256": "55b9d47ccb2ff7cb7de6aa24cda78f10b603eccf810d48ad017fbbdbc2531f46",
+          "observedWasmLinearBytes": 1179648,
+          "wasmInitializationMs": 12.651699999999998,
+          "interactions": 120,
+          "warmupPerExpression": 10,
+          "milliseconds": {
+            "p50": 0.03879999999998063,
+            "p95": 0.05489999999997508,
+            "p99": 0.07239999999995916
+          }
+        }
+      },
+      "geometry": {
+        "suite": "geometry-cli-wasm",
+        "passed": 32,
+        "isolationChecks": 4,
+        "failed": 0,
+        "measurement": {
+          "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+          "wasmBytes": 476533,
+          "wasmSha256": "5fdb4cda170ef7300dd543bfa2c33ddce74ec58b62a47af19d734818a722c409",
+          "observedWasmLinearBytes": 1179648,
+          "wasmInitializationMs": 14.0582,
+          "interactions": 120,
+          "warmupPerExpression": 10,
+          "milliseconds": {
+            "p50": 0.03289999999998372,
+            "p95": 0.11910000000000309,
+            "p99": 0.12860000000000582
+          }
+        }
+      },
+      "discrete-mathematics": {
+        "suite": "discrete-mathematics-cli-wasm",
+        "passed": 38,
+        "isolationChecks": 5,
+        "failed": 0,
+        "measurement": {
+          "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+          "wasmBytes": 449466,
+          "wasmSha256": "911077344346bd43620c94152f07960972ec1c178af436896b1af4932c794dfe",
+          "observedWasmLinearBytes": 1179648,
+          "wasmInitializationMs": 14.917300000000001,
+          "interactions": 120,
+          "warmupPerExpression": 10,
+          "milliseconds": {
+            "p50": 0.015000000000043201,
+            "p95": 0.03809999999998581,
+            "p99": 0.073599999999999
+          }
+        }
+      },
+      "programmer": {
+        "suite": "programmer-cli-wasm",
+        "passed": 36,
+        "isolationChecks": 6,
+        "failed": 0,
+        "measurement": {
+          "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+          "wasmBytes": 281582,
+          "wasmSha256": "12be9aa1b685b2a87576869c632fb0e6b3526f0747308b608f6b64b33610e52b",
+          "observedWasmLinearBytes": 1179648,
+          "wasmInitializationMs": 12.823500000000003,
+          "interactions": 120,
+          "warmupPerExpression": 10,
+          "milliseconds": {
+            "p50": 0.017499999999984084,
+            "p95": 0.06279999999998154,
+            "p99": 0.07409999999998718
+          }
+        }
+      },
+      "converter": {
+        "suite": "converter-cli-wasm",
+        "passed": 46,
+        "isolationChecks": 7,
+        "failed": 0,
+        "measurement": {
+          "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+          "wasmBytes": 350319,
+          "wasmSha256": "72ffc4f6240db6019123e4df70b7ed0baf11ff31e10c62e7eda85c88ff44c209",
+          "observedWasmLinearBytes": 1179648,
+          "wasmInitializationMs": 15.7335,
+          "interactions": 120,
+          "warmupPerExpression": 10,
+          "milliseconds": {
+            "p50": 0.02369999999996253,
+            "p95": 0.035900000000026466,
+            "p99": 0.06929999999999836
+          }
+        }
+      },
+      "date-time": {
+        "suite": "date-time-cli-wasm",
+        "passed": 49,
+        "isolationChecks": 8,
+        "failed": 0,
+        "measurement": {
+          "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+          "wasmBytes": 557861,
+          "wasmSha256": "a4fc2204758602eefbdb8dc570fe557a98b21d63d60c455ff368fab7320941b8",
+          "observedWasmLinearBytes": 1441792,
+          "wasmInitializationMs": 13.675599999999996,
+          "interactions": 120,
+          "warmupPerExpression": 10,
+          "milliseconds": {
+            "p50": 0.015399999999999636,
+            "p95": 0.03309999999999036,
+            "p99": 0.04619999999999891
+          }
+        }
+      }
+    },
+    "finance_comparisons": 49,
+    "finance_isolation": 20
+  },
+  "independent_finance": {
+    "financial_and_loans": 128,
+    "investment_and_business": 87,
+    "tax": 362
+  },
+  "physical_windows": {
+    "legacy_ui": 17,
+    "finance_examples": 5,
+    "workers": {
+      "opened": 5,
+      "closed": 5,
+      "peak": 1
+    }
+  },
+  "coverage": "coverage.json",
+  "historical_0_2_2_regression": {
+    "mapped": 602,
+    "status": "passed"
+  }
+}

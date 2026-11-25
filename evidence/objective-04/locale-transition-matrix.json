@@ -1,0 +1,1070 @@
+{
+  "schema": 1,
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "browser": "Chrome 158.0.8127.38",
+  "workspaces": [
+    "financial",
+    "investment",
+    "loans",
+    "tax",
+    "business"
+  ],
+  "directed_pairs": 42,
+  "identical_financial_proofs": 210,
+  "finance": [
+    {
+      "module": "financial",
+      "from": "en",
+      "to": "pt-BR"
+    },
+    {
+      "module": "financial",
+      "from": "en",
+      "to": "zh-CN"
+    },
+    {
+      "module": "financial",
+      "from": "en",
+      "to": "hi"
+    },
+    {
+      "module": "financial",
+      "from": "en",
+      "to": "es"
+    },
+    {
+      "module": "financial",
+      "from": "en",
+      "to": "ar"
+    },
+    {
+      "module": "financial",
+      "from": "en",
+      "to": "fr"
+    },
+    {
+      "module": "investment",
+      "from": "en",
+      "to": "pt-BR"
+    },
+    {
+      "module": "investment",
+      "from": "en",
+      "to": "zh-CN"
+    },
+    {
+      "module": "investment",
+      "from": "en",
+      "to": "hi"
+    },
+    {
+      "module": "investment",
+      "from": "en",
+      "to": "es"
+    },
+    {
+      "module": "investment",
+      "from": "en",
+      "to": "ar"
+    },
+    {
+      "module": "investment",
+      "from": "en",
+      "to": "fr"
+    },
+    {
+      "module": "loans",
+      "from": "en",
+      "to": "pt-BR"
+    },
+    {
+      "module": "loans",
+      "from": "en",
+      "to": "zh-CN"
+    },
+    {
+      "module": "loans",
+      "from": "en",
+      "to": "hi"
+    },
+    {
+      "module": "loans",
+      "from": "en",
+      "to": "es"
+    },
+    {
+      "module": "loans",
+      "from": "en",
+      "to": "ar"
+    },
+    {
+      "module": "loans",
+      "from": "en",
+      "to": "fr"
+    },
+    {
+      "module": "tax",
+      "from": "en",
+      "to": "pt-BR"
+    },
+    {
+      "module": "tax",
+      "from": "en",
+      "to": "zh-CN"
+    },
+    {
+      "module": "tax",
+      "from": "en",
+      "to": "hi"
+    },
+    {
+      "module": "tax",
+      "from": "en",
+      "to": "es"
+    },
+    {
+      "module": "tax",
+      "from": "en",
+      "to": "ar"
+    },
+    {
+      "module": "tax",
+      "from": "en",
+      "to": "fr"
+    },
+    {
+      "module": "business",
+      "from": "en",
+      "to": "pt-BR"
+    },
+    {
+      "module": "business",
+      "from": "en",
+      "to": "zh-CN"
+    },
+    {
+      "module": "business",
+      "from": "en",
+      "to": "hi"
+    },
+    {
+      "module": "business",
+      "from": "en",
+      "to": "es"
+    },
+    {
+      "module": "business",
+      "from": "en",
+      "to": "ar"
+    },
+    {
+      "module": "business",
+      "from": "en",
+      "to": "fr"
+    },
+    {
+      "module": "financial",
+      "from": "pt-BR",
+      "to": "en"
+    },
+    {
+      "module": "financial",
+      "from": "pt-BR",
+      "to": "zh-CN"
+    },
+    {
+      "module": "financial",
+      "from": "pt-BR",
+      "to": "hi"
+    },
+    {
+      "module": "financial",
+      "from": "pt-BR",
+      "to": "es"
+    },
+    {
+      "module": "financial",
+      "from": "pt-BR",
+      "to": "ar"
+    },
+    {
+      "module": "financial",
+      "from": "pt-BR",
+      "to": "fr"
+    },
+    {
+      "module": "investment",
+      "from": "pt-BR",
+      "to": "en"
+    },
+    {
+      "module": "investment",
+      "from": "pt-BR",
+      "to": "zh-CN"
+    },
+    {
+      "module": "investment",
+      "from": "pt-BR",
+      "to": "hi"
+    },
+    {
+      "module": "investment",
+      "from": "pt-BR",
+      "to": "es"
+    },
+    {
+      "module": "investment",
+      "from": "pt-BR",
+      "to": "ar"
+    },
+    {
+      "module": "investment",
+      "from": "pt-BR",
+      "to": "fr"
+    },
+    {
+      "module": "loans",
+      "from": "pt-BR",
+      "to": "en"
+    },
+    {
+      "module": "loans",
+      "from": "pt-BR",
+      "to": "zh-CN"
+    },
+    {
+      "module": "loans",
+      "from": "pt-BR",
+      "to": "hi"
+    },
+    {
+      "module": "loans",
+      "from": "pt-BR",
+      "to": "es"
+    },
+    {
+      "module": "loans",
+      "from": "pt-BR",
+      "to": "ar"
+    },
+    {
+      "module": "loans",
+      "from": "pt-BR",
+      "to": "fr"
+    },
+    {
+      "module": "tax",
+      "from": "pt-BR",
+      "to": "en"
+    },
+    {
+      "module": "tax",
+      "from": "pt-BR",
+      "to": "zh-CN"
+    },
+    {
+      "module": "tax",
+      "from": "pt-BR",
+      "to": "hi"
+    },
+    {
+      "module": "tax",
+      "from": "pt-BR",
+      "to": "es"
+    },
+    {
+      "module": "tax",
+      "from": "pt-BR",
+      "to": "ar"
+    },
+    {
+      "module": "tax",
+      "from": "pt-BR",
+      "to": "fr"
+    },
+    {
+      "module": "business",
+      "from": "pt-BR",
+      "to": "en"
+    },
+    {
+      "module": "business",
+      "from": "pt-BR",
+      "to": "zh-CN"
+    },
+    {
+      "module": "business",
+      "from": "pt-BR",
+      "to": "hi"
+    },
+    {
+      "module": "business",
+      "from": "pt-BR",
+      "to": "es"
+    },
+    {
+      "module": "business",
+      "from": "pt-BR",
+      "to": "ar"
+    },
+    {
+      "module": "business",
+      "from": "pt-BR",
+      "to": "fr"
+    },
+    {
+      "module": "financial",
+      "from": "zh-CN",
+      "to": "en"
+    },
+    {
+      "module": "financial",
+      "from": "zh-CN",
+      "to": "pt-BR"
+    },
+    {
+      "module": "financial",
+      "from": "zh-CN",
+      "to": "hi"
+    },
+    {
+      "module": "financial",
+      "from": "zh-CN",
+      "to": "es"
+    },
+    {
+      "module": "financial",
+      "from": "zh-CN",
+      "to": "ar"
+    },
+    {
+      "module": "financial",
+      "from": "zh-CN",
+      "to": "fr"
+    },
+    {
+      "module": "investment",
+      "from": "zh-CN",
+      "to": "en"
+    },
+    {
+      "module": "investment",
+      "from": "zh-CN",
+      "to": "pt-BR"
+    },
+    {
+      "module": "investment",
+      "from": "zh-CN",
+      "to": "hi"
+    },
+    {
+      "module": "investment",
+      "from": "zh-CN",
+      "to": "es"
+    },
+    {
+      "module": "investment",
+      "from": "zh-CN",
+      "to": "ar"
+    },
+    {
+      "module": "investment",
+      "from": "zh-CN",
+      "to": "fr"
+    },
+    {
+      "module": "loans",
+      "from": "zh-CN",
+      "to": "en"
+    },
+    {
+      "module": "loans",
+      "from": "zh-CN",
+      "to": "pt-BR"
+    },
+    {
+      "module": "loans",
+      "from": "zh-CN",
+      "to": "hi"
+    },
+    {
+      "module": "loans",
+      "from": "zh-CN",
+      "to": "es"
+    },
+    {
+      "module": "loans",
+      "from": "zh-CN",
+      "to": "ar"
+    },
+    {
+      "module": "loans",
+      "from": "zh-CN",
+      "to": "fr"
+    },
+    {
+      "module": "tax",
+      "from": "zh-CN",
+      "to": "en"
+    },
+    {
+      "module": "tax",
+      "from": "zh-CN",
+      "to": "pt-BR"
+    },
+    {
+      "module": "tax",
+      "from": "zh-CN",
+      "to": "hi"
+    },
+    {
+      "module": "tax",
+      "from": "zh-CN",
+      "to": "es"
+    },
+    {
+      "module": "tax",
+      "from": "zh-CN",
+      "to": "ar"
+    },
+    {
+      "module": "tax",
+      "from": "zh-CN",
+      "to": "fr"
+    },
+    {
+      "module": "business",
+      "from": "zh-CN",
+      "to": "en"
+    },
+    {
+      "module": "business",
+      "from": "zh-CN",
+      "to": "pt-BR"
+    },
+    {
+      "module": "business",
+      "from": "zh-CN",
+      "to": "hi"
+    },
+    {
+      "module": "business",
+      "from": "zh-CN",
+      "to": "es"
+    },
+    {
+      "module": "business",
+      "from": "zh-CN",
+      "to": "ar"
+    },
+    {
+      "module": "business",
+      "from": "zh-CN",
+      "to": "fr"
+    },
+    {
+      "module": "financial",
+      "from": "hi",
+      "to": "en"
+    },
+    {
+      "module": "financial",
+      "from": "hi",
+      "to": "pt-BR"
+    },
+    {
+      "module": "financial",
+      "from": "hi",
+      "to": "zh-CN"
+    },
+    {
+      "module": "financial",
+      "from": "hi",
+      "to": "es"
+    },
+    {
+      "module": "financial",
+      "from": "hi",
+      "to": "ar"
+    },
+    {
+      "module": "financial",
+      "from": "hi",
+      "to": "fr"
+    },
+    {
+      "module": "investment",
+      "from": "hi",
+      "to": "en"
+    },
+    {
+      "module": "investment",
+      "from": "hi",
+      "to": "pt-BR"
+    },
+    {
+      "module": "investment",
+      "from": "hi",
+      "to": "zh-CN"
+    },
+    {
+      "module": "investment",
+      "from": "hi",
+      "to": "es"
+    },
+    {
+      "module": "investment",
+      "from": "hi",
+      "to": "ar"
+    },
+    {
+      "module": "investment",
+      "from": "hi",
+      "to": "fr"
+    },
+    {
+      "module": "loans",
+      "from": "hi",
+      "to": "en"
+    },
+    {
+      "module": "loans",
+      "from": "hi",
+      "to": "pt-BR"
+    },
+    {
+      "module": "loans",
+      "from": "hi",
+      "to": "zh-CN"
+    },
+    {
+      "module": "loans",
+      "from": "hi",
+      "to": "es"
+    },
+    {
+      "module": "loans",
+      "from": "hi",
+      "to": "ar"
+    },
+    {
+      "module": "loans",
+      "from": "hi",
+      "to": "fr"
+    },
+    {
+      "module": "tax",
+      "from": "hi",
+      "to": "en"
+    },
+    {
+      "module": "tax",
+      "from": "hi",
+      "to": "pt-BR"
+    },
+    {
+      "module": "tax",
+      "from": "hi",
+      "to": "zh-CN"
+    },
+    {
+      "module": "tax",
+      "from": "hi",
+      "to": "es"
+    },
+    {
+      "module": "tax",
+      "from": "hi",
+      "to": "ar"
+    },
+    {
+      "module": "tax",
+      "from": "hi",
+      "to": "fr"
+    },
+    {
+      "module": "business",
+      "from": "hi",
+      "to": "en"
+    },
+    {
+      "module": "business",
+      "from": "hi",
+      "to": "pt-BR"
+    },
+    {
+      "module": "business",
+      "from": "hi",
+      "to": "zh-CN"
+    },
+    {
+      "module": "business",
+      "from": "hi",
+      "to": "es"
+    },
+    {
+      "module": "business",
+      "from": "hi",
+      "to": "ar"
+    },
+    {
+      "module": "business",
+      "from": "hi",
+      "to": "fr"
+    },
+    {
+      "module": "financial",
+      "from": "es",
+      "to": "en"
+    },
+    {
+      "module": "financial",
+      "from": "es",
+      "to": "pt-BR"
+    },
+    {
+      "module": "financial",
+      "from": "es",
+      "to": "zh-CN"
+    },
+    {
+      "module": "financial",
+      "from": "es",
+      "to": "hi"
+    },
+    {
+      "module": "financial",
+      "from": "es",
+      "to": "ar"
+    },
+    {
+      "module": "financial",
+      "from": "es",
+      "to": "fr"
+    },
+    {
+      "module": "investment",
+      "from": "es",
+      "to": "en"
+    },
+    {
+      "module": "investment",
+      "from": "es",
+      "to": "pt-BR"
+    },
+    {
+      "module": "investment",
+      "from": "es",
+      "to": "zh-CN"
+    },
+    {
+      "module": "investment",
+      "from": "es",
+      "to": "hi"
+    },
+    {
+      "module": "investment",
+      "from": "es",
+      "to": "ar"
+    },
+    {
+      "module": "investment",
+      "from": "es",
+      "to": "fr"
+    },
+    {
+      "module": "loans",
+      "from": "es",
+      "to": "en"
+    },
+    {
+      "module": "loans",
+      "from": "es",
+      "to": "pt-BR"
+    },
+    {
+      "module": "loans",
+      "from": "es",
+      "to": "zh-CN"
+    },
+    {
+      "module": "loans",
+      "from": "es",
+      "to": "hi"
+    },
+    {
+      "module": "loans",
+      "from": "es",
+      "to": "ar"
+    },
+    {
+      "module": "loans",
+      "from": "es",
+      "to": "fr"
+    },
+    {
+      "module": "tax",
+      "from": "es",
+      "to": "en"
+    },
+    {
+      "module": "tax",
+      "from": "es",
+      "to": "pt-BR"
+    },
+    {
+      "module": "tax",
+      "from": "es",
+      "to": "zh-CN"
+    },
+    {
+      "module": "tax",
+      "from": "es",
+      "to": "hi"
+    },
+    {
+      "module": "tax",
+      "from": "es",
+      "to": "ar"
+    },
+    {
+      "module": "tax",
+      "from": "es",
+      "to": "fr"
+    },
+    {
+      "module": "business",
+      "from": "es",
+      "to": "en"
+    },
+    {
+      "module": "business",
+      "from": "es",
+      "to": "pt-BR"
+    },
+    {
+      "module": "business",
+      "from": "es",
+      "to": "zh-CN"
+    },
+    {
+      "module": "business",
+      "from": "es",
+      "to": "hi"
+    },
+    {
+      "module": "business",
+      "from": "es",
+      "to": "ar"
+    },
+    {
+      "module": "business",
+      "from": "es",
+      "to": "fr"
+    },
+    {
+      "module": "financial",
+      "from": "ar",
+      "to": "en"
+    },
+    {
+      "module": "financial",
+      "from": "ar",
+      "to": "pt-BR"
+    },
+    {
+      "module": "financial",
+      "from": "ar",
+      "to": "zh-CN"
+    },
+    {
+      "module": "financial",
+      "from": "ar",
+      "to": "hi"
+    },
+    {
+      "module": "financial",
+      "from": "ar",
+      "to": "es"
+    },
+    {
+      "module": "financial",
+      "from": "ar",
+      "to": "fr"
+    },
+    {
+      "module": "investment",
+      "from": "ar",
+      "to": "en"
+    },
+    {
+      "module": "investment",
+      "from": "ar",
+      "to": "pt-BR"
+    },
+    {
+      "module": "investment",
+      "from": "ar",
+      "to": "zh-CN"
+    },
+    {
+      "module": "investment",
+      "from": "ar",
+      "to": "hi"
+    },
+    {
+      "module": "investment",
+      "from": "ar",
+      "to": "es"
+    },
+    {
+      "module": "investment",
+      "from": "ar",
+      "to": "fr"
+    },
+    {
+      "module": "loans",
+      "from": "ar",
+      "to": "en"
+    },
+    {
+      "module": "loans",
+      "from": "ar",
+      "to": "pt-BR"
+    },
+    {
+      "module": "loans",
+      "from": "ar",
+      "to": "zh-CN"
+    },
+    {
+      "module": "loans",
+      "from": "ar",
+      "to": "hi"
+    },
+    {
+      "module": "loans",
+      "from": "ar",
+      "to": "es"
+    },
+    {
+      "module": "loans",
+      "from": "ar",
+      "to": "fr"
+    },
+    {
+      "module": "tax",
+      "from": "ar",
+      "to": "en"
+    },
+    {
+      "module": "tax",
+      "from": "ar",
+      "to": "pt-BR"
+    },
+    {
+      "module": "tax",
+      "from": "ar",
+      "to": "zh-CN"
+    },
+    {
+      "module": "tax",
+      "from": "ar",
+      "to": "hi"
+    },
+    {
+      "module": "tax",
+      "from": "ar",
+      "to": "es"
+    },
+    {
+      "module": "tax",
+      "from": "ar",
+      "to": "fr"
+    },
+    {
+      "module": "business",
+      "from": "ar",
+      "to": "en"
+    },
+    {
+      "module": "business",
+      "from": "ar",
+      "to": "pt-BR"
+    },
+    {
+      "module": "business",
+      "from": "ar",
+      "to": "zh-CN"
+    },
+    {
+      "module": "business",
+      "from": "ar",
+      "to": "hi"
+    },
+    {
+      "module": "business",
+      "from": "ar",
+      "to": "es"
+    },
+    {
+      "module": "business",
+      "from": "ar",
+      "to": "fr"
+    },
+    {
+      "module": "financial",
+      "from": "fr",
+      "to": "en"
+    },
+    {
+      "module": "financial",
+      "from": "fr",
+      "to": "pt-BR"
+    },
+    {
+      "module": "financial",
+      "from": "fr",
+      "to": "zh-CN"
+    },
+    {
+      "module": "financial",
+      "from": "fr",
+      "to": "hi"
+    },
+    {
+      "module": "financial",
+      "from": "fr",
+      "to": "es"
+    },
+    {
+      "module": "financial",
+      "from": "fr",
+      "to": "ar"
+    },
+    {
+      "module": "investment",
+      "from": "fr",
+      "to": "en"
+    },
+    {
+      "module": "investment",
+      "from": "fr",
+      "to": "pt-BR"
+    },
+    {
+      "module": "investment",
+      "from": "fr",
+      "to": "zh-CN"
+    },
+    {
+      "module": "investment",
+      "from": "fr",
+      "to": "hi"
+    },
+    {
+      "module": "investment",
+      "from": "fr",
+      "to": "es"
+    },
+    {
+      "module": "investment",
+      "from": "fr",
+      "to": "ar"
+    },
+    {
+      "module": "loans",
+      "from": "fr",
+      "to": "en"
+    },
+    {
+      "module": "loans",
+      "from": "fr",
+      "to": "pt-BR"
+    },
+    {
+      "module": "loans",
+      "from": "fr",
+      "to": "zh-CN"
+    },
+    {
+      "module": "loans",
+      "from": "fr",
+      "to": "hi"
+    },
+    {
+      "module": "loans",
+      "from": "fr",
+      "to": "es"
+    },
+    {
+      "module": "loans",
+      "from": "fr",
+      "to": "ar"
+    },
+    {
+      "module": "tax",
+      "from": "fr",
+      "to": "en"
+    },
+    {
+      "module": "tax",
+      "from": "fr",
+      "to": "pt-BR"
+    },
+    {
+      "module": "tax",
+      "from": "fr",
+      "to": "zh-CN"
+    },
+    {
+      "module": "tax",
+      "from": "fr",
+      "to": "hi"
+    },
+    {
+      "module": "tax",
+      "from": "fr",
+      "to": "es"
+    },
+    {
+      "module": "tax",
+      "from": "fr",
+      "to": "ar"
+    },
+    {
+      "module": "business",
+      "from": "fr",
+      "to": "en"
+    },
+    {
+      "module": "business",
+      "from": "fr",
+      "to": "pt-BR"
+    },
+    {
+      "module": "business",
+      "from": "fr",
+      "to": "zh-CN"
+    },
+    {
+      "module": "business",
+      "from": "fr",
+      "to": "hi"
+    },
+    {
+      "module": "business",
+      "from": "fr",
+      "to": "es"
+    },
+    {
+      "module": "business",
+      "from": "fr",
+      "to": "ar"
+    }
+  ],
+  "historical": {
+    "proof_comparisons": 420,
+    "sha256": "139361f956e4ddd91178217abe8f544bdedc1e955f8131f35d5a3da112ecd295"
+  }
+}

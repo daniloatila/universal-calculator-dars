@@ -1,0 +1,367 @@
+{
+  "schema": 1,
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "engine": {
+    "target": "Node-hosted Windows x64 WASM",
+    "node": "24.19.0",
+    "measurement": [
+      {
+        "module": "financial",
+        "workload": "8-period simple interest including a negative rate",
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 1026431,
+        "wasmSha256": "562ec5bab8ae5e09f0f00fd789e862b4917c8799879b0bbef0905fb3e5bea7cc",
+        "observedWasmLinearBytes": 1245184,
+        "wasmInitializationMs": 16.6183,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.02559999999999718,
+          "p95": 0.04019999999997026,
+          "p99": 0.048699999999996635
+        }
+      },
+      {
+        "module": "investment",
+        "workload": "120-period projection with contributions, withdrawals, fee, inflation and tax",
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 677478,
+        "wasmSha256": "8345785d9e4911051bd8acf6ff7a5f41d449ae65673251111462c7187a49eca7",
+        "observedWasmLinearBytes": 1245184,
+        "wasmInitializationMs": 1.015100000000018,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 92.6201000000001,
+          "p95": 102.67180000000008,
+          "p99": 108.2564999999995
+        }
+      },
+      {
+        "module": "loans",
+        "workload": "360-period Price schedule, rational contract with final rounding, first 40 rows",
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 851675,
+        "wasmSha256": "8da466cb21f05741f4799925c3253400e128abbc197c7ec808e12a5d864a08da",
+        "observedWasmLinearBytes": 3211264,
+        "wasmInitializationMs": 1.589300000001458,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 1460.799500000001,
+          "p95": 1909.1759999999922,
+          "p99": 2030.954899999997
+        }
+      },
+      {
+        "module": "tax",
+        "workload": "monthly income withholding with primary tax deductions",
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 669246,
+        "wasmSha256": "90b4a00813d2dd59bbe2a6d775a6c953e82f4eb27b63df231bb9d2461d084a3b",
+        "observedWasmLinearBytes": 1245184,
+        "wasmInitializationMs": 3.607800000027055,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.04330000001937151,
+          "p95": 0.09330000000772998,
+          "p99": 0.10319999998318963
+        }
+      },
+      {
+        "module": "business",
+        "workload": "single unit price and markup",
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 499960,
+        "wasmSha256": "738b01a689fa1ebf61e0aed049fff2de540cd3d8ae0c944a60310cfe987a80c5",
+        "observedWasmLinearBytes": 1179648,
+        "wasmInitializationMs": 0.9412000000011176,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.03130000000237487,
+          "p95": 0.03959999998915009,
+          "p99": 0.0478000000002794
+        }
+      }
+    ],
+    "limits": "Per-module sample on one device. Includes decoding and proof generation after WASM initialization."
+  },
+  "desktop_report": "desktop.json",
+  "incremental_physical_ram_under_100_mb": "unverified",
+  "desktop": {
+    "reference": "0.3.1",
+    "candidate": "0.4.0",
+    "runtime": "WebView2 158.0.4370.33",
+    "first_pair": {
+      "path": "desktop.json",
+      "control": {
+        "startupToCheckedStandardMs": {
+          "baseline": 573.7390999999998,
+          "candidate": 1729.9694000000018,
+          "candidateMinusBaseline": 1156.230300000002
+        },
+        "standardRecalculationP50Ms": {
+          "baseline": 29.653700000000754,
+          "candidate": 32.394200000002456,
+          "candidateMinusBaseline": 2.7405000000017026
+        },
+        "standardRecalculationP95Ms": {
+          "baseline": 60.49040000000059,
+          "candidate": 59.40350000000035,
+          "candidateMinusBaseline": -1.0869000000002416
+        },
+        "startupVisibleMemory": {
+          "tree": {
+            "privateWorkingSetBytes": {
+              "baseline": 105025536,
+              "candidate": 109486080,
+              "candidateMinusBaseline": 4460544
+            },
+            "privateBytes": {
+              "baseline": 203206656,
+              "candidate": 210231296,
+              "candidateMinusBaseline": 7024640
+            }
+          },
+          "host": {
+            "privateWorkingSetBytes": {
+              "baseline": 4308992,
+              "candidate": 4657152,
+              "candidateMinusBaseline": 348160
+            },
+            "privateBytes": {
+              "baseline": 5971968,
+              "candidate": 6729728,
+              "candidateMinusBaseline": 757760
+            }
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": {
+              "baseline": 100716544,
+              "candidate": 104828928,
+              "candidateMinusBaseline": 4112384
+            },
+            "privateBytes": {
+              "baseline": 197234688,
+              "candidate": 203501568,
+              "candidateMinusBaseline": 6266880
+            }
+          }
+        },
+        "standardVisibleMemory": {
+          "tree": {
+            "privateWorkingSetBytes": {
+              "baseline": 102719488,
+              "candidate": 103960576,
+              "candidateMinusBaseline": 1241088
+            },
+            "privateBytes": {
+              "baseline": 247025664,
+              "candidate": 248455168,
+              "candidateMinusBaseline": 1429504
+            }
+          },
+          "host": {
+            "privateWorkingSetBytes": {
+              "baseline": 4308992,
+              "candidate": 4657152,
+              "candidateMinusBaseline": 348160
+            },
+            "privateBytes": {
+              "baseline": 5971968,
+              "candidate": 6729728,
+              "candidateMinusBaseline": 757760
+            }
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": {
+              "baseline": 98410496,
+              "candidate": 99303424,
+              "candidateMinusBaseline": 892928
+            },
+            "privateBytes": {
+              "baseline": 241053696,
+              "candidate": 241725440,
+              "candidateMinusBaseline": 671744
+            }
+          }
+        },
+        "standardRecalculatedMemory": {
+          "tree": {
+            "privateWorkingSetBytes": {
+              "baseline": 118902784,
+              "candidate": 120217600,
+              "candidateMinusBaseline": 1314816
+            },
+            "privateBytes": {
+              "baseline": 271147008,
+              "candidate": 271114240,
+              "candidateMinusBaseline": -32768
+            }
+          },
+          "host": {
+            "privateWorkingSetBytes": {
+              "baseline": 3686400,
+              "candidate": 3653632,
+              "candidateMinusBaseline": -32768
+            },
+            "privateBytes": {
+              "baseline": 5545984,
+              "candidate": 5509120,
+              "candidateMinusBaseline": -36864
+            }
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": {
+              "baseline": 115216384,
+              "candidate": 116563968,
+              "candidateMinusBaseline": 1347584
+            },
+            "privateBytes": {
+              "baseline": 265601024,
+              "candidate": 265605120,
+              "candidateMinusBaseline": 4096
+            }
+          }
+        }
+      }
+    },
+    "later_pair": {
+      "path": "desktop-repeat.json",
+      "control": {
+        "startupToCheckedStandardMs": {
+          "baseline": 620.7380000000003,
+          "candidate": 577.4506000000001,
+          "candidateMinusBaseline": -43.28740000000016
+        },
+        "standardRecalculationP50Ms": {
+          "baseline": 31.01380000000063,
+          "candidate": 47.50720000000001,
+          "candidateMinusBaseline": 16.493399999999383
+        },
+        "standardRecalculationP95Ms": {
+          "baseline": 37.08400000000074,
+          "candidate": 66.61929999999847,
+          "candidateMinusBaseline": 29.535299999997733
+        },
+        "startupVisibleMemory": {
+          "tree": {
+            "privateWorkingSetBytes": {
+              "baseline": 96432128,
+              "candidate": 120631296,
+              "candidateMinusBaseline": 24199168
+            },
+            "privateBytes": {
+              "baseline": 191475712,
+              "candidate": 234688512,
+              "candidateMinusBaseline": 43212800
+            }
+          },
+          "host": {
+            "privateWorkingSetBytes": {
+              "baseline": 4255744,
+              "candidate": 4612096,
+              "candidateMinusBaseline": 356352
+            },
+            "privateBytes": {
+              "baseline": 5906432,
+              "candidate": 6721536,
+              "candidateMinusBaseline": 815104
+            }
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": {
+              "baseline": 92176384,
+              "candidate": 116019200,
+              "candidateMinusBaseline": 23842816
+            },
+            "privateBytes": {
+              "baseline": 185569280,
+              "candidate": 227966976,
+              "candidateMinusBaseline": 42397696
+            }
+          }
+        },
+        "standardVisibleMemory": {
+          "tree": {
+            "privateWorkingSetBytes": {
+              "baseline": 106807296,
+              "candidate": 104046592,
+              "candidateMinusBaseline": -2760704
+            },
+            "privateBytes": {
+              "baseline": 251256832,
+              "candidate": 248639488,
+              "candidateMinusBaseline": -2617344
+            }
+          },
+          "host": {
+            "privateWorkingSetBytes": {
+              "baseline": 4255744,
+              "candidate": 4612096,
+              "candidateMinusBaseline": 356352
+            },
+            "privateBytes": {
+              "baseline": 5906432,
+              "candidate": 6721536,
+              "candidateMinusBaseline": 815104
+            }
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": {
+              "baseline": 102551552,
+              "candidate": 99434496,
+              "candidateMinusBaseline": -3117056
+            },
+            "privateBytes": {
+              "baseline": 245350400,
+              "candidate": 241917952,
+              "candidateMinusBaseline": -3432448
+            }
+          }
+        },
+        "standardRecalculatedMemory": {
+          "tree": {
+            "privateWorkingSetBytes": {
+              "baseline": 122957824,
+              "candidate": 119947264,
+              "candidateMinusBaseline": -3010560
+            },
+            "privateBytes": {
+              "baseline": 270618624,
+              "candidate": 266117120,
+              "candidateMinusBaseline": -4501504
+            }
+          },
+          "host": {
+            "privateWorkingSetBytes": {
+              "baseline": 3633152,
+              "candidate": 3657728,
+              "candidateMinusBaseline": 24576
+            },
+            "privateBytes": {
+              "baseline": 5906432,
+              "candidate": 5935104,
+              "candidateMinusBaseline": 28672
+            }
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": {
+              "baseline": 119324672,
+              "candidate": 116289536,
+              "candidateMinusBaseline": -3035136
+            },
+            "privateBytes": {
+              "baseline": 264712192,
+              "candidate": 260182016,
+              "candidateMinusBaseline": -4530176
+            }
+          }
+        }
+      }
+    },
+    "limits": "Two ordered pairs with one startup sample per version and pair. Startup includes a native sampler call. Windows file caches were left as-is. The process counters do not establish incremental physical RAM."
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "host": "Windows x64",
+  "node": "24.19.0",
+  "cli_sha256": "bd662aaece6cecdc6f6a2ed60362a41b99f1a31bca2be6d0c0e532bf2bfd4683",
+  "cases": 49,
+  "isolation_checks": 20,
+  "suites": [
+    {
+      "suite": "financial-cli-wasm",
+      "passed": 15,
+      "isolationChecks": 4,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 1026431,
+        "wasmSha256": "562ec5bab8ae5e09f0f00fd789e862b4917c8799879b0bbef0905fb3e5bea7cc",
+        "observedWasmLinearBytes": 1245184,
+        "wasmInitializationMs": 16.6183,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.02559999999999718,
+          "p95": 0.04019999999997026,
+          "p99": 0.048699999999996635
+        }
+      }
+    },
+    {
+      "suite": "investment-cli-wasm",
+      "passed": 3,
+      "isolationChecks": 4,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 677478,
+        "wasmSha256": "8345785d9e4911051bd8acf6ff7a5f41d449ae65673251111462c7187a49eca7",
+        "observedWasmLinearBytes": 1245184,
+        "wasmInitializationMs": 1.015100000000018,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 92.6201000000001,
+          "p95": 102.67180000000008,
+          "p99": 108.2564999999995
+        }
+      }
+    },
+    {
+      "suite": "loans-cli-wasm",
+      "passed": 7,
+      "isolationChecks": 4,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 851675,
+        "wasmSha256": "8da466cb21f05741f4799925c3253400e128abbc197c7ec808e12a5d864a08da",
+        "observedWasmLinearBytes": 3211264,
+        "wasmInitializationMs": 1.589300000001458,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 1460.799500000001,
+          "p95": 1909.1759999999922,
+          "p99": 2030.954899999997
+        }
+      }
+    },
+    {
+      "suite": "tax-cli-wasm",
+      "passed": 17,
+      "isolationChecks": 4,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 669246,
+        "wasmSha256": "90b4a00813d2dd59bbe2a6d775a6c953e82f4eb27b63df231bb9d2461d084a3b",
+        "observedWasmLinearBytes": 1245184,
+        "wasmInitializationMs": 3.607800000027055,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.04330000001937151,
+          "p95": 0.09330000000772998,
+          "p99": 0.10319999998318963
+        }
+      }
+    },
+    {
+      "suite": "business-cli-wasm",
+      "passed": 7,
+      "isolationChecks": 4,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 499960,
+        "wasmSha256": "738b01a689fa1ebf61e0aed049fff2de540cd3d8ae0c944a60310cfe987a80c5",
+        "observedWasmLinearBytes": 1179648,
+        "wasmInitializationMs": 0.9412000000011176,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.03130000000237487,
+          "p95": 0.03959999998915009,
+          "p99": 0.0478000000002794
+        }
+      }
+    }
+  ]
+}

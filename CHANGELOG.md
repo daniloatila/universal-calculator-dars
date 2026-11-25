@@ -7,7 +7,7 @@
 - Added five financial and business workspaces with rational monetary arithmetic, currency scales and explicit rounding.
 - Added local investment projections, amortization schedules, dated Brazilian tax rules and business analysis.
 - Extended Calculation Proof to preserve financial assumptions and added local scenario comparison and replay.
-- Validate the candidate against the shared runtime and the 0.3.1 reference. [Objective 04 evidence](evidence/objective-04/REPORT.md)
+- Validated the candidate against the shared runtime and the 0.3.1 reference. [Objective 04 evidence](evidence/objective-04/REPORT.md)
 
 ## 0.3.1 · Objective 03 locale review
 

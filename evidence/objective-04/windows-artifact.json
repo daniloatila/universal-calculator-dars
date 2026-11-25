@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "version": "0.4.0",
+  "source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "run_id": 45676193182,
+  "run_attempt": "1",
+  "artifact_id": 15053560404,
+  "artifact_name": "dars-windows-review",
+  "artifact_zip_sha256": "8885971382882fa3b33c77c8276d4a3fc7668949efa171f58c47d236549aa258",
+  "artifact_zip_bytes": 5658153,
+  "artifact_expires_at": "2026-11-26T18:44:51Z",
+  "target": "windows-x64",
+  "executable": "dars-desktop.exe",
+  "sha256": "6768f9b82d033e839cee836c9b5fe0b988dd6f319ba2be453c7dc76f447c590b",
+  "bytes": 17565184,
+  "authenticode": "NotSigned",
+  "live_package_verification": {
+    "schema": 1,
+    "commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+    "run_id": "45676193182",
+    "executable_sha256": "6768f9b82d033e839cee836c9b5fe0b988dd6f319ba2be453c7dc76f447c590b",
+    "webview2": "158.0.4370.33",
+    "packaged_wasm": [
+      {
+        "name": "dars_tool_wasm_bg-8EsAWSnZ.wasm",
+        "sha256": "d9214d2fe692dec5da9bdd46da7f276b4bd3af90df7fec032543b121b4b676a7",
+        "bytes": 851291
+      },
+      {
+        "name": "dars_tool_wasm_bg-aecQ-PRU.wasm",
+        "sha256": "82c6d7ad000385a2565095c76415a3fcbc78db7b7b7131aec0e13db51c23af05",
+        "bytes": 624127
+      },
+      {
+        "name": "dars_tool_wasm_bg-B_GMKvIc.wasm",
+        "sha256": "8e25bbd1ba3b5f57ae4c062a5ef232c6bcdb04075be7926b682522048214f5b9",
+        "bytes": 1025983
+      },
+      {
+        "name": "dars_tool_wasm_bg-B-zAhj3u.wasm",
+        "sha256": "8e5c316c761ba0257c005c40d92ff9c3b03549caee531269aec0858a31f029ed",
+        "bytes": 526481
+      },
+      {
+        "name": "dars_tool_wasm_bg-B6eDNO7W.wasm",
+        "sha256": "1a5034414ba889cf24c104bfd19ce36aba06d306881f1ae411407cf4883818bb",
+        "bytes": 612379
+      },
+      {
+        "name": "dars_tool_wasm_bg-B7EA--AT.wasm",
+        "sha256": "f2ffdabbf07c7629558d78b9ed90362b0dfe0dea05076fa13ca985b787d58275",
+        "bytes": 449338
+      },
+      {
+        "name": "dars_tool_wasm_bg-C6P6BGcD.wasm",
+        "sha256": "1ea26c8616f5e7caebedba0bdd92c8c1d817ec7708d11806d4a9ff3cfb2b8b8c",
+        "bytes": 557669
+      },
+      {
+        "name": "dars_tool_wasm_bg-Cc1V8zWq.wasm",
+        "sha256": "f34286d06c859c5a44db7e348393150f5e498b8b812a58c1035846e97b7f2cd5",
+        "bytes": 476341
+      },
+      {
+        "name": "dars_tool_wasm_bg-Ck4O5vZ3.wasm",
+        "sha256": "4f095b620b85c84eebad606d48442185b8eb8b1cb453d131e830735529180613",
+        "bytes": 668990
+      },
+      {
+        "name": "dars_tool_wasm_bg-CQxrTddF.wasm",
+        "sha256": "961a5daa3da109d159b230de01e1c592925adc38413ea0bee197af23c174d0ae",
+        "bytes": 281454
+      },
+      {
+        "name": "dars_tool_wasm_bg-CUETku50.wasm",
+        "sha256": "bcd55a1a87deeb20e344cea93862338d6cec373faaa6a0cc3078ac6a23afc57c",
+        "bytes": 350191
+      },
+      {
+        "name": "dars_tool_wasm_bg-DQtIutQz.wasm",
+        "sha256": "394747b810d1230a9455e23fdb2c5ba8f05d222d342c93235d4dd284f226236e",
+        "bytes": 677158
+      },
+      {
+        "name": "dars_tool_wasm_bg-h9NCvX7j.wasm",
+        "sha256": "997583af6ff87953c7c1f3abea3e0ff8e054d0693b7bb011051fa76dbf6fe0e6",
+        "bytes": 499832
+      },
+      {
+        "name": "dars_tool_wasm_bg-ixgh56O0.wasm",
+        "sha256": "6928e4c36be547652aa1bd7e264e51ab7d90050db7eae56d40220a2e9df7d3bc",
+        "bytes": 680249
+      },
+      {
+        "name": "dars_wasm_bg-DfMj2rJ7.wasm",
+        "sha256": "e5000aa839136f150bfe99756c2afd72e73210e37256bdabde0fcf7bff1f9a23",
+        "bytes": 332843
+      }
+    ],
+    "verified_count": 15,
+    "method": "SHA-256 of decompressed WebAssembly bytes served by the verified Windows executable on its local Tauri origin.",
+    "test_processes_after_close": 0
+  }
+}
