@@ -606,6 +606,81 @@
       "integerInput": "Inteiro exato da entrada"
     }
   },
+  "programmer": {
+    "title": "Programador",
+    "description": "Converta entre bases numéricas e inspecione operações de bits com largura fixa.",
+    "keyboardHint": "Use Ctrl+Enter ou ⌘+Enter para calcular e Escape para cancelar.",
+    "operation": "Operação de programação",
+    "inputBase": "Base de entrada",
+    "bitWidth": "Largura em bits",
+    "presets": "Larguras predefinidas",
+    "bits": "{count} bits",
+    "signed": "Interpretação com sinal",
+    "useExample": "Usar exemplo",
+    "invalid": "Informe dígitos da base selecionada e uma contagem em decimal.",
+    "domainError": "O valor deve caber na palavra escolhida. A contagem de deslocamento ou rotação deve ser não negativa.",
+    "invalidWidth": "Informe uma largura entre 1 e 1024 bits.",
+    "wordPolicy": "Use de 1 a 1024 bits. Valores binários, octais e hexadecimais sem sinal representam padrões de bits. A opção com sinal interpreta o bit inicial como sinal.",
+    "bitPreview": "Visualização de bits",
+    "signBit": "Bit de sinal",
+    "bitGroup": "Bits {range} · {bits}",
+    "previewRange": "Bits {range}",
+    "previous": "Bits anteriores",
+    "next": "Próximos bits",
+    "operations": {
+      "convert": "Converter",
+      "and": "AND",
+      "or": "OR",
+      "xor": "XOR",
+      "not": "NOT",
+      "shift_left": "Deslocar à esquerda",
+      "shift_right_logical": "Deslocamento lógico à direita",
+      "shift_right_arithmetic": "Deslocamento aritmético à direita",
+      "rotate_left": "Girar à esquerda",
+      "rotate_right": "Girar à direita",
+      "twos_complement": "Complemento de dois"
+    },
+    "fields": {
+      "value": "Valor",
+      "secondValue": "Segundo valor",
+      "count": "Contagem de deslocamento"
+    },
+    "representations": {
+      "binary": "Binário",
+      "octal": "Octal",
+      "decimal": "Decimal",
+      "hexadecimal": "Hexadecimal"
+    },
+    "hints": {
+      "convert": "Informe um valor na base de entrada escolhida.",
+      "and": "Mantenha as posições em que ambos os bits são 1.",
+      "or": "Marque as posições em que pelo menos um bit é 1.",
+      "xor": "Marque as posições em que os bits são diferentes.",
+      "not": "Inverta cada bit da largura selecionada.",
+      "shift_left": "Desloque à esquerda e preencha pela direita com zeros. Os bits excedentes são descartados.",
+      "shift_right_logical": "Desloque à direita e preencha pela esquerda com zeros.",
+      "shift_right_arithmetic": "Desloque à direita e repita pela esquerda o bit inicial em qualquer interpretação.",
+      "rotate_left": "Reintroduza os bits que saem pela esquerda. Informe a contagem em decimal.",
+      "rotate_right": "Reintroduza os bits que saem pela direita. Informe a contagem em decimal.",
+      "twos_complement": "Negue a palavra no módulo 2 elevado à largura selecionada."
+    },
+    "proof": {
+      "domain": "Inteiros de largura fixa",
+      "exactWord": "Palavra exata da entrada",
+      "exactCount": "Contagem decimal exata da entrada",
+      "signed": "Interpretação decimal com sinal",
+      "unsigned": "Interpretação decimal sem sinal",
+      "shiftLimit": "A contagem de deslocamento alcança ou excede a largura da palavra.",
+      "leftWrap": "O deslocamento à esquerda descarta bits fora da largura da palavra.",
+      "logicalFill": "O deslocamento lógico à direita preenche com zeros.",
+      "arithmeticFill": "O deslocamento aritmético à direita repete o bit inicial.",
+      "twosWrap": "A negação em complemento de dois usa o módulo 2 elevado à largura da palavra.",
+      "minSigned": "O menor valor com sinal mantém seu padrão de bits.",
+      "width": "Largura da palavra de {count} bits",
+      "base": "Base de entrada {count}",
+      "rotation": "Contagem efetiva de rotação {count}"
+    }
+  },
   "operations": {
     "operations": "Operação",
     "privacy": "Central de privacidade",

@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "tests": {
+    "rust": {
+      "universal": 51,
+      "standard": 16
+    },
+    "node": {
+      "passed": 65
+    },
+    "chrome": {
+      "offline": 10,
+      "full": 74
+    },
+    "standard": {
+      "oracle": 157,
+      "parity": 20,
+      "structured": 291
+    },
+    "scientific": {
+      "oracle": 177,
+      "parity": 19,
+      "isolation": 1
+    },
+    "algebra": {
+      "oracle": 184,
+      "parity": 28,
+      "isolation": 1
+    },
+    "calculus": {
+      "oracle": 210,
+      "parity": 27,
+      "isolation": 2
+    },
+    "linearAlgebra": {
+      "oracle": 223,
+      "parity": 30,
+      "isolation": 3
+    },
+    "geometry": {
+      "oracle": 159,
+      "parity": 32,
+      "isolation": 4
+    },
+    "discreteMathematics": {
+      "oracle": 289,
+      "parity": 38,
+      "isolation": 5
+    },
+    "programmerOracle": {
+      "suite": "programmer-python-integers",
+      "passed": 368,
+      "failed": 0,
+      "python": "3.14.7",
+      "cases": {
+        "and": 10,
+        "convert": 91,
+        "normalized replay": 6,
+        "not": 22,
+        "or": 10,
+        "rejected": 51,
+        "rotate_left": 22,
+        "rotate_right": 22,
+        "shift_left": 30,
+        "shift_right_arithmetic": 31,
+        "shift_right_logical": 30,
+        "twos_complement": 25,
+        "untrusted display text": 1,
+        "xor": 17
+      }
+    },
+    "programmerParity": {
+      "suite": "programmer-cli-wasm",
+      "passed": 36,
+      "isolationChecks": 6,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 280291,
+        "wasmSha256": "d4a788f9fc311ca77e55dc3bb675faa0703d67677906880dc1afc5e103484084",
+        "observedWasmLinearBytes": 1179648,
+        "wasmInitializationMs": 14.239800000000002,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.014299999999991542,
+          "p95": 0.05119999999999436,
+          "p99": 0.059599999999988995
+        }
+      }
+    }
+  },
+  "coverage": {
+    "method": "cargo-llvm-cov combined workspace unit tests and native CLI independent oracles",
+    "standard": {
+      "covered": 613,
+      "total": 620
+    },
+    "universal": {
+      "covered": 8442,
+      "total": 8688
+    },
+    "programmer": {
+      "covered": 521,
+      "total": 523
+    }
+  }
+}

@@ -606,6 +606,81 @@
       "integerInput": "Exact integer from the input"
     }
   },
+  "programmer": {
+    "title": "Programmer",
+    "description": "Convert between number bases and inspect fixed-width bit operations.",
+    "keyboardHint": "Use Ctrl+Enter or ⌘+Enter to calculate and Escape to cancel.",
+    "operation": "Programmer operation",
+    "inputBase": "Input base",
+    "bitWidth": "Bit width",
+    "presets": "Word width presets",
+    "bits": "{count} bits",
+    "signed": "Signed interpretation",
+    "useExample": "Use example",
+    "invalid": "Enter digits for the selected base and a decimal count.",
+    "domainError": "The value must fit the selected word. Shift and rotation counts must be nonnegative.",
+    "invalidWidth": "Enter a bit width between 1 and 1024.",
+    "wordPolicy": "Use 1–1024 bits. Unsigned binary, octal and hexadecimal literals encode bit patterns. The signed setting interprets the leading bit as the sign.",
+    "bitPreview": "Bit preview",
+    "signBit": "Sign bit",
+    "bitGroup": "Bits {range} · {bits}",
+    "previewRange": "Bits {range}",
+    "previous": "Previous bits",
+    "next": "Next bits",
+    "operations": {
+      "convert": "Convert",
+      "and": "AND",
+      "or": "OR",
+      "xor": "XOR",
+      "not": "NOT",
+      "shift_left": "Left shift",
+      "shift_right_logical": "Logical right shift",
+      "shift_right_arithmetic": "Arithmetic right shift",
+      "rotate_left": "Rotate left",
+      "rotate_right": "Rotate right",
+      "twos_complement": "Two’s complement"
+    },
+    "fields": {
+      "value": "Value",
+      "secondValue": "Second value",
+      "count": "Shift count"
+    },
+    "representations": {
+      "binary": "Binary",
+      "octal": "Octal",
+      "decimal": "Decimal",
+      "hexadecimal": "Hexadecimal"
+    },
+    "hints": {
+      "convert": "Enter one value in the selected input base.",
+      "and": "Keep positions where both bits are 1.",
+      "or": "Set positions where either bit is 1.",
+      "xor": "Set positions where the two bits differ.",
+      "not": "Flip every bit within the selected width.",
+      "shift_left": "Shift left and fill from the right with zeros. Excess bits are discarded.",
+      "shift_right_logical": "Shift right and fill from the left with zeros.",
+      "shift_right_arithmetic": "Shift right and repeat the leading bit from the left in either interpretation.",
+      "rotate_left": "Wrap bits around the left end of the word. Enter a decimal count.",
+      "rotate_right": "Wrap bits around the right end of the word. Enter a decimal count.",
+      "twos_complement": "Negate the word modulo 2 raised to the selected bit width."
+    },
+    "proof": {
+      "domain": "Fixed-width integers",
+      "exactWord": "Exact word from the input",
+      "exactCount": "Exact decimal count from the input",
+      "signed": "Signed decimal interpretation",
+      "unsigned": "Unsigned decimal interpretation",
+      "shiftLimit": "The shift count reaches or exceeds the word width.",
+      "leftWrap": "A left shift discards bits beyond the word width.",
+      "logicalFill": "A logical right shift fills with zeros.",
+      "arithmeticFill": "An arithmetic right shift repeats the leading bit.",
+      "twosWrap": "Two’s complement negation wraps modulo 2 raised to the word width.",
+      "minSigned": "The smallest signed value retains its bit pattern.",
+      "width": "Word width {count} bits",
+      "base": "Input base {count}",
+      "rotation": "Effective rotation count {count}"
+    }
+  },
   "operations": {
     "operations": "Operations",
     "privacy": "Privacy center",

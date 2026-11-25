@@ -106,4 +106,12 @@ export const primaryModules: readonly RegisteredModule[] = [
     }),
     load: () => import('./tool-discrete-runtime'),
   }),
+  registerModule({
+    id: 'programmer',
+    describe: (messages) => ({
+      title: messages.programmer.title, description: messages.programmer.description,
+      keyboardHint: messages.programmer.keyboardHint,
+    }),
+    load: () => import('./tool-programmer-runtime'),
+  }),
 ];

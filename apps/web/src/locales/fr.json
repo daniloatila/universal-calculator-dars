@@ -606,6 +606,81 @@
       "integerInput": "Entier exact de la saisie"
     }
   },
+  "programmer": {
+    "title": "Programmeur",
+    "description": "Convertissez des nombres entre bases et examinez les opérations bit à bit à largeur fixe.",
+    "keyboardHint": "Utilisez Ctrl+Entrée ou ⌘+Entrée pour calculer et Échap pour annuler.",
+    "operation": "Opération de programmation",
+    "inputBase": "Base d’entrée",
+    "bitWidth": "Largeur en bits",
+    "presets": "Largeurs prédéfinies",
+    "bits": "{count} bits",
+    "signed": "Interprétation signée",
+    "useExample": "Utiliser l’exemple",
+    "invalid": "Saisissez des chiffres de la base choisie et un décompte décimal.",
+    "domainError": "La valeur doit tenir dans le mot choisi. Le nombre de bits à décaler ou à faire pivoter doit être positif ou nul.",
+    "invalidWidth": "Saisissez une largeur de 1 à 1024 bits.",
+    "wordPolicy": "Utilisez de 1 à 1024 bits. Les littéraux binaires, octaux et hexadécimaux sans signe codent des suites de bits. L’interprétation signée utilise le bit de poids fort comme signe.",
+    "bitPreview": "Aperçu des bits",
+    "signBit": "Bit de signe",
+    "bitGroup": "Bits {range} · {bits}",
+    "previewRange": "Bits {range}",
+    "previous": "Bits précédents",
+    "next": "Bits suivants",
+    "operations": {
+      "convert": "Convertir",
+      "and": "ET",
+      "or": "OU",
+      "xor": "OU exclusif",
+      "not": "NON",
+      "shift_left": "Décaler à gauche",
+      "shift_right_logical": "Décalage logique à droite",
+      "shift_right_arithmetic": "Décalage arithmétique à droite",
+      "rotate_left": "Rotation à gauche",
+      "rotate_right": "Rotation à droite",
+      "twos_complement": "Complément à deux"
+    },
+    "fields": {
+      "value": "Valeur",
+      "secondValue": "Deuxième valeur",
+      "count": "Nombre de bits à décaler"
+    },
+    "representations": {
+      "binary": "Binaire",
+      "octal": "Octal",
+      "decimal": "Décimal",
+      "hexadecimal": "Hexadécimal"
+    },
+    "hints": {
+      "convert": "Saisissez une valeur dans la base d’entrée choisie.",
+      "and": "Conservez les positions où les deux bits valent 1.",
+      "or": "Activez les positions où au moins un des bits vaut 1.",
+      "xor": "Activez les positions où les deux bits diffèrent.",
+      "not": "Inversez chaque bit dans la largeur choisie.",
+      "shift_left": "Décalez à gauche et remplissez à droite avec des zéros. Les bits excédentaires sont supprimés.",
+      "shift_right_logical": "Décalez à droite et remplissez à gauche avec des zéros.",
+      "shift_right_arithmetic": "Décalez à droite et répétez à gauche le bit de poids fort dans les deux interprétations.",
+      "rotate_left": "Faites revenir à droite les bits sortis par la gauche. Saisissez un décompte décimal.",
+      "rotate_right": "Faites revenir à gauche les bits sortis par la droite. Saisissez un décompte décimal.",
+      "twos_complement": "Niez le mot modulo 2 à la puissance de la largeur choisie."
+    },
+    "proof": {
+      "domain": "Entiers de largeur fixe",
+      "exactWord": "Mot exact issu de la saisie",
+      "exactCount": "Décompte décimal exact issu de la saisie",
+      "signed": "Interprétation décimale signée",
+      "unsigned": "Interprétation décimale non signée",
+      "shiftLimit": "Le décalage atteint ou dépasse la largeur du mot.",
+      "leftWrap": "Le décalage à gauche élimine les bits situés hors du mot.",
+      "logicalFill": "Le décalage logique à droite remplit avec des zéros.",
+      "arithmeticFill": "Le décalage arithmétique à droite répète le bit de poids fort.",
+      "twosWrap": "La négation en complément à deux se calcule modulo 2 à la puissance de la largeur du mot.",
+      "minSigned": "La plus petite valeur signée garde les mêmes bits.",
+      "width": "Largeur du mot de {count} bits",
+      "base": "Base d’entrée {count}",
+      "rotation": "Décompte effectif de rotation {count}"
+    }
+  },
   "operations": {
     "operations": "Fonctionnement",
     "privacy": "Centre de confidentialité",

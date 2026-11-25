@@ -606,6 +606,81 @@
       "integerInput": "Entero exacto de la entrada"
     }
   },
+  "programmer": {
+    "title": "Programador",
+    "description": "Convierte entre bases numéricas e inspecciona operaciones de bits de ancho fijo.",
+    "keyboardHint": "Usa Ctrl+Enter o ⌘+Enter para calcular y Escape para cancelar.",
+    "operation": "Operación de programador",
+    "inputBase": "Base de entrada",
+    "bitWidth": "Ancho en bits",
+    "presets": "Anchos predefinidos",
+    "bits": "{count} bits",
+    "signed": "Interpretación con signo",
+    "useExample": "Usar ejemplo",
+    "invalid": "Introduce dígitos de la base elegida y un recuento decimal.",
+    "domainError": "El valor debe caber en la palabra seleccionada. Los recuentos de desplazamiento y rotación deben ser no negativos.",
+    "invalidWidth": "Introduce un ancho de 1 a 1024 bits.",
+    "wordPolicy": "Usa 1–1024 bits. Los literales binarios, octales y hexadecimales sin signo codifican patrones de bits. La interpretación con signo usa el bit inicial como signo.",
+    "bitPreview": "Vista de bits",
+    "signBit": "Bit de signo",
+    "bitGroup": "Bits {range} · {bits}",
+    "previewRange": "Bits {range}",
+    "previous": "Bits anteriores",
+    "next": "Bits siguientes",
+    "operations": {
+      "convert": "Convertir",
+      "and": "AND",
+      "or": "OR",
+      "xor": "XOR",
+      "not": "NOT",
+      "shift_left": "Desplazar a la izquierda",
+      "shift_right_logical": "Desplazamiento lógico a la derecha",
+      "shift_right_arithmetic": "Desplazamiento aritmético a la derecha",
+      "rotate_left": "Rotar a la izquierda",
+      "rotate_right": "Rotar a la derecha",
+      "twos_complement": "Complemento a dos"
+    },
+    "fields": {
+      "value": "Valor",
+      "secondValue": "Segundo valor",
+      "count": "Recuento de desplazamiento"
+    },
+    "representations": {
+      "binary": "Binario",
+      "octal": "Octal",
+      "decimal": "Decimal",
+      "hexadecimal": "Hexadecimal"
+    },
+    "hints": {
+      "convert": "Introduce un valor en la base de entrada seleccionada.",
+      "and": "Conserva las posiciones en las que ambos bits son 1.",
+      "or": "Activa las posiciones en las que alguno de los bits es 1.",
+      "xor": "Activa las posiciones en las que los dos bits difieren.",
+      "not": "Invierte cada bit dentro del ancho seleccionado.",
+      "shift_left": "Desplaza a la izquierda y rellena con ceros por la derecha. Los bits sobrantes se descartan.",
+      "shift_right_logical": "Desplaza a la derecha y rellena con ceros por la izquierda.",
+      "shift_right_arithmetic": "Desplaza a la derecha y repite el bit inicial por la izquierda en ambas interpretaciones.",
+      "rotate_left": "Reintroduce por la derecha los bits que salen por la izquierda. Indica un recuento decimal.",
+      "rotate_right": "Reintroduce por la izquierda los bits que salen por la derecha. Indica un recuento decimal.",
+      "twos_complement": "Niega la palabra módulo 2 elevado al ancho elegido."
+    },
+    "proof": {
+      "domain": "Enteros de ancho fijo",
+      "exactWord": "Palabra exacta de la entrada",
+      "exactCount": "Recuento decimal exacto de la entrada",
+      "signed": "Interpretación decimal con signo",
+      "unsigned": "Interpretación decimal sin signo",
+      "shiftLimit": "El recuento de desplazamiento alcanza o supera el ancho de la palabra.",
+      "leftWrap": "El desplazamiento a la izquierda descarta los bits fuera del ancho.",
+      "logicalFill": "El desplazamiento lógico a la derecha rellena con ceros.",
+      "arithmeticFill": "El desplazamiento aritmético a la derecha repite el bit inicial.",
+      "twosWrap": "La negación en complemento a dos se calcula módulo 2 elevado al ancho de la palabra.",
+      "minSigned": "El menor valor con signo conserva su patrón de bits.",
+      "width": "Ancho de palabra de {count} bits",
+      "base": "Base de entrada {count}",
+      "rotation": "Recuento efectivo de rotación {count}"
+    }
+  },
   "operations": {
     "operations": "Operación",
     "privacy": "Centro de privacidad",

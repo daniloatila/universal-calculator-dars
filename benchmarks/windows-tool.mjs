@@ -113,7 +113,7 @@ export async function runWindowsToolBenchmark(suite, argument = process.argv[2])
   async function calculate({ expression, expected, operation, field = 'Expression' }, testId) {
     if (operation) await page.getByRole('button', { name: operation, exact: true }).click();
     const started = performance.now();
-    if (testId !== 'result' && suite.enter) await suite.enter(page, expression);
+    if (testId !== 'result' && suite.enter) await suite.enter(page, expression, operation);
     else await page.getByRole('textbox', { name: field, exact: true }).fill(expression);
     await page.getByRole('button', { name: 'Calculate', exact: true }).click();
     const result = expect(page.getByTestId(testId));
@@ -183,7 +183,7 @@ export async function runWindowsToolBenchmark(suite, argument = process.argv[2])
     await samplePhase(`${suite.module}_minimized`, 'minimized', app.pid);
     assert.equal((await native('restore')).state, 'visible');
     await expect(page.locator('main')).toHaveAttribute('data-module-phase', 'active');
-    if (suite.verifyRetained) await suite.verifyRetained(page, suite.resume.expression, expect);
+    if (suite.verifyRetained) await suite.verifyRetained(page, suite.resume.expression, expect, suite.resume.operation);
     else await expect(page.getByRole('textbox', { name: suite.resume.field ?? 'Expression', exact: true })).toHaveValue(suite.resume.expression);
     await expect(page.getByTestId(resultId)).toHaveAttribute('data-canonical', suite.resume.expected);
     data.interactions.push({ expression: suite.recovery.expression, milliseconds: await calculate(suite.recovery, resultId) });

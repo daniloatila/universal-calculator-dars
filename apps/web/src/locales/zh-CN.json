@@ -606,6 +606,81 @@
       "integerInput": "输入的精确整数"
     }
   },
+  "programmer": {
+    "title": "程序员",
+    "description": "转换数值进制，查看固定字长的按位运算。",
+    "keyboardHint": "按 Ctrl+Enter 或 ⌘+Enter 计算，按 Esc 取消。",
+    "operation": "程序员运算",
+    "inputBase": "输入进制",
+    "bitWidth": "位宽",
+    "presets": "预设字长",
+    "bits": "{count} 位",
+    "signed": "按有符号数解读",
+    "useExample": "使用示例",
+    "invalid": "请输入当前进制的数字以及十进制位数。",
+    "domainError": "输入值必须在所选字长范围内。移位和循环移位的位数必须为非负数。",
+    "invalidWidth": "请输入 1 至 1024 之间的位宽。",
+    "wordPolicy": "使用 1–1024 位。未带正负号的二进制、八进制和十六进制输入表示位模式。有符号模式将最高位视为符号位。",
+    "bitPreview": "位预览",
+    "signBit": "符号位",
+    "bitGroup": "第 {range} 位 · {bits}",
+    "previewRange": "第 {range} 位",
+    "previous": "上一组位",
+    "next": "下一组位",
+    "operations": {
+      "convert": "转换",
+      "and": "按位与",
+      "or": "按位或",
+      "xor": "按位异或",
+      "not": "按位非",
+      "shift_left": "左移",
+      "shift_right_logical": "逻辑右移",
+      "shift_right_arithmetic": "算术右移",
+      "rotate_left": "循环左移",
+      "rotate_right": "循环右移",
+      "twos_complement": "二进制补码"
+    },
+    "fields": {
+      "value": "数值",
+      "secondValue": "第二个数值",
+      "count": "移位位数"
+    },
+    "representations": {
+      "binary": "二进制",
+      "octal": "八进制",
+      "decimal": "十进制",
+      "hexadecimal": "十六进制"
+    },
+    "hints": {
+      "convert": "按所选进制输入一个数值。",
+      "and": "保留两个数位均为 1 的位置。",
+      "or": "两个数位中任有一个为 1 的位置置为 1。",
+      "xor": "两个数位不同的位置置为 1。",
+      "not": "在选定的字长内逐位取反。",
+      "shift_left": "向左移位，右侧补零。超出字长的位被舍弃。",
+      "shift_right_logical": "向右移位，左侧补零。",
+      "shift_right_arithmetic": "向右移位，在任一解读模式下左侧重复最高位。",
+      "rotate_left": "从左侧移出的位回到右侧。请输入十进制位数。",
+      "rotate_right": "从右侧移出的位回到左侧。请输入十进制位数。",
+      "twos_complement": "以 2 的位宽次方为模对值取负。"
+    },
+    "proof": {
+      "domain": "固定字长整数",
+      "exactWord": "输入的精确字",
+      "exactCount": "输入的精确十进制位数",
+      "signed": "有符号十进制解读",
+      "unsigned": "无符号十进制解读",
+      "shiftLimit": "移位位数达到或超过字长。",
+      "leftWrap": "左移舍弃超出所选字长的位。",
+      "logicalFill": "逻辑右移补零。",
+      "arithmeticFill": "算术右移重复最高位。",
+      "twosWrap": "补码取负按 2 的字长次方取模。",
+      "minSigned": "最小有符号值保留原位模式。",
+      "width": "字长为 {count} 位",
+      "base": "输入进制为 {count}",
+      "rotation": "有效循环移位位数 {count}"
+    }
+  },
   "operations": {
     "operations": "运行管理",
     "privacy": "隐私中心",

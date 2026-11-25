@@ -12,7 +12,7 @@ The 0.2.2 delivery is the accepted baseline. Each internal stage records its mat
 | 4 | Linear Algebra | INTERNALLY_ACCEPTED · [Verification](linear-algebra/verification.md) · [CI](linear-algebra/ci.json) |
 | 5 | Geometry | INTERNALLY_ACCEPTED · [Verification](geometry/verification.md) · [CI](geometry/ci.json) |
 | 6 | Discrete Mathematics | INTERNALLY_ACCEPTED · [Verification](discrete-mathematics/verification.md) |
-| 7 | Programmer | NOT_STARTED |
+| 7 | Programmer | INTERNALLY_ACCEPTED · [Verification](programmer/verification.md) |
 | 8 | Converter | NOT_STARTED |
 | 9 | Date & Time | NOT_STARTED |
 | Audit | Integrated Objective 03 | NOT_STARTED |

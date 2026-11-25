@@ -14,6 +14,8 @@ mod discrete_mathematics;
 mod geometry;
 #[cfg(feature = "linear_algebra")]
 mod linear_algebra;
+#[cfg(feature = "programmer")]
+mod programmer;
 #[cfg(feature = "scientific")]
 mod scientific;
 
@@ -226,6 +228,16 @@ fn dispatch(
             )?,
             "linear_algebra/1",
             &["https://docs.rs/nalgebra/0.35.0/nalgebra/linalg/index.html"],
+        )),
+        #[cfg(feature = "programmer")]
+        "programmer" => Ok((
+            programmer::evaluate(
+                &request.operation,
+                &request.input,
+                &Value::Object(request.options.clone()),
+            )?,
+            "programmer/1",
+            &["https://doc.rust-lang.org/reference/expressions/operator-expr.html"],
         )),
         #[cfg(feature = "scientific")]
         "scientific" => Ok((
