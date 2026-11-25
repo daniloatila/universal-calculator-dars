@@ -1086,6 +1086,7 @@ pub(crate) fn evaluate(
         None
     };
     Ok(Computation {
+        variables: Default::default(),
         result,
         exactness,
         normalized: expression.normalized(),

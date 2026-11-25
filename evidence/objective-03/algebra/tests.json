@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "tests": {
+    "rust": {
+      "universal": 16,
+      "standard": 16
+    },
+    "node": {
+      "passed": 65
+    },
+    "chrome": {
+      "exactPackage": 12,
+      "preFormat": 39,
+      "offline": 10
+    },
+    "standardOracle": {
+      "suite": "python-fraction-decimal-oracle",
+      "passed": 157,
+      "failed": 0
+    },
+    "standardParity": {
+      "suite": "native-wasm-result-parity",
+      "passed": 20,
+      "failed": 0
+    },
+    "standardStructured": {
+      "suite": "fraction-decimal-structured-wasm",
+      "passed": 291,
+      "failed": 0,
+      "referencePrecision": 180
+    },
+    "algebraOracle": {
+      "failed": 0,
+      "boundedRejections": 37,
+      "normalizedReplay": 7,
+      "sympy": "1.14.0",
+      "passed": 184
+    },
+    "algebraParity": {
+      "suite": "algebra-cli-wasm",
+      "passed": 28,
+      "isolationChecks": 1,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 623789,
+        "wasmSha256": "5749e62ed3fc844efb7dbfb8f6d1437eb2918e35511788de285521cb9595b1f1",
+        "observedWasmLinearBytes": 1179648,
+        "wasmInitializationMs": 14.302700000000002,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.045200000000022555,
+          "p95": 0.06999999999999318,
+          "p99": 0.07820000000003802
+        }
+      }
+    },
+    "scientificParity": {
+      "suite": "scientific-cli-wasm",
+      "passed": 19,
+      "isolationChecks": 1,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 679874,
+        "wasmSha256": "34baaa9f214410c497c0ab0832e67cde2f9279874bba34dda5205918b78e1d3e",
+        "observedWasmLinearBytes": 1179648,
+        "wasmInitializationMs": 14.159300000000002,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.11250000000001137,
+          "p95": 0.8721000000000458,
+          "p99": 0.9467999999999961
+        }
+      }
+    }
+  },
+  "coverage": {
+    "method": "cargo-llvm-cov combined workspace unit tests and native CLI independent oracles",
+    "standard": {
+      "covered": 613,
+      "total": 620
+    },
+    "universal": {
+      "covered": 3246,
+      "total": 3375
+    },
+    "algebra": {
+      "covered": 1425,
+      "total": 1480
+    }
+  }
+}

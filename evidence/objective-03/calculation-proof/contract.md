@@ -2,7 +2,7 @@
 
 [Português brasileiro](contract.pt-BR.md) · [Structural schema](schema.v1.json)
 
-Schema 1 preserves the execution context of a successful computation. It records the requested operation, the submitted expression, its mathematical representation, settings, domain, method, result and declared exactness. The first producer is Scientific. The shared schema also recognizes identifiers for the other project modules. [Engine contract](../../../crates/dars-universal/src/lib.rs)
+Schema 1 preserves the execution context of a successful computation. It records the requested operation, the submitted expression, its mathematical representation, settings, domain, method, result and declared exactness. Scientific and Algebra emit records through the same Rust contract. The shared schema also recognizes identifiers for the other project modules. [Engine contract](../../../crates/dars-universal/src/lib.rs)
 
 An **execution record** describes the calculation that ran. An **explanation** clarifies its mathematical method. **Solution verification** applies independent criteria to a result. A **formal proof** requires justified premises and deductions. The displayed record offers provenance and material for reproduction. Its precision field describes the recorded numerical precision. An error bound is a separate field and is present only when supplied by the engine.
 
@@ -41,6 +41,8 @@ $request = [ordered]@{
 } | ConvertTo-Json -Depth 5 -Compress
 cargo run --locked -q -p dars-cli -- tool $request
 ```
+
+For Algebra, solve `x/x=1` with the real domain selected. The record identifies `x` as a real variable, retains `x != 0` and preserves the expression structure in its normalized input. Simplifying before recording that input would lose the exclusion during replay. The Algebra CLI suite verified identical records on replay for seven cases, including active restrictions and bound variables. [Algebra oracle](../../../tests/verify-algebra.py)
 
 ## Local format and validation
 

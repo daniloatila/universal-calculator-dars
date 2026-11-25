@@ -100,6 +100,56 @@
     "keypad": "计算键盘",
     "symbolic": "精确符号结果"
   },
+  "algebra": {
+    "title": "代数",
+    "description": "改写表达式、求解方程并验证候选解。",
+    "keyboardHint": "按 Ctrl+Enter 或 ⌘+Enter 计算，按 Esc 取消。",
+    "operation": "代数运算",
+    "domain": "解的范围",
+    "real": "实数",
+    "complex": "复数",
+    "symbolic": "精确符号结果",
+    "restrictions": "定义域限制",
+    "verified": "候选值是解",
+    "rejected": "候选值不在解集中",
+    "noSolution": "无解",
+    "allReal": "所有实数 x 都是解",
+    "allComplex": "所有复数 x 都是解",
+    "multiplicity": "m 表示根的重数。",
+    "operations": {
+      "simplify": "化简",
+      "expand": "展开",
+      "factor": "因式分解",
+      "polynomial": "系数",
+      "solve": "解方程",
+      "inequality": "解不等式",
+      "system": "解方程组",
+      "substitute": "代入",
+      "verify": "验证解"
+    },
+    "inputs": {
+      "simplify": "表达式",
+      "expand": "待展开的表达式",
+      "factor": "待分解的多项式",
+      "polynomial": "多项式",
+      "solve": "方程",
+      "inequality": "不等式",
+      "system": "线性方程",
+      "substitute": "表达式与赋值",
+      "verify": "方程与候选解"
+    },
+    "hints": {
+      "simplify": "输入含 x、y 或 z 的有理表达式。结果同时列出排除的值。",
+      "expand": "用括号对因式分组，用 ^ 表示乘方。",
+      "factor": "输入一个有理系数的一元多项式。",
+      "polynomial": "结果按次数从高到低列出系数。",
+      "solve": "输入一元方程并选择解的范围。",
+      "inequality": "输入使用 <、≤、> 或 ≥ 的一元不等式。",
+      "system": "每行输入一个线性方程，或使用分号分隔。",
+      "substitute": "先输入表达式，再输入赋值，各部分用分号分隔。",
+      "verify": "先输入方程，再输入候选赋值，各部分用分号分隔。"
+    }
+  },
   "operations": {
     "operations": "运行管理",
     "privacy": "隐私中心",

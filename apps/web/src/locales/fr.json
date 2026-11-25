@@ -100,6 +100,56 @@
     "keypad": "Clavier",
     "symbolic": "Symbolique exact"
   },
+  "algebra": {
+    "title": "Algèbre",
+    "description": "Réécrivez des expressions, résolvez des équations et vérifiez les solutions candidates.",
+    "keyboardHint": "Utilisez Ctrl+Entrée ou ⌘+Entrée pour calculer et Échap pour annuler.",
+    "operation": "Opération algébrique",
+    "domain": "Domaine des solutions",
+    "real": "Nombres réels",
+    "complex": "Nombres complexes",
+    "symbolic": "Symbolique exact",
+    "restrictions": "Restrictions du domaine",
+    "verified": "Le candidat est une solution",
+    "rejected": "Le candidat est hors de l’ensemble des solutions",
+    "noSolution": "Aucune solution",
+    "allReal": "Tout x réel est solution",
+    "allComplex": "Tout x complexe est solution",
+    "multiplicity": "m indique la multiplicité de la racine.",
+    "operations": {
+      "simplify": "Simplifier",
+      "expand": "Développer",
+      "factor": "Factoriser",
+      "polynomial": "Coefficients",
+      "solve": "Résoudre une équation",
+      "inequality": "Résoudre une inéquation",
+      "system": "Résoudre un système",
+      "substitute": "Substituer",
+      "verify": "Vérifier une solution"
+    },
+    "inputs": {
+      "simplify": "Expression",
+      "expand": "Expression à développer",
+      "factor": "Polynôme à factoriser",
+      "polynomial": "Polynôme",
+      "solve": "Équation",
+      "inequality": "Inéquation",
+      "system": "Équations linéaires",
+      "substitute": "Expression et affectations",
+      "verify": "Équation et candidat"
+    },
+    "hints": {
+      "simplify": "Saisissez une expression rationnelle en x, y ou z. Les valeurs exclues accompagnent le résultat.",
+      "expand": "Utilisez les parenthèses pour grouper les facteurs et ^ pour les puissances.",
+      "factor": "Saisissez un polynôme à une variable à coefficients rationnels.",
+      "polynomial": "Le résultat donne les coefficients par ordre décroissant de degré.",
+      "solve": "Saisissez une équation à une variable et choisissez le domaine des solutions.",
+      "inequality": "Saisissez une inéquation à une variable en utilisant <, ≤, > ou ≥.",
+      "system": "Placez chaque équation linéaire sur une nouvelle ligne ou séparez-les par des points-virgules.",
+      "substitute": "Saisissez l’expression puis les affectations, séparées par des points-virgules.",
+      "verify": "Saisissez l’équation puis les affectations candidates, séparées par des points-virgules."
+    }
+  },
   "operations": {
     "operations": "Fonctionnement",
     "privacy": "Centre de confidentialité",

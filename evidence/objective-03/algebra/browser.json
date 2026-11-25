@@ -1,0 +1,132 @@
+{
+  "browser": "installed Chrome on Windows",
+  "expected": 12,
+  "outcomes": [
+    {
+      "title": "Algebra runs its nine operations, exposes domain restrictions and preserves module state",
+      "duration_ms": 1733,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra changes solution domains and keeps restrictions when verifying excluded values",
+      "duration_ms": 810,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra controls are localized in seven languages and retain an accessible 320 px RTL layout",
+      "duration_ms": 1490,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra prepares only its own resources and calculates after offline reload",
+      "duration_ms": 951,
+      "status": "passed"
+    },
+    {
+      "title": "switching modules terminates an admitted Algebra worker and allows a fresh calculation",
+      "duration_ms": 429,
+      "status": "passed"
+    },
+    {
+      "title": "a real Scientific result exports a versioned local calculation record and reopens it as an import",
+      "duration_ms": 566,
+      "status": "passed"
+    },
+    {
+      "title": "the local proof viewer rejects malformed or oversized bytes and treats imported markup as text",
+      "duration_ms": 370,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific computes the required vectors and preserves Standard and adaptive behavior",
+      "duration_ms": 1382,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific options control working precision and engineering notation and expose domain failures",
+      "duration_ms": 522,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific normalizes localized input and keeps its controls within a narrow RTL layout",
+      "duration_ms": 1390,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific assets are absent on initial opening and remain usable after explicit offline preparation",
+      "duration_ms": 929,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific cancels an admitted worker and calculates on a fresh worker",
+      "duration_ms": 473,
+      "status": "passed"
+    }
+  ],
+  "observations": {
+    "algebra-interaction-observations": {
+      "activationMs": 40.80790000000002,
+      "observations": [
+        {
+          "operation": "simplify",
+          "throughBrowserMs": 93.75800000000004
+        },
+        {
+          "operation": "expand",
+          "throughBrowserMs": 87.58080000000018
+        },
+        {
+          "operation": "factor",
+          "throughBrowserMs": 94.71669999999995
+        },
+        {
+          "operation": "polynomial",
+          "throughBrowserMs": 77.64920000000006
+        },
+        {
+          "operation": "solve",
+          "throughBrowserMs": 75.61349999999993
+        },
+        {
+          "operation": "inequality",
+          "throughBrowserMs": 82.01069999999982
+        },
+        {
+          "operation": "system",
+          "throughBrowserMs": 71.57549999999992
+        },
+        {
+          "operation": "substitute",
+          "throughBrowserMs": 78.38449999999989
+        },
+        {
+          "operation": "verify",
+          "throughBrowserMs": 75.3266000000001
+        }
+      ],
+      "scope": "Playwright actions + scheduler, worker, WASM and result DOM"
+    },
+    "algebra-offline-proof": {
+      "initialRequests": [],
+      "initialCache": [],
+      "prepared": [
+        "/assets/dars_tool_wasm_bg-gWmb8xT9.wasm",
+        "/assets/tool-algebra-runtime-CT_9QoMP.js",
+        "/assets/tool-algebra-runtime-DKHYJEkX.css",
+        "/assets/tool-algebra-worker-DWMuCQAm.js",
+        "/assets/tool-runtime-CFQN2FKz.js",
+        "/assets/tool-runtime-Dli0aaFn.css"
+      ],
+      "offlineCanonical": "1",
+      "scientificAssets": []
+    }
+  },
+  "algebra_wasm_asset": "/assets/dars_tool_wasm_bg-gWmb8xT9.wasm",
+  "algebra_wasm_sha256": "5749e62ed3fc844efb7dbfb8f6d1437eb2918e35511788de285521cb9595b1f1",
+  "algebra_wasm_size": 623789,
+  "algebra_screenshot_sha256": "7cc22e659571748de2f8cf23b2caa9380579aef092a6d01c1911f4977cdb7de3",
+  "algebra_screenshot_px": [
+    1280,
+    945
+  ]
+}

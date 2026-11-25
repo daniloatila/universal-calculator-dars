@@ -6,8 +6,8 @@ A entrega 0.2.2 é a base aprovada. Registre em cada etapa a especificação mat
 
 | Etapa | Módulo | Estado |
 | --- | --- | --- |
-| 1 | Scientific | INTERNALLY_ACCEPTED · [Verificação](scientific/verification.pt-BR.md) |
-| 2 | Álgebra | NOT_STARTED |
+| 1 | Scientific | INTERNALLY_ACCEPTED · [Verificação](scientific/verification.pt-BR.md) · [CI](scientific/ci.json) |
+| 2 | Álgebra | INTERNALLY_ACCEPTED · [Verificação](algebra/verification.pt-BR.md) |
 | 3 | Cálculo | NOT_STARTED |
 | 4 | Álgebra Linear | NOT_STARTED |
 | 5 | Geometria | NOT_STARTED |

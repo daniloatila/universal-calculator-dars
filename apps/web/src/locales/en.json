@@ -100,6 +100,56 @@
     "keypad": "Keypad",
     "symbolic": "Exact symbolic"
   },
+  "algebra": {
+    "title": "Algebra",
+    "description": "Rewrite expressions, solve equations and check candidate solutions.",
+    "keyboardHint": "Use Ctrl+Enter or ⌘+Enter to calculate and Escape to cancel.",
+    "operation": "Algebra operation",
+    "domain": "Solution domain",
+    "real": "Real numbers",
+    "complex": "Complex numbers",
+    "symbolic": "Exact symbolic",
+    "restrictions": "Domain restrictions",
+    "verified": "Candidate is a solution",
+    "rejected": "Candidate is outside the solution set",
+    "noSolution": "No solution",
+    "allReal": "Every real x is a solution",
+    "allComplex": "Every complex x is a solution",
+    "multiplicity": "m is the root multiplicity.",
+    "operations": {
+      "simplify": "Simplify",
+      "expand": "Expand",
+      "factor": "Factor",
+      "polynomial": "Coefficients",
+      "solve": "Solve equation",
+      "inequality": "Solve inequality",
+      "system": "Solve system",
+      "substitute": "Substitute",
+      "verify": "Verify solution"
+    },
+    "inputs": {
+      "simplify": "Expression",
+      "expand": "Expression to expand",
+      "factor": "Polynomial to factor",
+      "polynomial": "Polynomial",
+      "solve": "Equation",
+      "inequality": "Inequality",
+      "system": "Linear equations",
+      "substitute": "Expression and assignments",
+      "verify": "Equation and candidate"
+    },
+    "hints": {
+      "simplify": "Enter a rational expression in x, y or z. Excluded values appear with the answer.",
+      "expand": "Use parentheses to group factors and ^ to enter powers.",
+      "factor": "Enter a polynomial in one variable with rational coefficients.",
+      "polynomial": "The result lists coefficients from highest to lowest degree.",
+      "solve": "Enter an equation in one variable and choose the solution domain.",
+      "inequality": "Enter an inequality in one variable using <, ≤, > or ≥.",
+      "system": "Place each linear equation on a new line or separate equations with semicolons.",
+      "substitute": "Enter the expression first, followed by assignments separated by semicolons.",
+      "verify": "Enter the equation first, followed by candidate assignments separated by semicolons."
+    }
+  },
   "operations": {
     "operations": "Operations",
     "privacy": "Privacy center",

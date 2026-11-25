@@ -4,6 +4,8 @@ use serde::{Deserialize, Deserializer, Serialize, de};
 use serde_json::{Map, Value, json};
 use std::collections::BTreeMap;
 
+#[cfg(feature = "algebra")]
+mod algebra;
 #[cfg(feature = "scientific")]
 mod scientific;
 
@@ -13,6 +15,10 @@ const EXPRESSION_BYTES: usize = 4096;
 const NORMALIZED_BYTES: usize = 8192;
 const RESULT_BYTES: usize = 32 * 1024;
 const OPTION_COUNT: usize = 16;
+const PROOF_MAP_COUNT: usize = 16;
+const PROOF_VALUE_BYTES: usize = 256;
+const PROOF_CONSTRAINT_COUNT: usize = 32;
+const PROOF_CONSTRAINT_BYTES: usize = 2048;
 const MAX_SAFE_INTEGER: i64 = 9_007_199_254_740_991;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
@@ -43,6 +49,7 @@ pub struct Computation {
     pub precision: Option<u32>,
     pub error_bound: Option<String>,
     pub constraints: Vec<String>,
+    pub variables: BTreeMap<String, String>,
 }
 
 #[derive(Deserialize)]
@@ -143,6 +150,16 @@ fn dispatch(
     request: &Request,
 ) -> Result<(Computation, &'static str, &'static [&'static str]), MathError> {
     match request.module.as_str() {
+        #[cfg(feature = "algebra")]
+        "algebra" => Ok((
+            algebra::evaluate(
+                &request.operation,
+                &request.input,
+                &Value::Object(request.options.clone()),
+            )?,
+            "algebra/1",
+            &["https://dlmf.nist.gov/1.11"],
+        )),
         #[cfg(feature = "scientific")]
         "scientific" => Ok((
             scientific::evaluate(
@@ -182,7 +199,21 @@ fn execute(input: &str) -> Result<Value, MathError> {
         return Err(MathError::InvalidInput);
     }
     let (result, algorithm, references) = dispatch(&request)?;
-    if result.normalized.len() > NORMALIZED_BYTES || result.result.len() > RESULT_BYTES {
+    if result.normalized.len() > NORMALIZED_BYTES
+        || result.result.len() > RESULT_BYTES
+        || result.variables.len() > PROOF_MAP_COUNT
+        || result.variables.iter().any(|(name, value)| {
+            name.is_empty()
+                || !valid_text(name, 32)
+                || matches!(name.as_str(), "__proto__" | "constructor" | "prototype")
+                || !valid_text(value, PROOF_VALUE_BYTES)
+        })
+        || result.constraints.len() > PROOF_CONSTRAINT_COUNT
+        || result
+            .constraints
+            .iter()
+            .any(|entry| !valid_text(entry, PROOF_CONSTRAINT_BYTES))
+    {
         return Err(MathError::Limit);
     }
     let assumptions = if result.exactness == Exactness::Approximate && result.error_bound.is_none()
@@ -210,7 +241,7 @@ fn execute(input: &str) -> Result<Value, MathError> {
         operation: &request.operation,
         expression: original,
         normalized: &result.normalized,
-        variables: BTreeMap::new(),
+        variables: result.variables,
         units,
         options: &request.options,
         domain: result.domain,

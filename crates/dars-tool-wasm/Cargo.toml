@@ -11,6 +11,7 @@ crate-type = ["cdylib", "rlib"]
 [features]
 default = ["scientific"]
 scientific = ["dars-universal/scientific"]
+algebra = ["dars-universal/algebra"]
 
 [dependencies]
 dars-universal = { path = "../dars-universal", default-features = false }

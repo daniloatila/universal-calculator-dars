@@ -100,6 +100,56 @@
     "keypad": "Teclado",
     "symbolic": "Simbólico exato"
   },
+  "algebra": {
+    "title": "Álgebra",
+    "description": "Reescreva expressões, resolva equações e confira soluções candidatas.",
+    "keyboardHint": "Use Ctrl+Enter ou ⌘+Enter para calcular e Esc para cancelar.",
+    "operation": "Operação algébrica",
+    "domain": "Domínio das soluções",
+    "real": "Números reais",
+    "complex": "Números complexos",
+    "symbolic": "Simbólico exato",
+    "restrictions": "Restrições de domínio",
+    "verified": "O candidato é uma solução",
+    "rejected": "O candidato está fora do conjunto solução",
+    "noSolution": "Sem solução",
+    "allReal": "Todo x real é solução",
+    "allComplex": "Todo x complexo é solução",
+    "multiplicity": "m indica a multiplicidade da raiz.",
+    "operations": {
+      "simplify": "Simplificar",
+      "expand": "Expandir",
+      "factor": "Fatorar",
+      "polynomial": "Coeficientes",
+      "solve": "Resolver equação",
+      "inequality": "Resolver inequação",
+      "system": "Resolver sistema",
+      "substitute": "Substituir",
+      "verify": "Verificar solução"
+    },
+    "inputs": {
+      "simplify": "Expressão",
+      "expand": "Expressão a expandir",
+      "factor": "Polinômio a fatorar",
+      "polynomial": "Polinômio",
+      "solve": "Equação",
+      "inequality": "Inequação",
+      "system": "Equações lineares",
+      "substitute": "Expressão e substituições",
+      "verify": "Equação e candidato"
+    },
+    "hints": {
+      "simplify": "Digite uma expressão racional em x, y ou z. Os valores excluídos aparecem junto ao resultado.",
+      "expand": "Use parênteses para agrupar fatores e ^ para inserir potências.",
+      "factor": "Digite um polinômio de uma variável com coeficientes racionais.",
+      "polynomial": "O resultado lista os coeficientes em ordem decrescente de grau.",
+      "solve": "Digite uma equação de uma variável e selecione o domínio das soluções.",
+      "inequality": "Digite uma inequação de uma variável usando <, ≤, > ou ≥.",
+      "system": "Coloque cada equação linear em uma nova linha ou separe as equações por ponto e vírgula.",
+      "substitute": "Digite a expressão seguida das substituições, separadas por ponto e vírgula.",
+      "verify": "Digite a equação seguida dos valores candidatos, separados por ponto e vírgula."
+    }
+  },
   "operations": {
     "operations": "Operação",
     "privacy": "Central de privacidade",

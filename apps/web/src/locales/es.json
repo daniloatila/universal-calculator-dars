@@ -100,6 +100,56 @@
     "keypad": "Teclado",
     "symbolic": "Simbólico exacto"
   },
+  "algebra": {
+    "title": "Álgebra",
+    "description": "Reescribe expresiones, resuelve ecuaciones y comprueba soluciones candidatas.",
+    "keyboardHint": "Usa Ctrl+Intro o ⌘+Intro para calcular y Esc para cancelar.",
+    "operation": "Operación algebraica",
+    "domain": "Dominio de soluciones",
+    "real": "Números reales",
+    "complex": "Números complejos",
+    "symbolic": "Simbólico exacto",
+    "restrictions": "Restricciones del dominio",
+    "verified": "El candidato es una solución",
+    "rejected": "El candidato está fuera del conjunto solución",
+    "noSolution": "Sin solución",
+    "allReal": "Todo x real es solución",
+    "allComplex": "Todo x complejo es solución",
+    "multiplicity": "m indica la multiplicidad de la raíz.",
+    "operations": {
+      "simplify": "Simplificar",
+      "expand": "Desarrollar",
+      "factor": "Factorizar",
+      "polynomial": "Coeficientes",
+      "solve": "Resolver ecuación",
+      "inequality": "Resolver inecuación",
+      "system": "Resolver sistema",
+      "substitute": "Sustituir",
+      "verify": "Verificar solución"
+    },
+    "inputs": {
+      "simplify": "Expresión",
+      "expand": "Expresión para desarrollar",
+      "factor": "Polinomio para factorizar",
+      "polynomial": "Polinomio",
+      "solve": "Ecuación",
+      "inequality": "Inecuación",
+      "system": "Ecuaciones lineales",
+      "substitute": "Expresión y asignaciones",
+      "verify": "Ecuación y candidato"
+    },
+    "hints": {
+      "simplify": "Introduce una expresión racional en x, y o z. Los valores excluidos aparecen junto al resultado.",
+      "expand": "Usa paréntesis para agrupar factores y ^ para escribir potencias.",
+      "factor": "Introduce un polinomio de una variable con coeficientes racionales.",
+      "polynomial": "El resultado muestra los coeficientes de mayor a menor grado.",
+      "solve": "Introduce una ecuación de una variable y elige el dominio de soluciones.",
+      "inequality": "Introduce una inecuación de una variable usando <, ≤, > o ≥.",
+      "system": "Escribe cada ecuación lineal en una línea distinta o sepáralas con punto y coma.",
+      "substitute": "Introduce la expresión seguida de las asignaciones, separadas por punto y coma.",
+      "verify": "Introduce la ecuación seguida de las asignaciones candidatas, separadas por punto y coma."
+    }
+  },
   "operations": {
     "operations": "Operación",
     "privacy": "Centro de privacidad",
