@@ -59,6 +59,8 @@ npm exec --prefix apps/web -- playwright test -c apps/web/playwright.config.ts m
 
 Use the regression ledger for all reported suites. The native runners place the candidate's output in the revision 02 artifact directory.
 
+When reproducing the offline suite with installed Chrome, set `DARS_CHROME_EXECUTABLE` to the installed executable path before running `node tests/verify-web-offline.mjs`. The CI runner uses its installed Playwright Chromium.
+
 ```powershell
 cargo build --locked --release -p dars-cli -p dars-desktop
 node scripts/verify-desktop.mjs --objective-02-revision-02

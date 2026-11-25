@@ -1,0 +1,404 @@
+{
+  "browser": "Google Chrome 158.0.8127.38",
+  "target": "Real DARS App shell with a synthetic Chart module and real dedicated browser workers. Test fixture bundled in memory.",
+  "durationMs": 13941.439999999999,
+  "outcomes": [
+    {
+      "case": "the real app shell selects heterogeneous modules and globally clears both active and suspended state",
+      "status": "passed",
+      "durationMs": 1134
+    },
+    {
+      "case": "the same app shell isolates a hung module, retries and disposes a late runtime",
+      "status": "passed",
+      "durationMs": 1346
+    },
+    {
+      "case": "real Workers time out, release foreground capacity, and return valid successors in every adaptive profile",
+      "status": "passed",
+      "durationMs": 10982
+    },
+    {
+      "case": "real scheduler Workers recover from secondary hangs and release in-flight jobs on cancel, suspend, and switch",
+      "status": "passed",
+      "durationMs": 3578
+    }
+  ],
+  "observed": {
+    "scheduler-timeout-profiles": {
+      "generation": 1,
+      "snapshot": {
+        "active": 0,
+        "queued": 0,
+        "concurrency": 4,
+        "closed": false
+      },
+      "workers": [
+        {
+          "id": "ultra_light-hang",
+          "started": true,
+          "heartbeat": 59,
+          "terminated": true
+        },
+        {
+          "id": "ultra_light-valid",
+          "started": true,
+          "heartbeat": 0,
+          "terminated": true
+        },
+        {
+          "id": "efficiency-hang",
+          "started": true,
+          "heartbeat": 59,
+          "terminated": true
+        },
+        {
+          "id": "efficiency-valid",
+          "started": true,
+          "heartbeat": 0,
+          "terminated": true
+        },
+        {
+          "id": "balanced-hang",
+          "started": true,
+          "heartbeat": 59,
+          "terminated": true
+        },
+        {
+          "id": "balanced-valid",
+          "started": true,
+          "heartbeat": 0,
+          "terminated": true
+        },
+        {
+          "id": "performance-hang",
+          "started": true,
+          "heartbeat": 59,
+          "terminated": true
+        },
+        {
+          "id": "performance-valid",
+          "started": true,
+          "heartbeat": 0,
+          "terminated": true
+        },
+        {
+          "id": "maximum-hang",
+          "started": true,
+          "heartbeat": 59,
+          "terminated": true
+        },
+        {
+          "id": "maximum-valid",
+          "started": true,
+          "heartbeat": 0,
+          "terminated": true
+        }
+      ],
+      "events": [
+        {
+          "id": "ultra_light-hang",
+          "event": "created"
+        },
+        {
+          "id": "ultra_light-hang",
+          "event": "terminated"
+        },
+        {
+          "id": "ultra_light-valid",
+          "event": "created"
+        },
+        {
+          "id": "ultra_light-valid",
+          "event": "terminated"
+        },
+        {
+          "id": "efficiency-hang",
+          "event": "created"
+        },
+        {
+          "id": "efficiency-hang",
+          "event": "terminated"
+        },
+        {
+          "id": "efficiency-valid",
+          "event": "created"
+        },
+        {
+          "id": "efficiency-valid",
+          "event": "terminated"
+        },
+        {
+          "id": "balanced-hang",
+          "event": "created"
+        },
+        {
+          "id": "balanced-hang",
+          "event": "terminated"
+        },
+        {
+          "id": "balanced-valid",
+          "event": "created"
+        },
+        {
+          "id": "balanced-valid",
+          "event": "terminated"
+        },
+        {
+          "id": "performance-hang",
+          "event": "created"
+        },
+        {
+          "id": "performance-hang",
+          "event": "terminated"
+        },
+        {
+          "id": "performance-valid",
+          "event": "created"
+        },
+        {
+          "id": "performance-valid",
+          "event": "terminated"
+        },
+        {
+          "id": "maximum-hang",
+          "event": "created"
+        },
+        {
+          "id": "maximum-hang",
+          "event": "terminated"
+        },
+        {
+          "id": "maximum-valid",
+          "event": "created"
+        },
+        {
+          "id": "maximum-valid",
+          "event": "terminated"
+        }
+      ],
+      "results": {
+        "ultra_light-hang": {
+          "status": "timed_out"
+        },
+        "ultra_light-valid": {
+          "status": "completed",
+          "value": 42
+        },
+        "efficiency-hang": {
+          "status": "timed_out"
+        },
+        "efficiency-valid": {
+          "status": "completed",
+          "value": 43
+        },
+        "balanced-hang": {
+          "status": "timed_out"
+        },
+        "balanced-valid": {
+          "status": "completed",
+          "value": 44
+        },
+        "performance-hang": {
+          "status": "timed_out"
+        },
+        "performance-valid": {
+          "status": "completed",
+          "value": 45
+        },
+        "maximum-hang": {
+          "status": "timed_out"
+        },
+        "maximum-valid": {
+          "status": "completed",
+          "value": 46
+        }
+      }
+    },
+    "scheduler-cancel-suspend-switch": {
+      "generation": 3,
+      "snapshot": {
+        "active": 0,
+        "queued": 0,
+        "concurrency": 1,
+        "closed": false
+      },
+      "workers": [
+        {
+          "id": "secondary-hang",
+          "started": true,
+          "heartbeat": 79,
+          "terminated": true
+        },
+        {
+          "id": "independent-essential",
+          "started": true,
+          "heartbeat": 0,
+          "terminated": true
+        },
+        {
+          "id": "secondary-valid",
+          "started": true,
+          "heartbeat": 0,
+          "terminated": true
+        },
+        {
+          "id": "explicit-abort",
+          "started": true,
+          "heartbeat": 4,
+          "terminated": true
+        },
+        {
+          "id": "after-abort",
+          "started": true,
+          "heartbeat": 0,
+          "terminated": true
+        },
+        {
+          "id": "while-suspending",
+          "started": true,
+          "heartbeat": 4,
+          "terminated": true
+        },
+        {
+          "id": "after-resume",
+          "started": true,
+          "heartbeat": 0,
+          "terminated": true
+        },
+        {
+          "id": "while-switching",
+          "started": true,
+          "heartbeat": 4,
+          "terminated": true
+        },
+        {
+          "id": "after-switch",
+          "started": true,
+          "heartbeat": 0,
+          "terminated": true
+        }
+      ],
+      "events": [
+        {
+          "id": "secondary-hang",
+          "event": "created"
+        },
+        {
+          "id": "independent-essential",
+          "event": "created"
+        },
+        {
+          "id": "independent-essential",
+          "event": "terminated"
+        },
+        {
+          "id": "secondary-hang",
+          "event": "terminated"
+        },
+        {
+          "id": "secondary-valid",
+          "event": "created"
+        },
+        {
+          "id": "secondary-valid",
+          "event": "terminated"
+        },
+        {
+          "id": "explicit-abort",
+          "event": "created"
+        },
+        {
+          "id": "explicit-abort",
+          "event": "terminated"
+        },
+        {
+          "id": "after-abort",
+          "event": "created"
+        },
+        {
+          "id": "after-abort",
+          "event": "terminated"
+        },
+        {
+          "id": "while-suspending",
+          "event": "created"
+        },
+        {
+          "id": "while-suspending",
+          "event": "terminated"
+        },
+        {
+          "id": "after-resume",
+          "event": "created"
+        },
+        {
+          "id": "after-resume",
+          "event": "terminated"
+        },
+        {
+          "id": "while-switching",
+          "event": "created"
+        },
+        {
+          "id": "while-switching",
+          "event": "terminated"
+        },
+        {
+          "id": "after-switch",
+          "event": "created"
+        },
+        {
+          "id": "after-switch",
+          "event": "terminated"
+        }
+      ],
+      "results": {
+        "independent-essential": {
+          "status": "completed",
+          "value": 24
+        },
+        "secondary-hang": {
+          "status": "timed_out"
+        },
+        "secondary-valid": {
+          "status": "completed",
+          "value": 23
+        },
+        "explicit-abort": {
+          "status": "cancelled"
+        },
+        "after-abort": {
+          "status": "completed",
+          "value": 25
+        },
+        "queued-while-suspending": {
+          "status": "cancelled"
+        },
+        "while-suspending": {
+          "status": "cancelled"
+        },
+        "after-resume": {
+          "status": "completed",
+          "value": 27
+        },
+        "while-switching": {
+          "status": "cancelled"
+        },
+        "after-switch": {
+          "status": "completed",
+          "value": 28
+        }
+      }
+    }
+  },
+  "checkedSourcesSha256": {
+    "apps/web/src/module-work.ts": "4463b123d2c6f9db17f2e0ab112752354812c0a443a599e62adfbec9cb0ad06c",
+    "apps/web/tests/module-shell.spec.ts": "eaabbfaba6229d442d2131992a4478db8f7d4daed52eb3b1a9bc6cde37d3fda6",
+    "apps/web/tests/fixtures/module-shell/chart-fixture.tsx": "d07cdfb92060426642f9d531a9a533ddb49518b7c23bd6adfa4bbd1c26edbd74",
+    "apps/web/tests/fixtures/module-shell/chart-scheduler.ts": "377f32c2f750c6077244271541db60d9d5b5c3cd59008eb3c7a25756d4df99e6",
+    "apps/web/tests/fixtures/module-shell/chart-scheduler-worker.ts": "29b653eb86b6b7ea6b7e5438fb27775502ec96debec967a3e51e3d52a9fde93d",
+    "apps/web/tests/fixtures/module-shell/control.ts": "17c8e37b41eed1dd7b41e04a93b6ab85bf0afd741405aeda4b8aa5f0d6d6d85d"
+  },
+  "verified_source_commit": "d3c5a95d9c059fceb19e6f4f50e7c4dd38be2fad"
+}

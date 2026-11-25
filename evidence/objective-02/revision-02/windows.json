@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "version": "0.2.2",
+  "verified_source_commit": "d3c5a95d9c059fceb19e6f4f50e7c4dd38be2fad",
+  "artifact_sha256": "8c0ca0ee530edc836f1cfbaef646d015cd40b79a231f89a0bb3838d7a0d5d96e",
+  "desktop_interface": {
+    "suite": "windows-x64-tauri-webview2",
+    "method": "Independent WebView2 profiles. Launch-to-first-result measured through the UI using a test-only CDP session. Sum of working sets can include shared pages. CDP offline mode was applied after startup.",
+    "launchToFirstResultMs": 542,
+    "idleSampleMs": 2930,
+    "idleCpuOneCorePct": 0,
+    "desktopHostWorkingSetBytes": 26214400,
+    "totalProcessTreeWorkingSetBytes": 428138496,
+    "processTreeCount": 7,
+    "passed": 17,
+    "failed": 0,
+    "launchToFirstResultSamplesMs": [
+      542,
+      534,
+      536
+    ]
+  },
+  "native_capability_smoke": {
+    "runtime": "158.0.4370.33",
+    "observed_at_utc": "2026-11-25T12:49:04.079Z",
+    "request_validation": "fixed empty request accepted; unexpected selector rejected",
+    "cache": {
+      "sampleCount": 2,
+      "cachedSameCount": true
+    },
+    "automatic_window_transition": {
+      "selection": "auto",
+      "previousProfile": "balanced",
+      "minimizedProfile": "ultra_light",
+      "minimizedModule": "suspended",
+      "minimizedWorkers": 0,
+      "reportedNativeWindow": "minimized",
+      "minimizedWebviewMemoryTarget": "low",
+      "restoredNativeWindow": "visible",
+      "restoredWebviewMemoryTarget": "normal",
+      "restoredProfile": "balanced",
+      "exactRationalRecheckedAfterRestore": true
+    },
+    "graphics_context": "Context created"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "objective": "02",
+  "revision": "02",
+  "version": "0.2.2",
+  "verified_source_commit": "d3c5a95d9c059fceb19e6f4f50e7c4dd38be2fad",
+  "windows_executable_sha256": "8c0ca0ee530edc836f1cfbaef646d015cd40b79a231f89a0bb3838d7a0d5d96e",
+  "previous_equivalent_passed": 594,
+  "additional_node_checks": 6,
+  "additional_chrome_checks": 2,
+  "total_distinct_counted_checks": 602,
+  "suites": [
+    {
+      "id": "rust_core",
+      "previous_passed": 16,
+      "passed": 16,
+      "failed": 0,
+      "command": "cargo test --locked --workspace"
+    },
+    {
+      "id": "cli_independent_oracle",
+      "previous_passed": 157,
+      "passed": 157,
+      "failed": 0,
+      "command": "python -B tests/oracle.py target/release/dars.exe"
+    },
+    {
+      "id": "wasm_structured_independent_oracle",
+      "previous_passed": 291,
+      "passed": 291,
+      "failed": 0,
+      "command": "python -B crates/dars-core/tests/structured-oracle.py"
+    },
+    {
+      "id": "cli_wasm_parity",
+      "previous_passed": 20,
+      "passed": 20,
+      "failed": 0,
+      "command": "node tests/check-targets.mjs target/release/dars.exe"
+    },
+    {
+      "id": "typescript_node",
+      "previous_passed": 51,
+      "passed": 57,
+      "failed": 0,
+      "command": "npm test --prefix apps/web"
+    },
+    {
+      "id": "physical_windows_chrome",
+      "previous_passed": 25,
+      "passed": 27,
+      "failed": 0,
+      "command": "npm run test:e2e --prefix apps/web"
+    },
+    {
+      "id": "browser_explicit_offline",
+      "previous_passed": 10,
+      "passed": 10,
+      "failed": 0,
+      "command": "node tests/verify-web-offline.mjs"
+    },
+    {
+      "id": "native_windows_webview2_ui",
+      "previous_passed": 17,
+      "passed": 17,
+      "failed": 0,
+      "command": "node scripts/verify-desktop.mjs --objective-02-revision-02"
+    },
+    {
+      "id": "native_windows_provider_credentials",
+      "previous_passed": 2,
+      "passed": 2,
+      "failed": 0,
+      "command": "cargo test --locked -p dars-desktop --lib -- --include-ignored"
+    },
+    {
+      "id": "native_windows_sensor_rust",
+      "previous_passed": 5,
+      "passed": 5,
+      "failed": 0,
+      "command": "cargo test --locked --workspace"
+    }
+  ],
+  "previous_ledger": "../revision-01/tests.json",
+  "equivalence_notes": [
+    "Scheduler and lifecycle cases using the previous callback interface now exercise the dedicated-worker contract.",
+    "The former hang test expected the successor to time out. Its replacement requires a valid successor result.",
+    "The focused shell run and the native capability smoke corroborate the evidence separately. The focused shell cases are already in the 27 browser checks.",
+    "The two credential checks are counted once despite one test also running in the workspace suite."
+  ],
+  "core_coverage": {
+    "functions": {
+      "covered": 57,
+      "total": 57,
+      "percent": 100
+    },
+    "lines": {
+      "covered": 613,
+      "total": 620,
+      "percent": 98.87096774193549
+    },
+    "regions": {
+      "covered": 711,
+      "total": 743,
+      "percent": 95.69313593539704
+    }
+  },
+  "checks": {
+    "cargo_fmt": "passed",
+    "cargo_clippy_workspace_all_targets": "passed",
+    "windows_release_build": "passed",
+    "production_web_build": "passed",
+    "typescript_typecheck": "passed",
+    "staged_source_gitleaks": "passed"
+  },
+  "historical_bug_reproduction": {
+    "stuck": {
+      "status": "timed_out"
+    },
+    "successor": {
+      "status": "timed_out"
+    },
+    "aborted": true,
+    "successorStarts": 0,
+    "queue": {
+      "active": 1,
+      "queued": 0,
+      "concurrency": 0,
+      "closed": false
+    }
+  },
+  "worker_recovery_evidence": "scheduler-outcomes.json",
+  "windows_evidence": "windows.json"
+}

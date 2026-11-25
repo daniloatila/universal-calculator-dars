@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "objective": "02",
+  "revision": "02",
+  "version": "0.2.2",
+  "status": "READY_FOR_REVIEW",
+  "approved": false,
+  "previous_objective": "APPROVED",
+  "objective_03": "NOT_STARTED",
+  "stable_release_published": false,
+  "independent_score_reported_for_0.2.1": 93,
+  "verified_source_commit": "d3c5a95d9c059fceb19e6f4f50e7c4dd38be2fad",
+  "criteria": [
+    {
+      "id": "DARS-02-R02-SCHEDULER-RECOVERY",
+      "requirement": {
+        "en": "A hung essential or secondary task releases its dedicated worker and a valid successor completes.",
+        "pt-BR": "Uma tarefa essencial ou secundária travada libera seu worker dedicado e a sucessora válida conclui."
+      },
+      "status": "PASS",
+      "evidence": [
+        "recovery.md",
+        "scheduler-outcomes.json",
+        "reproduction.md"
+      ]
+    },
+    {
+      "id": "DARS-02-R02-RESOURCE-BOUNDS",
+      "requirement": {
+        "en": "Queues, priorities and physical worker limits remain effective after timeout, cancellation and repeated failures.",
+        "pt-BR": "As filas, prioridades e os limites físicos continuam efetivos após prazo, cancelamento e falhas repetidas."
+      },
+      "status": "PASS",
+      "evidence": [
+        "recovery.md",
+        "scheduler-outcomes.json"
+      ]
+    },
+    {
+      "id": "DARS-02-R02-LIFECYCLE",
+      "requirement": {
+        "en": "Retired results are discarded, module scopes dispose their tasks and updates continue within the same app session.",
+        "pt-BR": "Resultados obsoletos são descartados, o escopo do módulo encerra suas tarefas e a aplicação continua na mesma sessão."
+      },
+      "status": "PASS",
+      "evidence": [
+        "recovery.md",
+        "scheduler-outcomes.json"
+      ]
+    },
+    {
+      "id": "DARS-02-R02-REGRESSION",
+      "requirement": {
+        "en": "Repeat 594 previous equivalent checks and verify Windows, precision, privacy, appearance and offline behavior.",
+        "pt-BR": "Repetir 594 verificações equivalentes e validar Windows, precisão, privacidade, aparência e modo offline."
+      },
+      "status": "PASS",
+      "evidence": [
+        "tests.json",
+        "windows.json"
+      ]
+    },
+    {
+      "id": "DARS-02-R02-MEMORY-DEBT",
+      "requirement": {
+        "en": "Track the observed memory debt and define monitoring and pre-1.0.0 investigation.",
+        "pt-BR": "Registrar a dívida de memória, o acompanhamento e a investigação anterior à versão 1.0.0."
+      },
+      "status": "PASS",
+      "evidence": [
+        "memory-debt.md",
+        "memory-debt.pt-BR.md",
+        "../../../ROADMAP.md"
+      ]
+    },
+    {
+      "id": "DARS-02-R02-CI",
+      "requirement": {
+        "en": "Verify four GitHub Actions jobs on the audited runtime and test source.",
+        "pt-BR": "Confirmar os quatro jobs do GitHub Actions no código auditado."
+      },
+      "status": "PASS",
+      "evidence": [
+        "ci.json"
+      ]
+    },
+    {
+      "id": "DARS-02-R02-DELIVERY",
+      "requirement": {
+        "en": "Publish audited code and revision evidence while preserving the milestone gates.",
+        "pt-BR": "Publicar código e evidências auditados, preservando os estados de aprovação."
+      },
+      "status": "PASS",
+      "evidence": [
+        "REPORT.md",
+        "REPORT.pt-BR.md",
+        "../../../PROJECT_STATE.md",
+        "../../objective-01/approval.json"
+      ]
+    }
+  ],
+  "retained_limit": {
+    "incremental_basic_mode_target": "under 100 MB",
+    "status": "open_monitored",
+    "evidence": "memory-debt.md"
+  }
+}
