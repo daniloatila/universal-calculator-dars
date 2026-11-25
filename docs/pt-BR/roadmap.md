@@ -17,7 +17,7 @@ Os marcos descrevem o escopo planejado. A missão original reúne os requisitos 
 
 Consulte o [estado do projeto](project-state.md) para saber qual é o objetivo vigente. Relatórios e decisões de aprovação permanecem junto às evidências de cada objetivo.
 
-Os Objetivos 01 e 02 foram aprovados nas versões 0.1.1 e 0.2.2. A primeira auditoria independente do Objetivo 03 solicitou corrigir as transições de idioma. A revisão 0.3.1 encerra essa correção técnica e aguarda uma nova auditoria independente. [Aprovação do Objetivo 01](../../evidence/objective-01/approval.json) · [Aprovação do Objetivo 02](../../evidence/objective-02/approval.json) · [Revisão do Objetivo 03](../../evidence/objective-03/revision-01/REPORT.pt-BR.md)
+Os Objetivos 01 e 02 foram aprovados nas versões 0.1.1 e 0.2.2. A primeira auditoria independente do Objetivo 03 solicitou corrigir as transições de idioma. O proprietário aprovou a revisão 0.3.1 com 95/100 após a avaliação independente final e autorizou o Objetivo 04 com branch próprio de revisão. [Aprovação do Objetivo 03](../../evidence/objective-03/approval.json) [Aprovação do Objetivo 01](../../evidence/objective-01/approval.json) · [Aprovação do Objetivo 02](../../evidence/objective-02/approval.json) · [Revisão do Objetivo 03](../../evidence/objective-03/revision-01/REPORT.pt-BR.md)
 
 ## Acompanhamento de memória no Windows
 

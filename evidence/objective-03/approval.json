@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "objective": "03",
+  "approved": true,
+  "status": "APPROVED",
+  "version": "0.3.1",
+  "approved_on": "2026-11-25",
+  "source": "Explicit owner authorization in the Objective 04 handoff",
+  "assessment": {
+    "score": 95,
+    "maximum": 100,
+    "source": "Final independent technical audit reported by the owner"
+  },
+  "audited_source_commit": "2a8e0f5a174afe850f245b2ae4cc8e974119bf5d",
+  "published_delivery_commit": "5a326bde2dcec5bc1c2b2957b3bec21c17b17b8a",
+  "verification_run": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45665744240",
+  "authorizes_objective": "04"
+}

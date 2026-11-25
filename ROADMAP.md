@@ -17,7 +17,7 @@ Milestones describe planned scope. The original mission contains their detailed 
 
 See [PROJECT_STATE.md](PROJECT_STATE.md) for the current gate. Review reports and approval records belong with each objective's evidence.
 
-Objectives 01 and 02 were approved at 0.1.1 and 0.2.2. The first independent review of Objective 03 requested correction of locale transitions. Revision 0.3.1 closes that technical finding and awaits a new independent review. [Objective 01 approval](evidence/objective-01/approval.json) · [Objective 02 approval](evidence/objective-02/approval.json) · [Objective 03 revision](evidence/objective-03/revision-01/REPORT.md)
+Objectives 01 and 02 were approved at 0.1.1 and 0.2.2. The first independent review of Objective 03 requested correction of locale transitions. The owner approved revision 0.3.1 at 95/100 after the final independent review and authorized Objective 04 for its own review branch. [Objective 03 approval](evidence/objective-03/approval.json) [Objective 01 approval](evidence/objective-01/approval.json) · [Objective 02 approval](evidence/objective-02/approval.json) · [Objective 03 revision](evidence/objective-03/revision-01/REPORT.md)
 
 ## Windows memory follow-up
 
