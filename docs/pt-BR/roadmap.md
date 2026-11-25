@@ -8,7 +8,7 @@ Os marcos descrevem o escopo planejado. A missão original reúne os requisitos 
 | --- | --- | --- | --- |
 | 01 · Fundação | 0.1.0 | Núcleo Rust, módulo Standard, desktop Windows, navegador, CLI inicial, design original, internacionalização, segurança e CI | Executar no Windows e no navegador. Verificar operação offline, aritmética exata, erros, paridade entre ambientes e reprodução. Registrar inicialização, tamanho, CPU, memória e latência. |
 | 02 · Inteligência operacional | 0.2.0 | Ciclo de vida dos módulos, adaptação de recursos, centro de privacidade, diagnóstico e localização completa | Medir suspensão, cancelamento, recuperação e ganhos sob restrições reais e simuladas. Verificar sete idiomas, RTL, privacidade e comportamento anterior. |
-| 03 · Matemática universal | 0.3.0 | Ferramentas científicas, algébricas, de cálculo, álgebra linear, geometria, matemática discreta, programação, conversão e prova | Validar cada módulo com referências independentes, propriedades, extremos e verificações de plataforma e ciclo de vida. |
+| 03 · Matemática universal | 0.3.0 | Scientific, Álgebra, Cálculo, Álgebra Linear, Geometria, Matemática Discreta, Programador, Conversor, Data e Hora e Calculation Proof | Validar cada módulo com referências independentes, propriedades, extremos e verificações de plataforma e ciclo de vida. |
 | 04 · Finanças e negócios | 0.4.0 | Finanças, investimento, empréstimos, tributos, negócios e comparação de cenários | Verificar decimais e arredondamento, fórmulas documentadas, casos financeiros independentes, exportação auditável e privacidade. |
 | 05 · Ciência, engenharia e dados | 0.5.0 | Estatística, probabilidade, simulação, otimização, física e engenharia, gráficos e dados | Comparar com referências científicas. Medir responsividade e recursos. Verificar cancelamento, sementes, entradas grandes e regressões. |
 | 06 · Produtividade, automação e IA | 0.6.0 | Caderno, fórmulas, automação declarativa, IA opcional e reconhecimento de voz e imagem | Verificar operação local, esquemas, permissões, automações reproduzíveis, cancelamento, compatibilidade de arquivos e matemática validada. |
@@ -17,7 +17,7 @@ Os marcos descrevem o escopo planejado. A missão original reúne os requisitos 
 
 Consulte o [estado do projeto](project-state.md) para saber qual é o objetivo vigente. Relatórios e decisões de aprovação permanecem junto às evidências de cada objetivo.
 
-O Objetivo 01 foi aprovado na versão 0.1.1. A revisão 01 do Objetivo 02 cobre a versão de desenvolvimento 0.2.1. [Aprovação do Objetivo 01](../../evidence/objective-01/approval.json) · [Revisão 01 do Objetivo 02](../../evidence/objective-02/revision-01/REPORT.pt-BR.md) · [Entrega histórica 0.2.0](../../evidence/objective-02/REPORT.md)
+Os Objetivos 01 e 02 foram aprovados nas versões 0.1.1 e 0.2.2. O Objetivo 03 segue em nove etapas internas, seguidas pela auditoria global. [Aprovação do Objetivo 01](../../evidence/objective-01/approval.json) · [Aprovação do Objetivo 02](../../evidence/objective-02/approval.json) · [Etapas do Objetivo 03](../../evidence/objective-03/PLAN.pt-BR.md)
 
 ## Acompanhamento de memória no Windows
 

@@ -8,7 +8,7 @@ Milestones describe planned scope. The original mission contains their detailed 
 | --- | --- | --- | --- |
 | 01 · Foundation | 0.1.0 | Rust core, Standard module, Windows desktop, browser, initial CLI, original design, internationalization, security and CI | Run on Windows and in a browser. Verify offline operation, exact arithmetic, errors, cross-runtime parity and reproducibility. Record startup, size, CPU, memory and latency. |
 | 02 · Operational intelligence | 0.2.0 | Module lifecycle, resource adaptation, privacy center, diagnostics and complete localization | Measure suspension, cancellation, recovery and gains under real and simulated constraints. Verify seven languages, RTL, privacy and prior behavior. |
-| 03 · Universal mathematics | 0.3.0 | Scientific, algebraic, calculus, linear algebra, geometry, discrete, programmer, conversion and proof-oriented tools | Validate each module against independent references, properties, extreme inputs and platform/lifecycle checks. |
+| 03 · Universal mathematics | 0.3.0 | Scientific, Algebra, Calculus, Linear Algebra, Geometry, Discrete Mathematics, Programmer, Converter, Date & Time and Calculation Proof | Validate each module against independent references, properties, extreme inputs and platform/lifecycle checks. |
 | 04 · Finance and business | 0.4.0 | Financial, investment, loans, tax, business and scenario comparison | Verify decimal and rounding policy, documented formulas, independently checked financial examples, auditable export and privacy. |
 | 05 · Science, engineering and data | 0.5.0 | Statistics, probability, simulation, optimization, physics and engineering, graphs and data | Compare with scientific references. Measure responsiveness and resources. Exercise cancellation, seeding, large inputs and regressions. |
 | 06 · Productivity, automation and AI | 0.6.0 | Notebook, formulas, declarative automation, optional AI, voice and visual recognition | Verify local-first operation, schema and permission enforcement, reproducible automation, cancellation, file compatibility and verified math. |
@@ -17,7 +17,7 @@ Milestones describe planned scope. The original mission contains their detailed 
 
 See [PROJECT_STATE.md](PROJECT_STATE.md) for the current gate. Review reports and approval records belong with each objective's evidence.
 
-Objective 01 was approved at 0.1.1. Objective 02 revision 01 covers the 0.2.1 development build. [Objective 01 approval](evidence/objective-01/approval.json) · [Objective 02 revision 01](evidence/objective-02/revision-01/REPORT.md) · [Historical 0.2.0 delivery](evidence/objective-02/REPORT.md)
+Objectives 01 and 02 were approved at 0.1.1 and 0.2.2. Objective 03 proceeds through nine internal stages, followed by the global audit. [Objective 01 approval](evidence/objective-01/approval.json) · [Objective 02 approval](evidence/objective-02/approval.json) · [Objective 03 stage gates](evidence/objective-03/PLAN.md)
 
 ## Windows memory follow-up
 

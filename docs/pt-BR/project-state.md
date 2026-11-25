@@ -4,17 +4,17 @@
 
 ## Objetivo atual
 
-**Objetivo 02 · Inteligência operacional · 0.2.2 · READY_FOR_REVIEW**
+**Objetivo 03 · Matemática universal · 0.3.0 · IN_PROGRESS**
 
 Em 24/11/2026, o proprietário aprovou o Objetivo 01 após a avaliação independente de 95/100 e autorizou o Objetivo 02. A entrega 0.1.1 revisada é a referência comparativa. [Aprovação](../../evidence/objective-01/approval.json) · [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) · [Relatório do Objetivo 02](../../evidence/objective-02/REPORT.md)
 
-O proprietário informou 93/100 na avaliação independente do 0.2.1, com correção exigida na recuperação do agendador. A revisão 02 verifica essa correção. [Revisão 02](../../evidence/objective-02/revision-02/REPORT.pt-BR.md) · [Revisão 01](../../evidence/objective-02/revision-01/REPORT.pt-BR.md)
+Em 25/11/2026, o proprietário aprovou o Objetivo 02 na versão 0.2.2 após a avaliação independente final de 95/100 e autorizou o Objetivo 03. O commit aprovado da 0.2.2 é a referência de regressão e de recursos. [Aprovação](../../evidence/objective-02/approval.json) · [Evidências da entrega aprovada](../../evidence/objective-02/revision-02/REPORT.pt-BR.md)
 
 | Objetivo | Versão planejada | Estado | Evidências |
 | --- | --- | --- | --- |
 | 01 · Fundação | 0.1.1 | APPROVED | [Aprovação](../../evidence/objective-01/approval.json) · [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) |
-| 02 · Inteligência operacional | 0.2.2 | READY_FOR_REVIEW | [Revisão 02](../../evidence/objective-02/revision-02/REPORT.pt-BR.md) · [Evidências anteriores](../../evidence/objective-02/revision-01/REPORT.pt-BR.md) |
-| 03 · Matemática universal | 0.3.0 | NOT_STARTED | `evidence/objective-03/` |
+| 02 · Inteligência operacional | 0.2.2 | APPROVED | [Aprovação](../../evidence/objective-02/approval.json) · [Revisão 02](../../evidence/objective-02/revision-02/REPORT.pt-BR.md) |
+| 03 · Matemática universal | 0.3.0 | IN_PROGRESS | [Etapas internas](../../evidence/objective-03/PLAN.pt-BR.md) |
 | 04 · Finanças e negócios | 0.4.0 | NOT_STARTED | `evidence/objective-04/` |
 | 05 · Ciência, engenharia e dados | 0.5.0 | NOT_STARTED | `evidence/objective-05/` |
 | 06 · Produtividade, automação e IA | 0.6.0 | NOT_STARTED | `evidence/objective-06/` |
