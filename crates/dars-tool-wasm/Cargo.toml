@@ -14,6 +14,7 @@ scientific = ["dars-universal/scientific"]
 algebra = ["dars-universal/algebra"]
 calculus = ["dars-universal/calculus"]
 linear_algebra = ["dars-universal/linear_algebra"]
+geometry = ["dars-universal/geometry"]
 
 [dependencies]
 dars-universal = { path = "../dars-universal", default-features = false }

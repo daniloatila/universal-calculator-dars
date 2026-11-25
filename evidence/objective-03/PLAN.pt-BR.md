@@ -9,8 +9,8 @@ A entrega 0.2.2 é a base aprovada. Registre em cada etapa a especificação mat
 | 1 | Scientific | INTERNALLY_ACCEPTED · [Verificação](scientific/verification.pt-BR.md) · [CI](scientific/ci.json) |
 | 2 | Álgebra | INTERNALLY_ACCEPTED · [Verificação](algebra/verification.pt-BR.md) · [CI](algebra/ci.json) |
 | 3 | Cálculo | INTERNALLY_ACCEPTED · [Verificação](calculus/verification.pt-BR.md) · [CI](calculus/ci.json) |
-| 4 | Álgebra Linear | INTERNALLY_ACCEPTED · [Verificação](linear-algebra/verification.pt-BR.md) |
-| 5 | Geometria | NOT_STARTED |
+| 4 | Álgebra Linear | INTERNALLY_ACCEPTED · [Verificação](linear-algebra/verification.pt-BR.md) · [CI](linear-algebra/ci.json) |
+| 5 | Geometria | INTERNALLY_ACCEPTED · [Verificação](geometry/verification.pt-BR.md) |
 | 6 | Matemática Discreta | NOT_STARTED |
 | 7 | Programador | NOT_STARTED |
 | 8 | Conversor | NOT_STARTED |

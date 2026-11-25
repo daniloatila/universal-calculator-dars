@@ -102,6 +102,7 @@ impl Answer {
             tolerance: None,
             constraints: self.constraints.into_iter().collect(),
             variables,
+            units: BTreeMap::new(),
         }
     }
 }

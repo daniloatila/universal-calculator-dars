@@ -252,6 +252,7 @@ pub(super) fn evaluate(operation: &str, input: &str, options: &Value) -> Checked
     let mut constraints: Vec<_> = guards.iter().map(Guard::text).collect();
     constraints.extend(answer.details);
     Ok(Computation {
+        units: Default::default(),
         result: answer.result,
         exactness: answer.exactness,
         normalized: input.trim().to_owned(),

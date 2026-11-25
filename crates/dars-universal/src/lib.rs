@@ -8,6 +8,8 @@ use std::collections::BTreeMap;
 mod algebra;
 #[cfg(feature = "calculus")]
 mod calculus;
+#[cfg(feature = "geometry")]
+mod geometry;
 #[cfg(feature = "linear_algebra")]
 mod linear_algebra;
 #[cfg(feature = "scientific")]
@@ -56,6 +58,7 @@ pub struct Computation {
     pub error_bound: Option<String>,
     pub constraints: Vec<String>,
     pub variables: BTreeMap<String, String>,
+    pub units: BTreeMap<String, String>,
 }
 
 #[derive(Deserialize)]
@@ -152,6 +155,16 @@ fn valid_options(options: &Map<String, Value>) -> bool {
         })
 }
 
+fn valid_proof_map(fields: &BTreeMap<String, String>) -> bool {
+    fields.len() <= PROOF_MAP_COUNT
+        && fields.iter().all(|(name, value)| {
+            !name.is_empty()
+                && valid_text(name, 32)
+                && !matches!(name.as_str(), "__proto__" | "constructor" | "prototype")
+                && valid_text(value, PROOF_VALUE_BYTES)
+        })
+}
+
 fn dispatch(
     request: &Request,
 ) -> Result<(Computation, &'static str, &'static [&'static str]), MathError> {
@@ -175,6 +188,19 @@ fn dispatch(
             )?,
             "calculus/1",
             &["https://dlmf.nist.gov/1.4", "https://dlmf.nist.gov/3.5"],
+        )),
+        #[cfg(feature = "geometry")]
+        "geometry" => Ok((
+            geometry::evaluate(
+                &request.operation,
+                &request.input,
+                &Value::Object(request.options.clone()),
+            )?,
+            "geometry/1",
+            &[
+                "https://openstax.org/books/prealgebra/pages/c-geometric-formulas",
+                "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf",
+            ],
         )),
         #[cfg(feature = "linear_algebra")]
         "linear_algebra" => Ok((
@@ -227,13 +253,8 @@ fn execute(input: &str) -> Result<Value, MathError> {
     let (result, algorithm, references) = dispatch(&request)?;
     if result.normalized.len() > NORMALIZED_BYTES
         || result.result.len() > RESULT_BYTES
-        || result.variables.len() > PROOF_MAP_COUNT
-        || result.variables.iter().any(|(name, value)| {
-            name.is_empty()
-                || !valid_text(name, 32)
-                || matches!(name.as_str(), "__proto__" | "constructor" | "prototype")
-                || !valid_text(value, PROOF_VALUE_BYTES)
-        })
+        || !valid_proof_map(&result.variables)
+        || !valid_proof_map(&result.units)
         || result.constraints.len() > PROOF_CONSTRAINT_COUNT
         || result
             .constraints
@@ -248,7 +269,7 @@ fn execute(input: &str) -> Result<Value, MathError> {
     } else {
         &[]
     };
-    let mut units = BTreeMap::new();
+    let mut units = result.units;
     let mut rounding = None;
     if request.module == "scientific" {
         let angle = request

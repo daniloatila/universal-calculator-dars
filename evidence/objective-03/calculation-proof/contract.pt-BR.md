@@ -48,6 +48,8 @@ Em Cálculo, integre `exp(-x^2)` numericamente entre `0` e `1`, com tolerância 
 
 Em Álgebra Linear, calcule a decomposição QR de uma matriz de três linhas e duas colunas com linhas `1 0`, `1 1` e `1 2`. O registro identifica o método de Householder, informa a tolerância aplicada e apresenta o resíduo observado de reconstrução e o erro de ortogonalidade pela norma de Frobenius. As medidas descrevem os fatores retornados. A suíte confere a reconstrução e o subespaço de forma independente com NumPy e SciPy. [Oráculo de Álgebra Linear](../../../tests/verify-linear-algebra.py)
 
+Em Geometria, use um círculo de raio `2` em metros. O registro mantém a área simbólica exata `4*pi` com unidade `m^2` e o diâmetro `4` com unidade `m`. O mapa de unidades registra a dimensão de cada grandeza a partir da escala comum das entradas. [Oráculo de Geometria](../../../tests/verify-geometry.py)
+
 ## Formato e validação local
 
 O arquivo é um objeto JSON independente em UTF-8. O navegador lê até 128 KiB, exige UTF-8 válido, rejeita nomes repetidos mesmo quando escritos com escapes e aceita apenas os campos próprios esperados. Os limites de comprimento do JSON Schema contam caracteres. O aplicativo também aplica limites em bytes UTF-8 por campo, rejeita sequências Unicode malformadas e limita a profundidade de estruturas a dois níveis. A expressão tem limite de 4.096 bytes. A expressão normalizada tem limite de 8.192 bytes e o resultado, de 32.768 bytes. Os mapas têm até 16 entradas e as listas têm até 32 itens. [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/json-schema-validation) · [Validador do aplicativo](../../../apps/web/src/calculation-proof.ts)

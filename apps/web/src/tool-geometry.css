@@ -1,0 +1,156 @@
+.geometry-workspace { display: grid; gap: 16px; }
+.geometry-card {
+  min-inline-size: 0;
+  padding: clamp(12px, 3vw, 21px);
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+.geometry-pick {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 7px;
+}
+.geometry-pick button {
+  min-inline-size: 0;
+  min-block-size: 44px;
+  padding: 5px 7px;
+  color: var(--muted);
+  background: var(--display);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: .87rem;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.geometry-pick button:hover, .geometry-pick button[aria-pressed=true] {
+  color: var(--text);
+  background: var(--tint);
+}
+.geometry-pick button[aria-pressed=true] {
+  border-color: var(--line-prominent);
+  box-shadow: inset 0 -2px var(--accent);
+}
+.geometry-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(285px, 1fr);
+  align-items: start;
+  gap: 16px;
+}
+.geometry-fields, .geometry-coordinates {
+  display: grid;
+  gap: 9px;
+}
+.geometry-fields {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 112px), 1fr));
+  align-items: end;
+  margin-block-end: 14px;
+}
+.geometry-preferences { padding-block-end: 14px; border-block-end: 1px solid var(--line); }
+.geometry-fields label, .geometry-coordinates {
+  display: grid;
+  gap: 6px;
+  min-inline-size: 0;
+  color: var(--muted);
+  font-size: .86rem;
+  font-weight: 650;
+}
+.geometry-fields :is(input, select), .geometry-coordinates textarea {
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 44px;
+  padding: 8px 10px;
+  color: var(--text);
+  background: var(--display);
+  border: 1px solid var(--line-prominent);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.geometry-fields input, .geometry-coordinates textarea { font-family: var(--mono); }
+.geometry-coordinates textarea { resize: vertical; line-height: 1.45; }
+.geometry-hint, .geometry-notice, .geometry-constraints {
+  margin-block: 10px 13px;
+  color: var(--muted);
+  font-size: .86rem;
+  line-height: 1.48;
+  overflow-wrap: anywhere;
+}
+.geometry-notice { min-block-size: 1.15em; margin-block-end: 0; }
+.geometry-notice[data-error] { color: var(--error); }
+.geometry-actions, .geometry-result-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.geometry-actions button { min-block-size: 44px; }
+.geometry-primary {
+  padding-inline: 16px;
+  color: var(--accent-ink);
+  background: var(--accent-key);
+  border: 1px solid var(--accent-key);
+  border-radius: 9px;
+  font-weight: 690;
+}
+.geometry-primary:hover:not(:disabled) { background: var(--accent-key-hover); }
+.geometry-primary:disabled { opacity: .56; }
+.geometry-diagram { margin: 0 0 13px; }
+.geometry-diagram canvas {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 480 / 238;
+  background: var(--display);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+}
+.geometry-diagram figcaption {
+  margin-block-start: 6px;
+  color: var(--muted);
+  font-size: .82rem;
+}
+.geometry-result-heading {
+  justify-content: space-between;
+  margin-block-end: 8px;
+  color: var(--muted);
+  font-size: .86rem;
+}
+.geometry-result-heading span { color: var(--accent); }
+.geometry-result {
+  min-block-size: 52px;
+  margin-block-end: 11px;
+  padding: 9px 12px;
+  color: var(--text);
+  background: var(--display);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+.geometry-result dl { margin: 0; }
+.geometry-result dl div {
+  display: grid;
+  grid-template-columns: minmax(88px, .8fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 8px;
+  padding-block: 5px;
+  overflow-wrap: anywhere;
+}
+.geometry-result dl div + div { border-block-start: 1px solid var(--line); }
+.geometry-result dt { color: var(--muted); font-size: .86rem; }
+.geometry-result dd {
+  margin: 0;
+  text-align: end;
+  font-family: var(--mono);
+  font-weight: 620;
+}
+.geometry-result dd span { color: var(--muted); font-weight: 450; }
+.geometry-constraints { padding-inline-start: 18px; }
+
+@media (max-width: 760px) {
+  .geometry-layout { grid-template-columns: minmax(0, 1fr); }
+  .geometry-pick { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 430px) {
+  .geometry-pick { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

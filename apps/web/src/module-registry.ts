@@ -90,4 +90,12 @@ export const primaryModules: readonly RegisteredModule[] = [
     }),
     load: () => import('./tool-linear-algebra-runtime'),
   }),
+  registerModule({
+    id: 'geometry',
+    describe: (messages) => ({
+      title: messages.geometry.title, description: messages.geometry.description,
+      keyboardHint: messages.geometry.keyboardHint,
+    }),
+    load: () => import('./tool-geometry-runtime'),
+  }),
 ];

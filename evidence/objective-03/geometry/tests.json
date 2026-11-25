@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "tests": {
+    "rust": {
+      "standard": 16,
+      "universal": 36
+    },
+    "node": {
+      "passed": 65
+    },
+    "chrome": {
+      "full": 59,
+      "offline": 10
+    },
+    "standard": {
+      "oracle": 157,
+      "structured": 291,
+      "parity": 20
+    },
+    "scientific": {
+      "oracle": 177,
+      "isolation": 1,
+      "parity": 19
+    },
+    "algebra": {
+      "oracle": 184,
+      "isolation": 1,
+      "parity": 28
+    },
+    "calculus": {
+      "oracle": 210,
+      "isolation": 2,
+      "parity": 27
+    },
+    "linearAlgebra": {
+      "oracle": 223,
+      "isolation": 3,
+      "parity": 30
+    },
+    "geometryOracle": {
+      "suite": "geometry-sympy",
+      "passed": 159,
+      "failed": 0,
+      "sympy": "1.14.0",
+      "cases": {
+        "angle": 22,
+        "circle": 5,
+        "cone": 4,
+        "cylinder": 4,
+        "distance": 11,
+        "normalized replay": 6,
+        "polygon": 13,
+        "prism": 5,
+        "rectangle": 13,
+        "rejected": 46,
+        "segments": 16,
+        "sphere": 4,
+        "triangle": 9,
+        "untrusted display text": 1
+      }
+    },
+    "geometryParity": {
+      "suite": "geometry-cli-wasm",
+      "passed": 32,
+      "isolationChecks": 4,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 475212,
+        "wasmSha256": "ccc38b66a109d54e6e41d031d4920e82782b9147c6fb16f79c1c2144414d12c4",
+        "observedWasmLinearBytes": 1179648,
+        "wasmInitializationMs": 12.895700000000001,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.029300000000034743,
+          "p95": 0.10890000000000555,
+          "p99": 0.12149999999996908
+        }
+      }
+    }
+  },
+  "coverage": {
+    "method": "cargo-llvm-cov combined workspace unit tests and native CLI independent oracles",
+    "standard": {
+      "covered": 613,
+      "total": 620
+    },
+    "universal": {
+      "covered": 6829,
+      "total": 7047
+    },
+    "geometry": {
+      "covered": 851,
+      "total": 865
+    }
+  }
+}

@@ -269,6 +269,7 @@ pub(super) fn evaluate(operation: &str, input: &str, options: &Value) -> Checked
         _ => return Err(MathError::InvalidInput),
     };
     Ok(Computation {
+        units: Default::default(),
         result: answer.result,
         exactness: if answer.tolerance.is_some() {
             Exactness::Approximate
