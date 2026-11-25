@@ -50,6 +50,8 @@ In Linear Algebra, run QR on a three-by-two matrix with rows `1 0`, `1 1` and `1
 
 In Geometry, use a circle of radius `2` in metres. The record preserves the exact symbolic area `4*pi` with `m^2` as its unit, and the diameter `4` with `m` as its unit. The units map records the dimensional power of each quantity from the common input scale. [Geometry oracle](../../../tests/verify-geometry.py)
 
+In Discrete Mathematics, `97` produces a deterministic primality result. Passing the fixed tests outside the certified range produces `probable_prime` with the tested bases recorded in the proof and an empty certified error bound. The independent suite checks the classification contract and the reported compositeness witnesses. [Discrete Mathematics oracle](../../../tests/verify-discrete-mathematics.py)
+
 ## Local format and validation
 
 The interchange file is a standalone UTF-8 JSON object. Browsers read at most 128 KiB, require valid UTF-8, reject repeated names even through escapes, and accept only the expected own fields. JSON Schema length limits describe characters. The application additionally enforces UTF-8 byte limits for each field, rejects malformed Unicode scalar sequences, and applies a two-level container limit. Request text has a 4,096-byte bound. Normalized text has an 8,192-byte bound and result text has a 32,768-byte bound. Map entries are limited to 16. Lists are limited to 32 entries. [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/json-schema-validation) · [Application validator](../../../apps/web/src/calculation-proof.ts)

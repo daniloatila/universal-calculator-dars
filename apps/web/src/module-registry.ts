@@ -98,4 +98,12 @@ export const primaryModules: readonly RegisteredModule[] = [
     }),
     load: () => import('./tool-geometry-runtime'),
   }),
+  registerModule({
+    id: 'discrete-mathematics',
+    describe: (messages) => ({
+      title: messages.discrete.title, description: messages.discrete.description,
+      keyboardHint: messages.discrete.keyboardHint,
+    }),
+    load: () => import('./tool-discrete-runtime'),
+  }),
 ];

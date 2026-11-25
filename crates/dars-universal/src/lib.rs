@@ -8,6 +8,8 @@ use std::collections::BTreeMap;
 mod algebra;
 #[cfg(feature = "calculus")]
 mod calculus;
+#[cfg(feature = "discrete-mathematics")]
+mod discrete_mathematics;
 #[cfg(feature = "geometry")]
 mod geometry;
 #[cfg(feature = "linear_algebra")]
@@ -189,6 +191,19 @@ fn dispatch(
             "calculus/1",
             &["https://dlmf.nist.gov/1.4", "https://dlmf.nist.gov/3.5"],
         )),
+        #[cfg(feature = "discrete-mathematics")]
+        "discrete-mathematics" => Ok((
+            discrete_mathematics::evaluate(
+                &request.operation,
+                &request.input,
+                &Value::Object(request.options.clone()),
+            )?,
+            "discrete-mathematics/1",
+            &[
+                "https://dlmf.nist.gov/26",
+                "https://arxiv.org/abs/1509.00864",
+            ],
+        )),
         #[cfg(feature = "geometry")]
         "geometry" => Ok((
             geometry::evaluate(
@@ -263,7 +278,9 @@ fn execute(input: &str) -> Result<Value, MathError> {
     {
         return Err(MathError::Limit);
     }
-    let assumptions = if result.exactness == Exactness::Approximate && result.error_bound.is_none()
+    let assumptions = if result.exactness == Exactness::Approximate
+        && result.precision.is_some()
+        && result.error_bound.is_none()
     {
         &["Working precision is not a certified error bound."][..]
     } else {

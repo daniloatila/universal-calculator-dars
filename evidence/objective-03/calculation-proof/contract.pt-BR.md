@@ -50,6 +50,8 @@ Em Álgebra Linear, calcule a decomposição QR de uma matriz de três linhas e 
 
 Em Geometria, use um círculo de raio `2` em metros. O registro mantém a área simbólica exata `4*pi` com unidade `m^2` e o diâmetro `4` com unidade `m`. O mapa de unidades registra a dimensão de cada grandeza a partir da escala comum das entradas. [Oráculo de Geometria](../../../tests/verify-geometry.py)
 
+Em Matemática Discreta, `97` produz um resultado determinístico de primalidade. A aprovação nos testes fixos fora do domínio certificado produz `probable_prime`, com as bases testadas no registro e sem um limite de erro certificado. A suíte independente confere a classificação e as bases que demonstram que um número é composto. [Oráculo de Matemática Discreta](../../../tests/verify-discrete-mathematics.py)
+
 ## Formato e validação local
 
 O arquivo é um objeto JSON independente em UTF-8. O navegador lê até 128 KiB, exige UTF-8 válido, rejeita nomes repetidos mesmo quando escritos com escapes e aceita apenas os campos próprios esperados. Os limites de comprimento do JSON Schema contam caracteres. O aplicativo também aplica limites em bytes UTF-8 por campo, rejeita sequências Unicode malformadas e limita a profundidade de estruturas a dois níveis. A expressão tem limite de 4.096 bytes. A expressão normalizada tem limite de 8.192 bytes e o resultado, de 32.768 bytes. Os mapas têm até 16 entradas e as listas têm até 32 itens. [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/json-schema-validation) · [Validador do aplicativo](../../../apps/web/src/calculation-proof.ts)

@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "tests": {
+    "rust": {
+      "universal": 44,
+      "standard": 16
+    },
+    "node": {
+      "passed": 65
+    },
+    "chrome": {
+      "offline": 10,
+      "full": 67
+    },
+    "standard": {
+      "structured": 291,
+      "parity": 20,
+      "oracle": 157
+    },
+    "scientific": {
+      "parity": 19,
+      "isolation": 1,
+      "oracle": 177
+    },
+    "algebra": {
+      "parity": 28,
+      "isolation": 1,
+      "oracle": 184
+    },
+    "calculus": {
+      "parity": 27,
+      "isolation": 2,
+      "oracle": 210
+    },
+    "linearAlgebra": {
+      "parity": 30,
+      "isolation": 3,
+      "oracle": 223
+    },
+    "geometry": {
+      "parity": 32,
+      "isolation": 4,
+      "oracle": 159
+    },
+    "discreteOracle": {
+      "suite": "discrete-mathematics-python-sympy",
+      "passed": 289,
+      "failed": 0,
+      "sympy": "1.14.0",
+      "cases": {
+        "arrangements": 20,
+        "combinations": 20,
+        "factor": 14,
+        "gcd": 9,
+        "lcm": 9,
+        "logic": 15,
+        "modular": 23,
+        "normalized replay": 10,
+        "permutations": 14,
+        "prime": 22,
+        "rejected": 59,
+        "sequence": 24,
+        "set_difference": 6,
+        "set_intersection": 7,
+        "set_subset": 7,
+        "set_symmetric_difference": 6,
+        "set_union": 9,
+        "truth_table": 14,
+        "untrusted display text": 1
+      }
+    },
+    "discreteParity": {
+      "suite": "discrete-mathematics-cli-wasm",
+      "passed": 38,
+      "isolationChecks": 5,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 448172,
+        "wasmSha256": "5c67295ada054af8254eb44510f2473f5f6d357a8a13ffd40adbab55600359da",
+        "observedWasmLinearBytes": 1179648,
+        "wasmInitializationMs": 14.197400000000002,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.015099999999961256,
+          "p95": 0.03829999999999245,
+          "p99": 0.04410000000001446
+        }
+      }
+    }
+  },
+  "coverage": {
+    "method": "cargo-llvm-cov combined workspace unit tests and native CLI independent oracles",
+    "standard": {
+      "covered": 613,
+      "total": 620
+    },
+    "universal": {
+      "covered": 7914,
+      "total": 8158
+    },
+    "discreteMathematics": {
+      "covered": 1073,
+      "total": 1099
+    }
+  }
+}

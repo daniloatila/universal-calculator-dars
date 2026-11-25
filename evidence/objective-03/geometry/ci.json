@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "commit": "202d55aa766d97d7166f548ee5156773076b7a2c",
+  "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45640423904",
+  "event": "workflow_dispatch",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "security",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45640423904/job/139297201631"
+    },
+    {
+      "name": "verify (macos-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45640423904/job/139297202165"
+    },
+    {
+      "name": "verify (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45640423904/job/139297202402"
+    },
+    {
+      "name": "verify (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45640423904/job/139297202758"
+    }
+  ]
+}

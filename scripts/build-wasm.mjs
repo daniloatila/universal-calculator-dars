@@ -35,7 +35,7 @@ run(bindingTool, [
   "--out-name", "dars_wasm",
 ]);
 
-for (const tool of ["scientific", "algebra", "calculus", "linear_algebra", "geometry"]) {
+for (const tool of ["scientific", "algebra", "calculus", "linear_algebra", "geometry", "discrete-mathematics"]) {
   run("cargo", [
     "build", "--locked", "--release", "-p", "dars-tool-wasm", "--target", "wasm32-unknown-unknown",
     "--no-default-features", "--features", tool,
