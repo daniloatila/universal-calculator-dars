@@ -1,0 +1,40 @@
+# Linear Algebra mathematics and bounds
+
+[Português brasileiro](limits.pt-BR.md)
+
+Enter matrix columns separated by whitespace, with rows separated by semicolons or newlines. A single vertical bar separates two operands. For example, solving `1 2;3 4|5;6` means solving a two-row system with right hand side `[5,6]`. A vector can be entered as a single row or column. Each cell accepts one signed integer, decimal, scientific literal or fraction with a nonzero denominator. The parser reads values directly and rejects expressions, brackets and malformed rows. [Parser and exact engine](../../../crates/dars-universal/src/linear_algebra/exact.rs)
+
+| Operation | Supported scope |
+| --- | --- |
+| Add and subtract | Matrices of the same shape. |
+| Multiply | Matrices with matching inner dimensions. The result retains the left row count and right column count. |
+| Transpose | Rectangular or square matrices, with dimensions exchanged. |
+| Determinant and inverse | Square matrices. A singular matrix has determinant zero and the inverse reports `singular`. |
+| Rank | Exact pivot count for any admitted rectangular or square matrix. |
+| Dot and cross | Dot takes vectors of matching lengths. Cross takes two three-component vectors. |
+| Solve | Square, overdetermined or underdetermined systems with one matching right hand side. Exact row reduction determines whether the solution is unique, infinite or inconsistent. |
+| LU | Exact row-pivoted factorization `P*A=L*U`. For an (m) by (n) matrix and (k=min(m,n)), `P` has shape (m) by (m), `L` has shape (m) by (k) and `U` has shape (k) by (n). Rank-deficient matrices are included. |
+| QR | Thin Householder factorization `A=Q*R`, with `Q` of shape (m) by (k) and `R` of shape (k) by (n). Rank-deficient matrices can still factor. The record reports exact rank and, for full-rank input, a numerical condition estimate when available. |
+| Eigenvalues and eigenvectors | Real symmetric square matrices with symmetry checked over exact rational input. Eigenvalues are in ascending order and eigenvectors are the corresponding columns of the returned matrix. Diagonal inputs have exact eigenpairs. General nonsymmetric and complex eigenproblems report `unsupported`. |
+
+## Exact outputs and system families
+
+Arithmetic, row reduction and pivot selection use arbitrary-precision rationals. Pivoting chooses the largest absolute nonzero entry in the current column and breaks ties by earlier row. Rank and singularity use exact zero comparisons. The engine returns rational fractions even when a decimal input has a short approximate representation. [Exact elimination and pivoted LU](../../../crates/dars-universal/src/linear_algebra/exact.rs) · [NIST numerical linear algebra](https://dlmf.nist.gov/3.2)
+
+Canonical output uses mathematical arrays such as `[[1,2],[3,4]]` and `[1/2,-3]`. A unique solution has `status:"unique"` and a `solution` vector. An infinite solution has `status:"infinite"`, a `particular` vector, independent `basis` vectors listed as rows and a corresponding list of free parameters. These parameters range over the real numbers, so the family is the particular solution plus an arbitrary real linear combination of the basis vectors. For example, `1 1|1` gives particular `[1,0]` and direction `[-1,1]` with parameter `t1`. An inconsistent system has `status:"inconsistent"`. Results with rational literals use this notation inside the proof's text field. [Result contract and tests](../../../crates/dars-universal/src/linear_algebra.rs)
+
+## Numerical acceptance and conditioning
+
+For non-diagonal symmetric spectra and QR, the engine scales entries by the largest absolute rational entry before conversion to binary64. It checks the output reconstruction after rescaling the returned eigenvalues or `R` coefficients. The observed relative Frobenius residual for eigenpairs is (||AV-Voperatorname{diag}(lambda)||_F/||A||_F). For QR it is (||QR-A||_F/||A||_F). The zero input uses the absolute residual. Orthogonality uses (||V^TV-I||_F) or (||Q^TQ-I||_F). Both computed metrics must be finite and within the selected tolerance, which defaults to `1e-10` and accepts rational strings from `1e-13` through `1e-6`. [Numerical validation](../../../crates/dars-universal/src/linear_algebra/numeric.rs)
+
+The record marks numerical results as approximate and records 15 decimal digits of binary64 working precision. The residuals describe the observed reconstruction of the computed factors. Certified forward error bounds are unavailable, and the `error_bound` field is empty. A small residual and sound orthogonality can coexist with sensitive individual basis vectors when eigenvalues are clustered. Eigenvalue gaps and magnitudes at or below (sqrt{epsilon}max_i|lambda_i|) trigger separate warnings. For repeated eigenvalues, any orthonormal basis of the eigenspace is valid. The engine makes the largest-magnitude component of each computed eigenvector positive to standardize its sign. [Eigenvector accuracy and gaps](https://www.netlib.org/lapack/lug/node89.html) · [Numerical implementation](../../../crates/dars-universal/src/linear_algebra/numeric.rs)
+
+QR records exact rank from the original rational matrix. A rank-deficient input gets a dependency warning. For full-rank input, the approximate ratio of smallest to largest singular value estimates reciprocal 2-norm conditioning, with a warning at or below (sqrt{epsilon}). If the optional singular-value calculation cannot provide an estimate, the record states this explicitly while retaining a QR result that passed its checks. Numerical failure in the requested factors or their checks reports `no_convergence`. [Householder QR](https://docs.rs/nalgebra/latest/nalgebra/linalg/struct.QR.html) · [Bounded SVD](https://docs.rs/nalgebra/latest/nalgebra/linalg/struct.SVD.html)
+
+## Resource and dependency decisions
+
+- Inputs have at most 4,096 UTF-8 bytes and each matrix dimension is between 1 and 12. Scalar cells have at most 256 bytes. Each decimal component allows at most 128 mantissa digits and exponent magnitude 256. The exact engine bounds rational numerators and denominators to 4,096 bits. The shared result text limit is 32,768 bytes. [Parser](../../../crates/dars-universal/src/linear_algebra/exact.rs) · [Shared proof limits](../../../crates/dars-universal/src/lib.rs)
+- For numerical work, a nonzero matrix scale must be between `1e-100` and `1e100`. A nonzero scaled entry must have magnitude at least `1e-150`. The eigenvalue and conditioning routines use at most 4,096 iterations each. Shape incompatibility or an undefined scalar reports a domain error. Invalid grammar, resource limits, singular inverse and unsupported problem classes have distinct responses. [Numerical bounds](../../../crates/dars-universal/src/linear_algebra/numeric.rs) · [Operation contract](../../../crates/dars-universal/src/linear_algebra.rs)
+- DARS uses `nalgebra` 0.35.0 with only its `std` feature and default macros disabled. The Apache-2.0 library provides bounded symmetric eigendecomposition, Householder QR and singular-value routines in pure Rust for native and WASM targets. The existing `BigRational` path retains exact arithmetic and rank. `faer` provides similar native Rust decompositions and targets medium to large matrices. Nalgebra's decomposition API and documented WASM path fit the small bounded matrices here. The LAPACK-backed variant requires native BLAS/LAPACK bindings. [Locked feature manifest](../../../crates/dars-universal/Cargo.toml) · [Nalgebra manifest](https://docs.rs/crate/nalgebra/latest/source/Cargo.toml.orig) · [Nalgebra WASM support](https://www.nalgebra.rs/docs/user_guide/wasm_and_embedded_targets/) · [Faer methods](https://docs.rs/faer/latest/faer/index.html)
+
+The independent suite uses SymPy for exact arithmetic and system families, and NumPy and SciPy for spectral and decomposition references. It checks numerical residuals and compares invariant subspaces when repeated eigenvalues make a specific basis arbitrary. [Independent oracle](../../../tests/verify-linear-algebra.py)

@@ -211,6 +211,113 @@
       "numerical_integral": "输入有限的积分上下限以及 1e-12 到 1e-3 之间的容限。结果给出近似值和误差估计。"
     }
   },
+  "linearAlgebra": {
+    "title": "线性代数",
+    "description": "编辑矩阵和向量，求解线性方程组，查看矩阵分解与谱。",
+    "keyboardHint": "按方向键在单元格之间移动，按 Ctrl+Enter 或 ⌘+Enter 计算，按 Esc 取消。",
+    "operation": "线性代数运算",
+    "useExample": "使用示例",
+    "clearCells": "清除单元格",
+    "gridHint": "空单元格按零处理。可以粘贴由制表符或空格分隔各列的矩形数据。",
+    "invalidCell": "每个单元格只能输入一个数字或分数，内容不得包含空格。",
+    "invalidMatrix": "请检查各元素。可以使用整数、小数、科学记数法或分数。",
+    "singular": "矩阵 A 是奇异矩阵，没有逆矩阵。",
+    "symbolic": "精确符号结果",
+    "constraints": "条件与诊断",
+    "tolerance": "数值容限（1e-13 至 1e-6）",
+    "unique": "唯一解",
+    "infinite": "无穷多解",
+    "inconsistent": "方程组无解",
+    "solution": "解向量",
+    "particular": "特解",
+    "basis": "零空间的基",
+    "parameters": "自由参数",
+    "eigenvectorList": "特征向量按特征值顺序逐列排列",
+    "invalidBlock": "请粘贴每行列数相同的矩形数据。",
+    "matrix": {
+      "A": "矩阵 A",
+      "B": "矩阵 B"
+    },
+    "rows": {
+      "A": "矩阵 A 的行数",
+      "B": "矩阵 B 的行数"
+    },
+    "columns": {
+      "A": "矩阵 A 的列数",
+      "B": "矩阵 B 的列数"
+    },
+    "grid": {
+      "A": "编辑矩阵 A",
+      "B": "编辑矩阵 B"
+    },
+    "operations": {
+      "add": "加法",
+      "subtract": "减法",
+      "multiply": "乘法",
+      "transpose": "转置",
+      "determinant": "行列式",
+      "inverse": "逆矩阵",
+      "rank": "秩",
+      "dot": "点积",
+      "cross": "叉积",
+      "solve": "求解方程组",
+      "eigenvalues": "特征值",
+      "eigenvectors": "特征向量",
+      "lu": "LU 分解",
+      "qr": "QR 分解"
+    },
+    "hints": {
+      "add": "A 和 B 必须具有相同的维度。",
+      "subtract": "A 和 B 必须具有相同的维度。",
+      "multiply": "A 的列数必须等于 B 的行数。",
+      "transpose": "交换 A 的行与列。",
+      "determinant": "A 必须是方阵。行列式为零表示矩阵奇异。",
+      "inverse": "A 必须是非奇异方阵。",
+      "rank": "计算 A 中线性无关的行数或列数。",
+      "dot": "输入两个元素个数相同的行向量或列向量。",
+      "cross": "输入两个各有三个元素的行向量或列向量。",
+      "solve": "在 A 中输入系数，在 B 中输入右端向量。",
+      "eigenvalues": "A 必须是实对称方阵。结果按升序排列。",
+      "eigenvectors": "A 必须是实对称方阵。每个向量对应一个特征值。",
+      "lu": "使用行主元分解 A。结果满足 P × A = L × U。",
+      "qr": "将 A 分解为 Q × R，其中 Q 的列标准正交。"
+    },
+    "proof": {
+      "realDomain": "实数",
+      "workingPrecision": "计算精度不构成经过认证的误差界。",
+      "relativeResidual": "实测相对弗罗贝尼乌斯残差",
+      "orthogonality": "实测弗罗贝尼乌斯正交误差",
+      "rank": "精确秩：{rank}/{total}",
+      "condition": "估计的 2-范数条件数倒数",
+      "illConditioned": "矩阵病态：小扰动可能影响因子或解。",
+      "clusteredEigenvalues": "相邻特征值过近时，单个特征向量可能对扰动敏感。",
+      "nearZeroEigenvalue": "有一个特征值相对于矩阵尺度接近零。",
+      "matrixShape": "{rows}×{columns} 矩阵",
+      "vectorShape": "含 {count} 个分量的向量",
+      "rankFormula": "rank(A) = 主元个数",
+      "qrFormula": "A = Q*R 且 Q^T*Q = I",
+      "realParameters": "自由参数可取任意实数。",
+      "zeroEigenvalue": "对角特征值为零时，矩阵奇异。",
+      "rankDeficient": "秩亏：存在线性相关的行或列。",
+      "conditionUnavailable": "已达迭代上限，无法估计条件数。",
+      "methods": {
+        "exact_matrix_addition": "精确矩阵加法",
+        "exact_matrix_subtraction": "精确矩阵减法",
+        "exact_matrix_product": "精确矩阵乘法",
+        "exact_matrix_transpose": "精确矩阵转置",
+        "exact_pivoted_determinant": "选主元精确求行列式",
+        "exact_gauss_jordan_inverse": "高斯–若尔当精确求逆",
+        "exact_row_rank": "通过精确行化简求秩",
+        "exact_dot_product": "精确点积",
+        "exact_cross_product": "精确叉积",
+        "exact_linear_system": "精确行化简求解线性方程组",
+        "exact_pivoted_lu": "带主元的精确 LU 分解",
+        "exact_diagonal_spectrum": "精确对角谱",
+        "verified_symmetric_eigen": "实对称特征分解",
+        "verified_householder_qr": "豪斯霍尔德 QR 分解"
+      }
+    }
+  },
   "operations": {
     "operations": "运行管理",
     "privacy": "隐私中心",

@@ -211,6 +211,113 @@
       "numerical_integral": "Introduce límites finitos y una tolerancia entre 1e-12 y 1e-3. El cálculo proporciona una aproximación y una estimación del error."
     }
   },
+  "linearAlgebra": {
+    "title": "Álgebra lineal",
+    "description": "Edita matrices y vectores, resuelve sistemas lineales e inspecciona factorizaciones y espectros.",
+    "keyboardHint": "Usa las flechas para moverte entre celdas, Ctrl+Enter o ⌘+Enter para calcular y Escape para cancelar.",
+    "operation": "Operación de álgebra lineal",
+    "useExample": "Usar ejemplo",
+    "clearCells": "Borrar celdas",
+    "gridHint": "Las celdas vacías valen cero. Pega un bloque rectangular con columnas separadas por tabulaciones o espacios.",
+    "invalidCell": "Introduce un solo número o fracción por celda, sin espacios.",
+    "invalidMatrix": "Comprueba los valores. Usa enteros, decimales, notación científica o fracciones.",
+    "singular": "La matriz A es singular y carece de inversa.",
+    "symbolic": "Exacto simbólico",
+    "constraints": "Condiciones y diagnósticos",
+    "tolerance": "Tolerancia numérica (1e-13 a 1e-6)",
+    "unique": "Solución única",
+    "infinite": "Infinitas soluciones",
+    "inconsistent": "Sistema incompatible",
+    "solution": "Vector solución",
+    "particular": "Solución particular",
+    "basis": "Base del espacio nulo",
+    "parameters": "Parámetros libres",
+    "eigenvectorList": "Vectores propios en columnas, en el orden de los valores propios",
+    "invalidBlock": "Pega un bloque rectangular con el mismo número de columnas en cada fila.",
+    "matrix": {
+      "A": "Matriz A",
+      "B": "Matriz B"
+    },
+    "rows": {
+      "A": "Filas de la matriz A",
+      "B": "Filas de la matriz B"
+    },
+    "columns": {
+      "A": "Columnas de la matriz A",
+      "B": "Columnas de la matriz B"
+    },
+    "grid": {
+      "A": "Editar matriz A",
+      "B": "Editar matriz B"
+    },
+    "operations": {
+      "add": "Sumar",
+      "subtract": "Restar",
+      "multiply": "Multiplicar",
+      "transpose": "Transponer",
+      "determinant": "Determinante",
+      "inverse": "Inversa",
+      "rank": "Rango",
+      "dot": "Producto escalar",
+      "cross": "Producto vectorial",
+      "solve": "Resolver sistema",
+      "eigenvalues": "Valores propios",
+      "eigenvectors": "Vectores propios",
+      "lu": "Descomposición LU",
+      "qr": "Descomposición QR"
+    },
+    "hints": {
+      "add": "A y B deben tener las mismas dimensiones.",
+      "subtract": "A y B deben tener las mismas dimensiones.",
+      "multiply": "El número de columnas de A debe coincidir con el número de filas de B.",
+      "transpose": "Intercambia las filas y las columnas de A.",
+      "determinant": "A debe ser cuadrada. Un determinante nulo indica una matriz singular.",
+      "inverse": "A debe ser cuadrada y no singular.",
+      "rank": "Cuenta las filas o columnas independientes de A.",
+      "dot": "Introduce dos vectores fila o columna con el mismo número de elementos.",
+      "cross": "Introduce dos vectores fila o columna con tres elementos cada uno.",
+      "solve": "Introduce los coeficientes en A y el lado derecho como vector en B.",
+      "eigenvalues": "A debe ser real, cuadrada y simétrica. Los resultados aparecen en orden ascendente.",
+      "eigenvectors": "A debe ser real, cuadrada y simétrica. Cada vector corresponde a un valor propio.",
+      "lu": "Factoriza A con pivoteo por filas. El resultado satisface P × A = L × U.",
+      "qr": "Factoriza A como Q × R. Las columnas de Q son ortonormales."
+    },
+    "proof": {
+      "realDomain": "Números reales",
+      "workingPrecision": "La precisión de trabajo no es una cota de error certificada.",
+      "relativeResidual": "Residuo relativo de Frobenius observado",
+      "orthogonality": "Error de ortogonalidad de Frobenius observado",
+      "rank": "Rango exacto: {rank} de {total}",
+      "condition": "Recíproco estimado del número de condición en norma 2",
+      "illConditioned": "Mal condicionada: pequeñas perturbaciones pueden cambiar los factores o las soluciones.",
+      "clusteredEigenvalues": "Valores propios cercanos pueden hacer sensibles a los vectores propios individuales.",
+      "nearZeroEigenvalue": "Un valor propio está cerca de cero en relación con la escala de la matriz.",
+      "matrixShape": "Matriz de {rows}×{columns}",
+      "vectorShape": "Vector de {count} componentes",
+      "rankFormula": "rango(A) = número de pivotes",
+      "qrFormula": "A = Q*R y Q^T*Q = I",
+      "realParameters": "Los parámetros libres toman valores reales.",
+      "zeroEigenvalue": "Un valor propio diagonal nulo hace que la matriz sea singular.",
+      "rankDeficient": "Rango deficiente: hay filas o columnas linealmente dependientes.",
+      "conditionUnavailable": "El límite de iteraciones impidió estimar el condicionamiento.",
+      "methods": {
+        "exact_matrix_addition": "Suma matricial exacta",
+        "exact_matrix_subtraction": "Resta matricial exacta",
+        "exact_matrix_product": "Multiplicación matricial exacta",
+        "exact_matrix_transpose": "Transposición matricial exacta",
+        "exact_pivoted_determinant": "Determinante exacto con pivoteo",
+        "exact_gauss_jordan_inverse": "Inversión exacta de Gauss–Jordan",
+        "exact_row_rank": "Reducción exacta de filas para obtener el rango",
+        "exact_dot_product": "Producto escalar exacto",
+        "exact_cross_product": "Producto vectorial exacto",
+        "exact_linear_system": "Reducción exacta de un sistema lineal",
+        "exact_pivoted_lu": "Factorización LU exacta con pivoteo",
+        "exact_diagonal_spectrum": "Espectro diagonal exacto",
+        "verified_symmetric_eigen": "Descomposición espectral simétrica real",
+        "verified_householder_qr": "Factorización QR de Householder"
+      }
+    }
+  },
   "operations": {
     "operations": "Operación",
     "privacy": "Centro de privacidad",

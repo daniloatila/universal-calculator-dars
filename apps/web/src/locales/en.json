@@ -211,6 +211,113 @@
       "numerical_integral": "Enter finite bounds and a tolerance from 1e-12 to 1e-3. The calculation gives an approximation and an error estimate."
     }
   },
+  "linearAlgebra": {
+    "title": "Linear algebra",
+    "description": "Edit matrices and vectors, solve linear systems, and inspect factorizations and spectra.",
+    "keyboardHint": "Use the arrow keys to move between cells, Ctrl+Enter or ⌘+Enter to calculate, and Escape to cancel.",
+    "operation": "Linear algebra operation",
+    "useExample": "Use example",
+    "clearCells": "Clear cells",
+    "gridHint": "Empty cells are zero. Paste a rectangular block with tab- or space-separated columns.",
+    "invalidCell": "Enter one number or fraction per cell, with no spaces.",
+    "invalidMatrix": "Check the entries. Use integers, decimals, scientific notation or fractions.",
+    "singular": "Matrix A is singular and has no inverse.",
+    "symbolic": "Exact symbolic",
+    "constraints": "Conditions and diagnostics",
+    "tolerance": "Numerical tolerance (1e-13 to 1e-6)",
+    "unique": "Unique solution",
+    "infinite": "Infinitely many solutions",
+    "inconsistent": "Inconsistent system",
+    "solution": "Solution vector",
+    "particular": "Particular solution",
+    "basis": "Null space basis",
+    "parameters": "Free parameters",
+    "eigenvectorList": "Eigenvectors by column, in eigenvalue order",
+    "invalidBlock": "Paste a rectangular block with the same number of columns on each row.",
+    "matrix": {
+      "A": "Matrix A",
+      "B": "Matrix B"
+    },
+    "rows": {
+      "A": "Rows in matrix A",
+      "B": "Rows in matrix B"
+    },
+    "columns": {
+      "A": "Columns in matrix A",
+      "B": "Columns in matrix B"
+    },
+    "grid": {
+      "A": "Edit matrix A",
+      "B": "Edit matrix B"
+    },
+    "operations": {
+      "add": "Add",
+      "subtract": "Subtract",
+      "multiply": "Multiply",
+      "transpose": "Transpose",
+      "determinant": "Determinant",
+      "inverse": "Inverse",
+      "rank": "Rank",
+      "dot": "Dot product",
+      "cross": "Cross product",
+      "solve": "Solve system",
+      "eigenvalues": "Eigenvalues",
+      "eigenvectors": "Eigenvectors",
+      "lu": "LU decomposition",
+      "qr": "QR decomposition"
+    },
+    "hints": {
+      "add": "A and B must have the same dimensions.",
+      "subtract": "A and B must have the same dimensions.",
+      "multiply": "The number of columns in A must match the number of rows in B.",
+      "transpose": "Exchange rows and columns of A.",
+      "determinant": "A must be square. A zero determinant indicates a singular matrix.",
+      "inverse": "A must be square and nonsingular.",
+      "rank": "Count the independent rows or columns of A.",
+      "dot": "Enter two row or column vectors with the same number of entries.",
+      "cross": "Enter two row or column vectors with three entries each.",
+      "solve": "Enter the coefficients in A and the right-hand side as a vector in B.",
+      "eigenvalues": "A must be real, square and symmetric. Results are in ascending order.",
+      "eigenvectors": "A must be real, square and symmetric. Each vector corresponds to an eigenvalue.",
+      "lu": "Factor A with row pivoting. The result satisfies P × A = L × U.",
+      "qr": "Factor A as Q × R. The columns of Q are orthonormal."
+    },
+    "proof": {
+      "realDomain": "Real numbers",
+      "workingPrecision": "Working precision is not a certified error bound.",
+      "relativeResidual": "Observed relative Frobenius residual",
+      "orthogonality": "Observed Frobenius orthogonality error",
+      "rank": "Exact rank: {rank} of {total}",
+      "condition": "Estimated reciprocal 2-norm condition",
+      "illConditioned": "Ill-conditioned: small perturbations may change the factors or solutions.",
+      "clusteredEigenvalues": "Closely spaced eigenvalues can make individual eigenvectors sensitive.",
+      "nearZeroEigenvalue": "An eigenvalue is close to zero relative to the matrix scale.",
+      "matrixShape": "{rows}×{columns} matrix",
+      "vectorShape": "Vector with {count} components",
+      "rankFormula": "rank(A) = number of pivots",
+      "qrFormula": "A = Q*R and Q^T*Q = I",
+      "realParameters": "Free parameters range over the reals.",
+      "zeroEigenvalue": "A zero diagonal eigenvalue makes the matrix singular.",
+      "rankDeficient": "Rank deficient: rows or columns are linearly dependent.",
+      "conditionUnavailable": "Condition estimate unavailable within the iteration budget.",
+      "methods": {
+        "exact_matrix_addition": "Exact matrix addition",
+        "exact_matrix_subtraction": "Exact matrix subtraction",
+        "exact_matrix_product": "Exact matrix multiplication",
+        "exact_matrix_transpose": "Exact matrix transpose",
+        "exact_pivoted_determinant": "Exact determinant with pivoting",
+        "exact_gauss_jordan_inverse": "Exact Gauss–Jordan inversion",
+        "exact_row_rank": "Exact row reduction for rank",
+        "exact_dot_product": "Exact dot product",
+        "exact_cross_product": "Exact cross product",
+        "exact_linear_system": "Exact reduction of a linear system",
+        "exact_pivoted_lu": "Exact LU factorization with pivoting",
+        "exact_diagonal_spectrum": "Exact diagonal spectrum",
+        "verified_symmetric_eigen": "Real symmetric eigendecomposition",
+        "verified_householder_qr": "Householder QR factorization"
+      }
+    }
+  },
   "operations": {
     "operations": "Operations",
     "privacy": "Privacy center",

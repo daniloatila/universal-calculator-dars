@@ -8,6 +8,8 @@ use std::collections::BTreeMap;
 mod algebra;
 #[cfg(feature = "calculus")]
 mod calculus;
+#[cfg(feature = "linear_algebra")]
+mod linear_algebra;
 #[cfg(feature = "scientific")]
 mod scientific;
 
@@ -28,6 +30,7 @@ const MAX_SAFE_INTEGER: i64 = 9_007_199_254_740_991;
 pub enum MathError {
     InvalidInput,
     Domain,
+    Singular,
     Limit,
     Unsupported,
     NoConvergence,
@@ -172,6 +175,16 @@ fn dispatch(
             )?,
             "calculus/1",
             &["https://dlmf.nist.gov/1.4", "https://dlmf.nist.gov/3.5"],
+        )),
+        #[cfg(feature = "linear_algebra")]
+        "linear_algebra" => Ok((
+            linear_algebra::evaluate(
+                &request.operation,
+                &request.input,
+                &Value::Object(request.options.clone()),
+            )?,
+            "linear_algebra/1",
+            &["https://docs.rs/nalgebra/0.35.0/nalgebra/linalg/index.html"],
         )),
         #[cfg(feature = "scientific")]
         "scientific" => Ok((

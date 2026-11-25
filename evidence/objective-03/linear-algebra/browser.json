@@ -1,0 +1,229 @@
+{
+  "browser": "installed Chrome on Windows",
+  "expected": 25,
+  "outcomes": [
+    {
+      "title": "Algebra runs its nine operations, exposes domain restrictions and preserves module state",
+      "duration_ms": 2516,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra changes solution domains and keeps restrictions when verifying excluded values",
+      "duration_ms": 1077,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra controls are localized in seven languages and retain an accessible 320 px RTL layout",
+      "duration_ms": 1644,
+      "status": "passed"
+    },
+    {
+      "title": "Algebra prepares only its own resources and calculates after offline reload",
+      "duration_ms": 1145,
+      "status": "passed"
+    },
+    {
+      "title": "switching modules terminates an admitted Algebra worker and allows a fresh calculation",
+      "duration_ms": 479,
+      "status": "passed"
+    },
+    {
+      "title": "a real Scientific result exports a versioned local calculation record and reopens it as an import",
+      "duration_ms": 722,
+      "status": "passed"
+    },
+    {
+      "title": "the local proof viewer rejects malformed or oversized bytes and treats imported markup as text",
+      "duration_ms": 568,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus performs higher and partial derivatives, integrals and a Taylor expansion",
+      "duration_ms": 1669,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus distinguishes limits, unsupported primitives and undefined integrals",
+      "duration_ms": 1178,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus exposes numerical tolerance and an uncertified estimate in its downloadable proof",
+      "duration_ms": 1149,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus localizes operation controls, numeric parameters and the narrow RTL layout",
+      "duration_ms": 2391,
+      "status": "passed"
+    },
+    {
+      "title": "Calculus prepares one isolated WASM lazily and calculates after offline reload",
+      "duration_ms": 1112,
+      "status": "passed"
+    },
+    {
+      "title": "switching modules stops a pending Calculus worker and keeps the draft",
+      "duration_ms": 533,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra runs all fourteen operations and preserves Standard and adaptive behavior",
+      "duration_ms": 3899,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra edits, pastes and resizes matrices by keyboard while retaining exact integer text",
+      "duration_ms": 638,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra distinguishes incompatible, indeterminate, singular and invalid input",
+      "duration_ms": 850,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra shows observed numerical diagnostics and exports canonical proof",
+      "duration_ms": 1255,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra localizes controls and decimal cells with accessible 320 px RTL and wide grids",
+      "duration_ms": 4888,
+      "status": "passed"
+    },
+    {
+      "title": "Linear algebra loads one isolated WASM on demand and recalculates offline",
+      "duration_ms": 2045,
+      "status": "passed"
+    },
+    {
+      "title": "switching modules terminates unfinished work and retains the matrix draft",
+      "duration_ms": 1426,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific computes the required vectors and preserves Standard and adaptive behavior",
+      "duration_ms": 2299,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific options control working precision and engineering notation and expose domain failures",
+      "duration_ms": 1032,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific normalizes localized input and keeps its controls within a narrow RTL layout",
+      "duration_ms": 2331,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific assets are absent on initial opening and remain usable after explicit offline preparation",
+      "duration_ms": 1313,
+      "status": "passed"
+    },
+    {
+      "title": "Scientific cancels an admitted worker and calculates on a fresh worker",
+      "duration_ms": 646,
+      "status": "passed"
+    }
+  ],
+  "observations": {
+    "linear-algebra-interaction-observations": {
+      "activationMs": 61.477499999999054,
+      "observations": [
+        {
+          "operation": "add",
+          "throughBrowserMs": 199.53299999999945
+        },
+        {
+          "operation": "subtract",
+          "throughBrowserMs": 92.9382999999998
+        },
+        {
+          "operation": "multiply",
+          "throughBrowserMs": 166.52890000000116
+        },
+        {
+          "operation": "transpose",
+          "throughBrowserMs": 133.14019999999982
+        },
+        {
+          "operation": "determinant",
+          "throughBrowserMs": 106.64000000000124
+        },
+        {
+          "operation": "inverse",
+          "throughBrowserMs": 91.67159999999967
+        },
+        {
+          "operation": "rank",
+          "throughBrowserMs": 92.80450000000019
+        },
+        {
+          "operation": "dot",
+          "throughBrowserMs": 107.83879999999954
+        },
+        {
+          "operation": "cross",
+          "throughBrowserMs": 110.13639999999941
+        },
+        {
+          "operation": "solve",
+          "throughBrowserMs": 578.3624
+        },
+        {
+          "operation": "eigenvalues",
+          "throughBrowserMs": 297.8134000000009
+        },
+        {
+          "operation": "eigenvectors",
+          "throughBrowserMs": 331.4469000000008
+        },
+        {
+          "operation": "lu",
+          "throughBrowserMs": 308.6388999999999
+        },
+        {
+          "operation": "qr",
+          "throughBrowserMs": 392.3029000000006
+        }
+      ],
+      "scope": "Playwright actions + scheduler, worker, WASM and result DOM"
+    },
+    "linear-algebra-numerical-proof": {
+      "exactness": "approximate",
+      "method": "verified_householder_qr",
+      "tolerance": "1e-10",
+      "error_bound": null,
+      "constraints": [
+        "Relative Frobenius residual (observed): 2.9373740229761033e-16",
+        "Frobenius orthogonality error (observed): 6.661338147750939e-16",
+        "Exact rank: 2 of 2",
+        "Estimated reciprocal 2-norm condition: 5.773502691896258e-1"
+      ]
+    },
+    "linear-algebra-offline-proof": {
+      "initialRequests": [],
+      "initialCache": [],
+      "prepared": [
+        "/assets/dars_tool_wasm_bg-C3Cb8g3S.wasm",
+        "/assets/tool-linear-algebra-runtime-BGjCnt0o.js",
+        "/assets/tool-linear-algebra-runtime-g3aGf1K5.css",
+        "/assets/tool-linear-algebra-worker-CJsbETCh.js",
+        "/assets/tool-runtime-COMJ0BY4.js",
+        "/assets/tool-runtime-Dli0aaFn.css"
+      ],
+      "offlineCanonical": "-2",
+      "otherToolAssets": []
+    }
+  },
+  "linear_algebra_wasm_asset": "/assets/dars_tool_wasm_bg-C3Cb8g3S.wasm",
+  "linear_algebra_wasm_sha256": "35611b767ba5b8a647969e090d60914641f45640c78d355ef2f2c771a92ca32c",
+  "linear_algebra_wasm_size": 523769,
+  "linear_algebra_screenshot_sha256": "8ecac7e8ecfefebd3dfe1d1b563b059fd1fb7bd2000b88cb0da4b5a2e234e846",
+  "linear_algebra_screenshot_px": [
+    1280,
+    1082
+  ]
+}

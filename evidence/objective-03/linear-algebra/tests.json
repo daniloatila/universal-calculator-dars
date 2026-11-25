@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "tests": {
+    "rust": {
+      "universal": 29,
+      "standard": 16
+    },
+    "node": {
+      "passed": 65
+    },
+    "chrome": {
+      "fullBeforeRtlCorrection": 52,
+      "focusedFinal": 25,
+      "offlineFinal": 10
+    },
+    "standard": {
+      "parity": 20,
+      "oracle": 157,
+      "structured": 291
+    },
+    "scientific": {
+      "isolation": 1,
+      "parity": 19,
+      "oracle": 177
+    },
+    "algebra": {
+      "isolation": 1,
+      "parity": 28,
+      "oracle": 184
+    },
+    "calculus": {
+      "isolation": 2,
+      "parity": 27,
+      "oracle": 210
+    },
+    "linearAlgebraOracle": {
+      "suite": "linear-algebra-sympy-numpy-scipy",
+      "passed": 223,
+      "failed": 0,
+      "sympy": "1.14.0",
+      "numpy": "2.5.1",
+      "scipy": "1.18.1",
+      "cases": {
+        "add": 10,
+        "cross": 8,
+        "determinant": 9,
+        "dot": 9,
+        "eigenvalues": 18,
+        "eigenvectors": 18,
+        "inverse": 6,
+        "lu": 12,
+        "multiply": 11,
+        "normalized replay": 6,
+        "qr": 15,
+        "rank": 14,
+        "rejected": 50,
+        "solve": 14,
+        "subtract": 9,
+        "transpose": 13,
+        "untrusted display text": 1
+      }
+    },
+    "linearAlgebraParity": {
+      "suite": "linear_algebra-cli-wasm",
+      "passed": 30,
+      "isolationChecks": 3,
+      "failed": 0,
+      "measurement": {
+        "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+        "wasmBytes": 523769,
+        "wasmSha256": "35611b767ba5b8a647969e090d60914641f45640c78d355ef2f2c771a92ca32c",
+        "observedWasmLinearBytes": 1179648,
+        "wasmInitializationMs": 13.082399999999996,
+        "interactions": 120,
+        "warmupPerExpression": 10,
+        "milliseconds": {
+          "p50": 0.028300000000001546,
+          "p95": 0.03890000000001237,
+          "p99": 0.04370000000000118
+        }
+      }
+    }
+  },
+  "coverage": {
+    "method": "cargo-llvm-cov combined workspace unit tests and native CLI independent oracles",
+    "standard": {
+      "total": 620,
+      "covered": 613
+    },
+    "universal": {
+      "total": 6164,
+      "covered": 5960
+    },
+    "linearAlgebra": {
+      "total": 934,
+      "covered": 921
+    }
+  }
+}

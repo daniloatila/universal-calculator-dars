@@ -51,16 +51,18 @@ jobs:
           node tests/check-scientific-targets.mjs target/release/dars
           node tests/check-algebra-targets.mjs target/release/dars
           node tests/check-calculus-targets.mjs target/release/dars
+          node tests/check-linear-algebra-targets.mjs target/release/dars
           python3 -B crates/dars-core/tests/structured-oracle.py
       - name: Verify advanced mathematics with independent references
         if: runner.os == 'Linux'
         run: |
           python3 -m venv "$RUNNER_TEMP/dars-test-math"
-          "$RUNNER_TEMP/dars-test-math/bin/python" -m pip install --only-binary=:all: --require-hashes -r tests/math-oracle-requirements.txt
+          "$RUNNER_TEMP/dars-test-math/bin/python" -m pip install --only-binary=:all: --require-hashes -r tests/math-oracle-requirements.txt -r tests/linear-algebra-oracle-requirements.txt
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-scientific.py target/release/dars
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-scientific-complex.py target/release/dars
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-algebra.py target/release/dars
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-calculus.py target/release/dars
+          "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-linear-algebra.py target/release/dars
       - name: Browser verification (Linux)
         if: runner.os == 'Linux'
         working-directory: apps/web

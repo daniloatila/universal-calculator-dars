@@ -211,6 +211,113 @@
       "numerical_integral": "Saisissez des bornes finies et une tolérance entre 1e-12 et 1e-3. Le calcul donne une approximation et une estimation de l’erreur."
     }
   },
+  "linearAlgebra": {
+    "title": "Algèbre linéaire",
+    "description": "Modifiez des matrices et des vecteurs, résolvez des systèmes linéaires et examinez les factorisations et les spectres.",
+    "keyboardHint": "Utilisez les flèches pour changer de cellule, Ctrl+Entrée ou ⌘+Entrée pour calculer et Échap pour annuler.",
+    "operation": "Opération d’algèbre linéaire",
+    "useExample": "Utiliser l’exemple",
+    "clearCells": "Effacer les cellules",
+    "gridHint": "Les cellules vides valent zéro. Collez un bloc rectangulaire dont les colonnes sont séparées par des tabulations ou des espaces.",
+    "invalidCell": "Saisissez un seul nombre ou une seule fraction par cellule, sans espaces.",
+    "invalidMatrix": "Vérifiez les valeurs. Utilisez des entiers, des décimaux, la notation scientifique ou des fractions.",
+    "singular": "La matrice A est singulière et n’a pas d’inverse.",
+    "symbolic": "Symbolique exact",
+    "constraints": "Conditions et diagnostics",
+    "tolerance": "Tolérance numérique (1e-13 à 1e-6)",
+    "unique": "Solution unique",
+    "infinite": "Infinité de solutions",
+    "inconsistent": "Système incompatible",
+    "solution": "Vecteur solution",
+    "particular": "Solution particulière",
+    "basis": "Base du noyau",
+    "parameters": "Paramètres libres",
+    "eigenvectorList": "Vecteurs propres en colonnes, dans l’ordre des valeurs propres",
+    "invalidBlock": "Collez un bloc rectangulaire avec le même nombre de colonnes sur chaque ligne.",
+    "matrix": {
+      "A": "Matrice A",
+      "B": "Matrice B"
+    },
+    "rows": {
+      "A": "Lignes de la matrice A",
+      "B": "Lignes de la matrice B"
+    },
+    "columns": {
+      "A": "Colonnes de la matrice A",
+      "B": "Colonnes de la matrice B"
+    },
+    "grid": {
+      "A": "Modifier la matrice A",
+      "B": "Modifier la matrice B"
+    },
+    "operations": {
+      "add": "Additionner",
+      "subtract": "Soustraire",
+      "multiply": "Multiplier",
+      "transpose": "Transposer",
+      "determinant": "Déterminant",
+      "inverse": "Inverse",
+      "rank": "Rang",
+      "dot": "Produit scalaire",
+      "cross": "Produit vectoriel",
+      "solve": "Résoudre le système",
+      "eigenvalues": "Valeurs propres",
+      "eigenvectors": "Vecteurs propres",
+      "lu": "Décomposition LU",
+      "qr": "Décomposition QR"
+    },
+    "hints": {
+      "add": "A et B doivent avoir les mêmes dimensions.",
+      "subtract": "A et B doivent avoir les mêmes dimensions.",
+      "multiply": "Le nombre de colonnes de A doit égaler le nombre de lignes de B.",
+      "transpose": "Échangez les lignes et les colonnes de A.",
+      "determinant": "A doit être carrée. Un déterminant nul indique une matrice singulière.",
+      "inverse": "A doit être carrée et non singulière.",
+      "rank": "Comptez les lignes ou colonnes indépendantes de A.",
+      "dot": "Saisissez deux vecteurs ligne ou colonne ayant le même nombre d’éléments.",
+      "cross": "Saisissez deux vecteurs ligne ou colonne de trois éléments chacun.",
+      "solve": "Saisissez les coefficients dans A et le second membre sous forme de vecteur dans B.",
+      "eigenvalues": "A doit être réelle, carrée et symétrique. Les résultats sont classés par ordre croissant.",
+      "eigenvectors": "A doit être réelle, carrée et symétrique. Chaque vecteur correspond à une valeur propre.",
+      "lu": "Factorisez A avec pivotement de lignes. Le résultat vérifie P × A = L × U.",
+      "qr": "Factorisez A sous la forme Q × R. Les colonnes de Q sont orthonormées."
+    },
+    "proof": {
+      "realDomain": "Nombres réels",
+      "workingPrecision": "La précision de calcul ne constitue pas une borne d’erreur certifiée.",
+      "relativeResidual": "Résidu relatif de Frobenius observé",
+      "orthogonality": "Erreur d’orthogonalité de Frobenius observée",
+      "rank": "Rang exact : {rank} sur {total}",
+      "condition": "Inverse estimé du conditionnement en norme 2",
+      "illConditioned": "Mauvais conditionnement : de faibles perturbations peuvent modifier les facteurs ou les solutions.",
+      "clusteredEigenvalues": "Des valeurs propres proches peuvent rendre les vecteurs propres individuels sensibles.",
+      "nearZeroEigenvalue": "Une valeur propre est proche de zéro à l’échelle de la matrice.",
+      "matrixShape": "Matrice {rows}×{columns}",
+      "vectorShape": "Vecteur à {count} composantes",
+      "rankFormula": "rang(A) = nombre de pivots",
+      "qrFormula": "A = Q*R et Q^T*Q = I",
+      "realParameters": "Les paramètres libres prennent des valeurs réelles.",
+      "zeroEigenvalue": "Une valeur propre diagonale nulle rend la matrice singulière.",
+      "rankDeficient": "Rang déficient : des lignes ou colonnes sont linéairement dépendantes.",
+      "conditionUnavailable": "La limite d’itérations a empêché l’estimation du conditionnement.",
+      "methods": {
+        "exact_matrix_addition": "Addition matricielle exacte",
+        "exact_matrix_subtraction": "Soustraction matricielle exacte",
+        "exact_matrix_product": "Multiplication matricielle exacte",
+        "exact_matrix_transpose": "Transposition matricielle exacte",
+        "exact_pivoted_determinant": "Déterminant exact avec pivotement",
+        "exact_gauss_jordan_inverse": "Inversion exacte de Gauss–Jordan",
+        "exact_row_rank": "Réduction exacte par lignes pour obtenir le rang",
+        "exact_dot_product": "Produit scalaire exact",
+        "exact_cross_product": "Produit vectoriel exact",
+        "exact_linear_system": "Réduction exacte d’un système linéaire",
+        "exact_pivoted_lu": "Factorisation LU exacte avec pivotement",
+        "exact_diagonal_spectrum": "Spectre diagonal exact",
+        "verified_symmetric_eigen": "Décomposition spectrale réelle symétrique",
+        "verified_householder_qr": "Factorisation QR de Householder"
+      }
+    }
+  },
   "operations": {
     "operations": "Fonctionnement",
     "privacy": "Centre de confidentialité",

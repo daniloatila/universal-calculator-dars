@@ -82,4 +82,12 @@ export const primaryModules: readonly RegisteredModule[] = [
     }),
     load: () => import('./tool-calculus-runtime'),
   }),
+  registerModule({
+    id: 'linear-algebra',
+    describe: (messages) => ({
+      title: messages.linearAlgebra.title, description: messages.linearAlgebra.description,
+      keyboardHint: messages.linearAlgebra.keyboardHint,
+    }),
+    load: () => import('./tool-linear-algebra-runtime'),
+  }),
 ];

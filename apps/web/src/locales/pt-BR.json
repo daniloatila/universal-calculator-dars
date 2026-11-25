@@ -211,6 +211,113 @@
       "numerical_integral": "Informe limites finitos e uma tolerância entre 1e-12 e 1e-3. O cálculo fornece uma aproximação e uma estimativa de erro."
     }
   },
+  "linearAlgebra": {
+    "title": "Álgebra linear",
+    "description": "Edite matrizes e vetores, resolva sistemas lineares e inspecione decomposições e espectros.",
+    "keyboardHint": "Use as setas para mover entre células, Ctrl+Enter ou ⌘+Enter para calcular e Escape para cancelar.",
+    "operation": "Operação de álgebra linear",
+    "useExample": "Usar exemplo",
+    "clearCells": "Limpar células",
+    "gridHint": "Células vazias valem zero. Cole um bloco retangular com colunas separadas por tabulações ou espaços.",
+    "invalidCell": "Digite um único número ou fração por célula, sem espaços.",
+    "invalidMatrix": "Confira os valores. Use inteiros, decimais, notação científica ou frações.",
+    "singular": "A matriz A é singular e não tem inversa.",
+    "symbolic": "Exato simbólico",
+    "constraints": "Condições e diagnósticos",
+    "tolerance": "Tolerância numérica (1e-13 a 1e-6)",
+    "unique": "Solução única",
+    "infinite": "Infinitas soluções",
+    "inconsistent": "Sistema incompatível",
+    "solution": "Vetor solução",
+    "particular": "Solução particular",
+    "basis": "Base do núcleo",
+    "parameters": "Parâmetros livres",
+    "eigenvectorList": "Autovetores em colunas, na ordem dos autovalores",
+    "invalidBlock": "Cole um bloco retangular com o mesmo número de colunas em cada linha.",
+    "matrix": {
+      "A": "Matriz A",
+      "B": "Matriz B"
+    },
+    "rows": {
+      "A": "Linhas da matriz A",
+      "B": "Linhas da matriz B"
+    },
+    "columns": {
+      "A": "Colunas da matriz A",
+      "B": "Colunas da matriz B"
+    },
+    "grid": {
+      "A": "Editar matriz A",
+      "B": "Editar matriz B"
+    },
+    "operations": {
+      "add": "Somar",
+      "subtract": "Subtrair",
+      "multiply": "Multiplicar",
+      "transpose": "Transpor",
+      "determinant": "Determinante",
+      "inverse": "Inversa",
+      "rank": "Posto",
+      "dot": "Produto escalar",
+      "cross": "Produto vetorial",
+      "solve": "Resolver sistema",
+      "eigenvalues": "Autovalores",
+      "eigenvectors": "Autovetores",
+      "lu": "Decomposição LU",
+      "qr": "Decomposição QR"
+    },
+    "hints": {
+      "add": "A e B devem ter as mesmas dimensões.",
+      "subtract": "A e B devem ter as mesmas dimensões.",
+      "multiply": "O número de colunas de A deve coincidir com o número de linhas de B.",
+      "transpose": "Troque as linhas e as colunas de A.",
+      "determinant": "A deve ser quadrada. Determinante zero indica matriz singular.",
+      "inverse": "A deve ser quadrada e não singular.",
+      "rank": "Conte as linhas ou colunas independentes de A.",
+      "dot": "Insira dois vetores linha ou coluna com o mesmo número de elementos.",
+      "cross": "Insira dois vetores linha ou coluna com três elementos cada.",
+      "solve": "Digite os coeficientes em A e o lado direito como vetor em B.",
+      "eigenvalues": "A deve ser real, quadrada e simétrica. Os resultados vêm em ordem crescente.",
+      "eigenvectors": "A deve ser real, quadrada e simétrica. Cada vetor corresponde a um autovalor.",
+      "lu": "Fatore A com pivoteamento por linhas. O resultado satisfaz P × A = L × U.",
+      "qr": "Fatore A como Q × R. As colunas de Q são ortonormais."
+    },
+    "proof": {
+      "realDomain": "Números reais",
+      "workingPrecision": "A precisão de trabalho não é um limite de erro certificado.",
+      "relativeResidual": "Resíduo relativo de Frobenius observado",
+      "orthogonality": "Erro de ortogonalidade de Frobenius observado",
+      "rank": "Posto exato: {rank} de {total}",
+      "condition": "Recíproco estimado da condição na norma 2",
+      "illConditioned": "Mal condicionada: pequenas perturbações podem alterar os fatores ou as soluções.",
+      "clusteredEigenvalues": "Autovalores próximos podem tornar os autovetores individuais sensíveis.",
+      "nearZeroEigenvalue": "Há um autovalor próximo de zero em relação à escala da matriz.",
+      "matrixShape": "Matriz {rows}×{columns}",
+      "vectorShape": "Vetor com {count} componentes",
+      "rankFormula": "posto(A) = número de pivôs",
+      "qrFormula": "A = Q*R e Q^T*Q = I",
+      "realParameters": "Os parâmetros livres assumem valores reais.",
+      "zeroEigenvalue": "Um autovalor diagonal nulo torna a matriz singular.",
+      "rankDeficient": "Posto deficiente: há linhas ou colunas linearmente dependentes.",
+      "conditionUnavailable": "O limite de iterações impediu a estimativa de condicionamento.",
+      "methods": {
+        "exact_matrix_addition": "Soma matricial exata",
+        "exact_matrix_subtraction": "Subtração matricial exata",
+        "exact_matrix_product": "Multiplicação matricial exata",
+        "exact_matrix_transpose": "Transposição matricial exata",
+        "exact_pivoted_determinant": "Determinante exato com pivoteamento",
+        "exact_gauss_jordan_inverse": "Inversão exata por Gauss–Jordan",
+        "exact_row_rank": "Escalonamento exato para obter o posto",
+        "exact_dot_product": "Produto escalar exato",
+        "exact_cross_product": "Produto vetorial exato",
+        "exact_linear_system": "Escalonamento exato de sistema linear",
+        "exact_pivoted_lu": "Fatoração LU exata com pivoteamento",
+        "exact_diagonal_spectrum": "Espectro diagonal exato",
+        "verified_symmetric_eigen": "Decomposição espectral simétrica real",
+        "verified_householder_qr": "Fatoração QR de Householder"
+      }
+    }
+  },
   "operations": {
     "operations": "Operação",
     "privacy": "Central de privacidade",
