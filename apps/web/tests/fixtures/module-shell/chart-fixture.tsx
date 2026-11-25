@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ModuleActivation } from '../../../src/module-manager';
 import type { PrimaryModule } from '../../../src/module-registry';
+import { activateChartWork } from './chart-scheduler';
 import { trace } from './control';
 
 type ChartState = { points: readonly number[] };
@@ -8,6 +9,7 @@ trace.imported.push('chart');
 
 export async function activate(scope: ModuleActivation<ChartState>): Promise<PrimaryModule<ChartState>> {
   let points = scope.previousState?.points ?? [];
+  const work = activateChartWork(scope.signal);
   const worker = new Worker(new URL('./chart-worker.ts', import.meta.url), { type: 'module' });
   trace.chartWorkersStarted++;
   scope.resources.own('worker', () => {
@@ -30,7 +32,11 @@ export async function activate(scope: ModuleActivation<ChartState>): Promise<Pri
       </section>;
     },
     snapshot: () => ({ points }),
-    setPolicy(policy) { trace.chartCacheBudget = policy.cacheEntries; },
+    setPolicy(policy) {
+      trace.chartCacheBudget = policy.cacheEntries;
+      work.setPolicy(policy);
+    },
+    getResources() { return { pending: work.getSnapshot().queued }; },
     dispose() { trace.chartDisposals++; },
   };
   if (trace.hangNextChart) {

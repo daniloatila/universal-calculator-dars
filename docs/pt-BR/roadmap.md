@@ -18,3 +18,7 @@ Os marcos descrevem o escopo planejado. A missão original reúne os requisitos 
 Consulte o [estado do projeto](project-state.md) para saber qual é o objetivo vigente. Relatórios e decisões de aprovação permanecem junto às evidências de cada objetivo.
 
 O Objetivo 01 foi aprovado na versão 0.1.1. A revisão 01 do Objetivo 02 cobre a versão de desenvolvimento 0.2.1. [Aprovação do Objetivo 01](../../evidence/objective-01/approval.json) · [Revisão 01 do Objetivo 02](../../evidence/objective-02/revision-01/REPORT.pt-BR.md) · [Entrega histórica 0.2.0](../../evidence/objective-02/REPORT.md)
+
+## Acompanhamento de memória no Windows
+
+Cada objetivo autorizado de 03 a 08 inclui uma verificação comparável de memória no Windows. A meta de menos de 100 MB de RAM incremental no modo básico desktop visível permanece aberta. A auditoria anterior à versão 1.0 investigará o aumento do commit privado observado durante a repetição de ciclos e documentará sua situação antes da release estável. [Dívida de memória e protocolo de investigação](../../evidence/objective-02/revision-02/memory-debt.pt-BR.md)

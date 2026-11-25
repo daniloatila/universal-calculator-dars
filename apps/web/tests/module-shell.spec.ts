@@ -3,7 +3,7 @@ import type { Page } from '@playwright/test';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath } from 'node:url';
 import { build } from 'vite';
-import type { trace } from './fixtures/module-shell/control';
+import type { ChartJob, trace } from './fixtures/module-shell/control';
 
 const fixturePrefix = '/__dars-module-shell/';
 const contentTypes: Record<string, string> = {
@@ -134,4 +134,172 @@ test('the same app shell isolates a hung module, retries and disposes a late run
   await picker(page).selectOption('note-fixture');
   await expect(note(page)).toHaveValue('Retained independently of chart failure');
   await testInfo.attach('module-shell-recovery-proof', { body: JSON.stringify(await observe(page)), contentType: 'application/json' });
+});
+
+const scheduler = (page: Page) => page.evaluate(() => {
+  const data: typeof trace = Reflect.get(window, 'darsModuleShellTest');
+  return {
+    generation: data.schedulerGeneration,
+    snapshot: data.scheduler?.getSnapshot(),
+    workers: data.schedulerWorkers,
+    events: data.schedulerEvents,
+    results: data.schedulerResults,
+  };
+});
+
+async function submit(page: Page, ...jobs: ChartJob[]) {
+  await page.evaluate((requests) => {
+    const data: typeof trace = Reflect.get(window, 'darsModuleShellTest');
+    if (!data.scheduler) throw new Error('Chart scheduler is not active.');
+    for (const request of requests) data.scheduler.submit(request);
+  }, jobs);
+}
+
+function hanging(id: string, kind: ChartJob['kind'], timeoutMs: number): ChartJob {
+  return { id, kind, timeoutMs, behavior: 'hang', value: 0 };
+}
+
+function completed(id: string, kind: ChartJob['kind'], value: number): ChartJob {
+  return { id, kind, timeoutMs: 10_000, behavior: 'complete', value };
+}
+
+async function waitForHeartbeat(page: Page, id: string) {
+  await expect.poll(async () => {
+    const worker = (await scheduler(page)).workers.find((entry) => entry.id === id);
+    return worker?.started && !worker.terminated ? worker.heartbeat : 0;
+  }, { message: `Real Worker ${id} acknowledged starting and stayed active until recovery` }).toBeGreaterThan(0);
+}
+
+async function chooseProfile(page: Page, profile: string, concurrency: number) {
+  await page.getByRole('combobox', { name: 'Performance profile', exact: true }).selectOption(profile);
+  await expect(main(page)).toHaveAttribute('data-profile', profile);
+  await expect.poll(async () => (await scheduler(page)).snapshot?.concurrency).toBe(concurrency);
+}
+
+function checkWorkerBalance(events: Awaited<ReturnType<typeof scheduler>>['events'], maximum: number) {
+  const active = new Set<string>();
+  let peak = 0;
+  for (const { id, event } of events) {
+    if (event === 'created') {
+      expect(active.has(id), `Worker ${id} must only be admitted once`).toBe(false);
+      active.add(id);
+      peak = Math.max(peak, active.size);
+    } else {
+      expect(active.delete(id), `Native Worker ${id} must be terminated once`).toBe(true);
+    }
+  }
+  expect(active.size).toBe(0);
+  expect(peak).toBe(maximum);
+}
+
+test('real Workers time out, release foreground capacity, and return valid successors in every adaptive profile', async ({ page }, testInfo) => {
+  await openFixture(page);
+  await note(page).fill('Session retained across scheduler recovery');
+  await picker(page).selectOption('chart-fixture');
+  await expect(main(page)).toHaveAttribute('data-module-phase', 'active');
+  await page.getByText('Operations', { exact: true }).click();
+
+  const profiles = [
+    ['ultra_light', 0], ['efficiency', 1], ['balanced', 2], ['performance', 3], ['maximum', 4],
+  ] as const;
+  for (const [profile, concurrency] of profiles) {
+    await chooseProfile(page, profile, concurrency);
+    const blocked = `${profile}-hang`;
+    const successor = `${profile}-valid`;
+    await submit(page, hanging(blocked, 'essential', 1500));
+    await waitForHeartbeat(page, blocked);
+    await submit(page, completed(successor, 'essential', 42 + concurrency));
+    await expect.poll(async () => (await scheduler(page)).results[successor]).toEqual({
+      status: 'completed', value: 42 + concurrency,
+    });
+    const current = await scheduler(page);
+    expect(current.results[blocked]).toEqual({ status: 'timed_out' });
+    expect(current.events.slice(-4)).toEqual([
+      { id: blocked, event: 'created' }, { id: blocked, event: 'terminated' },
+      { id: successor, event: 'created' }, { id: successor, event: 'terminated' },
+    ]);
+    expect(current.snapshot).toEqual({ active: 0, queued: 0, concurrency, closed: false });
+    expect(current.generation).toBe(1);
+  }
+  await expect(main(page)).toHaveAttribute('data-module-phase', 'active');
+  const evidence = await scheduler(page);
+  expect(evidence.workers).toHaveLength(profiles.length * 2);
+  checkWorkerBalance(evidence.events, 1);
+  await picker(page).selectOption('note-fixture');
+  await expect(note(page)).toHaveValue('Session retained across scheduler recovery');
+  await testInfo.attach('scheduler-timeout-profiles', { body: JSON.stringify(evidence), contentType: 'application/json' });
+});
+
+test('real scheduler Workers recover from secondary hangs and release in-flight jobs on cancel, suspend, and switch', async ({ page }, testInfo) => {
+  await openFixture(page);
+  await note(page).fill('The app was never restarted');
+  await picker(page).selectOption('chart-fixture');
+  await expect(main(page)).toHaveAttribute('data-module-phase', 'active');
+  await action(page, 'Add chart point').click();
+  await page.getByText('Operations', { exact: true }).click();
+  await chooseProfile(page, 'efficiency', 1);
+
+  await submit(page, hanging('secondary-hang', 'secondary', 2000));
+  await waitForHeartbeat(page, 'secondary-hang');
+  await submit(page, completed('secondary-valid', 'secondary', 23), completed('independent-essential', 'essential', 24));
+  await expect.poll(async () => (await scheduler(page)).results['secondary-valid']).toEqual({ status: 'completed', value: 23 });
+  const afterBackground = await scheduler(page);
+  expect(afterBackground.results).toMatchObject({
+    'secondary-hang': { status: 'timed_out' },
+    'independent-essential': { status: 'completed', value: 24 },
+  });
+  const backgroundTerminated = afterBackground.events.findIndex(({ id, event }) => id === 'secondary-hang' && event === 'terminated');
+  const independentCompleted = afterBackground.events.findIndex(({ id, event }) => id === 'independent-essential' && event === 'terminated');
+  const successorCreated = afterBackground.events.findIndex(({ id, event }) => id === 'secondary-valid' && event === 'created');
+  expect(independentCompleted).toBeGreaterThan(0);
+  expect(independentCompleted).toBeLessThan(backgroundTerminated);
+  expect(backgroundTerminated).toBeLessThan(successorCreated);
+
+  await submit(page, hanging('explicit-abort', 'essential', 10_000));
+  await waitForHeartbeat(page, 'explicit-abort');
+  await submit(page, completed('after-abort', 'essential', 25));
+  await page.evaluate(() => {
+    const data: typeof trace = Reflect.get(window, 'darsModuleShellTest');
+    data.scheduler?.cancel('explicit-abort');
+  });
+  await expect.poll(async () => (await scheduler(page)).results['after-abort']).toEqual({ status: 'completed', value: 25 });
+  expect((await scheduler(page)).results['explicit-abort']).toEqual({ status: 'cancelled' });
+  expect((await scheduler(page)).events.slice(-4)).toEqual([
+    { id: 'explicit-abort', event: 'created' }, { id: 'explicit-abort', event: 'terminated' },
+    { id: 'after-abort', event: 'created' }, { id: 'after-abort', event: 'terminated' },
+  ]);
+
+  await submit(page, hanging('while-suspending', 'essential', 10_000));
+  await waitForHeartbeat(page, 'while-suspending');
+  await submit(page, completed('queued-while-suspending', 'essential', 26));
+  await action(page, 'Suspend module').click();
+  await expect(main(page)).toHaveAttribute('data-module-phase', 'suspended');
+  await expect(main(page)).toHaveAttribute('data-workers', '0');
+  await expect.poll(async () => (await scheduler(page)).results['while-suspending']).toEqual({ status: 'cancelled' });
+  const suspended = await scheduler(page);
+  expect(suspended.results['queued-while-suspending']).toEqual({ status: 'cancelled' });
+  expect(suspended.workers.some(({ id }) => id === 'queued-while-suspending')).toBe(false);
+  expect(suspended.snapshot).toMatchObject({ active: 0, queued: 0, closed: true });
+  await action(page, 'Resume module').click();
+  await expect(points(page)).toHaveText('1');
+  await submit(page, completed('after-resume', 'essential', 27));
+  await expect.poll(async () => (await scheduler(page)).results['after-resume']).toEqual({ status: 'completed', value: 27 });
+  expect((await scheduler(page)).generation).toBe(2);
+
+  await submit(page, hanging('while-switching', 'essential', 10_000));
+  await waitForHeartbeat(page, 'while-switching');
+  await picker(page).selectOption('note-fixture');
+  await expect(note(page)).toHaveValue('The app was never restarted');
+  await expect.poll(async () => (await scheduler(page)).results['while-switching']).toEqual({ status: 'cancelled' });
+  expect((await scheduler(page)).snapshot).toMatchObject({ active: 0, queued: 0, closed: true });
+  await picker(page).selectOption('chart-fixture');
+  await expect(points(page)).toHaveText('1');
+  await submit(page, completed('after-switch', 'essential', 28));
+  await expect.poll(async () => (await scheduler(page)).results['after-switch']).toEqual({ status: 'completed', value: 28 });
+  const evidence = await scheduler(page);
+  expect(evidence.generation).toBe(3);
+  expect(evidence.snapshot).toMatchObject({ active: 0, queued: 0, closed: false });
+  expect(evidence.workers.every(({ terminated }) => terminated)).toBe(true);
+  checkWorkerBalance(evidence.events, 2);
+  await testInfo.attach('scheduler-cancel-suspend-switch', { body: JSON.stringify(evidence), contentType: 'application/json' });
 });

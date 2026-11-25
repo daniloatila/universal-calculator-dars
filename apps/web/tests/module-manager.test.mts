@@ -8,6 +8,7 @@ import type { AdaptiveProfile } from '../src/adaptive.ts';
 import { createModuleManager } from '../src/module-manager.ts';
 import type { ModuleActivation, ModuleDescriptor, ModuleRuntime, ResourceCounts } from '../src/module-manager.ts';
 import { createModuleWork, MODULE_WORK_QUEUE_LIMIT } from '../src/module-work.ts';
+import type { ModuleWorker } from '../src/module-work.ts';
 
 type State = { value: number };
 type Runtime = ModuleRuntime<State> & { value?: number };
@@ -462,6 +463,36 @@ function secondaryPolicy(profile: AdaptiveProfile) {
   }, 0).policy;
 }
 
+function workerProbe(index: number, onPost: () => void = () => {}, onTerminate: () => void = () => {}) {
+  const worker: ModuleWorker = {
+    onmessage: null,
+    onmessageerror: null,
+    onerror: null,
+    postMessage(request: unknown) {
+      assert.equal(request, index);
+      onPost();
+    },
+    terminate: onTerminate,
+  };
+  const task = {
+    createWorker: () => worker,
+    request: index,
+    decode(value: unknown) {
+      assert.equal(typeof value, 'number');
+      return value as number;
+    },
+  };
+  return {
+    worker,
+    task,
+    reply(value: number) {
+      const handler = worker.onmessage;
+      assert.ok(handler);
+      handler.call(worker as globalThis.Worker, new MessageEvent('message', { data: value }));
+    },
+  };
+}
+
 test('background work defers in Ultra Light, admits configured parallelism, and cancels on suspension', { timeout: 4_000 }, async () => {
   const capacities: number[] = [];
   const discovery = new AbortController();
@@ -472,28 +503,24 @@ test('background work defers in Ultra Light, admits configured parallelism, and 
   }
   assert.deepEqual(capacities, [0, 1, 2, 3, 4]);
 
-  const gates = Array.from({ length: 6 }, () => deferred<number>());
   const admitted = Array.from({ length: 6 }, () => deferred<void>());
   const starts: number[] = [];
-  const aborted: number[] = [];
+  const stopped: number[] = [];
+  const workers = admitted.map((gate, index) => workerProbe(index, () => {
+    starts.push(index);
+    gate.resolve();
+  }, () => { stopped.push(index); }));
   let background: ReturnType<typeof createModuleWork> | undefined;
   const runtime = manager(module('test-secondary', ({ signal }) => {
     background = createModuleWork(signal, secondaryPolicy('ultra_light'));
     return {};
-  }));
+  }), module('other-workspace', () => ({})));
 
   try {
     await runtime.activate('test-secondary');
     assert.ok(background);
     const work = background;
-    const results = gates.map(({ promise }, index) => work.submit(async (signal) => {
-      starts.push(index);
-      const abort = () => aborted.push(index);
-      signal.addEventListener('abort', abort, { once: true });
-      admitted[index]?.resolve();
-      try { return await promise; }
-      finally { signal.removeEventListener('abort', abort); }
-    }));
+    const results = workers.map(({ task }) => work.submit(task));
     await tick();
     assert.deepEqual(starts, []);
     assert.deepEqual(work.getSnapshot(), { active: 0, queued: 6, concurrency: 0, closed: false });
@@ -510,24 +537,48 @@ test('background work defers in Ultra Light, admits configured parallelism, and 
 
     work.setPolicy(secondaryPolicy('efficiency'));
     for (let index = 0; index < 3; index++) {
-      gates[index]?.resolve(index);
+      workers[index]?.reply(index);
       assert.deepEqual(await results[index], { status: 'completed', value: index });
     }
     await tick();
     assert.deepEqual(starts, [0, 1, 2, 3]);
     assert.deepEqual(work.getSnapshot(), { active: 1, queued: 2, concurrency: 1, closed: false });
-    gates[3]?.resolve(3);
+    workers[3]?.reply(3);
     assert.deepEqual(await results[3], { status: 'completed', value: 3 });
     await admitted[4]?.promise;
     assert.deepEqual(starts, [0, 1, 2, 3, 4]);
 
+    const late = workers[4]?.worker.onmessage;
+    assert.ok(late);
     assert.equal(await runtime.suspend(), 'suspended');
     assert.deepEqual(await Promise.all(results.slice(4)), [{ status: 'cancelled' }, { status: 'cancelled' }]);
-    assert.deepEqual(aborted, [4]);
+    assert.deepEqual(stopped, [0, 1, 2, 3, 4]);
     assert.deepEqual(work.getSnapshot(), { active: 0, queued: 0, concurrency: 1, closed: true });
-    gates[4]?.reject(new Error('late task failure'));
+    late.call(workers[4]?.worker as globalThis.Worker, new MessageEvent('message', { data: 999 }));
     await tick();
     assert.deepEqual(starts, [0, 1, 2, 3, 4]);
+
+    assert.equal(await runtime.activate('test-secondary'), 'active');
+    assert.ok(background);
+    const restarted = background;
+    const started = deferred<void>();
+    const active = workerProbe(10, () => started.resolve(), () => { stopped.push(10); });
+    const stillRunning = restarted.submit(active.task, { kind: 'essential' });
+    await started.promise;
+    assert.equal(await runtime.activate('other-workspace'), 'active');
+    assert.deepEqual(await stillRunning, { status: 'cancelled' });
+    assert.deepEqual(stopped, [0, 1, 2, 3, 4, 10]);
+    assert.equal(restarted.getSnapshot().active, 0);
+
+    assert.equal(await runtime.activate('test-secondary'), 'active');
+    assert.ok(background);
+    const finalStarted = deferred<void>();
+    const valid = workerProbe(11, () => finalStarted.resolve(), () => { stopped.push(11); });
+    const completed = background.submit(valid.task, { kind: 'essential' });
+    await finalStarted.promise;
+    valid.reply(11);
+    assert.deepEqual(await completed, { status: 'completed', value: 11 });
+    assert.deepEqual(stopped, [0, 1, 2, 3, 4, 10, 11]);
   } finally {
     await runtime.close();
   }
@@ -537,18 +588,25 @@ test('background work has a bounded queue, isolates failures, and never launches
   const scope = new AbortController();
   const work = createModuleWork(scope.signal, secondaryPolicy('ultra_light'));
   let ran = 0;
-  const queued = Array.from({ length: MODULE_WORK_QUEUE_LIMIT }, () => work.submit(async () => { ran++; }));
-  assert.deepEqual(await work.submit(async () => { ran++; }), { status: 'queue_full' });
+  const probe = (index: number) => workerProbe(index, () => { ran++; });
+  const queued = Array.from({ length: MODULE_WORK_QUEUE_LIMIT }, (_, index) => work.submit(probe(index).task));
+  assert.deepEqual(await work.submit(probe(10).task), { status: 'queue_full' });
   assert.equal(work.getSnapshot().queued, MODULE_WORK_QUEUE_LIMIT);
   scope.abort();
   assert.deepEqual(await Promise.all(queued), queued.map(() => ({ status: 'cancelled' })));
-  assert.deepEqual(await work.submit(async () => { ran++; }), { status: 'cancelled' });
+  assert.deepEqual(await work.submit(probe(11).task), { status: 'cancelled' });
   assert.equal(ran, 0);
 
   const fresh = createModuleWork(new AbortController().signal, secondaryPolicy('maximum'));
   try {
-    assert.deepEqual(await fresh.submit(async () => { throw new Error('fixture failure'); }), { status: 'failed' });
-    assert.deepEqual(await fresh.submit(async () => 21), { status: 'completed', value: 21 });
+    const failingTask = { ...probe(12).task, createWorker() { throw new Error('fixture failure'); } };
+    assert.deepEqual(await fresh.submit(failingTask), { status: 'failed' });
+    const started = deferred<void>();
+    const valid = workerProbe(21, () => started.resolve());
+    const result = fresh.submit(valid.task);
+    await started.promise;
+    valid.reply(21);
+    assert.deepEqual(await result, { status: 'completed', value: 21 });
   } finally {
     fresh.close();
   }

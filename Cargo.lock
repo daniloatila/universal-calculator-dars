@@ -518,7 +518,7 @@ dependencies = [
 
 [[package]]
 name = "dars-cli"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "dars-core",
  "serde_json",
@@ -526,7 +526,7 @@ dependencies = [
 
 [[package]]
 name = "dars-core"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "num-bigint",
  "num-integer",
@@ -538,7 +538,7 @@ dependencies = [
 
 [[package]]
 name = "dars-desktop"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "serde",
  "tauri",
@@ -550,7 +550,7 @@ dependencies = [
 
 [[package]]
 name = "dars-wasm"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "dars-core",
  "wasm-bindgen",

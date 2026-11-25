@@ -2,6 +2,12 @@
 
 [English](../../CHANGELOG.md)
 
+## 0.2.2 · Revisão 02 do Objetivo 02
+
+- Encerramento do worker dedicado de uma tarefa expirada ou cancelada antes da admissão da sucessora.
+- Descarte de respostas de workers encerrados, com suspensão por módulo, limites das filas e admissão adaptativa durante a recuperação.
+- Acompanhamento do commit privado do WebView2 e da meta de memória no modo básico nos objetivos restantes.
+
 ## 0.2.1 · Revisão 01 do Objetivo 02
 
 - Provedor de capacidades Windows com escopo mínimo e diagnóstico local.

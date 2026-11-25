@@ -33,10 +33,13 @@ async function run() {
   const root = fileURLToPath(new URL('../', import.meta.url));
   const require = createRequire(new URL('../apps/web/package.json', import.meta.url));
   const { chromium, expect } = require('@playwright/test');
-  const artifactRoot = resolve(root, 'artifacts/objective-02/revision-01');
+  const revision = process.argv.includes('--objective-02-revision-02') ? 'revision-02' : 'revision-01';
+  const artifactRoot = resolve(root, 'artifacts/objective-02', revision);
   await mkdir(artifactRoot, { recursive: true });
   const profile = await mkdtemp(join(artifactRoot, 'native-sensors-profile-'));
-  const executable = resolve(root, process.argv[2] ?? 'target/release/dars-desktop.exe');
+  const [executablePath = 'target/release/dars-desktop.exe'] =
+    process.argv.slice(2).filter((arg) => arg !== '--objective-02-revision-02');
+  const executable = resolve(root, executablePath);
   const artifactSha256 = createHash('sha256').update(await readFile(executable)).digest('hex');
   const app = spawn(executable, [], {
     cwd: profile, stdio: 'ignore',

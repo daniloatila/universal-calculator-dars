@@ -1,7 +1,15 @@
 import type { AdaptivePolicy } from './adaptive';
 
 type WorkPolicy = Pick<AdaptivePolicy, 'pendingJobs'>;
-type ModuleTask<T> = (signal: AbortSignal) => Promise<T>;
+
+export type ModuleWorker = Pick<Worker, 'onmessage' | 'onmessageerror' | 'onerror' | 'postMessage' | 'terminate'>;
+export type ModuleTask<TRequest, TResult> = {
+  /** Create a fresh dedicated worker from the module's bundled code. */
+  createWorker: () => ModuleWorker;
+  request: TRequest;
+  /** Validate the worker's single result synchronously. */
+  decode: (reply: unknown) => TResult;
+};
 
 export type ModuleTaskClass = 'essential' | 'interactive' | 'secondary' | 'optional' | 'maintenance' | 'rendering';
 export type ModuleWorkResult<T> =
@@ -13,7 +21,7 @@ type TaskOptions = { kind?: ModuleTaskClass; timeoutMs?: number; signal?: AbortS
 type Job = {
   kind: ModuleTaskClass;
   admittedAt: number;
-  start(): Promise<void>;
+  start(): void;
   settle(status: Refusal): void;
 };
 
@@ -35,7 +43,7 @@ function backgroundCapacity(policy: WorkPolicy): number {
   return Math.max(0, Math.min(MAX_CONCURRENT, Math.floor(policy.pendingJobs / 2)));
 }
 
-/** Admission for optional modules. Expensive tasks must use abortable, module-owned workers. */
+/** Each admitted job owns a dedicated worker until the scheduler terminates it. */
 export function createModuleWork(signal: AbortSignal, initialPolicy: WorkPolicy) {
   const waiting: Job[] = [];
   const background = new Set<Job>();
@@ -72,11 +80,7 @@ export function createModuleWork(signal: AbortSignal, initialPolicy: WorkPolicy)
       if (!job) return;
       if (POLICY[job.kind].foreground) foreground = job;
       else background.add(job);
-      void job.start().finally(() => {
-        if (foreground === job) foreground = undefined;
-        background.delete(job);
-        schedule();
-      });
+      job.start();
     }
   }
 
@@ -88,16 +92,14 @@ export function createModuleWork(signal: AbortSignal, initialPolicy: WorkPolicy)
     signal.removeEventListener('abort', close);
     for (const job of waiting.splice(0)) job.settle('cancelled');
     if (foreground) foreground.settle('cancelled');
-    foreground = undefined;
-    for (const job of background) job.settle('cancelled');
-    background.clear();
+    for (const job of [...background]) job.settle('cancelled');
   }
 
   if (signal.aborted) close();
   else signal.addEventListener('abort', close, { once: true });
 
   return {
-    submit<T>(task: ModuleTask<T>, options: TaskOptions = {}): Promise<ModuleWorkResult<T>> {
+    submit<TRequest, TResult>(task: ModuleTask<TRequest, TResult>, options: TaskOptions = {}): Promise<ModuleWorkResult<TResult>> {
       if (closed || options.signal?.aborted) return Promise.resolve({ status: 'cancelled' });
       const kind = options.kind ?? 'secondary';
       const rule = POLICY[kind];
@@ -110,37 +112,82 @@ export function createModuleWork(signal: AbortSignal, initialPolicy: WorkPolicy)
         ? Math.min(MAX_TIMEOUT_MS, Math.max(1, options.timeoutMs)) : rule.deadlineMs;
 
       return new Promise((resolve) => {
-        const controller = new AbortController();
         let finished = false;
-        function finish(result: ModuleWorkResult<T>) {
+        let worker: ModuleWorker | undefined;
+        let creating = false;
+        let duringCreation: ModuleWorkResult<TResult> | undefined;
+
+        function release(result: ModuleWorkResult<TResult>) {
+          try {
+            if (worker) {
+              worker.onmessage = null;
+              worker.onmessageerror = null;
+              worker.onerror = null;
+              worker.terminate();
+              worker = undefined;
+            }
+          } catch {
+            // A failed stop cannot certify that this execution slot is safe to reuse.
+            close();
+            resolve({ status: 'failed' });
+            return;
+          }
+          const index = waiting.indexOf(job);
+          if (index >= 0) waiting.splice(index, 1);
+          if (foreground === job) foreground = undefined;
+          background.delete(job);
+          resolve(result);
+          schedule();
+        }
+
+        function finish(result: ModuleWorkResult<TResult>) {
           if (finished) return;
           finished = true;
           clearTimeout(timer);
           options.signal?.removeEventListener('abort', cancel);
-          resolve(result);
+          if (creating) duringCreation = result;
+          else release(result);
         }
 
-        function reject(status: Refusal) {
-          if (finished) return;
-          const index = waiting.indexOf(job);
-          if (index >= 0) waiting.splice(index, 1);
-          finish({ status });
-          controller.abort();
-          schedule();
-        }
-        function cancel() { reject('cancelled'); }
+        function fail() { finish({ status: 'failed' }); }
+        function cancel() { finish({ status: 'cancelled' }); }
 
         const job: Job = {
           kind,
           admittedAt: performance.now(),
-          async start() {
-            try { finish({ status: 'completed', value: await task(controller.signal) }); }
-            catch { finish({ status: 'failed' }); }
+          start() {
+            creating = true;
+            try { worker = task.createWorker(); }
+            catch { fail(); }
+            finally { creating = false; }
+            if (duringCreation) {
+              release(duringCreation);
+              return;
+            }
+            if (!worker) {
+              fail();
+              return;
+            }
+            try {
+              worker.onmessage = ({ data }) => {
+                if (finished) return;
+                try { finish({ status: 'completed', value: task.decode(data) }); }
+                catch { fail(); }
+              };
+              worker.onmessageerror = fail;
+              worker.onerror = (event) => {
+                event.preventDefault();
+                fail();
+              };
+              worker.postMessage(task.request);
+            } catch {
+              fail();
+            }
           },
-          settle: reject,
+          settle: (status) => finish({ status }),
         };
         const timer = setTimeout(() => {
-          reject(!rule.foreground && waiting.includes(job) ? 'deferred' : 'timed_out');
+          finish({ status: !rule.foreground && waiting.includes(job) ? 'deferred' : 'timed_out' });
         }, maxWait);
         options.signal?.addEventListener('abort', cancel, { once: true });
         waiting.push(job);

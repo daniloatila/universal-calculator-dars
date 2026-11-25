@@ -2,6 +2,12 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
+## 0.2.2 · Objective 02 revision 02
+
+- Terminate the dedicated worker of an expired or cancelled module job before admitting its successor.
+- Ignore responses from retired workers and keep module suspension, queue limits and adaptive admission effective during recovery.
+- Track WebView2 private commit and the basic-mode memory target through the remaining objectives.
+
 ## 0.2.1 · Objective 02 revision 01
 
 - Added a scoped Windows capabilities provider and local resource diagnostics.

@@ -19,6 +19,6 @@ O proprietário aprovou a revisão 01 do Objetivo 01 (0.1.1). A calculadora Stan
 - [Revisão 01 do Objetivo 01](evidence/objective-01/revision-01/REPORT.md) e [linha de base 0.1.0](evidence/objective-01/REPORT.md)
 - [Missão original](PROJECT_SPEC.md) e [tradução para o inglês](docs/en/mission.md)
 
-A versão de desenvolvimento 0.2.1 do Objetivo 02 acrescenta leituras nativas e aprimora o ciclo de vida dos módulos, a privacidade e o agendamento de recursos. [Evidências da revisão do Objetivo 02](evidence/objective-02/revision-01/REPORT.md)
+A versão de desenvolvimento 0.2.2 do Objetivo 02 recupera a capacidade do agendador quando uma tarefa isolada deixa de responder. [Revisão 02 do Objetivo 02](evidence/objective-02/revision-02/REPORT.pt-BR.md) · [Capacidades nativas e desempenho](evidence/objective-02/revision-01/REPORT.pt-BR.md)
 
 O DARS usa a [licença Apache 2.0](LICENSE).
