@@ -89,10 +89,13 @@ export function activateFinance(id: FinanceModule, scope: ModuleActivation<Finan
     const draft = state.drafts[operation.id] ?? {};
     const labels: Readonly<Record<string, string>> = messages.finance.labels;
     const operationLabels: Readonly<Record<string, string>> = messages.finance.operations;
-    function label(key: string) {
+    function label(key: string): string {
       const term = key === 'price' ? (id === 'loans' ? 'price_loan' : 'price_result') : key;
       if (Object.hasOwn(labels, term)) return labels[term]!;
       if (Object.hasOwn(operationLabels, key)) return operationLabels[key]!;
+      if (key.endsWith('_exact') && Object.hasOwn(labels, 'exact_value')) {
+        return labels.exact_value!.replace('{field}', label(key.slice(0, -6)));
+      }
       return /^[a-z][a-z0-9_]*$/u.test(key) ? key.replaceAll('_', ' ') : key;
     }
     const title = messages.finance.modules[id].title;
@@ -310,7 +313,7 @@ export function activateFinance(id: FinanceModule, scope: ModuleActivation<Finan
     }}>
       <div className="finance-layout">
         <form className="finance-card" onSubmit={(event) => { event.preventDefault(); calculate(); }}>
-          <div className="finance-fields">
+          <div className="finance-fields finance-form-settings">
             <label className="finance-field">{label('operation')}
               <select data-testid="finance-operation" value={operation.id}
                 onChange={(event) => edit({ operation: event.currentTarget.value })}>

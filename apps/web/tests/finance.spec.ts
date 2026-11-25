@@ -218,6 +218,7 @@ test('the narrow RTL finance workspace keeps forms and ledger accessible', async
   await selectModule(page, 'loans', 'ar');
   await button(page, ar.finance.labels.example).click();
   await proof(page, 'ar');
+  await expect(output(page).getByText(ar.finance.labels.total_cost, { exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
   const results = await new AxeBuilder({ page }).include('.finance-workspace')
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();

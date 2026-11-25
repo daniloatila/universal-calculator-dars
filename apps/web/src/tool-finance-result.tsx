@@ -7,6 +7,12 @@ import { numberPresentation } from './locale-format';
 type Result = Record<string, unknown>;
 type Label = (key: string) => string;
 const decimal = /^[+-]?[0-9]+(?:\.[0-9]+)?$/u;
+const labeledValues = new Set([
+  'status', 'method', 'cost_kind', 'rounding_scope', 'unit', 'reason', 'rate_basis',
+  'product', 'timing', 'period_kind', 'day_count', 'npv_sign', 'variance_convention',
+  'deduction_method', 'tax_treatment', 'treatment', 'payment_status', 'classification',
+  'data_mode', 'valuation', 'basis', 'convention', 'undefined', 'deduction', 'retention_status',
+]);
 
 function object(value: unknown): value is Result {
   return Boolean(value && typeof value === 'object' && !Array.isArray(value));
@@ -31,12 +37,13 @@ export function downloadJson(filename: string, contents: unknown) {
   }
 }
 
-function scalar(value: unknown, label: Label, present: (value: string) => string): ReactNode {
+function scalar(value: unknown, label: Label, present: (value: string) => string, field?: string): ReactNode {
   if (value === null || value === undefined) return '—';
   if (typeof value === 'boolean') return label(String(value));
   if (typeof value === 'number' || typeof value === 'string') {
     const text = String(value);
-    return <bdi dir={decimal.test(text) ? 'ltr' : undefined}>{decimal.test(text) ? present(text) : text}</bdi>;
+    if (decimal.test(text)) return <bdi dir="ltr">{present(text)}</bdi>;
+    return <bdi>{field && labeledValues.has(field) ? label(text) : text}</bdi>;
   }
   if (Array.isArray(value)) {
     if (!value.length) return '—';
@@ -45,15 +52,15 @@ function scalar(value: unknown, label: Label, present: (value: string) => string
       return <div className="finance-scroll" tabIndex={0} aria-label={label('table')}>
         <table><thead><tr>{columns.map((key) => <th scope="col" key={key}>{label(key)}</th>)}</tr></thead>
           <tbody>{value.map((row, index) => <tr key={index}>{columns.map((key) => <td key={key}>
-            {scalar(row[key], label, present)}
+            {scalar(row[key], label, present, key)}
           </td>)}</tr>)}</tbody>
         </table>
       </div>;
     }
-    return <ul>{value.map((entry, index) => <li key={index}>{scalar(entry, label, present)}</li>)}</ul>;
+    return <ul>{value.map((entry, index) => <li key={index}>{scalar(entry, label, present, field)}</li>)}</ul>;
   }
   if (object(value)) return <dl className="finance-readings">
-    {Object.entries(value).map(([key, entry]) => <div key={key}><dt>{label(key)}</dt><dd>{scalar(entry, label, present)}</dd></div>)}
+    {Object.entries(value).map(([key, entry]) => <div key={key}><dt>{label(key)}</dt><dd>{scalar(entry, label, present, key)}</dd></div>)}
   </dl>;
   return '—';
 }

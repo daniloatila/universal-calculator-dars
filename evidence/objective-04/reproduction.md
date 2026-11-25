@@ -24,6 +24,11 @@ Use `target/release/dars.exe` on Windows. On a machine with an installed Chrome 
 
 On Windows, verify the executable and packaged WASM hashes against the review artifact's provenance before running the desktop check. Use an independently verified 0.3.1 executable for the matched Standard measurements. Use the Windows production WebView2 runtime and a fresh profile per run. Keep profiles and console logs outside public evidence. [Windows memory protocol](../objective-02/revision-02/memory-debt.md)
 
+```powershell
+node scripts/verify-finance-desktop.mjs $baseline $candidate $verifiedSha 'artifacts/objective-04/desktop.json'
+node scripts/verify-desktop.mjs --objective-04 --exe $candidate
+```
+
 For the double-IRR fixture, open Financial, choose Internal rates of return and load the example. Calculate and open the roots table. The two rates are 0.10 and 0.20, each with multiplicity one. Switch from English to Portuguese and calculate again. The visible digits and separators follow the locale while the Calculation Proof preserves each field's original notation and canonical payload.
 
 For the pricing fixture, open Business, choose Pricing and load the example. The resulting price is 125 and the gross margin on revenue is 0.20. Change one assumption, run both scenarios and save them for comparison. The comparator shows the difference between the selected outcomes and omits a relative difference when the reference is zero.

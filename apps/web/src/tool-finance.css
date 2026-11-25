@@ -29,6 +29,10 @@
   gap: .7rem;
 }
 
+.finance-form-settings {
+  grid-template-columns: minmax(0, 1.65fr) minmax(3.5rem, .58fr) minmax(0, 1.25fr);
+}
+
 .finance-field { min-inline-size: 0; display: grid; align-content: start; gap: .34rem; font-size: .9rem; }
 .finance-field input, .finance-field select {
   min-inline-size: 0;
@@ -87,4 +91,9 @@
 
 @media (max-width: 760px) {
   .finance-layout { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 440px) {
+  .finance-form-settings { grid-template-columns: 1fr 1fr; }
+  .finance-form-settings > :first-child { grid-column: 1 / -1; }
 }
