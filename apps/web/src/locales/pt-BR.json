@@ -1200,6 +1200,8 @@
       "metric": "Indicador",
       "difference": "Mostrar diferença",
       "absolute_difference": "Diferença absoluta",
+      "chart": "Gráfico",
+      "balance": "Saldo",
       "relative_difference": "Diferença relativa (%)",
       "assumptions": "Premissas",
       "sensitivity_step": "Variação para análise de sensibilidade",

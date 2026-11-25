@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 import { readFile } from 'node:fs/promises';
 import { LOCALES } from '../src/i18n';
 import type { Locale, Messages } from '../src/i18n';
@@ -86,7 +87,7 @@ test('five financial workspaces calculate under all adaptive profiles without si
     if (url.protocol.startsWith('http') && url.hostname !== '127.0.0.1') external.push(request.url());
   });
   await page.addInitScript(() => {
-    const measurements = { active: 0, max: 0, initializations: 0 };
+    const measurements = { active: 0, max: 0, initializations: 0, finance: 0 };
     Object.defineProperty(window, '__financeWorkerCounts', { value: measurements });
     const NativeWorker = window.Worker;
     window.Worker = class extends NativeWorker {
@@ -96,6 +97,7 @@ test('five financial workspaces calculate under all adaptive profiles without si
         measurements.active++;
         measurements.max = Math.max(measurements.max, measurements.active);
         measurements.initializations++;
+        if (/tool-(financial|investment|loans|tax|business)-worker/u.test(String(url))) measurements.finance++;
       }
       terminate() {
         if (this.live) { this.live = false; measurements.active--; }
@@ -106,7 +108,6 @@ test('five financial workspaces calculate under all adaptive profiles without si
   await page.goto('/');
   await selectLanguage(page, 'en');
   await page.getByText(en.operations.operations, { exact: true }).click();
-  await expect(page.locator('main')).toHaveAttribute('data-workers', '0');
   const checks = [];
   for (const id of ['ultra_light', 'efficiency', 'balanced', 'performance', 'maximum']) {
     await profile(page).selectOption(id);
@@ -120,11 +121,11 @@ test('five financial workspaces calculate under all adaptive profiles without si
     }
   }
   const counts = await page.evaluate(() => (window as unknown as {
-    __financeWorkerCounts: { active: number; max: number; initializations: number };
+    __financeWorkerCounts: { active: number; max: number; initializations: number; finance: number };
   }).__financeWorkerCounts);
   expect(counts.active).toBe(0);
   expect(counts.max).toBe(1);
-  expect(counts.initializations).toBeGreaterThanOrEqual(25);
+  expect(counts.finance).toBe(25);
   expect(checks).toHaveLength(25);
   expect(external).toEqual([]);
   await info.attach('finance-profiles', { contentType: 'application/json', body: JSON.stringify({ checks, counts, external }) });
@@ -208,6 +209,19 @@ test('dated flows keep monetary values paired through reorder and deletion', asy
   expect(JSON.parse((await proof(page, 'en')).normalized)).toMatchObject({
     flows: ['-100', '-132'], dates: ['2026-01-01', '2027-02-01'],
   });
+});
+
+test('the narrow RTL finance workspace keeps forms and ledger accessible', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.goto('/');
+  await selectLanguage(page, 'ar');
+  await selectModule(page, 'loans', 'ar');
+  await button(page, ar.finance.labels.example).click();
+  await proof(page, 'ar');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  const results = await new AxeBuilder({ page }).include('.finance-workspace')
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+  expect(results.violations.map(({ id }) => id)).toEqual([]);
 });
 
 test('mixed-source fields survive digit paste, module suspension and preference reset', async ({ page }) => {

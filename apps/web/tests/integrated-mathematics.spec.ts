@@ -4,6 +4,7 @@ import { expect, test } from '@playwright/test';
 import type { Locator, Page } from '@playwright/test';
 import { parseCalculationProofFile } from '../src/calculation-proof';
 import { proofLabels } from '../src/calculation-proof-labels';
+import { financeModules } from '../src/finance-modules';
 import ar from '../src/locales/ar.json' with { type: 'json' };
 import en from '../src/locales/en.json' with { type: 'json' };
 import es from '../src/locales/es.json' with { type: 'json' };
@@ -202,7 +203,7 @@ test('All ten workspaces calculate individually across five profiles with one wo
   await page.goto('/');
   await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await expect(picker(page).locator('option')).toHaveCount(modules.length);
+  await expect(picker(page).locator('option')).toHaveCount(modules.length + financeModules.length);
   expect(await picker(page).locator('option').evaluateAll((options) => options.map((option) => (option as HTMLOptionElement).value))).toEqual(modules);
   expect([...advancedRequests]).toEqual([]);
   const search = page.getByRole('searchbox', { name: en.tools.search, exact: true });
@@ -277,7 +278,7 @@ test.describe('localized touch workspace', () => {
       await languages.selectOption(locale);
       await expect(page.locator('html')).toHaveAttribute('lang', locale);
       const localPicker = page.getByRole('combobox', { name: messages.operations.modulePicker, exact: true });
-      await expect(localPicker.locator('option')).toHaveCount(15);
+      await expect(localPicker.locator('option')).toHaveCount(modules.length + financeModules.length);
       await expect(record(page).locator('summary')).toHaveText(messages.standardRecord.title);
       const search = page.getByRole('searchbox', { name: messages.tools.search, exact: true });
       await search.fill(messages.dateTime.title);

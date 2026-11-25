@@ -1200,6 +1200,8 @@
       "metric": "المؤشر",
       "difference": "عرض الفرق",
       "absolute_difference": "الفرق المطلق",
+      "chart": "الرسم البياني",
+      "balance": "الرصيد",
       "relative_difference": "الفرق النسبي (%)",
       "assumptions": "الافتراضات",
       "sensitivity_step": "خطوة تحليل الحساسية",

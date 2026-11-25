@@ -1200,6 +1200,8 @@
       "metric": "Metric",
       "difference": "Show difference",
       "absolute_difference": "Absolute difference",
+      "chart": "Chart",
+      "balance": "Balance",
       "relative_difference": "Relative difference (%)",
       "assumptions": "Assumptions",
       "sensitivity_step": "Sensitivity step",

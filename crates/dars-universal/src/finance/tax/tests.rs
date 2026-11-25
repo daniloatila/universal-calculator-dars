@@ -153,10 +153,10 @@ fn fixed_income_tests_all_rate_changes_and_exemption() {
     }
     let end_of_month = result(
         "br_investment_tax",
-        redemption("lci", "2025-08-31", "2026-02-28", "1100"),
+        redemption("lci", "2025-08-31", "2026-03-02", "1100"),
     );
     assert_eq!(end_of_month["income_tax"], "0.00");
-    for (purchased, event) in [("2025-08-31", "2026-02-27"), ("2025-05-25", "2026-11-25")] {
+    for (purchased, event) in [("2025-08-31", "2026-02-28"), ("2025-05-25", "2026-11-25")] {
         let input = redemption("lca", purchased, event, "1100");
         assert_eq!(
             evaluate("br_investment_tax", &input.to_string(), &Map::new()).err(),

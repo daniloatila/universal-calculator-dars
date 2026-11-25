@@ -1200,6 +1200,8 @@
       "metric": "Indicateur",
       "difference": "Afficher l’écart",
       "absolute_difference": "Écart absolu",
+      "chart": "Graphique",
+      "balance": "Solde",
       "relative_difference": "Écart relatif (%)",
       "assumptions": "Hypothèses",
       "sensitivity_step": "Variation pour l’analyse de sensibilité",

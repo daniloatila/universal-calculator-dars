@@ -433,6 +433,12 @@ fn investment_tax(input: &str, iof_only: bool) -> Result<Answer, MathError> {
         let minimum = purchase
             .checked_add(Span::new().months(rules::LCI_LCA_MIN_MONTHS))
             .map_err(|_| MathError::Domain)?;
+        // Law 810/1949, Art. 3: an absent matching day rolls to the following day.
+        let minimum = if minimum.day() < purchase.day() {
+            minimum.tomorrow().map_err(|_| MathError::Domain)?
+        } else {
+            minimum
+        };
         if purchase < rules::LCI_LCA_FIRST_PURCHASE || event < minimum {
             return Err(MathError::Unsupported);
         }

@@ -70,11 +70,37 @@ export function FinanceResult({ result, label, locale }: { result: Result; label
   }
   return <>
     {scalar(main, label, present)}
+    <LedgerPreview rows={result.rows} label={label} present={present} />
     {complex.map(([key, detail]) => <details className="finance-detail" key={key} open={key === 'roots' || key === 'rows'}>
       <summary>{label(key)}</summary>
       {scalar(detail, label, present)}
     </details>)}
   </>;
+}
+
+function LedgerPreview({ rows, label, present }: { rows: unknown; label: Label; present: (value: string) => string }) {
+  if (!Array.isArray(rows) || rows.length < 2 || !rows.every(object)) return null;
+  const balanceKey = ['balance_end', 'balance', 'cash_close'].find((key) => typeof rows[0]?.[key] === 'string');
+  if (!balanceKey) return null;
+  const count = Math.min(rows.length, 6);
+  const points = Array.from({ length: count }, (_, index) => rows[Math.round(index * (rows.length - 1) / (count - 1))]!);
+  const entries = points.flatMap((row) => {
+    const value = row[balanceKey];
+    return typeof value === 'string' && decimal.test(value) && Number.isFinite(Number(value))
+      ? [{ period: String(row.period), value, number: Number(value) }] : [];
+  });
+  if (entries.length < 2) return null;
+  const low = Math.min(0, ...entries.map((entry) => entry.number));
+  const high = Math.max(0, ...entries.map((entry) => entry.number));
+  if (low === high) return null;
+  return <details className="finance-detail">
+    <summary>{label(balanceKey)} · {label('chart')}</summary>
+    <div className="finance-chart">{entries.map(({ period, value, number }) => <div key={period}>
+      <span>{label('period')} {present(period)}</span>
+      <meter aria-label={`${label(balanceKey)} · ${label('period')} ${present(period)}`} min={low} max={high} value={number} />
+      <bdi>{present(value)}</bdi>
+    </div>)}</div>
+  </details>;
 }
 
 type MetricUnit = 'money' | 'ratio' | 'count';

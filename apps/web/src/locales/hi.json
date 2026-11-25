@@ -1200,6 +1200,8 @@
       "metric": "माप",
       "difference": "अंतर दिखाएँ",
       "absolute_difference": "निरपेक्ष अंतर",
+      "chart": "आलेख",
+      "balance": "शेष",
       "relative_difference": "सापेक्ष अंतर (%)",
       "assumptions": "मान्यताएँ",
       "sensitivity_step": "संवेदनशीलता परिवर्तन",

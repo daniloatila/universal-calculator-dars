@@ -233,7 +233,7 @@ def investment_cases(oracle):
         elapsed = (settled - date(2026, 1, 1)).days
         oracle.check("br_investment_tax", fields, fixed_income(D("1025.47"), D("1000"), elapsed, exempt=True))
     oracle.check("br_investment_tax", {"product": "lci", "principal": "1000", "redemption": "1025.47",
-                                       "purchase_date": "2025-08-31", "redemption_date": "2026-02-28"}, {
+                                       "purchase_date": "2025-08-31", "redemption_date": "2026-03-02"}, {
         "income_tax": "0.00", "iof": "0.00", "net_gain": "25.47",
     })
 
@@ -274,6 +274,8 @@ def rejection_cases(oracle):
     oracle.reject("br_iof", io, "domain")
     oracle.reject("br_iof", {**io, "product": "lci", "purchase_date": "2026-01-01"}, "unsupported")
     oracle.reject("br_investment_tax", {**io, "product": "lca", "purchase_date": "2026-11-01"}, "unsupported")
+    oracle.reject("br_investment_tax", {**io, "product": "lci", "purchase_date": "2025-08-31",
+                                        "redemption_date": "2026-02-28"}, "unsupported")
     oracle.reject("br_investment_tax", {**io, "product": "lca", "purchase_date": "2025-05-25"}, "unsupported")
     oracle.reject("br_inss", f'{{"date":"{EVENT}","gross":"100","gross":"100"}}', "invalid_input")
 

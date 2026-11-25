@@ -1200,6 +1200,8 @@
       "metric": "指标",
       "difference": "显示差值",
       "absolute_difference": "绝对差值",
+      "chart": "图表",
+      "balance": "余额",
       "relative_difference": "相对差值（%）",
       "assumptions": "计算假设",
       "sensitivity_step": "敏感性变动幅度",

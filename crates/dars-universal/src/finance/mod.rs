@@ -333,8 +333,8 @@ enum ComparisonUnit {
 
 pub(super) fn compare(input: &str, options: &Map<String, Value>) -> Result<Computation, MathError> {
     let values: Comparison = parse(input)?;
-    let reference = bounded_decimal(&values.reference, 128, 40)?;
-    let alternative = bounded_decimal(&values.alternative, 128, 40)?;
+    let reference = bounded_decimal(&values.reference, 1024, 40)?;
+    let alternative = bounded_decimal(&values.alternative, 1024, 40)?;
     let difference = &alternative - &reference;
     let currency = money(options)?;
     let scale = [&values.reference, &values.alternative]

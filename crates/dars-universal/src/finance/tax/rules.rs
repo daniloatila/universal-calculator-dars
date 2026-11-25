@@ -18,6 +18,7 @@ const RFB_IN_1585: &str =
 const IOF_DECREE: &str =
     "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6306compilado.htm#art32";
 const LCI_LCA_RULE: &str = "https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?numero=5215&tipo=RESOLU%C3%87%C3%83O+CMN";
+const CIVIL_MONTHS: &str = "https://www.planalto.gov.br/ccivil_03/leis/1930-1949/l810-49.htm";
 
 pub(super) struct Rule {
     pub(super) id: &'static str,
@@ -84,7 +85,7 @@ pub(super) const INVESTMENT: Rule = Rule {
     id: "br_fixed_income_resident_2026",
     jurisdiction: "BR",
     scope: "One realized redemption by a resident individual. CDB, RDB and Tesouro Direto without coupons use the fixed-income schedule. Non-price-indexed LCI and LCA bought at issue since 2025-05-26, held at least six calendar months, and savings interest are exempt from income tax.",
-    exclusions: "Inputs are actual acquisition and redemption before withholding. Longer contractual lockups, price-indexed LCI/LCA, tax-loss carryovers, secondary sale, multiple lots, fees, coupons, other assets or investor categories are outside the rule.",
+    exclusions: "Inputs are actual acquisition and redemption before withholding. Longer contractual lockups, banking day settlement adjustments, price-indexed LCI/LCA, tax-loss carryovers, secondary sale, multiple lots, fees, coupons and other assets are outside the rule.",
     formula: "gain = redemption - principal; IOF = min(positive gain times annex limit, redemption times 0.01 times days) before day 30; IR = positive gain net of IOF times holding-period rate",
     rounding_id: "half_up_iof_then_income_tax",
     rounding: "Round the actual modeled IOF to BRL cents before deducting it from realized gain. Round resulting IR to BRL cents. Nearest cent with ties away from zero.",
@@ -94,6 +95,7 @@ pub(super) const INVESTMENT: Rule = Rule {
         IOF_DECREE,
         LAW_8981_SAVINGS,
         LCI_LCA_RULE,
+        CIVIL_MONTHS,
     ],
 };
 
