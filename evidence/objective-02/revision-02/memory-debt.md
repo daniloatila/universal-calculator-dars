@@ -55,3 +55,15 @@ The physical comparison used the 0.4.1 and 0.5.0 review executables on the same 
 | System-wide physical memory in use, idle minus ambient control | 145,653,760 | 192,524,288 |
 
 The 0.5.0 build ran seven science modules offline and revisited Graph and Data across three cycles. All 11 science workers closed. Both application trees reached zero processes after closing. System-wide deltas include unrelated activity and shared pages could not be attributed to the application. The target of less than 100,000,000 incremental bytes remains unverified. The three-session, extended idle study remains scheduled for the pre-1.0 audit. [0.4.1 in the same session](../../objective-05/integrated-audit/windows-baseline.json) · [0.5.0 cycles](../../objective-05/integrated-audit/windows-candidate.json)
+
+## Objective 05 revision 0.5.1
+
+Same Windows x64 host, WebView2 158.0.4370.33, fresh profiles and 6 visible-idle samples per run.
+
+| Measurement in bytes | 0.5.0 | 0.5.1 |
+| --- | ---: | ---: |
+| Tree private working set | 121,049,088 | 119,152,640 |
+| Tree private commit | 271,839,232 | 268,509,184 |
+| System physical usage at idle minus ambient control | -2,437,120 | 129,417,216 |
+
+System-wide physical usage includes activity outside the application. The target below 100,000,000 incremental bytes and the extended retention study remain open. [0.5.0](../../objective-05/revision-01/windows-baseline.json) · [0.5.1](../../objective-05/revision-01/windows-candidate.json)

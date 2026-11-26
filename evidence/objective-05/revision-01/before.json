@@ -1,0 +1,376 @@
+{
+  "version": "0.5.0",
+  "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+  "wasm_sha256": "729e338038178963370f4fb8de9798cfa426716303ecc59b7a043a95bfff944c",
+  "method": "Native CLI proof and WASM page on the same synthetic bytes. Chrome used equivalent JSON with different whitespace and independently recorded its own input digest.",
+  "cases": [
+    {
+      "id": "mixed-json",
+      "file": "synthetic/mixed.json",
+      "config": {
+        "format": "json",
+        "decimal": "comma",
+        "types": {
+          "valor": "decimal"
+        }
+      },
+      "file_sha256": "eac9fd8718ba61541b9f4fc0b37ddf903b680eab1c9939934eac92afe54365d5",
+      "page": {
+        "columns": [
+          {
+            "kind": "decimal",
+            "name": "valor"
+          }
+        ],
+        "offset": 0,
+        "rows": [
+          [
+            {
+              "origin": "invalid",
+              "value": "1.25"
+            }
+          ],
+          [
+            {
+              "origin": "stored",
+              "value": "2,50"
+            }
+          ]
+        ],
+        "sheet": null,
+        "sheets": [],
+        "source_columns": [
+          {
+            "kind": "decimal",
+            "name": "valor"
+          }
+        ],
+        "total": 2
+      },
+      "proof": {
+        "algorithm_version": "data-lab/1",
+        "assumptions": [],
+        "constraints": [
+          "Replay requires the selected source bytes matching SHA-256. Cached spreadsheet formulas may be stale. Date-formatted serials retain the workbook epoch. Missing and invalid values are counted separately."
+        ],
+        "domain": "local_tabular_data",
+        "engine_version": "0.5.0",
+        "error_bound": null,
+        "exactness": "exact",
+        "expression": "{\"configuration\":{\"analysis\":null,\"decimal\":\"comma\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"json\",\"header\":\"present\",\"sheet\":null,\"steps\":[],\"types\":{\"valor\":\"decimal\"}},\"sha256\":\"eac9fd8718ba61541b9f4fc0b37ddf903b680eab1c9939934eac92afe54365d5\"}",
+        "formula": "mean = sum / valid numeric count",
+        "method": "Typed rows with exact rational aggregates",
+        "module": "data-lab",
+        "normalized": "{\"configuration\":{\"analysis\":null,\"decimal\":\"comma\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"json\",\"header\":\"present\",\"sheet\":null,\"steps\":[],\"types\":{\"valor\":\"decimal\"}},\"sha256\":\"eac9fd8718ba61541b9f4fc0b37ddf903b680eab1c9939934eac92afe54365d5\"}",
+        "operation": "dataset",
+        "options": {},
+        "precision": null,
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4180"
+        ],
+        "result": "{\"analysis\":null,\"columns\":[{\"kind\":\"decimal\",\"name\":\"valor\"}],\"profile\":[{\"column\":{\"kind\":\"decimal\",\"name\":\"valor\"},\"origins\":{\"invalid\":1,\"stored\":1},\"statistics\":{\"max\":\"5/2\",\"mean\":\"5/2\",\"min\":\"5/2\",\"n\":1,\"sum\":\"5/2\"}}],\"rows\":2,\"sha256\":\"eac9fd8718ba61541b9f4fc0b37ddf903b680eab1c9939934eac92afe54365d5\",\"sheet\":null,\"source_bytes\":41,\"source_columns\":[{\"kind\":\"decimal\",\"name\":\"valor\"}],\"source_rows\":2,\"steps\":[]}",
+        "rounding": null,
+        "schema": 1,
+        "tolerance": null,
+        "units": {},
+        "variables": {
+          "sha256": "eac9fd8718ba61541b9f4fc0b37ddf903b680eab1c9939934eac92afe54365d5"
+        }
+      }
+    },
+    {
+      "id": "date-request",
+      "file": "synthetic/styled-dates.xlsx",
+      "config": {
+        "format": "xlsx",
+        "types": {
+          "direct": "date",
+          "cached": "date"
+        }
+      },
+      "file_sha256": "b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7",
+      "page": {
+        "columns": [
+          {
+            "kind": "date",
+            "name": "direct"
+          },
+          {
+            "kind": "date",
+            "name": "cached"
+          }
+        ],
+        "offset": 0,
+        "rows": [
+          [
+            {
+              "origin": "date_serial1900",
+              "value": "45351.5"
+            },
+            {
+              "formula": "DATE(2024,2,29)+TIME(12,0,0)",
+              "origin": "invalid",
+              "value": "45351.5"
+            }
+          ]
+        ],
+        "sheet": "Records",
+        "sheets": [
+          "Records",
+          "Other"
+        ],
+        "source_columns": [
+          {
+            "kind": "date",
+            "name": "direct"
+          },
+          {
+            "kind": "date",
+            "name": "cached"
+          }
+        ],
+        "total": 1
+      },
+      "proof": {
+        "algorithm_version": "data-lab/1",
+        "assumptions": [],
+        "constraints": [
+          "Replay requires the selected source bytes matching SHA-256. Cached spreadsheet formulas may be stale. Date-formatted serials retain the workbook epoch. Missing and invalid values are counted separately."
+        ],
+        "domain": "local_tabular_data",
+        "engine_version": "0.5.0",
+        "error_bound": null,
+        "exactness": "exact",
+        "expression": "{\"configuration\":{\"analysis\":null,\"decimal\":\"point\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"xlsx\",\"header\":\"present\",\"sheet\":null,\"steps\":[],\"types\":{\"cached\":\"date\",\"direct\":\"date\"}},\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\"}",
+        "formula": "mean = sum / valid numeric count",
+        "method": "Typed rows with exact rational aggregates",
+        "module": "data-lab",
+        "normalized": "{\"configuration\":{\"analysis\":null,\"decimal\":\"point\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"xlsx\",\"header\":\"present\",\"sheet\":null,\"steps\":[],\"types\":{\"cached\":\"date\",\"direct\":\"date\"}},\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\"}",
+        "operation": "dataset",
+        "options": {},
+        "precision": null,
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4180"
+        ],
+        "result": "{\"analysis\":null,\"columns\":[{\"kind\":\"date\",\"name\":\"direct\"},{\"kind\":\"date\",\"name\":\"cached\"}],\"profile\":[{\"column\":{\"kind\":\"date\",\"name\":\"direct\"},\"origins\":{\"date_serial1900\":1},\"statistics\":null},{\"column\":{\"kind\":\"date\",\"name\":\"cached\"},\"origins\":{\"invalid\":1},\"statistics\":null}],\"rows\":1,\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\",\"sheet\":\"Records\",\"source_bytes\":2246,\"source_columns\":[{\"kind\":\"date\",\"name\":\"direct\"},{\"kind\":\"date\",\"name\":\"cached\"}],\"source_rows\":1,\"steps\":[]}",
+        "rounding": null,
+        "schema": 1,
+        "tolerance": null,
+        "units": {},
+        "variables": {
+          "sha256": "b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7"
+        }
+      }
+    },
+    {
+      "id": "serial-numeric-request",
+      "file": "synthetic/styled-dates.xlsx",
+      "config": {
+        "format": "xlsx",
+        "types": {
+          "direct": "decimal",
+          "cached": "decimal"
+        }
+      },
+      "file_sha256": "b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7",
+      "page": {
+        "columns": [
+          {
+            "kind": "decimal",
+            "name": "direct"
+          },
+          {
+            "kind": "decimal",
+            "name": "cached"
+          }
+        ],
+        "offset": 0,
+        "rows": [
+          [
+            {
+              "origin": "date_serial1900",
+              "value": "45351.5"
+            },
+            {
+              "formula": "DATE(2024,2,29)+TIME(12,0,0)",
+              "origin": "cached_formula",
+              "value": "45351.5"
+            }
+          ]
+        ],
+        "sheet": "Records",
+        "sheets": [
+          "Records",
+          "Other"
+        ],
+        "source_columns": [
+          {
+            "kind": "decimal",
+            "name": "direct"
+          },
+          {
+            "kind": "decimal",
+            "name": "cached"
+          }
+        ],
+        "total": 1
+      },
+      "proof": {
+        "algorithm_version": "data-lab/1",
+        "assumptions": [],
+        "constraints": [
+          "Replay requires the selected source bytes matching SHA-256. Cached spreadsheet formulas may be stale. Date-formatted serials retain the workbook epoch. Missing and invalid values are counted separately."
+        ],
+        "domain": "local_tabular_data",
+        "engine_version": "0.5.0",
+        "error_bound": null,
+        "exactness": "exact",
+        "expression": "{\"configuration\":{\"analysis\":null,\"decimal\":\"point\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"xlsx\",\"header\":\"present\",\"sheet\":null,\"steps\":[],\"types\":{\"cached\":\"decimal\",\"direct\":\"decimal\"}},\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\"}",
+        "formula": "mean = sum / valid numeric count",
+        "method": "Typed rows with exact rational aggregates",
+        "module": "data-lab",
+        "normalized": "{\"configuration\":{\"analysis\":null,\"decimal\":\"point\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"xlsx\",\"header\":\"present\",\"sheet\":null,\"steps\":[],\"types\":{\"cached\":\"decimal\",\"direct\":\"decimal\"}},\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\"}",
+        "operation": "dataset",
+        "options": {},
+        "precision": null,
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4180"
+        ],
+        "result": "{\"analysis\":null,\"columns\":[{\"kind\":\"decimal\",\"name\":\"direct\"},{\"kind\":\"decimal\",\"name\":\"cached\"}],\"profile\":[{\"column\":{\"kind\":\"decimal\",\"name\":\"direct\"},\"origins\":{\"date_serial1900\":1},\"statistics\":null},{\"column\":{\"kind\":\"decimal\",\"name\":\"cached\"},\"origins\":{\"cached_formula\":1},\"statistics\":{\"max\":\"90703/2\",\"mean\":\"90703/2\",\"min\":\"90703/2\",\"n\":1,\"sum\":\"90703/2\"}}],\"rows\":1,\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\",\"sheet\":\"Records\",\"source_bytes\":2246,\"source_columns\":[{\"kind\":\"decimal\",\"name\":\"direct\"},{\"kind\":\"decimal\",\"name\":\"cached\"}],\"source_rows\":1,\"steps\":[]}",
+        "rounding": null,
+        "schema": 1,
+        "tolerance": null,
+        "units": {},
+        "variables": {
+          "sha256": "b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7"
+        }
+      }
+    }
+  ],
+  "browser": {
+    "scope": "0.5.0 production Chrome browser reproduction",
+    "engine_version": "0.5.0",
+    "browser": "158.0.8127.38",
+    "input_sha256": "9601976f31ad5e86da4587081d9682006558f8a099a8eb3a9f42379f1d35f857",
+    "result": {
+      "analysis": null,
+      "columns": [
+        {
+          "kind": "decimal",
+          "name": "valor"
+        }
+      ],
+      "profile": [
+        {
+          "column": {
+            "kind": "decimal",
+            "name": "valor"
+          },
+          "origins": {
+            "invalid": 1,
+            "stored": 1
+          },
+          "statistics": {
+            "max": "5/2",
+            "mean": "5/2",
+            "min": "5/2",
+            "n": 1,
+            "sum": "5/2"
+          }
+        }
+      ],
+      "rows": 2,
+      "sha256": "9601976f31ad5e86da4587081d9682006558f8a099a8eb3a9f42379f1d35f857",
+      "sheet": null,
+      "source_bytes": 33,
+      "source_columns": [
+        {
+          "kind": "decimal",
+          "name": "valor"
+        }
+      ],
+      "source_rows": 2,
+      "steps": []
+    },
+    "cells": [
+      "1.25Invalid",
+      "2,50"
+    ],
+    "proof": {
+      "algorithm_version": "data-lab/1",
+      "assumptions": [],
+      "constraints": [
+        "Replay requires the selected source bytes matching SHA-256. Cached spreadsheet formulas may be stale. Date-formatted serials retain the workbook epoch. Missing and invalid values are counted separately."
+      ],
+      "domain": "local_tabular_data",
+      "engine_version": "0.5.0",
+      "error_bound": null,
+      "exactness": "exact",
+      "expression": "{\"configuration\":{\"analysis\":null,\"decimal\":\"comma\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"json\",\"header\":\"present\",\"sheet\":null,\"steps\":[],\"types\":{\"valor\":\"decimal\"}},\"sha256\":\"9601976f31ad5e86da4587081d9682006558f8a099a8eb3a9f42379f1d35f857\"}",
+      "formula": "mean = sum / valid numeric count",
+      "method": "Typed rows with exact rational aggregates",
+      "module": "data-lab",
+      "normalized": "{\"configuration\":{\"analysis\":null,\"decimal\":\"comma\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"json\",\"header\":\"present\",\"sheet\":null,\"steps\":[],\"types\":{\"valor\":\"decimal\"}},\"sha256\":\"9601976f31ad5e86da4587081d9682006558f8a099a8eb3a9f42379f1d35f857\"}",
+      "operation": "dataset",
+      "options": {},
+      "precision": null,
+      "references": [
+        "https://www.rfc-editor.org/rfc/rfc4180"
+      ],
+      "result": "{\"analysis\":null,\"columns\":[{\"kind\":\"decimal\",\"name\":\"valor\"}],\"profile\":[{\"column\":{\"kind\":\"decimal\",\"name\":\"valor\"},\"origins\":{\"invalid\":1,\"stored\":1},\"statistics\":{\"max\":\"5/2\",\"mean\":\"5/2\",\"min\":\"5/2\",\"n\":1,\"sum\":\"5/2\"}}],\"rows\":2,\"sha256\":\"9601976f31ad5e86da4587081d9682006558f8a099a8eb3a9f42379f1d35f857\",\"sheet\":null,\"source_bytes\":33,\"source_columns\":[{\"kind\":\"decimal\",\"name\":\"valor\"}],\"source_rows\":2,\"steps\":[]}",
+      "rounding": null,
+      "schema": 1,
+      "tolerance": null,
+      "units": {},
+      "variables": {
+        "sha256": "9601976f31ad5e86da4587081d9682006558f8a099a8eb3a9f42379f1d35f857"
+      },
+      "expression_locale": "en"
+    },
+    "assets": [
+      {
+        "name": "data-lab-worker-CIyQwR9K.js",
+        "sha256": "439609fd6fefe261620e7689566df07c2ae9b3617154e7225bb88a6a756a6bf5"
+      },
+      {
+        "name": "index-BIAERMph.css",
+        "sha256": "65984e33cf90e9804b1f19874b95fc4bb5b603d5f73b999216f30caf88e2e5ef"
+      },
+      {
+        "name": "index-BwAjpM77.js",
+        "sha256": "357c5ded24e1edcb9e60e323a8d86dfdae2821902f628cf02e70fa7db6482a6f"
+      },
+      {
+        "name": "tool-data-lab-BUfrb_k5.css",
+        "sha256": "f35349a8c7f9bde40fc62135822dbc744966a3fbd4ffb5f54fb2e0bc30f18e7a"
+      },
+      {
+        "name": "tool-data-lab-DOb2G7Br.js",
+        "sha256": "c4a1af88ff23477c62ce4d203627ef7d4924bebe9810e24a9cbc196ea5fdb482"
+      }
+    ]
+  },
+  "operational_budget": {
+    "scope": "One ordinary, small CSV using a fill transformation. No system memory stress or exploit workload. The absence of a cross-phase byte budget in 0.5.0 was additionally confirmed by inspecting the audited source.",
+    "sha256": "04f4aaaffaa9b478c09479826c670a1b05641bae6d35015fdb0827754249d619",
+    "without_budget": {
+      "exit_code": 0,
+      "rows": 80,
+      "source_bytes": 316,
+      "steps": [
+        {
+          "index": 0,
+          "input_rows": 80,
+          "operation": "fill_missing",
+          "output_rows": 80,
+          "reduced_rows": 0
+        }
+      ]
+    },
+    "explicit_budget": {
+      "exit_code": 1,
+      "error": "invalid_input"
+    }
+  }
+}

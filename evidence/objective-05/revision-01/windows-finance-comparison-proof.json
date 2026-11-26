@@ -1,0 +1,37 @@
+{
+  "algorithm_version": "finance-comparison/2",
+  "assumptions": [],
+  "constraints": [
+    "Both canonical scenario recipes are recalculated in the same financial module. Supplied scalar results are not accepted.",
+    "The comparison matches semantic identity, unit, required context and the precision source. Contextual results are side by side only, without ranking.",
+    "Relative changes divide by the magnitude of the reference. A zero reference has no relative change.",
+    "Annual compound normalization uses exact originated rates or exact quotes with a known period and capitalization. Approximate results carry no certified comparison error bound.",
+    "Known solver stopping tolerances limit displayed precision. Their sum is a resolution heuristic, not a certified error bound. Suppressed differences do not establish equality.",
+    "The bounded proof may omit individual fractions beyond 6 KiB. The calculation still uses the original numerical value, which can be regenerated from the recipes."
+  ],
+  "domain": "financial_comparison",
+  "engine_version": "0.5.1",
+  "error_bound": null,
+  "exactness": "exact",
+  "expression": "{\"reference\":{\"operation\":\"equivalent_rate\",\"input\":\"{\\\"from_periods_per_year\\\":2,\\\"rate\\\":\\\"0.10\\\",\\\"to_periods_per_year\\\":2}\",\"options\":{\"currency\":\"BRL\",\"rounding\":\"half_even\"}},\"alternative\":{\"operation\":\"equivalent_rate\",\"input\":\"{\\\"from_periods_per_year\\\":2,\\\"rate\\\":\\\"0.10\\\",\\\"to_periods_per_year\\\":1}\",\"options\":{\"currency\":\"BRL\",\"rounding\":\"half_even\"}},\"metric\":\"rate\"}",
+  "formula": "Delta = alternative - reference; percentage points = 100 * Delta for fractional rates; relative percentage = 100 * Delta / abs(reference)",
+  "method": "semantic_scenario_comparison",
+  "module": "financial",
+  "normalized": "{\"reference\":{\"operation\":\"equivalent_rate\",\"input\":\"{\\\"from_periods_per_year\\\":2,\\\"rate\\\":\\\"0.10\\\",\\\"to_periods_per_year\\\":2}\",\"options\":{\"currency\":\"BRL\",\"rounding\":\"half_even\"}},\"alternative\":{\"operation\":\"equivalent_rate\",\"input\":\"{\\\"from_periods_per_year\\\":2,\\\"rate\\\":\\\"0.10\\\",\\\"to_periods_per_year\\\":1}\",\"options\":{\"currency\":\"BRL\",\"rounding\":\"half_even\"}},\"metric\":\"rate\"}",
+  "operation": "scenario_compare",
+  "options": {},
+  "precision": null,
+  "references": [
+    "https://www.six-group.com/en/products-services/financial-information/market-reference-data/data-standards.html",
+    "https://nvlpubs.nist.gov/nistpubs/hb/2025/NIST.HB.135e2025.pdf",
+    "https://www.isda.org/2008/12/22/30-360-day-count-conventions/"
+  ],
+  "result": "{\"items\":[{\"id\":\"rate\",\"key\":\"rate\",\"reason\":\"normalized_compound_annual\",\"status\":\"normalized\",\"unit\":\"rate\"}],\"schema\":1,\"selected\":{\"absolute_difference\":\"0.0000000000000000\",\"alternative\":{\"context\":{\"calculation_basis\":\"discrete_equivalent_compounding_rate\",\"capitalization\":\"discrete_compounding\",\"input_periods_per_year\":2,\"periodicity\":1,\"purchasing_power\":\"nominal\",\"rate\":\"1/10\",\"rate_nature\":\"effective\",\"reference_date\":\"t0\",\"rounding_policy\":\"half_even\"},\"decimal_places\":16,\"exactness\":\"exact\",\"operation\":\"equivalent_rate\",\"presentation\":\"0.2100000000000000\",\"semantic_id\":\"financial_compounding_rate\",\"solver_tolerance\":null,\"source\":\"canonical\",\"value\":\"21/100\",\"value_omitted\":false,\"working_precision_bits\":null},\"common_basis\":{\"capitalization\":\"compound\",\"nature\":\"effective\",\"periods_per_year\":1},\"differences\":[],\"exact_difference\":\"0\",\"exact_difference_omitted\":false,\"formula\":\"Delta = alternative - reference; percentage points = 100 * Delta for fractional rates; relative percentage = 100 * Delta / abs(reference)\",\"id\":\"rate\",\"key\":\"rate\",\"normalization\":{\"alternative\":{\"formula\":\"(1 + original effective rate)^original periods per year - 1\",\"original_basis\":{\"capitalization\":\"compound\",\"nature\":\"effective\",\"periods_per_year\":1},\"presentation\":\"0.2100000000000000\",\"source\":\"canonical_exact\",\"value\":\"21/100\",\"value_omitted\":false},\"formula\":\"Effective annual rate = (1 + effective periodic rate)^periods_per_year - 1; effective annual rate = (1 + nominal annual rate/periods_per_year)^periods_per_year - 1\",\"reference\":{\"formula\":\"(1 + original effective rate)^original periods per year - 1\",\"original_basis\":{\"capitalization\":\"compound\",\"nature\":\"effective\",\"periods_per_year\":2},\"presentation\":\"0.2100000000000000\",\"source\":\"canonical_exact\",\"value\":\"21/100\",\"value_omitted\":false}},\"percentage_points\":\"0.00000000000000\",\"precision_source\":\"canonical_exact\",\"precision_used\":{\"combined_solver_tolerance\":null,\"difference_decimal_places\":16,\"exact_arithmetic_on_compared_values\":true,\"percentage_points_decimal_places\":14,\"relative_decimal_places\":12,\"relative_percent_decimal_places\":10,\"rounding\":\"half_even\"},\"precision_warning\":null,\"reason\":\"normalized_compound_annual\",\"reference\":{\"context\":{\"calculation_basis\":\"discrete_equivalent_compounding_rate\",\"capitalization\":\"discrete_compounding\",\"input_periods_per_year\":2,\"periodicity\":2,\"purchasing_power\":\"nominal\",\"rate\":\"1/10\",\"rate_nature\":\"effective\",\"reference_date\":\"t0\",\"rounding_policy\":\"half_even\"},\"decimal_places\":16,\"exactness\":\"exact\",\"operation\":\"equivalent_rate\",\"presentation\":\"0.1000000000000000\",\"semantic_id\":\"financial_compounding_rate\",\"solver_tolerance\":null,\"source\":\"canonical\",\"value\":\"1/10\",\"value_omitted\":false,\"working_precision_bits\":null},\"relative_difference\":\"0.000000000000\",\"relative_percent\":\"0.0000000000\",\"relative_reason\":null,\"status\":\"normalized\",\"unit\":\"rate\"}}",
+  "rounding": null,
+  "schema": 1,
+  "tolerance": null,
+  "units": {},
+  "variables": {
+    "comparison_contract": "1"
+  }
+}

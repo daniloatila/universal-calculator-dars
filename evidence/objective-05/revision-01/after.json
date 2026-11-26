@@ -1,0 +1,365 @@
+{
+  "version": "0.5.1",
+  "source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc",
+  "cli_sha256": "239bb670d505501bc890247b4f32c9e9943c6274b3dc5ba240c1d1cb1daa76a2",
+  "wasm_sha256": "b9dd1eefa7e9c198dbd871098d0f6191b7330e14a6b1b9f237aca49f008027a3",
+  "method": "Identical synthetic bytes and settings as before.json. Independent processes compare the entire Rust CLI and WASM proof, page and bound replay.",
+  "cases": [
+    {
+      "id": "mixed-json",
+      "file": "synthetic/mixed.json",
+      "config": {
+        "format": "json",
+        "decimal": "comma",
+        "types": {
+          "valor": "decimal"
+        }
+      },
+      "file_sha256": "eac9fd8718ba61541b9f4fc0b37ddf903b680eab1c9939934eac92afe54365d5",
+      "page": {
+        "columns": [
+          {
+            "name": "valor",
+            "kind": "decimal"
+          }
+        ],
+        "offset": 0,
+        "rows": [
+          [
+            {
+              "value": "1.25",
+              "origin": "stored",
+              "source_origin": "stored",
+              "source_type": "number",
+              "requested_type": "decimal",
+              "notation": "json",
+              "canonical": "5/4",
+              "validity": "valid"
+            }
+          ],
+          [
+            {
+              "value": "2,50",
+              "origin": "stored",
+              "source_origin": "stored",
+              "source_type": "text",
+              "requested_type": "decimal",
+              "notation": "text_comma",
+              "canonical": "5/2",
+              "validity": "valid"
+            }
+          ]
+        ],
+        "sheet": null,
+        "sheets": [],
+        "source_columns": [
+          {
+            "name": "valor",
+            "kind": "decimal"
+          }
+        ],
+        "total": 2,
+        "workbook_epoch": null
+      },
+      "proof": {
+        "algorithm_version": "data-lab/2",
+        "assumptions": [],
+        "constraints": [
+          "V2 replay requires source bytes matching SHA-256 and the recorded resource policy.",
+          "JSON and XLSX numbers use native notation. The selected decimal separator applies to text.",
+          "Spreadsheet formulas are represented by their stored caches. Date values retain the workbook epoch and are excluded from numeric statistics.",
+          "Excel's fictitious 1900 leap day has no Gregorian date. Serial fractions are rendered at nanosecond resolution.",
+          "Estimated live resource limit: 201326592 bytes under data-lab-estimated-live-v1."
+        ],
+        "domain": "local_tabular_data",
+        "engine_version": "0.5.1",
+        "error_bound": null,
+        "exactness": "exact",
+        "expression": "{\"configuration\":{\"analysis\":null,\"decimal\":\"comma\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"json\",\"header\":\"present\",\"resource_budget_bytes\":201326592,\"semantics_version\":2,\"sheet\":null,\"steps\":[],\"types\":{\"valor\":\"decimal\"}},\"resource_policy\":{\"limit_bytes\":201326592,\"model\":\"data-lab-estimated-live-v1\"},\"semantics_version\":2,\"sha256\":\"eac9fd8718ba61541b9f4fc0b37ddf903b680eab1c9939934eac92afe54365d5\"}",
+        "formula": "mean = sum / valid numeric count",
+        "method": "Typed rows with exact rational aggregates",
+        "module": "data-lab",
+        "normalized": "{\"configuration\":{\"analysis\":null,\"decimal\":\"comma\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"json\",\"header\":\"present\",\"resource_budget_bytes\":201326592,\"semantics_version\":2,\"sheet\":null,\"steps\":[],\"types\":{\"valor\":\"decimal\"}},\"resource_policy\":{\"limit_bytes\":201326592,\"model\":\"data-lab-estimated-live-v1\"},\"semantics_version\":2,\"sha256\":\"eac9fd8718ba61541b9f4fc0b37ddf903b680eab1c9939934eac92afe54365d5\"}",
+        "operation": "dataset",
+        "options": {},
+        "precision": null,
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4180"
+        ],
+        "result": "{\"analysis\":null,\"columns\":[{\"kind\":\"decimal\",\"name\":\"valor\"}],\"profile\":[{\"column\":{\"kind\":\"decimal\",\"name\":\"valor\"},\"origins\":{\"stored\":2},\"source_types\":{\"number\":1,\"text\":1},\"statistics\":{\"max\":\"5/2\",\"mean\":\"15/8\",\"min\":\"5/4\",\"n\":2,\"sum\":\"15/4\"},\"validity\":{\"valid\":2}}],\"rows\":2,\"sha256\":\"eac9fd8718ba61541b9f4fc0b37ddf903b680eab1c9939934eac92afe54365d5\",\"sheet\":null,\"source_bytes\":41,\"source_columns\":[{\"kind\":\"decimal\",\"name\":\"valor\"}],\"source_profile\":{\"formula_caches\":{},\"native_types\":{\"number\":1,\"text\":1},\"notations\":{\"json\":1,\"text_comma\":1}},\"source_rows\":2,\"steps\":[],\"workbook_epoch\":null}",
+        "rounding": null,
+        "schema": 1,
+        "tolerance": null,
+        "units": {},
+        "variables": {
+          "sha256": "eac9fd8718ba61541b9f4fc0b37ddf903b680eab1c9939934eac92afe54365d5"
+        }
+      },
+      "source_bound_replay": "identical"
+    },
+    {
+      "id": "date-request",
+      "file": "synthetic/styled-dates.xlsx",
+      "config": {
+        "format": "xlsx",
+        "types": {
+          "direct": "date",
+          "cached": "date"
+        }
+      },
+      "file_sha256": "b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7",
+      "page": {
+        "columns": [
+          {
+            "name": "direct",
+            "kind": "date"
+          },
+          {
+            "name": "cached",
+            "kind": "date"
+          }
+        ],
+        "offset": 0,
+        "rows": [
+          [
+            {
+              "value": "45351.5",
+              "origin": "date_serial1900",
+              "source_origin": "date_serial1900",
+              "source_type": "date",
+              "requested_type": "date",
+              "notation": "xlsx",
+              "canonical": "2024-02-29T12:00:00",
+              "validity": "valid",
+              "workbook": {
+                "cell_type": "n",
+                "style_index": 1,
+                "number_format_id": 14,
+                "raw_value": "45351.5",
+                "date": {
+                  "representation": "serial",
+                  "epoch": "1900",
+                  "status": "valid",
+                  "iso": "2024-02-29T12:00:00",
+                  "discarded_subnanosecond_precision": false
+                }
+              }
+            },
+            {
+              "value": "45351.5",
+              "origin": "cached_formula",
+              "source_origin": "cached_formula",
+              "source_type": "date",
+              "requested_type": "date",
+              "notation": "xlsx",
+              "canonical": "2024-02-29T12:00:00",
+              "validity": "valid",
+              "formula": "DATE(2024,2,29)+TIME(12,0,0)",
+              "workbook": {
+                "cell_type": "n",
+                "style_index": 1,
+                "number_format_id": 14,
+                "raw_value": "45351.5",
+                "cache": {
+                  "status": "stored",
+                  "value": "45351.5"
+                },
+                "date": {
+                  "representation": "serial",
+                  "epoch": "1900",
+                  "status": "valid",
+                  "iso": "2024-02-29T12:00:00",
+                  "discarded_subnanosecond_precision": false
+                }
+              }
+            }
+          ]
+        ],
+        "sheet": "Records",
+        "sheets": [
+          "Records",
+          "Other"
+        ],
+        "source_columns": [
+          {
+            "name": "direct",
+            "kind": "date"
+          },
+          {
+            "name": "cached",
+            "kind": "date"
+          }
+        ],
+        "total": 1,
+        "workbook_epoch": "1900"
+      },
+      "proof": {
+        "algorithm_version": "data-lab/2",
+        "assumptions": [],
+        "constraints": [
+          "V2 replay requires source bytes matching SHA-256 and the recorded resource policy.",
+          "JSON and XLSX numbers use native notation. The selected decimal separator applies to text.",
+          "Spreadsheet formulas are represented by their stored caches. Date values retain the workbook epoch and are excluded from numeric statistics.",
+          "Excel's fictitious 1900 leap day has no Gregorian date. Serial fractions are rendered at nanosecond resolution.",
+          "Estimated live resource limit: 201326592 bytes under data-lab-estimated-live-v1."
+        ],
+        "domain": "local_tabular_data",
+        "engine_version": "0.5.1",
+        "error_bound": null,
+        "exactness": "exact",
+        "expression": "{\"configuration\":{\"analysis\":null,\"decimal\":\"point\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"xlsx\",\"header\":\"present\",\"resource_budget_bytes\":201326592,\"semantics_version\":2,\"sheet\":null,\"steps\":[],\"types\":{\"cached\":\"date\",\"direct\":\"date\"}},\"resource_policy\":{\"limit_bytes\":201326592,\"model\":\"data-lab-estimated-live-v1\"},\"semantics_version\":2,\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\"}",
+        "formula": "mean = sum / valid numeric count",
+        "method": "Typed rows with exact rational aggregates",
+        "module": "data-lab",
+        "normalized": "{\"configuration\":{\"analysis\":null,\"decimal\":\"point\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"xlsx\",\"header\":\"present\",\"resource_budget_bytes\":201326592,\"semantics_version\":2,\"sheet\":null,\"steps\":[],\"types\":{\"cached\":\"date\",\"direct\":\"date\"}},\"resource_policy\":{\"limit_bytes\":201326592,\"model\":\"data-lab-estimated-live-v1\"},\"semantics_version\":2,\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\"}",
+        "operation": "dataset",
+        "options": {},
+        "precision": null,
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4180"
+        ],
+        "result": "{\"analysis\":null,\"columns\":[{\"kind\":\"date\",\"name\":\"direct\"},{\"kind\":\"date\",\"name\":\"cached\"}],\"profile\":[{\"column\":{\"kind\":\"date\",\"name\":\"direct\"},\"origins\":{\"date_serial1900\":1},\"source_types\":{\"date\":1},\"statistics\":null,\"validity\":{\"valid\":1}},{\"column\":{\"kind\":\"date\",\"name\":\"cached\"},\"origins\":{\"cached_formula\":1},\"source_types\":{\"date\":1},\"statistics\":null,\"validity\":{\"valid\":1}}],\"rows\":1,\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\",\"sheet\":\"Records\",\"source_bytes\":2246,\"source_columns\":[{\"kind\":\"date\",\"name\":\"direct\"},{\"kind\":\"date\",\"name\":\"cached\"}],\"source_profile\":{\"formula_caches\":{\"stored\":1},\"native_types\":{\"date\":2},\"notations\":{\"xlsx\":2}},\"source_rows\":1,\"steps\":[],\"workbook_epoch\":\"1900\"}",
+        "rounding": null,
+        "schema": 1,
+        "tolerance": null,
+        "units": {},
+        "variables": {
+          "sha256": "b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7"
+        }
+      },
+      "source_bound_replay": "identical"
+    },
+    {
+      "id": "serial-numeric-request",
+      "file": "synthetic/styled-dates.xlsx",
+      "config": {
+        "format": "xlsx",
+        "types": {
+          "direct": "decimal",
+          "cached": "decimal"
+        }
+      },
+      "file_sha256": "b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7",
+      "page": {
+        "columns": [
+          {
+            "name": "direct",
+            "kind": "decimal"
+          },
+          {
+            "name": "cached",
+            "kind": "decimal"
+          }
+        ],
+        "offset": 0,
+        "rows": [
+          [
+            {
+              "value": "45351.5",
+              "origin": "invalid",
+              "source_origin": "date_serial1900",
+              "source_type": "date",
+              "requested_type": "decimal",
+              "notation": "xlsx",
+              "canonical": null,
+              "validity": "invalid",
+              "workbook": {
+                "cell_type": "n",
+                "style_index": 1,
+                "number_format_id": 14,
+                "raw_value": "45351.5",
+                "date": {
+                  "representation": "serial",
+                  "epoch": "1900",
+                  "status": "valid",
+                  "iso": "2024-02-29T12:00:00",
+                  "discarded_subnanosecond_precision": false
+                }
+              }
+            },
+            {
+              "value": "45351.5",
+              "origin": "invalid",
+              "source_origin": "cached_formula",
+              "source_type": "date",
+              "requested_type": "decimal",
+              "notation": "xlsx",
+              "canonical": null,
+              "validity": "invalid",
+              "formula": "DATE(2024,2,29)+TIME(12,0,0)",
+              "workbook": {
+                "cell_type": "n",
+                "style_index": 1,
+                "number_format_id": 14,
+                "raw_value": "45351.5",
+                "cache": {
+                  "status": "stored",
+                  "value": "45351.5"
+                },
+                "date": {
+                  "representation": "serial",
+                  "epoch": "1900",
+                  "status": "valid",
+                  "iso": "2024-02-29T12:00:00",
+                  "discarded_subnanosecond_precision": false
+                }
+              }
+            }
+          ]
+        ],
+        "sheet": "Records",
+        "sheets": [
+          "Records",
+          "Other"
+        ],
+        "source_columns": [
+          {
+            "name": "direct",
+            "kind": "decimal"
+          },
+          {
+            "name": "cached",
+            "kind": "decimal"
+          }
+        ],
+        "total": 1,
+        "workbook_epoch": "1900"
+      },
+      "proof": {
+        "algorithm_version": "data-lab/2",
+        "assumptions": [],
+        "constraints": [
+          "V2 replay requires source bytes matching SHA-256 and the recorded resource policy.",
+          "JSON and XLSX numbers use native notation. The selected decimal separator applies to text.",
+          "Spreadsheet formulas are represented by their stored caches. Date values retain the workbook epoch and are excluded from numeric statistics.",
+          "Excel's fictitious 1900 leap day has no Gregorian date. Serial fractions are rendered at nanosecond resolution.",
+          "Estimated live resource limit: 201326592 bytes under data-lab-estimated-live-v1."
+        ],
+        "domain": "local_tabular_data",
+        "engine_version": "0.5.1",
+        "error_bound": null,
+        "exactness": "exact",
+        "expression": "{\"configuration\":{\"analysis\":null,\"decimal\":\"point\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"xlsx\",\"header\":\"present\",\"resource_budget_bytes\":201326592,\"semantics_version\":2,\"sheet\":null,\"steps\":[],\"types\":{\"cached\":\"decimal\",\"direct\":\"decimal\"}},\"resource_policy\":{\"limit_bytes\":201326592,\"model\":\"data-lab-estimated-live-v1\"},\"semantics_version\":2,\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\"}",
+        "formula": "mean = sum / valid numeric count",
+        "method": "Typed rows with exact rational aggregates",
+        "module": "data-lab",
+        "normalized": "{\"configuration\":{\"analysis\":null,\"decimal\":\"point\",\"delimiter\":null,\"encoding\":\"utf8\",\"format\":\"xlsx\",\"header\":\"present\",\"resource_budget_bytes\":201326592,\"semantics_version\":2,\"sheet\":null,\"steps\":[],\"types\":{\"cached\":\"decimal\",\"direct\":\"decimal\"}},\"resource_policy\":{\"limit_bytes\":201326592,\"model\":\"data-lab-estimated-live-v1\"},\"semantics_version\":2,\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\"}",
+        "operation": "dataset",
+        "options": {},
+        "precision": null,
+        "references": [
+          "https://www.rfc-editor.org/rfc/rfc4180"
+        ],
+        "result": "{\"analysis\":null,\"columns\":[{\"kind\":\"decimal\",\"name\":\"direct\"},{\"kind\":\"decimal\",\"name\":\"cached\"}],\"profile\":[{\"column\":{\"kind\":\"decimal\",\"name\":\"direct\"},\"origins\":{\"invalid\":1},\"source_types\":{\"date\":1},\"statistics\":null,\"validity\":{\"invalid\":1}},{\"column\":{\"kind\":\"decimal\",\"name\":\"cached\"},\"origins\":{\"invalid\":1},\"source_types\":{\"date\":1},\"statistics\":null,\"validity\":{\"invalid\":1}}],\"rows\":1,\"sha256\":\"b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7\",\"sheet\":\"Records\",\"source_bytes\":2246,\"source_columns\":[{\"kind\":\"decimal\",\"name\":\"direct\"},{\"kind\":\"decimal\",\"name\":\"cached\"}],\"source_profile\":{\"formula_caches\":{\"stored\":1},\"native_types\":{\"date\":2},\"notations\":{\"xlsx\":2}},\"source_rows\":1,\"steps\":[],\"workbook_epoch\":\"1900\"}",
+        "rounding": null,
+        "schema": 1,
+        "tolerance": null,
+        "units": {},
+        "variables": {
+          "sha256": "b7681fe73837fbb7b499445420ee74832728aea2bc5db4c4e301155568a5c4d7"
+        }
+      },
+      "source_bound_replay": "identical"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 
 [English](README.md)
 
-O DARS é uma plataforma de computação local de Danilo Átila. O branch de revisão 0.5.0 reúne 22 ferramentas no Windows e no navegador. O Rust calcula os resultados, incluindo agregações racionais exatas e simulações reproduzíveis por semente. Cada registro identifica o método, as entradas e os limites aplicáveis. [Objetivo 05](evidence/objective-05/REPORT.pt-BR.md)
+O DARS é uma plataforma de computação local de Danilo Átila. O branch de revisão 0.5.1 reúne 22 ferramentas no Windows e no navegador. O Rust calcula os resultados, incluindo agregações racionais exatas e simulações reproduzíveis por semente. Cada registro identifica o método, as entradas e os limites aplicáveis. [Revisão do Data Lab](evidence/objective-05/revision-01/REPORT.pt-BR.md) · [Objetivo 05](evidence/objective-05/REPORT.pt-BR.md)
 
 Use a busca de ferramentas para encontrar o módulo pelo nome ou pela descrição. Na seção científica, escolha uma operação e carregue o exemplo para conferir o resultado e a prova de cálculo.
 

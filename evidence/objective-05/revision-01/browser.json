@@ -1,0 +1,336 @@
+{
+  "schema": 1,
+  "source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc",
+  "files_count": 92,
+  "wasm_count": 22,
+  "asset_set_sha256": "d3e2ea60e55dde55115b1a54ddb19595711b0fc0b45b07ba990e52582d9bd8a5",
+  "asset_digest_method": "SHA-256 of UTF-8 compact JSON array of {path,sha256} for all files under apps/web/dist, sorted by relative path ascending with slash separators.",
+  "browser": {
+    "channel": "chrome",
+    "version": "158.0.8127.38"
+  },
+  "source_scope": "Committed 0.5.1 source, production build, physical Windows Chrome.",
+  "playwright": {
+    "stats": {
+      "passed": 232,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "started_utc": "2026-11-26T20:12:03.663Z",
+    "duration_ms": 303586.09599999996,
+    "report_sha256": "49efa93aae50683166d4b07662c57888fc9f9191e11ff9ad046b3b0ce3d96e1d",
+    "inherited_0_5_0": {
+      "mapped": 224,
+      "passed": 224,
+      "earlier_report_sha256": "9f3c3a46e27122931537bf15ec7aaeeefdd7c627abd56e06532099147be4474a"
+    },
+    "corrective": 8,
+    "suites": {
+      "algebra.spec.ts": 5,
+      "calculation-proof.spec.ts": 2,
+      "calculus.spec.ts": 6,
+      "converter.spec.ts": 8,
+      "data-lab-revision.spec.ts": 8,
+      "data-lab.spec.ts": 3,
+      "date-time.spec.ts": 8,
+      "discrete-mathematics.spec.ts": 8,
+      "finance-comparison.spec.ts": 12,
+      "finance.spec.ts": 14,
+      "geometry.spec.ts": 8,
+      "integrated-mathematics.spec.ts": 4,
+      "linear-algebra.spec.ts": 8,
+      "locale-transitions.spec.ts": 47,
+      "module-frames.spec.ts": 1,
+      "module-manager.spec.ts": 1,
+      "module-shell.spec.ts": 4,
+      "operations.spec.ts": 5,
+      "optimization-cancel.spec.ts": 1,
+      "programmer.spec.ts": 7,
+      "science.spec.ts": 48,
+      "scientific.spec.ts": 8,
+      "standard-revision.spec.ts": 5,
+      "standard.spec.ts": 10,
+      "worker.spec.ts": 1
+    }
+  },
+  "notation": {
+    "mathematics": 420,
+    "finance": 210,
+    "science": 294,
+    "total": 924,
+    "json_sha256": "3322c73521fb79ff545cd621c30a0bf152ecf10dcf4537d7f76a3728ec16515e",
+    "receipt": "locale-transition-matrix.json"
+  },
+  "standalone_offline": {
+    "results": [
+      {
+        "suite": "production-web-offline-and-lazy-locales",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "suite": "production-finance-offline",
+        "modules": [
+          "financial",
+          "investment",
+          "loans",
+          "tax",
+          "business"
+        ],
+        "passed": 5,
+        "failed": 0
+      }
+    ],
+    "log_sha256": "5951ef66d72322637b9e57f1a8c339fe617afba403e10cc3a20a08c198233d07"
+  },
+  "offline_science": {
+    "checked": [
+      "statistics",
+      "probability",
+      "simulation",
+      "optimization",
+      "physics-engineering",
+      "graph-lab",
+      "data-lab"
+    ],
+    "external_requests": 0
+  },
+  "node": {
+    "passed": 73,
+    "log_sha256": "e104c93d10a652782a7848210c48fe3b60622d10847b04e10fe381f31a115bf6"
+  },
+  "data_lab": {
+    "data-revision-json": {
+      "mixed": {
+        "sha256": "9601976f31ad5e86da4587081d9682006558f8a099a8eb3a9f42379f1d35f857",
+        "statistics": {
+          "max": "5/2",
+          "mean": "15/8",
+          "min": "5/4",
+          "n": 2,
+          "sum": "15/4"
+        }
+      },
+      "exact": [
+        {
+          "column": {
+            "kind": "text",
+            "name": "id"
+          },
+          "origins": {
+            "absent": 5,
+            "stored": 1
+          },
+          "source_types": {
+            "absent": 5,
+            "text": 1
+          },
+          "statistics": null,
+          "validity": {
+            "absent": 5,
+            "valid": 1
+          }
+        },
+        {
+          "column": {
+            "kind": "decimal",
+            "name": "valor"
+          },
+          "origins": {
+            "absent": 1,
+            "empty": 1,
+            "invalid": 1,
+            "null": 1,
+            "stored": 2
+          },
+          "source_types": {
+            "absent": 1,
+            "empty": 1,
+            "null": 1,
+            "number": 2,
+            "text": 1
+          },
+          "statistics": {
+            "max": "98765431209876543121/80",
+            "mean": "98765431209876543121/160",
+            "min": "0",
+            "n": 2,
+            "sum": "98765431209876543121/80"
+          },
+          "validity": {
+            "absent": 1,
+            "empty": 1,
+            "invalid": 1,
+            "null": 1,
+            "valid": 2
+          }
+        }
+      ],
+      "locales": [
+        "en",
+        "pt-BR",
+        "zh-CN",
+        "hi",
+        "es",
+        "ar",
+        "fr"
+      ]
+    },
+    "data-revision-xlsx": [
+      {
+        "epoch": "1900",
+        "inputSha256": "b1e0f55f0077891b7f8a54b0d273f8e6ff9eb6655ed097b21b1f14bd22506471",
+        "date": "1900-03-01T06:00:00",
+        "exactAmounts": {
+          "max": "5/2",
+          "mean": "379/300",
+          "min": "1/25",
+          "n": 3,
+          "sum": "379/100"
+        }
+      },
+      {
+        "epoch": "1904",
+        "inputSha256": "20f7e31ee9273ab2597c5c4cb1f32f0968432c9fa49066f843d4ddc4704a024d",
+        "date": "1904-03-02T06:00:00",
+        "exactAmounts": {
+          "max": "5/2",
+          "mean": "379/300",
+          "min": "1/25",
+          "n": 3,
+          "sum": "379/100"
+        }
+      }
+    ],
+    "data-revision-migration": {
+      "sourceSha256": "9601976f31ad5e86da4587081d9682006558f8a099a8eb3a9f42379f1d35f857",
+      "historical": "data-lab/1",
+      "current": "data-lab/2",
+      "currentProofSha256": "a2283f22324f006118271ee3cec61f7fb1a208fc9c29d790410b4aed3281b185",
+      "sourceMismatchRejected": true,
+      "tamperedResultRejected": true
+    },
+    "data-revision-resource-recovery": {
+      "budgetsBytes": [
+        65536,
+        1048576
+      ],
+      "largestInputBytes": 12094,
+      "inputSha256": "1cfad7e4e8a9c61563645dd1e01c5ef6ed894179f4fd714df7c96c985086d233",
+      "outputRows": 18,
+      "preflightWithoutWorker": true,
+      "previousResultPreserved": true,
+      "workers": {
+        "started": 4,
+        "active": 0,
+        "peak": 1,
+        "closed": 4,
+        "held": 0,
+        "progress": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0,
+          1,
+          2,
+          3,
+          4,
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "paused": false
+      }
+    },
+    "data-revision-cumulative": {
+      "inputBytes": 34,
+      "rows": 16,
+      "sha256": "a9f49d8974b3a84b4b4c6d598559c084ff8bfafbf29b0c004f823ebf376fb8b9",
+      "steps": [
+        "join",
+        "text",
+        "text"
+      ],
+      "testedBudgets": [
+        65536,
+        131072,
+        1048576
+      ],
+      "safeRejection": true
+    },
+    "data-revision-adaptive": {
+      "initialCeilingBytes": 268435456,
+      "lowerCeilingBytes": 33554432,
+      "activeWorkersAfterRecovery": 0
+    },
+    "data-revision-offline-lifecycle": {
+      "sourceSha256": "9601976f31ad5e86da4587081d9682006558f8a099a8eb3a9f42379f1d35f857",
+      "sourceLocale": "en",
+      "offlineNavigationFromServiceWorker": true,
+      "workerReleasedOnSuspend": true,
+      "workerReleasedOnSwitch": true,
+      "originalProofReproduced": true,
+      "outbound": []
+    },
+    "data-revision-cancel-preparation": {
+      "workerReleasedBeforeFileRead": true,
+      "worker": {
+        "started": 2,
+        "active": 0,
+        "peak": 1,
+        "closed": 2,
+        "held": 0,
+        "progress": [
+          0,
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "paused": false
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "chrome-captures/data-revision-mixed-json-en.png",
+      "sha256": "d9c95cf1aca2e1849ea8b601000da7e529efb2edbaa71f5ffaa1fd3edf8aee89",
+      "width": 1280,
+      "height": 1907
+    },
+    {
+      "path": "chrome-captures/data-revision-mixed-json-pt-BR.png",
+      "sha256": "63015e228efa9f98bde0fa9eab16406992b0ee23745803aff82cdfef69a69cda",
+      "width": 1280,
+      "height": 1957
+    },
+    {
+      "path": "chrome-captures/data-revision-cached-date-en.png",
+      "sha256": "300ebe4c1c1ee8fad906cb7af38f2300018612add698195850b88679f14ea57f",
+      "width": 1280,
+      "height": 2572
+    },
+    {
+      "path": "chrome-captures/data-revision-historical-proof-en.png",
+      "sha256": "bb6f7b8cf963787bee877365c39da8c204097ebe3d32e7a077cfa35921f49e9a",
+      "width": 1280,
+      "height": 1271
+    },
+    {
+      "path": "chrome-captures/data-revision-resource-rejection-en.png",
+      "sha256": "e707d00a85c70cc0730891f96d30b1992369f8102391e97699c741211becb761",
+      "width": 1280,
+      "height": 1997
+    }
+  ],
+  "synthetic_screenshot_inputs": true
+}

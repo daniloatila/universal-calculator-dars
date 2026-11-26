@@ -2,6 +2,12 @@
 
 [English](../../CHANGELOG.md)
 
+## 0.5.1 · Revisão do Laboratório de Dados
+
+- Interpreta os números nativos de JSON e de planilhas segundo a gramática do formato e conserva a notação configurada para texto.
+- Preserva o tipo, a época de datas, a fórmula e o estado de cache das células XLSX.
+- Aplica um orçamento de processamento no ciclo de vida do arquivo e versiona a reprodução de receitas e provas.
+
 ## 0.5.0 · Ciência, engenharia e dados
 
 - Adiciona Estatística, Probabilidade, Simulação, Otimização, Física e Engenharia, Gráficos e Dados ao registro de módulos sob demanda.

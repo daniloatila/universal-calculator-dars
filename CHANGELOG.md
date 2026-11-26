@@ -2,6 +2,12 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
+## 0.5.1 · Data Lab corrective review
+
+- Interpret native JSON and spreadsheet numbers with the file grammar while preserving the configured notation for text.
+- Preserve source types, date epochs, spreadsheet formulas and cache states.
+- Budget the local file-processing lifecycle and version Data Lab recipe and proof replay.
+
 ## 0.5.0 · Science, engineering and data
 
 - Added Statistics, Probability, Simulation, Optimization, Physics & Engineering, Graph Lab and Data Lab to the on-demand module registry.

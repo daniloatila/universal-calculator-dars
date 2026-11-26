@@ -1,0 +1,112 @@
+{
+  "version": "0.5.1",
+  "source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc",
+  "workflow": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45889156643",
+  "advanced_math_independent": {
+    "scientific-sympy-mpmath": 102,
+    "scientific-complex-mpmath": 75,
+    "algebra-sympy": 184,
+    "calculus-sympy-mpmath": 210,
+    "linear-algebra-sympy-numpy-scipy": 223,
+    "geometry-sympy": 159,
+    "discrete-mathematics-python-sympy": 289,
+    "programmer-python-integers": 368,
+    "converter-fraction-decimal-sympy": 342,
+    "date-time-datetime-calendar-zoneinfo": 403
+  },
+  "math_cli_wasm": {
+    "scientific": 19,
+    "algebra": 28,
+    "calculus": 27,
+    "linear_algebra": 30,
+    "geometry": 32,
+    "discrete-mathematics": 38,
+    "programmer": 36,
+    "converter": 46,
+    "date-time": 49
+  },
+  "finance_independent": {
+    "financial_and_loans": 128,
+    "investment_and_business": 87,
+    "tax": 362
+  },
+  "financial_comparisons": {
+    "independent": 84,
+    "cli_wasm": 84,
+    "bound_replays": 79
+  },
+  "simulation_chunk_replays": 36,
+  "science": {
+    "Statistics": 213,
+    "Probability": 277,
+    "Simulation": 57,
+    "physics-engineering-independent-cli": 47,
+    "optimization-independent-cli": 39,
+    "graph-lab-independent-cli": 25,
+    "optimization-boundaries": 6,
+    "graph-lab-boundaries": 10,
+    "tabular-import-contracts": 55,
+    "local-tabular-scientific-oracle": 20,
+    "data-lab-revision-contract": 23
+  },
+  "historical_base_cli_wasm": {
+    "python-fraction-decimal-oracle": 157,
+    "fraction-decimal-structured-wasm": 291,
+    "native-wasm-result-parity": 20
+  },
+  "rust_core_historical_map": "16 inherited tests in two maintained core integration test binaries; see original regression ledger and the audited Check Rust formatting and core workflow step.",
+  "node_passed": 73,
+  "hosted_chromium": 232,
+  "offline_web": {
+    "production-web-offline-and-lazy-locales": 10,
+    "production-finance-offline": 5
+  },
+  "credential_checks": 2,
+  "capability_checks": 5,
+  "historical_mapping": [
+    [
+      "rust_standard_and_structured",
+      16
+    ],
+    [
+      "cli_oracle",
+      157
+    ],
+    [
+      "wasm_structured",
+      291
+    ],
+    [
+      "cli_wasm",
+      20
+    ],
+    [
+      "node",
+      57
+    ],
+    [
+      "physical_chrome",
+      27
+    ],
+    [
+      "production_offline",
+      10
+    ],
+    [
+      "physical_webview2",
+      17
+    ],
+    [
+      "hosted_credential",
+      2
+    ],
+    [
+      "hosted_capabilities",
+      5
+    ]
+  ],
+  "physical_chrome_receipt": "browser.json",
+  "physical_windows_receipt": "windows-regression.json",
+  "locale_matrix_receipt": "locale-transition-matrix.json",
+  "counting": "The 602 historical positions are maintained equivalents inside larger current suites. Counts for different layers overlap and should not be summed into a grand total."
+}

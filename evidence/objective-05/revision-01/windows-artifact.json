@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "repository": "daniloatila/universal-calculator-dars",
+  "branch": "codex/objective-05-science-engineering-data",
+  "commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc",
+  "run_id": 45889156643,
+  "run_attempt": 1,
+  "windows_job_id": 140147242689,
+  "windows_job_conclusion": "success",
+  "artifact_id": 15151905188,
+  "archive_sha256": "8fde4720c74c883b2fb7d5c455ad852acfc8c5ba592bf9a6bf603351d46ac70e",
+  "archive_bytes": 7637148,
+  "retention_expires_utc": "2026-11-27T20:22:21Z",
+  "target": "windows-x64",
+  "exe_sha256": "847982f6e3db718fbde20e8eb4b6ce2d71d50fc6cf08b9353f58e392aecc3473",
+  "exe_bytes": 23995904,
+  "exe_version": "0.5.1",
+  "pe_machine": "AMD64 (0x8664)",
+  "signature_status": "NotSigned",
+  "packaged_wasm_receipt_count": 22,
+  "packaged_wasm_receipt": [
+    {
+      "name": "dars_tool_wasm_bg-96nrSWl1.wasm",
+      "sha256": "5496404ce4efd7693092e02626084d5ed4508cf0b4965a5d1693587a913d307f"
+    },
+    {
+      "name": "dars_tool_wasm_bg-B8OVTWt3.wasm",
+      "sha256": "0370b3efab51112775a9be7e885d69e34ea425f3331e7ccc3a2fefb2d3255a9a"
+    },
+    {
+      "name": "dars_tool_wasm_bg-Bck0GCga.wasm",
+      "sha256": "1b9300a630a7d3a9f39d589abbb4f22e8eee97a5e435128c0bad90301ab86329"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BG-ovbG8.wasm",
+      "sha256": "c542af256c98e11fd47487d312c6fa14e152eddfddecc77a4241b66f2f911d21"
+    },
+    {
+      "name": "dars_tool_wasm_bg-C5Aa83_m.wasm",
+      "sha256": "b48a20d382c7e86b11d8d70e9000ac8e50a0235b1ab0bf2a9cd3ad171e23e921"
+    },
+    {
+      "name": "dars_tool_wasm_bg-C7Kc086a.wasm",
+      "sha256": "b797af7ac79fd28e0b1aabf057a6381145f99d7cf620e0e2442082332904c000"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CaNGOz_l.wasm",
+      "sha256": "1ef3c5269ec96a556ec876d2774ee3801f772e618c4fd8c5aeffac85544cbbac"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CcbSbfnq.wasm",
+      "sha256": "4d2ce1a41fcc039abc1d5acc5301f760dd83eabff3dabb2d743ee7d5d2a275a3"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CSJ1s1VN.wasm",
+      "sha256": "ecd02f8c6fd601e96ff7964c58e354335368beb5cd35ba0aa4a1f21147507e0a"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DAhHG4yI.wasm",
+      "sha256": "15fd1854ca1210b8e9925302202102fbdffe6ac6ab5f80108363098b4f484522"
+    },
+    {
+      "name": "dars_tool_wasm_bg-Dgl0scJ1.wasm",
+      "sha256": "a0d73955db8defd7632823ecb6495513c0745b7edc6a3df18d7df100aab78ef1"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DmnlpNK6.wasm",
+      "sha256": "9ff6ea59352d9548787cbbc53004af8312a848d2a1362aac9a44b7fdc34b872b"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DNqstZEy.wasm",
+      "sha256": "32821b282c9fb04c54ac190b274abd1caf42f57b326bf5f57ca6174dd5e826c3"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DqPvmDz7.wasm",
+      "sha256": "c7daa4dc29256a6e67c98207fb7060897760ba5d5c1473a6f31814a4235a69dd"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DtmEck5T.wasm",
+      "sha256": "aef4c3022e7355124469203895640c5444e24f472da0817c8fa8dea41814dd02"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DVa0EJ7M.wasm",
+      "sha256": "a8cd136425eee3c87c214f5e0359b15827f9868868935b72a35d145e7da1da01"
+    },
+    {
+      "name": "dars_tool_wasm_bg-F5BNK23W.wasm",
+      "sha256": "ac16a01ae3c1967b6b1f5cc8d2c158c70b6913917f9da8dc2f6733721af813ad"
+    },
+    {
+      "name": "dars_tool_wasm_bg-h08h9r7w.wasm",
+      "sha256": "adf661ff4432acf77c67844f91f3bdfe14df03322ec6e580adab15d908f8f0e8"
+    },
+    {
+      "name": "dars_tool_wasm_bg-QBt9I8FJ.wasm",
+      "sha256": "07e041e678e5f846dd25f3ee78a5da4c2130d25b1c6d8830f3b7dc12a327f1e1"
+    },
+    {
+      "name": "dars_tool_wasm_bg-tYI5MWq-.wasm",
+      "sha256": "c08f851d6c0890d3714c991825e036a6fe0cfbd01ce01fbc318fd3ce73dfa437"
+    },
+    {
+      "name": "dars_tool_wasm_bg-U8DZr5GY.wasm",
+      "sha256": "8eefe6f789d7688501687ab994f810cf8737a3bd0ac1f195733fef3e1f63556d"
+    },
+    {
+      "name": "dars_wasm_bg-BybodlAN.wasm",
+      "sha256": "46600150bf0cadaa9844028cfce9fd00c78173e61878e335402178f94512b730"
+    }
+  ],
+  "checked_at_utc": "2026-11-26T20:22:57.0028089Z"
+}

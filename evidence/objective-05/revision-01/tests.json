@@ -1,0 +1,248 @@
+{
+  "audited_source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc",
+  "matrix": [
+    {
+      "number": 1,
+      "id": "mixed_native_and_localized_json",
+      "behavior": "mixed native number and explicitly localized text",
+      "evidence": [
+        "oracle.json",
+        "after.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 2,
+      "id": "native_exponent_precision",
+      "behavior": "exact decimal exponents and coefficients above binary64 integer precision",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 3,
+      "id": "literal_identifiers",
+      "behavior": "leading zeroes through text import, multiple casts and export",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 4,
+      "id": "mixed_xlsx_numbers_and_text",
+      "behavior": "native and localized spreadsheet scalars, including caches",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 5,
+      "id": "date_formula_cache",
+      "behavior": "direct dates and dates paired with stored formulas",
+      "evidence": [
+        "after.json",
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 6,
+      "id": "workbook_epochs",
+      "behavior": "1900, serial 60, fractional time and the 1904 calendar",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 7,
+      "id": "successive_casts",
+      "behavior": "successive explicit conversions preserve the source representation",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 8,
+      "id": "missing_states",
+      "behavior": "distinct zero, empty, null, absent and invalid",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 9,
+      "id": "shared_strings",
+      "behavior": "shared workbook values materialized under a bounded allowance",
+      "evidence": [
+        "oracle.json",
+        "ci.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 10,
+      "id": "fill_amplification",
+      "behavior": "small fill operation rejected before committing growth; admitted with room",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 11,
+      "id": "repeated_join",
+      "behavior": "lookup values retained only within the common allowance",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 12,
+      "id": "text_growth",
+      "behavior": "case conversion and multi-column text growth",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 13,
+      "id": "shared_operation_budget",
+      "behavior": "materialized values and temporary structures counted together",
+      "evidence": [
+        "oracle.json",
+        "resource-budget.md",
+        "ci.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 14,
+      "id": "pre_and_mid_operation_limits",
+      "behavior": "ingress check and allocation refusals in open, pipeline and output",
+      "evidence": [
+        "oracle.json",
+        "browser.json",
+        "ci.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 15,
+      "id": "import_cancellation",
+      "behavior": "terminate a running browser import and accept a later request",
+      "evidence": [
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 16,
+      "id": "recovery",
+      "behavior": "retain committed output and accept a smaller operation or a higher permitted budget",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 17,
+      "id": "module_work_lifecycle",
+      "behavior": "switch, suspend and lower the Adaptive profile during work",
+      "evidence": [
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 18,
+      "id": "historical_v1",
+      "behavior": "read certified version 1 result, verify source and explicitly migrate",
+      "evidence": [
+        "before.json",
+        "browser.json",
+        "compatibility.md"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 19,
+      "id": "csv_modes",
+      "behavior": "protected and literal export, including formula-like text",
+      "evidence": [
+        "oracle.json",
+        "browser.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 20,
+      "id": "language_change",
+      "behavior": "change presentation language during analysis and preserve the value",
+      "evidence": [
+        "browser.json",
+        "locale-transition-matrix.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 21,
+      "id": "independent_replay",
+      "behavior": "raw digest, normalized recipe and complete matching proofs across CLI and WASM",
+      "evidence": [
+        "after.json",
+        "oracle.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 22,
+      "id": "file_security",
+      "behavior": "existing bounded parser, archive, formula and rejection contracts",
+      "evidence": [
+        "security.md",
+        "regression.json",
+        "ci.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "number": 23,
+      "id": "local_operation",
+      "behavior": "offline operation and browser interception for unauthorized origins",
+      "evidence": [
+        "browser.json",
+        "windows-candidate.json",
+        "security.md"
+      ],
+      "status": "passed"
+    }
+  ],
+  "layers": {
+    "rust": "unit tests in crates/dars-universal/src/data_lab including resource, date, file handling and semantic cases",
+    "cli_and_wasm": "The independent Python driver launches both native CLI and Node/WASM. Some output and budget diagnostics are WASM-specific. Decimal, Fraction, pandas and openpyxl are test dependencies.",
+    "browser": "Real local Chrome and hosted Chromium run the UI and worker integration. Browser-specific lifecycle cases apply at this layer.",
+    "windows": "Verified hosted release executable run in the physical WebView2 environment."
+  },
+  "independent_oracle": "oracle.json",
+  "historical_regression": "regression.json"
+}

@@ -27,4 +27,6 @@ Cada objetivo autorizado de 03 a 08 inclui uma verificação comparável de mem�
 
 O proprietário aprovou o Objetivo 04 com 95/100 e autorizou o branch de revisão de ciência, engenharia e dados da versão 0.5.0. [0.4.1](../../evidence/objective-04/approval.json)
 
-A versão 0.5.0 está READY_FOR_REVIEW no branch de Ciência, Engenharia e Dados. Os Objetivos 01 a 04 estão aprovados com 95/100. O Objetivo 06 permanece NOT_STARTED até nova autorização. [Auditoria da 0.5.0](../../evidence/objective-05/REPORT.pt-BR.md) · [Dívida de memória atualizada](../../evidence/objective-02/revision-02/memory-debt.pt-BR.md)
+A versão 0.5.0 chegou a READY_FOR_REVIEW no branch de Ciência, Engenharia e Dados. Os Objetivos 01 a 04 estão aprovados com 95/100. O Objetivo 06 permanece NOT_STARTED até nova autorização. [Auditoria da 0.5.0](../../evidence/objective-05/REPORT.pt-BR.md) · [Dívida de memória atualizada](../../evidence/objective-02/revision-02/memory-debt.pt-BR.md)
+
+A revisão corretiva 0.5.1 do Laboratório de Dados passou pelos critérios do Objetivo 05 e está READY_FOR_REVIEW. O próximo marco depende da decisão do proprietário. [Relatório da revisão](../../evidence/objective-05/revision-01/REPORT.pt-BR.md)

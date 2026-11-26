@@ -1,0 +1,15 @@
+# Segurança de arquivos e privacidade
+
+[English](security.md)
+
+O Laboratório de Dados executa no dispositivo. O arquivo chega ao leitor Rust pela entrada padrão ou por um worker temporário do navegador. A interface apresenta células como texto. Fórmulas de planilha ficam inertes. A exportação local permite selecionar CSV protegido ou literal. O leitor verifica nomes de membros, tamanhos, relacionamentos permitidos, expansão do ZIP, profundidade XML e dimensões da tabela. O controle de recursos também considera a tabela materializada, os cálculos intermediários e a saída. [Modelo de orçamento](resource-budget.pt-BR.md) · [Limites da 0.5.0](../security.pt-BR.md)
+
+Os testes da revisão usam tabelas sintéticas comuns e limites artificialmente baixos. As duas modalidades de CSV são conferidas célula a célula. O encerramento do worker e o fechamento do aplicativo têm recibos distintos. No Windows, a identidade do executável é conferida pelos hashes, pelo commit e pelo job hospedado antes da execução com perfis WebView2 novos. Na leitura inicial, o Microsoft Defender informou antivírus, proteção em tempo real e monitoramento comportamental ativos. O Smart App Control informou Off. A revisão preservou as configurações e as exclusões existentes. Os campos de proteção observados coincidiram antes e depois dos testes nativos. [Estado do Windows](windows-protection.json)
+
+| Superfície revisada | Controle e evidência |
+| --- | --- |
+| Arquivo compactado e XML | Limites de expansão por parte e no total, verificação do diretório e dos caminhos, profundidade e atributos XML limitados. O leitor recusa instruções de processamento não suportadas e relacionamentos externos da planilha. [Leitor](../../../crates/dars-universal/src/data_lab/workbook.rs) |
+| Conteúdo da planilha | Macros e partes de links externos são recusadas. Fórmulas e caches permanecem inertes. Há limites independentes para coordenadas, campos e células materializadas. Cada materialização de texto compartilhado consome orçamento. [Testes de importação](../../../tests/verify-data-import.py) · [Testes de orçamento](../../../crates/dars-universal/src/data_lab/budget_tests.rs) |
+| Transformações | Preenchimento, junção, conversões de texto, colunas retidas, racionais e índices de agrupamento compartilham o orçamento. Os ensaios mantêm o arquivo e variam o limite. [Oráculo](oracle.json) |
+| Página, prova e exportação | Cada saída tem limite próprio e participa do orçamento cumulativo. Uma página pode caber mesmo quando a exportação completa é recusada. O Rust reserva o conteúdo pendente de resposta ao navegador enquanto produz a saída seguinte. A prévia confirmada anteriormente tem limites próprios. [Contrato de recursos](resource-budget.pt-BR.md) |
+| CSV e rede | O CSV protegido neutraliza textos com aparência de fórmula. A exportação literal depende de escolha explícita. A interceptação no navegador e os exemplos offline no Windows verificam a execução local. [Chrome](browser.json) · [Windows](windows-candidate.json) |

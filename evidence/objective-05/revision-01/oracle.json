@@ -1,0 +1,57 @@
+{
+  "suite": "data-lab-revision-contract",
+  "cases": [
+    "mixed_json_source_grammar_and_exact_profile",
+    "v2_proof_and_page_replay",
+    "changed_source_digest",
+    "v1_requires_explicit_migration",
+    "exact_decimal_exponent_and_integer_beyond_binary64",
+    "leading_zero_text_ids",
+    "zero_empty_null_absent_invalid",
+    "initial_text_and_successive_casts",
+    "localized_filter_exact_sort_calculate_group",
+    "fill_type_conversion_literal_keys_dedup_and_join",
+    "xlsx_numbers_text_cache_1900",
+    "direct_and_cached_dates_fractional_serial_1900",
+    "missing_empty_error_caches_and_iso_1900",
+    "xlsx_numbers_text_cache_1904",
+    "direct_and_cached_dates_fractional_serial_1904",
+    "missing_empty_error_caches_and_iso_1904",
+    "protected_and_literal_csv",
+    "shared_string_workbook_resource_admission_and_recovery",
+    "fill_missing_resource_admission_and_recovery",
+    "join_repeated_labels_resource_admission_and_recovery",
+    "expanding_text_resource_admission_and_recovery",
+    "multiple_retained_columns_resource_admission_and_recovery",
+    "ingress_limit_and_successor"
+  ],
+  "passed": 23,
+  "failed": 0,
+  "native_wasm_request_comparisons": 31,
+  "reference_readers": {
+    "1900": {
+      "openpyxl": "3.1.5",
+      "pandas": "3.1.1",
+      "shape": [
+        3,
+        11
+      ],
+      "direct_first_as_datetime": "1900-02-28T12:00:00",
+      "cached_formula": "=C3",
+      "ordinary_datetime": "1900-03-01T06:00:00"
+    },
+    "1904": {
+      "openpyxl": "3.1.5",
+      "pandas": "3.1.1",
+      "shape": [
+        3,
+        11
+      ],
+      "direct_first_as_datetime": "1904-03-01T12:00:00",
+      "cached_formula": "=C3",
+      "ordinary_datetime": "1904-03-02T06:00:00"
+    }
+  },
+  "cli_sha256": "239bb670d505501bc890247b4f32c9e9943c6274b3dc5ba240c1d1cb1daa76a2",
+  "wasm_sha256": "b9dd1eefa7e9c198dbd871098d0f6191b7330e14a6b1b9f237aca49f008027a3"
+}

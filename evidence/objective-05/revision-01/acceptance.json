@@ -1,0 +1,140 @@
+{
+  "objective": "05",
+  "version": "0.5.1",
+  "status": "READY_FOR_REVIEW",
+  "approval": "pending independent review and explicit owner decision",
+  "audited_source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc",
+  "prior_independent_review": {
+    "version": "0.5.0",
+    "score": 89
+  },
+  "objectives_01_through_04": "APPROVED",
+  "objective_06": "NOT_STARTED",
+  "workflow": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45889156643",
+  "delivery_ci": "The final evidence commit has a separate Actions run, discoverable by its own SHA on the review branch. The delivery commit cannot embed its own future run outcome.",
+  "criteria": [
+    {
+      "id": "native_grammar",
+      "status": "passed",
+      "evidence": [
+        "after.json",
+        "oracle.json"
+      ]
+    },
+    {
+      "id": "authorized_text_notation",
+      "status": "passed",
+      "evidence": [
+        "data-type-contract.md",
+        "oracle.json"
+      ]
+    },
+    {
+      "id": "spreadsheet_formula_and_date",
+      "status": "passed",
+      "evidence": [
+        "after.json",
+        "oracle.json"
+      ]
+    },
+    {
+      "id": "cumulative_budget",
+      "status": "passed",
+      "evidence": [
+        "resource-budget.md",
+        "tests.json"
+      ]
+    },
+    {
+      "id": "amplification_safely_refused",
+      "status": "passed",
+      "evidence": [
+        "oracle.json",
+        "browser.json",
+        "ci.json"
+      ]
+    },
+    {
+      "id": "cancellable_recoverable_operations",
+      "status": "passed",
+      "evidence": [
+        "browser.json",
+        "tests.json"
+      ]
+    },
+    {
+      "id": "reproducible_proof",
+      "status": "passed",
+      "evidence": [
+        "oracle.json",
+        "after.json"
+      ]
+    },
+    {
+      "id": "historical_compatibility",
+      "status": "passed",
+      "evidence": [
+        "before.json",
+        "compatibility.md",
+        "browser.json"
+      ]
+    },
+    {
+      "id": "22_workspaces",
+      "status": "passed",
+      "evidence": [
+        "windows-candidate.json",
+        "locale-transition-matrix.json"
+      ]
+    },
+    {
+      "id": "seven_languages",
+      "status": "passed",
+      "evidence": [
+        "locale-transition-matrix.json",
+        "browser.json"
+      ]
+    },
+    {
+      "id": "full_regression",
+      "status": "passed",
+      "evidence": [
+        "regression.json",
+        "coverage.json",
+        "windows-regression.json"
+      ]
+    },
+    {
+      "id": "security_and_privacy",
+      "status": "passed",
+      "evidence": [
+        "security.md",
+        "ci.json",
+        "browser.json"
+      ]
+    },
+    {
+      "id": "windows_app",
+      "status": "passed",
+      "evidence": [
+        "windows-artifact.json",
+        "windows-candidate.json"
+      ]
+    },
+    {
+      "id": "continuous_integration",
+      "status": "passed",
+      "evidence": [
+        "ci.json"
+      ]
+    },
+    {
+      "id": "review_branch_evidence",
+      "status": "passed",
+      "evidence": [
+        "REPORT.md",
+        "REPORT.pt-BR.md"
+      ]
+    }
+  ]
+}

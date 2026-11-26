@@ -4,7 +4,7 @@
 
 [Português brasileiro](README.pt-BR.md)
 
-DARS is a local-first computation platform by Danilo Átila. The 0.5.0 review branch brings 22 workspaces to Windows and the browser. Rust computes the results, including exact rational table aggregates and reproducible seeded simulations. Each record carries the method, inputs and applicable limits. [Objective 05](evidence/objective-05/REPORT.md)
+DARS is a local-first computation platform by Danilo Átila. The 0.5.1 review branch brings 22 workspaces to Windows and the browser. Rust computes the results, including exact rational table aggregates and reproducible seeded simulations. Each record carries the method, inputs and applicable limits. [Data Lab revision](evidence/objective-05/revision-01/REPORT.md) · [Objective 05](evidence/objective-05/REPORT.md)
 
 Search for a workspace by name or description. In a science workspace, select an operation and load its example to inspect the result and Calculation Proof.
 

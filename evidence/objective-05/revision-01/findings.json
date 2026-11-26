@@ -1,0 +1,82 @@
+{
+  "original_source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "corrected_source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc",
+  "findings": [
+    {
+      "id": "native-numeric-grammar",
+      "reproduction": "The 0.5.0 native JSON token 1.25 became invalid under comma notation; only text 2,50 entered the sum.",
+      "cause": "A source-neutral string was reparsed using the column's text notation.",
+      "solution": "Version 2 keeps source type, lexeme and notation. Native structured numbers follow their file grammar. Decimal and integer calculations use exact rational arithmetic.",
+      "corrected_observation": "Both rows are valid. Sum 15/4, mean 15/8.",
+      "regression_matrix_cases": [
+        1,
+        2,
+        3,
+        4,
+        7,
+        8,
+        20,
+        21
+      ],
+      "limitations": "Finite evidence cannot cover every file. Explicit text notation and configured arithmetic bounds apply.",
+      "evidence": [
+        "before.json",
+        "after.json",
+        "oracle.json",
+        "tests.json"
+      ],
+      "source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc"
+    },
+    {
+      "id": "cached-spreadsheet-dates",
+      "reproduction": "The styled numeric serial and the identically styled formula cache were treated differently. A requested decimal admitted the cached date.",
+      "cause": "The formula-origin flag replaced information that the cell was a date.",
+      "solution": "Preserve storage, number format, epoch, formula, cache state and date together. Numeric casts exclude direct and cached dates alike.",
+      "corrected_observation": "Both representations have the same date; neither enters a numeric sum.",
+      "regression_matrix_cases": [
+        4,
+        5,
+        6,
+        7,
+        21
+      ],
+      "limitations": "Excel formulas are not evaluated. Stored caches may be stale. The 1900 fictitious day is preserved explicitly.",
+      "evidence": [
+        "before.json",
+        "after.json",
+        "oracle.json",
+        "tests.json"
+      ],
+      "source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc"
+    },
+    {
+      "id": "cumulative-resources",
+      "reproduction": "0.5.0 accepted the ordinary fill with default settings and did not understand an explicit byte budget. Its size/count limits left several materialization and output allocations unaccounted for.",
+      "cause": "The importer and individual pipeline limits lacked one operation-wide byte ledger for retained and temporary data.",
+      "solution": "The shared admission model reserves bytes for ingress, workbook expansion, cells, transformations, analysis and output. The worker applies the Adaptive ceiling and relinquishes state on cancellation.",
+      "corrected_observation": "Small synthetic inputs trigger controlled rejections at low allowances and succeed with room. Subsequent requests and previously committed results remain usable.",
+      "regression_matrix_cases": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        22
+      ],
+      "limitations": "Conservative estimates and observed process memory are different measurements. Resident memory can include allocator, browser and runtime costs. No operating-system exhaustion was attempted.",
+      "evidence": [
+        "before.json",
+        "oracle.json",
+        "resource-budget.md",
+        "benchmarks.json",
+        "browser.json"
+      ],
+      "source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc"
+    }
+  ]
+}

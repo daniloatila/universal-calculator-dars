@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "audited_source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc",
+  "run_id": 45889156643,
+  "artifact_id": 15151905188,
+  "exe_sha256": "847982f6e3db718fbde20e8eb4b6ce2d71d50fc6cf08b9353f58e392aecc3473",
+  "screenshots": [
+    {
+      "name": "data-lab.png",
+      "bytes": 336598,
+      "sha256": "265d45571e1de68cc10f58b1ab63725594b0da2c8da462ffed1fa17c99f3fba3"
+    },
+    {
+      "name": "graph-lab-surface.png",
+      "bytes": 242979,
+      "sha256": "efcf5153f0d6743cfc17488a099b57c35b3e43e9a327e19a8b28de055a635a0d"
+    },
+    {
+      "name": "graph-lab.png",
+      "bytes": 207949,
+      "sha256": "074ef13805371c04098790d1b63f93247394f4365f9e404949a9d8a281d0785a"
+    },
+    {
+      "name": "mixed-json.png",
+      "bytes": 321446,
+      "sha256": "7c4f539c3e160db999b1b309f3c2a738f8927378bf39edafe6e936ecaf47f529"
+    },
+    {
+      "name": "optimization.png",
+      "bytes": 166782,
+      "sha256": "b7a2bdb4e7c3af01df664d4bfccd8db25fe67b4c9e102212f68b9d84e1b6ba3b"
+    },
+    {
+      "name": "physics-engineering.png",
+      "bytes": 160382,
+      "sha256": "6b2ad5caecc3ce604d1f1cec2c2e3342da367b9a9b5daa6746fe8847ee965bab"
+    },
+    {
+      "name": "probability.png",
+      "bytes": 207955,
+      "sha256": "aed2831448bfd515c7100550b0c3b8c9e496181125b2a5d66728615cadb6e15a"
+    },
+    {
+      "name": "simulation.png",
+      "bytes": 175615,
+      "sha256": "f4a9ebaa19c9ccd9c89d005def93d0f02715683e735ca1edfafe368cea3ec704"
+    },
+    {
+      "name": "statistics.png",
+      "bytes": 173071,
+      "sha256": "0dfe6c09f946a74fa4b045ac4560d4324366172445f13091e59eb2d06b8d6bc6"
+    }
+  ]
+}

@@ -27,4 +27,6 @@ Every authorized objective from 03 through 08 includes a comparable Windows memo
 
 The owner approved Objective 04 at 95/100 and authorized the 0.5.0 science, engineering and data review branch. [0.4.1](evidence/objective-04/approval.json)
 
-Version 0.5.0 is READY_FOR_REVIEW on the Science, Engineering and Data branch. Objectives 01 through 04 are approved at 95/100. Objective 06 remains NOT_STARTED pending a new authorization. [0.5.0 audit](evidence/objective-05/REPORT.md) · [Updated memory debt](evidence/objective-02/revision-02/memory-debt.md)
+Version 0.5.0 reached READY_FOR_REVIEW on the Science, Engineering and Data branch. Objectives 01 through 04 are approved at 95/100. Objective 06 remains NOT_STARTED pending a new authorization. [0.5.0 audit](evidence/objective-05/REPORT.md) · [Updated memory debt](evidence/objective-02/revision-02/memory-debt.md)
+
+Data Lab revision 0.5.1 passed the Objective 05 acceptance checks and is READY_FOR_REVIEW. The next milestone requires the owner’s decision. [Revision report](evidence/objective-05/revision-01/REPORT.md)

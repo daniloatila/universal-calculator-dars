@@ -1,0 +1,26 @@
+{
+  "scope": "Read-only status before and after the physical Windows review. Code integrity fields are the OS numeric status values.",
+  "before": {
+    "checked_utc": "2026-11-26T20:15:10.7570794Z",
+    "antivirus": true,
+    "realtime": true,
+    "behavior": true,
+    "smart_app_control": "Off",
+    "kernel_code_integrity_enforcement_status": 2,
+    "usermode_code_integrity_enforcement_status": 0,
+    "vbs_status": 2,
+    "scope": "Read-only local status. Native Windows policy values are reported as returned."
+  },
+  "after": {
+    "checked_utc": "2026-11-26T20:26:13.7358578Z",
+    "antivirus": true,
+    "realtime": true,
+    "behavior": true,
+    "smart_app_control": "Off",
+    "kernel_code_integrity_enforcement_status": 2,
+    "usermode_code_integrity_enforcement_status": 0,
+    "vbs_status": 2
+  },
+  "observed_fields_match": true,
+  "source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc"
+}

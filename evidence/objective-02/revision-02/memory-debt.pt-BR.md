@@ -55,3 +55,15 @@ A comparação física usou os executáveis de revisão da 0.4.1 e da 0.5.0 no m
 | Variação da RAM ocupada no sistema entre o controle ambiente e o repouso | 145.653.760 | 192.524.288 |
 
 A 0.5.0 executou sete módulos científicos offline e repetiu gráficos e dados em três ciclos. Todos os 11 workers científicos encerraram. Depois do fechamento, as duas árvores ficaram com zero processos. A variação sistêmica inclui atividade externa, e as páginas compartilhadas não tiveram atribuição por aplicativo. A meta de menos de 100.000.000 bytes incrementais continua sem comprovação. O estudo pré-1.0 de três sessões com repouso prolongado permanece aberto. [0.4.1 no mesmo ensaio](../../objective-05/integrated-audit/windows-baseline.json) · [0.5.0 e ciclos](../../objective-05/integrated-audit/windows-candidate.json)
+
+## Revisão 0.5.1 do Objetivo 05
+
+Mesmo Windows x64, WebView2 158.0.4370.33, perfis novos e 6 amostras no repouso visível de cada execução.
+
+| Medida em bytes | 0.5.0 | 0.5.1 |
+| --- | ---: | ---: |
+| Conjunto de trabalho privado da árvore | 121.049.088 | 119.152.640 |
+| Memória privada comprometida da árvore | 271.839.232 | 268.509.184 |
+| Diferença de RAM física do sistema entre repouso e controle ambiente | -2.437.120 | 129.417.216 |
+
+A variação física de todo o sistema inclui atividade alheia ao aplicativo. A meta de menos de 100.000.000 de bytes incrementais e a investigação prolongada de retenção permanecem em aberto. [0.5.0](../../objective-05/revision-01/windows-baseline.json) · [0.5.1](../../objective-05/revision-01/windows-candidate.json)
