@@ -19,6 +19,7 @@ export interface NotebookDocument {
   version: 1;
   title: string;
   cells: NotebookCell[];
+  metadata?: { description?: string; tags?: string[] };
   formulaDefinitions?: unknown[];
 }
 export interface NotebookOutput {
@@ -105,10 +106,15 @@ export function openNotebook(source: string): { document: NotebookDocument; hist
   if (!object(value) || value.format !== 'dars-notebook') fail('invalid_input');
   if (value.version !== 1 && value.version !== 0) fail('unsupported');
   const draft=value.version===0;
-  if (!hasKeys(value, draft ? ['format','version','title','cells','notation'] : ['format','version','title','cells','history','formulaDefinitions']) ||
+  if (!hasKeys(value, draft ? ['format','version','title','cells','notation'] : ['format','version','title','cells','metadata','history','formulaDefinitions']) ||
       !text(value.title,120) || !Array.isArray(value.cells) || value.cells.length > notebookLimits.cells ||
       (draft && value.notation !== 'ascii-point')) fail('invalid_input');
   const cells=value.cells.map(c=>checkedCell(c,draft));
+  const metadata=value.metadata;
+  if(metadata!==undefined && (!object(metadata) || !hasKeys(metadata,['description','tags']) ||
+      (metadata.description!==undefined && !text(metadata.description,1024)) ||
+      (metadata.tags!==undefined && (!Array.isArray(metadata.tags) || metadata.tags.length>16 ||
+        !metadata.tags.every(tag=>text(tag,40)))))) fail('invalid_input');
   if (new Set(cells.map(c=>c.id)).size!==cells.length) fail('duplicate_id');
   const historical: Records=Object.create(null);
   if (value.history!==undefined) {
@@ -120,7 +126,8 @@ export function openNotebook(source: string): { document: NotebookDocument; hist
   }
   const defs=value.formulaDefinitions;
   if(defs!==undefined && (!Array.isArray(defs) || defs.length>16 || !defs.every(object) || sizeOf(defs)>128*1024)) fail('invalid_input');
-  return {document:{format:'dars-notebook',version:1,title:value.title,cells,...(defs?{formulaDefinitions:defs as unknown[]}:{})},historical,migrated:draft};
+  return {document:{format:'dars-notebook',version:1,title:value.title,cells,
+    ...(metadata?{metadata:metadata as NotebookDocument['metadata']}:{}),...(defs?{formulaDefinitions:defs as unknown[]}:{})},historical,migrated:draft};
 }
 /** Bundle pinned definitions from locally executed receipts only, in dependency order. */
 export function saveNotebook(document:NotebookDocument, records:Records, verified:Records={}) {

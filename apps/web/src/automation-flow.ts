@@ -38,7 +38,28 @@ function structuredResult(text: string): Json {
   return JSON.parse(text.replace(/"(?:[^"\\]|\\[\s\S])*"|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g, token =>
     token.startsWith('"') || /^-?\d+$/.test(token) && Number.isSafeInteger(Number(token)) ? token : JSON.stringify(token))) as Json;
 }
-const size = (value: unknown) => new TextEncoder().encode(JSON.stringify(value)).length;
+// References may repeat the same large object thousands of times. Count its serialized
+// size without first materializing that expansion in a single string.
+function size(value:unknown):number {
+  const seen=new WeakMap<object,number>(),encoder=new TextEncoder();
+  function count(v:unknown):number {
+    if(v===null || typeof v!=='object') return encoder.encode(JSON.stringify(v)).length;
+    const known=seen.get(v);
+    if(known!==undefined) return known;
+    let bytes=2;
+    if(Array.isArray(v)){
+      bytes+=Math.max(0,v.length-1);
+      for(const item of v)bytes+=count(item);
+    } else {
+      let comma=0;
+      for(const [key,item] of Object.entries(v)) if(item!==undefined){
+        bytes+=comma+count(key)+1+count(item);comma=1;
+      }
+    }
+    seen.set(v,bytes);return bytes;
+  }
+  return count(value);
+}
 function inputValue(value: Json): Json {
   if (!obj(value) || value.type!=='decimal') return value;
   keys(value,['type','text','locale']);
@@ -289,6 +310,9 @@ export async function runFlow(flow:AutomationFlow,session:CapabilitySession,file
         default: invalid('unsupported');
       }
       check(); charge(4*size(result));env.set(step.id,result);
+      if(trace.proof && size(receipt.trace)>maxFlowFileBytes-1024) {
+        receipt.trace.pop();invalid('resource_budget');
+      }
     }
   }
   try {

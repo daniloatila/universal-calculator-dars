@@ -32,6 +32,9 @@ test('a rate change only invalidates its descendants; document reordering does n
 test('notebook import is closed, bounded and inert; the documented ASCII draft migrates explicitly',()=>{
   const sample=financialNotebook('en',titles), encoded=saveNotebook(sample,{});
   assert.deepEqual(openNotebook(encoded).document,sample);
+  const tagged={...sample,metadata:{description:'Synthetic financial plan',tags:['BRL','demo']}};
+  assert.deepEqual(openNotebook(saveNotebook(tagged,{})).document,tagged);
+  assert.throws(()=>openNotebook(JSON.stringify({...sample,metadata:{tags:[true]}})),/invalid_input/);
   const draft={format:'dars-notebook',version:0,title:'Legacy preview',notation:'ascii-point',
     cells:sample.cells.map(({origin:_,...cell})=>cell)};
   assert.equal(openNotebook(JSON.stringify(draft)).migrated,true);
@@ -66,6 +69,11 @@ test('numeric dependency checking refuses incompatible units and approximate ups
   const opts={run:stub,formula:async():Promise<never>=>{throw new Error('unreachable');}};
   const unit=await runNotebook(doc,{},[],opts,new AbortController().signal,100000);
   assert.equal(unit.errors.out,'unit');assert.equal(unit.calls,1);
+  const resultCell={...ref,kind:'result' as const,id:'alias',source:'@first'};
+  const proofCell={...ref,kind:'proof' as const,id:'verification',source:'@alias'};
+  const linked=await runNotebook({...doc,cells:[base,resultCell,proofCell]}, {},[],opts,new AbortController().signal,100000);
+  assert.deepEqual(linked.records.verification!.output.proofs,linked.records.first!.output.proofs);
+  assert.equal(linked.calls,1);
   const approx={...doc,cells:[{...base,kind:'scientific' as const,unit:'1'},ref]};
   const value=await runNotebook(approx,{},[],{...opts,run:async()=>({result:'3.00',exactness:'approximate'} as CalculationProof)},new AbortController().signal,100000);
   assert.equal(value.errors.out,'type');assert.equal(value.calls,1);

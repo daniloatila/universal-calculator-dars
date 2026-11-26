@@ -125,7 +125,8 @@ async function evaluate(cell:NotebookCell,records:Records,call:Run,formula:Formu
     return {value:String(table.length),unit:'table',table};
   }
   const out=refOutput(cell.source.trim(),records);
-  if(cell.kind==='result') return {value:out.value,unit:out.unit,display:out.display,exactness:out.exactness,...(out.fields?{fields:out.fields}:{})};
+  if(cell.kind==='result') return {value:out.value,unit:out.unit,display:out.display,exactness:out.exactness,
+    ...(out.fields?{fields:out.fields}:{}), ...(out.proofs?.length?{proofs:out.proofs.slice(-1)}:{}), ...(out.formula?{formula:out.formula}:{})};
   if(cell.kind==='chart') return {value:out.value,unit:out.unit,series:validateSeries(out.series??out.table?.slice(1)??[])};
   if(!out.proofs?.length) fail('type');
   return {value:out.value,unit:out.unit,exactness:out.exactness,proofs:[out.proofs[out.proofs.length-1]!],...(out.formula?{formula:out.formula}:{})};
