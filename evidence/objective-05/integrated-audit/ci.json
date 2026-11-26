@@ -1,0 +1,66 @@
+{
+  "conclusion": "success",
+  "createdAt": "2026-11-26T16:34:54Z",
+  "databaseId": 45860076452,
+  "headSha": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "status": "completed",
+  "updatedAt": "2026-11-26T16:51:41Z",
+  "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45860076452",
+  "jobs": [
+    {
+      "name": "verify (macos-latest)",
+      "databaseId": 140048634148,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45860076452/job/140048634148",
+      "startedAt": "2026-11-26T16:35:13Z",
+      "completedAt": "2026-11-26T16:41:56Z",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "security",
+      "databaseId": 140048634644,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45860076452/job/140048634644",
+      "startedAt": "2026-11-26T16:35:13Z",
+      "completedAt": "2026-11-26T16:37:56Z",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify (ubuntu-latest)",
+      "databaseId": 140048634715,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45860076452/job/140048634715",
+      "startedAt": "2026-11-26T16:35:14Z",
+      "completedAt": "2026-11-26T16:51:40Z",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify (windows-latest)",
+      "databaseId": 140048635432,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45860076452/job/140048635432",
+      "startedAt": "2026-11-26T16:35:13Z",
+      "completedAt": "2026-11-26T16:43:43Z",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "windows_credential_checks": [
+    "credentials::tests::accepts_only_bounded_ids_and_blobs",
+    "credentials::tests::windows_credential_manager_round_trip"
+  ],
+  "windows_capability_checks": [
+    "capabilities::tests::cached_sample_is_bounded_and_current_window_state_is_reported",
+    "capabilities::tests::capabilities_origin_is_local_to_the_packaged_origin",
+    "capabilities::tests::win32_counters_observe_the_local_host_with_normal_permissions",
+    "capabilities::windows::tests::unavailable_and_absent_battery_are_not_reported_as_charged",
+    "capabilities::windows::tests::windows_idle_is_excluded_and_invalid_counters_remain_unavailable"
+  ],
+  "ubuntu_chromium_passed": 224,
+  "hosted_scientific_line_coverage": {
+    "suite": "science-rust-line-coverage",
+    "covered": 5734,
+    "total": 5983,
+    "percent": 95.84,
+    "target_percent": 95
+  }
+}

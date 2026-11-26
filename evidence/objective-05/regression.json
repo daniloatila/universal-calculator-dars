@@ -1,0 +1,781 @@
+{
+  "schema": 1,
+  "version": "0.5.0",
+  "scope": "Historical regression mapping for Objective 05 with independent evidence layers.",
+  "counts_are_separate": true,
+  "historical_sources": {
+    "objective_02_original_mapping": "../objective-02/revision-02/tests.json",
+    "objective_04_approved_mapping": "../objective-04/revision-01/tests.json"
+  },
+  "evidence_epoch": {
+    "history": "Local Objective 05 history reruns. Do not assign these reports to the final source commit. An exact CLI hash is recorded only where a suite emitted it.",
+    "rust_and_node": "The local Rust history and final-source Node runs have separate receipts. Earlier Rust test logs do not carry release-binary provenance.",
+    "browser": "The final physical Windows Chrome execution and 924-decision matrix identify exact source and Vite asset-set digests. Earlier browser and matrix receipts remain in their original cohorts.",
+    "hosted": "Exact-source workflow 45860076452 passed all four jobs. The hosted credential and capability tests and the physical WebView2 run have separate receipts. The Windows artifact receipt connects the physically tested executable to this workflow."
+  },
+  "inherited_602": {
+    "mapped": 602,
+    "locally_reverified_as_mapped": 578,
+    "pending_physical_or_hosted_windows": 0,
+    "suites": [
+      {
+        "id": "rust_core",
+        "status": "passed_local",
+        "verification_layer": "local Windows Rust tests",
+        "observed_passed": 21,
+        "verified": "The Standard and structured test files report 10 and 6 tests. Five proof tests are additional.",
+        "receipt": {
+          "path": "artifacts/objective-05/review-tests.log",
+          "sha256": "bf556db7a855ee20a0c58d74b59899e4aed92f3c567f21d3b022f72151e8b6f7"
+        },
+        "mapped": 16,
+        "original_command": "cargo test --locked --workspace"
+      },
+      {
+        "id": "cli_independent_oracle",
+        "status": "passed_local",
+        "verification_layer": "local Windows release CLI history cohort",
+        "observed_passed": 157,
+        "verified": "Independent Fraction and Decimal oracle.",
+        "receipt": {
+          "path": "artifacts/objective-05/history/oracle.txt",
+          "sha256": "02a6bab421b71416d4ca14b828105a31148377b9c5d13921e701628b6c4dabd3"
+        },
+        "mapped": 157,
+        "original_command": "python -B tests/oracle.py target/release/dars.exe"
+      },
+      {
+        "id": "wasm_structured_independent_oracle",
+        "status": "passed_local",
+        "verification_layer": "local generated Standard WASM history cohort",
+        "observed_passed": 291,
+        "verified": "Independent structured arithmetic WASM oracle.",
+        "receipt": {
+          "path": "artifacts/objective-05/history/structured.txt",
+          "sha256": "9c40c8834516dea309fa3f8a700a816b339627db8fd2eb36db23f9f8d130471c"
+        },
+        "mapped": 291,
+        "original_command": "python -B crates/dars-core/tests/structured-oracle.py"
+      },
+      {
+        "id": "cli_wasm_parity",
+        "status": "passed_local",
+        "verification_layer": "local Windows CLI and generated Standard WASM history cohort",
+        "observed_passed": 20,
+        "verified": "Native and WASM result parity.",
+        "receipt": {
+          "path": "artifacts/objective-05/history/check-targets.txt",
+          "sha256": "928fd2756327dab54613fed42682f6a7a8cfc2dc43ff0a364fd73ed33d916163"
+        },
+        "mapped": 20,
+        "original_command": "node tests/check-targets.mjs target/release/dars.exe"
+      },
+      {
+        "id": "typescript_node",
+        "status": "passed_local",
+        "verification_layer": "local Node on Windows",
+        "observed_passed": 70,
+        "verified": "The maintained Node suite includes the 57 inherited equivalents and reports zero failures or skips.",
+        "receipt": {
+          "path": "artifacts/objective-05/science-check/frontend-label-node.log",
+          "sha256": "f35291328dc4f102f7d05efc10a9e88aba99081892afdc83e51d6e2adbcd9218"
+        },
+        "mapped": 57,
+        "original_command": "npm test --prefix apps/web",
+        "prior_receipt": {
+          "path": "artifacts/objective-05/final-node.log",
+          "sha256": "70423cd745f59d66c255680947a936e6c847748c325b827c1e549cdd9f86a6f0"
+        },
+        "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c"
+      },
+      {
+        "id": "physical_windows_chrome",
+        "status": "passed_local",
+        "verification_layer": "local Chrome on physical Windows",
+        "observed_passed": 27,
+        "verified": "The exact-source Chrome suite reran these seven inherited test files. Their 27 cases are included in the 172 inherited Chrome cases.",
+        "receipt": {
+          "path": "evidence/objective-05/integrated-audit/browser.json",
+          "sha256": "e8c8bd42fa71790915ed3fd68cebc2a9aca26e12767bd691a5c548bdff748a0c"
+        },
+        "mapped": 27,
+        "original_command": "npm run test:e2e --prefix apps/web",
+        "observed_by_file": {
+          "module-frames.spec.ts": 1,
+          "module-manager.spec.ts": 1,
+          "module-shell.spec.ts": 4,
+          "operations.spec.ts": 5,
+          "standard-revision.spec.ts": 5,
+          "standard.spec.ts": 10,
+          "worker.spec.ts": 1
+        },
+        "prior_receipt": {
+          "path": "artifacts/objective-05/science-check/frontend-browser.before-risk.json",
+          "sha256": "728baede349b6cf47d7afed7c0dbfb8fbfa24442bdf04babf5316477ac74396b"
+        },
+        "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c"
+      },
+      {
+        "id": "browser_explicit_offline",
+        "status": "passed_local",
+        "verification_layer": "local production web browser with explicit offline emulation",
+        "observed_passed": 10,
+        "verified": "Warmed offline navigation and lazy local language assets.",
+        "receipt": {
+          "path": "artifacts/objective-05/science-check/frontend-label-offline.log",
+          "sha256": "5951ef66d72322637b9e57f1a8c339fe617afba403e10cc3a20a08c198233d07"
+        },
+        "mapped": 10,
+        "original_command": "node tests/verify-web-offline.mjs",
+        "prior_receipt": {
+          "path": "artifacts/objective-05/standalone-offline.log",
+          "sha256": "5951ef66d72322637b9e57f1a8c339fe617afba403e10cc3a20a08c198233d07"
+        },
+        "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c"
+      },
+      {
+        "id": "native_windows_webview2_ui",
+        "status": "passed_physical",
+        "verification_layer": "physical Windows WebView2, verified hosted executable",
+        "mapped": 17,
+        "original_command": "node scripts/verify-desktop.mjs --objective-02-revision-02",
+        "observed_passed": 17,
+        "observed_failed": 0,
+        "verified": "All 17 inherited desktop checks passed on physical Windows with the verified hosted executable.",
+        "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+        "executable_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588",
+        "webview2": "158.0.4370.33",
+        "hosted_run_id": 45860076452,
+        "hosted_artifact_id": 15137777779,
+        "receipt": {
+          "path": "evidence/objective-05/integrated-audit/windows-regression.json",
+          "sha256": "2afa2661a03c3d715e2755150adf0a40ecaed3bd9e53866f375bc16f24cc5db6"
+        },
+        "artifact_receipt": {
+          "path": "evidence/objective-05/integrated-audit/windows-artifact.json",
+          "sha256": "36221c786984abd8c3cdf918dc0fefb1a45cb438966db72d4112e2f8bcf64719"
+        }
+      },
+      {
+        "id": "native_windows_provider_credentials",
+        "status": "passed_hosted",
+        "verification_layer": "exact-source GitHub Actions Windows job",
+        "mapped": 2,
+        "original_command": "cargo test --locked -p dars-desktop --lib -- --include-ignored",
+        "observed_passed": 2,
+        "verified": "The hosted release step passed both credential checks. The include-ignored flag enabled the isolated synthetic Credential Manager round trip.",
+        "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+        "hosted_run_id": 45860076452,
+        "hosted_windows_job_id": 140048635432,
+        "receipt": {
+          "path": "evidence/objective-05/integrated-audit/ci.json",
+          "sha256": "88d6e77ed5219460196ed0774af29af5b9b7aed4d4660b0e4b6534d89b8f58d7"
+        },
+        "raw_log_receipt": {
+          "path": "artifacts/objective-05/45860076452-windows.log",
+          "sha256": "fbc16266505f5a6bc68660d8985817841043603d7e9f75695c357224504eecb1"
+        },
+        "test_names": [
+          "credentials::tests::accepts_only_bounded_ids_and_blobs",
+          "credentials::tests::windows_credential_manager_round_trip"
+        ],
+        "verified_command": "cargo test --locked --release -p dars-desktop --lib -- --include-ignored"
+      },
+      {
+        "id": "native_windows_sensor_rust",
+        "status": "passed_hosted",
+        "verification_layer": "exact-source GitHub Actions Windows job",
+        "mapped": 5,
+        "original_command": "cargo test --locked --workspace",
+        "observed_passed": 5,
+        "verified": "The hosted desktop step passed five capabilities and sensor checks.",
+        "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+        "hosted_run_id": 45860076452,
+        "hosted_windows_job_id": 140048635432,
+        "receipt": {
+          "path": "evidence/objective-05/integrated-audit/ci.json",
+          "sha256": "88d6e77ed5219460196ed0774af29af5b9b7aed4d4660b0e4b6534d89b8f58d7"
+        },
+        "raw_log_receipt": {
+          "path": "artifacts/objective-05/45860076452-windows.log",
+          "sha256": "fbc16266505f5a6bc68660d8985817841043603d7e9f75695c357224504eecb1"
+        },
+        "test_names": [
+          "capabilities::tests::cached_sample_is_bounded_and_current_window_state_is_reported",
+          "capabilities::tests::capabilities_origin_is_local_to_the_packaged_origin",
+          "capabilities::tests::win32_counters_observe_the_local_host_with_normal_permissions",
+          "capabilities::windows::tests::unavailable_and_absent_battery_are_not_reported_as_charged",
+          "capabilities::windows::tests::windows_idle_is_excluded_and_invalid_counters_remain_unavailable"
+        ],
+        "verified_command": "cargo test --locked -p dars-desktop"
+      }
+    ],
+    "total_reverified": 602,
+    "physical_desktop_reverified": 17,
+    "hosted_windows_reverified": 7
+  },
+  "advanced_math_oracles": {
+    "passed": 2355,
+    "suites": [
+      {
+        "suite": "algebra-sympy",
+        "passed": 184,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/verify-algebra.txt",
+          "sha256": "136fe0e1064d2501fc27d43d8f57f7f86e328ee6e8cf7270c3adcd2715f293ab"
+        }
+      },
+      {
+        "suite": "calculus-sympy-mpmath",
+        "passed": 210,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/verify-calculus.txt",
+          "sha256": "df30237f77b7d0f8e84a57d7cd229d81c55e324d76cfc1ced9fdc9d14cd17e1b"
+        }
+      },
+      {
+        "suite": "converter-fraction-decimal-sympy",
+        "passed": 342,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/verify-converter.txt",
+          "sha256": "38a35d890aec1f56063529709cf1747a548e2f63d996704d6ed717526c865a8b"
+        }
+      },
+      {
+        "suite": "date-time-datetime-calendar-zoneinfo",
+        "passed": 403,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/verify-date-time.txt",
+          "sha256": "f7e28605cb1ef93b8579a0125c0da223dc5697b6b81a188a056fab62134ff660"
+        }
+      },
+      {
+        "suite": "discrete-mathematics-python-sympy",
+        "passed": 289,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/verify-discrete-mathematics.txt",
+          "sha256": "9033df4c2d2bbea8fb393c5036c269056e56f1ec7553d20668af952b622f73a1"
+        }
+      },
+      {
+        "suite": "geometry-sympy",
+        "passed": 159,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/verify-geometry.txt",
+          "sha256": "8ae3b597d1801b0f6bd26f051148ff8b4ec1140cb5391df349e4d745192bcad7"
+        }
+      },
+      {
+        "suite": "linear-algebra-sympy-numpy-scipy",
+        "passed": 223,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/verify-linear-algebra.txt",
+          "sha256": "86fc5ff386bdc088a8a48f267b2064cb8214ae6eb84b920fdb7c49e9681a255e"
+        }
+      },
+      {
+        "suite": "programmer-python-integers",
+        "passed": 368,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/verify-programmer.txt",
+          "sha256": "cdd20727bd6ca899617314b2a4129aff5d7cd680d9b263167874a5b9aa415293"
+        }
+      },
+      {
+        "suite": "scientific-complex-mpmath",
+        "passed": 75,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/verify-scientific-complex.txt",
+          "sha256": "354f8bf30825db22d6e6a5eb6a221e22821f2bc6fae93a57a06f03a5dd79bda5"
+        }
+      },
+      {
+        "suite": "scientific-sympy-mpmath",
+        "passed": 102,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/verify-scientific.txt",
+          "sha256": "cd838930015ca2375ef9d807872ec5b9c8016be04110b06f8ff79281384761ac"
+        }
+      }
+    ]
+  },
+  "advanced_math_cli_wasm": {
+    "passed": 305,
+    "isolation_checks": 37,
+    "suites": [
+      {
+        "suite": "algebra-cli-wasm",
+        "passed": 28,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/check-algebra-targets.txt",
+          "sha256": "c6889783576df315def701bff72463d1ba0a831bb32ba657d4ee937367902625"
+        },
+        "isolation_checks": 1,
+        "wasm_sha256": "dcb45901944da0e51caafc6a461293c11361c70d0e97919016cdf4f656d6285c"
+      },
+      {
+        "suite": "calculus-cli-wasm",
+        "passed": 27,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/check-calculus-targets.txt",
+          "sha256": "15072f2bcd380fc98b8e391bc0d2bd219f91c36250a070ccd267040fd8edcc3e"
+        },
+        "isolation_checks": 2,
+        "wasm_sha256": "b51de4f149fdfb1e152c78a9821715b0e26aa5456ce283fa437f1b4e4e987c2a"
+      },
+      {
+        "suite": "converter-cli-wasm",
+        "passed": 46,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/check-converter-targets.txt",
+          "sha256": "fc3f89a8996ccb1efca4ee5d0cd6a01cb5cf7cf8498f4e661b358ef7bb7e29fb"
+        },
+        "isolation_checks": 7,
+        "wasm_sha256": "2c4299e50764d3fb0bd00521e98cb7f39b6774abfa914bf8be8667df07b92a08"
+      },
+      {
+        "suite": "date-time-cli-wasm",
+        "passed": 49,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/check-date-time-targets.txt",
+          "sha256": "846b77e337a86499635d6394e103b32e03cb33cbf953f7453326f150f73aa1fd"
+        },
+        "isolation_checks": 8,
+        "wasm_sha256": "0f7714a15e64c2f683c287d53f866a5a73756a8db665964b6365ae46b7588a40"
+      },
+      {
+        "suite": "discrete-mathematics-cli-wasm",
+        "passed": 38,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/check-discrete-mathematics-targets.txt",
+          "sha256": "3723f79e18b6786a1ade395c947beae000f94102fee37bc077d3832ef86f799a"
+        },
+        "isolation_checks": 5,
+        "wasm_sha256": "615789d861f00c30fba4de8545d594e10df42ded82bfa43fd4050c18ef70c5c8"
+      },
+      {
+        "suite": "geometry-cli-wasm",
+        "passed": 32,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/check-geometry-targets.txt",
+          "sha256": "d6be4975a8fb8420b36ba964cce60d8ca85877badc10a277fe589d1b6d0cd1b7"
+        },
+        "isolation_checks": 4,
+        "wasm_sha256": "7710696257a786fa4dc2f24a23f9c3f6a78bd0d580aec30594d3720cf3b04e21"
+      },
+      {
+        "suite": "linear_algebra-cli-wasm",
+        "passed": 30,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/check-linear-algebra-targets.txt",
+          "sha256": "f0fe1018ea1f5ee6d70f14d4bd5f430e016178506e51208db1c42fbd29125ee4"
+        },
+        "isolation_checks": 3,
+        "wasm_sha256": "3ee53105ca2d34591de958746ac2be8950ea20a87d82bf38db01fd599368c8a1"
+      },
+      {
+        "suite": "programmer-cli-wasm",
+        "passed": 36,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/check-programmer-targets.txt",
+          "sha256": "953438d88748ff4b34bcab70d82c09d8628d7aa61f52d7583e35e16f8f3e3124"
+        },
+        "isolation_checks": 6,
+        "wasm_sha256": "540b6c55f8cb5b0f1b08657492aa2b0b9fcb20fc4b1914a66a7cb116e68f9b7f"
+      },
+      {
+        "suite": "scientific-cli-wasm",
+        "passed": 19,
+        "failed": 0,
+        "receipt": {
+          "path": "artifacts/objective-05/history/check-scientific-targets.txt",
+          "sha256": "f301d22de6712bff59b075371b6ef9592b47f2c1905950734e723c18f2c1b419"
+        },
+        "isolation_checks": 1,
+        "wasm_sha256": "1f1794276fefd3ec395d3b06079e36b01b1a33ca8e1fd561ac2a47780f17e1c0"
+      }
+    ]
+  },
+  "standard_calculation_proof_cli_wasm": {
+    "suite": "standard-record-cli-wasm",
+    "passed": 9,
+    "replays": 5,
+    "failed": 0,
+    "receipt": {
+      "path": "artifacts/objective-05/history/check-standard-record-targets.txt",
+      "sha256": "08b5c750959b4d37bf6b37300867779cffbbc19c5949472374670bfd1fd1dd16"
+    }
+  },
+  "finance": {
+    "independent_oracle": {
+      "passed": 577,
+      "suites": [
+        {
+          "suite": "financial_and_loans",
+          "passed": 128,
+          "receipt": {
+            "path": "artifacts/objective-05/history/verify-financial-loans.txt",
+            "sha256": "d3fc70566456184521d6aecc3c92d5e989c19ff8bffa69e40396118faaa2a8c3"
+          },
+          "cli_sha256": "62855de300d81f877ac1723d7d26a44896dad1b0ac42defd5d904d4b3d6a8fd4"
+        },
+        {
+          "suite": "investment_and_business",
+          "passed": 87,
+          "receipt": {
+            "path": "artifacts/objective-05/history/verify-investment-business.txt",
+            "sha256": "b030032ccc6f62d9970c26d05ab95a55e4324eef2763465f55e9ad44c2e9ca69"
+          },
+          "modules": {
+            "business": 38,
+            "investment": 49
+          }
+        },
+        {
+          "suite": "tax",
+          "passed": 362,
+          "receipt": {
+            "path": "artifacts/objective-05/history/verify-tax.txt",
+            "sha256": "9e19bfee0cc3419f20679fc239fd34e21c06ada156446d35156bff5d0f1ff69c"
+          }
+        }
+      ]
+    },
+    "baseline_cli_wasm": {
+      "passed": 49,
+      "isolation_checks": 20,
+      "suites": [
+        {
+          "suite": "financial-cli-wasm",
+          "passed": 15,
+          "isolation_checks": 4,
+          "wasm_sha256": "75151645fb6f62be6bcb0e16ec1a4e2a54777699bb71e4f5243a20566f6201c2"
+        },
+        {
+          "suite": "investment-cli-wasm",
+          "passed": 3,
+          "isolation_checks": 4,
+          "wasm_sha256": "236189b1f4956e85fc0fe113b8305083a6ddb18b29b6721c9bfd7e15f1d31f2d"
+        },
+        {
+          "suite": "loans-cli-wasm",
+          "passed": 7,
+          "isolation_checks": 4,
+          "wasm_sha256": "daea2be26e2c0ff9a64212f08a70a35d0b4d66c4b467bfdb38abe49875c34c1c"
+        },
+        {
+          "suite": "tax-cli-wasm",
+          "passed": 17,
+          "isolation_checks": 4,
+          "wasm_sha256": "826b373f88488edd7fd7526637e1c29db5ee6b75751861124b4a0f1c961fb5a1"
+        },
+        {
+          "suite": "business-cli-wasm",
+          "passed": 7,
+          "isolation_checks": 4,
+          "wasm_sha256": "c5f12beebeee92fb4a5a397fe54c186a25dd522c93eaac463aec273d47dfd072"
+        }
+      ],
+      "receipt": {
+        "path": "artifacts/objective-05/history/check-finance-targets.txt",
+        "sha256": "064e77641aca4c1930229669b92fadb8d21261156beae1d4a79a5ad31840c424"
+      }
+    },
+    "comparator_independent_oracle": {
+      "suite": "financial-semantic-comparison",
+      "passed": 84,
+      "independent_proof_replays": 79,
+      "cli_sha256": "62855de300d81f877ac1723d7d26a44896dad1b0ac42defd5d904d4b3d6a8fd4",
+      "failed": 0,
+      "receipt": {
+        "path": "artifacts/objective-05/history/verify-finance-comparison.txt",
+        "sha256": "9394f4852498e6583f8e694653e9c96adda0b1a0417dd5a0fd65ed05a773f6f5"
+      }
+    },
+    "comparator_cli_wasm": {
+      "suite": "semantic-comparison-cli-wasm",
+      "cases": 84,
+      "proof_replays": 79,
+      "failed": 0,
+      "receipt": {
+        "path": "artifacts/objective-05/history/check-finance-comparison-targets.txt",
+        "sha256": "26a0d7090c0f2ce47ea54113b9e95455b95db1e031495ba9c4330e09860b38b8"
+      }
+    },
+    "ordinary_chrome_workspaces": {
+      "passed": 14,
+      "receipt": {
+        "path": "evidence/objective-05/integrated-audit/browser.json",
+        "sha256": "e8c8bd42fa71790915ed3fd68cebc2a9aca26e12767bd691a5c548bdff748a0c"
+      },
+      "prior_receipt": {
+        "path": "artifacts/objective-05/science-check/frontend-browser.before-risk.json",
+        "sha256": "728baede349b6cf47d7afed7c0dbfb8fbfa24442bdf04babf5316477ac74396b"
+      },
+      "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c"
+    },
+    "comparator_chrome": {
+      "passed": 12,
+      "receipt": {
+        "path": "evidence/objective-05/integrated-audit/browser.json",
+        "sha256": "e8c8bd42fa71790915ed3fd68cebc2a9aca26e12767bd691a5c548bdff748a0c"
+      },
+      "prior_receipt": {
+        "path": "artifacts/objective-05/science-check/frontend-browser.before-risk.json",
+        "sha256": "728baede349b6cf47d7afed7c0dbfb8fbfa24442bdf04babf5316477ac74396b"
+      },
+      "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c"
+    },
+    "standalone_web_offline": {
+      "suite": "production-finance-offline",
+      "modules": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ],
+      "passed": 5,
+      "failed": 0,
+      "receipt": {
+        "path": "artifacts/objective-05/science-check/frontend-label-offline.log",
+        "sha256": "5951ef66d72322637b9e57f1a8c339fe617afba403e10cc3a20a08c198233d07"
+      },
+      "prior_receipt": {
+        "path": "artifacts/objective-05/standalone-offline.log",
+        "sha256": "5951ef66d72322637b9e57f1a8c339fe617afba403e10cc3a20a08c198233d07"
+      },
+      "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c"
+    },
+    "physical_windows_offline": {
+      "status": "passed_physical",
+      "approved_0_4_1_baseline": {
+        "passed": 5,
+        "receipt": "../objective-04/revision-01/desktop.json"
+      },
+      "distinct_from_inherited_602": true,
+      "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+      "executable_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588",
+      "webview2": "158.0.4370.33",
+      "hosted_run_id": 45860076452,
+      "hosted_artifact_id": 15137777779,
+      "observed_passed": 5,
+      "checked_examples": [
+        {
+          "module": "financial",
+          "operation": "irr"
+        },
+        {
+          "module": "investment",
+          "operation": "project"
+        },
+        {
+          "module": "loans",
+          "operation": "sac"
+        },
+        {
+          "module": "tax",
+          "operation": "br_irrf"
+        },
+        {
+          "module": "business",
+          "operation": "price"
+        }
+      ],
+      "workers": {
+        "opened": 5,
+        "closed": 5,
+        "peak": 1
+      },
+      "external_http_requests": 0,
+      "receipt": {
+        "path": "evidence/objective-05/integrated-audit/windows-finance-offline.json",
+        "sha256": "76719a1d7c08deb3b16dea1390cf08cbf77a6bfe7bb54628aa41be6d4ff9ae3c"
+      }
+    },
+    "physical_windows_comparator": {
+      "status": "passed_physical",
+      "approved_0_4_1_baseline": "../objective-04/revision-01/after-windows.json",
+      "distinct_from_inherited_602": true,
+      "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+      "executable_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588",
+      "webview2": "158.0.4370.33",
+      "hosted_run_id": 45860076452,
+      "hosted_artifact_id": 15137777779,
+      "observed_passed": 1,
+      "historical_import_reproduced": true,
+      "retained_after_switch": true,
+      "proof_metric": {
+        "id": "rate",
+        "status": "normalized",
+        "percentage_points": "0.00000000000000",
+        "relative_percent": "0.0000000000"
+      },
+      "workers": {
+        "opened": 8,
+        "closed": 8,
+        "peak": 1
+      },
+      "external_http_requests": 0,
+      "remaining_processes": 0,
+      "receipt": {
+        "path": "evidence/objective-05/integrated-audit/windows-finance-comparison.json",
+        "sha256": "51d65cea06e7151aacfd1320575b87b33765d85ca631aa5b88c6e5b9c47561d9"
+      },
+      "proof_receipt": {
+        "path": "evidence/objective-05/integrated-audit/windows-finance-comparison-proof.json",
+        "sha256": "eb2ab39ac2dabee46db566a6b651643730993f5fa2c0d31fa2c7a65b8ea69ae5"
+      }
+    }
+  },
+  "local_chrome": {
+    "channel": "chrome",
+    "browser_version": "158.0.8127.38",
+    "complete_observed_run": {
+      "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+      "asset_set_sha256": "9e19135cd5e85d01f60ae30c0a2b891de49ca696ec252c2cc61ec42889f1b491",
+      "playwright_report_sha256": "9f3c3a46e27122931537bf15ec7aaeeefdd7c627abd56e06532099147be4474a",
+      "passed": 224,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "inherited": {
+        "passed": 172,
+        "math_and_shell": 146,
+        "finance": 14,
+        "comparator": 12
+      },
+      "new_science": 52,
+      "receipt": {
+        "path": "evidence/objective-05/integrated-audit/browser.json",
+        "sha256": "e8c8bd42fa71790915ed3fd68cebc2a9aca26e12767bd691a5c548bdff748a0c"
+      },
+      "local_raw_report": {
+        "path": "artifacts/objective-05/science-check/frontend-label-full.playwright.json",
+        "sha256": "9f3c3a46e27122931537bf15ec7aaeeefdd7c627abd56e06532099147be4474a"
+      }
+    },
+    "earlier_attempt": {
+      "passed": 218,
+      "failed": 1,
+      "case": "Geometry lazy module isolation and offline reload",
+      "receipt": {
+        "path": "artifacts/objective-05/science-check/frontend-browser.candidate.json",
+        "sha256": "bbb5c9ffc24be9030418ffe188dfbfbd64f934f4afd3f86ed06cb8f2dfdfe0d9"
+      }
+    },
+    "prior_complete_runs": [
+      {
+        "asset_set_sha256": "2fb569a923084b3cc9bd42b2c6e3af841e86a02cbb1d6316acf3abbef9b26b68",
+        "playwright_report_sha256": "b3f42cdfa63c48a005c9f520601bada650fe7dae0967bbbace8232064fe55a02",
+        "passed": 223,
+        "failed": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "inherited": {
+          "passed": 172,
+          "math_and_shell": 146,
+          "finance": 14,
+          "comparator": 12
+        },
+        "receipt": {
+          "path": "artifacts/objective-05/science-check/frontend-browser.before-risk.json",
+          "sha256": "728baede349b6cf47d7afed7c0dbfb8fbfa24442bdf04babf5316477ac74396b"
+        },
+        "scope": "Pre-risk precision browser cohort on its recorded asset set."
+      },
+      {
+        "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+        "asset_set_sha256": "2026dc6c813d3cb03a7b641b015a7c7e46324d253477f7b3964999e3f68dcdf4",
+        "passed": 223,
+        "failed": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "scope": "Earlier complete source-matched production Chrome run.",
+        "local_raw_report": {
+          "path": "artifacts/objective-05/science-check/frontend-full.playwright.json",
+          "sha256": "d1afcd0f298e1dfc39311b6212c45869d7a6b4bb09838861bdf2df691eca95c6"
+        },
+        "console_receipt": {
+          "path": "artifacts/objective-05/science-check/frontend-final-full.log",
+          "sha256": "5939c71cae6a09c9d1bbb6a341acdd753a6e836b0d54afa7236fe3463a4d92a4"
+        }
+      }
+    ],
+    "firefox": {
+      "status": "not_measured",
+      "scope": "The mapped historical 27 and 172 browser checks use Chrome. The current hosted browser job uses Chromium."
+    }
+  },
+  "notation": {
+    "inherited_mathematics": 420,
+    "inherited_finance": 210,
+    "inherited_total": 630,
+    "new_science": 294,
+    "full_matrix_total": 924,
+    "directed_pairs": 42,
+    "receipt": {
+      "path": "evidence/objective-05/locale-transition-matrix.json",
+      "sha256": "77d74009b6781a316011e85446238a3a474969034e00478fea57549b50e835d8"
+    },
+    "matrix_sha256": "77d74009b6781a316011e85446238a3a474969034e00478fea57549b50e835d8",
+    "prior_local_receipts": [
+      {
+        "path": "artifacts/objective-05/science-check/locale-transition-matrix.before-risk.json",
+        "sha256": "2e258d54a509df30db743662c83d714bc83b19c43de465c55a1a2a2d35505e8e",
+        "scope": "Pre-risk precision browser cohort."
+      },
+      {
+        "path": "artifacts/objective-05/science-check/locale-transition-matrix.1c81656.json",
+        "sha256": "215a54aa0937f9f0d58b84c0092f98f82f9902a94abe39152d840180bd6fbb33",
+        "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+        "asset_set_sha256": "2026dc6c813d3cb03a7b641b015a7c7e46324d253477f7b3964999e3f68dcdf4"
+      }
+    ],
+    "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+    "asset_set_sha256": "9e19135cd5e85d01f60ae30c0a2b891de49ca696ec252c2cc61ec42889f1b491",
+    "canonical_comparisons_changed_from_1c81656": 0
+  },
+  "platform_reconciliation": {
+    "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+    "hosted_run_id": 45860076452,
+    "hosted_jobs_passed": 4,
+    "hosted_jobs_total": 4,
+    "hosted_ubuntu_chromium_passed": 224,
+    "workflow_receipt": {
+      "path": "evidence/objective-05/integrated-audit/ci.json",
+      "sha256": "88d6e77ed5219460196ed0774af29af5b9b7aed4d4660b0e4b6534d89b8f58d7"
+    },
+    "physical_windows_artifact": {
+      "path": "evidence/objective-05/integrated-audit/windows-artifact.json",
+      "sha256": "36221c786984abd8c3cdf918dc0fefb1a45cb438966db72d4112e2f8bcf64719"
+    },
+    "physical_windows_inherited_desktop": {
+      "path": "evidence/objective-05/integrated-audit/windows-regression.json",
+      "sha256": "2afa2661a03c3d715e2755150adf0a40ecaed3bd9e53866f375bc16f24cc5db6"
+    },
+    "physical_windows_scientific_runtime": {
+      "path": "evidence/objective-05/integrated-audit/windows-candidate.json",
+      "sha256": "49887572b177725066c88869583bbf4699bb8f603f3c7a91ce68e888afbf4ec1"
+    },
+    "physical_windows_method": "integrated-audit/windows-method.md"
+  }
+}

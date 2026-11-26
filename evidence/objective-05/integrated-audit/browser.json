@@ -1,0 +1,216 @@
+{
+  "schema": 1,
+  "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "source_scope": "Local production distribution under test",
+  "build_asset_set_sha256": "9e19135cd5e85d01f60ae30c0a2b891de49ca696ec252c2cc61ec42889f1b491",
+  "browser": {
+    "channel": "chrome",
+    "version": "158.0.8127.38"
+  },
+  "started_utc": "2026-11-26T16:34:53.174Z",
+  "duration_ms": 275230,
+  "result": {
+    "passed": 224,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "inherited": 172,
+    "science": 52
+  },
+  "suites": {
+    "algebra.spec.ts": 5,
+    "calculation-proof.spec.ts": 2,
+    "calculus.spec.ts": 6,
+    "converter.spec.ts": 8,
+    "data-lab.spec.ts": 3,
+    "date-time.spec.ts": 8,
+    "discrete-mathematics.spec.ts": 8,
+    "finance-comparison.spec.ts": 12,
+    "finance.spec.ts": 14,
+    "geometry.spec.ts": 8,
+    "integrated-mathematics.spec.ts": 4,
+    "linear-algebra.spec.ts": 8,
+    "locale-transitions.spec.ts": 47,
+    "module-frames.spec.ts": 1,
+    "module-manager.spec.ts": 1,
+    "module-shell.spec.ts": 4,
+    "operations.spec.ts": 5,
+    "optimization-cancel.spec.ts": 1,
+    "programmer.spec.ts": 7,
+    "science.spec.ts": 48,
+    "scientific.spec.ts": 8,
+    "standard-revision.spec.ts": 5,
+    "standard.spec.ts": 10,
+    "worker.spec.ts": 1
+  },
+  "report_sha256": "9f3c3a46e27122931537bf15ec7aaeeefdd7c627abd56e06532099147be4474a",
+  "science": {
+    "notation_cases": 42,
+    "notation_proof_comparisons": 294,
+    "focused": 10,
+    "form_examples": 82,
+    "graph_adaptive": {
+      "profiles": [
+        "ultra_light",
+        "efficiency",
+        "balanced",
+        "performance",
+        "maximum"
+      ],
+      "proofSha256": "e81fbf940fa0344ef6fbe1e614dc30c075ce78c7511075b5617b0975116dfb29",
+      "contextRecoveryEvent": true,
+      "keyboardInspection": true
+    },
+    "locale_labels": {
+      "locales": [
+        "en",
+        "pt-BR",
+        "zh-CN",
+        "hi",
+        "es",
+        "ar",
+        "fr"
+      ],
+      "samplePopulation": true,
+      "probability": true,
+      "confidenceMethods": true,
+      "initialValues": true,
+      "rateParameter": true,
+      "contingencyTable": true
+    },
+    "offline_modules": [
+      "statistics",
+      "probability",
+      "simulation",
+      "optimization",
+      "physics-engineering",
+      "graph-lab",
+      "data-lab"
+    ],
+    "requests_outside_preview_origin": 0,
+    "focused_cases": [
+      "analytic examples",
+      "graph rendering and local exports",
+      "simulation progress and cancel",
+      "320-pixel Arabic RTL",
+      "explicit offline reload",
+      "Data Lab formats",
+      "Data Lab pipeline replay and CSV escape behavior",
+      "Data Lab cancel/recovery",
+      "Optimization cancel/recovery",
+      "Scientific result and field labels in seven languages"
+    ]
+  },
+  "inherited_notation": {
+    "mathematics": 420,
+    "finance": 210,
+    "total": 630
+  },
+  "node": {
+    "passed": 70,
+    "failed": 0
+  },
+  "standalone_offline": [
+    {
+      "suite": "production-web-offline-and-lazy-locales",
+      "passed": 10,
+      "failed": 0
+    },
+    {
+      "suite": "production-finance-offline",
+      "modules": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ],
+      "passed": 5,
+      "failed": 0
+    }
+  ],
+  "historical_risk_decimal": {
+    "schema": 1,
+    "scope": "Real Chrome synthetic 100-observation historical risk",
+    "browser": "158.0.8127.38",
+    "production_asset_sha256": "9e19135cd5e85d01f60ae30c0a2b891de49ca696ec252c2cc61ec42889f1b491",
+    "simulation_wasm_sha256": "6cc083c613b7d1d1fdc543b1a9bc93d243ed23f9c25538806cacb2d3c50b88d2",
+    "checks": [
+      {
+        "exact_level": "0.56",
+        "display_level": 0.56,
+        "value_at_risk": 56,
+        "expected_shortfall": 78.5
+      },
+      {
+        "exact_level": "0.560000000000000000000001",
+        "display_level": 0.56,
+        "value_at_risk": 57,
+        "expected_shortfall": 78.5
+      }
+    ]
+  },
+  "combined_notation": 924,
+  "notation_digests_changed_from_1c81656": {},
+  "notation_ledger_sha256": "77d74009b6781a316011e85446238a3a474969034e00478fea57549b50e835d8",
+  "screenshots": [
+    {
+      "file": "data-lab/web.png",
+      "width": 1280,
+      "height": 1375,
+      "bytes": 423881,
+      "sha256": "63e633b403cf84cfb88b889bff91a3a77aa53bcb731dc6f9a42784760118ba2e"
+    },
+    {
+      "file": "graph-lab/web.png",
+      "width": 1280,
+      "height": 1319,
+      "bytes": 319412,
+      "sha256": "5fce18ddf7d0aca54e5c78d15946576e1a986bd0c3d8eb248dd2ad66db400ea3"
+    },
+    {
+      "file": "optimization/web.png",
+      "width": 1280,
+      "height": 856,
+      "bytes": 186451,
+      "sha256": "e74614d0cb2e88a0042b28d0aac3aca5588cfae05ce71f1c5d1cb735cd08dc8a"
+    },
+    {
+      "file": "physics-engineering/web.png",
+      "width": 1280,
+      "height": 777,
+      "bytes": 180511,
+      "sha256": "13d8601f3659054da55ef47c1b7dbdfeb261c3bb798e6e1e48143149381b72b4"
+    },
+    {
+      "file": "probability/web.png",
+      "width": 1280,
+      "height": 1806,
+      "bytes": 398614,
+      "sha256": "808ed7b5285f2588299366c588ea21790ab4bd974866f9b08253214999d8f1c7"
+    },
+    {
+      "file": "simulation/web.png",
+      "width": 1280,
+      "height": 2870,
+      "bytes": 606202,
+      "sha256": "a2b3b4362177f181373fdafe923926c0ff924496fdcfb60ad5f43ec1b1ddaef4"
+    },
+    {
+      "file": "statistics/web.png",
+      "width": 1280,
+      "height": 2252,
+      "bytes": 461068,
+      "sha256": "1e56d2df2294e8c68324fe0e60180345fb826903fab4852b9a2617eb2185be0b"
+    },
+    {
+      "file": "graph-lab/web-2d.png",
+      "width": 1280,
+      "height": 1300,
+      "bytes": 278863,
+      "sha256": "6479383aa9853b1db1d7600fc47ca51a9bbd328dd99025c60a47e59502ab57a2"
+    }
+  ],
+  "screenshots_use_synthetic_inputs": true,
+  "counts_are_separate": true
+}

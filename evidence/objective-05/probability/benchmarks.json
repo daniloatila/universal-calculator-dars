@@ -1,0 +1,22 @@
+{
+  "module": "probability",
+  "node": "v24.22.3",
+  "platform": "win32",
+  "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+  "requestParities": 57,
+  "exact": 27,
+  "numeric": 30,
+  "isolationChecks": 2,
+  "chunks": [],
+  "wasmBytes": 391933,
+  "wasmSha256": "d8a43fe4aeeb4dae0b54ccdf74802d84999b47a1a8347e9cf5cfa2ecb47e089d",
+  "benchmark": {
+    "scope": "Node, initialized release WASM, request to proof, 3 warmups discarded",
+    "initializationMs": 0.8514999999999873,
+    "initialLinearBytes": 1114112,
+    "finalLinearBytes": 1179648,
+    "measurements": 12,
+    "p50Ms": 0.1291999999999689,
+    "p95Ms": 0.19719999999995252
+  }
+}

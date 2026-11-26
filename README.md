@@ -4,8 +4,12 @@
 
 [Português brasileiro](README.pt-BR.md)
 
-DARS is a local-first computation platform by Danilo Átila. The 0.4.1 candidate brings 15 workspaces to a shared Windows and browser interface, with mathematical results from Rust and a native command-line interface. Financial, Investment, Loans, Tax and Business preserve the notation of editable inputs. The local Scenario Comparator checks what the measurements represent before calculating differences. [Objective 04 revision](evidence/objective-04/revision-01/REPORT.md)
+DARS is a local-first computation platform by Danilo Átila. The 0.5.0 review branch brings 22 workspaces to Windows and the browser. Rust computes the results, including exact rational table aggregates and reproducible seeded simulations. Each record carries the method, inputs and applicable limits. [Objective 05](evidence/objective-05/REPORT.md)
 
+Search for a workspace by name or description. In a science workspace, select an operation and load its example to inspect the result and Calculation Proof.
+
+- **Science, engineering and data** — Statistics, Probability, Simulation, Optimization, Physics & Engineering, Graph Lab and Data Lab.
+- **Finance and business** — Financial, Investment, Loans, Tax and Business, including the approved 0.4.1 Scenario Comparator.
 - **Arithmetic and analysis** — Standard, Scientific, Algebra, Calculus and Linear Algebra.
 - **Specialized tools** — Geometry, Discrete Mathematics, Programmer, Converter and Date & Time.
 

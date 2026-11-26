@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "module": "simulation",
+  "scope": "mathematical kernel and batch interface",
+  "criteria": [
+    {"id": "reference_generator_and_paths", "status": "verified", "evidence": "tests.json", "check": "Reference PCG32 words and independent normal, random walk and common-random-number finance path checks."},
+    {"id": "distribution_estimators", "status": "verified", "evidence": "tests.json", "check": "All seventeen analytic laws against seeded empirical moments and event probabilities, plus histogram conservation and finite-variance inference."},
+    {"id": "financial_risk", "status": "verified", "evidence": "tests.json", "check": "Simulated and historical VaR and Expected Shortfall, exact decimal rank jumps, close-to-zero financial loss and fractional empirical tail."},
+    {"id": "batch_reproducibility", "status": "verified", "evidence": "targets.json", "check": "Nine inputs replay across four batch widths, 36 byte-identical finished proofs, including equivalent CLI and WASM results."},
+    {"id": "bounded_and_releasable_tasks", "status": "verified", "evidence": "targets.json", "check": "WASM progress is monotonic and actual, invalid stages produce errors, discarded incomplete task can be followed by a fresh valid request."},
+    {"id": "resource_probe", "status": "verified", "evidence": "benchmarks.json", "check": "Three native runs each for 100,000 normal draws and two-million-step random-walk and financial workloads."}
+  ]
+}

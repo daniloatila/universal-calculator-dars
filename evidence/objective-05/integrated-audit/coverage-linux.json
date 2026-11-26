@@ -1,0 +1,113 @@
+{
+  "suite": "science-rust-line-coverage",
+  "covered": 5734,
+  "total": 5983,
+  "percent": 95.84,
+  "target_percent": 95,
+  "files": [
+    {
+      "module": "shared-expression",
+      "path": "calculus/numerical_expression.rs",
+      "covered": 256,
+      "total": 258
+    },
+    {
+      "module": "data_lab",
+      "path": "data_lab/analysis.rs",
+      "covered": 76,
+      "total": 79
+    },
+    {
+      "module": "data_lab",
+      "path": "data_lab/import.rs",
+      "covered": 145,
+      "total": 149
+    },
+    {
+      "module": "data_lab",
+      "path": "data_lab/mod.rs",
+      "covered": 216,
+      "total": 224
+    },
+    {
+      "module": "data_lab",
+      "path": "data_lab/pipeline.rs",
+      "covered": 221,
+      "total": 243
+    },
+    {
+      "module": "data_lab",
+      "path": "data_lab/workbook.rs",
+      "covered": 381,
+      "total": 412
+    },
+    {
+      "module": "shared-distribution",
+      "path": "discrete_tail.rs",
+      "covered": 139,
+      "total": 150
+    },
+    {
+      "module": "graph_lab",
+      "path": "graph_lab.rs",
+      "covered": 473,
+      "total": 478
+    },
+    {
+      "module": "optimization",
+      "path": "optimization.rs",
+      "covered": 440,
+      "total": 488
+    },
+    {
+      "module": "optimization",
+      "path": "optimization/linear.rs",
+      "covered": 184,
+      "total": 186
+    },
+    {
+      "module": "optimization",
+      "path": "optimization/multivariate.rs",
+      "covered": 282,
+      "total": 293
+    },
+    {
+      "module": "physics_engineering",
+      "path": "physics_engineering.rs",
+      "covered": 551,
+      "total": 569
+    },
+    {
+      "module": "probability",
+      "path": "probability.rs",
+      "covered": 641,
+      "total": 663
+    },
+    {
+      "module": "simulation",
+      "path": "simulation.rs",
+      "covered": 512,
+      "total": 529
+    },
+    {
+      "module": "statistics",
+      "path": "statistics.rs",
+      "covered": 479,
+      "total": 490
+    },
+    {
+      "module": "statistics",
+      "path": "statistics/inference.rs",
+      "covered": 603,
+      "total": 631
+    },
+    {
+      "module": "statistics",
+      "path": "statistics/regression.rs",
+      "covered": 135,
+      "total": 141
+    }
+  ],
+  "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "run_url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45860076452"
+}

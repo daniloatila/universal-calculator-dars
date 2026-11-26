@@ -8,6 +8,7 @@ import assert from "node:assert/strict";
 
 const moduleDir = new URL("../apps/web/src/tool-wasm/loans/", import.meta.url);
 const currentWasm = new URL("dars_tool_wasm_bg.wasm", moduleDir);
+const { version } = JSON.parse(await readFile(new URL("../apps/web/package.json", import.meta.url), "utf8"));
 const timeoutMs = 15_000;
 const samples = 2;
 const principal = 100_000n;
@@ -105,7 +106,7 @@ if (!isMainThread) {
         }
         const reply = JSON.parse(completion.response);
         assert.equal(reply.ok, true, JSON.stringify(reply));
-        assert.equal(reply.proof.engine_version, "0.4.1");
+        assert.equal(reply.proof.engine_version, version);
         const verified = validate(JSON.parse(reply.proof.result));
         trials.push({
           phase, request_wall_ms: wallMs, engine_ms: completion.engineMs,
@@ -164,7 +165,7 @@ if (!isMainThread) {
   const evidence = {
     schema: 1,
     observed_at_utc: new Date().toISOString(),
-    version: "0.4.1",
+    version,
     module_sha256: createHash("sha256").update(await readFile(currentWasm)).digest("hex"),
     platform: process.platform, architecture: process.arch, node: process.version,
     processor: cpus()[0]?.model,
@@ -173,7 +174,10 @@ if (!isMainThread) {
     limitations: "Two samples per path on a single host. Excludes browser/WebView rendering and cannot establish a platform-wide latency guarantee.",
     results,
   };
-  const output = resolve(process.argv[2] ?? "artifacts/objective-04/revision-01/price-benchmark.json");
+  const defaultOutput = version === "0.4.1"
+    ? "artifacts/objective-04/revision-01/price-benchmark.json"
+    : `artifacts/${version}-price-benchmark.json`;
+  const output = resolve(process.argv[2] ?? defaultOutput);
   await mkdir(dirname(output), { recursive: true });
   await writeFile(output, JSON.stringify(evidence, null, 2) + "\n");
 }

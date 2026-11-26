@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "screenshots": [
+    {
+      "name": "candidate-financial.png",
+      "bytes": 177817,
+      "sha256": "d4dc71a53a60972c384c92905932bf2ecf507e41064792b1d12f55a76a97ac88"
+    },
+    {
+      "name": "candidate-investment.png",
+      "bytes": 242678,
+      "sha256": "99a521a1d6c4e55c18b8033f1a89136d1ba122d2fab35e97b2c45af1624f8c1a"
+    },
+    {
+      "name": "candidate-loans.png",
+      "bytes": 215569,
+      "sha256": "99a3e5d3ba062ea2cc34f6ec99884991edf3b5a0993f6b47d1648ce474e4220a"
+    },
+    {
+      "name": "candidate-tax.png",
+      "bytes": 178005,
+      "sha256": "fab39cbf4834177086ce10b53941e26485850ed0f289b95046be245fbee88782"
+    },
+    {
+      "name": "candidate-business.png",
+      "bytes": 209586,
+      "sha256": "e5e15faeb789a5e46e2412b560487f18597aa650fd66156437fdbc85325d0bd6"
+    },
+    {
+      "name": "equivalent-rate-comparison.png",
+      "bytes": 260474,
+      "sha256": "f48528041a5f433bc95780cf7038d57a08485ea490fd144eafc87840881ca4a3"
+    }
+  ]
+}

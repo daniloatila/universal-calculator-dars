@@ -1,0 +1,18 @@
+{
+  "module": "graph-lab",
+  "status": "verified_module_checks",
+  "scientific_source": "contract.md",
+  "independent_cli": {
+    "passed": 25,
+    "evidence": "tests.json"
+  },
+  "parity": {
+    "passed": 16,
+    "cross_module_rejections": 3,
+    "evidence": "parity.json"
+  },
+  "browser": "../locale-transition-matrix.json",
+  "screen_capture": "web.png",
+  "windows": "../integrated-audit/windows-candidate.json",
+  "coverage": "coverage.json"
+}

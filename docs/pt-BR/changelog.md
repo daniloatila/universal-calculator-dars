@@ -2,6 +2,13 @@
 
 [English](../../CHANGELOG.md)
 
+## 0.5.0 · Ciência, engenharia e dados
+
+- Adiciona Estatística, Probabilidade, Simulação, Otimização, Física e Engenharia, Gráficos e Dados ao registro de módulos sob demanda.
+- Acrescenta progresso e prazos por classe de tarefa, lotes determinísticos, gráficos 2D/3D sob demanda e transformação local de tabelas.
+- Preserva a notação de origem entre idiomas e amplia os registros de cálculo com convenções, unidades, sementes e hashes das fontes.
+- Integra o Objetivo 04 aprovado na main e registra a avaliação de 95/100.
+
 ## 0.4.1 · Revisão da comparação financeira do Objetivo 04
 
 - Registra as tolerâncias de parada disponíveis e omite diferenças dentro da resolução do método numérico.

@@ -1,0 +1,39 @@
+{
+  "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+  "cargo": {
+    "database_commit": "c9f6c91a44dbad9d71742329e9df061279f9c4be",
+    "vulnerabilities": 0,
+    "informational": [
+      {
+        "type": "unmaintained",
+        "package": "chrono",
+        "version": "0.4.45",
+        "id": "RUSTSEC-2026-0543"
+      },
+      {
+        "type": "unmaintained",
+        "package": "proc-macro-error",
+        "version": "1.0.4",
+        "id": "RUSTSEC-2024-0370"
+      },
+      {
+        "type": "unsound",
+        "package": "glib",
+        "version": "0.18.5",
+        "id": "RUSTSEC-2024-0429"
+      }
+    ]
+  },
+  "npm": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "windows": {
+    "configuration_writes": false,
+    "review_path": "GitHub-hosted Windows package validated by commit, run, artifact and executable hashes. Local endpoint state was read without making configuration changes."
+  }
+}

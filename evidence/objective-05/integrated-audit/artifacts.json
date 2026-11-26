@@ -1,0 +1,137 @@
+{
+  "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "build_asset_set_sha256": "9e19135cd5e85d01f60ae30c0a2b891de49ca696ec252c2cc61ec42889f1b491",
+  "local_release_cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+  "node_generated_wasm": {
+    "algebra": {
+      "bytes": 619426,
+      "sha256": "948ed1054e3cc328888fe5109de72e9644e7e22f3791526c4a9137edb2f1dc41"
+    },
+    "business": {
+      "bytes": 687100,
+      "sha256": "255ef66ae9b8723fafd44030a9a3beabe76ab3d91a83b19104c0ef7ad9104a9b"
+    },
+    "calculus": {
+      "bytes": 608765,
+      "sha256": "76c1d001b52ea888f5f382a1c3f0f26c8f35e4dddbc4b6da8511ee05d7155370"
+    },
+    "converter": {
+      "bytes": 351271,
+      "sha256": "18f3e9cbe50de437c3172cb6b9d053d332f8c2c77b4fe06d6b1e31fca462d88b"
+    },
+    "data-lab": {
+      "bytes": 1445575,
+      "sha256": "729e338038178963370f4fb8de9798cfa426716303ecc59b7a043a95bfff944c"
+    },
+    "date-time": {
+      "bytes": 558002,
+      "sha256": "421ea3165990c22ce0ec7db529c852b8a831042e6aa9eca76b72ebe49607d56e"
+    },
+    "discrete-mathematics": {
+      "bytes": 449753,
+      "sha256": "331e50a583f68844ee61166092f7fa464953d4b333508f23f1798384205d1318"
+    },
+    "financial": {
+      "bytes": 1201477,
+      "sha256": "e9af9fe060e82187212944b40fa29e85e55bf3360f92736ef362704dc36c1dc3"
+    },
+    "geometry": {
+      "bytes": 475738,
+      "sha256": "d98d9c211879f106719bdf00c24c761a32b00ae2f36fb9230f1c287c85a87650"
+    },
+    "graph-lab": {
+      "bytes": 704866,
+      "sha256": "ce3b9defd306564c7bbadaab2cd23478a5008a3b7a010dac8ec38a1c4c14a570"
+    },
+    "investment": {
+      "bytes": 862744,
+      "sha256": "d6b1bc0bbfbb0edeea19e7baf01873e088c2602ac0c505c027616b0e76255fd3"
+    },
+    "linear_algebra": {
+      "bytes": 529546,
+      "sha256": "d5d80813e0c4c2aa5963a09e4b9ba394cb9e5a1406bf1a5cfe542a3304f805af"
+    },
+    "loans": {
+      "bytes": 1029424,
+      "sha256": "06495caf5640ac95142395db626d2b10f66c49c475e50f3ced066c7a5d268aab"
+    },
+    "optimization": {
+      "bytes": 765369,
+      "sha256": "f87c763fe2b09cb62b0daa0a1ab4b32627d01fb30273b2edd06b88b5363640eb"
+    },
+    "physics-engineering": {
+      "bytes": 477086,
+      "sha256": "0aadc5960b3f412fdfd1555dfd0509998c1d2f17925ddc74397b81f16e0fb77a"
+    },
+    "probability": {
+      "bytes": 391933,
+      "sha256": "d8a43fe4aeeb4dae0b54ccdf74802d84999b47a1a8347e9cf5cfa2ecb47e089d"
+    },
+    "programmer": {
+      "bytes": 285061,
+      "sha256": "1151f17fc49e44c079c3a86fedf15bedc3fcf12340cb1f568b82e1786f7f11e0"
+    },
+    "scientific": {
+      "bytes": 681139,
+      "sha256": "411c515fc50100020cec69ccafbd4bc96a5c5406039acdc70bf7a7c17b6d3c07"
+    },
+    "simulation": {
+      "bytes": 542005,
+      "sha256": "6cc083c613b7d1d1fdc543b1a9bc93d243ed23f9c25538806cacb2d3c50b88d2"
+    },
+    "standard": {
+      "bytes": 332971,
+      "sha256": "9ce7c64e73799fd94e15acbd4e8f8d2b9b3fc5dd3d82709e5b5746f26a392d72"
+    },
+    "statistics": {
+      "bytes": 718471,
+      "sha256": "f12d336f87284a79377f19a73d7a2c00bae6094c4fd33a8b28ac5a5bb3fd5e39"
+    },
+    "tax": {
+      "bytes": 840708,
+      "sha256": "88b6f1b605a022728a416aae4f88789029bc8ce5d87916e25b4d8c7e60d73bf9"
+    }
+  },
+  "public_windows_receipt": "windows-artifact.json",
+  "physical_device_result": "windows-candidate.json",
+  "captures": {
+    "data-lab/web.png": {
+      "bytes": 423881,
+      "sha256": "63e633b403cf84cfb88b889bff91a3a77aa53bcb731dc6f9a42784760118ba2e"
+    },
+    "graph-lab/web-2d.png": {
+      "bytes": 278863,
+      "sha256": "6479383aa9853b1db1d7600fc47ca51a9bbd328dd99025c60a47e59502ab57a2"
+    },
+    "graph-lab/web.png": {
+      "bytes": 319412,
+      "sha256": "5fce18ddf7d0aca54e5c78d15946576e1a986bd0c3d8eb248dd2ad66db400ea3"
+    },
+    "optimization/web.png": {
+      "bytes": 186451,
+      "sha256": "e74614d0cb2e88a0042b28d0aac3aca5588cfae05ce71f1c5d1cb735cd08dc8a"
+    },
+    "physics-engineering/web.png": {
+      "bytes": 180511,
+      "sha256": "13d8601f3659054da55ef47c1b7dbdfeb261c3bb798e6e1e48143149381b72b4"
+    },
+    "probability/web.png": {
+      "bytes": 398614,
+      "sha256": "808ed7b5285f2588299366c588ea21790ab4bd974866f9b08253214999d8f1c7"
+    },
+    "simulation/web.png": {
+      "bytes": 606202,
+      "sha256": "a2b3b4362177f181373fdafe923926c0ff924496fdcfb60ad5f43ec1b1ddaef4"
+    },
+    "statistics/web.png": {
+      "bytes": 461068,
+      "sha256": "1e56d2df2294e8c68324fe0e60180345fb826903fab4852b9a2617eb2185be0b"
+    }
+  },
+  "windows_archive_sha256": "4d72e2a378cb4fd463082936ac464400d0c9cb36ef0fe46eef2f78770635abe0",
+  "windows_executable_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588",
+  "windows_capture_manifests": [
+    "windows-captures/manifest.json",
+    "windows-finance-captures/manifest.json"
+  ]
+}

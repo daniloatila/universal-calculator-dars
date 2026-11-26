@@ -1,0 +1,22 @@
+{
+  "module": "statistics",
+  "node": "v24.22.3",
+  "platform": "win32",
+  "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+  "requestParities": 20,
+  "exact": 16,
+  "numeric": 4,
+  "isolationChecks": 2,
+  "chunks": [],
+  "wasmBytes": 718471,
+  "wasmSha256": "f12d336f87284a79377f19a73d7a2c00bae6094c4fd33a8b28ac5a5bb3fd5e39",
+  "benchmark": {
+    "scope": "Node, initialized release WASM, request to proof, 3 warmups discarded",
+    "initializationMs": 12.262700000000002,
+    "initialLinearBytes": 1114112,
+    "finalLinearBytes": 1245184,
+    "measurements": 12,
+    "p50Ms": 3.308899999999994,
+    "p95Ms": 3.5172000000000025
+  }
+}

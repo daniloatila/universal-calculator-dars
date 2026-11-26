@@ -1,0 +1,262 @@
+{
+  "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "reproduce": "node benchmarks/finance-comparison-price.mjs artifacts/objective-05/price-benchmark.json",
+  "baseline_receipt": "../../objective-04/revision-01/benchmarks.json",
+  "compared_against_version": "0.4.1",
+  "previous_600_period_final_rounding_ms": [
+    10712.474,
+    11040.453
+  ],
+  "current_600_period_final_rounding_ms": [
+    9288.467,
+    9380.883
+  ],
+  "comparison_basis": "Identical scenario settings and independent arithmetic checks, two samples per path per version on the same CPU model. Node versions, host activity and binary builds differ.",
+  "candidate": {
+    "schema": 1,
+    "observed_at_utc": "2026-11-26T16:40:52.248Z",
+    "version": "0.5.0",
+    "module_sha256": "06495caf5640ac95142395db626d2b10f66c49c475e50f3ced066c7a5d268aab",
+    "platform": "win32",
+    "architecture": "x64",
+    "node": "v24.22.3",
+    "processor": "Intel(R) Core(TM) Ultra 7 255HX",
+    "timeout_ms": 15000,
+    "scope": "Generated loans WASM under Node worker_threads. Module initialization is timed separately. First request after fresh-worker setup is not an operating-system cold start.",
+    "limitations": "Two samples per path on a single host. Excludes browser/WebView rendering and cannot establish a platform-wide latency guarantee.",
+    "results": [
+      {
+        "periods": 360,
+        "rounding_scope": "per_row",
+        "single": {
+          "initialization_ms": 15.29,
+          "ready_wall_ms": 41.988,
+          "request_bytes": 210,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 11.63,
+              "engine_ms": 11.428,
+              "result_bytes": 9328,
+              "status": "verified",
+              "total_cost": "270307.75",
+              "periods": 360
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 3.887,
+              "engine_ms": 3.72,
+              "result_bytes": 9328,
+              "status": "verified",
+              "total_cost": "270307.75",
+              "periods": 360
+            }
+          ]
+        },
+        "comparison": {
+          "initialization_ms": 11.669,
+          "ready_wall_ms": 35.555,
+          "request_bytes": 609,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 21.168,
+              "engine_ms": 20.931,
+              "result_bytes": 3922,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "3317.67",
+              "exact_difference_omitted": false
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 9.17,
+              "engine_ms": 8.991,
+              "result_bytes": 3922,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "3317.67",
+              "exact_difference_omitted": false
+            }
+          ]
+        }
+      },
+      {
+        "periods": 360,
+        "rounding_scope": "final",
+        "single": {
+          "initialization_ms": 12.244,
+          "ready_wall_ms": 35.893,
+          "request_bytes": 208,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 502.878,
+              "engine_ms": 502.587,
+              "result_bytes": 9326,
+              "status": "verified",
+              "total_cost": "270300.53",
+              "periods": 360
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 490.006,
+              "engine_ms": 489.591,
+              "result_bytes": 9326,
+              "status": "verified",
+              "total_cost": "270300.53",
+              "periods": 360
+            }
+          ]
+        },
+        "comparison": {
+          "initialization_ms": 13.996,
+          "ready_wall_ms": 37.013,
+          "request_bytes": 605,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 2201.574,
+              "engine_ms": 2201.345,
+              "result_bytes": 12532,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "3328.6869202088296983",
+              "exact_difference_omitted": false
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 2184.234,
+              "engine_ms": 2183.952,
+              "result_bytes": 12532,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "3328.6869202088296983",
+              "exact_difference_omitted": false
+            }
+          ]
+        }
+      },
+      {
+        "periods": 600,
+        "rounding_scope": "per_row",
+        "single": {
+          "initialization_ms": 12.389,
+          "ready_wall_ms": 35.494,
+          "request_bytes": 210,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 13.807,
+              "engine_ms": 13.636,
+              "result_bytes": 9289,
+              "status": "verified",
+              "total_cost": "501551.78",
+              "periods": 600
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 6.101,
+              "engine_ms": 5.953,
+              "result_bytes": 9289,
+              "status": "verified",
+              "total_cost": "501551.78",
+              "periods": 600
+            }
+          ]
+        },
+        "comparison": {
+          "initialization_ms": 12.3,
+          "ready_wall_ms": 35.239,
+          "request_bytes": 609,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 28.465,
+              "engine_ms": 28.163,
+              "result_bytes": 3925,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "5772.63",
+              "exact_difference_omitted": false
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 14.533,
+              "engine_ms": 14.335,
+              "result_bytes": 3925,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "5772.63",
+              "exact_difference_omitted": false
+            }
+          ]
+        }
+      },
+      {
+        "periods": 600,
+        "rounding_scope": "final",
+        "single": {
+          "initialization_ms": 12.034,
+          "ready_wall_ms": 35.501,
+          "request_bytes": 208,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 2036.315,
+              "engine_ms": 2036.06,
+              "result_bytes": 9287,
+              "status": "verified",
+              "total_cost": "501536.16",
+              "periods": 600
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 2035.821,
+              "engine_ms": 2035.501,
+              "result_bytes": 9287,
+              "status": "verified",
+              "total_cost": "501536.16",
+              "periods": 600
+            }
+          ]
+        },
+        "comparison": {
+          "initialization_ms": 12.31,
+          "ready_wall_ms": 36.872,
+          "request_bytes": 605,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 9288.467,
+              "engine_ms": 9288.271,
+              "result_bytes": 11139,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "5925.6645680650464908",
+              "exact_difference_omitted": true
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 9380.883,
+              "engine_ms": 9380.631,
+              "result_bytes": 11139,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "5925.6645680650464908",
+              "exact_difference_omitted": true
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "module": "statistics",
+  "scope": "mathematical kernel, deterministic input envelope and proof fields",
+  "criteria": [
+    {"id": "descriptive", "status": "verified", "evidence": "tests.json", "check": "Location, weighted means, geometric and harmonic means, dispersion, robust distances, outliers and quantile conventions against independent references."},
+    {"id": "large_magnitude_low_variance", "status": "verified", "evidence": "tests.json", "check": "Exact decimal means and centered sample variance remain correct before binary64 conversion."},
+    {"id": "relationship", "status": "verified", "evidence": "tests.json", "check": "Centered covariance, Pearson and tie-aware Spearman against SciPy and NumPy, including structurally undefined outputs."},
+    {"id": "regression", "status": "verified", "evidence": "tests.json", "check": "Single and multiple regression, SVD residuals and diagnostics, rank deficiency and conditioning, retained row indices."},
+    {"id": "inference", "status": "verified", "evidence": "tests.json", "check": "t, z, two chi-square methods, proportions, one-way ANOVA, Mann–Whitney and sign tests against independent values."},
+    {"id": "input_bounds", "status": "verified", "evidence": "tests.json", "check": "Missing values, incomplete pairs, malformed decimals, duplicate fields and work limits reach stable errors."},
+    {"id": "cli_wasm", "status": "verified", "evidence": "benchmarks.json", "check": "Twenty independent target cases with identical proof metadata and strict binary64 tolerance when numeric fields differ."}
+  ]
+}

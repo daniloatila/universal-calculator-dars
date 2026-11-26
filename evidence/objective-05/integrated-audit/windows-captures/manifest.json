@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "screenshots": [
+    {
+      "name": "data-lab.png",
+      "bytes": 341282,
+      "sha256": "6852b6a97138e7e894d6dbafbbc72bf9950013f8e939c91f343a67a8b0e80cb6"
+    },
+    {
+      "name": "graph-lab-surface.png",
+      "bytes": 242232,
+      "sha256": "ef4013fe6982d10ad577fa407f47d19e8e082b8b556f2d58f571a65c96f1be04"
+    },
+    {
+      "name": "graph-lab.png",
+      "bytes": 207949,
+      "sha256": "074ef13805371c04098790d1b63f93247394f4365f9e404949a9d8a281d0785a"
+    },
+    {
+      "name": "optimization.png",
+      "bytes": 166782,
+      "sha256": "b7a2bdb4e7c3af01df664d4bfccd8db25fe67b4c9e102212f68b9d84e1b6ba3b"
+    },
+    {
+      "name": "physics-engineering.png",
+      "bytes": 160382,
+      "sha256": "6b2ad5caecc3ce604d1f1cec2c2e3342da367b9a9b5daa6746fe8847ee965bab"
+    },
+    {
+      "name": "probability.png",
+      "bytes": 207955,
+      "sha256": "aed2831448bfd515c7100550b0c3b8c9e496181125b2a5d66728615cadb6e15a",
+      "capture": "fresh verified candidate profile after first Canvas draw"
+    },
+    {
+      "name": "simulation.png",
+      "bytes": 175615,
+      "sha256": "f4a9ebaa19c9ccd9c89d005def93d0f02715683e735ca1edfafe368cea3ec704"
+    },
+    {
+      "name": "statistics.png",
+      "bytes": 173071,
+      "sha256": "0dfe6c09f946a74fa4b045ac4560d4324366172445f13091e59eb2d06b8d6bc6"
+    }
+  ],
+  "exe_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588"
+}

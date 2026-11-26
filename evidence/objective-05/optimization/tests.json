@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "suite": "optimization-independent-cli",
+  "cases": 39,
+  "by_category": {
+    "active_bound": 1,
+    "binary64_roundoff": 1,
+    "binary64_underflow": 1,
+    "bisection": 1,
+    "coincident_estimates": 1,
+    "constraint_violation": 1,
+    "domain_and_false_roots": 6,
+    "exact_lp": 7,
+    "gradient_descent": 1,
+    "hybrid": 1,
+    "ill_conditioned": 1,
+    "interval_dependency": 1,
+    "invalid_inputs": 4,
+    "iteration_bound": 1,
+    "maximize_univariate": 1,
+    "minimize_univariate": 1,
+    "newton": 1,
+    "nonconvex_multiple_minima": 1,
+    "rosenbrock": 2,
+    "saddle_classification": 1,
+    "scipy": 2,
+    "secant": 1,
+    "three_dimensions": 1
+  },
+  "references": [
+    "Independent analytic solutions and exact rational LP certificates",
+    "SciPy 1.18.1: brentq, minimize, linprog"
+  ],
+  "maximum_case_wall_time_ms": 19.605,
+  "executable_sha256": "daabb6cbbb25bd5d18236e03fbb2cf1db85badcd879967335c32425ba60eb596"
+}

@@ -1,0 +1,16 @@
+{
+  "module": "probability",
+  "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+  "covered": 641,
+  "total": 663,
+  "percent": 96.68,
+  "denominator": "Instrumented module source in the integrated run. Shared kernels are itemized separately in ../coverage.json.",
+  "files": [
+    {
+      "module": "probability",
+      "path": "probability.rs",
+      "covered": 641,
+      "total": 663
+    }
+  ]
+}

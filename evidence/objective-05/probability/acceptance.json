@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "module": "probability",
+  "scope": "mathematical kernel, plot coordinates, local sampling and proof fields",
+  "criteria": [
+    {"id": "seventeen_laws", "status": "verified", "evidence": "tests.json", "check": "All seven discrete and ten continuous families checked against SciPy with moments, mass or density, CDF, survival, interval and quantiles."},
+    {"id": "required_analytic_examples", "status": "verified", "evidence": "tests.json", "check": "Standard normal CDF at zero equals 0.5 and Binomial(10,0.5) mass at five equals 0.24609375."},
+    {"id": "tail_stability_and_quantile", "status": "verified", "evidence": "tests.json", "check": "Complementarity, monotonicity, exact fair-binomial jumps, million-trial binomial center, large Beta shapes and mpmath extreme tails."},
+    {"id": "events", "status": "verified", "evidence": "tests.json", "check": "Event relationships, conditional probabilities, Bayes, zero conditioning and invalid joint probability."},
+    {"id": "sampling_and_visualization_values", "status": "verified", "evidence": "tests.json", "check": "Seed replay, sample support and plot coordinates verified against SciPy for all seventeen families."},
+    {"id": "input_bounds", "status": "verified", "evidence": "tests.json", "check": "Degenerate, unsupported, malformed, duplicate and excessive requests respect documented outcomes or stable errors."},
+    {"id": "cli_wasm", "status": "verified", "evidence": "benchmarks.json", "check": "Fifty-seven target cases with identical proof metadata and strict binary64 tolerance when numeric fields differ."}
+  ]
+}

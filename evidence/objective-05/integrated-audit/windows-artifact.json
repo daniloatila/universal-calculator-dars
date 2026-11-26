@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "repository": "daniloatila/universal-calculator-dars",
+  "branch": "codex/objective-05-science-engineering-data",
+  "commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "run_id": 45860076452,
+  "run_attempt": 1,
+  "windows_job_id": 140048635432,
+  "windows_job_conclusion": "success",
+  "artifact_id": 15137777779,
+  "archive_sha256": "4d72e2a378cb4fd463082936ac464400d0c9cb36ef0fe46eef2f78770635abe0",
+  "archive_bytes": 7575047,
+  "retention_expires_utc": "2026-11-27T16:43:38Z",
+  "target": "windows-x64",
+  "exe_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588",
+  "exe_bytes": 23747584,
+  "exe_version": "0.5.0",
+  "pe_machine": "AMD64 (0x8664)",
+  "signature_status": "NotSigned",
+  "packaged_wasm_receipt_count": 22,
+  "packaged_wasm_receipt": [
+    {
+      "name": "dars_tool_wasm_bg-_WqYaiIl.wasm",
+      "sha256": "058cdad92f49181e464f322469906e23d4da617b77ee73617ab569f152f31278"
+    },
+    {
+      "name": "dars_tool_wasm_bg-B6s0u7Vr.wasm",
+      "sha256": "41bd56324c7b2b360327c7311f545a731942613b98832802e5c46e548d1ad515"
+    },
+    {
+      "name": "dars_tool_wasm_bg-B7Tpv-Ld.wasm",
+      "sha256": "fb0730f3eeaa66223de2501e55307a17597c36952fd46bae6a8bca0b9f70533a"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BAavNlDR.wasm",
+      "sha256": "cfc3a9176a34b24237a20d46ff959dd79f60a4f36669397b1b7b541c3603398e"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BFfJaYT6.wasm",
+      "sha256": "b2fb845eb48eadac72477d1796438194929a4e21a18628bec0ab35947d794115"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BPqKHnNb.wasm",
+      "sha256": "f330e18fc1fc4fd0cdfb1f952f4d1df40401179164a63f96c872067139883763"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BtntPYnO.wasm",
+      "sha256": "ea013ae78e14962d4dd9cc3a2957ff9e538df693318e98d8870ec56cc5960279"
+    },
+    {
+      "name": "dars_tool_wasm_bg-C1bUfWyX.wasm",
+      "sha256": "182a6c6a495ec9ba8b3c3e00d5b158bf865a34304b90ddec68a3ed1249f613dd"
+    },
+    {
+      "name": "dars_tool_wasm_bg-C2BU5pAY.wasm",
+      "sha256": "c20f776bed23af83386080ecb80f0dc35187ca162fe4233f326339211b007326"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CPrbdtHb.wasm",
+      "sha256": "7f2a18ddc7cb366fe10303e872220ab0ba355ab518e89dda3049b61d22fcff05"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CsWEeIqF.wasm",
+      "sha256": "6d200f91242891201a1a2eaab0827f5687ef8aa4acc38b0b594929aa70f6ab7c"
+    },
+    {
+      "name": "dars_tool_wasm_bg-D0RV63aW.wasm",
+      "sha256": "2c8a52e741ce9c9cc504c060f4d4cfcb0d49d95587288fce001d33a3458a0fb2"
+    },
+    {
+      "name": "dars_tool_wasm_bg-D72jL5Fi.wasm",
+      "sha256": "2de9ab14972a3bf419e9f1f6d3e45dc488c61f5a776aebee316aa3226664ee9d"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DB3v2cQp.wasm",
+      "sha256": "bb191387d0c89134dc16a134bb921b9053d97d5655eb2d4892941d436974acac"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DGIHeEEb.wasm",
+      "sha256": "f44d166e582fcec4f9b98660c4a8223564bf78c58f5c93858343d9292f65a2c3"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DoaV-IBj.wasm",
+      "sha256": "14a456ffa4e4a2e574271ca03c0d291dd650f7c2118bc74cd72134fc993df6ed"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DSKfCMBv.wasm",
+      "sha256": "db9019db167b9426b99a47c40039946e6ecef67d25f131de2bd636b9164394bd"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DUr90QW4.wasm",
+      "sha256": "3113a020b455964ff439dd2f318a0add989b96ddc289013e347fe6e09411427c"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DVEb5h_3.wasm",
+      "sha256": "7248acf1a3b963859ddb82353ba8ee7fcff78a8749e95ffa5a687492d101a99c"
+    },
+    {
+      "name": "dars_tool_wasm_bg-rZKt2wZ6.wasm",
+      "sha256": "6c6840d3b9748a775d586e314bd24bc4715f833c7c4cead4463ebd957c678fc0"
+    },
+    {
+      "name": "dars_tool_wasm_bg-Xg1e3J0P.wasm",
+      "sha256": "0d3190c6a2af1560b03ac1b2ca4c7aeb5ebae77a821381993b572cec5ed9ea64"
+    },
+    {
+      "name": "dars_wasm_bg-B5jIm7Xm.wasm",
+      "sha256": "6c120cfe8dfe8172b35a4b7b6b99429ae4a904cdaa8c15700e938e0bad257c21"
+    }
+  ],
+  "checked_at_utc": "2026-11-26T16:44:28.6444960Z"
+}

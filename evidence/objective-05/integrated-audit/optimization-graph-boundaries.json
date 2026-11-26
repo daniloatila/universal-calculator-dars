@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "reports": [
+    {
+      "schema": 1,
+      "suite": "optimization-boundaries",
+      "cases": 2,
+      "by_category": {
+        "bisection": 1,
+        "nelder_mead": 1
+      },
+      "references": [
+        "Analytic square root and simplex initialization bounds"
+      ],
+      "maximum_case_wall_time_ms": 9.43,
+      "executable_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae"
+    },
+    {
+      "schema": 1,
+      "suite": "graph-lab-boundaries",
+      "cases": 10,
+      "by_category": {
+        "bounded_output_coordinate": 1,
+        "expression_byte_limit": 1,
+        "negative_center_ambiguous_cell": 1,
+        "partial_contour_budget": 1,
+        "partially_defined_implicit_field": 1,
+        "residual_unresolved_at_machine_spacing": 1,
+        "root_result_work_cap": 1,
+        "roots_at_both_window_edges": 1,
+        "unsupported_graph_operation": 1,
+        "unsupported_graph_option": 1
+      },
+      "references": [
+        "Analytic grid endpoints, phase multiples, model-domain and work-limit checks"
+      ],
+      "maximum_case_wall_time_ms": 8.598,
+      "executable_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae"
+    }
+  ]
+}

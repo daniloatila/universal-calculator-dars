@@ -1,0 +1,509 @@
+{
+  "schema": 1,
+  "objective": "05",
+  "version": "0.5.0",
+  "status": "READY_FOR_REVIEW",
+  "verified_source_snapshot": {
+    "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+    "browser_asset_set_sha256": "2026dc6c813d3cb03a7b641b015a7c7e46324d253477f7b3964999e3f68dcdf4"
+  },
+  "counts_are_separate": true,
+  "kernel_wasm": {
+    "scope": "Initialized Node WASM on Windows. Kits and workloads differ by module. Linear capacity is a WebAssembly allocation metric.",
+    "measurements": [
+      {
+        "module": "statistics",
+        "workload": "Descriptive summary of 512 observations",
+        "runtime": "v24.22.3",
+        "platform": "win32",
+        "wasm_file_bytes": 718471,
+        "wasm_sha256": "f12d336f87284a79377f19a73d7a2c00bae6094c4fd33a8b28ac5a5bb3fd5e39",
+        "measurements": 12,
+        "p50_ms": 3.308899999999994,
+        "p95_ms": 3.5172000000000025,
+        "initialization_ms": 12.262700000000002,
+        "initial_linear_bytes": 1114112,
+        "observed_linear_bytes": 1245184,
+        "receipt": "statistics/benchmarks.json"
+      },
+      {
+        "module": "probability",
+        "workload": "Million-trial binomial point, quantile and plot",
+        "runtime": "v24.22.3",
+        "platform": "win32",
+        "wasm_file_bytes": 391933,
+        "wasm_sha256": "d8a43fe4aeeb4dae0b54ccdf74802d84999b47a1a8347e9cf5cfa2ecb47e089d",
+        "measurements": 12,
+        "p50_ms": 0.1291999999999689,
+        "p95_ms": 0.19719999999995252,
+        "initialization_ms": 0.8514999999999873,
+        "initial_linear_bytes": 1114112,
+        "observed_linear_bytes": 1179648,
+        "receipt": "probability/benchmarks.json"
+      },
+      {
+        "module": "simulation",
+        "workload": "100,000 normal draws with proof and histogram",
+        "runtime": "v24.22.3",
+        "platform": "win32",
+        "wasm_file_bytes": 542005,
+        "wasm_sha256": "6cc083c613b7d1d1fdc543b1a9bc93d243ed23f9c25538806cacb2d3c50b88d2",
+        "measurements": 12,
+        "p50_ms": 8.090200000000095,
+        "p95_ms": 9.561899999999923,
+        "initialization_ms": 0.9890000000000327,
+        "initial_linear_bytes": 1114112,
+        "observed_linear_bytes": 2031616,
+        "receipt": "simulation/targets.json"
+      },
+      {
+        "module": "optimization",
+        "workload": "Initialized request-to-proof workload from the module parity script",
+        "wasm_file_bytes": 765369,
+        "wasm_sha256": "f87c763fe2b09cb62b0daa0a1ab4b32627d01fb30273b2edd06b88b5363640eb",
+        "measurements": 120,
+        "p50_ms": 0.0619999999999834,
+        "p95_ms": 0.21590000000000487,
+        "p99_ms": 0.3053999999999917,
+        "initialization_ms": 11.3917,
+        "observed_linear_bytes": 1179648,
+        "receipt": "optimization/benchmarks.json"
+      },
+      {
+        "module": "physics-engineering",
+        "workload": "Initialized request-to-proof workload from the module parity script",
+        "wasm_file_bytes": 477086,
+        "wasm_sha256": "0aadc5960b3f412fdfd1555dfd0509998c1d2f17925ddc74397b81f16e0fb77a",
+        "measurements": 120,
+        "p50_ms": 0.03480000000001837,
+        "p95_ms": 0.049600000000054933,
+        "p99_ms": 0.06189999999998008,
+        "initialization_ms": 0.8536000000000001,
+        "observed_linear_bytes": 1179648,
+        "receipt": "physics-engineering/benchmarks.json"
+      },
+      {
+        "module": "graph-lab",
+        "workload": "Initialized request-to-proof workload from the module parity script",
+        "wasm_file_bytes": 704866,
+        "wasm_sha256": "ce3b9defd306564c7bbadaab2cd23478a5008a3b7a010dac8ec38a1c4c14a570",
+        "measurements": 120,
+        "p50_ms": 0.12889999999998736,
+        "p95_ms": 0.2336999999999989,
+        "p99_ms": 0.44599999999996953,
+        "initialization_ms": 1.0377000000000294,
+        "observed_linear_bytes": 1245184,
+        "receipt": "graph-lab/benchmarks.json"
+      }
+    ]
+  },
+  "native_simulation": {
+    "scope": "native release CLI process wall, fresh process per sample; includes startup and JSON serialization",
+    "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+    "measurements": [
+      {
+        "case": "normal_100k",
+        "samples_ms": [
+          14.237,
+          18.998,
+          13.687
+        ],
+        "sample_count": 100000,
+        "path_steps": 1,
+        "median_ms": 14.237
+      },
+      {
+        "case": "walk_2m_steps",
+        "samples_ms": [
+          103.58,
+          104.224,
+          98.393
+        ],
+        "sample_count": 20000,
+        "path_steps": 100,
+        "median_ms": 103.58
+      },
+      {
+        "case": "finance_2m_steps",
+        "samples_ms": [
+          132.578,
+          129.775,
+          127.771
+        ],
+        "sample_count": 20000,
+        "path_steps": 100,
+        "median_ms": 129.775
+      }
+    ],
+    "receipt": "simulation/benchmarks.json"
+  },
+  "data_lab_volume": {
+    "scope": "Independent Node processes, warm WASM initialization excluded, one synthetic CSV import and full exact profile per size. RSS includes host allocator and input. Peak RSS is the process lifetime high-water mark.",
+    "platform": "win32",
+    "cpu": "Intel(R) Core(TM) Ultra 7 255HX",
+    "runtime": "v24.22.3",
+    "wasm_sha256": "729e338038178963370f4fb8de9798cfa426716303ecc59b7a043a95bfff944c",
+    "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+    "measurements": [
+      {
+        "rows": 1000,
+        "columns": 3,
+        "types": [
+          "text",
+          "text",
+          "decimal"
+        ],
+        "bytes": 15015,
+        "import_ms": 4.8645,
+        "profile_ms": 6.593499999999999,
+        "wasm_bytes": 1507328,
+        "rss_before": 60456960,
+        "rss_after": 65216512,
+        "js_heap_used": 8934472,
+        "process_peak_rss_bytes": 65560576
+      },
+      {
+        "rows": 10000,
+        "columns": 3,
+        "types": [
+          "text",
+          "text",
+          "decimal"
+        ],
+        "bytes": 150015,
+        "import_ms": 14.944000000000003,
+        "profile_ms": 11.596899999999998,
+        "wasm_bytes": 3342336,
+        "rss_before": 62857216,
+        "rss_after": 70103040,
+        "js_heap_used": 9505464,
+        "process_peak_rss_bytes": 70950912
+      },
+      {
+        "rows": 100000,
+        "columns": 3,
+        "types": [
+          "text",
+          "text",
+          "decimal"
+        ],
+        "bytes": 1500015,
+        "import_ms": 82.82860000000001,
+        "profile_ms": 81.0015,
+        "wasm_bytes": 21168128,
+        "rss_before": 83124224,
+        "rss_after": 104476672,
+        "js_heap_used": 22584024,
+        "process_peak_rss_bytes": 108908544
+      },
+      {
+        "rows": 200000,
+        "columns": 3,
+        "types": [
+          "text",
+          "text",
+          "decimal"
+        ],
+        "bytes": 3000015,
+        "import_ms": 168.71249999999998,
+        "profile_ms": 148.93880000000001,
+        "wasm_bytes": 41025536,
+        "rss_before": 104030208,
+        "rss_after": 131035136,
+        "js_heap_used": 7504016,
+        "process_peak_rss_bytes": 149544960
+      }
+    ],
+    "receipt": "data-lab/benchmarks.json"
+  },
+  "browser": {
+    "scope": "Production UI suite wall duration. Use the browser ledger for individual worker and context recovery checks.",
+    "duration_ms": 275230,
+    "passed": 224,
+    "receipt": "integrated-audit/browser.json",
+    "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c"
+  },
+  "physical_hosted_windows_pair": {
+    "status": "measured",
+    "baseline_version": "0.4.1",
+    "candidate_version": "0.5.0",
+    "method": "integrated-audit/windows-method.md",
+    "baseline_provenance": "../objective-04/revision-01/windows-artifact.json",
+    "candidate_provenance": "integrated-audit/windows-artifact.json",
+    "receipt": "integrated-audit/windows-candidate.json",
+    "observed_metrics": {
+      "baseline": {
+        "receipt": "integrated-audit/windows-baseline.json",
+        "executable_sha256": "1bc5c0a67ee24abfc770d857e835c7e9d7204c9d5c9e333b260fc779c565f004",
+        "startup_to_checked_standard_ms": 591.8408,
+        "checked_standard_cases": 12,
+        "standard_recalculation_ms_median": 46.78910000000087,
+        "initial_advanced_asset_count": 0,
+        "phase_metrics": {
+          "standard_visible": {
+            "samples": 6,
+            "tree_resident_private_bytes_p50": 104669184,
+            "tree_private_commit_bytes_p50": 247881728,
+            "tree_working_set_bytes_p50": 411480064,
+            "workers_at_end": 1,
+            "processes_at_end": 7
+          },
+          "standard_idle": {
+            "samples": 6,
+            "tree_resident_private_bytes_p50": 119242752,
+            "tree_private_commit_bytes_p50": 271212544,
+            "tree_working_set_bytes_p50": 427941888,
+            "workers_at_end": 1,
+            "processes_at_end": 7
+          },
+          "minimized_0": {
+            "samples": 4,
+            "tree_resident_private_bytes_p50": 85348352,
+            "tree_private_commit_bytes_p50": 215715840,
+            "tree_working_set_bytes_p50": 348217344,
+            "workers_at_end": 0,
+            "processes_at_end": 7
+          },
+          "restored_0": {
+            "samples": 4,
+            "tree_resident_private_bytes_p50": 96481280,
+            "tree_private_commit_bytes_p50": 255205376,
+            "tree_working_set_bytes_p50": 381730816,
+            "workers_at_end": 1,
+            "processes_at_end": 7
+          },
+          "after_close": {
+            "samples": 6,
+            "tree_resident_private_bytes_p50": 0,
+            "tree_private_commit_bytes_p50": 0,
+            "tree_working_set_bytes_p50": 0,
+            "workers_at_end": 0,
+            "processes_at_end": 0
+          }
+        }
+      },
+      "candidate": {
+        "receipt": "integrated-audit/windows-candidate.json",
+        "executable_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588",
+        "startup_to_checked_standard_ms": 603.515800000001,
+        "checked_standard_cases": 12,
+        "standard_recalculation_ms_median": 46.398150000004534,
+        "initial_advanced_asset_count": 0,
+        "phase_metrics": {
+          "standard_visible": {
+            "samples": 6,
+            "tree_resident_private_bytes_p50": 103227392,
+            "tree_private_commit_bytes_p50": 248254464,
+            "tree_working_set_bytes_p50": 409108480,
+            "workers_at_end": 1,
+            "processes_at_end": 7
+          },
+          "standard_idle": {
+            "samples": 6,
+            "tree_resident_private_bytes_p50": 117948416,
+            "tree_private_commit_bytes_p50": 266805248,
+            "tree_working_set_bytes_p50": 427065344,
+            "workers_at_end": 1,
+            "processes_at_end": 7
+          },
+          "minimized_0": {
+            "samples": 4,
+            "tree_resident_private_bytes_p50": 88510464,
+            "tree_private_commit_bytes_p50": 235118592,
+            "tree_working_set_bytes_p50": 361672704,
+            "workers_at_end": 0,
+            "processes_at_end": 7
+          },
+          "restored_0": {
+            "samples": 4,
+            "tree_resident_private_bytes_p50": 102477824,
+            "tree_private_commit_bytes_p50": 275423232,
+            "tree_working_set_bytes_p50": 400998400,
+            "workers_at_end": 1,
+            "processes_at_end": 7
+          },
+          "after_close": {
+            "samples": 6,
+            "tree_resident_private_bytes_p50": 0,
+            "tree_private_commit_bytes_p50": 0,
+            "tree_working_set_bytes_p50": 0,
+            "workers_at_end": 0,
+            "processes_at_end": 0
+          },
+          "graph-lab_0": {
+            "samples": 3,
+            "tree_resident_private_bytes_p50": 138194944,
+            "tree_private_commit_bytes_p50": 310403072,
+            "tree_working_set_bytes_p50": 466489344,
+            "workers_at_end": 0,
+            "processes_at_end": 7
+          },
+          "data-lab_0": {
+            "samples": 3,
+            "tree_resident_private_bytes_p50": 139870208,
+            "tree_private_commit_bytes_p50": 312811520,
+            "tree_working_set_bytes_p50": 470675456,
+            "workers_at_end": 0,
+            "processes_at_end": 7
+          },
+          "graph-lab_1": {
+            "samples": 3,
+            "tree_resident_private_bytes_p50": 116793344,
+            "tree_private_commit_bytes_p50": 326377472,
+            "tree_working_set_bytes_p50": 427245568,
+            "workers_at_end": 0,
+            "processes_at_end": 7
+          },
+          "data-lab_1": {
+            "samples": 3,
+            "tree_resident_private_bytes_p50": 119422976,
+            "tree_private_commit_bytes_p50": 326475776,
+            "tree_working_set_bytes_p50": 431325184,
+            "workers_at_end": 0,
+            "processes_at_end": 7
+          },
+          "graph-lab_2": {
+            "samples": 3,
+            "tree_resident_private_bytes_p50": 135192576,
+            "tree_private_commit_bytes_p50": 352145408,
+            "tree_working_set_bytes_p50": 453828608,
+            "workers_at_end": 0,
+            "processes_at_end": 7
+          },
+          "data-lab_2": {
+            "samples": 3,
+            "tree_resident_private_bytes_p50": 135340032,
+            "tree_private_commit_bytes_p50": 350396416,
+            "tree_working_set_bytes_p50": 456130560,
+            "workers_at_end": 0,
+            "processes_at_end": 7
+          },
+          "minimized_1": {
+            "samples": 4,
+            "tree_resident_private_bytes_p50": 96100352,
+            "tree_private_commit_bytes_p50": 340447232,
+            "tree_working_set_bytes_p50": 379371520,
+            "workers_at_end": 0,
+            "processes_at_end": 7
+          },
+          "restored_1": {
+            "samples": 4,
+            "tree_resident_private_bytes_p50": 132616192,
+            "tree_private_commit_bytes_p50": 333926400,
+            "tree_working_set_bytes_p50": 444923904,
+            "workers_at_end": 1,
+            "processes_at_end": 7
+          },
+          "minimized_2": {
+            "samples": 4,
+            "tree_resident_private_bytes_p50": 114593792,
+            "tree_private_commit_bytes_p50": 341180416,
+            "tree_working_set_bytes_p50": 411738112,
+            "workers_at_end": 0,
+            "processes_at_end": 7
+          },
+          "restored_2": {
+            "samples": 4,
+            "tree_resident_private_bytes_p50": 122257408,
+            "tree_private_commit_bytes_p50": 333508608,
+            "tree_working_set_bytes_p50": 433135616,
+            "workers_at_end": 1,
+            "processes_at_end": 7
+          }
+        }
+      }
+    },
+    "webview2": "158.0.4370.33"
+  },
+  "memory_debt": {
+    "status": "open",
+    "target": "less than 100 MB incremental application-attributable physical RAM",
+    "protocol": "../objective-02/revision-02/memory-debt.md",
+    "observed_resource_classes": [
+      "WASM linear allocation",
+      "Node and WebView2 JavaScript heap",
+      "Node process RSS and peak RSS",
+      "Paired Windows process tree working set, private resident bytes and private commit",
+      "Whole-system physical memory and commit"
+    ],
+    "watch_items": [
+      "extended retention including graph resources",
+      "whole-system physical-RAM attribution"
+    ]
+  },
+  "review_candidate": {
+    "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+    "workflow_run_id": 45860076452,
+    "rust_source_equivalence": {
+      "measurement_source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+      "verified": true,
+      "paths": [
+        "crates/",
+        "Cargo.toml",
+        "Cargo.lock",
+        "rust-toolchain.toml"
+      ],
+      "method": "Git tree comparison between source snapshots"
+    },
+    "production_browser_status": "verified",
+    "physical_windows_status": "verified",
+    "hosted_workflow_status": "verified"
+  },
+  "audited_source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "final_validation": {
+    "production_browser": {
+      "status": "verified",
+      "passed": 224,
+      "locale_comparisons": 924,
+      "asset_set_sha256": "9e19135cd5e85d01f60ae30c0a2b891de49ca696ec252c2cc61ec42889f1b491",
+      "receipt": "integrated-audit/browser.json"
+    },
+    "hosted_workflow": {
+      "status": "verified",
+      "run_id": 45860076452,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45860076452",
+      "jobs_passed": 4,
+      "ubuntu_chromium_passed": 224,
+      "receipt": "integrated-audit/ci.json"
+    },
+    "windows_artifact": {
+      "status": "verified",
+      "artifact_id": 15137777779,
+      "archive_sha256": "4d72e2a378cb4fd463082936ac464400d0c9cb36ef0fe46eef2f78770635abe0",
+      "executable_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588",
+      "runtime_wasm_readbacks": 22,
+      "receipt": "integrated-audit/windows-artifact.json"
+    },
+    "physical_windows": {
+      "status": "verified",
+      "historical_checks": 17,
+      "science_workspaces": 7,
+      "graph_and_data_cycles": 3,
+      "science_workers_opened": 11,
+      "science_workers_closed": 11,
+      "finance_offline_cases": 5,
+      "comparator_historical_replay": true,
+      "receipts": [
+        "integrated-audit/windows-candidate.json",
+        "integrated-audit/windows-regression.json",
+        "integrated-audit/windows-finance-offline.json",
+        "integrated-audit/windows-finance-comparison.json"
+      ]
+    }
+  },
+  "financial_price": {
+    "receipt": "integrated-audit/finance-price.json",
+    "reproduce": "node benchmarks/finance-comparison-price.mjs artifacts/objective-05/price-benchmark.json",
+    "comparison_basis": "Identical scenario settings and independent arithmetic checks, two samples per path per version on the same CPU model. Node versions, host activity and binary builds differ.",
+    "candidate_source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+    "timeout_ms": 15000,
+    "baseline_600_period_final_rounding_ms": [
+      10712.474,
+      11040.453
+    ],
+    "candidate_600_period_final_rounding_ms": [
+      9288.467,
+      9380.883
+    ]
+  }
+}

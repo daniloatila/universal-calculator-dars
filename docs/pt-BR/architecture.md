@@ -58,3 +58,5 @@ Os avaliadores ficam isolados de operações de entrada e saída e do ambiente h
 Veja a gramática das expressões, o arredondamento e os limites de recursos na [semântica dos cálculos Standard](standard.md). A decisão de arquitetura está no [ADR 001](../adr/0001-shared-calculation-core.md).
 
 O Objetivo 02 documenta os escopos de ativação, o encerramento do worker e as fronteiras de dados. [Contrato operacional](operations.md)
+
+Os sete módulos científicos usam entradas públicas isoladas por worker, um canal de bytes limitado no Laboratório de Dados e lotes determinísticos na simulação. [Decisão de arquitetura científica](../adr/0002-scientific-computation.pt-BR.md)

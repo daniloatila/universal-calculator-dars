@@ -1,0 +1,20 @@
+{
+  "suite": "physics-engineering-cli-wasm",
+  "passed": 14,
+  "isolationChecks": 3,
+  "failed": 0,
+  "measurement": {
+    "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+    "wasmBytes": 477086,
+    "wasmSha256": "0aadc5960b3f412fdfd1555dfd0509998c1d2f17925ddc74397b81f16e0fb77a",
+    "observedWasmLinearBytes": 1179648,
+    "wasmInitializationMs": 0.8536000000000001,
+    "interactions": 120,
+    "warmupPerExpression": 10,
+    "milliseconds": {
+      "p50": 0.03480000000001837,
+      "p95": 0.049600000000054933,
+      "p99": 0.06189999999998008
+    }
+  }
+}

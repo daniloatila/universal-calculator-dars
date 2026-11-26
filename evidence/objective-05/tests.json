@@ -1,0 +1,304 @@
+{
+  "schema": 1,
+  "objective": "05",
+  "version": "0.5.0",
+  "status": "READY_FOR_REVIEW",
+  "verified_source_snapshot": {
+    "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+    "browser_asset_set_sha256": "2026dc6c813d3cb03a7b641b015a7c7e46324d253477f7b3964999e3f68dcdf4"
+  },
+  "counts_are_separate": true,
+  "scope": "Independent Rust, CLI, native/WASM, production browser, locale and coverage receipts. Binary hashes remain local to the suites that emitted them.",
+  "local_rust": {
+    "standard_integration_tests": 21,
+    "universal_tests": 133,
+    "failed": 0,
+    "receipt": {
+      "path": "review-tests.log",
+      "sha256": "bf556db7a855ee20a0c58d74b59899e4aed92f3c567f21d3b022f72151e8b6f7"
+    }
+  },
+  "local_node": {
+    "passed": 70,
+    "failed": 0,
+    "receipt": "integrated-audit/browser.json"
+  },
+  "scientific_suites": [
+    {
+      "module": "statistics",
+      "independent_cli": {
+        "passed": 213,
+        "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+        "receipt": "statistics/tests.json"
+      },
+      "native_wasm": {
+        "passed": 20,
+        "exact": 16,
+        "numeric": 4,
+        "isolation_checks": 2,
+        "wasm_sha256": "f12d336f87284a79377f19a73d7a2c00bae6094c4fd33a8b28ac5a5bb3fd5e39",
+        "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+        "receipt": "statistics/benchmarks.json"
+      }
+    },
+    {
+      "module": "probability",
+      "independent_cli": {
+        "passed": 277,
+        "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+        "receipt": "probability/tests.json"
+      },
+      "native_wasm": {
+        "passed": 57,
+        "exact": 27,
+        "numeric": 30,
+        "isolation_checks": 2,
+        "wasm_sha256": "d8a43fe4aeeb4dae0b54ccdf74802d84999b47a1a8347e9cf5cfa2ecb47e089d",
+        "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+        "receipt": "probability/benchmarks.json"
+      }
+    },
+    {
+      "module": "simulation",
+      "independent_cli": {
+        "passed": 57,
+        "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+        "receipt": "simulation/tests.json"
+      },
+      "native_wasm": {
+        "passed": 11,
+        "exact": 11,
+        "numeric": 0,
+        "isolation_checks": 2,
+        "wasm_sha256": "6cc083c613b7d1d1fdc543b1a9bc93d243ed23f9c25538806cacb2d3c50b88d2",
+        "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+        "receipt": "simulation/targets.json"
+      },
+      "same_target_chunked_replays": {
+        "passed": 36,
+        "receipt": "simulation/targets.json"
+      }
+    },
+    {
+      "module": "optimization",
+      "independent_cli": {
+        "passed": 39,
+        "cli_sha256": "daabb6cbbb25bd5d18236e03fbb2cf1db85badcd879967335c32425ba60eb596",
+        "receipt": "optimization/tests.json"
+      },
+      "native_wasm": {
+        "passed": 17,
+        "isolation_checks": 3,
+        "wasm_sha256": "f87c763fe2b09cb62b0daa0a1ab4b32627d01fb30273b2edd06b88b5363640eb",
+        "receipt": "optimization/parity.json"
+      }
+    },
+    {
+      "module": "physics-engineering",
+      "independent_cli": {
+        "passed": 47,
+        "cli_sha256": "daabb6cbbb25bd5d18236e03fbb2cf1db85badcd879967335c32425ba60eb596",
+        "receipt": "physics-engineering/tests.json"
+      },
+      "native_wasm": {
+        "passed": 14,
+        "isolation_checks": 3,
+        "wasm_sha256": "0aadc5960b3f412fdfd1555dfd0509998c1d2f17925ddc74397b81f16e0fb77a",
+        "receipt": "physics-engineering/parity.json"
+      }
+    },
+    {
+      "module": "graph-lab",
+      "independent_cli": {
+        "passed": 25,
+        "cli_sha256": "daabb6cbbb25bd5d18236e03fbb2cf1db85badcd879967335c32425ba60eb596",
+        "receipt": "graph-lab/tests.json"
+      },
+      "native_wasm": {
+        "passed": 16,
+        "isolation_checks": 3,
+        "wasm_sha256": "ce3b9defd306564c7bbadaab2cd23478a5008a3b7a010dac8ec38a1c4c14a570",
+        "receipt": "graph-lab/parity.json"
+      }
+    },
+    {
+      "module": "data-lab",
+      "independent_import": {
+        "suite": "tabular-import-contracts",
+        "passed": 55,
+        "failed": 0,
+        "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+        "receipt": "data-lab/tests.json"
+      },
+      "native_wasm": {
+        "suite": "local-tabular-scientific-oracle",
+        "passed": 20,
+        "failed": 0,
+        "wasm_sha256": "729e338038178963370f4fb8de9798cfa426716303ecc59b7a043a95bfff944c",
+        "fixture_sha256": "f8f29c3a55437fe867edd449a1b1b4452ba212dcf27f672dfd643925d860e349",
+        "receipt": "data-lab/tests.json"
+      },
+      "rust_test_groups": 14
+    }
+  ],
+  "optimization_graph_extra_boundaries": {
+    "optimization_cases": 2,
+    "graph_cases": 10,
+    "receipt": "integrated-audit/optimization-graph-boundaries.json"
+  },
+  "local_chrome": {
+    "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+    "version": "158.0.8127.38",
+    "passed": 224,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "inherited": 172,
+    "science": 52,
+    "wasm_laziness_and_worker_checks": "included",
+    "receipt": "integrated-audit/browser.json"
+  },
+  "production_offline": {
+    "standalone_suites": [
+      {
+        "suite": "production-web-offline-and-lazy-locales",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "suite": "production-finance-offline",
+        "modules": [
+          "financial",
+          "investment",
+          "loans",
+          "tax",
+          "business"
+        ],
+        "passed": 5,
+        "failed": 0
+      }
+    ],
+    "scientific_modules": [
+      "statistics",
+      "probability",
+      "simulation",
+      "optimization",
+      "physics-engineering",
+      "graph-lab",
+      "data-lab"
+    ],
+    "scientific_requests_outside_preview_origin": 0,
+    "receipt": "integrated-audit/browser.json",
+    "physical_science_modules": 7,
+    "physical_finance_cases": 5,
+    "physical_receipts": [
+      "integrated-audit/windows-candidate.json",
+      "integrated-audit/windows-finance-offline.json"
+    ]
+  },
+  "locale_matrix": {
+    "directed_pairs": 42,
+    "locales": 7,
+    "historical_math": 420,
+    "historical_finance": 210,
+    "new_science": 294,
+    "comparisons": 924,
+    "receipt": "locale-transition-matrix.json"
+  },
+  "historical_regression": {
+    "mapped": 602,
+    "passed_local": 578,
+    "advanced_math_cli": 2355,
+    "advanced_math_cli_wasm": 305,
+    "finance_independent": 577,
+    "finance_baseline_cli_wasm": 49,
+    "finance_comparator_independent": 84,
+    "finance_comparator_cli_wasm": 84,
+    "proof_replays_per_comparator_suite": 79,
+    "receipt": "regression.json",
+    "passed_mapped": 602,
+    "physical_windows": 17,
+    "hosted_windows_credentials": 2,
+    "hosted_windows_capabilities": 5
+  },
+  "rust_line_coverage": {
+    "covered": 5734,
+    "total": 5983,
+    "percent": 95.84,
+    "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+    "receipt": "coverage.json"
+  },
+  "review_candidate": {
+    "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+    "workflow_run_id": 45860076452,
+    "rust_source_equivalence": {
+      "measurement_source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+      "verified": true,
+      "paths": [
+        "crates/",
+        "Cargo.toml",
+        "Cargo.lock",
+        "rust-toolchain.toml"
+      ],
+      "method": "Git tree comparison between source snapshots"
+    },
+    "production_browser_status": "verified",
+    "physical_windows_status": "verified",
+    "hosted_workflow_status": "verified"
+  },
+  "audited_source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "final_validation": {
+    "production_browser": {
+      "status": "verified",
+      "passed": 224,
+      "locale_comparisons": 924,
+      "asset_set_sha256": "9e19135cd5e85d01f60ae30c0a2b891de49ca696ec252c2cc61ec42889f1b491",
+      "receipt": "integrated-audit/browser.json"
+    },
+    "hosted_workflow": {
+      "status": "verified",
+      "run_id": 45860076452,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45860076452",
+      "jobs_passed": 4,
+      "ubuntu_chromium_passed": 224,
+      "receipt": "integrated-audit/ci.json"
+    },
+    "windows_artifact": {
+      "status": "verified",
+      "artifact_id": 15137777779,
+      "archive_sha256": "4d72e2a378cb4fd463082936ac464400d0c9cb36ef0fe46eef2f78770635abe0",
+      "executable_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588",
+      "runtime_wasm_readbacks": 22,
+      "receipt": "integrated-audit/windows-artifact.json"
+    },
+    "physical_windows": {
+      "status": "verified",
+      "historical_checks": 17,
+      "science_workspaces": 7,
+      "graph_and_data_cycles": 3,
+      "science_workers_opened": 11,
+      "science_workers_closed": 11,
+      "finance_offline_cases": 5,
+      "comparator_historical_replay": true,
+      "receipts": [
+        "integrated-audit/windows-candidate.json",
+        "integrated-audit/windows-regression.json",
+        "integrated-audit/windows-finance-offline.json",
+        "integrated-audit/windows-finance-comparison.json"
+      ]
+    }
+  },
+  "hosted_rust_line_coverage": {
+    "covered": 5734,
+    "total": 5983,
+    "percent": 95.84,
+    "receipt": "integrated-audit/coverage-linux.json"
+  },
+  "physical_windows_finance_comparison": {
+    "normalized_annual_rate": "21/100",
+    "exact_difference": "0",
+    "historical_import_reproduced": true,
+    "retained_after_switch": true,
+    "receipt": "integrated-audit/windows-finance-comparison.json"
+  }
+}

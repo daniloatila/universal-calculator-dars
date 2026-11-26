@@ -1,0 +1,40 @@
+{
+  "module": "data-lab",
+  "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+  "covered": 1039,
+  "total": 1107,
+  "percent": 93.86,
+  "denominator": "Instrumented module source in the integrated run. Shared kernels are itemized separately in ../coverage.json.",
+  "files": [
+    {
+      "module": "data_lab",
+      "path": "data_lab/analysis.rs",
+      "covered": 76,
+      "total": 79
+    },
+    {
+      "module": "data_lab",
+      "path": "data_lab/import.rs",
+      "covered": 145,
+      "total": 149
+    },
+    {
+      "module": "data_lab",
+      "path": "data_lab/mod.rs",
+      "covered": 216,
+      "total": 224
+    },
+    {
+      "module": "data_lab",
+      "path": "data_lab/pipeline.rs",
+      "covered": 221,
+      "total": 243
+    },
+    {
+      "module": "data_lab",
+      "path": "data_lab/workbook.rs",
+      "covered": 381,
+      "total": 412
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "suite": "graph-lab-independent-cli",
+  "cases": 25,
+  "by_category": {
+    "discontinuities": 3,
+    "explicit": 1,
+    "flat_field": 1,
+    "implicit": 1,
+    "implicit_discontinuity": 1,
+    "invalid_inputs": 6,
+    "numerical_search_visual_invariance": 1,
+    "parameters_and_coincidence": 1,
+    "parametric": 1,
+    "partial_domain": 1,
+    "polar": 1,
+    "roundoff_unresolved": 1,
+    "saddle_cell": 1,
+    "space_curve": 1,
+    "surface": 1,
+    "surface_hole": 1,
+    "undersampled_polar": 1,
+    "undersampling": 1
+  },
+  "references": [
+    "Closed-form geometry and Python math sample checks",
+    "Fixed independent invariance and domain fixtures"
+  ],
+  "maximum_case_wall_time_ms": 22.735,
+  "executable_sha256": "daabb6cbbb25bd5d18236e03fbb2cf1db85badcd879967335c32425ba60eb596"
+}

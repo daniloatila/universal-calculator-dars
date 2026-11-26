@@ -4,8 +4,12 @@
 
 [English](README.md)
 
-O DARS é uma plataforma de computação local de Danilo Átila. A candidata 0.4.1 reúne 15 ferramentas na interface compartilhada entre Windows e navegador, com resultados calculados em Rust e linha de comando nativa. Financeira, Investimentos, Empréstimos, Tributos e Negócios preservam a notação de cada campo. O Comparador de Cenários verifica o significado dos indicadores antes de calcular diferenças. [Revisão do Objetivo 04](evidence/objective-04/revision-01/REPORT.pt-BR.md)
+O DARS é uma plataforma de computação local de Danilo Átila. O branch de revisão 0.5.0 reúne 22 ferramentas no Windows e no navegador. O Rust calcula os resultados, incluindo agregações racionais exatas e simulações reproduzíveis por semente. Cada registro identifica o método, as entradas e os limites aplicáveis. [Objetivo 05](evidence/objective-05/REPORT.pt-BR.md)
 
+Use a busca de ferramentas para encontrar o módulo pelo nome ou pela descrição. Na seção científica, escolha uma operação e carregue o exemplo para conferir o resultado e a prova de cálculo.
+
+- **Ciência, engenharia e dados** — Estatística, Probabilidade, Simulação, Otimização, Física e Engenharia, Laboratório de Gráficos e Laboratório de Dados.
+- **Finanças e negócios** — Financeira, Investimentos, Empréstimos, Tributos e Negócios, incluindo o Comparador de Cenários aprovado na 0.4.1.
 - **Aritmética e análise** — Standard, Scientific, Álgebra, Cálculo e Álgebra Linear.
 - **Ferramentas especializadas** — Geometria, Matemática Discreta, Programador, Conversor e Data e Hora.
 

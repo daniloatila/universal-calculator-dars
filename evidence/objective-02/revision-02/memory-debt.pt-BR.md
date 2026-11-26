@@ -43,3 +43,15 @@ Antes da release estável, documente o padrão observado, a sensibilidade da med
 ## Acompanhamento do Objetivo 04
 
 Duas medições pareadas compararam a Standard auditada na 0.3.1 com a 0.4.0 no WebView2 158.0.4370.33. Em repouso visível na Standard, as medianas da memória privada residente da árvore passaram de 102.719.488 para 103.960.576 bytes na primeira dupla e de 106.807.296 para 104.046.592 bytes na segunda. O commit privado da árvore passou de 247.025.664 para 248.455.168 bytes e de 251.256.832 para 248.639.488 bytes. As duas execuções da 0.4.0 encerraram os cinco workers financeiros temporários e deixaram zero processos após fechar o aplicativo. Os caches do Windows foram mantidos no estado de cada execução. A meta de RAM física incremental e o ensaio prolongado de retenção continuam em aberto. [Primeira comparação](../../objective-04/desktop.json) · [Repetição](../../objective-04/desktop-repeat.json)
+
+## Acompanhamento do Objetivo 05
+
+A comparação física usou os executáveis de revisão da 0.4.1 e da 0.5.0 no mesmo Windows x64, com perfis WebView2 novos e o runtime 158.0.4370.33. A tabela mostra medianas em bytes da árvore inteira. O repouso da Standard teve seis amostras por versão, após os mesmos 12 cálculos.
+
+| Medição | 0.4.1 | 0.5.0 |
+| --- | ---: | ---: |
+| Memória privada residente no repouso | 119.242.752 | 117.948.416 |
+| Commit privado no repouso | 271.212.544 | 266.805.248 |
+| Variação da RAM ocupada no sistema entre o controle ambiente e o repouso | 145.653.760 | 192.524.288 |
+
+A 0.5.0 executou sete módulos científicos offline e repetiu gráficos e dados em três ciclos. Todos os 11 workers científicos encerraram. Depois do fechamento, as duas árvores ficaram com zero processos. A variação sistêmica inclui atividade externa, e as páginas compartilhadas não tiveram atribuição por aplicativo. A meta de menos de 100.000.000 bytes incrementais continua sem comprovação. O estudo pré-1.0 de três sessões com repouso prolongado permanece aberto. [0.4.1 no mesmo ensaio](../../objective-05/integrated-audit/windows-baseline.json) · [0.5.0 e ciclos](../../objective-05/integrated-audit/windows-candidate.json)

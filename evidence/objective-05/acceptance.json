@@ -1,0 +1,468 @@
+{
+  "schema": 1,
+  "objective": "05",
+  "version": "0.5.0",
+  "status": "READY_FOR_REVIEW",
+  "scope": "Section 19 of the owner's Objective 05 authorization.",
+  "verified_source_snapshot": {
+    "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+    "browser_asset_set_sha256": "2026dc6c813d3cb03a7b641b015a7c7e46324d253477f7b3964999e3f68dcdf4"
+  },
+  "criteria_count": 27,
+  "criteria": [
+    {
+      "number": 1,
+      "id": "seven_science_workspaces",
+      "criterion": "All seven new modules are implemented.",
+      "criterion_pt_BR": "Os sete novos módulos estiverem implementados.",
+      "status": "verified_local",
+      "observed": "Each workspace has a Rust or WASM contract, interface and module-specific evidence.",
+      "evidence": [
+        "statistics/acceptance.json",
+        "probability/acceptance.json",
+        "simulation/acceptance.json",
+        "optimization/acceptance.json",
+        "physics-engineering/acceptance.json",
+        "graph-lab/acceptance.json",
+        "data-lab/acceptance.json"
+      ]
+    },
+    {
+      "number": 2,
+      "id": "twenty_two_integrated_modules",
+      "criterion": "All 22 modules are integrated.",
+      "criterion_pt_BR": "Os 22 módulos estiverem integrados.",
+      "status": "verified_local",
+      "observed": "The local production inventory contains Standard and 21 isolated tool WASM binaries. The browser proof matrix covers all 22.",
+      "evidence": [
+        "integrated-audit/artifacts.json",
+        "integrated-audit/browser.json",
+        "locale-transition-matrix.json"
+      ]
+    },
+    {
+      "number": 3,
+      "id": "scientific_result_validation",
+      "criterion": "Scientific results are independently validated.",
+      "criterion_pt_BR": "Os resultados científicos estiverem validados.",
+      "status": "verified_local",
+      "observed": "Independent mathematical references, adversarial cases and explicit tolerances are retained by suite.",
+      "evidence": [
+        "statistics/tests.json",
+        "probability/tests.json",
+        "simulation/tests.json",
+        "optimization/tests.json",
+        "physics-engineering/tests.json",
+        "graph-lab/tests.json",
+        "data-lab/tests.json",
+        "coverage.json",
+        "integrated-audit/optimization-graph-boundaries.json"
+      ]
+    },
+    {
+      "number": 4,
+      "id": "statistics_conventions",
+      "criterion": "Statistical conventions are documented.",
+      "criterion_pt_BR": "As convenções estatísticas estiverem documentadas.",
+      "status": "verified_documentation",
+      "observed": "Sample and population conventions, quantiles, rank behavior, assumptions and limitations are stated.",
+      "evidence": [
+        "statistics/REPORT.md",
+        "statistics/REPORT.pt-BR.md"
+      ]
+    },
+    {
+      "number": 5,
+      "id": "probability_distributions",
+      "criterion": "Probability distributions are independently verified.",
+      "criterion_pt_BR": "As distribuições probabilísticas estiverem verificadas.",
+      "status": "verified_local",
+      "observed": "All 17 families, mass or density, tails, interval probabilities, quantiles and samples were checked.",
+      "evidence": [
+        "probability/tests.json",
+        "probability/REPORT.md"
+      ]
+    },
+    {
+      "number": 6,
+      "id": "simulation_reproducibility",
+      "criterion": "Simulations reproduce results according to their contracts.",
+      "criterion_pt_BR": "As simulações forem reproduzíveis conforme seus contratos.",
+      "status": "verified_local",
+      "observed": "Fixed-seed paths and 36 batch replays were checked. Decimal VaR ranks and representable loss are exercised by independent cases.",
+      "evidence": [
+        "simulation/tests.json",
+        "simulation/targets.json",
+        "integrated-audit/browser.json"
+      ]
+    },
+    {
+      "number": 7,
+      "id": "optimization_diagnostics",
+      "criterion": "Optimization algorithms report convergence and limitations accurately.",
+      "criterion_pt_BR": "Os algoritmos de otimização informarem convergência e limitações corretamente.",
+      "status": "verified_local",
+      "observed": "Brackets, residual, stopping reason and iteration controls are tested. Local optima and exact linear outcomes retain separate meanings.",
+      "evidence": [
+        "optimization/tests.json",
+        "optimization/contract.md",
+        "integrated-audit/optimization-graph-boundaries.json"
+      ]
+    },
+    {
+      "number": 8,
+      "id": "engineering_dimensions",
+      "criterion": "Physical quantities respect units and dimensions.",
+      "criterion_pt_BR": "As grandezas físicas respeitarem unidades e dimensões.",
+      "status": "verified_local",
+      "observed": "Dimensional checks include incompatible units and the 12 V/6 Ω case with 2 A and 24 W.",
+      "evidence": [
+        "physics-engineering/tests.json",
+        "physics-engineering/contract.md"
+      ]
+    },
+    {
+      "number": 9,
+      "id": "graph_2d_3d",
+      "criterion": "Graph Lab works in 2D and 3D within its validated scope.",
+      "criterion_pt_BR": "O Graph Lab estiver funcional em 2D e 3D dentro do escopo validado.",
+      "status": "verified_local",
+      "observed": "Observed 2D discontinuity gaps, 3D rendering, keyboard inspection and local export. Recovery uses synthetic Canvas context events.",
+      "evidence": [
+        "graph-lab/tests.json",
+        "graph-lab/web-2d.png",
+        "graph-lab/web.png",
+        "integrated-audit/browser.json"
+      ]
+    },
+    {
+      "number": 10,
+      "id": "data_formats_transformations",
+      "criterion": "Data Lab imports and transforms the prescribed data formats.",
+      "criterion_pt_BR": "O Data Lab importar e transformar os formatos definidos.",
+      "status": "verified_local",
+      "observed": "CSV, TSV, tabular JSON and XLSX, explicit typing and structured replay are exercised.",
+      "evidence": [
+        "data-lab/tests.json",
+        "data-lab/REPORT.md",
+        "integrated-audit/browser.json"
+      ]
+    },
+    {
+      "number": 11,
+      "id": "file_import_safety",
+      "criterion": "File import is secure within the audited scope.",
+      "criterion_pt_BR": "A importação de arquivos for segura.",
+      "status": "verified_local",
+      "observed": "Malformed and oversized archives, relationship paths, XML, cell limits and formula-safe export are exercised locally.",
+      "evidence": [
+        "data-lab/tests.json",
+        "security.md",
+        "integrated-audit/security.json"
+      ]
+    },
+    {
+      "number": 12,
+      "id": "long_calculation_cancellation",
+      "criterion": "Long-running calculations can be cancelled.",
+      "criterion_pt_BR": "Os cálculos prolongados forem canceláveis.",
+      "status": "verified_local",
+      "observed": "Browser runs exercise cancellation and subsequent work for Simulation, Optimization and Data Lab. The WASM task checks independent batch disposal.",
+      "evidence": [
+        "integrated-audit/browser.json",
+        "simulation/targets.json",
+        "regression.json"
+      ]
+    },
+    {
+      "number": 13,
+      "id": "task_manager_recovery",
+      "criterion": "The task manager recovers after faults and cancellation.",
+      "criterion_pt_BR": "O gerenciador de tarefas permanecer recuperável.",
+      "status": "verified_local",
+      "observed": "Inherited timeout and recovery tests plus scientific worker cancellation verify successful successors.",
+      "evidence": [
+        "integrated-audit/browser.json",
+        "regression.json"
+      ]
+    },
+    {
+      "number": 14,
+      "id": "scientific_calculation_proof",
+      "criterion": "Scientific Calculation Proof is integrated.",
+      "criterion_pt_BR": "O Calculation Proof científico estiver integrado.",
+      "status": "verified_local",
+      "observed": "Proofs preserve mathematical conventions, source notation, model parameters and manifest bindings in their applicable workspaces.",
+      "evidence": [
+        "locale-transition-matrix.json",
+        "data-lab/tests.json",
+        "simulation/targets.json",
+        "integrated-audit/browser.json"
+      ]
+    },
+    {
+      "number": 15,
+      "id": "adaptive_profiles",
+      "criterion": "All five adaptive profiles remain functional.",
+      "criterion_pt_BR": "Os cinco perfis adaptativos permanecerem funcionais.",
+      "status": "verified_local",
+      "observed": "The browser report exercises all five Graph Lab profiles with one immutable proof digest. Inherited worker tests cover scheduling under five profiles.",
+      "evidence": [
+        "integrated-audit/browser.json",
+        "regression.json"
+      ]
+    },
+    {
+      "number": 16,
+      "id": "seven_languages",
+      "criterion": "All seven supported languages are validated.",
+      "criterion_pt_BR": "Os sete idiomas estiverem validados.",
+      "status": "verified_final",
+      "observed": "Final Chrome includes the seven-locale scientific label check, including Arabic RTL.",
+      "evidence": [
+        "integrated-audit/browser.json",
+        "locale-transition-matrix.json"
+      ]
+    },
+    {
+      "number": 17,
+      "id": "locale_matrix_924",
+      "criterion": "The full 924-comparison locale matrix is verified.",
+      "criterion_pt_BR": "A matriz de 924 comparações estiver verificada.",
+      "status": "verified_final",
+      "observed": "The verified candidate matrix contains 420 mathematical, 210 financial and 294 scientific comparisons across 42 directed pairs.",
+      "evidence": [
+        "locale-transition-matrix.json",
+        "integrated-audit/browser.json"
+      ]
+    },
+    {
+      "number": 18,
+      "id": "offline_behavior",
+      "criterion": "Offline operation is demonstrated.",
+      "criterion_pt_BR": "O funcionamento offline estiver comprovado.",
+      "status": "verified_final",
+      "observed": "Production Chrome and physical Windows calculated in all seven science workspaces offline. The standalone web and physical Windows financial offline cases also passed.",
+      "evidence": [
+        "integrated-audit/browser.json",
+        "regression.json",
+        "integrated-audit/windows-method.md",
+        "integrated-audit/windows-candidate.json",
+        "integrated-audit/windows-finance-offline.json"
+      ]
+    },
+    {
+      "number": 19,
+      "id": "historical_regression",
+      "criterion": "The inherited regression suites pass.",
+      "criterion_pt_BR": "As regressões anteriores estiverem aprovadas.",
+      "status": "verified_final",
+      "observed": "The 578 mapped local checks are complemented by 17 physical Windows WebView2 checks, two hosted credential checks and five hosted capability tests. The approved regression corpus is retained.",
+      "evidence": [
+        "regression.json",
+        "integrated-audit/browser.json",
+        "integrated-audit/windows-regression.json",
+        "integrated-audit/ci.json",
+        "integrated-audit/windows-finance-comparison.json"
+      ]
+    },
+    {
+      "number": 20,
+      "id": "benchmark_publication",
+      "criterion": "Benchmarks are published on the review branch.",
+      "criterion_pt_BR": "Os benchmarks estiverem publicados.",
+      "status": "verified_documentation",
+      "observed": "The review evidence includes local WASM, native Simulation and Data Lab volume results, a paired physical Windows benchmark and the sampled Price comparison.",
+      "evidence": [
+        "benchmarks.json",
+        "integrated-audit/windows-method.md",
+        "integrated-audit/windows-candidate.json",
+        "integrated-audit/finance-price.json"
+      ]
+    },
+    {
+      "number": 21,
+      "id": "memory_debt_update",
+      "criterion": "The outstanding memory measurement debt is updated.",
+      "criterion_pt_BR": "A dívida de memória estiver atualizada.",
+      "status": "verified_documentation",
+      "observed": "The updated debt record includes paired 0.4.1/0.5.0 observations. Attribution of less than 100 MB incremental physical RAM remains open.",
+      "evidence": [
+        "benchmarks.json",
+        "../objective-02/revision-02/memory-debt.md",
+        "integrated-audit/windows-method.md",
+        "integrated-audit/windows-candidate.json",
+        "integrated-audit/windows-baseline.json"
+      ]
+    },
+    {
+      "number": 22,
+      "id": "security_privacy",
+      "criterion": "Security and privacy controls are preserved.",
+      "criterion_pt_BR": "A segurança e a privacidade estiverem preservadas.",
+      "status": "verified_final",
+      "observed": "The exact-source security job succeeded, and physical/offline checks preserved the local execution and Windows policy scope. Inherited informational Rust advisories remain listed.",
+      "evidence": [
+        "security.md",
+        "integrated-audit/security.json",
+        "integrated-audit/browser.json",
+        "integrated-audit/ci.json",
+        "integrated-audit/windows-artifact.json",
+        "integrated-audit/windows-candidate.json"
+      ]
+    },
+    {
+      "number": 23,
+      "id": "windows_execution",
+      "criterion": "The Windows executable functions on a physical device.",
+      "criterion_pt_BR": "O aplicativo Windows estiver funcional.",
+      "status": "verified_final",
+      "observed": "Physical WebView2 executed seven offline science modules, three Graph Lab/Data Lab cycles, 17 inherited desktop checks, five offline finance examples and the comparator replay. All 22 hosted WASM assets were read back.",
+      "evidence": [
+        "integrated-audit/windows-method.md",
+        "integrated-audit/artifacts.json",
+        "integrated-audit/windows-artifact.json",
+        "integrated-audit/windows-candidate.json",
+        "integrated-audit/windows-regression.json",
+        "integrated-audit/windows-finance-offline.json",
+        "integrated-audit/windows-finance-comparison.json"
+      ]
+    },
+    {
+      "number": 24,
+      "id": "web_execution",
+      "criterion": "The web build works in a production browser.",
+      "criterion_pt_BR": "A versão web estiver funcional.",
+      "status": "verified_final",
+      "observed": "The final review source passed 224 local Chrome tests on the production asset set and 224 hosted Ubuntu Chromium tests.",
+      "evidence": [
+        "integrated-audit/browser.json",
+        "integrated-audit/artifacts.json",
+        "integrated-audit/ci.json"
+      ]
+    },
+    {
+      "number": 25,
+      "id": "four_ci_jobs",
+      "criterion": "All four GitHub Actions jobs pass for the verified source.",
+      "criterion_pt_BR": "Os quatro jobs do GitHub Actions estiverem aprovados.",
+      "status": "verified_final",
+      "observed": "The exact source passed Ubuntu, Windows, macOS and security on workflow run 45860076452.",
+      "evidence": [
+        "../../.github/workflows/ci.yml",
+        "integrated-audit/ci.json",
+        "integrated-audit/coverage-linux.json"
+      ]
+    },
+    {
+      "number": 26,
+      "id": "bilingual_documentation",
+      "criterion": "English and Brazilian Portuguese documentation is current.",
+      "criterion_pt_BR": "A documentação bilíngue estiver atualizada.",
+      "status": "verified_documentation",
+      "observed": "Module reports, methods, scope and reproduction are recorded in both languages.",
+      "evidence": [
+        "REPORT.md",
+        "REPORT.pt-BR.md",
+        "integrated-audit/REPORT.md",
+        "integrated-audit/REPORT.pt-BR.md",
+        "reproduction.md",
+        "reproduction.pt-BR.md",
+        "statistics/REPORT.md",
+        "probability/REPORT.md",
+        "simulation/REPORT.md",
+        "optimization/REPORT.md",
+        "physics-engineering/REPORT.md",
+        "graph-lab/REPORT.md",
+        "data-lab/REPORT.md",
+        "statistics/REPORT.pt-BR.md",
+        "probability/REPORT.pt-BR.md",
+        "simulation/REPORT.pt-BR.md",
+        "optimization/REPORT.pt-BR.md",
+        "physics-engineering/REPORT.pt-BR.md",
+        "graph-lab/REPORT.pt-BR.md",
+        "data-lab/REPORT.pt-BR.md"
+      ]
+    },
+    {
+      "number": 27,
+      "id": "review_branch_publication",
+      "criterion": "Audited code and evidence are published on the review branch.",
+      "criterion_pt_BR": "O código e as evidências estiverem publicados.",
+      "status": "review_branch_delivery",
+      "observed": "The audited source is public on the dedicated review branch. This evidence pack accompanies that branch delivery. The final Git evidence head is checked externally to the pack.",
+      "evidence": [
+        "REPORT.md",
+        "integrated-audit/artifacts.json",
+        "integrated-audit/ci.json",
+        "integrated-audit/windows-artifact.json"
+      ]
+    }
+  ],
+  "review_candidate": {
+    "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+    "workflow_run_id": 45860076452,
+    "rust_source_equivalence": {
+      "measurement_source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+      "verified": true,
+      "paths": [
+        "crates/",
+        "Cargo.toml",
+        "Cargo.lock",
+        "rust-toolchain.toml"
+      ],
+      "method": "Git tree comparison between source snapshots"
+    },
+    "production_browser_status": "verified",
+    "physical_windows_status": "verified",
+    "hosted_workflow_status": "verified"
+  },
+  "audited_source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "final_validation": {
+    "production_browser": {
+      "status": "verified",
+      "passed": 224,
+      "locale_comparisons": 924,
+      "asset_set_sha256": "9e19135cd5e85d01f60ae30c0a2b891de49ca696ec252c2cc61ec42889f1b491",
+      "receipt": "integrated-audit/browser.json"
+    },
+    "hosted_workflow": {
+      "status": "verified",
+      "run_id": 45860076452,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45860076452",
+      "jobs_passed": 4,
+      "ubuntu_chromium_passed": 224,
+      "receipt": "integrated-audit/ci.json"
+    },
+    "windows_artifact": {
+      "status": "verified",
+      "artifact_id": 15137777779,
+      "archive_sha256": "4d72e2a378cb4fd463082936ac464400d0c9cb36ef0fe46eef2f78770635abe0",
+      "executable_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588",
+      "runtime_wasm_readbacks": 22,
+      "receipt": "integrated-audit/windows-artifact.json"
+    },
+    "physical_windows": {
+      "status": "verified",
+      "historical_checks": 17,
+      "science_workspaces": 7,
+      "graph_and_data_cycles": 3,
+      "science_workers_opened": 11,
+      "science_workers_closed": 11,
+      "finance_offline_cases": 5,
+      "comparator_historical_replay": true,
+      "receipts": [
+        "integrated-audit/windows-candidate.json",
+        "integrated-audit/windows-regression.json",
+        "integrated-audit/windows-finance-offline.json",
+        "integrated-audit/windows-finance-comparison.json"
+      ]
+    }
+  },
+  "publication": {
+    "branch": "codex/objective-05-science-engineering-data",
+    "source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+    "source_publication": "verified",
+    "evidence_commit_verification": "external_git_branch_readback"
+  }
+}

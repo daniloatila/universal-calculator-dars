@@ -1,0 +1,26 @@
+{
+  "module": "data-lab",
+  "status": "verified_module_checks",
+  "criteria": [
+    {
+      "item": "CSV, TSV, flat JSON and two-sheet XLSX with raw numeric tokens, stored formulas and caches",
+      "evidence": "tests.json"
+    },
+    {
+      "item": "Exact rational aggregates, reproducible typed pipeline and file hash",
+      "evidence": "REPORT.md"
+    },
+    {
+      "item": "Native/WASM parity, malformed boundary and spreadsheet schema cases",
+      "evidence": "tests.json"
+    },
+    {
+      "item": "1,000 to 200,000 synthetic rows, process memory and linear capacity",
+      "evidence": "benchmarks.json"
+    },
+    {
+      "item": "Source locale preservation, file selection, replay, export and worker disposal",
+      "evidence": "../integrated-audit/browser.json"
+    }
+  ]
+}

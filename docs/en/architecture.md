@@ -58,3 +58,5 @@ Evaluators are isolated from I/O and the host environment. Each workspace receiv
 See [Standard calculation semantics](standard.md) for the expression grammar, rounding, and resource bounds. See [ADR 001](../adr/0001-shared-calculation-core.md) for the architectural decision.
 
 Objective 02 documents activation scopes, worker retirement and the data boundary. [Operational contract](operations.md)
+
+The seven scientific workspaces use isolated public worker entry points, a bounded byte channel for Data Lab and deterministic simulation batches. [Scientific architecture decision](../adr/0002-scientific-computation.md)

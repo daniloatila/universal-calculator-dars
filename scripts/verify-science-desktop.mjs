@@ -14,6 +14,7 @@ assert.equal(hash(await readFile(candidate)),receipt.exe_sha256);
 assert.equal(receipt.exe_version,'0.5.0');assert.equal(receipt.windows_job_conclusion,'success');
 const out=resolve(outputArg);await mkdir(out,{recursive:true});
 const modules=['statistics','probability','simulation','optimization','physics-engineering','graph-lab','data-lab'];
+const scienceWorker=/\/(?:tool-(?:statistics|probability|simulation|optimization|physics-engineering|graph-lab)|data-lab)-worker-[^/]+\.js$/u;
 const results={};
 const closeTo=(actual,expected,tolerance)=>assert(Number.isFinite(actual)&&Math.abs(actual-expected)<=tolerance);
 
@@ -100,7 +101,11 @@ for(const [label,path] of [['baseline',baseline],['candidate',candidate]]){
       await sample('standard_idle','visible',6);
       const stats=()=>page.evaluate(()=>{const m=performance.memory;return m?{used:m.usedJSHeapSize,total:m.totalJSHeapSize}:null;});
       data.runtimePhases=[];data.modules=[];let started=0,closed=0;
-      page.on('worker',w=>{started++;w.once('close',()=>closed++);});
+      page.on('worker',w=>{
+        if(!scienceWorker.test(new URL(w.url()).pathname)) return;
+        started++;
+        w.once('close',()=>closed++);
+      });
       if(label==='candidate'){
         const session=await page.context().newCDPSession(page);
         await session.send('Network.enable');
@@ -123,6 +128,9 @@ for(const [label,path] of [['baseline',baseline],['candidate',candidate]]){
             if(id==='graph-lab'){await expect(page.locator('canvas').first()).toBeVisible();}
             data.modules.push({id,cycle:cycle+1,ms:performance.now()-at,result_sha256:hash(canonical)});
             if(cycle===0||id==='graph-lab'&&cycle===1){
+              if(['probability','simulation','graph-lab'].includes(id)){
+                await expect(page.getByTestId('science-canvas')).toHaveAttribute('data-draws',/^[1-9]/u);
+              }
               const file=id+(cycle?'-surface':'')+'.png';
               await page.screenshot({path:join(out,file)});
             }
@@ -145,7 +153,7 @@ for(const [label,path] of [['baseline',baseline],['candidate',candidate]]){
         assert.equal((await action('restore')).state,'visible');await sample('restored_0','visible',4);
       }
       await expect.poll(()=>started-closed).toBe(0);
-      data.workers={opened:started,closed};
+      data.workers={scope:'science module workers',opened:started,closed};
       networkContext.off('request',observeRequest);
       data.externalHttpRequests=externalRequests;
       assert.equal(externalRequests,0);

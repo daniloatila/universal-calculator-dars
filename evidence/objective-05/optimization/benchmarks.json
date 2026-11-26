@@ -1,0 +1,18 @@
+{
+  "module": "optimization",
+  "scope": "Initialized WASM, Windows x64 Node local run",
+  "measurement": {
+    "scope": "Node, initialized WASM, Rust request decoding and proof serialization",
+    "wasmBytes": 765369,
+    "wasmSha256": "f87c763fe2b09cb62b0daa0a1ab4b32627d01fb30273b2edd06b88b5363640eb",
+    "observedWasmLinearBytes": 1179648,
+    "wasmInitializationMs": 11.3917,
+    "interactions": 120,
+    "warmupPerExpression": 10,
+    "milliseconds": {
+      "p50": 0.0619999999999834,
+      "p95": 0.21590000000000487,
+      "p99": 0.3053999999999917
+    }
+  }
+}

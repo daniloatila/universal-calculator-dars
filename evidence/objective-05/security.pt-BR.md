@@ -1,0 +1,11 @@
+# Segurança e privacidade
+
+[English](security.md)
+
+O arquivo selecionado segue para um worker local do navegador ou WebView2 e para a memória linear do Rust. Ao terminar a tarefa, o worker é encerrado. A interface conserva temporariamente a referência necessária para paginar ou exportar. Selecionar arquivo, salvar pipeline e exportar gráficos ou provas são ações explícitas. Os módulos não acrescentam comandos nativos, permissões de sistema de arquivos, serviços remotos, contas ou telemetria. Os testes offline observam as requisições e reexecutam as ferramentas após desligar o acesso à rede.
+
+O leitor ZIP aceita planilhas com entradas armazenadas ou comprimidas com deflate. A verificação limita bytes de origem, entradas, expansão por parte e total, nomes internos e relacionamentos com planilhas. O leitor confere a expansão efetiva em relação ao comprimento declarado. XML passa por processamento iterativo com profundidade limitada, rejeição de DTD e instruções de processamento. Scripts, objetos binários, conexões e links externos não são executados. Limites adicionais protegem largura das linhas, tamanho de campos e conversões de tipos. React renderiza as células como texto. O CSV protegido neutraliza prefixos interpretáveis como fórmula e a exportação literal conserva o valor por escolha do usuário. [Contrato do Laboratório de Dados](data-lab/REPORT.pt-BR.md)
+
+O Cargo Audit local retornou zero entradas da classe vulnerabilidade e repetiu os três avisos informativos herdados. chrono 0.4.45 e proc-macro-error 1.0.4 têm avisos de manutenção. glib 0.18.5 tem aviso de unsoundness. O npm audit retornou zero vulnerabilidades para o lockfile do frontend. As contagens refletem as bases consultadas e os lockfiles verificados. [Aviso chrono](https://rustsec.org/advisories/RUSTSEC-2026-0543) · [Aviso proc-macro-error](https://rustsec.org/advisories/RUSTSEC-2024-0370) · [Aviso GLib](https://rustsec.org/advisories/RUSTSEC-2024-0429)
+
+Otimização e Gráficos interpretam uma gramática matemática restrita. Colunas calculadas aceitam apenas operações aritméticas declaradas. O importador de provas identifica um registro fornecido como tal. A execução Windows exige conferência da origem do arquivo, identidade do executável e hashes dos módulos WASM. As configurações do Smart App Control e do Defender são preservadas.

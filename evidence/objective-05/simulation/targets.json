@@ -1,0 +1,275 @@
+{
+  "module": "simulation",
+  "node": "v24.22.3",
+  "platform": "win32",
+  "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+  "requestParities": 11,
+  "exact": 11,
+  "numeric": 0,
+  "isolationChecks": 2,
+  "chunks": [
+    {
+      "model": "distribution",
+      "distribution": "normal",
+      "batch": 1,
+      "steps": 1201,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "normal",
+      "batch": 127,
+      "steps": 10,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "normal",
+      "batch": 2048,
+      "steps": 1,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "normal",
+      "batch": 4096,
+      "steps": 1,
+      "total": 1201
+    },
+    {
+      "model": "finance",
+      "distribution": null,
+      "batch": 1,
+      "steps": 420,
+      "total": 420
+    },
+    {
+      "model": "finance",
+      "distribution": null,
+      "batch": 127,
+      "steps": 4,
+      "total": 420
+    },
+    {
+      "model": "finance",
+      "distribution": null,
+      "batch": 2048,
+      "steps": 1,
+      "total": 420
+    },
+    {
+      "model": "finance",
+      "distribution": null,
+      "batch": 4096,
+      "steps": 1,
+      "total": 420
+    },
+    {
+      "model": "random_walk",
+      "distribution": null,
+      "batch": 1,
+      "steps": 1200,
+      "total": 1200
+    },
+    {
+      "model": "random_walk",
+      "distribution": null,
+      "batch": 127,
+      "steps": 10,
+      "total": 1200
+    },
+    {
+      "model": "random_walk",
+      "distribution": null,
+      "batch": 2048,
+      "steps": 2,
+      "total": 1200
+    },
+    {
+      "model": "random_walk",
+      "distribution": null,
+      "batch": 4096,
+      "steps": 2,
+      "total": 1200
+    },
+    {
+      "model": "historical_risk",
+      "distribution": null,
+      "batch": 1,
+      "steps": 9,
+      "total": 9
+    },
+    {
+      "model": "historical_risk",
+      "distribution": null,
+      "batch": 127,
+      "steps": 1,
+      "total": 9
+    },
+    {
+      "model": "historical_risk",
+      "distribution": null,
+      "batch": 2048,
+      "steps": 1,
+      "total": 9
+    },
+    {
+      "model": "historical_risk",
+      "distribution": null,
+      "batch": 4096,
+      "steps": 1,
+      "total": 9
+    },
+    {
+      "model": "historical_risk",
+      "distribution": null,
+      "batch": 1,
+      "steps": 100,
+      "total": 100
+    },
+    {
+      "model": "historical_risk",
+      "distribution": null,
+      "batch": 127,
+      "steps": 1,
+      "total": 100
+    },
+    {
+      "model": "historical_risk",
+      "distribution": null,
+      "batch": 2048,
+      "steps": 1,
+      "total": 100
+    },
+    {
+      "model": "historical_risk",
+      "distribution": null,
+      "batch": 4096,
+      "steps": 1,
+      "total": 100
+    },
+    {
+      "model": "finance",
+      "distribution": null,
+      "batch": 1,
+      "steps": 420,
+      "total": 420
+    },
+    {
+      "model": "finance",
+      "distribution": null,
+      "batch": 127,
+      "steps": 4,
+      "total": 420
+    },
+    {
+      "model": "finance",
+      "distribution": null,
+      "batch": 2048,
+      "steps": 1,
+      "total": 420
+    },
+    {
+      "model": "finance",
+      "distribution": null,
+      "batch": 4096,
+      "steps": 1,
+      "total": 420
+    },
+    {
+      "model": "distribution",
+      "distribution": "binomial",
+      "batch": 1,
+      "steps": 1201,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "binomial",
+      "batch": 127,
+      "steps": 10,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "binomial",
+      "batch": 2048,
+      "steps": 3,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "binomial",
+      "batch": 4096,
+      "steps": 3,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "gamma",
+      "batch": 1,
+      "steps": 1201,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "gamma",
+      "batch": 127,
+      "steps": 10,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "gamma",
+      "batch": 2048,
+      "steps": 1,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "gamma",
+      "batch": 4096,
+      "steps": 1,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "normal",
+      "batch": 1,
+      "steps": 1201,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "normal",
+      "batch": 127,
+      "steps": 10,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "normal",
+      "batch": 2048,
+      "steps": 1,
+      "total": 1201
+    },
+    {
+      "model": "distribution",
+      "distribution": "normal",
+      "batch": 4096,
+      "steps": 1,
+      "total": 1201
+    }
+  ],
+  "wasmBytes": 542005,
+  "wasmSha256": "6cc083c613b7d1d1fdc543b1a9bc93d243ed23f9c25538806cacb2d3c50b88d2",
+  "benchmark": {
+    "scope": "Node, initialized release WASM, request to proof, 3 warmups discarded",
+    "initializationMs": 0.9890000000000327,
+    "initialLinearBytes": 1114112,
+    "finalLinearBytes": 2031616,
+    "measurements": 12,
+    "p50Ms": 8.090200000000095,
+    "p95Ms": 9.561899999999923
+  }
+}

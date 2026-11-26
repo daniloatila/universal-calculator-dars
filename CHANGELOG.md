@@ -2,6 +2,13 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
+## 0.5.0 · Science, engineering and data
+
+- Added Statistics, Probability, Simulation, Optimization, Physics & Engineering, Graph Lab and Data Lab to the on-demand module registry.
+- Added worker progress and watchdogs by task class, deterministic simulation batches, on-demand 2D/3D rendering and a local tabular pipeline.
+- Kept source notation across language changes and extended calculation records to scientific conventions, units, seeds and source hashes.
+- Integrated the approved Objective 04 review tree into main. The owner approval is recorded at 95/100.
+
 ## 0.4.1 · Objective 04 financial comparison revision
 
 - Records available numerical stopping tolerances and withholds differences that fall inside the solver resolution.

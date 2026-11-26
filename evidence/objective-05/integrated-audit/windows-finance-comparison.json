@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "version": "0.5.0",
+  "executable_sha256": "c1f89fdf8206d531652c7c88527209c3786701291ae23f9579dd393cd62b5588",
+  "webview2": "158.0.4370.33",
+  "pair_milliseconds": 103.22199999999975,
+  "selected_milliseconds": 55.61620000000039,
+  "import_milliseconds": 200.15920000000006,
+  "startup_to_checked_standard_ms": 556.8775000000005,
+  "visible_standard_memory": {
+    "workingSetBytes": {
+      "count": 6,
+      "p50": 412258304,
+      "p95": 414662656,
+      "p99": 414662656
+    },
+    "privateWorkingSetBytes": {
+      "count": 6,
+      "p50": 106811392,
+      "p95": 110309376,
+      "p99": 110309376
+    },
+    "privateBytes": {
+      "count": 6,
+      "p50": 252248064,
+      "p95": 254427136,
+      "p99": 254427136
+    },
+    "sharedCommitBytes": {
+      "count": 6,
+      "p50": 91926528,
+      "p95": 98381824,
+      "p99": 98381824
+    },
+    "sharedWorkingSetBytes": {
+      "count": 6,
+      "p50": 305524736,
+      "p95": 307679232,
+      "p99": 307679232
+    }
+  },
+  "visible_comparison_memory": {
+    "workingSetBytes": {
+      "count": 2,
+      "p50": 431685632,
+      "p95": 434094080,
+      "p99": 434094080
+    },
+    "privateWorkingSetBytes": {
+      "count": 2,
+      "p50": 118652928,
+      "p95": 121081856,
+      "p99": 121081856
+    },
+    "privateBytes": {
+      "count": 2,
+      "p50": 275709952,
+      "p95": 278138880,
+      "p99": 278138880
+    },
+    "sharedCommitBytes": {
+      "count": 2,
+      "p50": 96514048,
+      "p95": 96514048,
+      "p99": 96514048
+    },
+    "sharedWorkingSetBytes": {
+      "count": 2,
+      "p50": 313012224,
+      "p95": 313032704,
+      "p99": 313032704
+    }
+  },
+  "workers_after_comparison": 0,
+  "remaining_processes": 0,
+  "proofBytes": 6008,
+  "scenarioExportBytes": 1081,
+  "historicalImportReproduced": true,
+  "retainedAfterSwitch": true,
+  "workers": {
+    "opened": 8,
+    "closed": 8,
+    "peak": 1
+  },
+  "externalHttpRequests": 0,
+  "audited_source_commit": "50225fb5dccb677b10653058f81d89c168a5743c",
+  "run_id": 45860076452,
+  "artifact_id": 15137777779
+}

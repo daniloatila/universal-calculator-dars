@@ -43,3 +43,15 @@ Record the classified pattern, measurement sensitivity, incremental target resul
 ## Objective 04 follow-up
 
 Two paired Windows measurements compared the audited 0.3.1 Standard workspace with 0.4.0 on WebView2 158.0.4370.33. At visible Standard idle, the tree private resident medians were 102,719,488 → 103,960,576 bytes in the first pair and 106,807,296 → 104,046,592 bytes in the second. The tree private commit medians were 247,025,664 → 248,455,168 bytes and 251,256,832 → 248,639,488 bytes. Both 0.4.0 runs closed all five temporary finance workers and left zero processes after closing the application. File caches stayed in their existing state. The observations leave the incremental physical RAM target and the extended retention experiment open. [First pair](../../objective-04/desktop.json) · [Second pair](../../objective-04/desktop-repeat.json)
+
+## Objective 05 follow-up
+
+The physical comparison used the 0.4.1 and 0.5.0 review executables on the same Windows x64 machine, with fresh WebView2 user profiles and runtime 158.0.4370.33. The table shows process-tree medians in bytes. Standard visible idle was sampled six times per version after the same 12 calculations.
+
+| Measurement | 0.4.1 | 0.5.0 |
+| --- | ---: | ---: |
+| Private working set at idle | 119,242,752 | 117,948,416 |
+| Private commit at idle | 271,212,544 | 266,805,248 |
+| System-wide physical memory in use, idle minus ambient control | 145,653,760 | 192,524,288 |
+
+The 0.5.0 build ran seven science modules offline and revisited Graph and Data across three cycles. All 11 science workers closed. Both application trees reached zero processes after closing. System-wide deltas include unrelated activity and shared pages could not be attributed to the application. The target of less than 100,000,000 incremental bytes remains unverified. The three-session, extended idle study remains scheduled for the pre-1.0 audit. [0.4.1 in the same session](../../objective-05/integrated-audit/windows-baseline.json) · [0.5.0 cycles](../../objective-05/integrated-audit/windows-candidate.json)

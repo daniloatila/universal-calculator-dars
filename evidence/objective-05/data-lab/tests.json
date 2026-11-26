@@ -1,0 +1,18 @@
+{
+  "source_commit": "1c816567d91524430779c93cf3c90984dfdcc99a",
+  "native_wasm": {
+    "suite": "local-tabular-scientific-oracle",
+    "passed": 20,
+    "failed": 0,
+    "wasm_sha256": "729e338038178963370f4fb8de9798cfa426716303ecc59b7a043a95bfff944c",
+    "fixture_sha256": "f8f29c3a55437fe867edd449a1b1b4452ba212dcf27f672dfd643925d860e349"
+  },
+  "independent_import": {
+    "suite": "tabular-import-contracts",
+    "passed": 55,
+    "failed": 0,
+    "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae"
+  },
+  "rust_test_groups": 14,
+  "snippets_are_synthetic": true
+}

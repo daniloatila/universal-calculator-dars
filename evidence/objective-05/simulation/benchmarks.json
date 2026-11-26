@@ -1,0 +1,41 @@
+{
+  "module": "simulation",
+  "host": "Windows",
+  "method": "native release CLI process wall, fresh process per sample; includes startup and JSON serialization",
+  "cli_sha256": "61fe63752b9fbd1c36788e40d6fc0ff88d2e74687702af009b64a3728ea0dcae",
+  "benchmarks": [
+    {
+      "case": "normal_100k",
+      "samples_ms": [
+        14.237,
+        18.998,
+        13.687
+      ],
+      "sample_count": 100000,
+      "path_steps": 1,
+      "median_ms": 14.237
+    },
+    {
+      "case": "walk_2m_steps",
+      "samples_ms": [
+        103.58,
+        104.224,
+        98.393
+      ],
+      "sample_count": 20000,
+      "path_steps": 100,
+      "median_ms": 103.58
+    },
+    {
+      "case": "finance_2m_steps",
+      "samples_ms": [
+        132.578,
+        129.775,
+        127.771
+      ],
+      "sample_count": 20000,
+      "path_steps": 100,
+      "median_ms": 129.775
+    }
+  ]
+}
