@@ -4,7 +4,7 @@
 
 ## Objetivo atual
 
-**Objetivo 05 · Ciência, engenharia e dados · 0.5.1 · READY_FOR_REVIEW**
+**Objetivo 05 · Ciência, engenharia e dados · 0.5.1 · APPROVED**
 
 Em 24/11/2026, o proprietário aprovou o Objetivo 01 após a avaliação independente de 95/100 e autorizou o Objetivo 02. A entrega 0.1.1 revisada é a referência comparativa. [Aprovação](../../evidence/objective-01/approval.json) · [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) · [Relatório do Objetivo 02](../../evidence/objective-02/REPORT.md)
 
@@ -24,13 +24,15 @@ Os sete módulos científicos passaram pelos oráculos independentes e pelos tes
 
 O parecer independente da 0.5.0 atribuiu 89/100 e manteve a aprovação pendente. A revisão 0.5.1 corrigiu números nativos, datas de fórmulas e o orçamento de recursos do Laboratório de Dados. A regressão e o aplicativo Windows foram verificados. O Objetivo 05 aguarda nova auditoria independente. [Relatório da revisão](../../evidence/objective-05/revision-01/REPORT.pt-BR.md) · [CI](../../evidence/objective-05/revision-01/ci.json)
 
+O proprietário aprovou formalmente o Objetivo 05 com 95/100 e autorizou o Objetivo 06 em 26/11/2026. [0.5.1](../../evidence/objective-05/approval.json)
+
 | Objetivo | Versão planejada | Estado | Evidências |
 | --- | --- | --- | --- |
 | 01 · Fundação | 0.1.1 | APPROVED | [Aprovação](../../evidence/objective-01/approval.json) · [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) |
 | 02 · Inteligência operacional | 0.2.2 | APPROVED | [Aprovação](../../evidence/objective-02/approval.json) · [Revisão 02](../../evidence/objective-02/revision-02/REPORT.pt-BR.md) |
 | 03 · Matemática universal | 0.3.1 | APPROVED | [Aprovação](../../evidence/objective-03/approval.json) · [Revisão 01](../../evidence/objective-03/revision-01/REPORT.pt-BR.md) · [Auditoria histórica da 0.3.0](../../evidence/objective-03/REPORT.pt-BR.md) |
 | 04 · Finanças e negócios | 0.4.1 | APPROVED | [Revisão 01](../../evidence/objective-04/revision-01/REPORT.pt-BR.md) · [Aceitação](../../evidence/objective-04/revision-01/acceptance.json) · [Relatório 0.4.0](../../evidence/objective-04/REPORT.pt-BR.md) |
-| 05 · Ciência, engenharia e dados | 0.5.1 | READY_FOR_REVIEW | [Relatório](../../evidence/objective-05/revision-01/REPORT.pt-BR.md) · [Aceitação](../../evidence/objective-05/revision-01/acceptance.json) |
+| 05 · Ciência, engenharia e dados | 0.5.1 | APPROVED | [Relatório](../../evidence/objective-05/revision-01/REPORT.pt-BR.md) · [Aceitação](../../evidence/objective-05/revision-01/acceptance.json) |
 | 06 · Produtividade, automação e IA | 0.6.0 | NOT_STARTED | `evidence/objective-06/` |
 | 07 · Distribuição e atualizações | 0.9.0 | NOT_STARTED | `evidence/objective-07/` |
 | 08 · Auditoria global e lançamento | 1.0.0 | NOT_STARTED | `evidence/objective-08/` |
