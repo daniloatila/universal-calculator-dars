@@ -1,5 +1,7 @@
 # Security and data boundary
 
+[Português brasileiro](security.pt-BR.md)
+
 Comparison requests remain in the active finance worker. The worker receives two bounded calculator recipes and sends the derived Calculation Proof to the view. It does not accept supplied output values or externally asserted context as alternative operands. Unknown fields, invalid operations and nested comparisons are rejected. The file importer uses the existing bounded local path and reexecutes historical inputs. Proof exports are explicit local file operations.
 
 The audit uses synthetic financial inputs. The Windows evidence identifies the tested executable, its Actions commit and digest. Review uses normal Windows policy and the existing local Tauri origin. The candidate requests no additional capabilities, network destination, credentials or financial persistence.

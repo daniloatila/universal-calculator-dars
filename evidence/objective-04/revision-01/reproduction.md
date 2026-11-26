@@ -1,5 +1,7 @@
 # Reproducing the 0.4.1 comparison revision
 
+[Português brasileiro](reproduction.pt-BR.md)
+
 The historical fixture was captured from the hosted and hash-verified 0.4.0 Windows package running on installed WebView2. Open Financial and select Equivalent rate. Save one scenario with a source rate of 0.10, two source periods per year, and two destination periods per year. Save a second scenario with the same source and one destination period. Comparing Rate in 0.4.0 reports 0.11 and 110%. [Original input and proof](before-windows.json) · [Capture](before-windows.png)
 
 Open the [historical scenario file](historical-scenarios.json) in the 0.4.1 Scenario Comparator. The engine recalculates both recipes, identifies the different periods, rebuilds the proof and shows 0.21 for both results on an effective annual basis. The fractional difference, percentage points and relative percent are zero.

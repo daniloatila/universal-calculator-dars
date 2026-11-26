@@ -199,6 +199,41 @@ test('business markup and margin keep their distinct bases and equal labels do n
   await expect(difference(page, 'percentage_points')).toHaveText('17.5');
 });
 
+test('dated loan costs surface solver tolerances and suppress differences inside their combined resolution', async ({ page }) => {
+  await openModule(page, 'loans');
+  const loan = { method: 'single_payment', principal: '1000000', periods: '1', start_date: '2026-01-01', rate: '0.010000000000' };
+  await save(page, 'effective_cost', loan);
+  await save(page, 'effective_cost', { ...loan, rate: '0.010000000001' });
+  await save(page, 'effective_cost', { ...loan, upfront_fee: '0.000000000001' });
+
+  await selectPair(page, '1', '2');
+  await inspect(page, 'effective_cost', 'direct');
+  await expect(delta(page).locator('[data-solver-tolerance]')).toHaveText(['0.000000000001', '0.000000000001']);
+  await expect(delta(page).locator('[data-comparison-precision-warning="solver_resolution"]'))
+    .toHaveText(labels.comparison_warning_solver_resolution);
+  await expect(difference(page, 'absolute_difference')).toHaveText('0.00000000001');
+
+  await selectPair(page, '1', '3');
+  await inspect(page, 'effective_cost', 'direct');
+  await expect(delta(page).locator('[data-comparison-precision-warning="within_solver_resolution"]'))
+    .toHaveText(labels.comparison_warning_within_solver_resolution);
+  await expect(delta(page).getByTestId('finance-comparison-differences')).toHaveCount(0);
+  await expect(delta(page)).not.toContainText(labels.comparison_relative_zero);
+  const details = delta(page).getByTestId('finance-comparison-proof');
+  await details.locator('summary').click();
+  await expect(details).toContainText(labels.combined_solver_tolerance);
+  await expect(details).toContainText('0.000000000002');
+  const [file] = await Promise.all([
+    page.waitForEvent('download'), button(page, labels.comparison_export_proof).click(),
+  ]);
+  const proof = JSON.parse(await readFile(await file.path(), 'utf8')) as CalculationProof;
+  expect(JSON.parse(proof.result).selected).toMatchObject({
+    absolute_difference: null, percentage_points: null, relative_percent: null,
+    precision_warning: 'within_solver_resolution',
+    precision_used: { combined_solver_tolerance: '0.000000000002' },
+  });
+});
+
 test('periodic and dated annual modified internal returns do not produce an equivalent delta', async ({ page }) => {
   await openModule(page, 'financial');
   await save(page, 'mirr');

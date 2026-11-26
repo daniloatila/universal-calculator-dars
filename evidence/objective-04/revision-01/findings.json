@@ -48,6 +48,18 @@
       "display_decimal_places": 16,
       "corrected_display": "≈0",
       "regression_test": "apps/web/tests/finance-comparison.spec.ts"
+    },
+    {
+      "id": "FIN-COMP-04",
+      "title": "Dated loan cost comparison displayed decimals finer than the solver's stopping tolerance",
+      "status": "corrected_in_cli_and_wasm",
+      "observed_in": "intermediate 0.4.1 candidate 860668eb954a4032e3ffbb73d054c297df156fc2",
+      "reproduction": "approximation-intermediate.json",
+      "corrected_evidence": "approximation-corrected.json",
+      "observed_difference": "0.0000000000136424",
+      "independent_difference": "1.3106613361625459e-11",
+      "stopping_tolerance_per_operand": "0.000000000001",
+      "regression_test": "tests/verify-finance-comparison.py"
     }
   ]
 }

@@ -25,6 +25,74 @@ fn run(module: &str, reference: Value, alternative: Value, metric: Option<&str>)
     )
 }
 
+#[cfg(feature = "loans")]
+#[test]
+fn approximate_loan_cost_comparisons_respect_solver_resolution() {
+    let cost = |rate: &str, fee: &str| {
+        scenario(
+            "effective_cost",
+            json!({
+                "principal":"1000000", "periods":1, "start_date":"2026-01-01",
+                "method":"single_payment", "rate":rate, "upfront_fee":fee
+            }),
+            "BRL",
+        )
+    };
+    let a = cost("0.010000000000", "0");
+    let b = cost("0.010000000001", "0");
+    let (result, proof) = run("loans", a.clone(), b, Some("effective_cost"));
+    let details = &result["selected"];
+    assert_eq!(details["status"], "direct");
+    assert_eq!(details["precision_source"], "canonical_approximate");
+    assert_eq!(details["precision_warning"], "solver_resolution");
+    assert_eq!(details["reference"]["solver_tolerance"], "0.000000000001");
+    assert_eq!(details["alternative"]["solver_tolerance"], "0.000000000001");
+    assert_eq!(
+        details["precision_used"]["combined_solver_tolerance"],
+        "0.000000000002"
+    );
+    assert_eq!(details["precision_used"]["difference_decimal_places"], 11);
+    // For a single payment after 31 days, an independent high-precision
+    // evaluation of (1+r)^(365/31)-1 places the difference near 1.31066e-11.
+    assert_eq!(details["absolute_difference"], "0.00000000001");
+    assert!(proof["error_bound"].is_null());
+
+    let (result, _) = run(
+        "loans",
+        a,
+        cost("0.010000000000", "0.000000000001"),
+        Some("effective_cost"),
+    );
+    let details = &result["selected"];
+    assert_eq!(details["precision_warning"], "within_solver_resolution");
+    assert_eq!(details["relative_reason"], "within_solver_resolution");
+    assert!(details["absolute_difference"].is_null());
+    assert!(details["percentage_points"].is_null());
+    assert!(details["relative_percent"].is_null());
+
+    let (result, _) = run(
+        "loans",
+        cost("0", "0.000000000001"),
+        cost("0.01", "0"),
+        Some("effective_cost"),
+    );
+    let details = &result["selected"];
+    assert_eq!(details["precision_warning"], "solver_resolution");
+    assert_eq!(details["relative_reason"], "reference_solver_resolution");
+    assert!(details["absolute_difference"].is_string());
+    assert!(details["relative_percent"].is_null());
+
+    let (result, _) = run(
+        "loans",
+        cost("0", "0"),
+        cost("0.01", "0"),
+        Some("effective_cost"),
+    );
+    let details = &result["selected"];
+    assert!(details["reference"]["solver_tolerance"].is_null());
+    assert_eq!(details["relative_reason"], "zero_reference");
+}
+
 #[cfg(feature = "financial")]
 #[test]
 fn reproduces_equivalent_and_nominal_rates_from_their_exact_origins() {

@@ -153,6 +153,8 @@ function OriginalIndicator({ title, indicator, label, display, present }: {
         <div><dt>{label('comparison_precision')}</dt><dd>{label('comparison_' + indicator.exactness)}
           {indicator.decimal_places !== null && ` · ${label('comparison_decimal_places')} ${present(String(indicator.decimal_places))}`}
         </dd></div>
+        {indicator.solver_tolerance && <div><dt>{label('solver_tolerance')}</dt>
+          <dd data-solver-tolerance>{scalar(indicator.solver_tolerance, label, present)}</dd></div>}
         <div><dt>{label('comparison_source')}</dt><dd>{label('comparison_source_' + indicator.source)}</dd></div>
       </dl>
       <details className="finance-detail"><summary>{label('comparison_original_basis')}</summary>
@@ -178,6 +180,7 @@ function ComparisonDetails({ comparison, proof, label, locale, exportProof }: {
   const { status, reason, reference, alternative, normalization, common_basis: basis } = comparison;
   const format = LOCALES[locale].format;
   const present = numberPresentation(format).format;
+  const showDifferences = comparableStatus(status) && comparison.precision_warning !== 'within_solver_resolution';
   const uncertainZero = comparison.exact_difference_omitted ||
     (comparison.exact_difference !== null && comparison.exact_difference !== '0') ||
     comparison.precision_source === 'canonical_approximate' || comparison.precision_source === 'presentation_rounded';
@@ -213,7 +216,10 @@ function ComparisonDetails({ comparison, proof, label, locale, exportProof }: {
         </dd></div>
       </dl>}
     </section>}
-    {comparableStatus(status) && <>
+    {comparison.precision_warning && <p data-comparison-precision-warning={comparison.precision_warning}>
+      {label('comparison_warning_' + comparison.precision_warning)}
+    </p>}
+    {showDifferences && <>
       <dl className="finance-readings" data-testid="finance-comparison-differences">
         <div><dt>{label('absolute_difference')}</dt><dd data-comparison-field="absolute_difference">
           {scalar(comparison.absolute_difference, label, presentDifference)}
@@ -225,12 +231,13 @@ function ComparisonDetails({ comparison, proof, label, locale, exportProof }: {
           {comparison.relative_percent === null ? '—' : <bdi>{presentDelta(comparison.relative_percent, percent)}</bdi>}
         </dd></div>
       </dl>
-      {comparison.relative_percent === null && <p>{label('comparison_relative_zero')}</p>}
+      {comparison.relative_reason === 'zero_reference' && <p>{label('comparison_relative_zero')}</p>}
+      {comparison.relative_reason === 'reference_solver_resolution' && <p>{label('comparison_relative_reference_resolution')}</p>}
       <p>{label('comparison_relative_basis')}</p>
-      {comparison.precision_source && <p>
-        <strong>{label('comparison_precision_source')}</strong>{' · '}{label('comparison_source_' + comparison.precision_source)}
-      </p>}
     </>}
+    {comparison.precision_source && <p>
+      <strong>{label('comparison_precision_source')}</strong>{' · '}{label('comparison_source_' + comparison.precision_source)}
+    </p>}
     {proof && <details className="finance-detail" data-testid="finance-comparison-proof">
       <summary>{label('comparison_proof')}</summary>
       <div className="finance-actions"><button type="button" onClick={exportProof}>{label('comparison_export_proof')}</button></div>

@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import subprocess
+from decimal import Decimal, localcontext
 from fractions import Fraction
 from pathlib import Path
 
@@ -44,6 +45,21 @@ def money_case(name, left, right, difference, **checks):
 
 def interest(principal, rate, currency="BRL"):
     return recipe("simple_interest", {"principal": principal, "rate": rate, "periods": 1}, currency)
+
+
+def single_payment_cost(rate, fee="0"):
+    return recipe("effective_cost", {
+        "method": "single_payment", "principal": "1000000", "rate": rate,
+        "periods": 1, "start_date": "2026-01-01", "upfront_fee": fee,
+    })
+
+
+def independently_annualized_cost(rate, fee):
+    with localcontext() as context:
+        context.prec = 70
+        principal = Decimal("1000000")
+        payback = principal * (1 + Decimal(rate))
+        return (payback / (principal - Decimal(fee))) ** (Decimal(365) / 31) - 1
 
 
 def check_catalog_cases():
@@ -221,6 +237,16 @@ def cases():
             "nominal_status": "direct_compatible" if compatible else "loan_nominal_basis_mismatch",
             "lowest_nominal_proposal": [2] if compatible else [],
         })
+    for rate, fee in (("0.010000000001", "0"), ("0.01", "0.000000000001")):
+        reference = "0.01"
+        with localcontext() as context:
+            context.prec = 70
+            change = independently_annualized_cost(rate, fee) - independently_annualized_cost(reference, "0")
+        result.append(scenario_case(
+            f"dated_loan_cost_resolution:{rate}:{fee}", "loans",
+            single_payment_cost(reference), single_payment_cost(rate, fee), "effective_cost", "direct",
+            approximate_difference=change,
+        ))
     return result + check_catalog_cases()
 
 
@@ -260,6 +286,25 @@ def verify_comparison_result(fixture, result):
         operand = selected[side]
         if operand is not None:
             assert operand["semantic_id"] and operand["context"] and operand["source"], (name, operand)
+    if "approximate_difference" in fixture:
+        expected = fixture["approximate_difference"]
+        assert expected > 0 and selected["exact_difference"] is None, (name, selected)
+        assert selected["precision_source"] == "canonical_approximate", (name, selected)
+        assert all(Decimal(selected[side]["solver_tolerance"]) == Decimal("1e-12")
+                   for side in ("reference", "alternative")), (name, selected)
+        used = selected["precision_used"]
+        combined = Decimal(used["combined_solver_tolerance"])
+        assert combined == Decimal("2e-12"), (name, selected)
+        if expected <= combined:
+            assert selected["precision_warning"] == "within_solver_resolution", (name, selected)
+            assert all(selected[field] is None for field in
+                       ("absolute_difference", "percentage_points", "relative_percent")), (name, selected)
+        else:
+            assert selected["precision_warning"] == "solver_resolution", (name, selected)
+            places = used["difference_decimal_places"]
+            assert Decimal(10) ** -places >= combined, (name, selected)
+            assert abs(Decimal(selected["absolute_difference"]) - expected) <= Decimal(10) ** -places, (name, selected)
+        return
     if "difference" not in fixture:
         assert selected["absolute_difference"] is None and selected["relative_percent"] is None, (name, selected)
         return

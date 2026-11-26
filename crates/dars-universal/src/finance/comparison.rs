@@ -46,6 +46,7 @@ struct Scenario {
     input: Map<String, Value>,
     metrics: Vec<Metric>,
     working_precision: Option<u32>,
+    solver_tolerance: Option<String>,
 }
 
 impl Scenario {
@@ -84,6 +85,7 @@ impl Scenario {
             input,
             metrics,
             working_precision: calculation.precision,
+            solver_tolerance: calculation.tolerance,
         })
     }
 }
@@ -361,8 +363,46 @@ fn value_report(metric: &Metric, scenario: &Scenario) -> Value {
         "exactness": metric.exactness,
         "decimal_places": metric.decimal_places,
         "working_precision_bits": scenario.working_precision,
+        "solver_tolerance": declared_tolerance(metric, scenario),
         "context": metric.context,
     })
+}
+
+fn declared_tolerance<'a>(metric: &Metric, scenario: &'a Scenario) -> Option<&'a str> {
+    (metric.exactness == Exactness::Approximate && metric.value.is_some())
+        .then_some(scenario.solver_tolerance.as_deref())
+        .flatten()
+}
+
+fn solver_resolution(metric: &Metric, scenario: &Scenario) -> Rational {
+    declared_tolerance(metric, scenario)
+        .and_then(|value| super::bounded_decimal(value, 18, 40).ok())
+        .filter(Rational::is_positive)
+        .unwrap_or_else(Rational::zero)
+}
+
+fn resolution_places(resolution: &Rational, cap: u32) -> u32 {
+    if resolution.is_zero() {
+        return cap;
+    }
+    // Keep the displayed decimal step at least as wide as the source resolution.
+    let mut step = number(1);
+    let mut places = 0;
+    for _ in 0..cap {
+        step /= number(10);
+        if step < *resolution {
+            break;
+        }
+        places += 1;
+    }
+    places
+}
+
+fn decimal_tolerance(value: &Rational) -> String {
+    display(value, 40)
+        .trim_end_matches('0')
+        .trim_end_matches('.')
+        .to_owned()
 }
 
 fn annual_report(rate: &AnnualRate, metric: &Metric) -> Value {
@@ -417,6 +457,7 @@ fn detailed(
         "relative_percent",
         "precision_source",
         "precision_used",
+        "precision_warning",
         "relative_reason",
     ] {
         result[key] = Value::Null;
@@ -477,6 +518,19 @@ fn detailed(
     };
     let delta = b - a;
     let exact = matches!(source, "canonical_exact" | "statutory_quantized");
+    let (reference_resolution, alternative_resolution) = if exact {
+        (Rational::zero(), Rational::zero())
+    } else {
+        (
+            solver_resolution(left, reference),
+            solver_resolution(right, alternative),
+        )
+    };
+    // These are original solver stopping thresholds, not certified error bounds.
+    let combined_resolution = &reference_resolution + alternative_resolution;
+    let has_resolution = combined_resolution.is_positive();
+    let within_resolution = has_resolution && delta.abs() <= combined_resolution;
+    let scale = resolution_places(&combined_resolution, scale);
     let delta_scale = if pair.unit() == "money" && exact {
         let minor = money(&reference.recipe.options)
             .expect("validated currency")
@@ -490,30 +544,63 @@ fn detailed(
     } else {
         scale
     };
-    result["absolute_difference"] = json!(display(&delta, delta_scale));
+    result["absolute_difference"] =
+        json!((!within_resolution).then(|| display(&delta, delta_scale)));
     let exact_difference = exact.then(|| proof_fraction(&delta)).flatten();
     result["exact_difference_omitted"] = json!(exact && exact_difference.is_none());
     result["exact_difference"] = json!(exact_difference);
-    result["percentage_points"] = json!(
-        (pair.unit() == "rate").then(|| display(&(&delta * number(100)), scale.saturating_sub(2)))
-    );
+    let point_scale =
+        (pair.unit() == "rate" && !within_resolution).then_some(scale.saturating_sub(2));
+    result["percentage_points"] =
+        json!(point_scale.map(|digits| display(&(&delta * number(100)), digits)));
     result["formula"] = json!(FORMULA);
     result["precision_source"] = json!(source);
+    result["precision_warning"] = json!(if within_resolution {
+        Some("within_solver_resolution")
+    } else if has_resolution {
+        Some("solver_resolution")
+    } else {
+        None
+    });
+    let mut relative_digits = None;
+    let mut relative_percent_digits = None;
+    if a.is_zero() && reference_resolution.is_zero() {
+        result["relative_reason"] = json!("zero_reference");
+    } else if a.abs() <= reference_resolution {
+        result["relative_reason"] = json!("reference_solver_resolution");
+    } else if within_resolution {
+        result["relative_reason"] = json!("within_solver_resolution");
+    } else {
+        let relative = &delta / a.abs();
+        // A small denominator amplifies the stopping resolutions of both inputs.
+        // Use the propagated scale as a display heuristic, not a bound.
+        let relative_resolution = if has_resolution {
+            (&combined_resolution + relative.abs() * &reference_resolution)
+                / (a.abs() - reference_resolution)
+        } else {
+            Rational::zero()
+        };
+        if relative_resolution >= number(1) {
+            result["relative_reason"] = json!("reference_solver_resolution");
+        } else {
+            let digits = resolution_places(&relative_resolution, scale.min(12));
+            let percent_digits =
+                resolution_places(&(relative_resolution * number(100)), scale.min(10));
+            relative_digits = Some(digits);
+            relative_percent_digits = Some(percent_digits);
+            result["relative_difference"] = json!(display(&relative, digits));
+            result["relative_percent"] = json!(display(&(relative * number(100)), percent_digits));
+        }
+    }
     result["precision_used"] = json!({
-        "difference_decimal_places": delta_scale,
-        "percentage_points_decimal_places": (pair.unit() == "rate").then_some(scale.saturating_sub(2)),
-        "relative_decimal_places": scale.min(12),
-        "relative_percent_decimal_places": scale.min(10),
+        "difference_decimal_places": (!within_resolution).then_some(delta_scale),
+        "percentage_points_decimal_places": point_scale,
+        "relative_decimal_places": relative_digits,
+        "relative_percent_decimal_places": relative_percent_digits,
+        "combined_solver_tolerance": has_resolution.then(|| decimal_tolerance(&combined_resolution)),
         "rounding": "half_even",
         "exact_arithmetic_on_compared_values": true,
     });
-    if a.is_zero() {
-        result["relative_reason"] = json!("zero_reference");
-    } else {
-        let relative = &delta / a.abs();
-        result["relative_difference"] = json!(display(&relative, scale.min(12)));
-        result["relative_percent"] = json!(display(&(relative * number(100)), scale.min(10)));
-    }
     (
         result,
         if exact {
@@ -585,6 +672,7 @@ pub(super) fn evaluate(
             "The comparison matches semantic identity, unit, required context and the precision source. Contextual results are side by side only, without ranking.".to_owned(),
             "Relative changes divide by the magnitude of the reference. A zero reference has no relative change.".to_owned(),
             "Annual compound normalization uses exact originated rates or exact quotes with a known period and capitalization. Approximate results carry no certified comparison error bound.".to_owned(),
+            "Known solver stopping tolerances limit displayed precision. Their sum is a resolution heuristic, not a certified error bound. Suppressed differences do not establish equality.".to_owned(),
             "The bounded proof may omit individual fractions beyond 6 KiB. The calculation still uses the original numerical value, which can be regenerated from the recipes.".to_owned(),
         ],
         variables: BTreeMap::from([("comparison_contract".to_owned(), "1".to_owned())]),

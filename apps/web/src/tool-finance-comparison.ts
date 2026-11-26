@@ -2,6 +2,8 @@ import type { CalculationProof } from './calculation-proof';
 
 const statuses = ['direct', 'normalized', 'contextual', 'incompatible', 'undefined'] as const;
 const units = ['money', 'rate', 'ratio', 'period', 'count'] as const;
+const precisionWarnings = ['solver_resolution', 'within_solver_resolution'] as const;
+const relativeReasons = ['zero_reference', 'reference_solver_resolution', 'within_solver_resolution'] as const;
 const identifier = /^[a-z][a-z0-9_]{0,63}$/u;
 
 export type ComparisonItem = {
@@ -21,6 +23,7 @@ export type Indicator = {
   source: string;
   exactness: string;
   decimal_places: number | null;
+  solver_tolerance?: string | null;
   context: Record<string, unknown>;
 };
 
@@ -44,7 +47,9 @@ export type ComparisonDetail = ComparisonItem & {
   percentage_points: string | null;
   relative_difference: string | null;
   relative_percent: string | null;
+  relative_reason?: typeof relativeReasons[number] | null;
   precision_source: string | null;
+  precision_warning?: typeof precisionWarnings[number] | null;
   precision_used?: Record<string, unknown> | null;
   differences: string[];
 };
@@ -71,6 +76,7 @@ function indicator(value: unknown): value is Indicator | null {
     isIdentifier(value.semantic_id) && isNullableText(value.presentation) && isNullableText(value.value) &&
     typeof value.value_omitted === 'boolean' && isIdentifier(value.source) &&
     isIdentifier(value.exactness) && (value.decimal_places === null || Number.isSafeInteger(value.decimal_places)) &&
+    (value.solver_tolerance === undefined || isNullableText(value.solver_tolerance)) &&
     object(value.context);
 }
 
@@ -89,6 +95,8 @@ function comparisonDetail(value: unknown): value is ComparisonDetail {
       normalizedValue(normalization.reference) && normalizedValue(normalization.alternative)) &&
     ['absolute_difference', 'exact_difference', 'percentage_points', 'relative_difference', 'relative_percent', 'precision_source']
       .every((key) => isNullableText(record[key])) &&
+    (record.relative_reason == null || relativeReasons.some((reason) => reason === record.relative_reason)) &&
+    (record.precision_warning == null || precisionWarnings.some((warning) => warning === record.precision_warning)) &&
     (record.precision_used === undefined || record.precision_used === null || object(record.precision_used)) &&
     Array.isArray(record.differences) && record.differences.every(isIdentifier);
 }
