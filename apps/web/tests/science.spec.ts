@@ -306,6 +306,73 @@ test('simulation emits real monotone progress, releases a cancelled Worker and r
   await expect(page.getByTestId('science-canvas')).toBeVisible();
 });
 
+test('scientific labels keep their mathematical meaning in all seven languages', async ({ page }, info) => {
+  test.setTimeout(90_000);
+  await observe(page);
+  await page.goto('/');
+  expect(en.science.labels.method).toBe('Method');
+  expect(pt.science.labels.method).toBe('Método');
+  expect(en.science.labels.probability).toBe('Probability');
+  expect(pt.science.labels.probability).toBe('Probabilidade');
+  expect(en.science.labels.sample_values).toBe('Sample');
+  expect(pt.science.labels.sample_values).toBe('Amostra');
+  const reading = (key: string) => output(page).locator('[data-science-reading="' + key + '"]');
+
+  for (const locale of languages) {
+    const terms = messages[locale].science.labels;
+    await test.step(locale, async () => {
+      await language(page, locale);
+      await open(page, 'statistics', locale);
+      await page.getByTestId('science-operation').selectOption('descriptive');
+      await page.getByTestId('science-example').click();
+      expect((await run(page, 'statistics')).result.population).toBe(false);
+      const convention = reading('population').locator('xpath=following-sibling::dd');
+      await expect(convention).toHaveText(terms.sample_values);
+      await expect(reading('probability')).toHaveText(terms.probability);
+      await field(page, 'options.population').selectOption('true');
+      expect((await run(page, 'statistics')).result.population).toBe(true);
+      await expect(convention).toHaveText(terms.population_values);
+      await page.getByTestId('science-operation').selectOption('chi_square_independence');
+      await expect(page.getByRole('textbox', { name: terms.contingency_table, exact: true })).toBeVisible();
+
+      await open(page, 'probability', locale);
+      await page.getByTestId('science-example').click();
+      await run(page, 'probability');
+      await expect(reading('probability')).toHaveText([terms.probability, terms.probability]);
+      await expect(reading('density')).toHaveText(terms.density_probability);
+      await page.locator('.science-advanced summary').click();
+      await expect(page.getByRole('textbox', { name: terms.quantile_probability, exact: true })).toBeVisible();
+      await field(page, 'distribution').selectOption('gamma');
+      await expect(page.getByRole('textbox', { name: terms.rate_parameter, exact: true })).toBeVisible();
+
+      await open(page, 'simulation', locale);
+      await page.getByTestId('science-example').click();
+      await field(page, 'samples').fill('64');
+      await run(page, 'simulation');
+      await expect(reading('method')).toHaveText([terms.method, terms.method]);
+      await expect(reading('level')).toHaveText([terms.confidence_level, terms.confidence_level]);
+      await expect(output(page).getByText(terms.clt_normal, { exact: true })).toBeVisible();
+      await expect(output(page).getByText(terms.wilson, { exact: true })).toBeVisible();
+      await field(page, 'model').selectOption('random_walk');
+      await expect(page.getByRole('textbox', { name: terms.starting_value, exact: true })).toBeVisible();
+      await field(page, 'model').selectOption('finance');
+      await expect(page.getByRole('textbox', { name: terms.initial_wealth, exact: true })).toBeVisible();
+
+      await open(page, 'optimization', locale);
+      await page.getByTestId('science-operation').selectOption('newton');
+      await expect(page.getByRole('textbox', { name: terms.initial_estimate, exact: true })).toBeVisible();
+
+      await open(page, 'physics-engineering', locale);
+      await page.getByTestId('science-operation').selectOption('ideal_gas');
+      await expect(page.getByRole('textbox', { name: terms.amount_of_substance, exact: true })).toBeVisible();
+    });
+  }
+  await info.attach('science-label-locales', {
+    contentType: 'application/json', body: JSON.stringify({ locales: languages, samplePopulation: true, probability: true,
+      confidenceMethods: true, initialValues: true, rateParameter: true, contingencyTable: true }),
+  });
+});
+
 test('all science workspace controls render at 320 pixels in Arabic with local-only requests', async ({ page }, info) => {
   await page.setViewportSize({ width: 320, height: 900 });
   const remote: string[] = [];

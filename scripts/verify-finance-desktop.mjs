@@ -6,19 +6,22 @@ import { runWindowsToolBenchmark } from '../benchmarks/windows-tool.mjs';
 
 const argumentsList = process.argv.slice(2);
 const baselineOnly = argumentsList[0] === '--baseline-only';
+const candidateOnly = argumentsList[0] === '--candidate-only';
 const [baselineArgument, candidateArgument, expectedCandidateSha, outputArgument] = baselineOnly
   ? [argumentsList[1], undefined, undefined, argumentsList[2]]
-  : argumentsList;
-const candidateVersion = argumentsList[4] ?? '0.4.0';
-assert(baselineArgument && outputArgument && (baselineOnly
-  ? argumentsList.length === 3 : [4, 5].includes(argumentsList.length) &&
-      /^0\.4\.[01]$/u.test(candidateVersion) && /^[a-f0-9]{64}$/u.test(expectedCandidateSha)),
-  'Pass BASELINE_EXE CANDIDATE_EXE VERIFIED_CANDIDATE_SHA256 OUTPUT_JSON [VERSION], or --baseline-only BASELINE_EXE OUTPUT_JSON.');
+  : candidateOnly ? [undefined, argumentsList[1], argumentsList[2], argumentsList[3]] : argumentsList;
+const candidateVersion = argumentsList[4] ?? (candidateOnly ? '0.5.0' : '0.4.0');
+const validCandidate = candidateArgument && /^[a-f0-9]{64}$/u.test(expectedCandidateSha ?? '') &&
+  /^(?:0\.4\.[01]|0\.5\.0)$/u.test(candidateVersion);
+assert(outputArgument && (baselineOnly ? baselineArgument && argumentsList.length === 3
+  : validCandidate && [4,5].includes(argumentsList.length) && (candidateOnly || baselineArgument)),
+  'Pass BASELINE_EXE CANDIDATE_EXE VERIFIED_SHA256 OUTPUT_JSON [VERSION], --baseline-only BASELINE_EXE OUTPUT_JSON, or --candidate-only CANDIDATE_EXE VERIFIED_SHA256 OUTPUT_JSON [VERSION].');
 
 const output = resolve(outputArgument);
 const screenshotDirectory = join(dirname(output), `${basename(output, '.json')}-screenshots`);
 await mkdir(screenshotDirectory, { recursive: true });
-const receipt = JSON.parse(await readFile(new URL('../evidence/objective-03/revision-01/windows-artifact.json', import.meta.url), 'utf8'));
+const receipt = candidateOnly ? undefined
+  : JSON.parse(await readFile(new URL('../evidence/objective-03/revision-01/windows-artifact.json', import.meta.url), 'utf8'));
 
 async function verifiedExecutable(argument, expectedSha) {
   const executable = resolve(argument);
@@ -27,7 +30,7 @@ async function verifiedExecutable(argument, expectedSha) {
   return executable;
 }
 
-const baselineExecutable = await verifiedExecutable(baselineArgument, receipt.sha256);
+const baselineExecutable = candidateOnly ? undefined : await verifiedExecutable(baselineArgument, receipt.sha256);
 const candidateExecutable = baselineOnly ? undefined : await verifiedExecutable(candidateArgument, expectedCandidateSha);
 
 const repeatedStandard = [
@@ -185,14 +188,16 @@ async function audit(context, version, candidate) {
 }
 
 const run = (executable, version, candidate) => runWindowsToolBenchmark({
-  artifactObjective: 'objective-04', module: 'desktop', label: `review-${version}`, audit: (context) => audit(context, version, candidate),
+  artifactObjective: version === '0.5.0' ? 'objective-05' : 'objective-04',
+  module: version === '0.5.0' ? 'desktop-finance' : 'desktop',
+  label: `review-${version}`, audit: (context) => audit(context, version, candidate),
 }, executable);
-const baseline = await run(baselineExecutable, '0.3.1', false);
-assert.equal(baseline.executableSha256, receipt.sha256);
+const baseline = baselineExecutable ? await run(baselineExecutable, '0.3.1', false) : null;
+if (baseline) assert.equal(baseline.executableSha256, receipt.sha256);
 const candidate = candidateExecutable ? await run(candidateExecutable, candidateVersion, true) : null;
-if (candidate) {
+if (candidate) assert.equal(candidate.executableSha256, expectedCandidateSha);
+if (candidate && baseline) {
   assert.equal(baseline.webview, candidate.webview);
-  assert.equal(candidate.executableSha256, expectedCandidateSha);
   assert.notEqual(baseline.executableSha256, candidate.executableSha256);
   assert.deepEqual(baseline.interactions.map(({ expression, expected }) => ({ expression, expected })),
     candidate.interactions.map(({ expression, expected }) => ({ expression, expected })));
@@ -213,15 +218,16 @@ function memoryComparison(phase) {
 }
 
 const report = {
-  schema: 1, status: candidate ? 'complete' : 'baseline_only',
-  method: 'Fresh WebView2 profiles and the same interactive Windows device. Paired Standard workload and candidate-only offline finance cases.',
+  schema: 1, status: candidateOnly ? 'candidate_only' : candidate ? 'complete' : 'baseline_only',
+  method: candidateOnly ? 'Fresh WebView2 profile and five checked offline finance cases with exact candidate provenance.'
+    : 'Fresh WebView2 profiles and the same interactive Windows device. Paired Standard workload and candidate-only offline finance cases.',
   limitations: [
     'The startup clock includes one native sampler call and ends at the checked Standard result.',
     'One startup and twelve visible Standard recalculations per artifact describe this controlled run, not long-run behavior.',
     'Private working set is process-resident private memory. Private bytes is process private commit. Adjacent samples can vary with OS activity.',
   ],
   screenshotDirectory: basename(screenshotDirectory),
-  comparison: candidate ? {
+  comparison: candidate && baseline ? {
     startupToCheckedStandardMs: compare((run) => run.startupToCheckedStandardMs),
     standardRecalculationP50Ms: compare((run) => run.standardRecalculationMs.p50),
     standardRecalculationP95Ms: compare((run) => run.standardRecalculationMs.p95),
@@ -233,5 +239,5 @@ const report = {
 };
 await writeFile(output, `${JSON.stringify(report, null, 2)}\n`, { flush: true });
 console.log(JSON.stringify({ status: report.status, examples: candidate?.financeExamples.length ?? 0,
-  baselineProcessesAfterClose: baseline.phases.after_close.processesAtEnd,
+  baselineProcessesAfterClose: baseline?.phases.after_close.processesAtEnd ?? null,
   candidateProcessesAfterClose: candidate?.phases.after_close.processesAtEnd ?? null }));

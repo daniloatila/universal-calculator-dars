@@ -4,9 +4,9 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { runWindowsToolBenchmark } from '../benchmarks/windows-tool.mjs';
 
-const [executable, expectedSha, output] = process.argv.slice(2);
-assert(executable && /^[0-9a-f]{64}$/u.test(expectedSha ?? '') && output,
-  'Pass the 0.4.1 Windows executable, its verified SHA-256, and an output directory.');
+const [executable, expectedSha, output, version = '0.4.1'] = process.argv.slice(2);
+assert(executable && /^[0-9a-f]{64}$/u.test(expectedSha ?? '') && output && ['0.4.1','0.5.0'].includes(version),
+  'Pass the Windows executable, its verified SHA-256, an output directory, and optionally version 0.4.1 or 0.5.0.');
 const digest = createHash('sha256').update(await readFile(executable)).digest('hex');
 assert.equal(digest, expectedSha);
 const folder = resolve(output);
@@ -24,7 +24,7 @@ async function exportProof(details, page) {
 }
 
 function checkProof(proof) {
-  assert.equal(proof.engine_version, '0.4.1');
+  assert.equal(proof.engine_version, version);
   assert.equal(proof.operation, 'scenario_compare');
   const { selected } = JSON.parse(proof.result);
   assert.equal(selected.status, 'normalized');
@@ -37,7 +37,8 @@ function checkProof(proof) {
 }
 
 const observed = await runWindowsToolBenchmark({
-  artifactObjective: 'objective-04', module: 'revision-01', label: 'comparison-0.4.1',
+  artifactObjective: version === '0.5.0' ? 'objective-05' : 'objective-04',
+  module: version === '0.5.0' ? 'finance-comparison' : 'revision-01', label: `comparison-${version}`,
   async audit({ page, expect, data, sample }) {
     const main = page.locator('main');
     const chooser = page.getByRole('combobox', { name: 'Module', exact: true });
@@ -128,7 +129,7 @@ const observed = await runWindowsToolBenchmark({
 assert.equal(observed.phases.after_close.processesAtEnd, 0);
 const report = {
   schema: 1,
-  version: '0.4.1',
+  version,
   executable_sha256: digest,
   webview2: observed.webview,
   pair_milliseconds: observed.pairMilliseconds,

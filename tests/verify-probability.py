@@ -164,7 +164,7 @@ def run(cli):
         ("poisson", {"lambda": 0}, 0), ("hypergeometric", {"population": 1, "successes": 1, "draws": 1}, 1),
     ]
     for name, parameters, value in degenerates:
-        r = evaluate(f"degenerate_{name}", {"distribution": name, "parameters": parameters, "x": value, "sample_count": 2, "seed": "2", "probability": 0})
+        r = evaluate(f"degenerate_moments_{name}", {"distribution": name, "parameters": parameters, "x": value, "sample_count": 2, "seed": "2", "probability": 0})
         assert r["point"]["mass"] == r["point"]["cdf"] == 1 and r["point"]["survival"] == r["variance"] == 0
         assert r["samples"] == [value,value] and r["quantile"]["value"] == value
     for name,parameters,error in [

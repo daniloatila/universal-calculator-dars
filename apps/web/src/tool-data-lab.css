@@ -13,7 +13,7 @@
 .data-lab fieldset,
 .data-stat,
 .data-lab figure {
-  border: 1px solid var(--border, #425976);
+  border: 1px solid var(--line);
   border-radius: 0.65rem;
   padding: 0.9rem;
 }
@@ -45,6 +45,16 @@
   max-width: 100%;
   font: inherit;
 }
+.data-lab select,
+.data-lab textarea,
+.data-lab input:not([type='checkbox'], [type='file']) {
+  box-sizing: border-box;
+  background: var(--display);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.65rem;
+}
 .data-lab textarea {
   width: 100%;
   font-family: monospace;
@@ -64,10 +74,29 @@
 .data-lab select {
   min-height: 2.4rem;
 }
+.data-lab button,
+.data-lab ::file-selector-button {
+  background: var(--key);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.65rem;
+  font: inherit;
+}
+.data-lab button:hover:enabled,
+.data-lab ::file-selector-button:hover {
+  background: var(--key-hover);
+}
+.data-lab button:disabled {
+  color: var(--muted);
+}
 .data-lab .data-run {
-  background: #235590;
-  color: #fff;
-  border-color: #6595c7;
+  background: var(--accent-key);
+  color: var(--accent-ink);
+  font-weight: 700;
+}
+.data-lab .data-run:hover:enabled {
+  background: var(--accent-key-hover);
 }
 .data-scroll {
   overflow: auto;
@@ -82,7 +111,7 @@
 .data-lab th {
   padding: 0.48rem 0.65rem;
   text-align: start;
-  border-bottom: 1px solid var(--border, #425976);
+  border-bottom: 1px solid var(--line);
   overflow-wrap: anywhere;
   max-width: 24rem;
 }
@@ -111,6 +140,7 @@
 }
 .data-stat {
   flex: 1;
+  align-self: stretch;
   min-width: 9rem;
 }
 .data-lab input[type='file'] {

@@ -63,6 +63,8 @@ jobs:
           node tests/check-data-targets.mjs target/release/dars
           node tests/check-science-kernel-targets.mjs target/release/dars
           node tests/verify-simulation-targets.mjs target/release/dars
+          python3 -B tests/verify-data-import.py target/release/dars
+          python3 -B tests/verify-optimization-boundaries.py target/release/dars
           python3 -B crates/dars-core/tests/structured-oracle.py
       - name: Verify advanced mathematics with independent references
         if: runner.os == 'Linux'
@@ -100,6 +102,10 @@ jobs:
           done
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-optimization.py target/llvm-cov-target/release/dars --scipy
           node tests/check-data-targets.mjs target/llvm-cov-target/release/dars
+          node tests/check-science-kernel-targets.mjs target/llvm-cov-target/release/dars
+          node tests/verify-simulation-targets.mjs target/llvm-cov-target/release/dars
+          python3 -B tests/verify-data-import.py target/llvm-cov-target/release/dars
+          python3 -B tests/verify-optimization-boundaries.py target/llvm-cov-target/release/dars
           cargo llvm-cov report --release --json --summary-only --output-path "$RUNNER_TEMP/dars-science-coverage.json"
           python3 -B tests/summarize-science-coverage.py "$RUNNER_TEMP/dars-science-coverage.json"
       - name: Measure financial line coverage from tests and independent oracles

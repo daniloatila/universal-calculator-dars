@@ -46,8 +46,8 @@ class Oracle:
         assert proof["constraints"] and proof["error_bound"] is None, proof
         return json.loads(proof["result"]), proof
 
-    def finish(self, report, references):
-        summary = {"schema": 1, "suite": f"{self.module}-independent-cli", "cases": sum(self.counts.values()),
+    def finish(self, report, references, *, suite=None):
+        summary = {"schema": 1, "suite": suite or f"{self.module}-independent-cli", "cases": sum(self.counts.values()),
                    "by_category": dict(sorted(self.counts.items())), "references": references,
                    "maximum_case_wall_time_ms": round(self.max_ms, 3),
                    "executable_sha256": hashlib.sha256(self.executable.read_bytes()).hexdigest()}
@@ -55,3 +55,4 @@ class Oracle:
         if report:
             report.write_text(text, encoding="utf-8")
         print(json.dumps(summary, separators=(",", ":")))
+        return summary

@@ -32,6 +32,21 @@ const chartKeys = new Set(['series', 'grid', 'plot', 'histogram']);
 const inputBytes = 4096;
 const encoder = new TextEncoder();
 const empty: Draft = {};
+const sharedLabels = new Set([
+  'assumptions', 'contribution', 'currency', 'example', 'false', 'negative',
+  'operation', 'period', 'positive', 'roots', 'sensitivity', 'status', 'table', 'true', 'unit',
+]);
+const parameterLabels: Readonly<Record<string, string>> = {
+  'parameters.population': 'population_size',
+  'parameters.rate': 'rate_parameter',
+};
+const fieldLabels: Partial<Record<CalculationScienceModule, Readonly<Record<string, string>>>> = {
+  statistics: { table: 'contingency_table' },
+  probability: { probability: 'quantile_probability' },
+  simulation: { start: 'starting_value', initial: 'initial_wealth' },
+  optimization: { initial: 'initial_estimate' },
+  'physics-engineering': { mass: 'mass_quantity', amount: 'amount_of_substance' },
+};
 type RecordData = Record<string, unknown>;
 type FramePolicy = Pick<AdaptivePolicy, 'graphicsFrameIntervalMs'>;
 
@@ -44,7 +59,9 @@ export type ScienceState = {
 export function scienceLabel(messages: Messages, key: string) {
   const labels: Readonly<Record<string, string>> = messages.science.labels;
   const finance: Readonly<Record<string, string>> = messages.finance.labels;
-  return labels[key] ?? finance[key] ?? key.replaceAll('_', ' ');
+  if (Object.hasOwn(labels, key)) return labels[key]!;
+  if (sharedLabels.has(key) && Object.hasOwn(finance, key)) return finance[key]!;
+  return key.replaceAll('_', ' ');
 }
 
 function makeDraft(module: CalculationScienceModule, operation: Operation, locale: Locale, previous: Draft = empty) {
@@ -57,11 +74,13 @@ function isObject(value: unknown): value is RecordData {
   return Boolean(value && typeof value === 'object' && !Array.isArray(value));
 }
 
-function Value({ value, label, present, level = 0 }: {
-  value: unknown; label(key: string): string; present(value: string): string; level?: number;
+function Value({ value, label, present, field, level = 0 }: {
+  value: unknown; label(key: string): string; present(value: string): string; field?: string; level?: number;
 }) {
   if (value === null || value === undefined) return <span aria-label={label('unavailable')}>—</span>;
-  if (typeof value === 'boolean') return label(String(value));
+  if (typeof value === 'boolean') {
+    return label(field === 'population' ? value ? 'population_values' : 'sample_values' : String(value));
+  }
   if (typeof value === 'number' || typeof value === 'string') {
     const text = String(value);
     return <bdi>{numeric.test(text) ? present(text) : /^[a-z][a-z0-9_]*$/u.test(text) ? label(text) : text}</bdi>;
@@ -73,15 +92,15 @@ function Value({ value, label, present, level = 0 }: {
     if (sample.every(isObject)) {
       const headings = [...new Set(sample.flatMap(Object.keys))];
       return <div className="science-scroll" tabIndex={0} aria-label={label('table')}>
-        <table><thead><tr>{headings.map((key) => <th key={key} scope="col">{label(key)}</th>)}</tr></thead>
+        <table><thead><tr>{headings.map((key) => <th key={key} scope="col" data-science-reading={key}>{label(key)}</th>)}</tr></thead>
           <tbody>{sample.map((row, index) => <tr key={index}>{headings.map((key) =>
-            <td key={key}><Value value={row[key]} label={label} present={present} level={level + 1} /></td>)}</tr>)}</tbody>
+            <td key={key}><Value value={row[key]} label={label} present={present} field={key} level={level + 1} /></td>)}</tr>)}</tbody>
         </table>
         {value.length > sample.length && <p>{label('partial_preview').replace('{count}', present(String(value.length)))}</p>}
       </div>;
     }
     return <ol>{sample.map((item, index) => <li key={index}>
-      <Value value={item} label={label} present={present} level={level + 1} />
+      <Value value={item} label={label} present={present} field={field} level={level + 1} />
     </li>)}{value.length > sample.length && <li>{label('partial_preview').replace('{count}', present(String(value.length)))}</li>}</ol>;
   }
   if (isObject(value)) {
@@ -89,9 +108,14 @@ function Value({ value, label, present, level = 0 }: {
       return <span><bdi>{present(value.value)}</bdi>{' '}<bdi>{value.unit}</bdi></span>;
     }
     return <dl className="science-readings">
-      {Object.entries(value).map(([key, item]) => <div key={key}>
-        <dt>{label(key)}</dt><dd><Value value={item} label={label} present={present} level={level + 1} /></dd>
-      </div>)}
+      {Object.entries(value).map(([key, item]) => {
+        const labelKey = key === 'level' && field === 'confidence_interval' ? 'confidence_level'
+          : key === 'level' && field === 'loss_risk' ? 'risk_level' : key;
+        return <div key={key}>
+          <dt data-science-reading={key}>{label(labelKey)}</dt>
+          <dd><Value value={item} label={label} present={present} field={key} level={level + 1} /></dd>
+        </div>;
+      })}
     </dl>;
   }
   return null;
@@ -124,6 +148,7 @@ export function activateScience(module: CalculationScienceModule, scope: ModuleA
     const controller = useRef<AbortController>(undefined);
     const id = useId();
     const label = (key: string) => scienceLabel(messages, key);
+    const resultLabel = (key: string) => label(module === 'probability' && key === 'density' ? 'density_probability' : key);
     const present = numberPresentation(LOCALES[locale].format).format;
     const interval = useSyncExternalStore(subscribe, snapshot);
     const framePolicy: FramePolicy = useMemo(() => ({ graphicsFrameIntervalMs: interval }), [interval]);
@@ -254,8 +279,7 @@ export function activateScience(module: CalculationScienceModule, scope: ModuleA
         'data-science-field': key,
         'aria-describedby': origins.some((origin) => origin !== locale) ? id + '-notation' : undefined,
       };
-      const entryLabel = label(module === 'physics-engineering' && entry.key === 'mass' ? 'mass_quantity'
-        : entry.place === 'parameters' && entry.key === 'population' ? 'population_size' : entry.key);
+      const entryLabel = label(parameterLabels[key] ?? fieldLabels[module]?.[entry.key] ?? entry.key);
       const caption = entry.place === 'units' ? entryLabel + ' · ' + label('unit') : entryLabel;
       return <label key={key} className={multiline.has(entry.kind) ? 'science-wide' : undefined}>
         <span>{caption}</span>
@@ -295,7 +319,7 @@ export function activateScience(module: CalculationScienceModule, scope: ModuleA
               })}
             </select>
           </label>
-          <p className="science-hint">{label(module)} {entries.some((entry) => multiline.has(entry.kind)) && label('list_format')}</p>
+          <p className="science-hint">{label('hint_' + module)} {entries.some((entry) => multiline.has(entry.kind)) && label('list_format')}</p>
           <div className="science-fields">{entries.filter((entry) => !entry.advanced).map(renderField)}</div>
           {entries.some((entry) => entry.advanced) && <details className="science-advanced">
             <summary>{label('advanced_parameters')}</summary>
@@ -329,7 +353,7 @@ export function activateScience(module: CalculationScienceModule, scope: ModuleA
         </Suspense>}
         <div data-testid="science-result" data-canonical={proof?.result} aria-busy={pending}>
           {result ? <Value value={isObject(result.values) && module === 'physics-engineering' ? result.values : summarize(result)}
-            label={label} present={present} /> : <p className="science-reading-empty">{label('result_prompt')}</p>}
+            label={resultLabel} present={present} /> : <p className="science-reading-empty">{label('result_prompt')}</p>}
         </div>
         {proof && <CalculationProofPanel proof={proof} locale={locale}
           localizeText={(field, text) => field === 'operation' ? label(text) : text} />}
