@@ -1,0 +1,59 @@
+{
+  "command": {
+    "schema": 1,
+    "module": "loans",
+    "operation": "compare",
+    "input": "{\"proposals\":[{\"method\":\"price\",\"principal\":\"1000\",\"rate\":\"0.01\",\"periods\":3,\"start_date\":\"2026-01-31\"},{\"method\":\"sac\",\"principal\":\"2000\",\"rate\":\"0.01\",\"periods\":6,\"start_date\":\"2026-01-31\"}]}",
+    "options": {
+      "currency": "BRL",
+      "rounding": "half_even"
+    }
+  },
+  "proof": {
+    "algorithm_version": "loans/1",
+    "assumptions": [],
+    "constraints": [
+      "Decimal inputs and rational arithmetic before presentation, with operation-specific exceptions stated below.",
+      "Rates in canonical inputs are fractional (0.01 means 1%). One currency applies to the entire calculation.",
+      "Monetary display follows the selected rounding rule and ISO 4217 minor-unit scale.",
+      "Each installment accrues one contractual period at the applicable nonnegative rate. Civil dates use a fixed monthly day, clamped when the month is shorter.",
+      "Interest and fees are computed before principal and extra payments. Extra payments are capped at the open balance. Scheduled rows and charges end when that balance is zero.",
+      "Price reinstates the remaining-term payment at a rate change; extra reduce_payment also recasts Price and SAC. Uniform keeps its supplied payment until the closing installment; bullet repays scheduled principal at maturity.",
+      "Single-payment loans capitalize all interest until the closing installment. Optional fees and extra principal are separate cash flows if supplied.",
+      "In per_row mode principal, fees, uniform payment and extras enter the ledger at currency scale, and each row rounds interest and principal. Final mode retains rational amounts and rounds each displayed figure independently.",
+      "The closing payment settles the remaining balance. A payment on payoff_at includes the interest and fee accrued for that installment.",
+      "Proposal numbers follow input order, starting at 1. Nominal cost is undiscounted and depends on the amount financed and schedule."
+    ],
+    "domain": "financial_decimal",
+    "engine_version": "0.4.0",
+    "error_bound": null,
+    "exactness": "exact",
+    "expression": "{\"proposals\":[{\"method\":\"price\",\"principal\":\"1000\",\"rate\":\"0.01\",\"periods\":3,\"start_date\":\"2026-01-31\"},{\"method\":\"sac\",\"principal\":\"2000\",\"rate\":\"0.01\",\"periods\":6,\"start_date\":\"2026-01-31\"}]}",
+    "formula": "nominal cost = total paid − principal; rank by nominal cost",
+    "method": "loan_proposal_comparison",
+    "module": "loans",
+    "normalized": "{\"proposals\":[{\"method\":\"price\",\"periods\":3,\"principal\":\"1000\",\"rate\":\"0.01\",\"start_date\":\"2026-01-31\"},{\"method\":\"sac\",\"periods\":6,\"principal\":\"2000\",\"rate\":\"0.01\",\"start_date\":\"2026-01-31\"}]}",
+    "operation": "compare",
+    "options": {
+      "currency": "BRL",
+      "rounding": "half_even"
+    },
+    "precision": null,
+    "references": [
+      "https://www.six-group.com/en/products-services/financial-information/market-reference-data/data-standards.html",
+      "https://www3.bcb.gov.br/CALCIDADAO/publico/exibirMetodologiaFinanciamentoPrestacoesFixas.do?method=exibirMetodologiaFinanciamentoPrestacoesFixas",
+      "https://www.bcb.gov.br/content/estabilidadefinanceira/especialnor/Resolu%C3%A7%C3%A3o4881.pdf"
+    ],
+    "result": "{\"least_total_cost_proposals\":[1],\"proposals\":[{\"actual_periods\":3,\"amortization\":\"1000.00\",\"balance_end\":\"0.00\",\"capitalized\":\"0.00\",\"contract_periods\":3,\"extra\":\"0.00\",\"fees\":\"0.00\",\"interest\":\"20.07\",\"method\":\"price\",\"principal\":\"1000.00\",\"rounding_scope\":\"final\",\"start_date\":\"2026-01-31\",\"total_cost\":\"20.07\",\"total_paid\":\"1020.07\",\"upfront_fee\":\"0.00\"},{\"actual_periods\":6,\"amortization\":\"2000.00\",\"balance_end\":\"0.00\",\"capitalized\":\"0.00\",\"contract_periods\":6,\"extra\":\"0.00\",\"fees\":\"0.00\",\"interest\":\"70.00\",\"method\":\"sac\",\"principal\":\"2000.00\",\"rounding_scope\":\"final\",\"start_date\":\"2026-01-31\",\"total_cost\":\"70.00\",\"total_paid\":\"2070.00\",\"upfront_fee\":\"0.00\"}]}",
+    "rounding": "monetary presentation: nearest, ties to even",
+    "schema": 1,
+    "tolerance": null,
+    "units": {
+      "currency": "BRL"
+    },
+    "variables": {
+      "minor_unit_scale": "2",
+      "rounding_policy": "half_even"
+    }
+  }
+}

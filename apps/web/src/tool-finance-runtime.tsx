@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { CalculationProofPanel } from './calculation-proof-panel';
+import { MAX_CALCULATION_PROOF_BYTES, MAX_FINANCE_COMPARISON_INPUT_BYTES } from './calculation-proof';
 import type { CalculationProof } from './calculation-proof';
 import { LOCALES } from './i18n';
 import type { Locale } from './i18n';
@@ -9,7 +10,8 @@ import type { ModuleActivation } from './module-manager';
 import type { ModuleWorkspaceProps, PrimaryModule } from './module-registry';
 import { canonicalDraft, exampleDraft, operations, replayDraft } from './tool-finance-input';
 import type { Cell, Draft, Field } from './tool-finance-input';
-import { FinanceResult, ScenarioResults, readResult, downloadJson, scenarioMetrics } from './tool-finance-result';
+import { readComparison } from './tool-finance-comparison';
+import { FinanceResult, ScenarioResults, readResult, downloadJson } from './tool-finance-result';
 import { activateTool } from './tool-runtime';
 import type { ToolRequest } from './tool-runtime';
 import './tool-finance.css';
@@ -28,9 +30,16 @@ const byteLength = new TextEncoder();
 const MAX_SCENARIO_BYTES = 64 * 1024;
 const currenciesFor = (id: FinanceModule) => id === 'tax' ? ['BRL'] : currencies;
 const maxScenarios = 6;
-const loanSchedules = ['price', 'sac', 'uniform', 'bullet', 'single_payment'];
 
 type Saved = { id: number; proof: CalculationProof };
+type ComparisonState = {
+  reference: number;
+  alternative: number;
+  result?: ReturnType<typeof readComparison>;
+  proof?: CalculationProof;
+};
+const noComparison: ComparisonState = { reference: 0, alternative: 0 };
+
 export type FinanceState = {
   operation: string;
   drafts: Record<string, Draft>;
@@ -39,6 +48,7 @@ export type FinanceState = {
   proof?: CalculationProof;
   scenarios: Saved[];
   next: number;
+  comparison?: ComparisonState;
 };
 
 function isObject(value: unknown): value is Record<string, unknown> {
@@ -50,20 +60,13 @@ function storedRequest(proof: CalculationProof): ToolRequest {
     original_input: proof.expression, options: proof.options };
 }
 
-function canCompare(id: FinanceModule, baseline: Saved, candidate: Saved) {
-  return baseline.id !== candidate.id &&
-    (baseline.proof.operation === candidate.proof.operation ||
-      id === 'loans' && [baseline, candidate].every(({ proof }) => loanSchedules.includes(proof.operation))) &&
-    baseline.proof.units.currency === candidate.proof.units.currency;
-}
-
-function comparisonRequest(id: FinanceModule, baseline: Saved, candidate: Saved, key: string): ToolRequest {
-  const selected = canCompare(id, baseline, candidate) &&
-    scenarioMetrics(readResult(baseline.proof), readResult(candidate.proof)).find((entry) => entry.key === key);
-  if (!selected) throw new TypeError('invalid_input');
-  const { reference, alternative, unit } = selected;
-  return { schema: 1, module: id, operation: 'scenario_compare',
-    input: JSON.stringify({ reference, alternative, unit }), options: baseline.proof.options };
+function comparisonRequest(id: FinanceModule, baseline: Saved, candidate: Saved, metric?: string): ToolRequest {
+  function source({ proof }: Saved) {
+    return { operation: proof.operation, input: proof.normalized, options: proof.options };
+  }
+  const input = JSON.stringify({ reference: source(baseline), alternative: source(candidate), metric });
+  if (byteLength.encode(input).length > MAX_FINANCE_COMPARISON_INPUT_BYTES) throw new TypeError('limit');
+  return { schema: 1, module: id, operation: 'scenario_compare', input, options: {} };
 }
 
 export function activateFinance(id: FinanceModule, scope: ModuleActivation<FinanceState>): PrimaryModule<FinanceState> {
@@ -78,15 +81,12 @@ export function activateFinance(id: FinanceModule, scope: ModuleActivation<Finan
     const [state, setState] = useState(retained);
     const [pending, setPending] = useState(false);
     const [notice, setNotice] = useState<string>();
-    const [reference, setReference] = useState(0);
-    const [alternative, setAlternative] = useState(0);
-    const [metric, setMetric] = useState('');
-    const [delta, setDelta] = useState<CalculationProof>();
     const running = useRef<AbortController | undefined>(undefined);
     const file = useRef<HTMLInputElement>(null);
     const help = useId();
     const operation = choices.find((candidate) => candidate.id === state.operation) ?? choices[0]!;
     const draft = state.drafts[operation.id] ?? {};
+    const comparison = state.comparison ?? noComparison;
     const labels: Readonly<Record<string, string>> = messages.finance.labels;
     const operationLabels: Readonly<Record<string, string>> = messages.finance.operations;
     function label(key: string): string {
@@ -237,9 +237,16 @@ export function activateFinance(id: FinanceModule, scope: ModuleActivation<Finan
       commit({ ...state, scenarios: [...state.scenarios, { id: state.next, proof }], next: state.next + 1 });
     }
 
-    const baseline = state.scenarios.find((scenario) => scenario.id === reference);
-    const candidate = state.scenarios.find((scenario) => scenario.id === alternative);
-    const comparable = baseline && candidate && canCompare(id, baseline, candidate);
+    const baseline = state.scenarios.find((scenario) => scenario.id === comparison.reference);
+    const candidate = state.scenarios.find((scenario) => scenario.id === comparison.alternative);
+    const comparable = baseline && candidate && baseline.id !== candidate.id;
+
+    async function inspectComparison(left: Saved, right: Saved, controller: AbortController, metric?: string) {
+      const proof = await submit(comparisonRequest(id, left, right, metric), controller);
+      if (!proof) return;
+      const result = readComparison(proof, metric);
+      return { reference: left.id, alternative: right.id, result, proof: result.selected ? proof : undefined };
+    }
 
     async function importScenario(imported: File) {
       await run(async (controller) => {
@@ -247,7 +254,7 @@ export function activateFinance(id: FinanceModule, scope: ModuleActivation<Finan
         const text = new TextDecoder('utf-8', { fatal: true }).decode(await imported.arrayBuffer());
         let document: unknown;
         try { document = JSON.parse(text); } catch { throw new Error('invalid_input'); }
-        if (!isObject(document) || document.schema !== 1 || !Array.isArray(document.requests) ||
+        if (!isObject(document) || (document.schema !== 1 && document.schema !== 2) || !Array.isArray(document.requests) ||
           document.requests.length < 1 || document.requests.length > maxScenarios - state.scenarios.length) {
           throw new Error('invalid_input');
         }
@@ -256,53 +263,96 @@ export function activateFinance(id: FinanceModule, scope: ModuleActivation<Finan
           if (!isObject(value) || value.schema !== 1 || value.module !== id ||
             !choices.some((entry) => entry.id === value.operation) || typeof value.operation !== 'string' ||
             typeof value.input !== 'string' || typeof value.original_input !== 'string' || !isObject(value.options) ||
-            !currenciesFor(id).includes(String(value.options.currency)) || !roundings.includes(String(value.options.rounding)) ||
+            typeof value.options.currency !== 'string' || typeof value.options.rounding !== 'string' ||
+            !currenciesFor(id).includes(value.options.currency) || !roundings.includes(value.options.rounding) ||
             byteLength.encode(value.input).length > 4096 || byteLength.encode(value.original_input).length > 4096) {
             throw new Error('invalid_input');
           }
           if (!current(controller)) return;
           const proof = await submit({ schema: 1, module: id, operation: value.operation, input: value.input,
-            original_input: value.original_input, options: { currency: String(value.options.currency),
-              rounding: String(value.options.rounding) } }, controller);
+            original_input: value.original_input, options: { currency: value.options.currency,
+              rounding: value.options.rounding } }, controller);
           if (!proof) return;
           const descriptor = choices.find((entry) => entry.id === proof.operation)!;
           replayDraft(descriptor, proof.expression, proof.normalized);
           checked.push({ id: state.next + checked.length, proof });
         }
+        let restored = comparison;
         if (document.comparison !== undefined && document.comparison !== null) {
-          const comparison = document.comparison;
-          if (!isObject(comparison) || typeof comparison.metric !== 'string' || typeof comparison.reference_index !== 'number' ||
-            typeof comparison.alternative_index !== 'number' || !Number.isSafeInteger(comparison.reference_index) ||
-            !Number.isSafeInteger(comparison.alternative_index)) throw new Error('invalid_input');
-          const left = checked[comparison.reference_index];
-          const right = checked[comparison.alternative_index];
-          if (!left || !right) throw new Error('invalid_input');
-          const validated = await submit(comparisonRequest(id, left, right, comparison.metric), controller);
-          if (!validated) return;
-          setReference(left.id);
-          setAlternative(right.id);
-          setMetric(comparison.metric);
-          setDelta(validated);
+          const saved = document.comparison;
+          if (!isObject(saved) || typeof saved.reference_index !== 'number' || typeof saved.alternative_index !== 'number' ||
+            !Number.isSafeInteger(saved.reference_index) || !Number.isSafeInteger(saved.alternative_index) ||
+            (saved.metric !== null || document.schema !== 2) &&
+              (typeof saved.metric !== 'string' || !/^[a-z][a-z0-9_]{0,63}$/u.test(saved.metric))) {
+            throw new Error('invalid_input');
+          }
+          const left = checked[saved.reference_index];
+          const right = checked[saved.alternative_index];
+          if (!left || !right || left.id === right.id) throw new Error('invalid_input');
+          // Imported results and proofs never determine the display. Replay the two requests in Rust.
+          const initial = await inspectComparison(left, right, controller);
+          if (!initial) return;
+          restored = initial;
+          if (saved.metric !== null) {
+            const items = initial.result.items;
+            const item = items.find(({ id }) => id === saved.metric) ??
+              (document.schema === 1 ? items.find(({ key }) => key === saved.metric) : undefined);
+            if (item) {
+              const selected = await inspectComparison(left, right, controller, item.id);
+              if (!selected) return;
+              restored = selected;
+            } else if (document.schema === 2) {
+              throw new Error('invalid_input');
+            }
+          }
         }
-        if (current(controller)) commit({ ...state, scenarios: [...state.scenarios, ...checked], next: state.next + checked.length });
+        if (current(controller)) commit({
+          ...state, scenarios: [...state.scenarios, ...checked], next: state.next + checked.length, comparison: restored,
+        });
       });
     }
 
     function compareMetric(key: string) {
-      if (!baseline || !candidate) return;
-      setMetric(key);
-      setDelta(undefined);
+      if (!comparable) return;
       void run(async (controller) => {
-        const proof = await submit(comparisonRequest(id, baseline, candidate, key), controller);
-        if (proof) setDelta(proof);
+        const updated = await inspectComparison(baseline, candidate, controller, key);
+        if (updated) commit({ ...state, comparison: updated });
       });
     }
 
     function selectScenario(value: string, which: 'reference' | 'alternative') {
-      setDelta(undefined);
-      setMetric('');
-      if (which === 'reference') setReference(Number(value));
-      else setAlternative(Number(value));
+      cancel();
+      setNotice(undefined);
+      const selection = { reference: comparison.reference, alternative: comparison.alternative, [which]: Number(value) };
+      commit({ ...state, comparison: selection });
+      const left = state.scenarios.find(({ id }) => id === selection.reference);
+      const right = state.scenarios.find(({ id }) => id === selection.alternative);
+      if (left && right && left.id !== right.id) {
+        void run(async (controller) => {
+          const updated = await inspectComparison(left, right, controller);
+          if (updated) commit({ ...state, comparison: updated });
+        });
+      }
+    }
+
+    function exportScenarios() {
+      try {
+        downloadJson('dars-scenarios.json', {
+          schema: 2,
+          requests: state.scenarios.map(({ proof }) => storedRequest(proof)),
+          comparison: comparable ? {
+            reference_index: state.scenarios.indexOf(baseline),
+            alternative_index: state.scenarios.indexOf(candidate),
+            metric: comparison.result?.selected?.id ?? null,
+          } : null,
+        }, MAX_SCENARIO_BYTES);
+      } catch { setNotice('limit'); }
+    }
+
+    function exportComparisonProof() {
+      if (!comparison.proof) return;
+      try { downloadJson('dars-comparison-proof.json', comparison.proof, MAX_CALCULATION_PROOF_BYTES); }
+      catch { setNotice('limit'); }
     }
 
     return <section className="finance-workspace" aria-label={title} onKeyDown={(event) => {
@@ -378,16 +428,7 @@ export function activateFinance(id: FinanceModule, scope: ModuleActivation<Finan
           <button type="button" disabled={pending || state.scenarios.length >= maxScenarios}
             onClick={() => file.current?.click()}>{label('open_scenarios')}</button>
           <button type="button" disabled={pending || !state.scenarios.length}
-            onClick={() => downloadJson('dars-scenarios.json', {
-              schema: 1,
-              requests: state.scenarios.map(({ proof }) => storedRequest(proof)),
-              comparison: delta && comparable && metric ? {
-                reference_index: state.scenarios.indexOf(baseline),
-                alternative_index: state.scenarios.indexOf(candidate),
-                metric,
-                proof: delta,
-              } : null,
-            })}>{label('export_scenarios')}</button>
+            onClick={exportScenarios}>{label('export_scenarios')}</button>
         </div>
         <ul className="finance-scenario-list">{state.scenarios.map((scenario) => <li key={scenario.id}>
           <span>{label('scenario')} {scenario.id} · {label(scenario.proof.operation)} · {scenario.proof.units.currency}</span>
@@ -404,24 +445,31 @@ export function activateFinance(id: FinanceModule, scope: ModuleActivation<Finan
             } catch { setNotice('invalid_input'); }
           }}>{label('edit_scenario')}</button>
           <button type="button" disabled={pending} onClick={() => {
-            commit({ ...state, scenarios: state.scenarios.filter((entry) => entry.id !== scenario.id) });
-            if (reference === scenario.id) selectScenario('0', 'reference');
-            if (alternative === scenario.id) selectScenario('0', 'alternative');
+            const reference = comparison.reference === scenario.id ? 0 : comparison.reference;
+            const alternative = comparison.alternative === scenario.id ? 0 : comparison.alternative;
+            commit({ ...state, scenarios: state.scenarios.filter((entry) => entry.id !== scenario.id),
+              comparison: reference === comparison.reference && alternative === comparison.alternative
+                ? comparison : { reference, alternative } });
           }}>{label('remove_row')}</button>
         </li>)}</ul>
         {state.scenarios.length > 1 && <div className="finance-fields">
           {(['reference', 'alternative'] as const).map((key) => <label className="finance-field" key={key}>{label(key)}
-            <select value={key === 'reference' ? reference : alternative} disabled={pending}
+            <select value={comparison[key]}
               onChange={(event) => selectScenario(event.currentTarget.value, key)}>
               <option value={0}>{label('choose_scenario')}</option>
               {state.scenarios.map((entry) => <option value={entry.id} key={entry.id}>{label('scenario')} {entry.id}</option>)}
             </select>
           </label>)}
         </div>}
-        {comparable && <ScenarioResults first={readResult(baseline.proof)} second={readResult(candidate.proof)}
+        {comparable && comparison.result && <ScenarioResults result={comparison.result}
           firstInputs={baseline.proof.normalized} secondInputs={candidate.proof.normalized}
-          label={label} locale={locale} pending={pending} compare={compareMetric} metric={metric}
-          delta={delta ? readResult(delta) : undefined} />}
+          label={label} locale={locale} pending={pending} compare={compareMetric} proof={comparison.proof}
+          exportProof={exportComparisonProof} />}
+        {comparable && !comparison.result && !pending && <div className="finance-actions">
+          <button type="button" onClick={() => selectScenario(String(comparison.reference), 'reference')}>
+            {label('compare_scenarios')}
+          </button>
+        </div>}
         {!comparable && baseline && candidate && <p>{label('incompatible_scenarios')}</p>}
       </details>
     </section>;

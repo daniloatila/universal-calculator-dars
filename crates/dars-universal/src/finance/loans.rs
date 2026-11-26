@@ -1,4 +1,5 @@
 use super::cash_flow::{bounded, calendar_days, estimated_dated_rate, power};
+use super::metric_catalog::RawMetrics;
 use super::{Money, Rational, date, decimal, display, finish, money, number, parse};
 use crate::{Computation, Exactness, MathError};
 use jiff::civil::Date;
@@ -60,7 +61,7 @@ enum ExtraPolicy {
     ReducePayment,
 }
 
-#[derive(Clone, Copy, Default, Deserialize)]
+#[derive(Clone, Copy, Default, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
 enum RoundingScope {
     #[default]
@@ -142,6 +143,15 @@ struct Schedule {
     principal: Rational,
     start: Date,
     contract_periods: u32,
+    rounding: RoundingScope,
+}
+
+#[derive(PartialEq, Eq)]
+struct NominalComparisonBasis {
+    principal: Rational,
+    contract_periods: u32,
+    start: Date,
+    payment_dates: Vec<Date>,
     rounding: RoundingScope,
 }
 
@@ -386,7 +396,7 @@ impl Schedule {
         &self.totals.paid + &self.upfront_fee
     }
 
-    fn summary(&self, money: &Money) -> Value {
+    fn summary(&self, money: &Money, raw: &mut Option<&mut RawMetrics>) -> Value {
         let paid = self.paid();
         let fees = &self.totals.fees + &self.upfront_fee;
         let borrowing_cost = &paid - &self.principal;
@@ -395,6 +405,28 @@ impl Schedule {
             .last()
             .map(|row| row.balance_end.clone())
             .unwrap_or_else(|| self.principal.clone());
+        RawMetrics::capture(
+            raw,
+            Exactness::Exact,
+            &[
+                ("principal", &self.principal),
+                ("interest", &self.totals.interest),
+                ("amortization", &self.totals.amortization),
+                ("fees", &fees),
+                ("upfront_fee", &self.upfront_fee),
+                ("extra", &self.totals.extra),
+                ("total_paid", &paid),
+                ("total_cost", &borrowing_cost),
+                ("capitalized", &self.totals.capitalized),
+                ("balance_end", &balance),
+            ],
+        );
+        if let Some(raw) = raw.as_deref_mut() {
+            raw.loan_payment_dates(
+                self.rows.first().map(|row| row.date),
+                self.rows.last().map(|row| row.date),
+            );
+        }
         json!({
             "method": self.method.as_str(), "principal": money.format(&self.principal),
             "interest": money.format(&self.totals.interest), "amortization": money.format(&self.totals.amortization),
@@ -407,7 +439,23 @@ impl Schedule {
         })
     }
 
-    fn result(&self, money: &Money, page: u32, page_size: u32) -> Result<Value, MathError> {
+    fn nominal_comparison_basis(&self) -> NominalComparisonBasis {
+        NominalComparisonBasis {
+            principal: self.principal.clone(),
+            contract_periods: self.contract_periods,
+            start: self.start,
+            payment_dates: self.rows.iter().map(|row| row.date).collect(),
+            rounding: self.rounding,
+        }
+    }
+
+    fn result(
+        &self,
+        money: &Money,
+        page: u32,
+        page_size: u32,
+        raw: &mut Option<&mut RawMetrics>,
+    ) -> Result<Value, MathError> {
         if page == 0 || page_size == 0 {
             return Err(MathError::Domain);
         }
@@ -427,7 +475,7 @@ impl Schedule {
             .map(|row| row.json(money))
             .collect::<Vec<_>>();
         Ok(
-            json!({"summary": self.summary(money), "rows": rows, "page":{
+            json!({"summary": self.summary(money, raw), "rows": rows, "page":{
                 "number": page, "size": page_size, "total_rows": row_count,
                 "total_pages": row_count.div_ceil(page_size as usize),
             }}),
@@ -483,6 +531,15 @@ pub(super) fn evaluate(
     input: &str,
     options: &Map<String, Value>,
 ) -> Result<Computation, MathError> {
+    evaluate_with_metrics(operation, input, options, None)
+}
+
+pub(super) fn evaluate_with_metrics(
+    operation: &str,
+    input: &str,
+    options: &Map<String, Value>,
+    mut raw: Option<&mut RawMetrics>,
+) -> Result<Computation, MathError> {
     let currency = money(options)?;
     if operation == "compare" {
         let comparison: Compare = parse(input)?;
@@ -494,6 +551,8 @@ pub(super) fn evaluate(
         }
         let mut proposals = Vec::with_capacity(comparison.proposals.len());
         let mut costs = Vec::with_capacity(comparison.proposals.len());
+        let mut reference = None;
+        let mut comparable = true;
         for request in comparison.proposals {
             if request.payoff_at.is_some() || request.page.is_some() || request.page_size.is_some()
             {
@@ -501,26 +560,38 @@ pub(super) fn evaluate(
             }
             let method = request.method.ok_or(MathError::InvalidInput)?;
             let schedule = Schedule::generate(&request, method, &currency, None)?;
-            proposals.push(schedule.summary(&currency));
+            proposals.push(schedule.summary(&currency, &mut None));
             costs.push(schedule.paid() - &schedule.principal);
+            if comparable {
+                let basis = schedule.nominal_comparison_basis();
+                if let Some(reference) = &reference {
+                    comparable = &basis == reference;
+                } else {
+                    reference = Some(basis);
+                }
+            }
         }
         let lowest = costs.iter().min().ok_or(MathError::Domain)?;
         let least_cost = costs
             .iter()
             .enumerate()
-            .filter(|(_, cost)| *cost == lowest)
+            .filter(|(_, cost)| comparable && *cost == lowest)
             .map(|(index, _)| index + 1)
             .collect::<Vec<_>>();
-        let result = json!({"proposals": proposals, "least_total_cost_proposals": least_cost});
+        let result = json!({
+            "proposals": proposals,
+            "least_total_cost_proposals": least_cost,
+            "nominal_cost_comparison": if comparable { "direct_compatible" } else { "loan_nominal_basis_mismatch" },
+        });
         let mut computation = finish(
             input,
             options,
             result,
             "loan_proposal_comparison",
-            "nominal cost = total paid − principal; rank by nominal cost",
+            "nominal cost = total paid − principal",
         )?;
         describe(&mut computation);
-        computation.constraints.push("Proposal numbers follow input order, starting at 1. Nominal cost is undiscounted and depends on the amount financed and schedule.".to_owned());
+        computation.constraints.push("Proposal numbers follow input order, starting at 1. Nominal cost is undiscounted. A minimum is reported only for the same financed amount, contractual term, disbursement and installment dates, and settlement rounding scope. A nominal minimum is not an economic offer ranking.".to_owned());
         return Ok(computation);
     }
     let requested_method = match operation {
@@ -544,9 +615,15 @@ pub(super) fn evaluate(
     let schedule = Schedule::generate(&request, method, &currency, request.payoff_at)?;
     let page = request.page.unwrap_or(1);
     let size = request.page_size.unwrap_or(MAX_PAGE_SIZE);
-    let mut result = schedule.result(&currency, page, size)?;
+    let mut result = schedule.result(&currency, page, size, &mut raw)?;
     let (algorithm, formula, exact) = if operation == "effective_cost" {
         let (rate, exact) = schedule.effective_rate()?;
+        let exactness = if exact {
+            Exactness::Exact
+        } else {
+            Exactness::Approximate
+        };
+        RawMetrics::capture(&mut raw, exactness, &[("effective_cost", &rate)]);
         result["effective_cost"] = json!(display(&rate, 16));
         result["cost_kind"] = json!("economic_estimate");
         result["day_count"] = json!("act_365f");
@@ -704,5 +781,36 @@ mod tests {
         assert!((annual - (1010.0 / 990.0 - 1.0)).abs() < 1e-12);
         assert_eq!(cost["cost_kind"], "economic_estimate");
         assert_eq!(proof.exactness, Exactness::Approximate);
+    }
+
+    #[test]
+    fn nominal_cost_minimum_requires_matched_disbursement_and_schedule() {
+        let mut sac = example();
+        sac["method"] = json!("sac");
+        let mut price = example();
+        price["method"] = json!("price");
+        let proposals = |alternative: &Value| json!({"proposals":[sac, alternative]});
+        let (matched, _) = run("compare", &proposals(&price));
+        assert_eq!(matched["nominal_cost_comparison"], "direct_compatible");
+        assert_eq!(matched["least_total_cost_proposals"], json!([1]));
+
+        for (key, value) in [
+            ("principal", json!("2000")),
+            ("periods", json!(4)),
+            ("start_date", json!("2027-02-01")),
+            ("first_date", json!("2027-02-01")),
+            ("rounding_scope", json!("per_row")),
+            ("extra", json!([{"period":1,"amount":"1000"}])),
+        ] {
+            let mut unlike = price.clone();
+            unlike[key] = value;
+            let (result, _) = run("compare", &proposals(&unlike));
+            assert_eq!(
+                result["nominal_cost_comparison"], "loan_nominal_basis_mismatch",
+                "{key}"
+            );
+            assert_eq!(result["least_total_cost_proposals"], json!([]), "{key}");
+            assert_eq!(result["proposals"].as_array().unwrap().len(), 2, "{key}");
+        }
     }
 }

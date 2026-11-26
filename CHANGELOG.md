@@ -2,6 +2,12 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
+## 0.4.1 · Objective 04 financial comparison revision
+
+- Recalculate both scenario recipes in Rust and classify metric compatibility by financial meaning, units and applicable context.
+- Normalize known discrete compound rates to an exact effective annual basis. Report percentage points, relative variation and precision independently.
+- Preserve historical scenario import and export replayable comparison proofs. Limit nominal loan-cost selection to compatible proposals.
+
 ## 0.4.0 · Objective 04 review candidate
 
 - Added five financial and business workspaces with rational monetary arithmetic, currency scales and explicit rounding.

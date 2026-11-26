@@ -28,6 +28,8 @@ mod scientific;
 const SCHEMA: u8 = 1;
 const REQUEST_BYTES: usize = 24 * 1024;
 const EXPRESSION_BYTES: usize = 4096;
+#[cfg(feature = "finance")]
+const COMPARISON_BYTES: usize = 18 * 1024;
 const NORMALIZED_BYTES: usize = 8192;
 const RESULT_BYTES: usize = 32 * 1024;
 const OPTION_COUNT: usize = 16;
@@ -322,17 +324,27 @@ fn execute(input: &str) -> Result<Value, MathError> {
         return Err(MathError::InvalidInput);
     }
     let original = request.original_input.as_deref().unwrap_or(&request.input);
-    if request.input.len() > EXPRESSION_BYTES || original.len() > EXPRESSION_BYTES {
+    let bounds = (EXPRESSION_BYTES, NORMALIZED_BYTES);
+    #[cfg(feature = "finance")]
+    let bounds = if request.operation == "scenario_compare"
+        && finance::MODULES.contains(&request.module.as_str())
+    {
+        (COMPARISON_BYTES, COMPARISON_BYTES)
+    } else {
+        bounds
+    };
+    let (input_limit, normalized_limit) = bounds;
+    if request.input.len() > input_limit || original.len() > input_limit {
         return Err(MathError::Limit);
     }
-    if !valid_text(&request.input, EXPRESSION_BYTES)
-        || !valid_text(original, EXPRESSION_BYTES)
+    if !valid_text(&request.input, input_limit)
+        || !valid_text(original, input_limit)
         || !valid_options(&request.options)
     {
         return Err(MathError::InvalidInput);
     }
     let (result, algorithm, references) = dispatch(&request)?;
-    if result.normalized.len() > NORMALIZED_BYTES
+    if result.normalized.len() > normalized_limit
         || result.result.len() > RESULT_BYTES
         || !valid_proof_map(&result.variables)
         || !valid_proof_map(&result.units)

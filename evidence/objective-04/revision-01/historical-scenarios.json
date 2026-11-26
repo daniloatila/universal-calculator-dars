@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "requests": [
+    {
+      "schema": 1,
+      "module": "financial",
+      "operation": "equivalent_rate",
+      "input": "{\"from_periods_per_year\":2,\"rate\":\"0.10\",\"to_periods_per_year\":2}",
+      "original_input": "{\"rate\":{\"text\":\"0.10\",\"locale\":\"en\"},\"from_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"},\"to_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"}}",
+      "options": {
+        "currency": "BRL",
+        "rounding": "half_even"
+      }
+    },
+    {
+      "schema": 1,
+      "module": "financial",
+      "operation": "equivalent_rate",
+      "input": "{\"from_periods_per_year\":2,\"rate\":\"0.10\",\"to_periods_per_year\":1}",
+      "original_input": "{\"rate\":{\"text\":\"0.10\",\"locale\":\"en\"},\"from_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"},\"to_periods_per_year\":{\"text\":\"1\",\"locale\":\"en\"}}",
+      "options": {
+        "currency": "BRL",
+        "rounding": "half_even"
+      }
+    }
+  ],
+  "comparison": {
+    "reference_index": 0,
+    "alternative_index": 1,
+    "metric": "rate",
+    "proof": {
+      "algorithm_version": "financial/1",
+      "assumptions": [],
+      "constraints": [
+        "Decimal inputs and rational arithmetic before presentation, with operation-specific exceptions stated below.",
+        "Rates in canonical inputs are fractional (0.01 means 1%). One currency applies to the entire calculation.",
+        "Monetary display follows the selected rounding rule and ISO 4217 minor-unit scale.",
+        "Deltas compare the selected numbers from the scenario results; any prior presentation rounding is retained."
+      ],
+      "domain": "financial_decimal",
+      "engine_version": "0.4.0",
+      "error_bound": null,
+      "exactness": "exact",
+      "expression": "{\"reference\":\"0.1000000000000000\",\"alternative\":\"0.2100000000000000\",\"unit\":\"ratio\"}",
+      "formula": "Delta = alternative - reference; relative percentage = 100 * Delta / abs(reference)",
+      "method": "scenario_comparison",
+      "module": "financial",
+      "normalized": "{\"alternative\":\"0.2100000000000000\",\"reference\":\"0.1000000000000000\",\"unit\":\"ratio\"}",
+      "operation": "scenario_compare",
+      "options": {
+        "currency": "BRL",
+        "rounding": "half_even"
+      },
+      "precision": null,
+      "references": [
+        "https://www.six-group.com/en/products-services/financial-information/market-reference-data/data-standards.html",
+        "https://nvlpubs.nist.gov/nistpubs/hb/2025/NIST.HB.135e2025.pdf",
+        "https://www.isda.org/2008/12/22/30-360-day-count-conventions/"
+      ],
+      "result": "{\"absolute_difference\":\"0.1100000000000000\",\"alternative\":\"0.2100000000000000\",\"reference\":\"0.1000000000000000\",\"relative_difference\":\"1.100000000000\",\"relative_percent\":\"110.0000000000\"}",
+      "rounding": "monetary presentation: nearest, ties to even",
+      "schema": 1,
+      "tolerance": null,
+      "units": {
+        "currency": "BRL"
+      },
+      "variables": {
+        "minor_unit_scale": "2",
+        "rounding_policy": "half_even"
+      }
+    }
+  }
+}

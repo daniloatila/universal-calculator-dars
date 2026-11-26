@@ -2,6 +2,7 @@ import { isLocale } from './i18n.ts';
 import type { Locale } from './i18n.ts';
 
 export const MAX_CALCULATION_PROOF_BYTES = 128 * 1024;
+export const MAX_FINANCE_COMPARISON_INPUT_BYTES = 18 * 1024;
 
 const modules = [
   'standard', 'scientific', 'algebra', 'calculus', 'linear-algebra', 'linear_algebra', 'geometry',
@@ -104,7 +105,10 @@ export function parseCalculationProof(value: unknown): CalculationProof | null {
     !exactness.some((kind) => kind === value.exactness)) return null;
   if (!isIdentifier(value.operation, 64)) return null;
   if (hasBindings && (value.module !== 'standard' || value.operation !== 'evaluate' || !isStandardBindings(value.standard_bindings))) return null;
-  if (!isText(value.expression, 4096) || !isText(value.normalized, 8192) ||
+  const financeComparison = value.operation === 'scenario_compare' &&
+    ['financial', 'investment', 'loans', 'tax', 'business'].some((module) => module === value.module);
+  if (!isText(value.expression, financeComparison ? MAX_FINANCE_COMPARISON_INPUT_BYTES : 4096) ||
+    !isText(value.normalized, financeComparison ? MAX_FINANCE_COMPARISON_INPUT_BYTES : 8192) ||
     !isText(value.result, 32768) || value.result.length === 0 ||
     !isText(value.domain, 2048) || !isText(value.method, 2048) ||
     !isText(value.engine_version, 128) || !isText(value.algorithm_version, 128)) return null;

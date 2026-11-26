@@ -1,0 +1,1972 @@
+{
+  "schema": 1,
+  "engine_catalog": "crates/dars-universal/src/finance/metric_catalog.rs",
+  "decision_engine": "crates/dars-universal/src/finance/comparison.rs",
+  "definitions_total": 149,
+  "matching": {
+    "discovery": "Only metrics emitted by a re-executed supported operation enter the matrix for a given scenario. A listed metric may be absent in an operation group if its result does not produce that field.",
+    "identity": "Semantic identity and unit determine whether two values describe the same measure. A shared display key is insufficient. The scenarios must be from the active module.",
+    "currency": "Money requires matching ISO currency. Dimensionless metrics require currency where explicitly listed. Core replay performs no currency conversion.",
+    "required_context": "For a compatible pair, every stated context field must exist on both sides and be equal, except bases transformed by an approved normalization.",
+    "context_notes": "Different numerical inputs and disclosed assumptions are allowed when the semantic basis remains comparable. A delta measures the stated scenario outcomes. It is not an overall offer ranking."
+  },
+  "classifications": {
+    "direct": "Same semantic identity, unit, currency where required and required financial context; report differences from the best available value.",
+    "normalized": "Known discrete-compounding rate conventions converted exactly to a common annual effective rate through available exact originating quotes.",
+    "contextual": "A required context field or one operand is missing or differs, or normalization is unavailable. Inspect the original values side by side without a delta.",
+    "incompatible": "The economic meaning, unit or required currency differs. No delta is computed.",
+    "undefined": "A present result has no defined mathematical value, such as a zero denominator, unmet payback or legally undetermined amount. Null is never treated as zero."
+  },
+  "precision": {
+    "canonical": "Use engine-produced exact rationals or the engine's higher-precision approximate value when a method is numeric. Raw rational collection bounds each component to 16384 bits.",
+    "statutory_quantized": "An exact value after required settlement rounding, such as BR-2026.1 tax. The underlying unrounded theoretical tax is not substituted.",
+    "presentation_rounded": "When canonical data cannot be used and a numeric presentation is available, the decimal shown is the comparison input and its known display precision applies.",
+    "rate_delta": "Absolute difference is in fractional units. Percentage-points difference multiplies the fractional delta by 100. Relative percent is independent of percentage points.",
+    "reference_zero": "Relative difference and percent are undefined at zero baseline.",
+    "reference_negative": "Relative difference uses alternative minus reference divided by the absolute reference."
+  },
+  "module_policies": {
+    "financial": {
+      "approved_normalization": {
+        "semantic_id": "financial_compounding_rate",
+        "applies": [
+          "equivalent_rate",
+          "nominal_effective"
+        ],
+        "common_basis": "effective annual rate under discrete compounding",
+        "from_effective": "(1 + i)^m - 1",
+        "from_nominal": "(1 + j/m)^m - 1",
+        "limit": "Known positive integral frequencies within the engine bound. Reuse the exact original quote or exact annual anchor. No annualization of irregular cash flows, unknown periods, MIRR or uncertified display approximations."
+      },
+      "omitted": [
+        {
+          "operation": "irr",
+          "result": "roots",
+          "reason": "A root set may contain none, one or multiple candidates. Implicit root selection could change the meaning of the scenario."
+        }
+      ],
+      "time_context": "Dated cash flows carry origin, terminal date and actual day-count convention. Periodic NPV and payback use abstract model periods. An inferred rate and periodic MIRR carry unknown frequency and cannot be annualized."
+    },
+    "investment": {
+      "return_semantics": "All three simple return variants are accumulated. Gross and net, and nominal and real, use distinct definitions and bases. None is treated as an annualized or time-weighted return.",
+      "horizon": "Same frequency, elapsed horizon, origin and actual terminal date are required for performance and ending-amount deltas. Varying horizons may be inspected side by side.",
+      "assumptions": "Product, rate basis, reinvestment, flow timing, costs, inflation and user tax assumptions are retained as replay context. Product and modeled growth assumptions can differ without implying an overall ranking."
+    },
+    "loans": {
+      "total_cost": "Undiscounted total paid minus principal. Nominal cost deltas require matching comparable financing and repayment basis. Rates, fees, grace and extra policy remain assumptions that can be inspected.",
+      "effective_cost": "Common annual effective economic estimate against dated installments under ACT/365 Fixed, based on net disbursement and projected payments. It is not regulatory CET.",
+      "separate_operation": {
+        "operation": "compare",
+        "result": "least_total_cost_proposals",
+        "minimum": "Identical financed principal, contractual period count, disbursement, full payment-date sequence and ledger rounding scope. Distinct repayment methods can meet those requirements.",
+        "mismatch": "Separate proposal summaries remain visible, the minima array is empty and nominal_cost_comparison is loan_nominal_basis_mismatch."
+      }
+    },
+    "tax": {
+      "baseline": "BR-2026.1 only. Unsupported dates and jurisdictions fail on original scenario validation rather than falling through to comparison.",
+      "time_context": "Monthly rules use the event calendar month, annual models the event calendar year, and holding/redemption and ICMS rules the specific taxable event date.",
+      "basis": "Jurisdiction, rule version, regime and relevant tax period are required. Product categories are additionally required for the fixed-income amounts and rates. Statutory nominal and actually payable IBS/CBS are distinct."
+    },
+    "business": {
+      "ratios": "Markup uses unit cost, pricing margin uses unit price, statement margins use revenue and profitability ratios use their own stated denominators.",
+      "unknown_period": "Statement amounts and performance ratios that require accounting period, valuation date or investment horizon remain contextual when those fields cannot be established by the model.",
+      "cycle": "Calendar-day measures require the same measurement-period day count. Division by zero remains undefined.",
+      "plan": "Profit is accrual. Cash flow is nominal. NPV is discounted cash flow from period zero. Plan totals require the same abstract horizon."
+    }
+  },
+  "modules": [
+    {
+      "module": "financial",
+      "operation_groups": [
+        {
+          "operations": [
+            "simple_interest",
+            "compound_interest"
+          ],
+          "metrics": [
+            {
+              "key": "amount",
+              "semantic_id": "loan_or_deposit_final_value",
+              "unit": "money",
+              "calculation_basis": "principal_and_interest_at_horizon",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "interest",
+              "semantic_id": "lump_sum_interest_earned",
+              "unit": "money",
+              "calculation_basis": "final_value_less_initial_principal",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "present_value"
+          ],
+          "metrics": [
+            {
+              "key": "amount",
+              "semantic_id": "lump_sum_present_value",
+              "unit": "money",
+              "calculation_basis": "discounted_terminal_cash_flow",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "future_value"
+          ],
+          "metrics": [
+            {
+              "key": "amount",
+              "semantic_id": "lump_sum_future_value",
+              "unit": "money",
+              "calculation_basis": "compounded_initial_cash_flow",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "annuity_present_value"
+          ],
+          "metrics": [
+            {
+              "key": "amount",
+              "semantic_id": "annuity_present_value",
+              "unit": "money",
+              "calculation_basis": "present_value_of_equal_payments",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "annuity_future_value"
+          ],
+          "metrics": [
+            {
+              "key": "amount",
+              "semantic_id": "annuity_future_value",
+              "unit": "money",
+              "calculation_basis": "future_value_of_equal_payments",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "annuity_payment"
+          ],
+          "metrics": [
+            {
+              "key": "payment",
+              "semantic_id": "annuity_level_payment",
+              "unit": "money",
+              "calculation_basis": "equal_payment_of_annuity",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "payment_timing"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "discount"
+          ],
+          "metrics": [
+            {
+              "key": "present",
+              "semantic_id": "discounted_face_value",
+              "unit": "money",
+              "calculation_basis": "present_value_under_selected_discount_convention",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "discount",
+              "semantic_id": "face_value_discount",
+              "unit": "money",
+              "calculation_basis": "face_value_less_present_value",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "periods"
+          ],
+          "metrics": [
+            {
+              "key": "periods",
+              "semantic_id": "lump_sum_period_count",
+              "unit": "period",
+              "calculation_basis": "logarithmic_number_of_model_periods",
+              "required_context": [
+                "periodicity"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "rate"
+          ],
+          "metrics": [
+            {
+              "key": "rate",
+              "semantic_id": "financial_compounding_rate",
+              "unit": "rate",
+              "calculation_basis": "implied_effective_rate_per_unspecified_period",
+              "required_context": [
+                "periodicity",
+                "rate_nature",
+                "capitalization"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "equivalent_rate",
+            "nominal_effective"
+          ],
+          "metrics": [
+            {
+              "key": "rate",
+              "semantic_id": "financial_compounding_rate",
+              "unit": "rate",
+              "calculation_basis": "discrete_equivalent_compounding_rate",
+              "required_context": [
+                "periodicity",
+                "rate_nature",
+                "capitalization"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "npv"
+          ],
+          "metrics": [
+            {
+              "key": "npv",
+              "semantic_id": "discounted_cash_flow_npv",
+              "unit": "money",
+              "calculation_basis": "discounted_cash_flows_from_earliest_point",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "day_count"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "mirr"
+          ],
+          "metrics": [
+            {
+              "key": "mirr",
+              "semantic_id": "modified_internal_return",
+              "unit": "rate",
+              "calculation_basis": "terminal_reinvestment_over_initial_financing",
+              "required_context": [
+                "periodicity",
+                "day_count"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "payback"
+          ],
+          "metrics": [
+            {
+              "key": "payback",
+              "semantic_id": "simple_cash_flow_payback",
+              "unit": "period",
+              "calculation_basis": "linear_cumulative_cash_flow_recovery",
+              "required_context": [
+                "periodicity",
+                "day_count"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "discounted_payback"
+          ],
+          "metrics": [
+            {
+              "key": "payback",
+              "semantic_id": "discounted_cash_flow_payback",
+              "unit": "period",
+              "calculation_basis": "linear_discounted_cash_flow_recovery",
+              "required_context": [
+                "periodicity",
+                "day_count"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "profitability_index"
+          ],
+          "metrics": [
+            {
+              "key": "profitability_index",
+              "semantic_id": "discounted_cash_flow_profitability_index",
+              "unit": "ratio",
+              "calculation_basis": "present_receipts_over_present_outlays",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "day_count"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "investment",
+      "operation_groups": [
+        {
+          "operations": [
+            "project"
+          ],
+          "metrics": [
+            {
+              "key": "final_balance",
+              "semantic_id": "investment_nominal_net_balance",
+              "unit": "money",
+              "calculation_basis": "projected_ending_balance",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "distributions",
+              "semantic_id": "investment_nominal_net_distributions",
+              "unit": "money",
+              "calculation_basis": "total_distributed_over_horizon",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "net_profit",
+              "semantic_id": "investment_nominal_net_profit",
+              "unit": "money",
+              "calculation_basis": "net_balance_and_flows_less_contributions",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "simple_net_return",
+              "semantic_id": "investment_accumulated_nominal_net_return",
+              "unit": "rate",
+              "calculation_basis": "nominal_net_profit_over_total_contributions_not_annualized",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date",
+                "flow_timing",
+                "reinvest"
+              ]
+            },
+            {
+              "key": "fees",
+              "semantic_id": "investment_nominal_fees",
+              "unit": "money",
+              "calculation_basis": "scenario_fees_over_horizon",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "taxes",
+              "semantic_id": "investment_nominal_taxes",
+              "unit": "money",
+              "calculation_basis": "user_assumed_tax_over_horizon",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "gross_final_balance",
+              "semantic_id": "investment_nominal_gross_balance",
+              "unit": "money",
+              "calculation_basis": "projected_ending_balance_before_fees_and_taxes",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "gross_distributions",
+              "semantic_id": "investment_nominal_gross_distributions",
+              "unit": "money",
+              "calculation_basis": "total_distributed_before_fees_and_taxes",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "gross_profit",
+              "semantic_id": "investment_nominal_gross_profit",
+              "unit": "money",
+              "calculation_basis": "gross_balance_and_flows_less_contributions",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "simple_gross_return",
+              "semantic_id": "investment_accumulated_nominal_gross_return",
+              "unit": "rate",
+              "calculation_basis": "nominal_gross_profit_over_total_contributions_not_annualized",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date",
+                "flow_timing",
+                "reinvest"
+              ]
+            },
+            {
+              "key": "real_final_balance",
+              "semantic_id": "investment_real_net_balance",
+              "unit": "money",
+              "calculation_basis": "ending_balance_deflated_to_start",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "real_net_profit",
+              "semantic_id": "investment_real_net_profit",
+              "unit": "money",
+              "calculation_basis": "individual_cash_flows_deflated_to_start",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "simple_real_net_return",
+              "semantic_id": "investment_accumulated_real_net_return",
+              "unit": "rate",
+              "calculation_basis": "real_net_profit_over_deflated_contributions_not_annualized",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date",
+                "flow_timing",
+                "reinvest"
+              ]
+            },
+            {
+              "key": "contributions",
+              "semantic_id": "investment_nominal_additional_contributions",
+              "unit": "money",
+              "calculation_basis": "nominal_contributions_excluding_initial",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "total_contributed",
+              "semantic_id": "investment_nominal_total_contributed",
+              "unit": "money",
+              "calculation_basis": "nominal_contributions_including_initial",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "withdrawals",
+              "semantic_id": "investment_nominal_withdrawals",
+              "unit": "money",
+              "calculation_basis": "nominal_withdrawals_over_horizon",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "cumulative_inflation",
+              "semantic_id": "investment_accumulated_inflation",
+              "unit": "rate",
+              "calculation_basis": "product_of_period_inflation_factors_less_one",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "terminal_date"
+              ]
+            },
+            {
+              "key": "elapsed_periods",
+              "semantic_id": "investment_elapsed_periods",
+              "unit": "period",
+              "calculation_basis": "modeled_investment_period_count",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "requested_periods",
+              "semantic_id": "investment_requested_periods",
+              "unit": "period",
+              "calculation_basis": "requested_investment_period_count",
+              "required_context": [
+                "periodicity"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "loans",
+      "operation_groups": [
+        {
+          "operations": [
+            "price",
+            "sac",
+            "uniform",
+            "bullet",
+            "single_payment",
+            "schedule",
+            "payoff",
+            "effective_cost"
+          ],
+          "metrics": [
+            {
+              "key": "principal",
+              "semantic_id": "loan_principal_financed",
+              "unit": "money",
+              "calculation_basis": "contract_principal",
+              "required_context": []
+            },
+            {
+              "key": "contract_periods",
+              "semantic_id": "loan_contract_month_count",
+              "unit": "period",
+              "calculation_basis": "stated_number_of_installments",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "actual_periods",
+              "semantic_id": "loan_repayment_month_count",
+              "unit": "period",
+              "calculation_basis": "modeled_number_of_installments",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "interest",
+              "semantic_id": "loan_nominal_interest",
+              "unit": "money",
+              "calculation_basis": "sum_of_interest_accrued",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "principal_financed",
+                "first_payment_date",
+                "last_payment_date",
+                "repayment_scope",
+                "payment_periods",
+                "rounding_scope",
+                "settlement_rounding"
+              ]
+            },
+            {
+              "key": "amortization",
+              "semantic_id": "loan_principal_amortized",
+              "unit": "money",
+              "calculation_basis": "sum_of_scheduled_principal_payments",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "principal_financed",
+                "first_payment_date",
+                "last_payment_date",
+                "repayment_scope",
+                "payment_periods",
+                "rounding_scope",
+                "settlement_rounding"
+              ]
+            },
+            {
+              "key": "fees",
+              "semantic_id": "loan_nominal_total_fees",
+              "unit": "money",
+              "calculation_basis": "upfront_and_installment_fees",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "principal_financed",
+                "first_payment_date",
+                "last_payment_date",
+                "repayment_scope",
+                "payment_periods",
+                "rounding_scope",
+                "settlement_rounding"
+              ]
+            },
+            {
+              "key": "upfront_fee",
+              "semantic_id": "loan_upfront_fee",
+              "unit": "money",
+              "calculation_basis": "transaction_fee_at_disbursement",
+              "required_context": [
+                "principal_financed",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "extra",
+              "semantic_id": "loan_extra_principal_payments",
+              "unit": "money",
+              "calculation_basis": "sum_of_extra_principal_payments",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "principal_financed",
+                "first_payment_date",
+                "last_payment_date",
+                "repayment_scope",
+                "payment_periods",
+                "rounding_scope",
+                "settlement_rounding"
+              ]
+            },
+            {
+              "key": "total_paid",
+              "semantic_id": "loan_nominal_total_paid",
+              "unit": "money",
+              "calculation_basis": "undiscounted_installments_and_upfront_fee",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "principal_financed",
+                "first_payment_date",
+                "last_payment_date",
+                "repayment_scope",
+                "payment_periods",
+                "rounding_scope",
+                "settlement_rounding"
+              ]
+            },
+            {
+              "key": "total_cost",
+              "semantic_id": "loan_nominal_total_cost",
+              "unit": "money",
+              "calculation_basis": "total_paid_less_principal",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "principal_financed",
+                "first_payment_date",
+                "last_payment_date",
+                "repayment_scope",
+                "payment_periods",
+                "rounding_scope",
+                "settlement_rounding"
+              ]
+            },
+            {
+              "key": "capitalized",
+              "semantic_id": "loan_capitalized_interest",
+              "unit": "money",
+              "calculation_basis": "interest_incorporated_in_principal",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "principal_financed",
+                "first_payment_date",
+                "last_payment_date",
+                "repayment_scope",
+                "payment_periods",
+                "rounding_scope",
+                "settlement_rounding"
+              ]
+            },
+            {
+              "key": "balance_end",
+              "semantic_id": "loan_end_balance",
+              "unit": "money",
+              "calculation_basis": "outstanding_loan_balance",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date",
+                "principal_financed",
+                "first_payment_date",
+                "last_payment_date",
+                "repayment_scope",
+                "payment_periods",
+                "rounding_scope",
+                "settlement_rounding"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "effective_cost"
+          ],
+          "metrics": [
+            {
+              "key": "effective_cost",
+              "semantic_id": "loan_economic_effective_cost",
+              "unit": "rate",
+              "calculation_basis": "net_disbursement_and_dated_payments",
+              "required_context": [
+                "periodicity",
+                "day_count",
+                "currency"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "tax",
+      "operation_groups": [
+        {
+          "operations": [
+            "br_inss"
+          ],
+          "metrics": [
+            {
+              "key": "gross",
+              "semantic_id": "tax_employment_gross_pay",
+              "unit": "money",
+              "calculation_basis": "gross_monthly_pay",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "contribution_basis",
+              "semantic_id": "tax_inss_contribution_basis",
+              "unit": "money",
+              "calculation_basis": "gross_subject_to_contribution_cap",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "inss",
+              "semantic_id": "tax_employee_inss_due",
+              "unit": "money",
+              "calculation_basis": "progressive_employee_payroll_contribution",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "br_irrf",
+            "br_irpf",
+            "br_payroll"
+          ],
+          "metrics": [
+            {
+              "key": "gross",
+              "semantic_id": "tax_gross_income",
+              "unit": "money",
+              "calculation_basis": "gross_income_for_income_tax_regime",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "deduction",
+              "semantic_id": "tax_income_deduction",
+              "unit": "money",
+              "calculation_basis": "eligible_income_tax_deduction_under_selected_mode",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "taxable_basis",
+              "semantic_id": "tax_income_taxable_basis",
+              "unit": "money",
+              "calculation_basis": "gross_less_selected_deductions",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "bracket_rate",
+              "semantic_id": "tax_income_marginal_bracket_rate",
+              "unit": "rate",
+              "calculation_basis": "statutory_marginal_rate_not_effective_tax_burden",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "tax_before_relief",
+              "semantic_id": "tax_income_before_relief",
+              "unit": "money",
+              "calculation_basis": "income_tax_after_bracket_deduction_before_relief",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "tax_relief",
+              "semantic_id": "tax_income_relief",
+              "unit": "money",
+              "calculation_basis": "statutory_income_tax_relief",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "tax_after_relief",
+              "semantic_id": "tax_income_after_relief",
+              "unit": "money",
+              "calculation_basis": "income_tax_less_reduction_before_settlement",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "withholding_tax",
+              "semantic_id": "tax_income_payroll_withheld",
+              "unit": "money",
+              "calculation_basis": "monthly_tax_withheld_after_minimum_threshold",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "withheld_tax",
+              "semantic_id": "tax_annual_prior_withholdings",
+              "unit": "money",
+              "calculation_basis": "prior_tax_withheld",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "eligible_education_expense",
+              "semantic_id": "tax_annual_eligible_education_expenses",
+              "unit": "money",
+              "calculation_basis": "education_deduction_subject_to_cap",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "balance",
+              "semantic_id": "tax_annual_settlement_balance",
+              "unit": "money",
+              "calculation_basis": "calculated_tax_less_prior_withholding",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "tax_due",
+              "semantic_id": "tax_annual_amount_due",
+              "unit": "money",
+              "calculation_basis": "positive_settlement_balance",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "refund",
+              "semantic_id": "tax_annual_refund",
+              "unit": "money",
+              "calculation_basis": "absolute_value_of_negative_settlement_balance",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "inss",
+              "semantic_id": "tax_employee_inss_due",
+              "unit": "money",
+              "calculation_basis": "progressive_employee_payroll_contribution",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "net_after_inss_and_irrf",
+              "semantic_id": "tax_net_after_employee_contribution_and_withholding",
+              "unit": "money",
+              "calculation_basis": "gross_less_employee_inss_and_irrf",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "br_investment_tax",
+            "br_iof"
+          ],
+          "metrics": [
+            {
+              "key": "principal",
+              "semantic_id": "tax_investment_principal",
+              "unit": "money",
+              "calculation_basis": "principal_at_purchase",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period",
+                "tax_product"
+              ]
+            },
+            {
+              "key": "holding_days",
+              "semantic_id": "tax_investment_holding_days",
+              "unit": "period",
+              "calculation_basis": "calendar_days_from_purchase_to_redemption",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime"
+              ]
+            },
+            {
+              "key": "gross_redemption",
+              "semantic_id": "tax_investment_gross_redemption",
+              "unit": "money",
+              "calculation_basis": "redemption_before_tax",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period",
+                "tax_product"
+              ]
+            },
+            {
+              "key": "gross_gain",
+              "semantic_id": "tax_investment_gross_gain",
+              "unit": "money",
+              "calculation_basis": "redemption_less_principal",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period",
+                "tax_product"
+              ]
+            },
+            {
+              "key": "iof_gain_limit_rate",
+              "semantic_id": "tax_iof_gain_limit_rate",
+              "unit": "rate",
+              "calculation_basis": "statutory_limit_as_fraction_of_gain",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period",
+                "tax_product"
+              ]
+            },
+            {
+              "key": "iof",
+              "semantic_id": "tax_investment_iof_due",
+              "unit": "money",
+              "calculation_basis": "iof_due_on_eligible_redemption",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period",
+                "tax_product"
+              ]
+            },
+            {
+              "key": "income_tax_basis",
+              "semantic_id": "tax_investment_income_basis",
+              "unit": "money",
+              "calculation_basis": "positive_gain_less_iof_for_taxable_products",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period",
+                "tax_product"
+              ]
+            },
+            {
+              "key": "income_tax_rate",
+              "semantic_id": "tax_investment_withholding_rate",
+              "unit": "rate",
+              "calculation_basis": "statutory_rate_on_taxable_gain",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period",
+                "tax_product"
+              ]
+            },
+            {
+              "key": "income_tax",
+              "semantic_id": "tax_investment_income_tax_due",
+              "unit": "money",
+              "calculation_basis": "income_tax_due_after_iof",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period",
+                "tax_product"
+              ]
+            },
+            {
+              "key": "net_redemption",
+              "semantic_id": "tax_investment_net_redemption",
+              "unit": "money",
+              "calculation_basis": "redemption_less_iof_and_income_tax",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period",
+                "tax_product"
+              ]
+            },
+            {
+              "key": "net_gain",
+              "semantic_id": "tax_investment_net_gain",
+              "unit": "money",
+              "calculation_basis": "net_redemption_less_principal",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period",
+                "tax_product"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "br_icms"
+          ],
+          "metrics": [
+            {
+              "key": "gross",
+              "semantic_id": "tax_icms_gross_price",
+              "unit": "money",
+              "calculation_basis": "price_including_icms",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "rate",
+              "semantic_id": "tax_icms_inclusive_rate",
+              "unit": "rate",
+              "calculation_basis": "statutory_tax_inclusive_rate",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "included_icms",
+              "semantic_id": "tax_icms_included",
+              "unit": "money",
+              "calculation_basis": "included_tax_rounded_under_icms_rule",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "price_less_icms",
+              "semantic_id": "tax_icms_excluded_price",
+              "unit": "money",
+              "calculation_basis": "gross_price_less_included_icms",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "br_ibs_cbs"
+          ],
+          "metrics": [
+            {
+              "key": "base",
+              "semantic_id": "tax_ibs_cbs_basis",
+              "unit": "money",
+              "calculation_basis": "supplied_test_year_base",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "nominal_ibs_state_rate",
+              "semantic_id": "tax_nominal_state_ibs_rate",
+              "unit": "rate",
+              "calculation_basis": "test_year_state_ibs_nominal_rate",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "nominal_ibs_municipal_rate",
+              "semantic_id": "tax_nominal_municipal_ibs_rate",
+              "unit": "rate",
+              "calculation_basis": "test_year_municipal_ibs_nominal_rate",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "nominal_cbs_rate",
+              "semantic_id": "tax_nominal_cbs_rate",
+              "unit": "rate",
+              "calculation_basis": "test_year_cbs_nominal_rate",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "nominal_ibs_state",
+              "semantic_id": "tax_nominal_state_ibs_amount",
+              "unit": "money",
+              "calculation_basis": "test_year_state_ibs_nominal_amount",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "nominal_ibs_municipal",
+              "semantic_id": "tax_nominal_municipal_ibs_amount",
+              "unit": "money",
+              "calculation_basis": "test_year_municipal_ibs_nominal_amount",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "nominal_cbs",
+              "semantic_id": "tax_nominal_cbs_amount",
+              "unit": "money",
+              "calculation_basis": "test_year_cbs_nominal_amount",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "total_nominal",
+              "semantic_id": "tax_ibs_cbs_total_nominal",
+              "unit": "money",
+              "calculation_basis": "sum_of_nominal_tax_components",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            },
+            {
+              "key": "payable_ibs_cbs",
+              "semantic_id": "tax_ibs_cbs_amount_payable",
+              "unit": "money",
+              "calculation_basis": "payment_dispensed_only_for_confirmed_obligations",
+              "required_context": [
+                "jurisdiction",
+                "tax_rule",
+                "regime",
+                "tax_period"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "business",
+      "operation_groups": [
+        {
+          "operations": [
+            "price"
+          ],
+          "metrics": [
+            {
+              "key": "unit_cost",
+              "semantic_id": "business_unit_cost",
+              "unit": "money",
+              "calculation_basis": "cost_per_unit",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "price",
+              "semantic_id": "business_unit_selling_price",
+              "unit": "money",
+              "calculation_basis": "selling_price_per_unit_after_quote_policy",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "gross_profit",
+              "semantic_id": "business_unit_gross_profit",
+              "unit": "money",
+              "calculation_basis": "selling_price_less_unit_cost",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "variable_sales_cost",
+              "semantic_id": "business_unit_variable_sales_cost",
+              "unit": "money",
+              "calculation_basis": "sales_cost_as_fraction_of_unit_price",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "margin",
+              "semantic_id": "business_unit_gross_margin",
+              "unit": "rate",
+              "calculation_basis": "unit_gross_profit_over_selling_price",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "markup",
+              "semantic_id": "business_unit_markup",
+              "unit": "rate",
+              "calculation_basis": "unit_gross_profit_over_unit_cost",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "contribution",
+              "semantic_id": "business_unit_contribution",
+              "unit": "money",
+              "calculation_basis": "unit_price_less_unit_cost_and_sales_cost",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "contribution_margin",
+              "semantic_id": "business_unit_contribution_margin",
+              "unit": "rate",
+              "calculation_basis": "unit_contribution_over_selling_price",
+              "required_context": [
+                "periodicity"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "margins"
+          ],
+          "metrics": [
+            {
+              "key": "revenue",
+              "semantic_id": "business_statement_revenue",
+              "unit": "money",
+              "calculation_basis": "accrued_revenue",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "gross_profit",
+              "semantic_id": "business_statement_gross_profit",
+              "unit": "money",
+              "calculation_basis": "revenue_less_cogs",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "contribution",
+              "semantic_id": "business_statement_contribution",
+              "unit": "money",
+              "calculation_basis": "revenue_less_variable_expenses",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "operating_profit",
+              "semantic_id": "business_operating_profit",
+              "unit": "money",
+              "calculation_basis": "accrued_operating_profit",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "net_profit",
+              "semantic_id": "business_net_profit",
+              "unit": "money",
+              "calculation_basis": "profit_after_finance_cost_and_income_tax",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "ebit",
+              "semantic_id": "business_ebit_from_operating_profit",
+              "unit": "money",
+              "calculation_basis": "accrued_operating_profit",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "ebitda",
+              "semantic_id": "business_ebitda_from_operating_profit",
+              "unit": "money",
+              "calculation_basis": "operating_profit_plus_depreciation",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "gross_margin",
+              "semantic_id": "business_statement_gross_margin",
+              "unit": "rate",
+              "calculation_basis": "gross_profit_over_revenue",
+              "required_context": []
+            },
+            {
+              "key": "contribution_margin",
+              "semantic_id": "business_statement_contribution_margin",
+              "unit": "rate",
+              "calculation_basis": "accrual_contribution_over_revenue",
+              "required_context": []
+            },
+            {
+              "key": "operating_margin",
+              "semantic_id": "business_statement_operating_margin",
+              "unit": "rate",
+              "calculation_basis": "operating_profit_over_revenue",
+              "required_context": []
+            },
+            {
+              "key": "net_margin",
+              "semantic_id": "business_statement_net_margin",
+              "unit": "rate",
+              "calculation_basis": "net_profit_over_revenue",
+              "required_context": []
+            },
+            {
+              "key": "ebitda_margin",
+              "semantic_id": "business_statement_ebitda_margin",
+              "unit": "rate",
+              "calculation_basis": "accrual_ebitda_over_revenue",
+              "required_context": []
+            }
+          ]
+        },
+        {
+          "operations": [
+            "ratios"
+          ],
+          "metrics": [
+            {
+              "key": "roi",
+              "semantic_id": "business_accumulated_roi",
+              "unit": "rate",
+              "calculation_basis": "investment_proceeds_less_cost_over_cost",
+              "required_context": [
+                "horizon"
+              ]
+            },
+            {
+              "key": "roe",
+              "semantic_id": "business_roe",
+              "unit": "rate",
+              "calculation_basis": "net_profit_over_average_equity",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "roa",
+              "semantic_id": "business_roa",
+              "unit": "rate",
+              "calculation_basis": "net_profit_over_average_assets",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "roic",
+              "semantic_id": "business_roic",
+              "unit": "rate",
+              "calculation_basis": "nopat_over_average_invested_capital",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "current_ratio",
+              "semantic_id": "business_current_ratio",
+              "unit": "ratio",
+              "calculation_basis": "current_assets_over_current_liabilities",
+              "required_context": []
+            },
+            {
+              "key": "quick_ratio",
+              "semantic_id": "business_quick_ratio",
+              "unit": "ratio",
+              "calculation_basis": "current_assets_less_inventory_and_prepaid_over_current_liabilities",
+              "required_context": []
+            },
+            {
+              "key": "liabilities_to_assets",
+              "semantic_id": "business_liabilities_to_assets",
+              "unit": "ratio",
+              "calculation_basis": "total_liabilities_over_total_assets",
+              "required_context": []
+            },
+            {
+              "key": "working_capital",
+              "semantic_id": "business_working_capital",
+              "unit": "money",
+              "calculation_basis": "current_assets_less_current_liabilities",
+              "required_context": [
+                "reference_date"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "ebitda"
+          ],
+          "metrics": [
+            {
+              "key": "net_income",
+              "semantic_id": "business_reconciliation_net_income",
+              "unit": "money",
+              "calculation_basis": "profit_after_finance_cost_and_income_tax",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "income_tax",
+              "semantic_id": "business_reconciliation_income_tax",
+              "unit": "money",
+              "calculation_basis": "supplied_income_tax",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "net_finance_cost",
+              "semantic_id": "business_reconciliation_net_finance_cost",
+              "unit": "money",
+              "calculation_basis": "supplied_net_finance_cost",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "depreciation_amortization_depletion",
+              "semantic_id": "business_reconciliation_non_cash_expenses",
+              "unit": "money",
+              "calculation_basis": "supplied_depreciation_amortization_and_depletion",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "ebit",
+              "semantic_id": "business_reconciled_ebit",
+              "unit": "money",
+              "calculation_basis": "net_income_plus_tax_and_finance_cost",
+              "required_context": [
+                "accounting_period",
+                "convention"
+              ]
+            },
+            {
+              "key": "ebitda",
+              "semantic_id": "business_reconciled_ebitda",
+              "unit": "money",
+              "calculation_basis": "reconciled_ebit_plus_non_cash_expenses",
+              "required_context": [
+                "accounting_period",
+                "convention"
+              ]
+            },
+            {
+              "key": "ebit_margin",
+              "semantic_id": "business_reconciled_ebit_margin",
+              "unit": "rate",
+              "calculation_basis": "reconciled_ebit_over_revenue",
+              "required_context": [
+                "convention"
+              ]
+            },
+            {
+              "key": "ebitda_margin",
+              "semantic_id": "business_reconciled_ebitda_margin",
+              "unit": "rate",
+              "calculation_basis": "reconciled_ebitda_over_revenue",
+              "required_context": [
+                "convention"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "cycle"
+          ],
+          "metrics": [
+            {
+              "key": "inventory_days",
+              "semantic_id": "business_inventory_turnover_days",
+              "unit": "period",
+              "calculation_basis": "period_days_times_inventory_over_cost_of_goods",
+              "required_context": [
+                "periodicity",
+                "horizon"
+              ]
+            },
+            {
+              "key": "receivables_days",
+              "semantic_id": "business_receivables_collection_days",
+              "unit": "period",
+              "calculation_basis": "period_days_times_receivables_over_credit_sales",
+              "required_context": [
+                "periodicity",
+                "horizon"
+              ]
+            },
+            {
+              "key": "payables_days",
+              "semantic_id": "business_payables_payment_days",
+              "unit": "period",
+              "calculation_basis": "period_days_times_payables_over_credit_purchases",
+              "required_context": [
+                "periodicity",
+                "horizon"
+              ]
+            },
+            {
+              "key": "operating_cycle_days",
+              "semantic_id": "business_operating_cycle_days",
+              "unit": "period",
+              "calculation_basis": "inventory_days_plus_receivables_days",
+              "required_context": [
+                "periodicity",
+                "horizon"
+              ]
+            },
+            {
+              "key": "financial_cycle_days",
+              "semantic_id": "business_financial_cycle_days",
+              "unit": "period",
+              "calculation_basis": "operating_cycle_days_less_payables_days",
+              "required_context": [
+                "periodicity",
+                "horizon"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "plan"
+          ],
+          "metrics": [
+            {
+              "key": "periods",
+              "semantic_id": "business_plan_period_count",
+              "unit": "period",
+              "calculation_basis": "forecast_period_count",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "revenue",
+              "semantic_id": "business_plan_accrued_revenue",
+              "unit": "money",
+              "calculation_basis": "earned_revenue_during_forecast",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "cost",
+              "semantic_id": "business_plan_accrued_cost",
+              "unit": "money",
+              "calculation_basis": "accrued_product_cost_during_forecast",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "expenses",
+              "semantic_id": "business_plan_accrued_expenses",
+              "unit": "money",
+              "calculation_basis": "accrued_expenses_during_forecast",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "profit",
+              "semantic_id": "business_plan_accrued_profit",
+              "unit": "money",
+              "calculation_basis": "earned_revenue_less_cost_and_expenses",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "cash_receipts",
+              "semantic_id": "business_plan_cash_receipts",
+              "unit": "money",
+              "calculation_basis": "received_cash_during_forecast",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "cash_payments",
+              "semantic_id": "business_plan_cash_payments",
+              "unit": "money",
+              "calculation_basis": "paid_cash_during_forecast",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "cash_close",
+              "semantic_id": "business_plan_closing_cash",
+              "unit": "money",
+              "calculation_basis": "undiscounted_cash_at_forecast_close",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "minimum_cash",
+              "semantic_id": "business_plan_minimum_cash",
+              "unit": "money",
+              "calculation_basis": "minimum_modeled_cash_including_period_zero",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            },
+            {
+              "key": "net_present_value",
+              "semantic_id": "business_plan_discounted_cash_flow_npv",
+              "unit": "money",
+              "calculation_basis": "discounted_cash_forecast_less_initial_investment",
+              "required_context": [
+                "periodicity",
+                "horizon",
+                "reference_date"
+              ]
+            }
+          ]
+        },
+        {
+          "operations": [
+            "break_even"
+          ],
+          "metrics": [
+            {
+              "key": "unit_contribution",
+              "semantic_id": "business_break_even_unit_contribution",
+              "unit": "money",
+              "calculation_basis": "unit_price_less_variable_unit_cost",
+              "required_context": [
+                "periodicity"
+              ]
+            },
+            {
+              "key": "accounting_fixed",
+              "semantic_id": "business_break_even_accounting_fixed_cost",
+              "unit": "money",
+              "calculation_basis": "fixed_cost_including_non_cash",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "cash_fixed",
+              "semantic_id": "business_break_even_cash_fixed_cost",
+              "unit": "money",
+              "calculation_basis": "fixed_cost_excluding_non_cash_plus_fixed_outlays",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "accounting_units",
+              "semantic_id": "business_accounting_break_even_units",
+              "unit": "count",
+              "calculation_basis": "accounting_fixed_cost_over_unit_contribution",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "accounting_sales",
+              "semantic_id": "business_accounting_break_even_sales",
+              "unit": "money",
+              "calculation_basis": "accounting_break_even_quantity_times_unit_price",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "cash_units",
+              "semantic_id": "business_cash_break_even_units",
+              "unit": "count",
+              "calculation_basis": "cash_fixed_cost_over_unit_contribution",
+              "required_context": [
+                "accounting_period"
+              ]
+            },
+            {
+              "key": "cash_sales",
+              "semantic_id": "business_cash_break_even_sales",
+              "unit": "money",
+              "calculation_basis": "cash_break_even_quantity_times_unit_price",
+              "required_context": [
+                "accounting_period"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

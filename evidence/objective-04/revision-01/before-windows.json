@@ -1,0 +1,225 @@
+{
+  "schema": 1,
+  "version": "0.4.0",
+  "source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+  "executable_sha256": "6768f9b82d033e839cee836c9b5fe0b988dd6f319ba2be453c7dc76f447c590b",
+  "webview2": "158.0.4370.33",
+  "comparison_milliseconds": 71.61390000000029,
+  "startup_to_checked_standard_ms": 1105.9775,
+  "visible_standard_memory": {
+    "workingSetBytes": {
+      "count": 6,
+      "p50": 411590656,
+      "p95": 412319744,
+      "p99": 412319744
+    },
+    "privateWorkingSetBytes": {
+      "count": 6,
+      "p50": 101355520,
+      "p95": 107507712,
+      "p99": 107507712
+    },
+    "privateBytes": {
+      "count": 6,
+      "p50": 204242944,
+      "p95": 258023424,
+      "p99": 258023424
+    },
+    "sharedCommitBytes": {
+      "count": 6,
+      "p50": 91455488,
+      "p95": 97845248,
+      "p99": 97845248
+    },
+    "sharedWorkingSetBytes": {
+      "count": 6,
+      "p50": 310460416,
+      "p95": 310865920,
+      "p99": 310865920
+    }
+  },
+  "visible_comparison_memory": {
+    "workingSetBytes": {
+      "count": 2,
+      "p50": 542846976,
+      "p95": 546222080,
+      "p99": 546222080
+    },
+    "privateWorkingSetBytes": {
+      "count": 2,
+      "p50": 147894272,
+      "p95": 151339008,
+      "p99": 151339008
+    },
+    "privateBytes": {
+      "count": 2,
+      "p50": 320942080,
+      "p95": 324435968,
+      "p99": 324435968
+    },
+    "sharedCommitBytes": {
+      "count": 2,
+      "p50": 119664640,
+      "p95": 119664640,
+      "p99": 119664640
+    },
+    "sharedWorkingSetBytes": {
+      "count": 2,
+      "p50": 394883072,
+      "p95": 394952704,
+      "p99": 394952704
+    }
+  },
+  "workers_after_comparison": 0,
+  "remaining_processes": 0,
+  "status": "reproduced",
+  "requests": [
+    {
+      "schema": 1,
+      "module": "financial",
+      "operation": "equivalent_rate",
+      "input": "{\"from_periods_per_year\":2,\"rate\":\"0.10\",\"to_periods_per_year\":2}",
+      "original_input": "{\"rate\":{\"text\":\"0.10\",\"locale\":\"en\"},\"from_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"},\"to_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"}}",
+      "options": {
+        "currency": "BRL",
+        "rounding": "half_even"
+      }
+    },
+    {
+      "schema": 1,
+      "module": "financial",
+      "operation": "equivalent_rate",
+      "input": "{\"from_periods_per_year\":2,\"rate\":\"0.10\",\"to_periods_per_year\":1}",
+      "original_input": "{\"rate\":{\"text\":\"0.10\",\"locale\":\"en\"},\"from_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"},\"to_periods_per_year\":{\"text\":\"1\",\"locale\":\"en\"}}",
+      "options": {
+        "currency": "BRL",
+        "rounding": "half_even"
+      }
+    }
+  ],
+  "calculationProofs": [
+    {
+      "algorithm_version": "financial/1",
+      "assumptions": [],
+      "constraints": [
+        "Decimal inputs and rational arithmetic before presentation, with operation-specific exceptions stated below.",
+        "Rates in canonical inputs are fractional (0.01 means 1%). One currency applies to the entire calculation.",
+        "Monetary display follows the selected rounding rule and ISO 4217 minor-unit scale."
+      ],
+      "domain": "financial_decimal",
+      "engine_version": "0.4.0",
+      "error_bound": null,
+      "exactness": "exact",
+      "expression": "{\"rate\":{\"text\":\"0.10\",\"locale\":\"en\"},\"from_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"},\"to_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"}}",
+      "formula": "i_to = (1 + i_from)^(m_from/m_to) − 1",
+      "method": "equivalent_rate_conversion",
+      "module": "financial",
+      "normalized": "{\"from_periods_per_year\":2,\"rate\":\"0.10\",\"to_periods_per_year\":2}",
+      "operation": "equivalent_rate",
+      "options": {
+        "currency": "BRL",
+        "rounding": "half_even"
+      },
+      "precision": null,
+      "references": [
+        "https://www.six-group.com/en/products-services/financial-information/market-reference-data/data-standards.html",
+        "https://nvlpubs.nist.gov/nistpubs/hb/2025/NIST.HB.135e2025.pdf",
+        "https://www.isda.org/2008/12/22/30-360-day-count-conventions/"
+      ],
+      "result": "{\"rate\":\"0.1000000000000000\",\"rate_exact\":\"1/10\"}",
+      "rounding": "monetary presentation: nearest, ties to even",
+      "schema": 1,
+      "tolerance": null,
+      "units": {
+        "currency": "BRL"
+      },
+      "variables": {
+        "minor_unit_scale": "2",
+        "rounding_policy": "half_even"
+      }
+    },
+    {
+      "algorithm_version": "financial/1",
+      "assumptions": [],
+      "constraints": [
+        "Decimal inputs and rational arithmetic before presentation, with operation-specific exceptions stated below.",
+        "Rates in canonical inputs are fractional (0.01 means 1%). One currency applies to the entire calculation.",
+        "Monetary display follows the selected rounding rule and ISO 4217 minor-unit scale."
+      ],
+      "domain": "financial_decimal",
+      "engine_version": "0.4.0",
+      "error_bound": null,
+      "exactness": "exact",
+      "expression": "{\"rate\":{\"text\":\"0.10\",\"locale\":\"en\"},\"from_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"},\"to_periods_per_year\":{\"text\":\"1\",\"locale\":\"en\"}}",
+      "formula": "i_to = (1 + i_from)^(m_from/m_to) − 1",
+      "method": "equivalent_rate_conversion",
+      "module": "financial",
+      "normalized": "{\"from_periods_per_year\":2,\"rate\":\"0.10\",\"to_periods_per_year\":1}",
+      "operation": "equivalent_rate",
+      "options": {
+        "currency": "BRL",
+        "rounding": "half_even"
+      },
+      "precision": null,
+      "references": [
+        "https://www.six-group.com/en/products-services/financial-information/market-reference-data/data-standards.html",
+        "https://nvlpubs.nist.gov/nistpubs/hb/2025/NIST.HB.135e2025.pdf",
+        "https://www.isda.org/2008/12/22/30-360-day-count-conventions/"
+      ],
+      "result": "{\"rate\":\"0.2100000000000000\",\"rate_exact\":\"21/100\"}",
+      "rounding": "monetary presentation: nearest, ties to even",
+      "schema": 1,
+      "tolerance": null,
+      "units": {
+        "currency": "BRL"
+      },
+      "variables": {
+        "minor_unit_scale": "2",
+        "rounding_policy": "half_even"
+      }
+    }
+  ],
+  "comparisonProof": {
+    "algorithm_version": "financial/1",
+    "assumptions": [],
+    "constraints": [
+      "Decimal inputs and rational arithmetic before presentation, with operation-specific exceptions stated below.",
+      "Rates in canonical inputs are fractional (0.01 means 1%). One currency applies to the entire calculation.",
+      "Monetary display follows the selected rounding rule and ISO 4217 minor-unit scale.",
+      "Deltas compare the selected numbers from the scenario results; any prior presentation rounding is retained."
+    ],
+    "domain": "financial_decimal",
+    "engine_version": "0.4.0",
+    "error_bound": null,
+    "exactness": "exact",
+    "expression": "{\"reference\":\"0.1000000000000000\",\"alternative\":\"0.2100000000000000\",\"unit\":\"ratio\"}",
+    "formula": "Delta = alternative - reference; relative percentage = 100 * Delta / abs(reference)",
+    "method": "scenario_comparison",
+    "module": "financial",
+    "normalized": "{\"alternative\":\"0.2100000000000000\",\"reference\":\"0.1000000000000000\",\"unit\":\"ratio\"}",
+    "operation": "scenario_compare",
+    "options": {
+      "currency": "BRL",
+      "rounding": "half_even"
+    },
+    "precision": null,
+    "references": [
+      "https://www.six-group.com/en/products-services/financial-information/market-reference-data/data-standards.html",
+      "https://nvlpubs.nist.gov/nistpubs/hb/2025/NIST.HB.135e2025.pdf",
+      "https://www.isda.org/2008/12/22/30-360-day-count-conventions/"
+    ],
+    "result": "{\"absolute_difference\":\"0.1100000000000000\",\"alternative\":\"0.2100000000000000\",\"reference\":\"0.1000000000000000\",\"relative_difference\":\"1.100000000000\",\"relative_percent\":\"110.0000000000\"}",
+    "rounding": "monetary presentation: nearest, ties to even",
+    "schema": 1,
+    "tolerance": null,
+    "units": {
+      "currency": "BRL"
+    },
+    "variables": {
+      "minor_unit_scale": "2",
+      "rounding_policy": "half_even"
+    }
+  },
+  "interfaceText": "Rate per period\nAbsolute difference\n0.1100000000000000\nRelative difference (%)\n110.0000000000%\nReference\n0.1000000000000000\nAlternative\n0.2100000000000000",
+  "exportedBytes": 3128
+}

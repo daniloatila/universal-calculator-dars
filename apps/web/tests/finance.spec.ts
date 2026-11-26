@@ -170,7 +170,7 @@ test('scenario differences exclude undefined percentages and replay exported dra
   await scenarios.getByRole('combobox', { name: en.finance.labels.alternative, exact: true }).selectOption('2');
   await scenarios.locator('[data-metric="final_balance"]').click();
   await expect(scenarios.locator('.finance-delta')).toContainText(en.finance.labels.relative_difference);
-  await expect(scenarios.locator('.finance-delta dd').last()).toHaveText('—');
+  await expect(scenarios.locator('[data-comparison-field="relative_percent"]')).toHaveText('—');
   const [download] = await Promise.all([page.waitForEvent('download'), button(page, en.finance.labels.export_scenarios).click()]);
   const bytes = await readFile(await download.path());
   await scenarios.locator('input[type=file]').setInputFiles({ name: 'scenarios.json', mimeType: 'application/json', buffer: bytes });

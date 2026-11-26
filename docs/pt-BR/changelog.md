@@ -2,6 +2,12 @@
 
 [English](../../CHANGELOG.md)
 
+## 0.4.1 · Revisão da comparação financeira do Objetivo 04
+
+- Recalcula os dois cenários em Rust e classifica a compatibilidade pelo significado, unidade e contexto financeiro de cada indicador.
+- Normaliza taxas compostas conhecidas para a base efetiva anual. Apresenta separadamente pontos percentuais, variação relativa e precisão.
+- Preserva a importação de cenários históricos e exporta provas reproduzíveis. Restringe a seleção pelo custo nominal a propostas de empréstimo compatíveis.
+
 ## 0.4.0 · Candidata à revisão do Objetivo 04
 
 - Incluídas cinco ferramentas financeiras e empresariais com aritmética racional, unidades monetárias e arredondamento explícito.

@@ -59,6 +59,7 @@ jobs:
           node tests/check-converter-targets.mjs target/release/dars
           node tests/check-date-time-targets.mjs target/release/dars
           node tests/check-finance-targets.mjs target/release/dars
+          node tests/check-finance-comparison-targets.mjs target/release/dars
           python3 -B crates/dars-core/tests/structured-oracle.py
       - name: Verify advanced mathematics with independent references
         if: runner.os == 'Linux'
@@ -78,6 +79,20 @@ jobs:
           python3 -B tests/verify-financial-loans.py target/release/dars
           python3 -B tests/verify-investment-business.py target/release/dars
           python3 -B tests/verify-tax.py target/release/dars
+          python3 -B tests/verify-finance-comparison.py target/release/dars
+      - name: Measure financial line coverage from tests and independent oracles
+        if: runner.os == 'Linux' && github.ref == 'refs/heads/codex/objective-04-finance-and-business'
+        run: |
+          rustup component add llvm-tools-preview
+          cargo install cargo-llvm-cov --version 0.9.2 --locked
+          cargo llvm-cov --locked --release --no-report -p dars-universal
+          cargo llvm-cov run --locked --release --no-report -p dars-cli -- -V
+          export LLVM_PROFILE_FILE="$PWD/target/llvm-cov-target/finance-revision-%p-%m.profraw"
+          for suite in financial-loans investment-business tax finance-comparison; do
+            python3 -B "tests/verify-$suite.py" target/llvm-cov-target/release/dars
+          done
+          cargo llvm-cov report --release --json --output-path "$RUNNER_TEMP/dars-finance-coverage.json"
+          python3 -B tests/summarize-finance-coverage.py "$RUNNER_TEMP/dars-finance-coverage.json"
       - name: Browser verification (Linux)
         if: runner.os == 'Linux'
         working-directory: apps/web

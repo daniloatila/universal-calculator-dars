@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "independent_assessment": {
+    "reported_on": "2026-11-26",
+    "version": "0.4.0",
+    "score": 91,
+    "maximum": 100,
+    "decision": "approval_pending",
+    "audited_source_commit": "cf0d62d1e5c014b9e1f4743300aaf6ef4c6192da",
+    "delivered_evidence_commit": "2f07ae13e120a0ee0a629621ec52087a0e7b6253"
+  },
+  "findings": [
+    {
+      "id": "FIN-COMP-01",
+      "title": "Comparison drops financial periods",
+      "status": "reproduced",
+      "reproduction": "before-windows.json",
+      "capture": "before-windows.png",
+      "replay_file": "historical-scenarios.json",
+      "observed": {
+        "reference_rate": "0.10",
+        "reference_periods_per_year": 2,
+        "alternative_rate": "0.21",
+        "alternative_periods_per_year": 1,
+        "absolute_difference": "0.11",
+        "relative_percent": "110"
+      },
+      "expected_common_effective_annual_rate": "0.21",
+      "expected_difference": "0"
+    },
+    {
+      "id": "FIN-COMP-02",
+      "title": "Loan proposal selection exposed minimum nominal cost across unlike contracts",
+      "status": "reproduced",
+      "reproduction": "loan-selection-v040.json",
+      "observed": {
+        "principals": ["1000.00", "2000.00"],
+        "contract_periods": [3, 6],
+        "selected_proposal_indices": [1]
+      }
+    },
+    {
+      "id": "FIN-COMP-03",
+      "title": "Display zero concealed a nonzero exact difference at the selected resolution",
+      "status": "corrected_in_candidate_chrome",
+      "observed_in": "intermediate 0.4.1 candidate",
+      "exact_difference": "1/1000000000000000000000000",
+      "display_decimal_places": 16,
+      "corrected_display": "≈0",
+      "regression_test": "apps/web/tests/finance-comparison.spec.ts"
+    }
+  ]
+}

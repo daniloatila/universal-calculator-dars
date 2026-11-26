@@ -1,5 +1,6 @@
+use super::metric_catalog::RawMetrics;
 use super::{Money, Rational, decimal, display, finish, money, number, parse};
-use crate::{Computation, MathError};
+use crate::{Computation, Exactness, MathError};
 use num_traits::{Signed, Zero};
 use serde::Deserialize;
 use serde_json::{Map, Value, json};
@@ -15,16 +16,25 @@ pub(super) fn evaluate(
     input: &str,
     options: &Map<String, Value>,
 ) -> Result<Computation, MathError> {
+    evaluate_with_metrics(operation, input, options, None)
+}
+
+pub(super) fn evaluate_with_metrics(
+    operation: &str,
+    input: &str,
+    options: &Map<String, Value>,
+    mut raw: Option<&mut RawMetrics>,
+) -> Result<Computation, MathError> {
     let currency = money(options)?;
     let (mut result, method, formula, conditions) = match operation {
         "price" => (
-            price(parse(input)?, &currency)?,
+            price(parse(input)?, &currency, &mut raw)?,
             "unit_price_and_contribution",
             "P=C(1+markup) or C/(1-margin); contribution=P(1-sales_cost_rate)-C",
             vec!["Gross margin is divided by selling price. Markup is divided by unit cost."],
         ),
         "margins" => (
-            margins(parse(input)?, &currency)?,
+            margins(parse(input)?, &currency, &mut raw)?,
             "accrual_profit_waterfall",
             "gross=R-COGS; contribution=R-variable_costs; net=EBIT-net_finance_cost-income_tax",
             vec![
@@ -33,7 +43,7 @@ pub(super) fn evaluate(
             ],
         ),
         "break_even" => (
-            break_even(parse(input)?, &currency)?,
+            break_even(parse(input)?, &currency, &mut raw)?,
             "single_product_break_even",
             "units=fixed/(unit_price-variable_unit_cost); sales=units*unit_price",
             vec![
@@ -42,7 +52,7 @@ pub(super) fn evaluate(
             ],
         ),
         "ratios" => (
-            ratios(parse(input)?, &currency)?,
+            ratios(parse(input)?, &currency, &mut raw)?,
             "matched_period_business_ratios",
             "ROA=net_profit/average_assets; ROE=net_profit/average_equity; ROIC=NOPAT/average_invested_capital",
             vec![
@@ -51,7 +61,7 @@ pub(super) fn evaluate(
             ],
         ),
         "ebitda" => (
-            ebitda(parse(input)?, &currency)?,
+            ebitda(parse(input)?, &currency, &mut raw)?,
             "cvm_156_unadjusted_reconciliation",
             "EBIT=net_income+income_tax+net_finance_cost; EBITDA=EBIT+depreciation_amortization_depletion",
             vec![
@@ -60,7 +70,7 @@ pub(super) fn evaluate(
             ],
         ),
         "cycle" => (
-            cycle(parse(input)?)?,
+            cycle(parse(input)?, &mut raw)?,
             "matched_period_cash_conversion_cycle",
             "DIO=days*inventory/COGS; DSO=days*receivables/credit_sales; DPO=days*payables/credit_purchases; CCC=DIO+DSO-DPO",
             vec![
@@ -68,7 +78,7 @@ pub(super) fn evaluate(
             ],
         ),
         "plan" => (
-            plan(parse(input)?, &currency)?,
+            plan(parse(input)?, &currency, &mut raw)?,
             "periodic_accrual_and_cash_budget",
             "profit=earned_revenue-cost-expenses; cash_close=cash_open+receipts-payments; NPV=-investment+sum(net_cash/(1+rate)^t)",
             vec![
@@ -105,10 +115,17 @@ fn nonnegative(text: &str) -> Result<Rational, MathError> {
     Ok(value)
 }
 
-fn ratio(value: &Rational, divisor: &Rational) -> Option<String> {
-    divisor
-        .is_positive()
-        .then(|| display(&(value / divisor), RATE_PLACES))
+fn ratio(
+    value: &Rational,
+    divisor: &Rational,
+    name: &'static str,
+    raw: &mut Option<&mut RawMetrics>,
+) -> Option<String> {
+    divisor.is_positive().then(|| {
+        let value = value / divisor;
+        RawMetrics::capture(raw, Exactness::Exact, &[(name, &value)]);
+        display(&value, RATE_PLACES)
+    })
 }
 
 #[derive(Deserialize)]
@@ -124,7 +141,11 @@ struct PriceInput {
     quote_to_minor: bool,
 }
 
-fn price(input: PriceInput, money: &Money) -> Result<Value, MathError> {
+fn price(
+    input: PriceInput,
+    money: &Money,
+    raw: &mut Option<&mut RawMetrics>,
+) -> Result<Value, MathError> {
     let cost = nonnegative(&input.unit_cost)?;
     let sales_cost = nonnegative(&input.sales_cost_rate)?;
     let one = number(1);
@@ -161,13 +182,26 @@ fn price(input: PriceInput, money: &Money) -> Result<Value, MathError> {
     let unit_gross_profit = &price - &cost;
     let variable_sales_cost = &price * &sales_cost;
     let contribution = &unit_gross_profit - &variable_sales_cost;
+    RawMetrics::capture(
+        raw,
+        Exactness::Exact,
+        &[
+            ("unit_cost", &cost),
+            ("price", &price),
+            ("gross_profit", &unit_gross_profit),
+            ("variable_sales_cost", &variable_sales_cost),
+            ("contribution", &contribution),
+        ],
+    );
     Ok(json!({
         "basis": basis, "unit_cost": money.format(&cost), "price": money.format(&price),
         "price_exact": price.to_string(), "unrounded_price_exact": proposed.to_string(),
         "quote_to_minor": input.quote_to_minor,
         "gross_profit": money.format(&unit_gross_profit), "variable_sales_cost": money.format(&variable_sales_cost),
-        "margin": ratio(&unit_gross_profit, &price), "markup": ratio(&unit_gross_profit, &cost),
-        "contribution": money.format(&contribution), "contribution_margin": ratio(&contribution, &price),
+        "margin": ratio(&unit_gross_profit, &price, "margin", raw),
+        "markup": ratio(&unit_gross_profit, &cost, "markup", raw),
+        "contribution": money.format(&contribution),
+        "contribution_margin": ratio(&contribution, &price, "contribution_margin", raw),
         "markup_undefined": cost.is_zero(),
     }))
 }
@@ -190,7 +224,11 @@ struct MarginInput {
     income_tax: String,
 }
 
-fn margins(input: MarginInput, money: &Money) -> Result<Value, MathError> {
+fn margins(
+    input: MarginInput,
+    money: &Money,
+    raw: &mut Option<&mut RawMetrics>,
+) -> Result<Value, MathError> {
     let revenue = nonnegative(&input.revenue)?;
     let cogs = nonnegative(&input.cogs)?;
     let variable_cogs = match input.variable_cogs {
@@ -210,13 +248,28 @@ fn margins(input: MarginInput, money: &Money) -> Result<Value, MathError> {
     let operating_profit = &gross_profit - variable_expenses - fixed_expenses - &depreciation;
     let net_profit = &operating_profit - net_finance_cost - income_tax;
     let ebitda = &operating_profit + depreciation;
+    RawMetrics::capture(
+        raw,
+        Exactness::Exact,
+        &[
+            ("revenue", &revenue),
+            ("gross_profit", &gross_profit),
+            ("contribution", &contribution),
+            ("operating_profit", &operating_profit),
+            ("net_profit", &net_profit),
+            ("ebit", &operating_profit),
+            ("ebitda", &ebitda),
+        ],
+    );
     Ok(json!({
         "revenue": money.format(&revenue), "gross_profit": money.format(&gross_profit),
         "contribution": money.format(&contribution), "operating_profit": money.format(&operating_profit),
         "net_profit": money.format(&net_profit), "ebit": money.format(&operating_profit),
-        "ebitda": money.format(&ebitda), "gross_margin": ratio(&gross_profit, &revenue),
-        "contribution_margin": ratio(&contribution, &revenue), "operating_margin": ratio(&operating_profit, &revenue),
-        "net_margin": ratio(&net_profit, &revenue), "ebitda_margin": ratio(&ebitda, &revenue),
+        "ebitda": money.format(&ebitda), "gross_margin": ratio(&gross_profit, &revenue, "gross_margin", raw),
+        "contribution_margin": ratio(&contribution, &revenue, "contribution_margin", raw),
+        "operating_margin": ratio(&operating_profit, &revenue, "operating_margin", raw),
+        "net_margin": ratio(&net_profit, &revenue, "net_margin", raw),
+        "ebitda_margin": ratio(&ebitda, &revenue, "ebitda_margin", raw),
         "margin_undefined": revenue.is_zero(),
     }))
 }
@@ -233,7 +286,11 @@ struct BreakEvenInput {
     fixed_cash_extra: String,
 }
 
-fn break_even(input: BreakEvenInput, money: &Money) -> Result<Value, MathError> {
+fn break_even(
+    input: BreakEvenInput,
+    money: &Money,
+    raw: &mut Option<&mut RawMetrics>,
+) -> Result<Value, MathError> {
     let price = nonnegative(&input.unit_price)?;
     let contribution = &price - nonnegative(&input.variable_unit_cost)?;
     let accounting_fixed = nonnegative(&input.fixed_accounting)?;
@@ -242,7 +299,16 @@ fn break_even(input: BreakEvenInput, money: &Money) -> Result<Value, MathError> 
         return Err(MathError::Domain);
     }
     let cash_fixed = &accounting_fixed - non_cash + nonnegative(&input.fixed_cash_extra)?;
-    let threshold = |fixed: &Rational| {
+    RawMetrics::capture(
+        raw,
+        Exactness::Exact,
+        &[
+            ("unit_contribution", &contribution),
+            ("accounting_fixed", &accounting_fixed),
+            ("cash_fixed", &cash_fixed),
+        ],
+    );
+    let mut threshold = |fixed: &Rational, sales_key| {
         if !contribution.is_positive() && !fixed.is_zero() {
             return json!({"status":"unreachable_positive_fixed_cost","units":null,"whole_units":null,"sales":null,"whole_sales":null});
         }
@@ -252,18 +318,21 @@ fn break_even(input: BreakEvenInput, money: &Money) -> Result<Value, MathError> 
             fixed / &contribution
         };
         let whole = units.ceil();
+        let sales = &units * &price;
+        RawMetrics::capture(raw, Exactness::Exact, &[(sales_key, &sales)]);
         let status = if !contribution.is_positive() {
             "zero_volume_only_or_no_recovery"
         } else {
             "reachable"
         };
         json!({"status":status,"units":display(&units,RATE_PLACES),"units_exact":units.to_string(),
-            "whole_units":whole.to_integer().to_string(),"sales":money.format(&(&units*&price)),
+            "whole_units":whole.to_integer().to_string(),"sales":money.format(&sales),
             "whole_sales":money.format(&(whole*&price))})
     };
     Ok(
         json!({"unit_contribution":money.format(&contribution),"accounting_fixed":money.format(&accounting_fixed),
-        "cash_fixed":money.format(&cash_fixed),"accounting":threshold(&accounting_fixed),"financial":threshold(&cash_fixed)}),
+        "cash_fixed":money.format(&cash_fixed),"accounting":threshold(&accounting_fixed,"accounting_sales"),
+        "financial":threshold(&cash_fixed,"cash_sales")}),
     )
 }
 
@@ -308,15 +377,16 @@ fn average(left: Option<Rational>, right: Option<Rational>) -> Option<Rational> 
 fn set_ratio(
     result: &mut Map<String, Value>,
     undefined: &mut Map<String, Value>,
-    name: &str,
+    name: &'static str,
     numerator: Option<&Rational>,
     denominator: Option<&Rational>,
     invalid_base: Option<&str>,
+    raw: &mut Option<&mut RawMetrics>,
 ) {
     let (value, reason) = match (numerator, denominator, invalid_base) {
         (Some(_), Some(_), Some(reason)) => (None, Some(reason)),
         (Some(top), Some(bottom), None) => (
-            ratio(top, bottom),
+            ratio(top, bottom, name, raw),
             (!bottom.is_positive()).then_some("nonpositive_denominator"),
         ),
         _ => (None, Some("missing_inputs")),
@@ -327,7 +397,11 @@ fn set_ratio(
     }
 }
 
-fn ratios(input: RatiosInput, money: &Money) -> Result<Value, MathError> {
+fn ratios(
+    input: RatiosInput,
+    money: &Money,
+    raw: &mut Option<&mut RawMetrics>,
+) -> Result<Value, MathError> {
     let net_profit = amount(input.net_profit, true)?;
     let average_assets = average(
         amount(input.initial_assets, false)?,
@@ -400,12 +474,17 @@ fn ratios(input: RatiosInput, money: &Money) -> Result<Value, MathError> {
             numerator,
             denominator,
             invalid,
+            raw,
         );
     }
     let working_capital = current_assets
         .as_ref()
         .zip(current_liabilities.as_ref())
-        .map(|(assets, liabilities)| money.format(&(assets - liabilities)));
+        .map(|(assets, liabilities)| {
+            let value = assets - liabilities;
+            RawMetrics::capture(raw, Exactness::Exact, &[("working_capital", &value)]);
+            money.format(&value)
+        });
     if working_capital.is_none() {
         undefined.insert("working_capital".into(), json!("missing_inputs"));
     }
@@ -427,7 +506,11 @@ struct EbitdaInput {
     revenue: Option<String>,
 }
 
-fn ebitda(input: EbitdaInput, money: &Money) -> Result<Value, MathError> {
+fn ebitda(
+    input: EbitdaInput,
+    money: &Money,
+    raw: &mut Option<&mut RawMetrics>,
+) -> Result<Value, MathError> {
     let net_income = decimal(&input.net_income)?;
     let income_tax = decimal(&input.income_tax)?;
     let finance_cost = decimal(&input.net_finance_cost)?;
@@ -435,12 +518,24 @@ fn ebitda(input: EbitdaInput, money: &Money) -> Result<Value, MathError> {
     let ebit = &net_income + &income_tax + &finance_cost;
     let ebitda = &ebit + &depreciation;
     let revenue = amount(input.revenue, false)?;
+    RawMetrics::capture(
+        raw,
+        Exactness::Exact,
+        &[
+            ("net_income", &net_income),
+            ("income_tax", &income_tax),
+            ("net_finance_cost", &finance_cost),
+            ("depreciation_amortization_depletion", &depreciation),
+            ("ebit", &ebit),
+            ("ebitda", &ebitda),
+        ],
+    );
     Ok(
         json!({ "net_income":money.format(&net_income),"income_tax":money.format(&income_tax),
         "net_finance_cost":money.format(&finance_cost),"depreciation_amortization_depletion":money.format(&depreciation),
         "ebit":money.format(&ebit),"ebitda":money.format(&ebitda),
-        "ebit_margin":revenue.as_ref().and_then(|value|ratio(&ebit,value)),
-        "ebitda_margin":revenue.as_ref().and_then(|value|ratio(&ebitda,value)),
+        "ebit_margin":revenue.as_ref().and_then(|value|ratio(&ebit,value,"ebit_margin",raw)),
+        "ebitda_margin":revenue.as_ref().and_then(|value|ratio(&ebitda,value,"ebitda_margin",raw)),
         "convention":"cvm_156_article_3_unadjusted" }),
     )
 }
@@ -457,7 +552,7 @@ struct CycleInput {
     credit_purchases: String,
 }
 
-fn cycle(input: CycleInput) -> Result<Value, MathError> {
+fn cycle(input: CycleInput, raw: &mut Option<&mut RawMetrics>) -> Result<Value, MathError> {
     if !(1..=3660).contains(&input.days) {
         return Err(MathError::Domain);
     }
@@ -487,7 +582,12 @@ fn cycle(input: CycleInput) -> Result<Value, MathError> {
         ("financial_cycle_days", &financial),
     ]
     .into_iter()
-    .filter_map(|(name, value)| value.is_none().then_some(name))
+    .filter_map(|(name, value)| {
+        if let Some(value) = value {
+            RawMetrics::capture(raw, Exactness::Exact, &[(name, value)]);
+        }
+        value.is_none().then_some(name)
+    })
     .collect::<Vec<_>>();
     Ok(
         json!({"period_days":input.days,"inventory_days":show(dio),"receivables_days":show(dso),
@@ -597,7 +697,11 @@ fn realized_and_variance(
         .transpose()
 }
 
-fn plan(input: PlanInput, money: &Money) -> Result<Value, MathError> {
+fn plan(
+    input: PlanInput,
+    money: &Money,
+    raw: &mut Option<&mut RawMetrics>,
+) -> Result<Value, MathError> {
     if !(1..=MAX_PERIODS).contains(&input.periods)
         || !(1..=MAX_PAGE_SIZE).contains(&input.page_size)
         || !(1..=input.periods).contains(&input.page_start)
@@ -721,6 +825,21 @@ fn plan(input: PlanInput, money: &Money) -> Result<Value, MathError> {
         }
     }
     let total_profit = &earned - &total_cost - &total_expenses;
+    RawMetrics::capture(
+        raw,
+        Exactness::Exact,
+        &[
+            ("revenue", &earned),
+            ("cost", &total_cost),
+            ("expenses", &total_expenses),
+            ("profit", &total_profit),
+            ("cash_receipts", &received),
+            ("cash_payments", &paid),
+            ("cash_close", &cash),
+            ("minimum_cash", &minimum_cash),
+            ("net_present_value", &net_present),
+        ],
+    );
     let sensitivity = sensitivity.map(|(_, _, totals)| {
         json!({
             "lower_revenue_growth_profit":money.format(&(&totals[0]-&total_cost-&total_expenses)),

@@ -6,6 +6,7 @@ use num_traits::{One, Signed, Zero};
 use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value, json};
 
+use super::metric_catalog::RawMetrics;
 use super::{Money, Rational, date, decimal, display, finish, money, number, parse};
 use crate::{Computation, Exactness, MathError};
 
@@ -633,6 +634,15 @@ pub(super) fn evaluate(
     input: &str,
     options: &Map<String, Value>,
 ) -> Result<Computation, MathError> {
+    evaluate_with_metrics(operation, input, options, None)
+}
+
+pub(super) fn evaluate_with_metrics(
+    operation: &str,
+    input: &str,
+    options: &Map<String, Value>,
+    mut raw: Option<&mut RawMetrics>,
+) -> Result<Computation, MathError> {
     if operation != "project" {
         return Err(MathError::Unsupported);
     }
@@ -670,6 +680,7 @@ pub(super) fn evaluate(
     };
     let mut approximate = false;
     let mut elapsed = 0;
+    let mut terminal_date = calendar.current;
     for period in 1..=data.periods {
         let terms = terms.for_period(overrides.get(&period).copied())?;
         let (rate, derived) = terms.effective_rate(basis)?;
@@ -691,6 +702,7 @@ pub(super) fn evaluate(
             continue;
         }
         elapsed = period;
+        terminal_date = period_date;
         approximate |= derived;
         if data.timing == Timing::Start {
             totals.flow(&terms)?;
@@ -726,9 +738,66 @@ pub(super) fn evaluate(
         &totals.gross.balance + &totals.gross.distributed + &totals.withdrawals - &invested;
     let real_final = &totals.net.balance / &totals.inflation_factor;
     let real_profit = &real_final + &totals.real_operating_flows - &opening;
-    let simple_return = |profit: &Rational, contribution: &Rational| {
-        (!contribution.is_zero()).then(|| display(&(profit / contribution), RATE_PRECISION))
+    let mut simple_return = |key, profit: &Rational, contribution: &Rational, exactness| {
+        (!contribution.is_zero()).then(|| {
+            let rate = profit / contribution;
+            RawMetrics::capture(&mut raw, exactness, &[(key, &rate)]);
+            display(&rate, RATE_PRECISION)
+        })
     };
+    let performance_exactness = if approximate {
+        Exactness::Approximate
+    } else {
+        Exactness::Exact
+    };
+    let nominal_gross = simple_return(
+        "simple_gross_return",
+        &gross_profit,
+        &invested,
+        performance_exactness,
+    );
+    let nominal_net = simple_return(
+        "simple_net_return",
+        &net_profit,
+        &invested,
+        performance_exactness,
+    );
+    let real_net = simple_return(
+        "simple_real_net_return",
+        &real_profit,
+        &totals.real_contributed,
+        performance_exactness,
+    );
+    let inflation = &totals.inflation_factor - Rational::one();
+    RawMetrics::capture(
+        &mut raw,
+        performance_exactness,
+        &[
+            ("final_balance", &totals.net.balance),
+            ("gross_final_balance", &totals.gross.balance),
+            ("real_final_balance", &real_final),
+            ("distributions", &totals.net.distributed),
+            ("gross_distributions", &totals.gross.distributed),
+            ("fees", &totals.net.fees),
+            ("taxes", &totals.net.taxes),
+            ("net_profit", &net_profit),
+            ("gross_profit", &gross_profit),
+            ("real_net_profit", &real_profit),
+        ],
+    );
+    RawMetrics::capture(
+        &mut raw,
+        Exactness::Exact,
+        &[
+            ("contributions", &totals.deposits),
+            ("total_contributed", &invested),
+            ("withdrawals", &totals.withdrawals),
+            ("cumulative_inflation", &inflation),
+        ],
+    );
+    if let Some(raw) = raw {
+        raw.terminal_date(terminal_date);
+    }
     let mut output = finish(
         input,
         options,
@@ -750,10 +819,10 @@ pub(super) fn evaluate(
             "net_profit": currency.format(&net_profit),
             "gross_profit": currency.format(&gross_profit),
             "real_net_profit": currency.format(&real_profit),
-            "simple_gross_return": simple_return(&gross_profit, &invested),
-            "simple_net_return": simple_return(&net_profit, &invested),
-            "simple_real_net_return": simple_return(&real_profit, &totals.real_contributed),
-            "cumulative_inflation": display(&(totals.inflation_factor - Rational::one()), RATE_PRECISION),
+            "simple_gross_return": nominal_gross,
+            "simple_net_return": nominal_net,
+            "simple_real_net_return": real_net,
+            "cumulative_inflation": display(&inflation, RATE_PRECISION),
             "currency": currency.code,
             "page_start": rows.start,
             "next_page": rows.next,

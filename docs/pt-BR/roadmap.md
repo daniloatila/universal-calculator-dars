@@ -19,7 +19,7 @@ Consulte o [estado do projeto](project-state.md) para saber qual é o objetivo v
 
 Os Objetivos 01 e 02 foram aprovados nas versões 0.1.1 e 0.2.2. A primeira auditoria independente do Objetivo 03 solicitou corrigir as transições de idioma. O proprietário aprovou a revisão 0.3.1 com 95/100 após a avaliação independente final e autorizou o Objetivo 04 com branch próprio de revisão. [Aprovação do Objetivo 03](../../evidence/objective-03/approval.json) [Aprovação do Objetivo 01](../../evidence/objective-01/approval.json) · [Aprovação do Objetivo 02](../../evidence/objective-02/approval.json) · [Revisão do Objetivo 03](../../evidence/objective-03/revision-01/REPORT.pt-BR.md)
 
-A candidata 0.4.0 de Finanças e Negócios passou nos oráculos independentes, nas verificações do navegador e do Windows e nos quatro jobs de GitHub Actions. Ela está no branch de revisão e aguarda aprovação. [Relatório do Objetivo 04](../../evidence/objective-04/REPORT.pt-BR.md) · [Aceitação](../../evidence/objective-04/acceptance.json)
+A candidata 0.4.0 de Finanças e Negócios passou nas verificações da entrega. A avaliação independente deu 91/100 e solicitou a correção do Comparador de Cenários antes da aprovação. A revisão 0.4.1 está em andamento no branch do Objetivo 04. [Evidências originais](../../evidence/objective-04/REPORT.pt-BR.md) · [Revisão](../../evidence/objective-04/revision-01/REPORT.pt-BR.md)
 
 ## Acompanhamento de memória no Windows
 

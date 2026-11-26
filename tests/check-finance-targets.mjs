@@ -45,7 +45,9 @@ function request(module, operation, input, currency = 'BRL') {
 
 for (const [module, cases] of Object.entries(operationInputs)) {
   const supported = Object.entries(cases).map(([operation, input]) => request(module, operation, input));
-  const comparator = request(module, 'scenario_compare', { unit: 'money', reference: '0', alternative: '20.25' });
+  const { operation, input, options } = supported[0];
+  const recipe = { operation, input, options };
+  const comparator = { ...request(module, 'scenario_compare', { reference: recipe, alternative: recipe }), options: {} };
   const malformed = Object.keys(cases).map((operation) => request(module, operation, { x: '1' }));
   const otherModules = modules.filter((id) => id !== module).map((id) => {
     const [operation, input] = Object.entries(operationInputs[id])[0];

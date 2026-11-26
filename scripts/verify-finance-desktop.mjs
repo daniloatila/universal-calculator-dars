@@ -9,9 +9,11 @@ const baselineOnly = argumentsList[0] === '--baseline-only';
 const [baselineArgument, candidateArgument, expectedCandidateSha, outputArgument] = baselineOnly
   ? [argumentsList[1], undefined, undefined, argumentsList[2]]
   : argumentsList;
+const candidateVersion = argumentsList[4] ?? '0.4.0';
 assert(baselineArgument && outputArgument && (baselineOnly
-  ? argumentsList.length === 3 : argumentsList.length === 4 && /^[a-f0-9]{64}$/u.test(expectedCandidateSha)),
-  'Pass BASELINE_EXE CANDIDATE_EXE VERIFIED_CANDIDATE_SHA256 OUTPUT_JSON, or --baseline-only BASELINE_EXE OUTPUT_JSON.');
+  ? argumentsList.length === 3 : [4, 5].includes(argumentsList.length) &&
+      /^0\.4\.[01]$/u.test(candidateVersion) && /^[a-f0-9]{64}$/u.test(expectedCandidateSha)),
+  'Pass BASELINE_EXE CANDIDATE_EXE VERIFIED_CANDIDATE_SHA256 OUTPUT_JSON [VERSION], or --baseline-only BASELINE_EXE OUTPUT_JSON.');
 
 const output = resolve(outputArgument);
 const screenshotDirectory = join(dirname(output), `${basename(output, '.json')}-screenshots`);
@@ -187,7 +189,7 @@ const run = (executable, version, candidate) => runWindowsToolBenchmark({
 }, executable);
 const baseline = await run(baselineExecutable, '0.3.1', false);
 assert.equal(baseline.executableSha256, receipt.sha256);
-const candidate = candidateExecutable ? await run(candidateExecutable, '0.4.0', true) : null;
+const candidate = candidateExecutable ? await run(candidateExecutable, candidateVersion, true) : null;
 if (candidate) {
   assert.equal(baseline.webview, candidate.webview);
   assert.equal(candidate.executableSha256, expectedCandidateSha);

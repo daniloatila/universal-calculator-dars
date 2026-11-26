@@ -3,6 +3,7 @@ import type { CalculationProof } from './calculation-proof';
 import { LOCALES } from './i18n';
 import type { Locale } from './i18n';
 import { numberPresentation } from './locale-format';
+import type { ComparisonDetail, Indicator, readComparison } from './tool-finance-comparison';
 
 type Result = Record<string, unknown>;
 type Label = (key: string) => string;
@@ -25,8 +26,12 @@ export function readResult(proof: CalculationProof): Result {
   } catch { return {}; }
 }
 
-export function downloadJson(filename: string, contents: unknown) {
-  const url = URL.createObjectURL(new Blob([JSON.stringify(contents, null, 2)], { type: 'application/json' }));
+export function downloadJson(filename: string, contents: unknown, maximumBytes?: number) {
+  const encoder = new TextEncoder();
+  const readable = JSON.stringify(contents, null, 2);
+  const text = maximumBytes && encoder.encode(readable).byteLength > maximumBytes ? JSON.stringify(contents) : readable;
+  if (maximumBytes && encoder.encode(text).byteLength > maximumBytes) throw new TypeError('limit');
+  const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
   const link = document.createElement('a');
   link.href = url;
   link.download = filename;
@@ -110,83 +115,172 @@ function LedgerPreview({ rows, label, present }: { rows: unknown; label: Label; 
   </details>;
 }
 
-type MetricUnit = 'money' | 'ratio' | 'count';
-const units = {
-  ratio: new Set(['rate', 'nominal_rate', 'effective_rate', 'mirr', 'profitability_index', 'effective_cost',
-    'cumulative_inflation', 'simple_gross_return', 'simple_net_return', 'simple_real_net_return',
-    'gross_margin', 'operating_margin', 'contribution_margin', 'ebitda_margin', 'net_margin', 'markup', 'margin',
-    'roi', 'roe', 'roa', 'roic', 'current_ratio', 'quick_ratio', 'debt_ratio', 'income_tax_rate', 'icms_rate']),
-  count: new Set(['periods', 'contract_periods', 'actual_periods', 'payback', 'accounting_units', 'cash_units',
-    'operating_cycle', 'cash_cycle', 'inventory_days', 'receivable_days', 'payable_days']),
-  money: new Set(['amount', 'interest', 'present', 'discount', 'payment', 'npv', 'principal', 'total_paid', 'total_cost',
-    'amortization', 'fees', 'upfront_fee', 'extra', 'capitalized', 'balance_end', 'initial', 'contributions',
-    'withdrawals', 'distributions', 'taxes', 'final_balance', 'gross_final_balance', 'real_final_balance',
-    'gross_profit', 'net_profit', 'real_net_profit', 'price', 'contribution', 'revenue', 'expenses', 'cost',
-    'ebit', 'ebitda', 'profit', 'cash_close', 'minimum_cash', 'net_present_value', 'cash_receipts', 'cash_payments',
-    'gross', 'inss', 'irrf', 'irpf', 'net', 'net_pay', 'withheld', 'income_tax', 'net_redemption', 'net_gain',
-    'delta', 'refund', 'tax_due', 'iof', 'icms', 'working_capital']),
-} satisfies Record<MetricUnit, Set<string>>;
-
-function extractMetrics(value: Result): Record<string, string> {
-  const output: Record<string, string> = {};
-  for (const [key, metric] of Object.entries({ ...(object(value.summary) ? value.summary : {}), ...value })) {
-    if (typeof metric === 'string' && decimal.test(metric) ||
-      typeof metric === 'number' && Number.isSafeInteger(metric)) output[key] = String(metric);
-  }
-  return output;
+/** Shift a fractional rate for presentation only, without rounding or using Number for its value. */
+function rateAsPercent(value: string) {
+  const match = value.match(/^([+-]?)([0-9]+)(?:\.([0-9]+))?$/u);
+  if (!match) return value;
+  const fraction = match[3] ?? '';
+  const whole = (match[2]! + fraction.slice(0, 2).padEnd(2, '0')).replace(/^0+(?=\d)/u, '');
+  const rest = fraction.slice(2).replace(/0+$/u, '');
+  return (match[1] === '-' ? '-' : '') + whole + (rest ? `.${rest}` : '');
 }
 
-export function scenarioMetrics(first: Result, second: Result) {
-  const left = extractMetrics(first);
-  const right = extractMetrics(second);
-  return Object.keys(left).flatMap((key) => {
-    if (key === 'payback' && first.unit !== second.unit) return [];
-    const unit = (Object.keys(units) as MetricUnit[]).find((unit) => units[unit].has(key));
-    return unit && Object.hasOwn(right, key) ? [{ key, reference: left[key]!, alternative: right[key]!, unit }] : [];
-  });
+function comparableStatus(status: ComparisonDetail['status']) {
+  return status === 'direct' || status === 'normalized';
 }
 
-export function ScenarioResults({ first, second, firstInputs, secondInputs, label, locale, compare, metric, delta, pending }: {
-  first: Result; second: Result; firstInputs: string; secondInputs: string; label: Label; locale: Locale;
-  compare: (key: string) => void;
-  metric: string; delta?: Result; pending: boolean;
+function compactDecimal(value: string) {
+  return value.includes('.') ? value.replace(/0+$/u, '').replace(/\.$/u, '') : value;
+}
+
+function OriginalIndicator({ title, indicator, label, display, present }: {
+  title: string; indicator: Indicator | null; label: Label;
+  display: (value: string) => string; present: (value: string) => string;
 }) {
-  const shared = scenarioMetrics(first, second);
-  const present = numberPresentation(LOCALES[locale].format).format;
-  if (!shared.length) return <p>{label('no_metrics')}</p>;
-  const selected = shared.find(({ key }) => key === metric);
-  const compared = selected ? [selected.reference, selected.alternative] : [];
-  const magnitudes = compared.map((value) => Math.abs(Number(value)));
-  const extent = Math.max(0, ...magnitudes);
-  return <>
-    <div className="finance-scroll" tabIndex={0} aria-label={label('scenario_comparator')}>
-      <table><thead><tr><th scope="col">{label('metric')}</th><th scope="col">{label('reference')}</th>
-        <th scope="col">{label('alternative')}</th><th scope="col">{label('absolute_difference')}</th></tr></thead>
-        <tbody>{shared.map(({ key, reference, alternative }) => <tr key={key}>
-          <th scope="row">{label(key)}</th><td><bdi>{present(reference)}</bdi></td>
-          <td><bdi>{present(alternative)}</bdi></td><td><button type="button" disabled={pending}
-            data-metric={key} aria-pressed={key === metric}
-            onClick={() => compare(key)}>
-            {label('difference')}
-          </button></td></tr>)}</tbody>
-      </table>
-    </div>
-    {delta && metric && <div className="finance-delta" aria-live="polite">
-      <h3>{label(metric)}</h3>
+  return <section>
+    <h4>{title}</h4>
+    {indicator ? <>
       <dl className="finance-readings">
-        <div><dt>{label('absolute_difference')}</dt><dd>{scalar(delta.absolute_difference, label, present)}</dd></div>
-        <div><dt>{label('relative_difference')}</dt><dd>
-          {typeof delta.relative_percent === 'string' ? <bdi>{present(delta.relative_percent)}%</bdi> : '—'}
+        <div><dt>{label('operation')}</dt><dd>{label(indicator.operation)}</dd></div>
+        {typeof indicator.context.currency === 'string' && <div>
+          <dt>{label('currency')}</dt><dd><bdi>{indicator.context.currency}</bdi></dd>
+        </div>}
+        <div><dt>{label('comparison_original_value')}</dt>
+          <dd data-original-value><bdi>{indicator.presentation === null ? '—' : display(indicator.presentation)}</bdi></dd></div>
+        <div><dt>{label('comparison_canonical_value')}</dt>
+          <dd><bdi>{indicator.value_omitted ? label('comparison_value_omitted')
+            : indicator.value === null ? '—' : present(indicator.value)}</bdi></dd></div>
+        <div><dt>{label('comparison_precision')}</dt><dd>{label('comparison_' + indicator.exactness)}
+          {indicator.decimal_places !== null && ` · ${label('comparison_decimal_places')} ${present(String(indicator.decimal_places))}`}
+        </dd></div>
+        <div><dt>{label('comparison_source')}</dt><dd>{label('comparison_source_' + indicator.source)}</dd></div>
+      </dl>
+      <details className="finance-detail"><summary>{label('comparison_original_basis')}</summary>
+        {comparisonContext(indicator.context, label, present)}
+      </details>
+    </> : <p>{label('comparison_reason_metric_missing')}</p>}
+  </section>;
+}
+
+function comparisonContext(context: Record<string, unknown>, label: Label, present: (value: string) => string) {
+  return <dl className="finance-readings">
+    {Object.entries(context).filter(([, value]) => value !== null).map(([key, value]) => <div key={key}>
+      <dt>{label(key === 'periodicity' && typeof value === 'number' ? 'periods_per_year' : key)}</dt>
+      <dd>{typeof value === 'string' && /^[a-z][a-z0-9_]*$/u.test(value)
+        ? label(value) : scalar(value, label, present, key)}</dd>
+    </div>)}
+  </dl>;
+}
+
+function ComparisonDetails({ comparison, proof, label, locale, exportProof }: {
+  comparison: ComparisonDetail; proof?: CalculationProof; label: Label; locale: Locale; exportProof(): void;
+}) {
+  const { status, reason, reference, alternative, normalization, common_basis: basis } = comparison;
+  const format = LOCALES[locale].format;
+  const present = numberPresentation(format).format;
+  const uncertainZero = comparison.exact_difference_omitted ||
+    (comparison.exact_difference !== null && comparison.exact_difference !== '0') ||
+    comparison.precision_source === 'canonical_approximate' || comparison.precision_source === 'presentation_rounded';
+  function presentDelta(value: string, displayValue: (value: string) => string) {
+    const compact = compactDecimal(value);
+    return (uncertainZero && compact === '0' ? '≈' : '') + displayValue(compact);
+  }
+  const presentDifference = (value: string) => presentDelta(value, present);
+  const percentTemplate = new Intl.NumberFormat(format, { style: 'percent' }).formatToParts(0);
+  const percent = (value: string) => percentTemplate
+    .map((part) => part.type === 'integer' ? present(value) : part.value).join('');
+  const display = comparison.unit === 'rate' ? (value: string) => percent(rateAsPercent(value)) : present;
+  return <div className="finance-delta" aria-live="polite" data-comparison-status={status}>
+    <h3>{label(comparison.key)} · {label('comparison_status_' + status)}</h3>
+    <p>{label('comparison_reason_' + reason)}</p>
+    {comparison.differences.length > 0 && <p>
+      {label('comparison_different_fields').replace('{fields}', comparison.differences.map((field) => label(field)).join(' · '))}
+    </p>}
+    <div className="finance-layout">
+      <OriginalIndicator title={label('reference')} indicator={reference} label={label} present={present} display={display} />
+      <OriginalIndicator title={label('alternative')} indicator={alternative} label={label} present={present} display={display} />
+    </div>
+    {basis && <section>
+      <h4>{label('comparison_common_basis')}</h4>
+      {comparisonContext(basis, label, present)}
+      {normalization && <dl className="finance-readings">
+        <div><dt>{label('comparison_formula')}</dt><dd><bdi dir="ltr">{normalization.formula}</bdi></dd></div>
+        <div><dt>{label('reference')}</dt><dd data-normalized-value="reference">
+          <bdi>{display(normalization.reference.presentation)}</bdi>
+        </dd></div>
+        <div><dt>{label('alternative')}</dt><dd data-normalized-value="alternative">
+          <bdi>{display(normalization.alternative.presentation)}</bdi>
+        </dd></div>
+      </dl>}
+    </section>}
+    {comparableStatus(status) && <>
+      <dl className="finance-readings" data-testid="finance-comparison-differences">
+        <div><dt>{label('absolute_difference')}</dt><dd data-comparison-field="absolute_difference">
+          {scalar(comparison.absolute_difference, label, presentDifference)}
+        </dd></div>
+        {comparison.percentage_points !== null && <div><dt>{label('percentage_points')}</dt>
+          <dd data-comparison-field="percentage_points">{scalar(comparison.percentage_points, label, presentDifference)}</dd>
+        </div>}
+        <div><dt>{label('relative_difference')}</dt><dd data-comparison-field="relative_percent">
+          {comparison.relative_percent === null ? '—' : <bdi>{presentDelta(comparison.relative_percent, percent)}</bdi>}
         </dd></div>
       </dl>
-      {Number.isFinite(extent) && extent > 0 && <div className="finance-chart" aria-hidden="true">
-        {magnitudes.map((value, index) => <div key={index}>
-          <span>{label(index === 0 ? 'reference' : 'alternative')}</span>
-          <meter min={0} max={extent} value={value} />
-          <bdi>{present(compared[index]!)}</bdi>
-        </div>)}
-      </div>}
-    </div>}
+      {comparison.relative_percent === null && <p>{label('comparison_relative_zero')}</p>}
+      <p>{label('comparison_relative_basis')}</p>
+      {comparison.precision_source && <p>
+        <strong>{label('comparison_precision_source')}</strong>{' · '}{label('comparison_source_' + comparison.precision_source)}
+      </p>}
+    </>}
+    {proof && <details className="finance-detail" data-testid="finance-comparison-proof">
+      <summary>{label('comparison_proof')}</summary>
+      <div className="finance-actions"><button type="button" onClick={exportProof}>{label('comparison_export_proof')}</button></div>
+      <dl className="finance-readings">
+        <div><dt>{label('comparison_algorithm')}</dt><dd><bdi>{proof.algorithm_version}</bdi></dd></div>
+        <div><dt>{label('comparison_method')}</dt><dd>{label('comparison_semantic_matching')}</dd></div>
+        {reference && <div><dt>{label('reference')} · {label('comparison_semantic_identity')}</dt>
+          <dd><bdi>{reference.semantic_id}</bdi></dd></div>}
+        {alternative && <div><dt>{label('alternative')} · {label('comparison_semantic_identity')}</dt>
+          <dd><bdi>{alternative.semantic_id}</bdi></dd></div>}
+        {normalization && <div><dt>{label('reference')} · {label('comparison_formula')}</dt>
+          <dd><bdi dir="ltr">{normalization.reference.formula}</bdi></dd></div>}
+        {normalization && <div><dt>{label('alternative')} · {label('comparison_formula')}</dt>
+          <dd><bdi dir="ltr">{normalization.alternative.formula}</bdi></dd></div>}
+        {(comparison.exact_difference !== null || comparison.exact_difference_omitted) && <div>
+          <dt>{label('comparison_exact_difference')}</dt>
+          <dd><bdi>{comparison.exact_difference === null ? label('comparison_value_omitted')
+            : present(comparison.exact_difference)}</bdi></dd>
+        </div>}
+        {comparison.formula && <div><dt>{label('comparison_formula')}</dt><dd><bdi dir="ltr">{comparison.formula}</bdi></dd></div>}
+      </dl>
+      {comparison.precision_used && <>
+        <h4>{label('comparison_precision_source')}</h4>
+        {comparisonContext(comparison.precision_used, label, present)}
+      </>}
+      <h4>{label('comparison_limitations')}</h4>
+      <p>{label(comparableStatus(status) ? 'comparison_limit_comparable' : 'comparison_limit_contextual')}</p>
+    </details>}
+  </div>;
+}
+
+export function ScenarioResults({ result, firstInputs, secondInputs, label, locale, compare, proof, exportProof, pending }: {
+  result: ReturnType<typeof readComparison>; firstInputs: string; secondInputs: string; label: Label; locale: Locale;
+  compare: (key: string) => void; proof?: CalculationProof; exportProof(): void; pending: boolean;
+}) {
+  const present = numberPresentation(LOCALES[locale].format).format;
+  return <>
+    {result.items.length > 0 ? <div className="finance-scroll" tabIndex={0} aria-label={label('scenario_comparator')}>
+      <table><thead><tr><th scope="col">{label('metric')}</th><th scope="col">{label('comparison_status')}</th>
+        <th scope="col">{label('comparison_details')}</th></tr></thead>
+        <tbody>{result.items.map(({ id, key, status }) => <tr key={id} data-comparison-status={status}>
+          <th scope="row">{label(key)}</th><td>{label('comparison_status_' + status)}</td>
+          <td><button type="button" disabled={pending} data-metric={id} aria-pressed={id === result.selected?.id}
+            onClick={() => compare(id)}>
+            {label(comparableStatus(status) ? 'difference' : 'comparison_details')}
+          </button></td>
+        </tr>)}</tbody>
+      </table>
+    </div> : <p>{label('no_metrics')}</p>}
+    {result.selected && <ComparisonDetails comparison={result.selected} proof={proof} label={label} locale={locale} exportProof={exportProof} />}
     <details className="finance-detail"><summary>{label('assumptions')}</summary>
       <div className="finance-layout">
         <div><h3>{label('reference')}</h3>{scalar(JSON.parse(firstInputs), label, present)}</div>

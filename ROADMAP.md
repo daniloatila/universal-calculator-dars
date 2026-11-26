@@ -19,7 +19,7 @@ See [PROJECT_STATE.md](PROJECT_STATE.md) for the current gate. Review reports an
 
 Objectives 01 and 02 were approved at 0.1.1 and 0.2.2. The first independent review of Objective 03 requested correction of locale transitions. The owner approved revision 0.3.1 at 95/100 after the final independent review and authorized Objective 04 for its own review branch. [Objective 03 approval](evidence/objective-03/approval.json) [Objective 01 approval](evidence/objective-01/approval.json) · [Objective 02 approval](evidence/objective-02/approval.json) · [Objective 03 revision](evidence/objective-03/revision-01/REPORT.md)
 
-The 0.4.0 Finance and Business candidate passed the independent oracles, browser and Windows checks, and all four GitHub Actions jobs. It is on its review branch and awaits approval. [Objective 04 report](evidence/objective-04/REPORT.md) · [Acceptance](evidence/objective-04/acceptance.json)
+The 0.4.0 Finance and Business candidate passed its delivery checks. An independent assessment rated it 91/100 and requested a correction to the Scenario Comparator before approval. The 0.4.1 revision is in progress on the Objective 04 review branch. [Original evidence](evidence/objective-04/REPORT.md) · [Revision](evidence/objective-04/revision-01/REPORT.md)
 
 ## Windows memory follow-up
 

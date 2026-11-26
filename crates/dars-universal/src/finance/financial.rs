@@ -4,6 +4,7 @@ use super::cash_flow::{
     Numeric, bounded, calendar_days, dated_factor, estimated_dated_rate, nth_root, power,
     sign_variations,
 };
+use super::metric_catalog::RawMetrics;
 use super::{Money, Rational, date, decimal, display, finish, money, number, parse};
 use crate::{Computation, Exactness, MathError};
 use num_integer::Integer;
@@ -166,7 +167,15 @@ fn rate(value: &str) -> Result<Rational, MathError> {
     Ok(value)
 }
 
-fn money_values(money: &Money, values: &[(&str, &Rational)], exact: bool) -> Value {
+fn money_values(
+    money: &Money,
+    values: &[(&'static str, &Rational)],
+    exact: bool,
+    raw: &mut Option<&mut RawMetrics>,
+) -> Value {
+    if !exact {
+        RawMetrics::capture(raw, Exactness::Approximate, values);
+    }
     let mut result = Map::new();
     for (name, value) in values {
         result.insert((*name).to_owned(), json!(money.format(value)));
@@ -177,7 +186,15 @@ fn money_values(money: &Money, values: &[(&str, &Rational)], exact: bool) -> Val
     Value::Object(result)
 }
 
-fn scalar(name: &str, value: &Rational, exact: bool) -> Value {
+fn scalar(
+    name: &'static str,
+    value: &Rational,
+    exact: bool,
+    raw: &mut Option<&mut RawMetrics>,
+) -> Value {
+    if !exact {
+        RawMetrics::capture(raw, Exactness::Approximate, &[(name, value)]);
+    }
     let mut result = Map::new();
     result.insert(name.to_owned(), json!(display(value, RATE_SCALE)));
     if exact {
@@ -229,6 +246,15 @@ pub(super) fn evaluate(
     input: &str,
     options: &Map<String, Value>,
 ) -> Result<Computation, MathError> {
+    evaluate_with_metrics(operation, input, options, None)
+}
+
+pub(super) fn evaluate_with_metrics(
+    operation: &str,
+    input: &str,
+    options: &Map<String, Value>,
+    mut raw: Option<&mut RawMetrics>,
+) -> Result<Computation, MathError> {
     let currency = money(options)?;
     let (result, method, formula, exact) = match operation {
         "simple_interest" | "compound_interest" => {
@@ -257,6 +283,7 @@ pub(super) fn evaluate(
                     &currency,
                     &[("amount", &amount), ("interest", &interest)],
                     true,
+                    &mut raw,
                 ),
                 "interest_factor",
                 formula,
@@ -274,7 +301,7 @@ pub(super) fn evaluate(
                 (bounded(amount * growth)?, "FV = PV(1 + i)^n")
             };
             (
-                money_values(&currency, &[("amount", &amount)], true),
+                money_values(&currency, &[("amount", &amount)], true, &mut raw),
                 "lump_sum_value",
                 formula,
                 true,
@@ -297,7 +324,7 @@ pub(super) fn evaluate(
                 "FV = PMT Σ(1+i)^(n−t)"
             };
             (
-                money_values(&currency, &[("amount", &result)], true),
+                money_values(&currency, &[("amount", &result)], true, &mut raw),
                 "annuity_factor",
                 formula,
                 true,
@@ -314,7 +341,7 @@ pub(super) fn evaluate(
             )?;
             let payment = bounded(positive(&request.principal)? / factor)?;
             (
-                money_values(&currency, &[("payment", &payment)], true),
+                money_values(&currency, &[("payment", &payment)], true, &mut raw),
                 "inverse_annuity_factor",
                 "PMT = PV / Σ(1+i)^−t",
                 true,
@@ -346,7 +373,7 @@ pub(super) fn evaluate(
                 }
             };
             (
-                scalar("rate", &result, exact),
+                scalar("rate", &result, exact, &mut raw),
                 "nominal_effective_conversion",
                 formula,
                 exact,
@@ -366,7 +393,7 @@ pub(super) fn evaluate(
                     .fractional_power(&base, &(number(i64::from(from)) / number(i64::from(to))))?
             };
             (
-                scalar("rate", &(factor - number(1)), exact),
+                scalar("rate", &(factor - number(1)), exact, &mut raw),
                 "equivalent_rate_conversion",
                 "i_to = (1 + i_from)^(m_from/m_to) − 1",
                 exact,
@@ -377,7 +404,7 @@ pub(super) fn evaluate(
             let ratio = positive(&request.future)? / positive(&request.present)?;
             let (factor, exact) = nth_root(&ratio, duration(request.periods, false)?)?;
             (
-                scalar("rate", &(factor - number(1)), exact),
+                scalar("rate", &(factor - number(1)), exact, &mut raw),
                 "inverse_lump_sum_rate",
                 "i = (FV/PV)^(1/n) − 1",
                 exact,
@@ -406,7 +433,7 @@ pub(super) fn evaluate(
                 .is_some_and(|n| power(&base, n).is_ok_and(|factor| factor == ratio));
             let result = if exact { whole } else { periods };
             (
-                scalar("periods", &result, exact),
+                scalar("periods", &result, exact, &mut raw),
                 "inverse_lump_sum_periods",
                 "n = ln(FV/PV)/ln(1+i)",
                 exact,
@@ -444,6 +471,7 @@ pub(super) fn evaluate(
                     &currency,
                     &[("present", &present), ("discount", &discount)],
                     true,
+                    &mut raw,
                 ),
                 "financial_discount",
                 formula,
@@ -451,7 +479,7 @@ pub(super) fn evaluate(
             )
         }
         "npv" | "irr" | "mirr" | "payback" | "discounted_payback" | "profitability_index" => {
-            return evaluate_flows(operation, input, options, &currency);
+            return evaluate_flows(operation, input, options, &currency, &mut raw);
         }
         _ => return Err(MathError::Unsupported),
     };
@@ -559,6 +587,7 @@ fn evaluate_flows(
     input: &str,
     options: &Map<String, Value>,
     currency: &Money,
+    raw: &mut Option<&mut RawMetrics>,
 ) -> Result<Computation, MathError> {
     let request: FlowInput = parse(input)?;
     let series = FlowSeries::new(&request)?;
@@ -583,7 +612,7 @@ fn evaluate_flows(
         "npv" => {
             let net = sum(flows.iter().map(|(_, cash)| cash.clone()))?;
             (
-                money_values(currency, &[("npv", &net)], exact),
+                money_values(currency, &[("npv", &net)], exact, raw),
                 "net_present_value",
                 "NPV = Σ C_t/(1+i)^t",
                 exact,
@@ -605,7 +634,7 @@ fn evaluate_flows(
             )?;
             let (rate, exact) = mirr(&series, finance_rate, reinvest_rate)?;
             (
-                scalar("mirr", &rate, exact),
+                scalar("mirr", &rate, exact, raw),
                 "modified_internal_rate_of_return",
                 "MIRR = (FV_positive / abs(PV_negative))^(1/T) − 1",
                 exact,
@@ -618,7 +647,7 @@ fn evaluate_flows(
                 "periods"
             };
             let mut value = match payback(flows)? {
-                Some(result) => scalar("payback", &result, exact),
+                Some(result) => scalar("payback", &result, exact, raw),
                 None => json!({"payback":null}),
             };
             value["unit"] = json!(unit);
@@ -651,7 +680,12 @@ fn evaluate_flows(
                 return Err(MathError::Domain);
             }
             (
-                scalar("profitability_index", &bounded(receipts / outlays)?, exact),
+                scalar(
+                    "profitability_index",
+                    &bounded(receipts / outlays)?,
+                    exact,
+                    raw,
+                ),
                 "profitability_index",
                 "PI = PV(positive cash flows) / abs(PV(negative cash flows))",
                 exact,
@@ -793,7 +827,7 @@ fn irr(
                         .sum::<Rational>()
                         .is_zero();
                     dated_estimate = !exact;
-                    let mut root = scalar("rate", &rate, exact);
+                    let mut root = scalar("rate", &rate, exact, &mut None);
                     root["multiplicity"] = json!(1);
                     values.push(root);
                     "solved"
@@ -815,7 +849,7 @@ fn irr(
                     exact &= is_exact;
                     certified_intervals |= !is_exact;
                     let middle = (&root.lower + &root.upper) / number(2);
-                    let mut value = scalar("rate", &middle, is_exact);
+                    let mut value = scalar("rate", &middle, is_exact, &mut None);
                     value["multiplicity"] = json!(root.multiplicity);
                     if !is_exact {
                         value["lower_exact"] = json!(root.lower.to_string());

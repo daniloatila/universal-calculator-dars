@@ -3,12 +3,14 @@ mod business;
 #[cfg(any(feature = "financial", feature = "loans"))]
 #[path = "financial/cash_flow.rs"]
 mod cash_flow;
+mod comparison;
 #[cfg(feature = "financial")]
 mod financial;
 #[cfg(feature = "investment")]
 mod investment;
 #[cfg(feature = "loans")]
 mod loans;
+mod metric_catalog;
 #[cfg(feature = "tax")]
 mod tax;
 
@@ -24,9 +26,9 @@ use jiff::civil::Date;
 use num_bigint::BigInt;
 use num_integer::Integer;
 use num_rational::BigRational;
-use num_traits::{One, Signed, Zero};
+use num_traits::{One, Signed};
 use serde::de::DeserializeOwned;
-use serde_json::{Map, Value, json};
+use serde_json::{Map, Value};
 use std::collections::BTreeMap;
 
 pub(super) type Rational = BigRational;
@@ -44,11 +46,16 @@ pub(super) fn dispatch(
     macro_rules! run {
         ($tool:ident, $version:literal, $references:expr) => {{
             let result = if operation == "scenario_compare" {
-                compare(input, options)?
+                comparison::evaluate(module, input, options)?
             } else {
                 $tool::evaluate(operation, input, options)?
             };
-            Ok((result, $version, $references))
+            let version = if operation == "scenario_compare" {
+                "finance-comparison/2"
+            } else {
+                $version
+            };
+            Ok((result, version, $references))
         }};
     }
     match module {
@@ -104,6 +111,31 @@ pub(super) fn dispatch(
                 "https://www.ifrs.org/issued-standards/list-of-standards/ias-7-statement-of-cash-flows.html/",
             ]
         ),
+        _ => Err(MathError::Unsupported),
+    }
+}
+
+fn evaluate_scenario(
+    module: &str,
+    operation: &str,
+    input: &str,
+    options: &Map<String, Value>,
+    raw: &mut metric_catalog::RawMetrics,
+) -> Result<Computation, MathError> {
+    match module {
+        #[cfg(feature = "financial")]
+        "financial" => financial::evaluate_with_metrics(operation, input, options, Some(raw)),
+        #[cfg(feature = "investment")]
+        "investment" => investment::evaluate_with_metrics(operation, input, options, Some(raw)),
+        #[cfg(feature = "loans")]
+        "loans" => loans::evaluate_with_metrics(operation, input, options, Some(raw)),
+        #[cfg(feature = "tax")]
+        "tax" => {
+            let _ = raw;
+            tax::evaluate(operation, input, options)
+        }
+        #[cfg(feature = "business")]
+        "business" => business::evaluate_with_metrics(operation, input, options, Some(raw)),
         _ => Err(MathError::Unsupported),
     }
 }
@@ -315,63 +347,10 @@ pub(super) fn finish(
     })
 }
 
-#[derive(serde::Deserialize)]
-#[serde(deny_unknown_fields)]
-struct Comparison {
-    reference: String,
-    alternative: String,
-    unit: ComparisonUnit,
-}
-
-#[derive(serde::Deserialize)]
-#[serde(rename_all = "snake_case")]
-enum ComparisonUnit {
-    Money,
-    Ratio,
-    Count,
-}
-
-pub(super) fn compare(input: &str, options: &Map<String, Value>) -> Result<Computation, MathError> {
-    let values: Comparison = parse(input)?;
-    let reference = bounded_decimal(&values.reference, 1024, 40)?;
-    let alternative = bounded_decimal(&values.alternative, 1024, 40)?;
-    let difference = &alternative - &reference;
-    let currency = money(options)?;
-    let scale = [&values.reference, &values.alternative]
-        .into_iter()
-        .filter_map(|value| {
-            value
-                .split_once('.')
-                .map(|(_, fraction)| fraction.len() as u32)
-        })
-        .max()
-        .unwrap_or(0);
-    let present = |value: &Rational| match values.unit {
-        ComparisonUnit::Money => currency.format(value),
-        ComparisonUnit::Ratio | ComparisonUnit::Count => display(value, scale),
-    };
-    let mut proof = finish(
-        input,
-        options,
-        json!({
-            "reference": present(&reference),
-            "alternative": present(&alternative),
-            "absolute_difference": present(&difference),
-            "relative_difference": (!reference.is_zero())
-                .then(|| display(&(&difference / reference.abs()), 12)),
-            "relative_percent": (!reference.is_zero())
-                .then(|| display(&(&difference * number(100) / reference.abs()), 10)),
-        }),
-        "scenario_comparison",
-        "Delta = alternative - reference; relative percentage = 100 * Delta / abs(reference)",
-    )?;
-    proof.constraints.push("Deltas compare the selected numbers from the scenario results; any prior presentation rounding is retained.".to_owned());
-    Ok(proof)
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
+    use serde_json::json;
 
     #[test]
     fn bounded_decimal_grammar_and_exact_sign() {
@@ -415,27 +394,5 @@ mod tests {
             money(json!({"rounding":"bad"}).as_object().unwrap()),
             Err(MathError::InvalidInput)
         ));
-    }
-
-    #[test]
-    fn comparison_handles_zero_and_signed_reference() {
-        let options = Map::new();
-        let zero = compare(
-            r#"{"reference":"0","alternative":"20","unit":"money"}"#,
-            &options,
-        )
-        .unwrap();
-        let result: Value = parse(&zero.result).unwrap();
-        assert_eq!(result["absolute_difference"], "20.00");
-        assert!(result["relative_difference"].is_null());
-        let negative = compare(
-            r#"{"reference":"-50","alternative":"-25","unit":"money"}"#,
-            &options,
-        )
-        .unwrap();
-        assert_eq!(
-            parse::<Value>(&negative.result).unwrap()["relative_difference"],
-            "0.500000000000"
-        );
     }
 }

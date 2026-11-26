@@ -4,7 +4,7 @@
 
 ## Current objective
 
-**Objective 04 · Finance and business · 0.4.0 · READY_FOR_REVIEW**
+**Objective 04 · Finance and business · 0.4.1 · IN_PROGRESS**
 
 The owner approved Objective 01 on 2026-11-24 following the independent assessment of 95/100 and authorized Objective 02. The reviewed 0.1.1 delivery remains the comparison baseline. [Approval record](evidence/objective-01/approval.json) · [Revision 01](evidence/objective-01/revision-01/REPORT.md) · [Objective 02 report](evidence/objective-02/REPORT.md)
 
@@ -14,12 +14,14 @@ The nine internal mathematics stages and the integrated audit are complete. The 
 
 The independent assessment rated 0.3.0 at 90/100 and withheld approval pending correction of editable input semantics across language changes. Revision 01 fixes that issue and passes the 42 directed language transitions in ten workspaces, all 602 mapped checks and all four CI jobs. The owner approved the 0.3.1 revision on 2026-11-25 after the final independent assessment of 95/100 and authorized Objective 04. [Approval record](evidence/objective-03/approval.json) · [Revision report](evidence/objective-03/revision-01/REPORT.md) · [Acceptance](evidence/objective-03/revision-01/acceptance.json)
 
+The independent assessment rated Objective 04 at 91/100 and withheld approval pending a semantic correction to the Scenario Comparator. The 0.4.0 packaging and verification evidence remains the historical baseline. [Revision findings](evidence/objective-04/revision-01/findings.json)
+
 | Objective | Planned version | State | Evidence |
 | --- | --- | --- | --- |
 | 01 · Foundation | 0.1.1 | APPROVED | [Approval](evidence/objective-01/approval.json) · [Revision 01](evidence/objective-01/revision-01/REPORT.md) |
 | 02 · Operational intelligence | 0.2.2 | APPROVED | [Approval](evidence/objective-02/approval.json) · [Revision 02](evidence/objective-02/revision-02/REPORT.md) |
 | 03 · Universal mathematics | 0.3.1 | APPROVED | [Approval](evidence/objective-03/approval.json) · [Revision 01](evidence/objective-03/revision-01/REPORT.md) · [Historical 0.3.0 audit](evidence/objective-03/REPORT.md) |
-| 04 · Finance and business | 0.4.0 | READY_FOR_REVIEW | [Report](evidence/objective-04/REPORT.md) · [Acceptance](evidence/objective-04/acceptance.json) |
+| 04 · Finance and business | 0.4.1 | IN_PROGRESS | [Revision findings](evidence/objective-04/revision-01/findings.json) · [0.4.0 report](evidence/objective-04/REPORT.md) |
 | 05 · Science, engineering and data | 0.5.0 | NOT_STARTED | `evidence/objective-05/` |
 | 06 · Productivity, automation and AI | 0.6.0 | NOT_STARTED | `evidence/objective-06/` |
 | 07 · Distribution and updates | 0.9.0 | NOT_STARTED | `evidence/objective-07/` |
