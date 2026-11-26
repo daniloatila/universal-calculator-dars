@@ -1389,7 +1389,8 @@
     "storageNote": "Expressions, history and saved values live in this session. Explicit preferences stay on this device.",
     "cachedAssetsNote": "Clear downloaded web assets using this site's storage controls in your browser.",
     "permissions": "Permissions",
-    "permissionNote": "Copying uses the clipboard after your action. Battery state is optional when the browser makes it available. This version requests no account, location or credentials.",
+    "permissionNote": "Clipboard, local files and available on-device speech require a user action. Optional desktop AI uses the provider credentials you supply.",
+    "providerNetworkNote": "Desktop AI starts disabled. Each request shows the provider, destination and content for your authorization. Local mode connects directly to the selected loopback address.",
     "connections": "Communication destinations",
     "networkNote": "The web build uses its own origin for static files. It sends no calculations, diagnostics or telemetry.",
     "clearSession": "Clear calculations and session",
@@ -2031,6 +2032,24 @@
       "dispensed": "Payment waived",
       "undetermined": "Payment undetermined",
       "price_result": "Price"
+    }
+  },
+  "productivity": {
+    "category": "Productivity",
+    "intelligence": "DARS Intelligence",
+    "modules": {
+      "math-notebook": {
+        "title": "Math Notebook",
+        "description": "Connect cells, formulas and proofs in a local document."
+      },
+      "formula-studio": {
+        "title": "Formula Studio",
+        "description": "Create, test and reuse versioned formulas."
+      },
+      "automation-studio": {
+        "title": "Automation Studio",
+        "description": "Run bounded local calculation flows."
+      }
     }
   }
 }

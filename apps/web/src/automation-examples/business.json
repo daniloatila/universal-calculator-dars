@@ -1,0 +1,101 @@
+{
+  "format": "dars-flow",
+  "version": 1,
+  "id": "business",
+  "inputs": {},
+  "steps": [
+    {
+      "id": "table",
+      "op": "dataset",
+      "config": {
+        "format": "csv",
+        "types": {
+          "cost": "decimal",
+          "price": "decimal"
+        }
+      }
+    },
+    {
+      "id": "unit_margins",
+      "op": "each",
+      "items": {
+        "ref": "table.rows"
+      },
+      "body": [
+        {
+          "id": "gain",
+          "op": "arithmetic",
+          "left": {
+            "ref": "item.price"
+          },
+          "operator": "-",
+          "right": {
+            "ref": "item.cost"
+          }
+        },
+        {
+          "id": "ratio",
+          "op": "arithmetic",
+          "left": {
+            "ref": "gain"
+          },
+          "operator": "/",
+          "right": {
+            "ref": "item.price"
+          }
+        },
+        {
+          "id": "markup",
+          "op": "arithmetic",
+          "left": {
+            "ref": "gain"
+          },
+          "operator": "/",
+          "right": {
+            "ref": "item.cost"
+          }
+        },
+        {
+          "id": "item_output",
+          "op": "let",
+          "value": {
+            "margin": {
+              "ref": "ratio"
+            },
+            "markup": {
+              "ref": "markup"
+            }
+          }
+        }
+      ],
+      "result": "item_output"
+    },
+    {
+      "id": "total_gain",
+      "op": "arithmetic",
+      "left": {
+        "ref": "table.profile.profile.1.statistics.sum"
+      },
+      "operator": "-",
+      "right": {
+        "ref": "table.profile.profile.0.statistics.sum"
+      }
+    },
+    {
+      "id": "weighted_margin",
+      "op": "arithmetic",
+      "left": {
+        "ref": "total_gain"
+      },
+      "operator": "/",
+      "right": {
+        "ref": "table.profile.profile.1.statistics.sum"
+      }
+    }
+  ],
+  "outputs": [
+    "unit_margins",
+    "total_gain",
+    "weighted_margin"
+  ]
+}

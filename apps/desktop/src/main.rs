@@ -1,6 +1,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod capabilities;
+use dars_desktop::intelligence;
 
 use std::sync::atomic::{AtomicBool, Ordering};
 use tauri::{Manager, WindowEvent};
@@ -71,8 +72,10 @@ fn main() {
     let minimized_before = AtomicBool::new(false);
     tauri::Builder::default()
         .manage(capabilities::NativeSensorState::default())
+        .manage(intelligence::Gateway::default())
         .invoke_handler(tauri::generate_handler![
-            capabilities::dars_native_capabilities
+            capabilities::dars_native_capabilities,
+            intelligence::dars_intelligence
         ])
         .on_window_event(move |window, event| {
             if window.label() != "main"

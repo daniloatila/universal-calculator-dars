@@ -1389,7 +1389,8 @@
     "storageNote": "表达式、历史和保留值仅在本次会话中存在。主动选择的首选项保存在此设备上。",
     "cachedAssetsNote": "请在浏览器的此网站存储设置中清除已下载的网页资源。",
     "permissions": "权限",
-    "permissionNote": "复制在您操作后使用剪贴板。浏览器提供电量信息时可选读取。本版本不要求账户、位置或凭据。",
+    "permissionNote": "使用剪贴板、本地文件和设备上可用的语音功能均需用户操作。可选的桌面 AI 使用您提供的服务商凭据。",
+    "providerNetworkNote": "桌面 AI 默认关闭。每次请求都会显示服务商、目标地址和待授权的内容。本地模式直接连接所选的回环地址。",
     "connections": "通信目标",
     "networkNote": "网页版本从自身来源加载静态文件，不发送计算、诊断或遥测数据。",
     "clearSession": "清除计算和会话",
@@ -2031,6 +2032,24 @@
       "dispensed": "免予缴纳",
       "undetermined": "是否缴纳尚未确定",
       "price_result": "价格"
+    }
+  },
+  "productivity": {
+    "category": "生产力",
+    "intelligence": "DARS 智能助手",
+    "modules": {
+      "math-notebook": {
+        "title": "数学笔记本",
+        "description": "在本地文档中连接单元格、公式和计算证明。"
+      },
+      "formula-studio": {
+        "title": "公式工作室",
+        "description": "创建、测试和重用带版本的公式。"
+      },
+      "automation-studio": {
+        "title": "自动化工作室",
+        "description": "执行有资源上限的本地计算流程。"
+      }
     }
   }
 }

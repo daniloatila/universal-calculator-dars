@@ -57,6 +57,8 @@ export default function App({ initialLanguage, modules = primaryModules, moduleO
   const selectedModule = useRef(selectedId);
   const [adaptive, setAdaptive] = useState<AdaptiveSnapshot>();
   const [operationsOpen, setOperationsOpen] = useState(false);
+  const [nativeOffline,setNativeOffline]=useState(true);
+  const [sessionGeneration,setSessionGeneration]=useState(0);
   const [assetMode, setAssetMode] = useState<AssetMode>(() => packagedAssets() ? 'packaged' : 'unavailable');
   const [changingMode, setChangingMode] = useState(false);
   const [announcement, setAnnouncement] = useState('');
@@ -150,6 +152,8 @@ export default function App({ initialLanguage, modules = primaryModules, moduleO
   }
 
   async function resetSession() {
+    setSessionGeneration(n=>n+1);
+    window.dispatchEvent(new Event('dars-clear-session'));
     const result = await manager.clearSession();
     const id = selectedModule.current;
     setPausedId(null);
@@ -270,7 +274,8 @@ export default function App({ initialLanguage, modules = primaryModules, moduleO
         <details className="operations" onToggle={(event) => setOperationsOpen(event.currentTarget.open)}>
           <summary>{m.operations.operations}</summary>
           {operationsOpen && adaptive && <Suspense fallback={<p role="status">{m.operations.loading}</p>}>
-            <OperationsPanel locale={locale} messages={m} adaptive={adaptive} phase={phase}
+            <OperationsPanel key={selectedId+'-'+sessionGeneration+'-'+phase} nativeOffline={nativeOffline} setNativeOffline={setNativeOffline}
+              locale={locale} messages={m} adaptive={adaptive} phase={phase}
               moduleName={description?.title ?? m.operations.unavailable} workers={module.resources.worker}
               pending={active ? resources?.pending : 0} wasmBytes={resources?.wasmBytes} mode={assetMode} changingMode={changingMode}
               select={selectProfile} setOffline={(value) => void changeOffline(value)}

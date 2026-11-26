@@ -15,7 +15,8 @@ const executable = executableFlag === -1
   : resolve(process.argv[executableFlag + 1]);
 const localeRevision = process.argv.includes("--objective-03-revision-01");
 const scienceRevision = process.argv.includes("--objective-05-revision-01");
-const scienceReview = scienceRevision || process.argv.includes("--objective-05");
+const productivityReview = process.argv.includes("--objective-06");
+const scienceReview = productivityReview || scienceRevision || process.argv.includes("--objective-05");
 const financeRevision = process.argv.includes("--objective-04-revision-01");
 const financeReview = scienceReview || financeRevision || process.argv.includes("--objective-04");
 const universalReview = financeReview || localeRevision || process.argv.includes("--objective-03");
@@ -24,7 +25,8 @@ const operationalRevision = recoveryRevision || process.argv.includes("--objecti
 const operational = universalReview || operationalRevision || process.argv.includes("--objective-02");
 const revised = operational || process.argv.includes("--revision-01");
 const evidenceRoot = new URL(
-  scienceRevision ? "../artifacts/objective-05/revision-01/desktop-regression/"
+  productivityReview ? "../artifacts/objective-06/desktop-regression/"
+    : scienceRevision ? "../artifacts/objective-05/revision-01/desktop-regression/"
     : scienceReview ? "../artifacts/objective-05/desktop-regression/"
     : financeRevision ? "../artifacts/objective-04/revision-01/desktop-regression/"
     : financeReview ? "../artifacts/objective-04/desktop-regression/"

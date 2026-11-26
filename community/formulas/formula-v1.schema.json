@@ -1,0 +1,314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:dars:formula:1",
+  "title": "DARS portable formula",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "kind": {
+      "const": "dars-formula"
+    },
+    "id": {
+      "$ref": "#/$defs/id"
+    },
+    "version": {
+      "$ref": "#/$defs/version"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60
+    },
+    "expression": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 768
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 600
+    },
+    "unit": {
+      "$ref": "#/$defs/unit"
+    },
+    "parameters": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 16,
+      "items": {
+        "$ref": "#/$defs/parameter"
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 8,
+      "items": {
+        "$ref": "#/$defs/dependency"
+      }
+    },
+    "references": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 8,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 350
+      }
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "tests": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "items": {
+        "$ref": "#/$defs/test"
+      },
+      "contains": {
+        "required": [
+          "expected"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "kind",
+    "id",
+    "version",
+    "name",
+    "description",
+    "category",
+    "expression",
+    "domain",
+    "unit",
+    "parameters",
+    "dependencies",
+    "references",
+    "author",
+    "license",
+    "tests"
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 48,
+      "pattern": "^[a-z][a-z0-9-]{0,47}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 20,
+      "pattern": "^(?:0|[1-9][0-9]{0,5})(?:\\.(?:0|[1-9][0-9]{0,5})){2}$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,31}$",
+      "not": {
+        "enum": [
+          "constructor",
+          "prototype",
+          "sqrt",
+          "cbrt"
+        ]
+      }
+    },
+    "scalar": {
+      "type": "string",
+      "maxLength": 160,
+      "pattern": "^-?(?:[0-9]+(?:\\.[0-9]+)?|[0-9]+/[1-9][0-9]*)$"
+    },
+    "unit": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^(?:1|[A-Za-z][A-Za-z0-9]{0,11})(?:\\^-?[0-9]{1,2})?(?:[*/][A-Za-z][A-Za-z0-9]{0,11}(?:\\^-?[0-9]{1,2})?)*$"
+    },
+    "inputs": {
+      "type": "object",
+      "maxProperties": 16,
+      "propertyNames": {
+        "$ref": "#/$defs/name"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "$ref": "#/$defs/scalar"
+          },
+          "unit": {
+            "$ref": "#/$defs/unit"
+          }
+        },
+        "required": [
+          "value",
+          "unit"
+        ]
+      }
+    },
+    "parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "type": {
+          "enum": [
+            "decimal",
+            "integer",
+            "rational"
+          ]
+        },
+        "unit": {
+          "$ref": "#/$defs/unit"
+        },
+        "default": {
+          "$ref": "#/$defs/scalar"
+        },
+        "min": {
+          "$ref": "#/$defs/scalar"
+        },
+        "max": {
+          "$ref": "#/$defs/scalar"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "unit"
+      ]
+    },
+    "dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "arguments": {
+          "type": "object",
+          "maxProperties": 16,
+          "propertyNames": {
+            "$ref": "#/$defs/name"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/name"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "version",
+        "arguments"
+      ]
+    },
+    "test": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "inputs": {
+              "$ref": "#/$defs/inputs"
+            },
+            "expected": {
+              "$ref": "#/$defs/scalar"
+            },
+            "unit": {
+              "$ref": "#/$defs/unit"
+            },
+            "tolerance": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/scalar"
+                },
+                {
+                  "not": {
+                    "pattern": "^-"
+                  }
+                }
+              ]
+            }
+          },
+          "required": [
+            "name",
+            "inputs",
+            "expected",
+            "unit"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "inputs": {
+              "$ref": "#/$defs/inputs"
+            },
+            "error": {
+              "enum": [
+                "input",
+                "unit",
+                "constraint",
+                "division_by_zero",
+                "domain_error",
+                "magnitude_limit",
+                "precision_limit",
+                "unsupported_exponent",
+                "inexact_dependency"
+              ]
+            }
+          },
+          "required": [
+            "name",
+            "inputs",
+            "error"
+          ]
+        }
+      ]
+    }
+  }
+}

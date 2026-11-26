@@ -87,6 +87,7 @@ type Analysis = {
 };
 type Profile = {
   sha256: string;
+  source_rows: number;
   rows: number;
   profile: {
     column: Column;
@@ -97,9 +98,10 @@ type Profile = {
   analysis: Analysis | null;
 };
 export type Output = { page: Page; proof: CalculationProof; profile: Profile };
-type WorkerOutput = { ok: true; page: string; proof: string; csv?: Uint8Array<ArrayBuffer> };
+type WorkerOutput = { ok: true; page: string; proof: string; csv?: Uint8Array<ArrayBuffer>; estimatedPeak?: number };
 type WorkerReply = WorkerOutput | { ok: false; code: string };
 export type DataJob = {
+  includeResourceReceipt?: boolean;
   file: Blob;
   settings: string;
   budget: number;
@@ -222,7 +224,10 @@ export function decodeDataLabReply(value: unknown): WorkerReply {
     throw new Error('invalid transport');
   const csv = reply.csv instanceof Uint8Array && reply.csv.buffer instanceof ArrayBuffer
     ? reply.csv as Uint8Array<ArrayBuffer> : undefined;
-  return { ok: true, page: reply.page, proof: reply.proof, csv };
+  const estimatedPeak = reply.estimatedPeak;
+  if (estimatedPeak !== undefined && (typeof estimatedPeak !== 'number' || !Number.isSafeInteger(estimatedPeak) ||
+    estimatedPeak < 0 || estimatedPeak > MAX_DATA_LAB_BUDGET)) throw new Error('invalid transport');
+  return { ok: true, page: reply.page, proof: reply.proof, csv, estimatedPeak: estimatedPeak as number | undefined };
 }
 
 export function decodeDataLabOutput(reply: WorkerOutput): Output {

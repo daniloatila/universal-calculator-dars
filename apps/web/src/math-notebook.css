@@ -1,0 +1,57 @@
+.math-notebook { display:grid; gap:1rem; min-width:0; }
+.math-notebook button,.math-notebook input,.math-notebook select,.math-notebook textarea {
+  font:inherit; color:var(--text); background:var(--key); border:1px solid var(--line); border-radius:.5rem;
+  padding:.45rem .7rem; min-height:2.4rem; max-width:100%; box-sizing:border-box;
+}
+.math-notebook button { cursor:pointer; }
+.math-notebook button:hover:not(:disabled) { background:var(--key-hover); }
+.math-notebook button:disabled { opacity:.48; cursor:default; }
+.math-notebook label { display:grid; gap:.35rem; font-size:.88rem; color:var(--muted); }
+.math-notebook input,.math-notebook textarea { background:var(--display); }
+.notebook-top,.notebook-runbar,.notebook-actions,.notebook-tools,.notebook-add,.notebook-fields { display:flex; flex-wrap:wrap; align-items:end; gap:.45rem; }
+.notebook-top { justify-content:space-between; }
+.notebook-top label { flex:1; min-width:min(100%,15rem); }
+.notebook-top input { font-weight:650; font-size:1.18rem; }
+.notebook-runbar { align-items:center; padding-block:.55rem; border-block:1px solid var(--line); }
+.math-notebook .notebook-run { color:var(--accent-ink); background:var(--accent-key); border-color:var(--accent-key); font-weight:650; }
+.math-notebook .notebook-run:hover:not(:disabled) { background:var(--accent-key-hover); }
+.notebook-runbar small,.notebook-cell small,.notebook-outline small { color:var(--muted); }
+.notebook-runbar small { overflow-wrap:anywhere; }
+.notebook-layout { display:grid; grid-template-columns:minmax(10rem,1fr) minmax(0,3fr); align-items:start; gap:1rem; }
+.notebook-outline,.notebook-pages { min-width:0; }
+.notebook-outline { border-inline-end:1px solid var(--line); padding-inline-end:.8rem; }
+.notebook-outline ol { list-style:none; padding:0; margin:.65rem 0; display:grid; gap:.15rem; }
+.notebook-outline li button,.notebook-cell header button {
+  display:grid; gap:.15rem; width:100%; text-align:start; background:none; border:1px solid transparent; padding:.4rem .5rem;
+}
+.notebook-outline button[aria-current] { background:var(--tint); border-color:var(--line-prominent); }
+.notebook-outline li span,.notebook-outline li small { overflow-wrap:anywhere; }
+.notebook-pages { display:grid; gap:.65rem; }
+.notebook-cell,.notebook-edit { border:1px solid var(--line); border-radius:.65rem; padding:.65rem .85rem; min-width:0; margin:0; }
+.notebook-edit { display:grid; gap:.5rem; background:var(--display); }
+.notebook-edit legend { padding-inline:.3rem; }
+.notebook-edit textarea,.notebook-cell code,.notebook-cell pre { font-family:var(--mono); }
+.notebook-cell.selected { border-inline-start:3px solid var(--accent); }
+.notebook-cell header { display:flex; align-items:start; justify-content:space-between; gap:.5rem; }
+.notebook-cell header button { flex:1; min-width:0; padding-inline:0; }
+.notebook-cell strong,.notebook-cell code,.notebook-answer { overflow-wrap:anywhere; }
+.notebook-cell .notebook-status { font-size:.75rem; color:var(--muted); margin-block:.45rem; }
+.notebook-cell .notebook-status[data-state=current] { color:var(--accent); }
+.notebook-cell .notebook-status[data-state=error],.math-notebook [role=alert] { color:var(--error); }
+.notebook-cell details { margin-block-start:.5rem; }
+.notebook-cell summary { color:var(--muted); font-size:.88rem; cursor:pointer; }
+.notebook-cell dl { display:grid; grid-template-columns:auto 1fr; gap:.25rem .5rem; }
+.notebook-cell dd { margin:0; }
+.notebook-cell pre,.notebook-table-scroll { overflow:auto; max-height:16rem; }
+.notebook-answer output { font-family:var(--mono); }
+.notebook-answer small { margin-inline-start:.45rem; }
+.notebook-chart { width:100%; max-height:9rem; }
+.notebook-chart line { stroke:var(--line); stroke-width:1; }
+.notebook-chart polyline { fill:none; stroke:var(--accent); stroke-width:2.5; }
+.notebook-table-scroll table { border-collapse:collapse; }
+.notebook-table-scroll td,.notebook-table-scroll th { padding:.35rem .55rem; border:1px solid var(--line); text-align:start; }
+@media(max-width:730px) {
+  .notebook-layout { grid-template-columns:minmax(0,1fr); }
+  .notebook-outline { border:0; padding:0; }
+  .notebook-outline ol { grid-template-columns:repeat(auto-fit,minmax(7rem,1fr)); }
+}

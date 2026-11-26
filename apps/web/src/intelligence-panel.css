@@ -1,0 +1,16 @@
+.intelligence-dialog { width:min(43rem,calc(100% - 2rem)); max-height:86dvh; overflow:auto; color:var(--text); background:var(--surface,#10213b); border:1px solid var(--border,#385574); border-radius:1rem; padding:1.4rem; }
+.intelligence-dialog::backdrop {background:rgb(3 10 22 /.7)}
+.intelligence-dialog header,.intelligence-dialog section,.intelligence-dialog details {margin-block-end:1rem}
+.intelligence-dialog header {display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.intelligence-dialog :is(h2,h3) {margin:0 0 .5rem}
+.intelligence-dialog label,.intelligence-dialog output { display:block; margin:.55rem 0; }
+.intelligence-dialog :is(input:not([type=checkbox]),textarea,select) { display:block; width:100%; font:inherit; color:inherit; background:var(--panel,#132941); border:1px solid var(--border,#506985); border-radius:.35rem; padding:.45rem; }
+.intelligence-dialog textarea {min-height:4.5rem;resize:vertical}
+.intelligence-dialog button {cursor:pointer;margin:.2rem .4rem .2rem 0;padding:.4rem .7rem;border-radius:.35rem;color:inherit;background:var(--panel,#132941);border:1px solid var(--border,#506985)}
+.intelligence-dialog button:disabled { opacity:.6;cursor:default; }
+.intelligence-dialog summary {cursor:pointer}
+.intelligence-fields {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(11rem,100%),1fr));gap:.5rem}
+.intelligence-dialog pre,.intelligence-dialog dd {overflow-wrap:anywhere;white-space:pre-wrap;max-height:12rem;overflow:auto}
+.intelligence-dialog dl {display:grid;grid-template-columns:auto 1fr;gap:.25rem .8rem}
+.intelligence-dialog dd {margin:0}
+.intelligence-consent {border-inline-start:3px solid var(--accent-key,#62c4fa);padding-inline-start:1rem}

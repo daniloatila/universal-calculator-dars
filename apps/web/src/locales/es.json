@@ -1389,7 +1389,8 @@
     "storageNote": "Las expresiones, el historial y los valores guardados duran esta sesión. Las preferencias explícitas quedan en este dispositivo.",
     "cachedAssetsNote": "Borre los recursos web descargados en los controles de almacenamiento de este sitio en su navegador.",
     "permissions": "Permisos",
-    "permissionNote": "Copiar usa el portapapeles tras su acción. El nivel de batería es opcional cuando lo facilita el navegador. Esta versión no solicita cuenta, ubicación ni credenciales.",
+    "permissionNote": "El portapapeles, los archivos locales y la voz disponible en el dispositivo requieren una acción del usuario. La IA opcional de escritorio usa las credenciales que proporcione.",
+    "providerNetworkNote": "La IA de escritorio se inicia desactivada. Cada solicitud muestra el proveedor, el destino y el contenido para su autorización. El modo local conecta directamente con la dirección de bucle local elegida.",
     "connections": "Destinos de comunicación",
     "networkNote": "La versión web usa su propio origen para los archivos estáticos. No envía cálculos, diagnósticos ni telemetría.",
     "clearSession": "Borrar cálculos y sesión",
@@ -2031,6 +2032,24 @@
       "dispensed": "Pago dispensado",
       "undetermined": "Pago indeterminado",
       "price_result": "Precio"
+    }
+  },
+  "productivity": {
+    "category": "Productividad",
+    "intelligence": "Inteligencia DARS",
+    "modules": {
+      "math-notebook": {
+        "title": "Cuaderno matemático",
+        "description": "Conecte celdas, fórmulas y pruebas en un documento local."
+      },
+      "formula-studio": {
+        "title": "Estudio de fórmulas",
+        "description": "Cree, pruebe y reutilice fórmulas versionadas."
+      },
+      "automation-studio": {
+        "title": "Estudio de automatización",
+        "description": "Ejecute flujos locales de cálculo con límites."
+      }
     }
   }
 }

@@ -1,0 +1,46 @@
+{
+  "format": "dars-flow",
+  "version": 1,
+  "id": "statistics",
+  "inputs": {},
+  "steps": [
+    {
+      "id": "table",
+      "op": "dataset",
+      "config": {
+        "format": "csv",
+        "types": {
+          "value": "decimal"
+        },
+        "steps": [
+          {
+            "op": "fill_missing",
+            "column": "value",
+            "value": "0"
+          }
+        ],
+        "analysis": {
+          "x": "value"
+        }
+      }
+    },
+    {
+      "id": "distribution",
+      "op": "chart",
+      "values": {
+        "ref": "table.profile.analysis.histogram"
+      }
+    },
+    {
+      "id": "statistics",
+      "op": "export",
+      "value": {
+        "ref": "table.profile.profile.0.statistics"
+      }
+    }
+  ],
+  "outputs": [
+    "distribution",
+    "statistics"
+  ]
+}

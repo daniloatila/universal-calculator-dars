@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "kind": "dars-formula",
+  "id": "simple-interest",
+  "version": "1.0.0",
+  "name": "Simple interest",
+  "description": "Interest accrued without capitalization.",
+  "category": "finance",
+  "expression": "principal * rate * periods",
+  "domain": "Rate is a fraction per period. Principal, rate and whole periods are nonnegative.",
+  "unit": "BRL",
+  "parameters": [
+    {
+      "name": "principal",
+      "type": "decimal",
+      "unit": "BRL",
+      "min": "0",
+      "default": "10000"
+    },
+    {
+      "name": "rate",
+      "type": "decimal",
+      "unit": "1",
+      "min": "0",
+      "default": "0.01"
+    },
+    {
+      "name": "periods",
+      "type": "integer",
+      "unit": "1",
+      "min": "0",
+      "default": "12"
+    }
+  ],
+  "dependencies": [],
+  "references": [
+    "Definition of simple interest, I = P × i × n."
+  ],
+  "author": "DARS contributors",
+  "license": "Apache-2.0",
+  "tests": [
+    {
+      "name": "Twelve periods",
+      "inputs": {},
+      "expected": "1200",
+      "unit": "BRL"
+    },
+    {
+      "name": "Zero rate",
+      "inputs": {
+        "rate": {
+          "value": "0",
+          "unit": "1"
+        }
+      },
+      "expected": "0",
+      "unit": "BRL"
+    },
+    {
+      "name": "Partial period",
+      "inputs": {
+        "periods": {
+          "value": "1.5",
+          "unit": "1"
+        }
+      },
+      "error": "constraint"
+    }
+  ]
+}

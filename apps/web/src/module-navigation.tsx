@@ -21,11 +21,13 @@ export default function ModuleNavigation({ modules, selectedId, locale, messages
   const query = searchable ? fold(search.trim()) : '';
   const matches = modules.map((module) => ({ id: module.id, ...module.describe(messages) }))
     .filter(({ id, title, description }) => !query || id === selectedId || fold(id + ' ' + title + ' ' + description).includes(query));
+  const productivity = Object.keys(messages.productivity.modules);
   const groups = [
     [messages.science.labels.math_category, matches.filter(({ id }) =>
-      !financeModules.some((module) => module === id) && !scienceModules.some((module) => module === id))],
+      !productivity.includes(id) && !financeModules.some((module) => module === id) && !scienceModules.some((module) => module === id))],
     [messages.science.labels.finance_category, matches.filter(({ id }) => financeModules.some((module) => module === id))],
     [messages.science.labels.science_category, matches.filter(({ id }) => scienceModules.some((module) => module === id))],
+    [messages.productivity.category, matches.filter(({id}) => productivity.includes(id))],
   ] as const;
 
   return <nav className="module-navigation" aria-label={messages.tools.navigation}>

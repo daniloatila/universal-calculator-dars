@@ -1,3 +1,4 @@
+import { lazy, Suspense, useState } from 'react';
 import type { AdaptiveSelection, AdaptiveSnapshot } from './adaptive';
 import { ADAPTIVE_PROFILES, isAdaptiveSelection } from './adaptive';
 import type { Locale, Messages } from './i18n';
@@ -5,6 +6,7 @@ import { LOCALES } from './i18n';
 import type { ModulePhase } from './module-manager';
 import type { AssetMode } from './offline';
 import { version } from '../package.json';
+const IntelligenceWorkspace = lazy(()=>import('./intelligence-workspace'));
 
 interface Props {
   locale: Locale;
@@ -17,6 +19,8 @@ interface Props {
   wasmBytes?: number;
   mode: AssetMode;
   changingMode: boolean;
+  nativeOffline: boolean;
+  setNativeOffline(value:boolean):void;
   select(selection: AdaptiveSelection): void;
   setOffline(value: boolean): void;
   setDiagnostics(open: boolean): void;
@@ -26,8 +30,9 @@ interface Props {
 
 export default function OperationsPanel({
   locale, messages, adaptive, moduleName, phase, workers, pending, wasmBytes, mode, changingMode,
-  select, setOffline, setDiagnostics, clearSession, clearPreferences,
+  select, setOffline, setDiagnostics, clearSession, clearPreferences, nativeOffline, setNativeOffline,
 }: Props) {
+  const [intelligence,setIntelligence]=useState(false);
   const m = messages.operations;
   const num = new Intl.NumberFormat(LOCALES[locale].format, { maximumFractionDigits: 1 });
   const percent = new Intl.NumberFormat(LOCALES[locale].format, { style: 'percent', maximumFractionDigits: 2 });
@@ -54,6 +59,12 @@ export default function OperationsPanel({
       </section>
       <section aria-labelledby="privacy-heading">
         <h2 id="privacy-heading">{m.privacy}</h2>
+        <button type="button" data-testid="open-intelligence" onClick={()=>setIntelligence(true)}>{messages.productivity.intelligence}</button>
+        {mode==='packaged' && <label><input type="checkbox" checked={nativeOffline} onChange={e=>setNativeOffline(e.target.checked)}/>{m.offline}</label>}
+        {intelligence && signals.visible && <Suspense fallback={<p role="status">{m.loading}</p>}>
+          <IntelligenceWorkspace locale={locale} policy={adaptive.policy} offline={mode==='offline' || mode==='packaged' && nativeOffline}
+            onClose={()=>setIntelligence(false)}/>
+        </Suspense>}
         <div className="privacy-grid">
           <section>
             <h3>{m.offline}</h3>
@@ -81,7 +92,7 @@ export default function OperationsPanel({
           </section>
           <section>
             <h3>{m.connections}</h3>
-            <p>{mode === 'packaged' ? m.packaged : m.networkNote}</p>
+            <p>{mode === 'packaged' ? m.providerNetworkNote : m.networkNote}</p>
             {mode !== 'packaged' && <bdi className="operations-origin">{window.location.origin}</bdi>}
           </section>
         </div>

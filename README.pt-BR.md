@@ -4,16 +4,19 @@
 
 [English](README.md)
 
-O DARS é uma plataforma de computação local de Danilo Átila. O branch de revisão 0.5.1 reúne 22 ferramentas no Windows e no navegador. O Rust calcula os resultados, incluindo agregações racionais exatas e simulações reproduzíveis por semente. Cada registro identifica o método, as entradas e os limites aplicáveis. [Revisão do Data Lab](evidence/objective-05/revision-01/REPORT.pt-BR.md) · [Objetivo 05](evidence/objective-05/REPORT.pt-BR.md)
+O DARS é uma plataforma de computação local de Danilo Átila. O branch de revisão 0.6.0 reúne 25 ferramentas no Windows e no navegador. O Rust calcula os resultados, incluindo agregações racionais exatas e simulações reproduzíveis por semente. Cada registro identifica o método, as entradas e os limites aplicáveis. [Revisão do Data Lab](evidence/objective-05/revision-01/REPORT.pt-BR.md) · [Objetivo 05](evidence/objective-05/REPORT.pt-BR.md)
 
 Use a busca de ferramentas para encontrar o módulo pelo nome ou pela descrição. Na seção científica, escolha uma operação e carregue o exemplo para conferir o resultado e a prova de cálculo.
 
+- **Produtividade** — Math Notebook, Formula Studio e Automation Studio.
 - **Ciência, engenharia e dados** — Estatística, Probabilidade, Simulação, Otimização, Física e Engenharia, Laboratório de Gráficos e Laboratório de Dados.
 - **Finanças e negócios** — Financeira, Investimentos, Empréstimos, Tributos e Negócios, incluindo o Comparador de Cenários aprovado na 0.4.1.
 - **Aritmética e análise** — Standard, Scientific, Álgebra, Cálculo e Álgebra Linear.
 - **Ferramentas especializadas** — Geometria, Matemática Discreta, Programador, Conversor e Data e Hora.
 
 A ferramenta ativa carrega seus próprios recursos matemáticos. Os registros de cálculo podem ser consultados e baixados localmente. A Standard funciona offline após a preparação da interface web, e as ferramentas avançadas ficam disponíveis offline quando seus recursos entram no cache. [Auditoria de idioma da 0.3.1](evidence/objective-03/revision-01/REPORT.pt-BR.md) · [Auditoria da 0.3.0](evidence/objective-03/REPORT.pt-BR.md) · [Registros de cálculo](evidence/objective-03/calculation-proof/contract.pt-BR.md)
+
+A versão 0.6.0 acrescenta Math Notebook, Formula Studio e Automation Studio. Os três funcionam localmente com a IA desativada. O painel opcional DARS Intelligence para desktop consulta modelos no endereço de loopback selecionado. Consulte o [relatório de revisão](evidence/objective-06/REPORT.pt-BR.md) e a [biblioteca de fórmulas](community/formulas/README.pt-BR.md).
 
 ## Fundação
 

@@ -2,13 +2,14 @@ param(
     [Parameter(Mandatory)][ValidateRange(1, [long]::MaxValue)][long] $ArtifactId,
     [Parameter(Mandatory)][ValidateRange(1, [long]::MaxValue)][long] $RunId,
     [Parameter(Mandatory)][ValidatePattern('^[a-f0-9]{40}$')][string] $Commit,
-    [ValidateSet('0.5.0','0.5.1')][string] $Version = '0.5.0'
+    [ValidateSet('0.5.0','0.5.1','0.6.0')][string] $Version = '0.5.0'
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $repository = 'daniloatila/universal-calculator-dars'
-$branch = 'codex/objective-05-science-engineering-data'
+$objective = if ($Version -eq '0.6.0') { 'objective-06' } else { 'objective-05' }
+$branch = if ($Version -eq '0.6.0') { 'codex/objective-06-productivity-automation-ai' } else { 'codex/objective-05-science-engineering-data' }
 $project = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 $api = "repos/$repository/actions"
 $artifactPath = "$api/artifacts/$ArtifactId"
@@ -48,7 +49,7 @@ $declared = & git -C $project show ('{0}:apps/desktop/tauri.conf.json' -f $commi
 if ($LASTEXITCODE -ne 0 -or ($declared | ConvertFrom-Json).version -cne $version) {
     throw 'Audited source does not declare the expected desktop version.'
 }
-$workspaceRun = Join-Path $project "artifacts/objective-05/windows-review-$ArtifactId"
+$workspaceRun = Join-Path $project "artifacts/$objective/windows-review-$ArtifactId"
 New-Item -ItemType Directory -Force -Path $workspaceRun | Out-Null
 $archive = Join-Path $workspaceRun 'dars-windows-review.zip'
 & gh api "$artifactPath/zip" > $archive

@@ -1,0 +1,7 @@
+.flow-studio{display:grid;gap:1rem;min-width:0}
+.flow-studio label{display:grid;gap:.35rem}
+.flow-toolbar{display:flex;align-items:end;flex-wrap:wrap;gap:.7rem}
+.flow-studio textarea,.flow-studio pre{box-sizing:border-box;width:100%;padding:.85rem;border-radius:.5rem;overflow:auto;font-family:ui-monospace,monospace}
+.flow-studio textarea{min-height:16rem;resize:vertical;background:var(--surface);color:inherit}
+.flow-studio pre{max-height:24rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.flow-studio meter{width:min(18rem,72%)}

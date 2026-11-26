@@ -1,0 +1,60 @@
+{
+  "format": "dars-flow",
+  "version": 1,
+  "id": "science",
+  "inputs": {
+    "seed": "42"
+  },
+  "steps": [
+    {
+      "id": "simulation",
+      "op": "call",
+      "module": "simulation",
+      "operation": "monte_carlo",
+      "input": {
+        "model": "distribution",
+        "distribution": "normal",
+        "parameters": {
+          "mean": "3",
+          "sd": "2"
+        },
+        "seed": {
+          "ref": "seed"
+        },
+        "samples": 512,
+        "threshold": 4,
+        "bins": 12
+      }
+    },
+    {
+      "id": "quantiles",
+      "op": "let",
+      "value": [
+        {
+          "ref": "simulation.quantiles.p05"
+        },
+        {
+          "ref": "simulation.quantiles.p50"
+        },
+        {
+          "ref": "simulation.quantiles.p95"
+        }
+      ]
+    },
+    {
+      "id": "summary",
+      "op": "call",
+      "module": "statistics",
+      "operation": "descriptive",
+      "input": {
+        "values": {
+          "ref": "quantiles"
+        }
+      }
+    }
+  ],
+  "outputs": [
+    "simulation",
+    "summary"
+  ]
+}

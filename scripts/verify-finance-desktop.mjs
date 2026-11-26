@@ -12,7 +12,7 @@ const [baselineArgument, candidateArgument, expectedCandidateSha, outputArgument
   : candidateOnly ? [undefined, argumentsList[1], argumentsList[2], argumentsList[3]] : argumentsList;
 const candidateVersion = argumentsList[4] ?? (candidateOnly ? '0.5.0' : '0.4.0');
 const validCandidate = candidateArgument && /^[a-f0-9]{64}$/u.test(expectedCandidateSha ?? '') &&
-  /^(?:0\.4\.[01]|0\.5\.[01])$/u.test(candidateVersion);
+  /^(?:0\.4\.[01]|0\.5\.[01]|0\.6\.0)$/u.test(candidateVersion);
 assert(outputArgument && (baselineOnly ? baselineArgument && argumentsList.length === 3
   : validCandidate && [4,5].includes(argumentsList.length) && (candidateOnly || baselineArgument)),
   'Pass BASELINE_EXE CANDIDATE_EXE VERIFIED_SHA256 OUTPUT_JSON [VERSION], --baseline-only BASELINE_EXE OUTPUT_JSON, or --candidate-only CANDIDATE_EXE VERIFIED_SHA256 OUTPUT_JSON [VERSION].');
@@ -188,8 +188,8 @@ async function audit(context, version, candidate) {
 }
 
 const run = (executable, version, candidate) => runWindowsToolBenchmark({
-  artifactObjective: version.startsWith('0.5.') ? 'objective-05' : 'objective-04',
-  module: version.startsWith('0.5.') ? 'desktop-finance' : 'desktop',
+  artifactObjective: version==='0.6.0' ? 'objective-06' : version.startsWith('0.5.') ? 'objective-05' : 'objective-04',
+  module: version.startsWith('0.4.') ? 'desktop' : 'desktop-finance',
   label: `review-${version}`, audit: (context) => audit(context, version, candidate),
 }, executable);
 const baseline = baselineExecutable ? await run(baselineExecutable, '0.3.1', false) : null;

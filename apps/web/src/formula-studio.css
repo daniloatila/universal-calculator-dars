@@ -1,0 +1,24 @@
+.formula-studio { display:grid; grid-template-columns:minmax(12rem, .72fr) minmax(0, 2fr); gap:1.25rem; align-items:start; }
+.formula-library-panel,.formula-editor-panel { display:grid; gap:1rem; min-width:0; padding:clamp(.9rem,2vw,1.45rem); border:1px solid var(--line); background:var(--panel); border-radius:14px; }
+.formula-heading,.formula-tools { display:flex; align-items:center; flex-wrap:wrap; gap:.55rem; }
+.formula-heading { justify-content:space-between; }
+.formula-heading h2 { margin:0; font-size:1.12rem; }
+.formula-studio label { display:grid; min-width:0; gap:.35rem; color:var(--muted); font-size:.88rem; }
+.formula-studio input,.formula-studio textarea,.formula-studio button { padding:.6rem .75rem; border:1px solid var(--line-prominent); border-radius:7px; color:var(--text); background:var(--raised); font:inherit; }
+.formula-studio input,.formula-studio textarea { width:100%; min-width:0; }
+.formula-studio button,.formula-studio summary { cursor:pointer; }
+.formula-studio button:disabled { opacity:.6; cursor:default; }
+.formula-cards { display:grid; gap:.35rem; }
+.formula-cards button { display:grid; gap:.2rem; text-align:start; background:transparent; }
+.formula-cards button[aria-pressed=true] { border-color:var(--accent); background:var(--raised); }
+.formula-cards small,.formula-status { color:var(--muted); font-size:.78rem; }
+.formula-studio textarea { margin-top:.75rem; min-height:18rem; font-family:monospace; resize:vertical; }
+.formula-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr)); gap:.6rem; }
+.formula-studio fieldset { min-width:0; margin:0; border:1px solid var(--line); border-radius:8px; padding:.7rem; }
+.formula-studio legend { padding:0 .35rem; }
+.formula-run { border-color:var(--accent)!important; }
+.formula-output { display:grid; justify-items:start; gap:.75rem; overflow-wrap:anywhere; }
+.formula-output>strong { color:var(--accent); font-size:1.4rem; }
+.formula-proof { width:100%; min-width:0; }
+.formula-proof pre { max-height:22rem; overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; text-align:left; }
+@media(max-width:700px){.formula-studio{grid-template-columns:minmax(0,1fr)}.formula-cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr))}}

@@ -1389,7 +1389,8 @@
     "storageNote": "Les expressions, l’historique et les valeurs conservées restent dans cette session. Les préférences explicites restent sur cet appareil.",
     "cachedAssetsNote": "Effacez les fichiers web téléchargés via les réglages de stockage du site dans le navigateur.",
     "permissions": "Autorisations",
-    "permissionNote": "La copie utilise le presse-papiers après votre action. L’état de la batterie est facultatif si le navigateur le fournit. Cette version ne demande ni compte, ni localisation, ni identifiants.",
+    "permissionNote": "Le presse-papiers, les fichiers locaux et la voix disponible sur cet appareil nécessitent votre intervention. L’IA facultative sur ordinateur utilise les identifiants que vous fournissez.",
+    "providerNetworkNote": "L’IA sur ordinateur est désactivée au démarrage. Chaque demande affiche le fournisseur, la destination et le contenu à autoriser. Le mode local se connecte directement à l’adresse de bouclage choisie.",
     "connections": "Destinations des communications",
     "networkNote": "La version web utilise sa propre origine pour les fichiers statiques. Elle n’envoie aucun calcul, diagnostic ou télémétrie.",
     "clearSession": "Effacer les calculs et la session",
@@ -2031,6 +2032,24 @@
       "dispensed": "Dispense de paiement",
       "undetermined": "Paiement indéterminé",
       "price_result": "Prix"
+    }
+  },
+  "productivity": {
+    "category": "Productivité",
+    "intelligence": "Intelligence DARS",
+    "modules": {
+      "math-notebook": {
+        "title": "Carnet mathématique",
+        "description": "Reliez cellules, formules et preuves dans un document local."
+      },
+      "formula-studio": {
+        "title": "Studio de formules",
+        "description": "Créez, testez et réutilisez des formules versionnées."
+      },
+      "automation-studio": {
+        "title": "Studio d’automatisation",
+        "description": "Exécutez des flux de calcul locaux bornés."
+      }
     }
   }
 }

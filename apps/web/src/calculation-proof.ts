@@ -134,13 +134,13 @@ export function withExpressionLocale(proof: CalculationProof, locale: Locale): C
 
 // JSON.parse defines the JSON grammar. This pass rules out ambiguous duplicate fields,
 // including names that become equal after decoding their escapes.
-function hasUniqueKeys(text: string): boolean {
+export function hasUniqueKeys(text: string, maximumDepth = 2): boolean {
   const stack: (Set<string> | null)[] = [];
   let lastString = '';
   for (const [token] of text.matchAll(/"(?:[^"\\]|\\[\s\S])*"|[{}\[\]:]/gu)) {
     if (!token) return false;
     if (token === '{' || token === '[') {
-      if (stack.length === 2) return false;
+      if (stack.length >= maximumDepth) return false;
       stack.push(token === '{' ? new Set<string>() : null);
     } else if (token === '}' || token === ']') {
       stack.pop();

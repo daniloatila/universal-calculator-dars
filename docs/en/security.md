@@ -25,3 +25,5 @@ The calculator's evaluation path stays on the device. Telemetry, tracking, adver
 See [Objective 01 security evidence](../../evidence/objective-01/security.md) for the observed checks, findings and limits.
 
 Objective 02 adds the same-origin cache policy, local diagnostics and a Windows credential provider reserved for authorized native consumers. [Privacy center and security boundaries](operations.md#values-privacy-and-readings)
+
+The desktop Intelligence gateway is the first user-authorized consumer of native provider credentials. The webview can replace or remove a key. It cannot read it back. See the [0.6.0 privacy ledger](../../evidence/objective-06/privacy.md) and [architecture decision](../adr/0003-productivity.md).

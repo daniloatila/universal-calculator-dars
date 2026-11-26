@@ -1,0 +1,8 @@
+{
+  "identifier": "intelligence",
+  "description": "Local packaged main window access to the consent-bound AI provider gateway.",
+  "local": true,
+  "windows": ["main"],
+  "webviews": ["main"],
+  "permissions": ["allow-dars-intelligence"]
+}

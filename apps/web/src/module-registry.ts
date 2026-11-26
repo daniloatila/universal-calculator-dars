@@ -155,4 +155,7 @@ export const primaryModules: readonly RegisteredModule[] = [
     describe: (messages) => messages.science.modules['data-lab'],
     load: () => import('./tool-data-lab'),
   }),
+  registerModule({id: 'math-notebook', describe: m => m.productivity.modules['math-notebook'], load: () => import('./math-notebook')}),
+  registerModule({id: 'formula-studio', describe: m => m.productivity.modules['formula-studio'], load: () => import('./formula-studio')}),
+  registerModule({id: 'automation-studio', describe: m => m.productivity.modules['automation-studio'], load: () => import('./automation-studio')}),
 ];

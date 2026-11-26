@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "kind": "dars-formula",
+  "id": "rectangle-area",
+  "version": "1.0.0",
+  "name": "Rectangle area",
+  "description": "Area of a Euclidean rectangle.",
+  "category": "mathematics",
+  "expression": "width * height",
+  "domain": "Nonnegative side lengths in metres.",
+  "unit": "m^2",
+  "parameters": [
+    {
+      "name": "width",
+      "type": "decimal",
+      "unit": "m",
+      "min": "0",
+      "default": "4"
+    },
+    {
+      "name": "height",
+      "type": "decimal",
+      "unit": "m",
+      "min": "0",
+      "default": "3"
+    }
+  ],
+  "dependencies": [],
+  "references": [
+    "Euclidean area, A = width × height."
+  ],
+  "author": "DARS contributors",
+  "license": "Apache-2.0",
+  "tests": [
+    {
+      "name": "Rectangle",
+      "inputs": {
+        "width": {
+          "value": "4",
+          "unit": "m"
+        },
+        "height": {
+          "value": "3",
+          "unit": "m"
+        }
+      },
+      "expected": "12",
+      "unit": "m^2"
+    },
+    {
+      "name": "Zero width",
+      "inputs": {
+        "width": {
+          "value": "0",
+          "unit": "m"
+        }
+      },
+      "expected": "0",
+      "unit": "m^2"
+    },
+    {
+      "name": "Negative side",
+      "inputs": {
+        "width": {
+          "value": "-1",
+          "unit": "m"
+        }
+      },
+      "error": "constraint"
+    }
+  ]
+}

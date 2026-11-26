@@ -1,0 +1,572 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DARS Automation Studio flow v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "dars-flow"
+    },
+    "version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,31}$",
+      "not": {
+        "enum": [
+          "constructor",
+          "prototype",
+          "__proto__"
+        ]
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,31}$",
+        "not": {
+          "enum": [
+            "constructor",
+            "prototype",
+            "__proto__"
+          ]
+        }
+      },
+      "maxProperties": 32,
+      "additionalProperties": {
+        "$ref": "#/$defs/value"
+      }
+    },
+    "steps": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/steps"
+        },
+        {
+          "minItems": 1
+        }
+      ]
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,31}$",
+        "not": {
+          "enum": [
+            "constructor",
+            "prototype",
+            "__proto__"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "format",
+    "version",
+    "id",
+    "inputs",
+    "steps",
+    "outputs"
+  ],
+  "$defs": {
+    "value": {
+      "oneOf": [
+        {
+          "type": [
+            "null",
+            "boolean",
+            "string"
+          ]
+        },
+        {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "not": {
+              "enum": [
+                "constructor",
+                "prototype",
+                "__proto__",
+                "ref"
+              ]
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ref": {
+              "type": "string",
+              "maxLength": 395
+            }
+          },
+          "required": [
+            "ref"
+          ]
+        }
+      ]
+    },
+    "step": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "let"
+            },
+            "value": {
+              "$ref": "#/$defs/value"
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "value"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "arithmetic"
+            },
+            "left": {
+              "$ref": "#/$defs/value"
+            },
+            "operator": {
+              "enum": [
+                "+",
+                "-",
+                "*",
+                "/",
+                "^"
+              ]
+            },
+            "right": {
+              "$ref": "#/$defs/value"
+            },
+            "unit": {
+              "type": "string",
+              "maxLength": 64
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "left",
+            "operator",
+            "right"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "call"
+            },
+            "module": {
+              "type": "string"
+            },
+            "operation": {
+              "type": "string"
+            },
+            "input": {
+              "$ref": "#/$defs/value"
+            },
+            "options": {
+              "type": "object",
+              "maxProperties": 16,
+              "additionalProperties": {
+                "$ref": "#/$defs/value"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "module",
+            "operation",
+            "input"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "formula"
+            },
+            "formula": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "arguments": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/value"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "formula",
+            "version",
+            "arguments"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "comparison"
+            },
+            "reference": {
+              "$ref": "#/$defs/value"
+            },
+            "alternative": {
+              "$ref": "#/$defs/value"
+            },
+            "metric": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "reference",
+            "alternative",
+            "metric"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "dataset"
+            },
+            "config": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/value"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "config"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "each"
+            },
+            "items": {
+              "$ref": "#/$defs/value"
+            },
+            "body": {
+              "$ref": "#/$defs/steps"
+            },
+            "result": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "items",
+            "body",
+            "result"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "choose"
+            },
+            "left": {
+              "$ref": "#/$defs/value"
+            },
+            "compare": {
+              "enum": [
+                "eq",
+                "lt",
+                "gt"
+              ]
+            },
+            "right": {
+              "$ref": "#/$defs/value"
+            },
+            "then": {
+              "$ref": "#/$defs/steps"
+            },
+            "else": {
+              "$ref": "#/$defs/steps"
+            },
+            "result": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "left",
+            "compare",
+            "right",
+            "then",
+            "else",
+            "result"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "collect"
+            },
+            "items": {
+              "$ref": "#/$defs/value"
+            },
+            "field": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "items",
+            "field"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "export"
+            },
+            "value": {
+              "$ref": "#/$defs/value"
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "value"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "not": {
+                "enum": [
+                  "constructor",
+                  "prototype",
+                  "__proto__"
+                ]
+              }
+            },
+            "op": {
+              "const": "chart"
+            },
+            "values": {
+              "$ref": "#/$defs/value"
+            }
+          },
+          "required": [
+            "id",
+            "op",
+            "values"
+          ]
+        }
+      ]
+    },
+    "steps": {
+      "type": "array",
+      "maxItems": 96,
+      "items": {
+        "$ref": "#/$defs/step"
+      }
+    }
+  }
+}

@@ -7,8 +7,9 @@ import {runWindowsToolBenchmark} from '../benchmarks/windows-tool.mjs';
 const [baseline,candidate,receiptPath,outputArg]=process.argv.slice(2);
 assert(outputArg,'Pass baseline executable, reviewed candidate executable, verified candidate receipt, and output directory.');
 const receipt=JSON.parse(await readFile(receiptPath));
-assert(['0.5.0','0.5.1'].includes(receipt.exe_version));
-const baseReceiptPath=receipt.exe_version==='0.5.1'
+assert(['0.5.0','0.5.1','0.6.0'].includes(receipt.exe_version));
+const productivity=receipt.exe_version==='0.6.0';
+const baseReceiptPath=productivity ? '../evidence/objective-05/revision-01/windows-artifact.json' : receipt.exe_version==='0.5.1'
   ? '../evidence/objective-05/integrated-audit/windows-artifact.json'
   : '../evidence/objective-04/revision-01/windows-artifact.json';
 const baseReceipt=JSON.parse(await readFile(new URL(baseReceiptPath,import.meta.url)));
@@ -85,7 +86,7 @@ async function verifyWasmAssets(page, inventory) {
 
 for(const [label,path] of [['baseline',baseline],['candidate',candidate]]){
   results[label]=await runWindowsToolBenchmark({
-    module:'science-desktop',artifactObjective:'objective-05',label,
+    module:'science-desktop',artifactObjective:productivity?'objective-06':'objective-05',label,
     async audit({page,expect,data,sample,action,calculateStandard}){
       const menu=page.locator('nav.module-navigation select');
       const standard=()=>menu.selectOption('standard');
@@ -100,6 +101,12 @@ for(const [label,path] of [['baseline',baseline],['candidate',candidate]]){
       const resourceUrls=()=>page.evaluate(()=>performance.getEntriesByType('resource').map(r=>new URL(r.name).pathname));
       data.initialAdvancedAssets=(await resourceUrls()).filter(p=>/\/(?:tool-|dars_tool_wasm|science-|data-lab-)/.test(p));
       assert.equal(data.initialAdvancedAssets.length,0);
+      if(productivity && label==='candidate') {
+        data.initialProductivityAssets=(await resourceUrls()).filter(p=>/\/(?:intelligence-|math-notebook|formula-studio|automation-studio|capability-standard-worker)/u.test(p));
+        assert.deepEqual(data.initialProductivityAssets,[]);
+        data.moduleIds=await menu.locator('option').evaluateAll(options=>options.map(o=>o.value).filter(Boolean));
+        assert.equal(new Set(data.moduleIds).size,25);
+      }
       data.standardTimesMs=[];
       for(let i=0;i<12;i++){data.standardTimesMs.push(await calculateStandard({expression:(7+i)+'*3',expected:String((7+i)*3)}));}
       await sample('standard_idle','visible',6);
@@ -148,7 +155,7 @@ for(const [label,path] of [['baseline',baseline],['candidate',candidate]]){
           assert.equal((await action('restore')).state,'visible');
           await sample('restored_'+cycle,'visible',4);
         }
-        if (receipt.exe_version === '0.5.1') {
+        if (receipt.exe_version !== '0.5.0') {
           await menu.selectOption('data-lab');
           await expect(page.getByTestId('data-lab-file')).toBeVisible();
           await page.getByRole('button',{name:'End module',exact:true}).click();
@@ -178,7 +185,7 @@ for(const [label,path] of [['baseline',baseline],['candidate',candidate]]){
           const exported = await readFile(await download.path());
           const proof = JSON.parse(exported);
           const record = proof.proof ?? proof;
-          assert.equal(record.engine_version,'0.5.1');
+          assert.equal(record.engine_version,receipt.exe_version);
           assert.equal(record.variables.sha256,hash(source));
           assert.deepEqual(JSON.parse(record.result),actual);
           await writeFile(join(out,'mixed-json-proof.json'),exported,{flush:true});
@@ -186,6 +193,12 @@ for(const [label,path] of [['baseline',baseline],['candidate',candidate]]){
           await page.screenshot({path:join(out,'mixed-json.png')});
           await expect.poll(()=>page.workers().length).toBe(0);
           await standard();
+        }
+        if(productivity) {
+          const { verifyProductivity }=await import('./verify-productivity-windows.mjs');
+          data.productivity=await verifyProductivity(page,expect,out);
+          const { verifyIntelligenceLocal }=await import('./verify-intelligence-windows.mjs');
+          data.intelligenceLocal=await verifyIntelligenceLocal(page,expect,out);
         }
         await session.send('Network.emulateNetworkConditions',{offline:false,latency:0,downloadThroughput:-1,uploadThroughput:-1});
         await session.detach();

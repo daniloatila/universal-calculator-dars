@@ -34,7 +34,7 @@ export default function offlinePrecache() {
         const deferredAssets = new Set(Object.values(deferredLocales));
         for (const file of files) {
           // Advanced workspaces and their engines are deferred. The shared record viewer belongs to Standard too.
-          if (/^assets\/(?:tool-|science-|data-lab-|module-frames-|dars_tool_wasm)/.test(file)) deferredAssets.add(file);
+          if (/^assets\/(?:tool-|science-|data-lab-|module-frames-|dars_tool_wasm|automation-|formula-|math-notebook|notebook-|capability-|intelligence-|voice-vision-)/.test(file)) deferredAssets.add(file);
         }
         const eagerFiles = files.filter((file) => !deferredAssets.has(file));
         const hash = createHash("sha256");

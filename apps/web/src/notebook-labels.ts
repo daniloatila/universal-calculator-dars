@@ -1,0 +1,50 @@
+import type { Locale } from './i18n.ts';
+import { notebookKinds } from './notebook-document.ts';
+
+const commands = ['title','description','document','sample','blank','open','save','run','cancel','undo','redo','cells','add','duplicate','remove','up','down','editor','name','source','unit','symbol','kind','select','empty','changed','current','historical','stale','notRun','failed','rerun','records','inputs','dependencies','progress','migrated','sourceLocale','apply','edit','close','pinned','formulaFile','clear','openHint','details','labels','status'] as const;
+const failures=['invalid_input','duplicate_id','duplicate_variable','missing','cycle','blocked','type','unit','domain','limit','resource_budget','unsupported','cancelled','timed_out','failed','no_convergence','unknown_formula','unverified_formula'] as const;
+function dictionary<T extends string>(keys:readonly T[], values:string):Record<T,string> {
+  const columns=values.split('|');
+  if(columns.length!==keys.length) throw new Error('Incomplete Math Notebook translation');
+  return Object.fromEntries(keys.map((key,i)=>[key,columns[i]!])) as Record<T,string>;
+}
+function labels(actions:string,types:string,sample:string,errors:string) {
+  return {...dictionary(commands,actions), kinds:dictionary(notebookKinds,types), sampleNames:sample.split('|'), errors:dictionary(failures,errors)};
+}
+export const notebookLabels={
+  en:labels(
+    'Math Notebook|Connect cells, calculations and proofs|Document title|Financial example|New document|Open notebook|Export notebook|Recalculate|Cancel|Undo|Redo|Cells|Add cell|Duplicate|Remove|Move up|Move down|Cell editor|Cell title|Source|Unit|Variable name|Cell type|Select cell|Empty notebook|Recalculated cells|Current|Stored result|Out of date|Pending|Error|Authorize recalculation|Calculation records|Inputs|Dependencies|Progress|Draft format converted|Input notation|Apply changes|Edit|Close|Formula version|Attach formula definition|Clear document|Stored results are historical. Recalculate to verify them.|Cell details|Cell labels|Status',
+    'Heading|Formatted text|Variable|Expression|Custom formula|Scientific calculation|Financial calculation|Table|Chart|Structured result|Calculation proof',
+    'Investment plan|Initial capital|Effective monthly rate (fraction)|Months|Future capital|Accrued gain|Capital over time|Calculation proof',
+    'Invalid input|Duplicate cell ID|Duplicate variable name|Missing reference|Circular reference|A dependency failed|Incompatible value type|Incompatible units|Outside the mathematical domain|Operation limit|Resource budget exceeded|Unsupported format|Cancelled|Deadline exceeded|Execution failed|Did not converge|Formula not found|Formula needs verification'),
+  'pt-BR':labels(
+    'Caderno Matemático|Conecte células, cálculos e provas|Título do documento|Exemplo financeiro|Novo documento|Abrir caderno|Exportar caderno|Recalcular|Cancelar|Desfazer|Refazer|Células|Adicionar célula|Duplicar|Remover|Mover para cima|Mover para baixo|Editor de célula|Título da célula|Conteúdo|Unidade|Nome da variável|Tipo da célula|Selecionar célula|Caderno vazio|Células recalculadas|Atual|Resultado armazenado|Desatualizado|Pendente|Erro|Autorizar recálculo|Registros de cálculo|Entradas|Dependências|Progresso|Formato preliminar convertido|Notação da entrada|Aplicar alterações|Editar|Fechar|Versão da fórmula|Anexar definição de fórmula|Limpar documento|Os resultados armazenados são históricos. Recalcule para verificá-los.|Detalhes da célula|Rótulos das células|Estado',
+    'Título|Texto formatado|Variável|Expressão|Fórmula personalizada|Cálculo científico|Cálculo financeiro|Tabela|Gráfico|Resultado estruturado|Prova de cálculo',
+    'Planejamento financeiro|Capital inicial|Taxa efetiva mensal (fração)|Meses|Capital futuro|Ganho acumulado|Evolução patrimonial|Prova de cálculo',
+    'Entrada inválida|Identificador de célula duplicado|Nome de variável duplicado|Referência ausente|Referência circular|Uma dependência falhou|Tipo de valor incompatível|Unidades incompatíveis|Fora do domínio matemático|Limite da operação|Orçamento de recursos excedido|Formato não suportado|Cancelado|Prazo excedido|Falha na execução|Sem convergência|Fórmula não encontrada|A fórmula requer verificação'),
+  'zh-CN':labels(
+    '数学笔记本|连接单元格、计算和证明|文档标题|财务示例|新建文档|打开笔记本|导出笔记本|重新计算|取消|撤销|重做|单元格|添加单元格|复制|删除|上移|下移|单元格编辑器|单元格标题|内容|单位|变量名|单元格类型|选择单元格|空笔记本|已重新计算的单元格|当前|已存储结果|已过期|待处理|错误|授权重新计算|计算记录|输入|依赖项|进度|已转换草案格式|输入记法|应用更改|编辑|关闭|公式版本|附加公式定义|清空文档|已存储的结果为历史结果。重新计算以验证。|单元格详情|单元格标签|状态',
+    '标题|格式化文本|变量|表达式|自定义公式|科学计算|财务计算|表格|图表|结构化结果|计算证明',
+    '投资计划|初始本金|实际月利率（小数）|月数|未来本金|累计收益|资产变化|计算证明',
+    '输入无效|单元格标识重复|变量名重复|缺少引用|循环引用|依赖项失败|值类型不兼容|单位不兼容|超出数学定义域|操作超限|超出资源预算|不支持的格式|已取消|已超时|执行失败|未收敛|未找到公式|公式需要验证'),
+  hi:labels(
+    'गणित नोटबुक|सेल, गणना और प्रमाण जोड़ें|दस्तावेज़ का शीर्षक|वित्तीय उदाहरण|नया दस्तावेज़|नोटबुक खोलें|नोटबुक निर्यात करें|पुनर्गणना|रद्द करें|पूर्ववत करें|फिर करें|सेल|सेल जोड़ें|प्रतिलिपि बनाएँ|हटाएँ|ऊपर ले जाएँ|नीचे ले जाएँ|सेल संपादक|सेल का शीर्षक|सामग्री|इकाई|चर का नाम|सेल का प्रकार|सेल चुनें|खाली नोटबुक|पुनर्गणित सेल|वर्तमान|संग्रहीत परिणाम|पुराना|लंबित|त्रुटि|पुनर्गणना की अनुमति दें|गणना अभिलेख|इनपुट|निर्भरताएँ|प्रगति|प्रारूप परिवर्तित|इनपुट संकेतन|बदलाव लागू करें|संपादित करें|बंद करें|सूत्र संस्करण|सूत्र परिभाषा जोड़ें|दस्तावेज़ खाली करें|संग्रहीत परिणाम ऐतिहासिक हैं। सत्यापन के लिए पुनर्गणना करें।|सेल विवरण|सेल लेबल|स्थिति',
+    'शीर्षक|स्वरूपित पाठ|चर|व्यंजक|कस्टम सूत्र|वैज्ञानिक गणना|वित्तीय गणना|तालिका|चार्ट|संरचित परिणाम|गणना प्रमाण',
+    'निवेश योजना|प्रारंभिक पूँजी|प्रभावी मासिक दर (भिन्न)|महीने|भविष्य की पूँजी|संचित लाभ|पूँजी का विकास|गणना प्रमाण',
+    'अमान्य इनपुट|सेल आईडी दोहराई गई|चर का नाम दोहराया गया|संदर्भ अनुपस्थित|चक्रीय संदर्भ|निर्भरता विफल|असंगत मान प्रकार|असंगत इकाइयाँ|गणितीय परास से बाहर|संचालन सीमा|संसाधन बजट पार हुआ|असमर्थित प्रारूप|रद्द|समय सीमा समाप्त|निष्पादन विफल|अभिसरण नहीं हुआ|सूत्र नहीं मिला|सूत्र का सत्यापन चाहिए'),
+  es:labels(
+    'Cuaderno matemático|Conecta celdas, cálculos y pruebas|Título del documento|Ejemplo financiero|Nuevo documento|Abrir cuaderno|Exportar cuaderno|Recalcular|Cancelar|Deshacer|Rehacer|Celdas|Añadir celda|Duplicar|Eliminar|Subir|Bajar|Editor de celda|Título de la celda|Contenido|Unidad|Nombre de variable|Tipo de celda|Seleccionar celda|Cuaderno vacío|Celdas recalculadas|Actual|Resultado guardado|Desactualizado|Pendiente|Error|Autorizar recálculo|Registros de cálculo|Entradas|Dependencias|Progreso|Formato preliminar convertido|Notación de entrada|Aplicar cambios|Editar|Cerrar|Versión de fórmula|Adjuntar definición de fórmula|Vaciar documento|Los resultados guardados son históricos. Recalcula para verificarlos.|Detalles de la celda|Etiquetas de celda|Estado',
+    'Título|Texto con formato|Variable|Expresión|Fórmula personalizada|Cálculo científico|Cálculo financiero|Tabla|Gráfico|Resultado estructurado|Prueba de cálculo',
+    'Plan de inversión|Capital inicial|Tasa mensual efectiva (fracción)|Meses|Capital futuro|Ganancia acumulada|Evolución del capital|Prueba de cálculo',
+    'Entrada no válida|ID de celda duplicado|Nombre de variable duplicado|Falta una referencia|Referencia circular|Falló una dependencia|Tipo incompatible|Unidades incompatibles|Fuera del dominio|Límite de operación|Presupuesto de recursos excedido|Formato no compatible|Cancelado|Plazo excedido|Error de ejecución|Sin convergencia|Fórmula no encontrada|La fórmula requiere verificación'),
+  ar:labels(
+    'دفتر الرياضيات|اربط الخلايا والحسابات وأدلة الحساب|عنوان المستند|مثال مالي|مستند جديد|فتح دفتر|تصدير الدفتر|إعادة الحساب|إلغاء|تراجع|إعادة|الخلايا|إضافة خلية|تكرار|إزالة|نقل لأعلى|نقل لأسفل|محرر الخلية|عنوان الخلية|المحتوى|الوحدة|اسم المتغير|نوع الخلية|تحديد الخلية|دفتر فارغ|الخلايا المعاد حسابها|حالي|نتيجة مخزنة|قديم|معلق|خطأ|السماح بإعادة الحساب|سجلات الحساب|المدخلات|التبعيات|التقدم|تم تحويل تنسيق المسودة|تدوين الإدخال|تطبيق التغييرات|تحرير|إغلاق|إصدار الصيغة|إرفاق تعريف صيغة|مسح المستند|النتائج المخزنة تاريخية. أعد الحساب للتحقق منها.|تفاصيل الخلية|تسميات الخلايا|الحالة',
+    'عنوان|نص منسق|متغير|تعبير|صيغة مخصصة|حساب علمي|حساب مالي|جدول|مخطط|نتيجة منظمة|دليل الحساب',
+    'خطة الاستثمار|رأس المال الأولي|المعدل الشهري الفعلي (كسر)|الأشهر|رأس المال المستقبلي|الربح التراكمي|تطور رأس المال|دليل الحساب',
+    'إدخال غير صالح|معرف خلية مكرر|اسم متغير مكرر|مرجع مفقود|مرجع دائري|فشل أحد الاعتماديات|نوع قيمة غير متوافق|وحدات غير متوافقة|خارج المجال الرياضي|حد العملية|تجاوز ميزانية الموارد|تنسيق غير مدعوم|ألغيت|انتهت المهلة|فشل التنفيذ|لم يتحقق التقارب|تعذر العثور على الصيغة|تحتاج الصيغة إلى تحقق'),
+  fr:labels(
+    'Carnet mathématique|Reliez cellules, calculs et preuves|Titre du document|Exemple financier|Nouveau document|Ouvrir un carnet|Exporter le carnet|Recalculer|Annuler le calcul|Annuler|Rétablir|Cellules|Ajouter une cellule|Dupliquer|Supprimer|Monter|Descendre|Éditeur de cellule|Titre de cellule|Contenu|Unité|Nom de variable|Type de cellule|Sélectionner la cellule|Carnet vide|Cellules recalculées|À jour|Résultat enregistré|Périmé|En attente|Erreur|Autoriser le recalcul|Relevés de calcul|Entrées|Dépendances|Progression|Format préliminaire converti|Notation de saisie|Appliquer les modifications|Modifier|Fermer|Version de formule|Joindre une définition de formule|Vider le document|Les résultats enregistrés sont historiques. Recalculez pour les vérifier.|Détails de cellule|Libellés des cellules|État',
+    'Titre|Texte formaté|Variable|Expression|Formule personnalisée|Calcul scientifique|Calcul financier|Tableau|Graphique|Résultat structuré|Preuve de calcul',
+    'Plan de placement|Capital initial|Taux mensuel effectif (fraction)|Mois|Capital futur|Gain cumulé|Évolution du capital|Preuve de calcul',
+    'Saisie incorrecte|Identifiant de cellule en double|Nom de variable en double|Référence manquante|Référence circulaire|Une dépendance a échoué|Type incompatible|Unités incompatibles|Hors du domaine|Limite de calcul|Budget de ressources dépassé|Format incompatible|Annulé|Délai dépassé|Échec du calcul|Pas de convergence|Formule introuvable|La formule doit être vérifiée'),
+} satisfies Record<Locale,ReturnType<typeof labels>>;

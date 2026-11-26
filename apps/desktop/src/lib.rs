@@ -1,4 +1,4 @@
-//! The native credential provider is reserved for future authorized consumers.
-//! The Objective 02 webview has no credential IPC commands.
+//! Native credential storage and the consent-bound optional Intelligence gateway.
 
 pub mod credentials;
+pub mod intelligence;

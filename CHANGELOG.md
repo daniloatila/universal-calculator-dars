@@ -2,6 +2,11 @@
 
 [Português brasileiro](docs/pt-BR/changelog.md)
 
+## 0.6.0 · Productivity, automation and optional AI
+
+- Added Math Notebook, Formula Studio and Automation Studio with versioned local documents, bounded execution and replayable Rust proofs.
+- Added an optional desktop gateway with explicit per-request review, IPv4/IPv6 loopback discovery, and local OCR. Standard starts with AI disabled.
+
 ## 0.5.1 · Data Lab corrective review
 
 - Interpret native JSON and spreadsheet numbers with the file grammar while preserving the configured notation for text.

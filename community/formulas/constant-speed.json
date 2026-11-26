@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "kind": "dars-formula",
+  "id": "constant-speed",
+  "version": "1.0.0",
+  "name": "Average speed",
+  "description": "Distance travelled divided by elapsed time.",
+  "category": "physics",
+  "expression": "distance / time",
+  "domain": "Nonnegative distance and strictly positive elapsed time.",
+  "unit": "m/s",
+  "parameters": [
+    {
+      "name": "distance",
+      "type": "decimal",
+      "unit": "m",
+      "min": "0",
+      "default": "10"
+    },
+    {
+      "name": "time",
+      "type": "decimal",
+      "unit": "s",
+      "min": "0",
+      "default": "4"
+    }
+  ],
+  "dependencies": [],
+  "references": [
+    "Kinematic definition of average speed, total distance divided by total elapsed time."
+  ],
+  "author": "DARS contributors",
+  "license": "Apache-2.0",
+  "tests": [
+    {
+      "name": "Ten metres in four seconds",
+      "inputs": {},
+      "expected": "5/2",
+      "unit": "m/s"
+    },
+    {
+      "name": "Zero time",
+      "inputs": {
+        "time": {
+          "value": "0",
+          "unit": "s"
+        }
+      },
+      "error": "division_by_zero"
+    },
+    {
+      "name": "Different unit",
+      "inputs": {
+        "time": {
+          "value": "4",
+          "unit": "m"
+        }
+      },
+      "error": "unit"
+    }
+  ]
+}

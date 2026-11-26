@@ -1,0 +1,114 @@
+{
+  "format": "dars-flow",
+  "version": 1,
+  "id": "finance",
+  "inputs": {
+    "principal": "10000",
+    "rate_a": "0.01",
+    "rate_b": "0.015",
+    "periods": 12,
+    "currency": "BRL",
+    "period_unit": "month"
+  },
+  "steps": [
+    {
+      "id": "scenario_a",
+      "op": "call",
+      "module": "financial",
+      "operation": "compound_interest",
+      "input": {
+        "principal": {
+          "ref": "principal"
+        },
+        "rate": {
+          "ref": "rate_a"
+        },
+        "periods": {
+          "ref": "periods"
+        }
+      },
+      "options": {
+        "currency": {
+          "ref": "currency"
+        },
+        "rounding": "half_even"
+      }
+    },
+    {
+      "id": "scenario_b",
+      "op": "call",
+      "module": "financial",
+      "operation": "compound_interest",
+      "input": {
+        "principal": {
+          "ref": "principal"
+        },
+        "rate": {
+          "ref": "rate_b"
+        },
+        "periods": {
+          "ref": "periods"
+        }
+      },
+      "options": {
+        "currency": {
+          "ref": "currency"
+        },
+        "rounding": "half_even"
+      }
+    },
+    {
+      "id": "comparison",
+      "op": "comparison",
+      "reference": {
+        "ref": "scenario_a"
+      },
+      "alternative": {
+        "ref": "scenario_b"
+      },
+      "metric": "amount"
+    },
+    {
+      "id": "difference",
+      "op": "arithmetic",
+      "left": {
+        "ref": "scenario_b.amount_exact"
+      },
+      "operator": "-",
+      "right": {
+        "ref": "scenario_a.amount_exact"
+      }
+    },
+    {
+      "id": "winner",
+      "op": "choose",
+      "left": {
+        "ref": "difference"
+      },
+      "compare": "gt",
+      "right": "0",
+      "then": [
+        {
+          "id": "value",
+          "op": "let",
+          "value": "B"
+        }
+      ],
+      "else": [
+        {
+          "id": "value",
+          "op": "let",
+          "value": "A or equal"
+        }
+      ],
+      "result": "value"
+    }
+  ],
+  "outputs": [
+    "scenario_a",
+    "scenario_b",
+    "difference",
+    "winner",
+    "comparison"
+  ]
+}

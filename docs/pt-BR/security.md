@@ -25,3 +25,5 @@ O cálculo ocorre no dispositivo. Telemetria, rastreamento, anúncios, contas, m
 Veja as [evidências de segurança do Objetivo 01](../../evidence/objective-01/security.md) para os testes executados, resultados e limites observados.
 
 O Objetivo 02 acrescenta a política de cache de mesma origem, diagnóstico local e um provedor Windows reservado a consumidores nativos autorizados. [Central de privacidade e limites](operations.md#valores-privacidade-e-leituras)
+
+O gateway de IA do desktop é o primeiro consumidor autorizado das credenciais nativas dos provedores. A interface permite substituir ou remover a chave. A leitura da chave fica restrita ao componente nativo. Consulte o [registro de privacidade](../../evidence/objective-06/privacy.pt-BR.md) e a [decisão arquitetural](../adr/0003-productivity.pt-BR.md).

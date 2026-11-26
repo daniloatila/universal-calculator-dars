@@ -2,6 +2,11 @@
 
 [English](../../CHANGELOG.md)
 
+## 0.6.0 · Produtividade, automação e IA opcional
+
+- Adicionados Math Notebook, Formula Studio e Automation Studio, com documentos locais versionados, limites de execução e provas reproduzíveis no Rust.
+- Adicionado um gateway opcional para desktop com revisão por solicitação, diagnóstico local IPv4/IPv6 e OCR local. A calculadora abre com IA desativada.
+
 ## 0.5.1 · Revisão do Laboratório de Dados
 
 - Interpreta os números nativos de JSON e de planilhas segundo a gramática do formato e conserva a notação configurada para texto.

@@ -36,6 +36,7 @@ async function process(job: DataJob) {
   let page: string;
   let proof: string;
   let csv: Uint8Array | undefined;
+  let estimatedPeak: number | undefined;
   try {
     progress(3);
     // Conservatively charge UTF-16 transport, cloning and the eventual JSON materialization.
@@ -47,10 +48,11 @@ async function process(job: DataJob) {
     table.reserve_browser_response(responseReserve);
     csv = job.exportMode ? table.export_csv(job.exportMode === 'protected') : undefined;
     if (csv) table.reserve_browser_response(responseReserve + 2 * csv.byteLength);
+    if (job.includeResourceReceipt) estimatedPeak=JSON.parse(table.resource_diagnostics()).estimated_high_water_bytes;
   } finally {
     table.free();
   }
   progress(4);
   if (csv?.buffer instanceof ArrayBuffer) self.postMessage({ ok: true, page, proof, csv }, { transfer: [csv.buffer] });
-  else self.postMessage({ ok: true, page, proof });
+  else self.postMessage({ ok: true, page, proof, estimatedPeak });
 }
