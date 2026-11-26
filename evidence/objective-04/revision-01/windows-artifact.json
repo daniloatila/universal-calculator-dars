@@ -1,0 +1,172 @@
+{
+  "schema": 1,
+  "repository": "daniloatila/universal-calculator-dars",
+  "branch": "codex/objective-04-finance-and-business",
+  "commit": "5329e697a105685f3206d14adac9832224bcf53e",
+  "run_id": 45846772329,
+  "run_attempt": 1,
+  "windows_job_id": 140002550786,
+  "windows_job_conclusion": "success",
+  "artifact_id": 15132054968,
+  "archive_sha256": "7c2777a5eb69c871777fb7e06a09d26feea087ceb4ef02cc4997f78712bfb2bb",
+  "archive_bytes": 5943015,
+  "retention_expires_utc": "2026-11-27T15:22:37Z",
+  "target": "windows-x64",
+  "exe_sha256": "1bc5c0a67ee24abfc770d857e835c7e9d7204c9d5c9e333b260fc779c565f004",
+  "exe_bytes": 18519552,
+  "exe_version": "0.4.1",
+  "pe_machine": "AMD64 (0x8664)",
+  "signature_status": "NotSigned",
+  "packaged_wasm_receipt_count": 15,
+  "packaged_wasm_receipt": [
+    {
+      "name": "dars_tool_wasm_bg-2G977mlQ.wasm",
+      "sha256": "d0e4a4f6f4de8023d3a68e1b5d6291ecdde86ae2e088966db7eab0ed99583aa1"
+    },
+    {
+      "name": "dars_tool_wasm_bg-B94x6JTa.wasm",
+      "sha256": "335e8ee25477247151491d76208baab28730fe17bfdc8c6c65d45787c9100e3c"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BIx14Spf.wasm",
+      "sha256": "221786ec2c59edfc457978c0ebb9b3085d7eaa477f3c73604108f1fabbb4885f"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BKeWWZLO.wasm",
+      "sha256": "5dfb59be89a556b3b4d0eb6858fbec4be4b006c2283f5d5dc9cbb4517ed6bb5a"
+    },
+    {
+      "name": "dars_tool_wasm_bg-ClXqZCRY.wasm",
+      "sha256": "56fe446cafad1d749d91870e5d75e182a929dac6037721a0161a514894040037"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CpNe6iGa.wasm",
+      "sha256": "ec80df9c47763b5763d00124601d03939a8988b67ddd8804afa2ee587d16d030"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CZ-lf9NQ.wasm",
+      "sha256": "1e48ee6b49003d6d098fde2c2b9671bca47b005f3ff47c0bae0e469f467454d9"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DirLnx5J.wasm",
+      "sha256": "30950afccc39b397513e404152218123ea19eacc0146ecea56b160bcecf08338"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DPWc7Xa5.wasm",
+      "sha256": "c106bcd8f98f46ea39baa4ad329fc557aa433b3b5c8db2100fdc25cd6392da2f"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DqYbKAWq.wasm",
+      "sha256": "33274d122dd31619eb35db17ae8ed0a0e256312d2968ab1571c95beec661a4c8"
+    },
+    {
+      "name": "dars_tool_wasm_bg-WCr9uMwP.wasm",
+      "sha256": "574f760442b1f17b506c8368e48f6c6e90e1587279e95fc53bc2a2a3eccee767"
+    },
+    {
+      "name": "dars_tool_wasm_bg-We41zFZM.wasm",
+      "sha256": "265cb95d52d03f61b3965cc1272d30dec21b5cb4410d399633dfa7ee7ca2aa14"
+    },
+    {
+      "name": "dars_tool_wasm_bg-wswHuyin.wasm",
+      "sha256": "499fc3329aaff76c118050558d5abe1b6d6c4a7bb87bc4dca5ace8317aba5e7b"
+    },
+    {
+      "name": "dars_tool_wasm_bg-XH2u94m-.wasm",
+      "sha256": "f8de0b675f30ef13bb03e8fe00194402a40956e17ae8ff8997090cecf0fd23bf"
+    },
+    {
+      "name": "dars_wasm_bg-DDcHdjmj.wasm",
+      "sha256": "f01ed7a362581d111c976d9e48bdd90c0ed339c7e4a9c7277056c0d250ca0d49"
+    }
+  ],
+  "checked_at_utc": "2026-11-26T15:23:00.9319992Z",
+  "actual_runtime_readback": {
+    "schema": 1,
+    "commit": "5329e697a105685f3206d14adac9832224bcf53e",
+    "run_id": "45846772329",
+    "executable_sha256": "1bc5c0a67ee24abfc770d857e835c7e9d7204c9d5c9e333b260fc779c565f004",
+    "webview2": "158.0.4370.33",
+    "packaged_wasm": [
+      {
+        "name": "dars_tool_wasm_bg-2G977mlQ.wasm",
+        "sha256": "d0e4a4f6f4de8023d3a68e1b5d6291ecdde86ae2e088966db7eab0ed99583aa1",
+        "bytes": 861988
+      },
+      {
+        "name": "dars_tool_wasm_bg-B94x6JTa.wasm",
+        "sha256": "335e8ee25477247151491d76208baab28730fe17bfdc8c6c65d45787c9100e3c",
+        "bytes": 350191
+      },
+      {
+        "name": "dars_tool_wasm_bg-BIx14Spf.wasm",
+        "sha256": "221786ec2c59edfc457978c0ebb9b3085d7eaa477f3c73604108f1fabbb4885f",
+        "bytes": 839952
+      },
+      {
+        "name": "dars_tool_wasm_bg-BKeWWZLO.wasm",
+        "sha256": "5dfb59be89a556b3b4d0eb6858fbec4be4b006c2283f5d5dc9cbb4517ed6bb5a",
+        "bytes": 680249
+      },
+      {
+        "name": "dars_tool_wasm_bg-ClXqZCRY.wasm",
+        "sha256": "56fe446cafad1d749d91870e5d75e182a929dac6037721a0161a514894040037",
+        "bytes": 686471
+      },
+      {
+        "name": "dars_tool_wasm_bg-CpNe6iGa.wasm",
+        "sha256": "ec80df9c47763b5763d00124601d03939a8988b67ddd8804afa2ee587d16d030",
+        "bytes": 449338
+      },
+      {
+        "name": "dars_tool_wasm_bg-CZ-lf9NQ.wasm",
+        "sha256": "1e48ee6b49003d6d098fde2c2b9671bca47b005f3ff47c0bae0e469f467454d9",
+        "bytes": 1027651
+      },
+      {
+        "name": "dars_tool_wasm_bg-DirLnx5J.wasm",
+        "sha256": "30950afccc39b397513e404152218123ea19eacc0146ecea56b160bcecf08338",
+        "bytes": 1200241
+      },
+      {
+        "name": "dars_tool_wasm_bg-DPWc7Xa5.wasm",
+        "sha256": "c106bcd8f98f46ea39baa4ad329fc557aa433b3b5c8db2100fdc25cd6392da2f",
+        "bytes": 281478
+      },
+      {
+        "name": "dars_tool_wasm_bg-DqYbKAWq.wasm",
+        "sha256": "33274d122dd31619eb35db17ae8ed0a0e256312d2968ab1571c95beec661a4c8",
+        "bytes": 557777
+      },
+      {
+        "name": "dars_tool_wasm_bg-WCr9uMwP.wasm",
+        "sha256": "574f760442b1f17b506c8368e48f6c6e90e1587279e95fc53bc2a2a3eccee767",
+        "bytes": 476341
+      },
+      {
+        "name": "dars_tool_wasm_bg-We41zFZM.wasm",
+        "sha256": "265cb95d52d03f61b3965cc1272d30dec21b5cb4410d399633dfa7ee7ca2aa14",
+        "bytes": 612379
+      },
+      {
+        "name": "dars_tool_wasm_bg-wswHuyin.wasm",
+        "sha256": "499fc3329aaff76c118050558d5abe1b6d6c4a7bb87bc4dca5ace8317aba5e7b",
+        "bytes": 526481
+      },
+      {
+        "name": "dars_tool_wasm_bg-XH2u94m-.wasm",
+        "sha256": "f8de0b675f30ef13bb03e8fe00194402a40956e17ae8ff8997090cecf0fd23bf",
+        "bytes": 624127
+      },
+      {
+        "name": "dars_wasm_bg-DDcHdjmj.wasm",
+        "sha256": "f01ed7a362581d111c976d9e48bdd90c0ed339c7e4a9c7277056c0d250ca0d49",
+        "bytes": 332903
+      }
+    ],
+    "verified_count": 15,
+    "method": "SHA-256 of decompressed WebAssembly bytes served by the verified Windows executable on its local Tauri origin.",
+    "test_processes_after_close": 0
+  },
+  "artifact_url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45846772329/artifacts/15132054968"
+}

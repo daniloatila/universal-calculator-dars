@@ -13,7 +13,7 @@
     {
       "id": "FIN-COMP-01",
       "title": "Comparison drops financial periods",
-      "status": "reproduced",
+      "status": "corrected_in_physical_windows",
       "reproduction": "before-windows.json",
       "capture": "before-windows.png",
       "replay_file": "historical-scenarios.json",
@@ -26,18 +26,28 @@
         "relative_percent": "110"
       },
       "expected_common_effective_annual_rate": "0.21",
-      "expected_difference": "0"
+      "expected_difference": "0",
+      "corrected_evidence": "after-windows.json"
     },
     {
       "id": "FIN-COMP-02",
       "title": "Loan proposal selection exposed minimum nominal cost across unlike contracts",
-      "status": "reproduced",
+      "status": "corrected_in_cli_and_wasm",
       "reproduction": "loan-selection-v040.json",
       "observed": {
-        "principals": ["1000.00", "2000.00"],
-        "contract_periods": [3, 6],
-        "selected_proposal_indices": [1]
-      }
+        "principals": [
+          "1000.00",
+          "2000.00"
+        ],
+        "contract_periods": [
+          3,
+          6
+        ],
+        "selected_proposal_indices": [
+          1
+        ]
+      },
+      "corrected_evidence": "tests.json"
     },
     {
       "id": "FIN-COMP-03",
@@ -52,7 +62,7 @@
     {
       "id": "FIN-COMP-04",
       "title": "Dated loan cost comparison displayed decimals finer than the solver's stopping tolerance",
-      "status": "corrected_in_cli_and_wasm",
+      "status": "corrected_in_cli_wasm_and_chrome",
       "observed_in": "intermediate 0.4.1 candidate 860668eb954a4032e3ffbb73d054c297df156fc2",
       "reproduction": "approximation-intermediate.json",
       "corrected_evidence": "approximation-corrected.json",

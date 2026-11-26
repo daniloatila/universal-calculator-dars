@@ -4,6 +4,7 @@
 
 ## 0.4.1 · Objective 04 financial comparison revision
 
+- Records available numerical stopping tolerances and withholds differences that fall inside the solver resolution.
 - Recalculate both scenario recipes in Rust and classify metric compatibility by financial meaning, units and applicable context.
 - Normalize known discrete compound rates to an exact effective annual basis. Report percentage points, relative variation and precision independently.
 - Preserve historical scenario import and export replayable comparison proofs. Limit nominal loan-cost selection to compatible proposals.

@@ -1,0 +1,306 @@
+{
+  "schema": 1,
+  "audited_source_commit": "5329e697a105685f3206d14adac9832224bcf53e",
+  "price": {
+    "schema": 1,
+    "observed_at_utc": "2026-11-26T15:17:34.704Z",
+    "version": "0.4.1",
+    "module_sha256": "d8a4d197f7a289128c85705238ee4cd7e77637429c874b55102dfd05a97d71c7",
+    "platform": "win32",
+    "architecture": "x64",
+    "node": "v24.19.0",
+    "processor": "Intel(R) Core(TM) Ultra 7 255HX",
+    "timeout_ms": 15000,
+    "scope": "Generated loans WASM under Node worker_threads. Module initialization is timed separately. First request after fresh-worker setup is not an operating-system cold start.",
+    "limitations": "Two samples per path on a single host. Excludes browser/WebView rendering and cannot establish a platform-wide latency guarantee.",
+    "results": [
+      {
+        "periods": 360,
+        "rounding_scope": "per_row",
+        "single": {
+          "initialization_ms": 19.172,
+          "ready_wall_ms": 48.351,
+          "request_bytes": 210,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 13.368,
+              "engine_ms": 13.089,
+              "result_bytes": 9328,
+              "status": "verified",
+              "total_cost": "270307.75",
+              "periods": 360
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 4.278,
+              "engine_ms": 4.078,
+              "result_bytes": 9328,
+              "status": "verified",
+              "total_cost": "270307.75",
+              "periods": 360
+            }
+          ]
+        },
+        "comparison": {
+          "initialization_ms": 16.647,
+          "ready_wall_ms": 44.48,
+          "request_bytes": 609,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 27.87,
+              "engine_ms": 27.595,
+              "result_bytes": 3922,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "3317.67",
+              "exact_difference_omitted": false
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 10.13,
+              "engine_ms": 9.895,
+              "result_bytes": 3922,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "3317.67",
+              "exact_difference_omitted": false
+            }
+          ]
+        }
+      },
+      {
+        "periods": 360,
+        "rounding_scope": "final",
+        "single": {
+          "initialization_ms": 15.305,
+          "ready_wall_ms": 41.288,
+          "request_bytes": 208,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 560.698,
+              "engine_ms": 560.344,
+              "result_bytes": 9326,
+              "status": "verified",
+              "total_cost": "270300.53",
+              "periods": 360
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 557.657,
+              "engine_ms": 557.295,
+              "result_bytes": 9326,
+              "status": "verified",
+              "total_cost": "270300.53",
+              "periods": 360
+            }
+          ]
+        },
+        "comparison": {
+          "initialization_ms": 16.135,
+          "ready_wall_ms": 41.102,
+          "request_bytes": 605,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 2449.534,
+              "engine_ms": 2449.224,
+              "result_bytes": 12532,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "3328.6869202088296983",
+              "exact_difference_omitted": false
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 2441.906,
+              "engine_ms": 2441.592,
+              "result_bytes": 12532,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "3328.6869202088296983",
+              "exact_difference_omitted": false
+            }
+          ]
+        }
+      },
+      {
+        "periods": 600,
+        "rounding_scope": "per_row",
+        "single": {
+          "initialization_ms": 14.002,
+          "ready_wall_ms": 41.196,
+          "request_bytes": 210,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 14.933,
+              "engine_ms": 14.731,
+              "result_bytes": 9289,
+              "status": "verified",
+              "total_cost": "501551.78",
+              "periods": 600
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 7.845,
+              "engine_ms": 7.631,
+              "result_bytes": 9289,
+              "status": "verified",
+              "total_cost": "501551.78",
+              "periods": 600
+            }
+          ]
+        },
+        "comparison": {
+          "initialization_ms": 14.033,
+          "ready_wall_ms": 39.475,
+          "request_bytes": 609,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 34.702,
+              "engine_ms": 34.441,
+              "result_bytes": 3925,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "5772.63",
+              "exact_difference_omitted": false
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 15.141,
+              "engine_ms": 14.937,
+              "result_bytes": 3925,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "5772.63",
+              "exact_difference_omitted": false
+            }
+          ]
+        }
+      },
+      {
+        "periods": 600,
+        "rounding_scope": "final",
+        "single": {
+          "initialization_ms": 14.833,
+          "ready_wall_ms": 37.958,
+          "request_bytes": 208,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 2341.047,
+              "engine_ms": 2340.774,
+              "result_bytes": 9287,
+              "status": "verified",
+              "total_cost": "501536.16",
+              "periods": 600
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 2403.055,
+              "engine_ms": 2402.781,
+              "result_bytes": 9287,
+              "status": "verified",
+              "total_cost": "501536.16",
+              "periods": 600
+            }
+          ]
+        },
+        "comparison": {
+          "initialization_ms": 17.908,
+          "ready_wall_ms": 48.474,
+          "request_bytes": 605,
+          "trials": [
+            {
+              "phase": "first_request_after_setup",
+              "request_wall_ms": 10712.474,
+              "engine_ms": 10712.236,
+              "result_bytes": 11139,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "5925.6645680650464908",
+              "exact_difference_omitted": true
+            },
+            {
+              "phase": "warm_worker",
+              "request_wall_ms": 11040.453,
+              "engine_ms": 11040.088,
+              "result_bytes": 11139,
+              "status": "verified",
+              "compatibility": "direct",
+              "source": "canonical_exact",
+              "absolute_difference": "5925.6645680650464908",
+              "exact_difference_omitted": true
+            }
+          ]
+        }
+      }
+    ],
+    "sample_count": 16,
+    "max_observed_request_ms": 11040.453,
+    "reproduction_command": "node benchmarks/finance-comparison-price.mjs",
+    "investigation": [
+      "Final settlement preserves exact rational balances, so long schedules make rational reductions dominate WASM execution.",
+      "Detailed comparison reexecutes both scenarios. Compact result transport would not remove the cost of their amortization arithmetic.",
+      "Per-row settlement quantizes the ledger and is faster in these samples. Its contractual totals differ and the revision preserves the selected policy.",
+      "Further optimization needs identical schedules and payment dates, exact totals, and parity under all rounding and extra-payment rules."
+    ]
+  },
+  "historical_0_4_0_comparator": {
+    "record": "before-windows.json",
+    "exported_proof_bytes": 3128,
+    "interaction_ms": 71.61390000000029
+  },
+  "memory_follow_up": {
+    "status": "open",
+    "incremental_physical_ram_target_bytes": 100000000,
+    "protocol": "../../objective-02/revision-02/memory-debt.md"
+  },
+  "windows_semantic_comparator": {
+    "evidence": "after-windows.json",
+    "measurement": "One execution of each artifact on the same device with separate WebView2 profiles",
+    "candidate_milliseconds": {
+      "pair": 44.2447000000011,
+      "selected": 139.8212999999996,
+      "import": 225.3765000000003
+    },
+    "candidate_exported_scenario_bytes": 1081,
+    "candidate_exported_proof_bytes": 6008,
+    "candidate_worker_peak": 1,
+    "workers_after_comparison": 0,
+    "historical_visible_comparison_private_working_set_p50_bytes": 147894272,
+    "candidate_visible_comparison_private_working_set_p50_bytes": 120774656,
+    "limitations": "Stages do different work and have only two process-tree samples in visible comparison. Neither the timing nor the memory difference establishes a platform-wide effect."
+  },
+  "windows_standard_pair": {
+    "evidence": "desktop.json",
+    "versions": [
+      "0.3.1",
+      "0.4.1"
+    ],
+    "visible_private_working_set_p50_bytes": [
+      103493632,
+      103882752
+    ],
+    "visible_private_commit_p50_bytes": [
+      246562816,
+      247865344
+    ],
+    "startup_ms": [
+      657.4371000000001,
+      618.3452999999972
+    ],
+    "limitation": "Aggregate private working set and commit do not establish incremental physical memory against a matched idle device baseline."
+  }
+}

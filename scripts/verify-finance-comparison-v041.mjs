@@ -70,7 +70,7 @@ const observed = await runWindowsToolBenchmark({
     }
     const scenarios = page.getByTestId('finance-scenarios');
     const detail = scenarios.locator('.finance-delta[data-comparison-status="normalized"]');
-    await scenarios.locator('summary').click();
+    await scenarios.locator(':scope > summary').click();
     await scenarios.getByRole('combobox', { name: 'Reference', exact: true }).selectOption('1');
     const pairStarted = performance.now();
     await scenarios.getByRole('combobox', { name: 'Alternative', exact: true }).selectOption('2');
@@ -112,7 +112,7 @@ const observed = await runWindowsToolBenchmark({
     await chooser.selectOption('business');
     await expect(main).toHaveAttribute('data-module-phase', 'active');
     await chooser.selectOption('financial');
-    if (!(await scenarios.evaluate((element) => element.open))) await scenarios.locator('summary').click();
+    if (!(await scenarios.evaluate((element) => element.open))) await scenarios.locator(':scope > summary').click();
     await expect(detail).toBeVisible();
     await expect(main).toHaveAttribute('data-workers', '0');
     await expect.poll(() => workers.closed).toBe(workers.opened);

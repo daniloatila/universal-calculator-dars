@@ -1,0 +1,397 @@
+{
+  "schema": 1,
+  "version": "0.4.1",
+  "audited_source_commit": "5329e697a105685f3206d14adac9832224bcf53e",
+  "scope": "Windows 11 local production build, Chrome, Node, offline, independent comparison oracle and CLI/WASM parity",
+  "counts_are_separate": true,
+  "builds": {
+    "release_cli": "passed",
+    "wasm": "passed",
+    "typescript": "passed",
+    "vite": "passed",
+    "isolated_wasm_artifacts": 15,
+    "built_asset_set_sha256": "27e57ff1c098dd1e27adc11426f3c070ea9c385930bfcb48c49554449bc17d17"
+  },
+  "node": {
+    "passed": 69,
+    "failed": 0,
+    "skipped": 0
+  },
+  "chrome": {
+    "browser": {
+      "channel": "chrome",
+      "version": "158.0.8127.38"
+    },
+    "project_workers": 2,
+    "started_utc": "2026-11-26T15:12:38.851Z",
+    "duration_ms": 236100,
+    "passed": 172,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "inherited_mathematical_and_shell": 146,
+    "inherited_financial_workspaces": 14,
+    "new_comparator": 12,
+    "targeted_comparator_rerun": 12,
+    "targeted_report_sha256": "089f25af9736195bc62cec686ae96e17a3f1cdafac3af7ef5295fa20b386cbca",
+    "inherited_0_2_2_by_file": {
+      "apps/web/tests/module-frames.spec.ts": 1,
+      "apps/web/tests/module-manager.spec.ts": 1,
+      "apps/web/tests/module-shell.spec.ts": 4,
+      "apps/web/tests/operations.spec.ts": 5,
+      "apps/web/tests/standard-revision.spec.ts": 5,
+      "apps/web/tests/standard.spec.ts": 10,
+      "apps/web/tests/worker.spec.ts": 1
+    },
+    "report": "artifacts/objective-04/revision-01/local-audit/final-full-chrome.playwright.json",
+    "report_sha256": "d147c311ad84561919ba9a14cdd07740b303874a2034fbaa315c31e4837ab850"
+  },
+  "notation_matrices": {
+    "locales": [
+      "ar",
+      "en",
+      "es",
+      "fr",
+      "hi",
+      "pt-BR",
+      "zh-CN"
+    ],
+    "mathematics": {
+      "browser_cases": 42,
+      "directed_language_pairs": 42,
+      "modules": [
+        "algebra",
+        "calculus",
+        "converter",
+        "date-time",
+        "discrete-mathematics",
+        "geometry",
+        "linear-algebra",
+        "programmer",
+        "scientific",
+        "standard"
+      ],
+      "unique_comparisons": 420,
+      "checks": "canonical request and complete proof invariant",
+      "verified_pair_digests": 42
+    },
+    "finance": {
+      "browser_cases": 7,
+      "directed_language_pairs": 42,
+      "modules": [
+        "business",
+        "financial",
+        "investment",
+        "loans",
+        "tax"
+      ],
+      "unique_comparisons": 210,
+      "checks": "complete exported proof invariant"
+    }
+  },
+  "financial_profiles": {
+    "checks": 25,
+    "worker_counts": {
+      "active": 0,
+      "max": 1,
+      "initializations": 26,
+      "finance": 25
+    },
+    "external_requests": 0
+  },
+  "loan_solver_presentation": {
+    "fixture": "dated single-payment loan, Actual/365 Fixed",
+    "reference_tolerance": "0.000000000001",
+    "alternative_tolerance": "0.000000000001",
+    "combined_tolerance": "0.000000000002",
+    "above_tolerance": {
+      "absolute_difference": "0.00000000001",
+      "warning": "solver_resolution"
+    },
+    "within_tolerance": {
+      "absolute_difference": null,
+      "percentage_points": null,
+      "relative_percent": null,
+      "warning": "within_solver_resolution"
+    }
+  },
+  "standalone_production_offline": [
+    {
+      "suite": "production-web-offline-and-lazy-locales",
+      "passed": 10,
+      "failed": 0
+    },
+    {
+      "suite": "production-finance-offline",
+      "modules": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ],
+      "passed": 5,
+      "failed": 0
+    }
+  ],
+  "independent_python_comparison_oracle": {
+    "suite": "financial-semantic-comparison",
+    "passed": 84,
+    "independent_proof_replays": 79,
+    "cli_sha256": "0e0e59626e595ba85628f04ff1e518d7b4c5fc00c3a52870542912327d6f7c12",
+    "failed": 0
+  },
+  "comparison_cli_wasm_parity": {
+    "suite": "semantic-comparison-cli-wasm",
+    "cases": 84,
+    "proof_replays": 79,
+    "failed": 0
+  },
+  "coverage": {
+    "local_status": "not_rerun",
+    "prior_local_attempt": {
+      "commit": "860668eb954a4032e3ffbb73d054c297df156fc2",
+      "status": "blocked",
+      "os_error": 4551
+    },
+    "hosted_status": "passed",
+    "hosted": "coverage.json"
+  },
+  "inherited_0_2_2": {
+    "original_ledger": "evidence/objective-02/revision-02/tests.json",
+    "previous_finance_ledger": "evidence/objective-04/tests.json",
+    "mapped": 602,
+    "reverified_by_this_ledger": 602,
+    "suites": [
+      {
+        "id": "rust_core",
+        "mapped": 16,
+        "original_command": "cargo test --locked --workspace",
+        "local_status": "passed",
+        "revision_path": ".github/workflows/ci.yml - Check Rust formatting and core",
+        "local_verification": "21 passing Standard tests preserve the 16 inherited tests"
+      },
+      {
+        "id": "cli_independent_oracle",
+        "mapped": 157,
+        "original_command": "python -B tests/oracle.py target/release/dars.exe",
+        "local_status": "passed",
+        "revision_path": "tests/oracle.py",
+        "local_verification": "157 passed in the exact-source python-fraction-decimal-oracle suite"
+      },
+      {
+        "id": "wasm_structured_independent_oracle",
+        "mapped": 291,
+        "original_command": "python -B crates/dars-core/tests/structured-oracle.py",
+        "local_status": "passed",
+        "revision_path": "crates/dars-core/tests/structured-oracle.py",
+        "local_verification": "291 passed in the exact-source fraction-decimal-structured-wasm suite"
+      },
+      {
+        "id": "cli_wasm_parity",
+        "mapped": 20,
+        "original_command": "node tests/check-targets.mjs target/release/dars.exe",
+        "local_status": "passed",
+        "revision_path": "tests/check-targets.mjs",
+        "local_verification": "20 passed in the exact-source native-wasm-result-parity suite"
+      },
+      {
+        "id": "typescript_node",
+        "mapped": 57,
+        "original_command": "npm test --prefix apps/web",
+        "local_status": "passed",
+        "local_verification": "69 local Node checks include 57 inherited cases"
+      },
+      {
+        "id": "physical_windows_chrome",
+        "mapped": 27,
+        "original_command": "npm run test:e2e --prefix apps/web",
+        "local_status": "passed",
+        "local_verification": "27 passed across seven inherited test files in the 172-test local Chrome run"
+      },
+      {
+        "id": "browser_explicit_offline",
+        "mapped": 10,
+        "original_command": "node tests/verify-web-offline.mjs",
+        "local_status": "passed",
+        "local_verification": "10 passed in the explicitly offline local web script"
+      },
+      {
+        "id": "native_windows_webview2_ui",
+        "mapped": 17,
+        "original_command": "node scripts/verify-desktop.mjs --objective-02-revision-02",
+        "local_status": "passed",
+        "revision_path": "scripts/verify-desktop.mjs with the exact-commit Windows review executable",
+        "revision_verification": "17 native WebView2 UI checks passed on the verified review executable"
+      },
+      {
+        "id": "native_windows_provider_credentials",
+        "mapped": 2,
+        "original_command": "cargo test --locked -p dars-desktop --lib -- --include-ignored",
+        "local_status": "not_measured_in_this_ledger",
+        "revision_path": ".github/workflows/ci.yml - Verify Windows release lint and credential round trip",
+        "hosted_status": "passed",
+        "revision_verification": "2 credential checks passed in the exact-source Windows job"
+      },
+      {
+        "id": "native_windows_sensor_rust",
+        "mapped": 5,
+        "original_command": "cargo test --locked --workspace",
+        "local_status": "not_measured_in_this_ledger",
+        "revision_path": ".github/workflows/ci.yml - Build the Windows and macOS desktop targets",
+        "hosted_status": "passed",
+        "revision_verification": "5 desktop capability checks passed in the exact-source Windows job"
+      }
+    ],
+    "status": "passed"
+  },
+  "log_sha256": {
+    "final-cli-build.log": "9f28f0f31814a8e641c371481969344ce7495e97862ec0049eac9a299b409991",
+    "final-wasm-build.log": "aba36e133fad920899f0ed69ab7d690e3d4cf6af2c1099d7da97767b836b25ec",
+    "final-web-build.log": "8c81c8162d5ba3155076445b408db42f2d0611652304ca6a7e0ffd134a57fda3",
+    "final-web-unit.log": "ad9312b9ba1d18fac879be56aca82abe1bb6df0c9d1a9ac28823ca256373ecc5",
+    "final-web-offline.log": "5951ef66d72322637b9e57f1a8c339fe617afba403e10cc3a20a08c198233d07",
+    "precision-targeted-chrome.log": "4623d39540d0f8d8bea016776c8d1a1f1927627ad04a12de4e5888a669709197",
+    "final-full-chrome.log": "98a6c30a499be037067d832e4fb4cc84e97a542257da1f0f767554ac89075bf5",
+    "final-comparison-oracle.json": "b481b84bb4a657bbb6658526f336cf018616b17fe2408b702c3362708843c251",
+    "final-semantic-parity.json": "26a0d7090c0f2ce47ea54113b9e95455b95db1e031495ba9c4330e09860b38b8"
+  },
+  "rust": {
+    "command": "cargo test --locked -p dars-core -p dars-universal",
+    "standard_passed": 21,
+    "universal_passed": 102,
+    "failed": 0,
+    "log_sha256": "36a57202d7cf356c6102d0a256584bde34bf454a21244d74122fa1669d0659a5",
+    "format_check": "passed",
+    "clippy_all_targets_strict": "passed"
+  },
+  "independent_finance_baseline": {
+    "passed": 577,
+    "by_suite": {
+      "financial_and_loans": 128,
+      "investment_and_business": 87,
+      "tax": 362
+    }
+  },
+  "advanced_math_oracles": {
+    "passed": 2355,
+    "by_suite": {
+      "scientific-sympy-mpmath": 102,
+      "scientific-complex-mpmath": 75,
+      "algebra-sympy": 184,
+      "calculus-sympy-mpmath": 210,
+      "linear-algebra-sympy-numpy-scipy": 223,
+      "geometry-sympy": 159,
+      "discrete-mathematics-python-sympy": 289,
+      "programmer-python-integers": 368,
+      "converter-fraction-decimal-sympy": 342,
+      "date-time-datetime-calendar-zoneinfo": 403
+    }
+  },
+  "advanced_math_cli_wasm": {
+    "passed": 305,
+    "by_suite": {
+      "scientific-cli-wasm": 19,
+      "algebra-cli-wasm": 28,
+      "calculus-cli-wasm": 27,
+      "linear_algebra-cli-wasm": 30,
+      "geometry-cli-wasm": 32,
+      "discrete-mathematics-cli-wasm": 38,
+      "programmer-cli-wasm": 36,
+      "converter-cli-wasm": 46,
+      "date-time-cli-wasm": 49
+    },
+    "isolation_checks": 37
+  },
+  "finance_baseline_cli_wasm": {
+    "by_suite": [
+      {
+        "suite": "financial-cli-wasm",
+        "passed": 15,
+        "isolation_checks": 4
+      },
+      {
+        "suite": "investment-cli-wasm",
+        "passed": 3,
+        "isolation_checks": 4
+      },
+      {
+        "suite": "loans-cli-wasm",
+        "passed": 7,
+        "isolation_checks": 4
+      },
+      {
+        "suite": "tax-cli-wasm",
+        "passed": 17,
+        "isolation_checks": 4
+      },
+      {
+        "suite": "business-cli-wasm",
+        "passed": 7,
+        "isolation_checks": 4
+      }
+    ],
+    "passed": 49
+  },
+  "standard": {
+    "independent_cli": {
+      "suite": "python-fraction-decimal-oracle",
+      "passed": 157,
+      "failed": 0
+    },
+    "independent_structured_wasm": {
+      "suite": "fraction-decimal-structured-wasm",
+      "passed": 291,
+      "failed": 0,
+      "referencePrecision": 180
+    },
+    "cli_wasm": {
+      "suite": "native-wasm-result-parity",
+      "passed": 20,
+      "failed": 0
+    },
+    "proof": {
+      "suite": "standard-record-cli-wasm",
+      "passed": 9,
+      "replays": 5,
+      "failed": 0
+    }
+  },
+  "windows_hosted_rust": {
+    "capabilities": 5,
+    "credentials": 2,
+    "failed": 0,
+    "job_id": 140002550786,
+    "evidence": "ci.json"
+  },
+  "windows_historical_browser": {
+    "passed": 17,
+    "failed": 0,
+    "evidence": "windows-regression.json"
+  },
+  "windows_finance_offline": {
+    "passed": 5,
+    "failed": 0,
+    "modules": [
+      "financial",
+      "investment",
+      "loans",
+      "tax",
+      "business"
+    ],
+    "workers": {
+      "opened": 5,
+      "closed": 5,
+      "peak": 1
+    },
+    "evidence": "desktop.json"
+  },
+  "windows_semantic_comparison": {
+    "normalized_rate": "21/100",
+    "exact_difference": "0",
+    "historical_import_reproduced": true,
+    "retained_after_switch": true,
+    "evidence": "after-windows.json"
+  },
+  "hosted_ci": "ci.json"
+}

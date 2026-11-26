@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "audited_source_commit": "5329e697a105685f3206d14adac9832224bcf53e",
+  "run_id": 45846772329,
+  "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45846772329",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "verify (macos-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "databaseId": 140002550390,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45846772329/job/140002550390"
+    },
+    {
+      "name": "security",
+      "status": "completed",
+      "conclusion": "success",
+      "databaseId": 140002550743,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45846772329/job/140002550743"
+    },
+    {
+      "name": "verify (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "databaseId": 140002550786,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45846772329/job/140002550786"
+    },
+    {
+      "name": "verify (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "databaseId": 140002550999,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45846772329/job/140002550999"
+    }
+  ],
+  "ubuntu_browser_tests": 172,
+  "financial_line_coverage": "coverage.json",
+  "security": {
+    "npm_vulnerabilities_reported": 0,
+    "cargo_allowed_advisories": [
+      "RUSTSEC-2026-0543",
+      "RUSTSEC-2024-0370",
+      "RUSTSEC-2024-0429"
+    ]
+  }
+}

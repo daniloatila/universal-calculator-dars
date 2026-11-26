@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "audited_source_commit": "5329e697a105685f3206d14adac9832224bcf53e",
+  "tool": "cargo-llvm-cov 0.9.2, GitHub Actions Ubuntu release",
+  "workflow_run_id": 45846772329,
+  "job_id": 140002550999,
+  "scope": "All instrumented finance source reported by LLVM. Inline unit-test lines mapped by LLVM are included. Standalone tests are exercised by the workload.",
+  "workload": {
+    "universal_rust_unit_tests": 102,
+    "historical_independent_finance_cases": 577,
+    "independent_comparison_cases": 84
+  },
+  "suite": "finance-line-coverage",
+  "covered": 6038,
+  "total": 6208,
+  "percent": 97.26,
+  "above_95": true,
+  "files": [
+    {
+      "path": "crates/dars-universal/src/finance/business.rs",
+      "total": 636,
+      "covered": 626
+    },
+    {
+      "path": "crates/dars-universal/src/finance/comparison.rs",
+      "total": 507,
+      "covered": 494
+    },
+    {
+      "path": "crates/dars-universal/src/finance/financial.rs",
+      "total": 728,
+      "covered": 689
+    },
+    {
+      "path": "crates/dars-universal/src/finance/financial/cash_flow.rs",
+      "total": 83,
+      "covered": 71
+    },
+    {
+      "path": "crates/dars-universal/src/finance/financial/numeric.rs",
+      "total": 161,
+      "covered": 151
+    },
+    {
+      "path": "crates/dars-universal/src/finance/financial/roots.rs",
+      "total": 216,
+      "covered": 207
+    },
+    {
+      "path": "crates/dars-universal/src/finance/investment.rs",
+      "total": 606,
+      "covered": 583
+    },
+    {
+      "path": "crates/dars-universal/src/finance/loans.rs",
+      "total": 590,
+      "covered": 571
+    },
+    {
+      "path": "crates/dars-universal/src/finance/metric_catalog.rs",
+      "total": 2038,
+      "covered": 2020
+    },
+    {
+      "path": "crates/dars-universal/src/finance/mod.rs",
+      "total": 257,
+      "covered": 254
+    },
+    {
+      "path": "crates/dars-universal/src/finance/tax.rs",
+      "total": 372,
+      "covered": 365
+    },
+    {
+      "path": "crates/dars-universal/src/finance/tax/rules.rs",
+      "total": 14,
+      "covered": 7
+    }
+  ]
+}

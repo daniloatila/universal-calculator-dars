@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "objective": "04",
+  "version": "0.4.1",
+  "status": "READY_FOR_REVIEW",
+  "review_branch": "codex/objective-04-finance-and-business",
+  "previous_objectives": {
+    "01": "APPROVED",
+    "02": "APPROVED",
+    "03": "APPROVED"
+  },
+  "next_objective": {
+    "id": "05",
+    "status": "NOT_STARTED",
+    "requires_owner_authorization": true
+  },
+  "criteria": [
+    {
+      "id": "original_failure_reproduced",
+      "evidence": [
+        "before-windows.json",
+        "before-windows.png",
+        "historical-scenarios.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "equivalent_rates_exactly_equal",
+      "evidence": [
+        "after-windows.json",
+        "comparison-proof.json",
+        "tests.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "rust_semantic_contract",
+      "evidence": [
+        "comparison-contract.md",
+        "compatibility-matrix.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "meaningful_context_and_incompatibilities",
+      "evidence": [
+        "compatibility-matrix.json",
+        "tests.json",
+        "findings.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "supported_normalization",
+      "evidence": [
+        "comparison-contract.md",
+        "comparison-proof.json",
+        "tests.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "precision_and_rounding",
+      "evidence": [
+        "comparison-contract.md",
+        "findings.json",
+        "tests.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "replayable_proof_and_legacy_import",
+      "evidence": [
+        "historical-scenarios.json",
+        "replay-v2.json",
+        "comparison-proof.json",
+        "tests.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "five_modules",
+      "evidence": [
+        "compatibility-matrix.json",
+        "tests.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "full_regression_and_coverage",
+      "evidence": [
+        "regression.md",
+        "tests.json",
+        "coverage.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "seven_languages",
+      "evidence": [
+        "tests.json",
+        "locale-transition-matrix.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "local_data_and_windows_security",
+      "evidence": [
+        "security.md",
+        "after-windows.json",
+        "ci.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "physical_windows_and_provenance",
+      "evidence": [
+        "windows-artifact.json",
+        "after-windows.json",
+        "windows-regression.json",
+        "desktop.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "four_ci_jobs_on_audited_source",
+      "evidence": [
+        "ci.json"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "published_review_evidence",
+      "evidence": [
+        "REPORT.md",
+        "REPORT.pt-BR.md",
+        "reproduction.md"
+      ],
+      "status": "verified"
+    }
+  ],
+  "open_follow_up": {
+    "incremental_physical_ram_under_100_mb": "unverified",
+    "distribution_signing": "objective_07"
+  },
+  "audited_source_commit": "5329e697a105685f3206d14adac9832224bcf53e",
+  "assessment": "independent_audit_pending",
+  "review_artifact": "windows-artifact.json",
+  "performance_and_memory": "benchmarks.json"
+}

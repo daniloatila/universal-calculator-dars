@@ -1,0 +1,32 @@
+{
+  "schema": 2,
+  "requests": [
+    {
+      "schema": 1,
+      "module": "financial",
+      "operation": "equivalent_rate",
+      "input": "{\"from_periods_per_year\":2,\"rate\":\"0.10\",\"to_periods_per_year\":2}",
+      "original_input": "{\"rate\":{\"text\":\"0.10\",\"locale\":\"en\"},\"from_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"},\"to_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"}}",
+      "options": {
+        "currency": "BRL",
+        "rounding": "half_even"
+      }
+    },
+    {
+      "schema": 1,
+      "module": "financial",
+      "operation": "equivalent_rate",
+      "input": "{\"from_periods_per_year\":2,\"rate\":\"0.10\",\"to_periods_per_year\":1}",
+      "original_input": "{\"rate\":{\"text\":\"0.10\",\"locale\":\"en\"},\"from_periods_per_year\":{\"text\":\"2\",\"locale\":\"en\"},\"to_periods_per_year\":{\"text\":\"1\",\"locale\":\"en\"}}",
+      "options": {
+        "currency": "BRL",
+        "rounding": "half_even"
+      }
+    }
+  ],
+  "comparison": {
+    "reference_index": 0,
+    "alternative_index": 1,
+    "metric": "rate"
+  }
+}

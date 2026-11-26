@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "version": "0.4.1",
+  "executable_sha256": "1bc5c0a67ee24abfc770d857e835c7e9d7204c9d5c9e333b260fc779c565f004",
+  "webview2": "158.0.4370.33",
+  "pair_milliseconds": 44.2447000000011,
+  "selected_milliseconds": 139.8212999999996,
+  "import_milliseconds": 225.3765000000003,
+  "startup_to_checked_standard_ms": 590.6306999999997,
+  "visible_standard_memory": {
+    "workingSetBytes": {
+      "count": 6,
+      "p50": 414384128,
+      "p95": 415698944,
+      "p99": 415698944
+    },
+    "privateWorkingSetBytes": {
+      "count": 6,
+      "p50": 108097536,
+      "p95": 111648768,
+      "p99": 111648768
+    },
+    "privateBytes": {
+      "count": 6,
+      "p50": 253116416,
+      "p95": 255352832,
+      "p99": 255352832
+    },
+    "sharedCommitBytes": {
+      "count": 6,
+      "p50": 91455488,
+      "p95": 99876864,
+      "p99": 99876864
+    },
+    "sharedWorkingSetBytes": {
+      "count": 6,
+      "p50": 306487296,
+      "p95": 307519488,
+      "p99": 307519488
+    }
+  },
+  "visible_comparison_memory": {
+    "workingSetBytes": {
+      "count": 2,
+      "p50": 433688576,
+      "p95": 436064256,
+      "p99": 436064256
+    },
+    "privateWorkingSetBytes": {
+      "count": 2,
+      "p50": 120774656,
+      "p95": 123174912,
+      "p99": 123174912
+    },
+    "privateBytes": {
+      "count": 2,
+      "p50": 274501632,
+      "p95": 276918272,
+      "p99": 276918272
+    },
+    "sharedCommitBytes": {
+      "count": 2,
+      "p50": 96108544,
+      "p95": 96108544,
+      "p99": 96108544
+    },
+    "sharedWorkingSetBytes": {
+      "count": 2,
+      "p50": 312889344,
+      "p95": 312913920,
+      "p99": 312913920
+    }
+  },
+  "workers_after_comparison": 0,
+  "remaining_processes": 0,
+  "proofBytes": 6008,
+  "scenarioExportBytes": 1081,
+  "historicalImportReproduced": true,
+  "retainedAfterSwitch": true,
+  "workers": {
+    "opened": 8,
+    "closed": 8,
+    "peak": 1
+  },
+  "externalHttpRequests": 0,
+  "audited_source_commit": "5329e697a105685f3206d14adac9832224bcf53e",
+  "runtime_review_artifact": "windows-artifact.json",
+  "exported_proof_uses_ui_format": true,
+  "evidence_sha256": {
+    "after-windows.png": "af60e0c27d3ee757573b0d36a0b30f68fa19c45d65644537c41dfc2087975ab4",
+    "comparison-proof.json": "d0f9c20b36d66d362ac6f8bd5a3a9dd5d5619d98d7b733e783659128267deac0",
+    "replay-v2.json": "17878f98ef95be1fb0c9ad12838321026f8e70808eaae6ff6434eb1800d40eac"
+  },
+  "manual_verifier_sha256": "5485f97e8fb776d3a6022b545be3419e6c9dfa22af6649ad2741d3884d2ebdad"
+}

@@ -1,0 +1,2324 @@
+{
+  "schema": 1,
+  "audited_source_commit": "5329e697a105685f3206d14adac9832224bcf53e",
+  "browser": "Chrome 158.0.8127.38",
+  "browser_report_sha256": "d147c311ad84561919ba9a14cdd07740b303874a2034fbaa315c31e4837ab850",
+  "languages": [
+    "en",
+    "pt-BR",
+    "zh-CN",
+    "hi",
+    "es",
+    "ar",
+    "fr"
+  ],
+  "directed_pairs": 42,
+  "math_proofs": 420,
+  "finance_proofs": 210,
+  "finance_attachments_sha256_by_source_locale": {
+    "en": "14075b95c1d22cfd83d14077c2147c1e95248d859ac4ff7dd17a96b3354f3492",
+    "pt-BR": "792c94e66cc267a499b822cf572e0a44e0560e49dbdaa72fb3db14c04c9d78a8",
+    "zh-CN": "8bbb347084f678ac004e7d430e6537f92ab0a844004c4524ed205c4f66777247",
+    "hi": "ece162abb3546e3fdd19fdc41e4a82863bb9b13129f95b1dae3d3da155de0f47",
+    "es": "13271a54f864c661033897f99537974749b4bb5b7067967e0f2ab791894af964",
+    "ar": "71adff195b314fcdfc4648b57f01822fd4d80018d447a7f3cf6bd2879f081ad6",
+    "fr": "ed966b9afac065b1300084dc170e2af3e969f8686fbc646ffdd9064696575b09"
+  },
+  "pairs": [
+    {
+      "from": "en",
+      "to": "pt-BR",
+      "math_pair_attachment_payload_sha256": "8d9ba38c65e544754bc4e46b31c764a27eed0875a871aba1cd8c87d003939232",
+      "math": {
+        "standard": {
+          "request_sha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proof_sha256": "bb8b4388d264b6afc9741f74d93a068afa8896ea6a02f2c88dc5f481ce403b69"
+        },
+        "scientific": {
+          "request_sha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proof_sha256": "69cf775f9122530b3a56da94dd47772c74d797cdc8ee3b8d49e9b2338a0e608d"
+        },
+        "algebra": {
+          "request_sha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proof_sha256": "93779401957d9fcd143a92612eede7c5608d001a9b75489748384dead384c0dc"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proof_sha256": "72ef2f808195d492ea85f7c762e416c317684ba98fc99d483c699db3f63e885a"
+        },
+        "geometry": {
+          "request_sha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proof_sha256": "ab1137ef8bcc7dcd5c0888dcbb17bbefcedb8a98374ed0701bf087fc127db249"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proof_sha256": "bf1c044e6d5c0c5cb9e394328219b37bd629a9e3c7f09b658e73f4d2bdff963b"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "en",
+      "to": "zh-CN",
+      "math_pair_attachment_payload_sha256": "6392954e936c5eb05f2d7745d3e5557bc08a3e96f4210bb0472141a8a430eecc",
+      "math": {
+        "standard": {
+          "request_sha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proof_sha256": "bb8b4388d264b6afc9741f74d93a068afa8896ea6a02f2c88dc5f481ce403b69"
+        },
+        "scientific": {
+          "request_sha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proof_sha256": "69cf775f9122530b3a56da94dd47772c74d797cdc8ee3b8d49e9b2338a0e608d"
+        },
+        "algebra": {
+          "request_sha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proof_sha256": "93779401957d9fcd143a92612eede7c5608d001a9b75489748384dead384c0dc"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proof_sha256": "72ef2f808195d492ea85f7c762e416c317684ba98fc99d483c699db3f63e885a"
+        },
+        "geometry": {
+          "request_sha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proof_sha256": "ab1137ef8bcc7dcd5c0888dcbb17bbefcedb8a98374ed0701bf087fc127db249"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proof_sha256": "bf1c044e6d5c0c5cb9e394328219b37bd629a9e3c7f09b658e73f4d2bdff963b"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "en",
+      "to": "hi",
+      "math_pair_attachment_payload_sha256": "06676bff6dbba95c33a8cf5be1834bf5ed4d576f777968e1557b55577063b44f",
+      "math": {
+        "standard": {
+          "request_sha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proof_sha256": "bb8b4388d264b6afc9741f74d93a068afa8896ea6a02f2c88dc5f481ce403b69"
+        },
+        "scientific": {
+          "request_sha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proof_sha256": "69cf775f9122530b3a56da94dd47772c74d797cdc8ee3b8d49e9b2338a0e608d"
+        },
+        "algebra": {
+          "request_sha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proof_sha256": "93779401957d9fcd143a92612eede7c5608d001a9b75489748384dead384c0dc"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proof_sha256": "72ef2f808195d492ea85f7c762e416c317684ba98fc99d483c699db3f63e885a"
+        },
+        "geometry": {
+          "request_sha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proof_sha256": "ab1137ef8bcc7dcd5c0888dcbb17bbefcedb8a98374ed0701bf087fc127db249"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proof_sha256": "bf1c044e6d5c0c5cb9e394328219b37bd629a9e3c7f09b658e73f4d2bdff963b"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "en",
+      "to": "es",
+      "math_pair_attachment_payload_sha256": "9fb59d7252715038498578ee6f7a3b6d0aabc15d8aaf234447cf564fe3482ff2",
+      "math": {
+        "standard": {
+          "request_sha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proof_sha256": "bb8b4388d264b6afc9741f74d93a068afa8896ea6a02f2c88dc5f481ce403b69"
+        },
+        "scientific": {
+          "request_sha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proof_sha256": "69cf775f9122530b3a56da94dd47772c74d797cdc8ee3b8d49e9b2338a0e608d"
+        },
+        "algebra": {
+          "request_sha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proof_sha256": "93779401957d9fcd143a92612eede7c5608d001a9b75489748384dead384c0dc"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proof_sha256": "72ef2f808195d492ea85f7c762e416c317684ba98fc99d483c699db3f63e885a"
+        },
+        "geometry": {
+          "request_sha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proof_sha256": "ab1137ef8bcc7dcd5c0888dcbb17bbefcedb8a98374ed0701bf087fc127db249"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proof_sha256": "bf1c044e6d5c0c5cb9e394328219b37bd629a9e3c7f09b658e73f4d2bdff963b"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "en",
+      "to": "ar",
+      "math_pair_attachment_payload_sha256": "57ba9d995edd45e4a18ab80c93d651555dc204a17a7fe88b513e44ff462e0651",
+      "math": {
+        "standard": {
+          "request_sha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proof_sha256": "bb8b4388d264b6afc9741f74d93a068afa8896ea6a02f2c88dc5f481ce403b69"
+        },
+        "scientific": {
+          "request_sha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proof_sha256": "69cf775f9122530b3a56da94dd47772c74d797cdc8ee3b8d49e9b2338a0e608d"
+        },
+        "algebra": {
+          "request_sha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proof_sha256": "93779401957d9fcd143a92612eede7c5608d001a9b75489748384dead384c0dc"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proof_sha256": "72ef2f808195d492ea85f7c762e416c317684ba98fc99d483c699db3f63e885a"
+        },
+        "geometry": {
+          "request_sha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proof_sha256": "ab1137ef8bcc7dcd5c0888dcbb17bbefcedb8a98374ed0701bf087fc127db249"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proof_sha256": "bf1c044e6d5c0c5cb9e394328219b37bd629a9e3c7f09b658e73f4d2bdff963b"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "en",
+      "to": "fr",
+      "math_pair_attachment_payload_sha256": "80ad1bd42bda48f08747fc27ddcb533490a6be7479d35e0016f5825531efda52",
+      "math": {
+        "standard": {
+          "request_sha256": "d81075d53d7de49929916a3eed94f84d484d3ddcb98af525195526bc31325292",
+          "proof_sha256": "bb8b4388d264b6afc9741f74d93a068afa8896ea6a02f2c88dc5f481ce403b69"
+        },
+        "scientific": {
+          "request_sha256": "aabf415c0ccf7886724ca15cea7beeb940e87d102d81dc899c3b3acb4eeb4965",
+          "proof_sha256": "69cf775f9122530b3a56da94dd47772c74d797cdc8ee3b8d49e9b2338a0e608d"
+        },
+        "algebra": {
+          "request_sha256": "7f8a9e5676104e0a44063d1cf393434f057abb20f10ffd6078a75ae84bc67f7e",
+          "proof_sha256": "93779401957d9fcd143a92612eede7c5608d001a9b75489748384dead384c0dc"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "44a0e76030e067009730d314674ab7e36a8f2397d11c9cc1fe669c645b72a6c6",
+          "proof_sha256": "72ef2f808195d492ea85f7c762e416c317684ba98fc99d483c699db3f63e885a"
+        },
+        "geometry": {
+          "request_sha256": "c6449c369f7d5605f0c6b5249dd8d8821434841fc7fa1f775200cf0744972df9",
+          "proof_sha256": "ab1137ef8bcc7dcd5c0888dcbb17bbefcedb8a98374ed0701bf087fc127db249"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "5147bb7865c18d0e84dbc9cda42270fa1f2d743aa18793a45d012e1196c0677f",
+          "proof_sha256": "bf1c044e6d5c0c5cb9e394328219b37bd629a9e3c7f09b658e73f4d2bdff963b"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "pt-BR",
+      "to": "en",
+      "math_pair_attachment_payload_sha256": "1155597ec63cfdb24ca8462a60148aa3bfa543672cec1d9f50c9b75dd904b173",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "pt-BR",
+      "to": "zh-CN",
+      "math_pair_attachment_payload_sha256": "a0da227f0443dabb3ca1f17da5718a6257db1f716dcd2229c8b8536292b3099d",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "pt-BR",
+      "to": "hi",
+      "math_pair_attachment_payload_sha256": "8734b3d8120d401ecef7592a770ae437bf676d4665ec22eece41b33f94d4bda8",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "pt-BR",
+      "to": "es",
+      "math_pair_attachment_payload_sha256": "d41746b22563ee7c90f2098843f223404be19c2e35c06afb4fb8c02f8e7a0e7c",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "pt-BR",
+      "to": "ar",
+      "math_pair_attachment_payload_sha256": "1b0cdd9cc21e402f0daed9bc0bdc1bd214793c5c92ebbaa0482d85bbad98568a",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "pt-BR",
+      "to": "fr",
+      "math_pair_attachment_payload_sha256": "ec29b418bfbfe03ab7ccfaa6ec3324827f901d616eb6e466afd7cbae064ad647",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "zh-CN",
+      "to": "en",
+      "math_pair_attachment_payload_sha256": "09bc06977c874ebff25867560b45048620a5933b7595b4392025de981b577cb5",
+      "math": {
+        "standard": {
+          "request_sha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proof_sha256": "9008c3a995b30994f6a3d123e6f84d715574e5faeafc4d331afbd8b13d8525bd"
+        },
+        "scientific": {
+          "request_sha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proof_sha256": "e07a6d1c29016269606704a7ebc5d894ec06062065e5b3d963e73f340f620529"
+        },
+        "algebra": {
+          "request_sha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proof_sha256": "e747063fee4d8581b6edab9cf8bef701b79f1be83999ed0d87c2b5685b9f1fdd"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proof_sha256": "f95656406b5dce74a747b16a1c100dc499ef82dd48c11a5c0cd51c37b4a2c1b2"
+        },
+        "geometry": {
+          "request_sha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proof_sha256": "795d6b8274950c78e2932287de52af4708226c447a2e1212a5ad0d92a1de160c"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proof_sha256": "89d50f20ac306d67700e06152c508e2f54a46c64c6848c8af97fa44cd2fba670"
+        },
+        "programmer": {
+          "request_sha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proof_sha256": "b19be9473b828dc43d5380a3ae9ad3b52773fd47058fc73d2ec14d74901598ef"
+        },
+        "converter": {
+          "request_sha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proof_sha256": "8e332c1e74f33f1f7265ff038e23d0ea5b0695d8049cd37be36b222d6d3cebe2"
+        },
+        "date-time": {
+          "request_sha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proof_sha256": "dc3ccd73de145fd999067f49188846e1dc8340680a05e3531f1b9bf0585beace"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "zh-CN",
+      "to": "pt-BR",
+      "math_pair_attachment_payload_sha256": "d00a0277d6445b4151ecddd0d0581a1b2fa9a37b06128c18d84fbaf41a449968",
+      "math": {
+        "standard": {
+          "request_sha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proof_sha256": "9008c3a995b30994f6a3d123e6f84d715574e5faeafc4d331afbd8b13d8525bd"
+        },
+        "scientific": {
+          "request_sha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proof_sha256": "e07a6d1c29016269606704a7ebc5d894ec06062065e5b3d963e73f340f620529"
+        },
+        "algebra": {
+          "request_sha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proof_sha256": "e747063fee4d8581b6edab9cf8bef701b79f1be83999ed0d87c2b5685b9f1fdd"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proof_sha256": "f95656406b5dce74a747b16a1c100dc499ef82dd48c11a5c0cd51c37b4a2c1b2"
+        },
+        "geometry": {
+          "request_sha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proof_sha256": "795d6b8274950c78e2932287de52af4708226c447a2e1212a5ad0d92a1de160c"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proof_sha256": "89d50f20ac306d67700e06152c508e2f54a46c64c6848c8af97fa44cd2fba670"
+        },
+        "programmer": {
+          "request_sha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proof_sha256": "b19be9473b828dc43d5380a3ae9ad3b52773fd47058fc73d2ec14d74901598ef"
+        },
+        "converter": {
+          "request_sha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proof_sha256": "8e332c1e74f33f1f7265ff038e23d0ea5b0695d8049cd37be36b222d6d3cebe2"
+        },
+        "date-time": {
+          "request_sha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proof_sha256": "dc3ccd73de145fd999067f49188846e1dc8340680a05e3531f1b9bf0585beace"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "zh-CN",
+      "to": "hi",
+      "math_pair_attachment_payload_sha256": "16ae86bc2c4166a7351e324616b18a2d27381569ed3e5d3e383769f1400fb860",
+      "math": {
+        "standard": {
+          "request_sha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proof_sha256": "9008c3a995b30994f6a3d123e6f84d715574e5faeafc4d331afbd8b13d8525bd"
+        },
+        "scientific": {
+          "request_sha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proof_sha256": "e07a6d1c29016269606704a7ebc5d894ec06062065e5b3d963e73f340f620529"
+        },
+        "algebra": {
+          "request_sha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proof_sha256": "e747063fee4d8581b6edab9cf8bef701b79f1be83999ed0d87c2b5685b9f1fdd"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proof_sha256": "f95656406b5dce74a747b16a1c100dc499ef82dd48c11a5c0cd51c37b4a2c1b2"
+        },
+        "geometry": {
+          "request_sha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proof_sha256": "795d6b8274950c78e2932287de52af4708226c447a2e1212a5ad0d92a1de160c"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proof_sha256": "89d50f20ac306d67700e06152c508e2f54a46c64c6848c8af97fa44cd2fba670"
+        },
+        "programmer": {
+          "request_sha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proof_sha256": "b19be9473b828dc43d5380a3ae9ad3b52773fd47058fc73d2ec14d74901598ef"
+        },
+        "converter": {
+          "request_sha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proof_sha256": "8e332c1e74f33f1f7265ff038e23d0ea5b0695d8049cd37be36b222d6d3cebe2"
+        },
+        "date-time": {
+          "request_sha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proof_sha256": "dc3ccd73de145fd999067f49188846e1dc8340680a05e3531f1b9bf0585beace"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "zh-CN",
+      "to": "es",
+      "math_pair_attachment_payload_sha256": "8eb006e7f63231ef07900b5f7cc6e6b66ad8fe4b0d8eb74d6bee8ccb634caa02",
+      "math": {
+        "standard": {
+          "request_sha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proof_sha256": "9008c3a995b30994f6a3d123e6f84d715574e5faeafc4d331afbd8b13d8525bd"
+        },
+        "scientific": {
+          "request_sha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proof_sha256": "e07a6d1c29016269606704a7ebc5d894ec06062065e5b3d963e73f340f620529"
+        },
+        "algebra": {
+          "request_sha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proof_sha256": "e747063fee4d8581b6edab9cf8bef701b79f1be83999ed0d87c2b5685b9f1fdd"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proof_sha256": "f95656406b5dce74a747b16a1c100dc499ef82dd48c11a5c0cd51c37b4a2c1b2"
+        },
+        "geometry": {
+          "request_sha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proof_sha256": "795d6b8274950c78e2932287de52af4708226c447a2e1212a5ad0d92a1de160c"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proof_sha256": "89d50f20ac306d67700e06152c508e2f54a46c64c6848c8af97fa44cd2fba670"
+        },
+        "programmer": {
+          "request_sha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proof_sha256": "b19be9473b828dc43d5380a3ae9ad3b52773fd47058fc73d2ec14d74901598ef"
+        },
+        "converter": {
+          "request_sha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proof_sha256": "8e332c1e74f33f1f7265ff038e23d0ea5b0695d8049cd37be36b222d6d3cebe2"
+        },
+        "date-time": {
+          "request_sha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proof_sha256": "dc3ccd73de145fd999067f49188846e1dc8340680a05e3531f1b9bf0585beace"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "zh-CN",
+      "to": "ar",
+      "math_pair_attachment_payload_sha256": "837c1482bb6342e3294e3fe1f4052273c5572b9eed3c955d41ba0dcc4d7e6e37",
+      "math": {
+        "standard": {
+          "request_sha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proof_sha256": "9008c3a995b30994f6a3d123e6f84d715574e5faeafc4d331afbd8b13d8525bd"
+        },
+        "scientific": {
+          "request_sha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proof_sha256": "e07a6d1c29016269606704a7ebc5d894ec06062065e5b3d963e73f340f620529"
+        },
+        "algebra": {
+          "request_sha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proof_sha256": "e747063fee4d8581b6edab9cf8bef701b79f1be83999ed0d87c2b5685b9f1fdd"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proof_sha256": "f95656406b5dce74a747b16a1c100dc499ef82dd48c11a5c0cd51c37b4a2c1b2"
+        },
+        "geometry": {
+          "request_sha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proof_sha256": "795d6b8274950c78e2932287de52af4708226c447a2e1212a5ad0d92a1de160c"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proof_sha256": "89d50f20ac306d67700e06152c508e2f54a46c64c6848c8af97fa44cd2fba670"
+        },
+        "programmer": {
+          "request_sha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proof_sha256": "b19be9473b828dc43d5380a3ae9ad3b52773fd47058fc73d2ec14d74901598ef"
+        },
+        "converter": {
+          "request_sha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proof_sha256": "8e332c1e74f33f1f7265ff038e23d0ea5b0695d8049cd37be36b222d6d3cebe2"
+        },
+        "date-time": {
+          "request_sha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proof_sha256": "dc3ccd73de145fd999067f49188846e1dc8340680a05e3531f1b9bf0585beace"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "zh-CN",
+      "to": "fr",
+      "math_pair_attachment_payload_sha256": "33e728bf9c190dadbecb54149d5e8ef152573e458fec3e512f148708758360ef",
+      "math": {
+        "standard": {
+          "request_sha256": "4aa2b02d2219de40c7febc7d48981786fe85255052fb8a93b47b7eee2a327f6c",
+          "proof_sha256": "9008c3a995b30994f6a3d123e6f84d715574e5faeafc4d331afbd8b13d8525bd"
+        },
+        "scientific": {
+          "request_sha256": "1df2ff7cb409e81444fe1751b9d64436aea2a75f165532b8fd07dde72101d652",
+          "proof_sha256": "e07a6d1c29016269606704a7ebc5d894ec06062065e5b3d963e73f340f620529"
+        },
+        "algebra": {
+          "request_sha256": "820870dcaa712cdb25343cfda17666d0b5c7855654afab6b4066d0f2143a0da0",
+          "proof_sha256": "e747063fee4d8581b6edab9cf8bef701b79f1be83999ed0d87c2b5685b9f1fdd"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "2e7b3e6baeb47a8d5e1a3c4415558ecf87565298c96defe6d0626134fcf1e162",
+          "proof_sha256": "f95656406b5dce74a747b16a1c100dc499ef82dd48c11a5c0cd51c37b4a2c1b2"
+        },
+        "geometry": {
+          "request_sha256": "0cb14edb29f966344d1468fb4ee8073a4410e44a023fb64008f8f3d10858f97e",
+          "proof_sha256": "795d6b8274950c78e2932287de52af4708226c447a2e1212a5ad0d92a1de160c"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "472af6ca2a044cb3bdc75d5909454fd69b7bc52ec1991848323b9b25996fbc17",
+          "proof_sha256": "89d50f20ac306d67700e06152c508e2f54a46c64c6848c8af97fa44cd2fba670"
+        },
+        "programmer": {
+          "request_sha256": "ae70bd80b0b5e1105a713c671663592d4de150f62e42dcc7ee933c66ce1e993a",
+          "proof_sha256": "b19be9473b828dc43d5380a3ae9ad3b52773fd47058fc73d2ec14d74901598ef"
+        },
+        "converter": {
+          "request_sha256": "1f41808fe855e8cf85f7b80465c31e4f57b79dd13a6e9eedaa5e3f34fd27776a",
+          "proof_sha256": "8e332c1e74f33f1f7265ff038e23d0ea5b0695d8049cd37be36b222d6d3cebe2"
+        },
+        "date-time": {
+          "request_sha256": "35c53901a566ef7961f59afeec6f72025c9ced89fbd1b1e6fc867a352f5272e3",
+          "proof_sha256": "dc3ccd73de145fd999067f49188846e1dc8340680a05e3531f1b9bf0585beace"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "hi",
+      "to": "en",
+      "math_pair_attachment_payload_sha256": "00063f4a4242a91b255ae184249d2465308be2b80b4daade59180f0cba94a3f6",
+      "math": {
+        "standard": {
+          "request_sha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proof_sha256": "08345cb06591719273713e228d4f78bbc717d995c2e9a1a434552a3fc6cc66fe"
+        },
+        "scientific": {
+          "request_sha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proof_sha256": "ef930112b89b97ec756e8ed8282f6ca8ef808c996d3986c135a0a64bdce0a869"
+        },
+        "algebra": {
+          "request_sha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proof_sha256": "11d97d123066be773d57b8f785615439f3de7a40cb753712245f0097cfa28db1"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proof_sha256": "91bc25f1036409db16feed70b3e5ee6103e9acac2d4fc317fc3633bb763b127c"
+        },
+        "geometry": {
+          "request_sha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proof_sha256": "701cf8e2869e36adc7a6b145912a0c32540b44d9c5d20a1f7a5611c7dca6a413"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proof_sha256": "5e77c748a0dcfee320e7408561a5fd4cb714b341d7b65b4442d9db05f2ea3307"
+        },
+        "programmer": {
+          "request_sha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proof_sha256": "6bf119201f59bf37e8c6b36f29468a26dd59ac71cddf62296af04dd6a2e19cf3"
+        },
+        "converter": {
+          "request_sha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proof_sha256": "2ae946e507642eec8a96da0f232d005c5812c8dff9bc766fde07f3e1a7c439a8"
+        },
+        "date-time": {
+          "request_sha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proof_sha256": "c45b1c78b2fbf1c59253b02ecc79704e0dfd53fe3af91678bf9ee4512577a574"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "hi",
+      "to": "pt-BR",
+      "math_pair_attachment_payload_sha256": "cc5e9b0738ef8f0b13e0c8b31b85374072d72a62d0ad81abdc681cd4afedbf4d",
+      "math": {
+        "standard": {
+          "request_sha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proof_sha256": "08345cb06591719273713e228d4f78bbc717d995c2e9a1a434552a3fc6cc66fe"
+        },
+        "scientific": {
+          "request_sha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proof_sha256": "ef930112b89b97ec756e8ed8282f6ca8ef808c996d3986c135a0a64bdce0a869"
+        },
+        "algebra": {
+          "request_sha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proof_sha256": "11d97d123066be773d57b8f785615439f3de7a40cb753712245f0097cfa28db1"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proof_sha256": "91bc25f1036409db16feed70b3e5ee6103e9acac2d4fc317fc3633bb763b127c"
+        },
+        "geometry": {
+          "request_sha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proof_sha256": "701cf8e2869e36adc7a6b145912a0c32540b44d9c5d20a1f7a5611c7dca6a413"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proof_sha256": "5e77c748a0dcfee320e7408561a5fd4cb714b341d7b65b4442d9db05f2ea3307"
+        },
+        "programmer": {
+          "request_sha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proof_sha256": "6bf119201f59bf37e8c6b36f29468a26dd59ac71cddf62296af04dd6a2e19cf3"
+        },
+        "converter": {
+          "request_sha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proof_sha256": "2ae946e507642eec8a96da0f232d005c5812c8dff9bc766fde07f3e1a7c439a8"
+        },
+        "date-time": {
+          "request_sha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proof_sha256": "c45b1c78b2fbf1c59253b02ecc79704e0dfd53fe3af91678bf9ee4512577a574"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "hi",
+      "to": "zh-CN",
+      "math_pair_attachment_payload_sha256": "b1955f217d011d837a847b981ddbd083af725cd37ad765bd2e14ec3a1833867e",
+      "math": {
+        "standard": {
+          "request_sha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proof_sha256": "08345cb06591719273713e228d4f78bbc717d995c2e9a1a434552a3fc6cc66fe"
+        },
+        "scientific": {
+          "request_sha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proof_sha256": "ef930112b89b97ec756e8ed8282f6ca8ef808c996d3986c135a0a64bdce0a869"
+        },
+        "algebra": {
+          "request_sha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proof_sha256": "11d97d123066be773d57b8f785615439f3de7a40cb753712245f0097cfa28db1"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proof_sha256": "91bc25f1036409db16feed70b3e5ee6103e9acac2d4fc317fc3633bb763b127c"
+        },
+        "geometry": {
+          "request_sha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proof_sha256": "701cf8e2869e36adc7a6b145912a0c32540b44d9c5d20a1f7a5611c7dca6a413"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proof_sha256": "5e77c748a0dcfee320e7408561a5fd4cb714b341d7b65b4442d9db05f2ea3307"
+        },
+        "programmer": {
+          "request_sha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proof_sha256": "6bf119201f59bf37e8c6b36f29468a26dd59ac71cddf62296af04dd6a2e19cf3"
+        },
+        "converter": {
+          "request_sha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proof_sha256": "2ae946e507642eec8a96da0f232d005c5812c8dff9bc766fde07f3e1a7c439a8"
+        },
+        "date-time": {
+          "request_sha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proof_sha256": "c45b1c78b2fbf1c59253b02ecc79704e0dfd53fe3af91678bf9ee4512577a574"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "hi",
+      "to": "es",
+      "math_pair_attachment_payload_sha256": "636526b5a5464dfda6fa81f7f9e43e0d81650131fc97331f31be3f7045b23f4c",
+      "math": {
+        "standard": {
+          "request_sha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proof_sha256": "08345cb06591719273713e228d4f78bbc717d995c2e9a1a434552a3fc6cc66fe"
+        },
+        "scientific": {
+          "request_sha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proof_sha256": "ef930112b89b97ec756e8ed8282f6ca8ef808c996d3986c135a0a64bdce0a869"
+        },
+        "algebra": {
+          "request_sha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proof_sha256": "11d97d123066be773d57b8f785615439f3de7a40cb753712245f0097cfa28db1"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proof_sha256": "91bc25f1036409db16feed70b3e5ee6103e9acac2d4fc317fc3633bb763b127c"
+        },
+        "geometry": {
+          "request_sha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proof_sha256": "701cf8e2869e36adc7a6b145912a0c32540b44d9c5d20a1f7a5611c7dca6a413"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proof_sha256": "5e77c748a0dcfee320e7408561a5fd4cb714b341d7b65b4442d9db05f2ea3307"
+        },
+        "programmer": {
+          "request_sha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proof_sha256": "6bf119201f59bf37e8c6b36f29468a26dd59ac71cddf62296af04dd6a2e19cf3"
+        },
+        "converter": {
+          "request_sha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proof_sha256": "2ae946e507642eec8a96da0f232d005c5812c8dff9bc766fde07f3e1a7c439a8"
+        },
+        "date-time": {
+          "request_sha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proof_sha256": "c45b1c78b2fbf1c59253b02ecc79704e0dfd53fe3af91678bf9ee4512577a574"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "hi",
+      "to": "ar",
+      "math_pair_attachment_payload_sha256": "33eb840bae059fa40ce2b1906895d5723abd90a0e9e7527d77db82b0cdfd3b02",
+      "math": {
+        "standard": {
+          "request_sha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proof_sha256": "08345cb06591719273713e228d4f78bbc717d995c2e9a1a434552a3fc6cc66fe"
+        },
+        "scientific": {
+          "request_sha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proof_sha256": "ef930112b89b97ec756e8ed8282f6ca8ef808c996d3986c135a0a64bdce0a869"
+        },
+        "algebra": {
+          "request_sha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proof_sha256": "11d97d123066be773d57b8f785615439f3de7a40cb753712245f0097cfa28db1"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proof_sha256": "91bc25f1036409db16feed70b3e5ee6103e9acac2d4fc317fc3633bb763b127c"
+        },
+        "geometry": {
+          "request_sha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proof_sha256": "701cf8e2869e36adc7a6b145912a0c32540b44d9c5d20a1f7a5611c7dca6a413"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proof_sha256": "5e77c748a0dcfee320e7408561a5fd4cb714b341d7b65b4442d9db05f2ea3307"
+        },
+        "programmer": {
+          "request_sha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proof_sha256": "6bf119201f59bf37e8c6b36f29468a26dd59ac71cddf62296af04dd6a2e19cf3"
+        },
+        "converter": {
+          "request_sha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proof_sha256": "2ae946e507642eec8a96da0f232d005c5812c8dff9bc766fde07f3e1a7c439a8"
+        },
+        "date-time": {
+          "request_sha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proof_sha256": "c45b1c78b2fbf1c59253b02ecc79704e0dfd53fe3af91678bf9ee4512577a574"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "hi",
+      "to": "fr",
+      "math_pair_attachment_payload_sha256": "e7937e863659baccdc1c0fb3c023e45f194e7ed41ff4c07452d0235ff108ced0",
+      "math": {
+        "standard": {
+          "request_sha256": "c1b565cb62d81941446bd9f786859fe6c7bb97ec0eec8d9aa5b705c2a89b35cb",
+          "proof_sha256": "08345cb06591719273713e228d4f78bbc717d995c2e9a1a434552a3fc6cc66fe"
+        },
+        "scientific": {
+          "request_sha256": "2dfee34415cc40f44962d6f58b3d6cc839dfb41e0d2bddc016354a76c1eed1e1",
+          "proof_sha256": "ef930112b89b97ec756e8ed8282f6ca8ef808c996d3986c135a0a64bdce0a869"
+        },
+        "algebra": {
+          "request_sha256": "6214e3d743557e27461e2809f647926e43c400eca813a0a49f536575442f9fb5",
+          "proof_sha256": "11d97d123066be773d57b8f785615439f3de7a40cb753712245f0097cfa28db1"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "eb55e9ea45df3379f23d2a9b84d5767ce8a112338803e52891f832d844f09eb2",
+          "proof_sha256": "91bc25f1036409db16feed70b3e5ee6103e9acac2d4fc317fc3633bb763b127c"
+        },
+        "geometry": {
+          "request_sha256": "9972d0d681de7f964d3e52d3f521b7965dda56fc8f0e726cb3c732a8278662d3",
+          "proof_sha256": "701cf8e2869e36adc7a6b145912a0c32540b44d9c5d20a1f7a5611c7dca6a413"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "bdd2841723d0b9261920ade569355aa2bbccf48357f8257f60b24a7b9bd9f3e1",
+          "proof_sha256": "5e77c748a0dcfee320e7408561a5fd4cb714b341d7b65b4442d9db05f2ea3307"
+        },
+        "programmer": {
+          "request_sha256": "405886c168fd90fcd405365361bbe9f7f64c0ffd4a19a839c9ac28c36ff9ed52",
+          "proof_sha256": "6bf119201f59bf37e8c6b36f29468a26dd59ac71cddf62296af04dd6a2e19cf3"
+        },
+        "converter": {
+          "request_sha256": "d1ddaaa6804c0b59a41d876bc4818c71cd7b7887a8d620480a66d2c4ea5daa0c",
+          "proof_sha256": "2ae946e507642eec8a96da0f232d005c5812c8dff9bc766fde07f3e1a7c439a8"
+        },
+        "date-time": {
+          "request_sha256": "dd58e81f2134502351a2e8dee11deeefb35a3adfa434861e4b60aa6a862c00b2",
+          "proof_sha256": "c45b1c78b2fbf1c59253b02ecc79704e0dfd53fe3af91678bf9ee4512577a574"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "es",
+      "to": "en",
+      "math_pair_attachment_payload_sha256": "551ed8b375a311883403b7fb6a33a867486eb8d5384ac50a125d91f89950b041",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "es",
+      "to": "pt-BR",
+      "math_pair_attachment_payload_sha256": "4117f92461a8883524cc9b728c49986384e7981690d1adc820a2dc6842d39e78",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "es",
+      "to": "zh-CN",
+      "math_pair_attachment_payload_sha256": "1ef26c9ff7832a79e42663c44b23dccfbdc621ab383b798b0284b81d45db4793",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "es",
+      "to": "hi",
+      "math_pair_attachment_payload_sha256": "be2731f3186462401c6114d30f79f6dff2b9a62128ca08be716a5ce30ac37ee6",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "es",
+      "to": "ar",
+      "math_pair_attachment_payload_sha256": "d8b21f418bf32595e37fb39b64a98da2a9e6f76381ca5baef65ae913985abc45",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "es",
+      "to": "fr",
+      "math_pair_attachment_payload_sha256": "a36e6b1e756866c36d90f64d04c33d6f5dcb3c1db41a9c9dce9614efd25f3085",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "ar",
+      "to": "en",
+      "math_pair_attachment_payload_sha256": "5e019bc756652834d77acbd4aef33e5b05ea7b515a59bc197f9d6068397ac78d",
+      "math": {
+        "standard": {
+          "request_sha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proof_sha256": "8289bc0854919e4b21ea0665e105e42f86e3dccdc69c69532c654b1605a4667f"
+        },
+        "scientific": {
+          "request_sha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proof_sha256": "4bdac6beba0840e8125f690eff082ed6a5bac18e720638384b40a28a543eb9b2"
+        },
+        "algebra": {
+          "request_sha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proof_sha256": "d3c55096355d8cc63c923083f6ddc2f46e02a73294359c50714b4b28961e2bd6"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proof_sha256": "45abf9adc7824868ff76a43e6ce9d9e0375b9a33874c51775e16d5ba4021145c"
+        },
+        "geometry": {
+          "request_sha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proof_sha256": "93b95ba198d32b23a57059b6178d92540f7c457b06385659850b0e879457983f"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proof_sha256": "c259bd4d2ca5258e6b5c0a5ebd0a5115c188f1e55961827a46d31ef90283e3dc"
+        },
+        "programmer": {
+          "request_sha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proof_sha256": "5224c41e62834753cb81da0e551fdae0e7e919c9e99fc51ecfd67d37c67dbfcb"
+        },
+        "converter": {
+          "request_sha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proof_sha256": "6070f2944cde9e2699434ff9270fc0c895b49abb991564cd50757c594b191d00"
+        },
+        "date-time": {
+          "request_sha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proof_sha256": "02a3dd5f87c57738671013a756f3b398acff8dff661c0cd480b045171fbd182a"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "ar",
+      "to": "pt-BR",
+      "math_pair_attachment_payload_sha256": "cc96be6f744427d81ff6c5347922e7e017d7f97b43f8dd7a040be23ea7714cf6",
+      "math": {
+        "standard": {
+          "request_sha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proof_sha256": "8289bc0854919e4b21ea0665e105e42f86e3dccdc69c69532c654b1605a4667f"
+        },
+        "scientific": {
+          "request_sha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proof_sha256": "4bdac6beba0840e8125f690eff082ed6a5bac18e720638384b40a28a543eb9b2"
+        },
+        "algebra": {
+          "request_sha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proof_sha256": "d3c55096355d8cc63c923083f6ddc2f46e02a73294359c50714b4b28961e2bd6"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proof_sha256": "45abf9adc7824868ff76a43e6ce9d9e0375b9a33874c51775e16d5ba4021145c"
+        },
+        "geometry": {
+          "request_sha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proof_sha256": "93b95ba198d32b23a57059b6178d92540f7c457b06385659850b0e879457983f"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proof_sha256": "c259bd4d2ca5258e6b5c0a5ebd0a5115c188f1e55961827a46d31ef90283e3dc"
+        },
+        "programmer": {
+          "request_sha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proof_sha256": "5224c41e62834753cb81da0e551fdae0e7e919c9e99fc51ecfd67d37c67dbfcb"
+        },
+        "converter": {
+          "request_sha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proof_sha256": "6070f2944cde9e2699434ff9270fc0c895b49abb991564cd50757c594b191d00"
+        },
+        "date-time": {
+          "request_sha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proof_sha256": "02a3dd5f87c57738671013a756f3b398acff8dff661c0cd480b045171fbd182a"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "ar",
+      "to": "zh-CN",
+      "math_pair_attachment_payload_sha256": "e2ebc4a0031a860ebc84789551c431df0042eb915afe88cb1ed88232a463ea24",
+      "math": {
+        "standard": {
+          "request_sha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proof_sha256": "8289bc0854919e4b21ea0665e105e42f86e3dccdc69c69532c654b1605a4667f"
+        },
+        "scientific": {
+          "request_sha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proof_sha256": "4bdac6beba0840e8125f690eff082ed6a5bac18e720638384b40a28a543eb9b2"
+        },
+        "algebra": {
+          "request_sha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proof_sha256": "d3c55096355d8cc63c923083f6ddc2f46e02a73294359c50714b4b28961e2bd6"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proof_sha256": "45abf9adc7824868ff76a43e6ce9d9e0375b9a33874c51775e16d5ba4021145c"
+        },
+        "geometry": {
+          "request_sha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proof_sha256": "93b95ba198d32b23a57059b6178d92540f7c457b06385659850b0e879457983f"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proof_sha256": "c259bd4d2ca5258e6b5c0a5ebd0a5115c188f1e55961827a46d31ef90283e3dc"
+        },
+        "programmer": {
+          "request_sha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proof_sha256": "5224c41e62834753cb81da0e551fdae0e7e919c9e99fc51ecfd67d37c67dbfcb"
+        },
+        "converter": {
+          "request_sha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proof_sha256": "6070f2944cde9e2699434ff9270fc0c895b49abb991564cd50757c594b191d00"
+        },
+        "date-time": {
+          "request_sha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proof_sha256": "02a3dd5f87c57738671013a756f3b398acff8dff661c0cd480b045171fbd182a"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "ar",
+      "to": "hi",
+      "math_pair_attachment_payload_sha256": "32682237066a9971158f4c4b7ece0236e6f20c241580d00ea70f65cdd05ea6ed",
+      "math": {
+        "standard": {
+          "request_sha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proof_sha256": "8289bc0854919e4b21ea0665e105e42f86e3dccdc69c69532c654b1605a4667f"
+        },
+        "scientific": {
+          "request_sha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proof_sha256": "4bdac6beba0840e8125f690eff082ed6a5bac18e720638384b40a28a543eb9b2"
+        },
+        "algebra": {
+          "request_sha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proof_sha256": "d3c55096355d8cc63c923083f6ddc2f46e02a73294359c50714b4b28961e2bd6"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proof_sha256": "45abf9adc7824868ff76a43e6ce9d9e0375b9a33874c51775e16d5ba4021145c"
+        },
+        "geometry": {
+          "request_sha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proof_sha256": "93b95ba198d32b23a57059b6178d92540f7c457b06385659850b0e879457983f"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proof_sha256": "c259bd4d2ca5258e6b5c0a5ebd0a5115c188f1e55961827a46d31ef90283e3dc"
+        },
+        "programmer": {
+          "request_sha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proof_sha256": "5224c41e62834753cb81da0e551fdae0e7e919c9e99fc51ecfd67d37c67dbfcb"
+        },
+        "converter": {
+          "request_sha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proof_sha256": "6070f2944cde9e2699434ff9270fc0c895b49abb991564cd50757c594b191d00"
+        },
+        "date-time": {
+          "request_sha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proof_sha256": "02a3dd5f87c57738671013a756f3b398acff8dff661c0cd480b045171fbd182a"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "ar",
+      "to": "es",
+      "math_pair_attachment_payload_sha256": "0dc3fe8634581b71932c0c7da96b1ed78856c8bddce1b83115292968f6c7f310",
+      "math": {
+        "standard": {
+          "request_sha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proof_sha256": "8289bc0854919e4b21ea0665e105e42f86e3dccdc69c69532c654b1605a4667f"
+        },
+        "scientific": {
+          "request_sha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proof_sha256": "4bdac6beba0840e8125f690eff082ed6a5bac18e720638384b40a28a543eb9b2"
+        },
+        "algebra": {
+          "request_sha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proof_sha256": "d3c55096355d8cc63c923083f6ddc2f46e02a73294359c50714b4b28961e2bd6"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proof_sha256": "45abf9adc7824868ff76a43e6ce9d9e0375b9a33874c51775e16d5ba4021145c"
+        },
+        "geometry": {
+          "request_sha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proof_sha256": "93b95ba198d32b23a57059b6178d92540f7c457b06385659850b0e879457983f"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proof_sha256": "c259bd4d2ca5258e6b5c0a5ebd0a5115c188f1e55961827a46d31ef90283e3dc"
+        },
+        "programmer": {
+          "request_sha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proof_sha256": "5224c41e62834753cb81da0e551fdae0e7e919c9e99fc51ecfd67d37c67dbfcb"
+        },
+        "converter": {
+          "request_sha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proof_sha256": "6070f2944cde9e2699434ff9270fc0c895b49abb991564cd50757c594b191d00"
+        },
+        "date-time": {
+          "request_sha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proof_sha256": "02a3dd5f87c57738671013a756f3b398acff8dff661c0cd480b045171fbd182a"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "ar",
+      "to": "fr",
+      "math_pair_attachment_payload_sha256": "e0cb071d98e07e68201fd2bb68b5d537238ecb4347da96a6d5092bf3562a4605",
+      "math": {
+        "standard": {
+          "request_sha256": "dbe1a553ee6b2d47b8a2a96ad14fc2313aed81dea70f03ee93d28b383cb9bb44",
+          "proof_sha256": "8289bc0854919e4b21ea0665e105e42f86e3dccdc69c69532c654b1605a4667f"
+        },
+        "scientific": {
+          "request_sha256": "0e31bdb18921a155a80893be9a1a9c8874158b86613acbb83dbd1c64804212e8",
+          "proof_sha256": "4bdac6beba0840e8125f690eff082ed6a5bac18e720638384b40a28a543eb9b2"
+        },
+        "algebra": {
+          "request_sha256": "b22d176683376592d60c2b5338337e0794a64cec32754c356e4f53f0cb3d494a",
+          "proof_sha256": "d3c55096355d8cc63c923083f6ddc2f46e02a73294359c50714b4b28961e2bd6"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "e83a85a4e7a1fdd8a6bb71f192c0072293da85ef41a9e5c0c068e6bc23ab972a",
+          "proof_sha256": "45abf9adc7824868ff76a43e6ce9d9e0375b9a33874c51775e16d5ba4021145c"
+        },
+        "geometry": {
+          "request_sha256": "2e6796bc4d0efde73bdbb5acc1a27b663cac977476d997853f0aabb799559dd9",
+          "proof_sha256": "93b95ba198d32b23a57059b6178d92540f7c457b06385659850b0e879457983f"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "c01280394e5c417ee4f0a3027f8348ac1f35636e99332d77a6e10489c5a23565",
+          "proof_sha256": "c259bd4d2ca5258e6b5c0a5ebd0a5115c188f1e55961827a46d31ef90283e3dc"
+        },
+        "programmer": {
+          "request_sha256": "bd9119cee7da2031b6ad745db5cf840de4982f16b9cc07e64d078755ad067793",
+          "proof_sha256": "5224c41e62834753cb81da0e551fdae0e7e919c9e99fc51ecfd67d37c67dbfcb"
+        },
+        "converter": {
+          "request_sha256": "1f6b075b40e30a2e23d29644751330f70a9bba5a8e4aac0073a12d6a4764544b",
+          "proof_sha256": "6070f2944cde9e2699434ff9270fc0c895b49abb991564cd50757c594b191d00"
+        },
+        "date-time": {
+          "request_sha256": "aa0bbced4ccf478cbf3b674039eab2e45dc04ff2dc06b67511a820d232ac59bc",
+          "proof_sha256": "02a3dd5f87c57738671013a756f3b398acff8dff661c0cd480b045171fbd182a"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "fr",
+      "to": "en",
+      "math_pair_attachment_payload_sha256": "9ae052fb84ac71b7b38f0476ed888eb86ea376f865b8ef496e41f0e3f2344e14",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "fr",
+      "to": "pt-BR",
+      "math_pair_attachment_payload_sha256": "8fe84ba8170acbde1d6718ff64419e25882b4a980e8496f9ad5f38e2c76e562a",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "fr",
+      "to": "zh-CN",
+      "math_pair_attachment_payload_sha256": "e6e2cd72a599056ef7930c82ee026b6bd6be34d5dc551f03e980fba1d04168d9",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "fr",
+      "to": "hi",
+      "math_pair_attachment_payload_sha256": "2d385cfc9618473886bac196426f08c958900089eff0107f1b9fe7f3669c6e95",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "fr",
+      "to": "es",
+      "math_pair_attachment_payload_sha256": "9921cadb0b41980dbc398b478d9fcb1b56798d7d5a9c6e777030cb810e60bf09",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    },
+    {
+      "from": "fr",
+      "to": "ar",
+      "math_pair_attachment_payload_sha256": "3b1d34f2d576227fceefa5a4766ab14b97145bce65a38f82a74a06a6742125df",
+      "math": {
+        "standard": {
+          "request_sha256": "c7c1c564ca908dddf7ea02082374a4f9705f1cbe5d8cc31a3b03393db0a67f40",
+          "proof_sha256": "73d79fc97c311e60ff2c4c9a3e3d30f7e6fc90b875d1dd71662b4cd668eddbfa"
+        },
+        "scientific": {
+          "request_sha256": "53aeba89e61c6af8700a68357f58a09afee2f7587b2e4f2d0f5b851d0f9d3306",
+          "proof_sha256": "968ca766ac5e06d43f947cfb4686bcede38056cef24018f1170acba3cebeb892"
+        },
+        "algebra": {
+          "request_sha256": "11298aed5b1a16e10c641855175f653496c5e994d296b2dc56c46178981f795d",
+          "proof_sha256": "18986e37b52fc3d9d69c5c96c303a169f510eedd033a2312b12a83c65b669182"
+        },
+        "calculus": {
+          "request_sha256": "3abf7578e2d5dfdd3ddccad77f69f3ff40d7cdb24a0c1c8ff68cdc798b779355",
+          "proof_sha256": "96bf82b93a47c3549dbf8166e15c3fe56362d9d7252f1ea46613671589795c2d"
+        },
+        "linear-algebra": {
+          "request_sha256": "08247252c17f6815769e9f20e52d483638d76c95cb887924d255d7f728e5f36d",
+          "proof_sha256": "8b2afb4b4a2c0b2ecad3107a0c5d73e9932d15d5df1b653c959c61303069b08a"
+        },
+        "geometry": {
+          "request_sha256": "9c3c0507c52de135bda02f851eda64d376d03fd0661e3f8ea09a68ca7cb11253",
+          "proof_sha256": "f057aa10f2f73c348627e4720f8e0a8a187b836493e387b66d0cf8a0d5c384a7"
+        },
+        "discrete-mathematics": {
+          "request_sha256": "a82b60ac54239c96d77dcb59589f1c5be428879a10d2e9827cae0e4215b4a39f",
+          "proof_sha256": "d0b961d0cfd0ed38b8a7c3d3c06c59525c17d3b90497443d1c73982d6dc8c2fd"
+        },
+        "programmer": {
+          "request_sha256": "be0835ae8f8f70eccbc2179b49036743c0de78fc7d2ef70b23fb112dc6b1de93",
+          "proof_sha256": "ea2cb035942e07ed223c9e01a2caea5e02abf9a7e6a27dcf3132d1c3ec37c9fb"
+        },
+        "converter": {
+          "request_sha256": "ae4a3c17b44f8390e34a1b55ab152da6b0af23ef00b947e9a714a8253e4be5a4",
+          "proof_sha256": "7f841260d47003c088428db1aa42ae3f44dc8931f827707eccba36ac6baef916"
+        },
+        "date-time": {
+          "request_sha256": "b1f85d828d8b99df7d17206ece0c69451756afc3e11ea04fc6ee725c8e90b951",
+          "proof_sha256": "17753fa5f3440c5e768d83ac27e6695ce79af030da1382af2fe82c046d0de13c"
+        }
+      },
+      "finance": [
+        "financial",
+        "investment",
+        "loans",
+        "tax",
+        "business"
+      ]
+    }
+  ],
+  "math_lifecycle": [
+    {
+      "title": "language changes before first evaluation and during a held real request preserve Scientific notation and portable proof",
+      "status": "passed",
+      "duration_ms": 1400
+    },
+    {
+      "title": "an explicitly suspended Scientific draft survives language changes, preference reset and warm offline catalogs",
+      "status": "passed",
+      "duration_ms": 2722
+    },
+    {
+      "title": "incomplete notation and an ambiguous civil time remain explicit errors across language changes",
+      "status": "passed",
+      "duration_ms": 1268
+    },
+    {
+      "title": "independently edited currency amount retains the rate notation, dates and unmodified source text",
+      "status": "passed",
+      "duration_ms": 1369
+    },
+    {
+      "title": "numeric set members and working-calendar dates preserve their grammar while malformed names remain invalid",
+      "status": "passed",
+      "duration_ms": 1659
+    }
+  ]
+}
