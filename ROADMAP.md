@@ -24,3 +24,5 @@ The 0.4.0 Finance and Business candidate passed its delivery checks. An independ
 ## Windows memory follow-up
 
 Every authorized objective from 03 through 08 includes a comparable Windows memory check. The target of less than 100 MB of incremental RAM in visible basic desktop mode remains open after the 0.4.1 paired checks. The pre-1.0 audit will investigate the increase in private commit observed across repeated cycles and document its disposition before stable release. [0.4.1 measurements](evidence/objective-04/revision-01/benchmarks.json) · [Investigation protocol](evidence/objective-02/revision-02/memory-debt.md)
+
+The owner approved Objective 04 at 95/100 and authorized the 0.5.0 science, engineering and data review branch. [0.4.1](evidence/objective-04/approval.json)

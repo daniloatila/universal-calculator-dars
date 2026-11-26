@@ -24,3 +24,5 @@ A candidata 0.4.0 de Finanças e Negócios passou nas verificações da entrega.
 ## Acompanhamento de memória no Windows
 
 Cada objetivo autorizado de 03 a 08 inclui uma verificação comparável de memória no Windows. A meta de menos de 100 MB de RAM incremental no modo básico desktop visível permanece aberta após as medições pareadas da 0.4.1. A auditoria anterior à versão 1.0 investigará o aumento do commit privado observado durante a repetição de ciclos e documentará sua situação antes da release estável. [Medições da 0.4.1](../../evidence/objective-04/revision-01/benchmarks.json) · [Protocolo de investigação](../../evidence/objective-02/revision-02/memory-debt.pt-BR.md)
+
+O proprietário aprovou o Objetivo 04 com 95/100 e autorizou o branch de revisão de ciência, engenharia e dados da versão 0.5.0. [0.4.1](../../evidence/objective-04/approval.json)
