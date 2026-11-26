@@ -383,15 +383,56 @@ test('Data Lab retires pending work when Adaptive lowers its budget and accepts 
   }) });
 });
 
-test('Data Lab suspension, switching, in-flight language changes and offline replay release workers and preserve canonical values', async ({ page, context }, info) => {
+test('Data Lab suspension, switching, in-flight language changes and offline replay release workers and preserve canonical values', async ({ page, context, baseURL }, info) => {
   const worker = await watchWorkers(page, true);
+  // Make the first, uncontrolled visit deterministic. The production worker must recover the
+  // UI chunks already requested before it claimed the page, without warming unrelated tools.
+  await page.addInitScript(() => {
+    if (navigator.serviceWorker.controller) return;
+    const register = ServiceWorkerContainer.prototype.register;
+    const permit = new Promise<void>(resolve => {
+      window.addEventListener('start-data-test-service-worker', () => resolve(), { once: true });
+    });
+    ServiceWorkerContainer.prototype.register = async function (...args) {
+      await permit;
+      return Reflect.apply(register, this, args);
+    };
+  });
   const outbound = new Set<string>();
   context.on('request', request => {
     const url = new URL(request.url());
-    if (url.protocol.startsWith('http') && url.origin !== 'http://127.0.0.1:4174') outbound.add(url.origin);
+    if (url.protocol.startsWith('http') && url.origin !== new URL(baseURL!).origin) outbound.add(url.origin);
   });
-  await open(page);
+  // Use the real contract bytes, with their completion held across the controller change.
+  let arrived!: () => void, release!: () => void;
+  const requestStarted = new Promise<void>(resolve => { arrived = resolve; });
+  const mayFinish = new Promise<void>(resolve => { release = resolve; });
+  await page.route(/\/assets\/data-lab-contract-[\w-]+\.js$/u, async route => {
+    arrived();
+    await mayFinish;
+    await route.continue();
+  });
+  await page.goto('/');
+  await controls(page, en.operations.modulePicker).selectOption('data-lab');
+  await requestStarted;
+  await expect.poll(() => page.evaluate(() => performance.getEntriesByType('resource')
+    .some(item => /\/assets\/tool-data-lab-/u.test(item.name)))).toBe(true);
+  expect(await page.evaluate(() => navigator.serviceWorker.controller === null)).toBe(true);
+  const earlyAssets = await page.evaluate(() => performance.getEntriesByType('resource').map(item => item.name)
+    .filter(name => /\/assets\/(?:tool-data-lab-|data-lab-contract-)/u.test(name)));
+  expect(earlyAssets.some(url => url.endsWith('.js'))).toBe(true);
+  await page.evaluate(() => window.dispatchEvent(new Event('start-data-test-service-worker')));
   await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
+  release();
+  await expect(run(page)).toBeVisible();
+  const contractUrl = await page.evaluate(() => performance.getEntriesByType('resource')
+    .find(entry => /\/assets\/data-lab-contract-/u.test(entry.name))?.name);
+  expect(contractUrl).toBeDefined();
+  await expect.poll(() => page.evaluate(async urls => {
+    const names = (await caches.keys()).filter(key => key.startsWith('dars-static:'));
+    const keys = (await Promise.all(names.map(async key => (await (await caches.open(key)).keys()).map(r => r.url)))).flat();
+    return urls.every(url => keys.includes(url)) && !keys.some(url => /\/assets\/tool-(?:loans|physics-engineering)-/u.test(url));
+  }, [...earlyAssets, contractUrl!])).toBe(true);
   await input(page, mixed);
   await run(page).click();
   await expect.poll(async () => (await worker()).held).toBe(1);
@@ -444,7 +485,9 @@ test('Data Lab suspension, switching, in-flight language changes and offline rep
   expect([...outbound]).toEqual([]);
   await info.attach('data-revision-offline-lifecycle', { contentType: 'application/json', body: JSON.stringify({
     sourceSha256: sha256(mixed), sourceLocale: proof.expression_locale, offlineNavigationFromServiceWorker: true,
-    workerReleasedOnSuspend: true, workerReleasedOnSwitch: true, originalProofReproduced: true, outbound: [...outbound],
+    workerReleasedOnSuspend: true, workerReleasedOnSwitch: true, originalProofReproduced: true,
+    firstVisitAssetsRecovered: [...earlyAssets,contractUrl!].map(url => new URL(url).pathname.split('/').at(-1)),
+    inFlightAssetRecovered: true, outbound: [...outbound],
   }) });
 });
 

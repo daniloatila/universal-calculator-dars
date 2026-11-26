@@ -53,6 +53,7 @@ const initialUrls = ${JSON.stringify(eagerFiles)}.map((path) => new URL(path, sc
 const localeFiles = ${JSON.stringify(deferredLocales)};
 const deferredUrls = ${JSON.stringify([...deferredAssets])}.map((path) => new URL(path, scope).href);
 const assetUrls = new Set([...initialUrls, ...deferredUrls]);
+const deferredSet = new Set(deferredUrls);
 let offlineMode = caches.open(policyCache).then((cache) => cache.match(offlineKey)).then(Boolean).catch(() => false);
 
 self.addEventListener("install", (event) => {
@@ -95,6 +96,22 @@ self.addEventListener("fetch", (event) => {
 
 self.addEventListener("message", (event) => {
   const message = event.data;
+  if (message?.type === "dars-cache-visited") {
+    if (!event.source?.url?.startsWith(scope) || !Array.isArray(message.urls) || message.urls.length > 128) return;
+    event.waitUntil((async () => {
+      const cache = await caches.open(cacheName);
+      for (const url of new Set(message.urls)) {
+        if (await offlineMode || !self.navigator.onLine) return;
+        if (!deferredSet.has(url) || await cache.match(url, {ignoreVary: true})) continue;
+        try {
+          const request = new Request(url, {mode: "same-origin", credentials: "same-origin", cache: "force-cache", redirect: "error"});
+          const response = await fetch(request);
+          if (response.ok) await cache.put(url, response);
+        } catch { /* Unavailable build assets can be cached on the next online visit. */ }
+      }
+    })());
+    return;
+  }
   if (message?.type === "dars-static-policy" && event.ports[0]) {
     const port = event.ports[0];
     const source = event.source;

@@ -23,6 +23,14 @@ test('A well-formed proposal still needs Rust to validate its mathematical expre
 });
 test('Intelligence is off by default; synthetic financial proposal replays with the real Rust engine and zero external calls',async({page,baseURL},info)=>{
   const requests:string[]=[];
+  // Mathematical replay does not require an installed speech engine.
+  await page.addInitScript(()=>{
+    (window as Window & {voiceQueries?:number}).voiceQueries=0;
+    Object.defineProperty(window,'speechSynthesis',{configurable:true,get(){
+      const observed=window as Window & {voiceQueries?:number};
+      observed.voiceQueries=(observed.voiceQueries??0)+1;return undefined;
+    }});
+  });
   await page.route('**/*',async route=>{
     const url=new URL(route.request().url());
     if(url.origin!==new URL(baseURL!).origin&&url.protocol!=='data:'){requests.push(url.origin);await route.abort();}
@@ -30,6 +38,7 @@ test('Intelligence is off by default; synthetic financial proposal replays with 
   });
   await open(page);await expect(page.getByTestId('intelligence-mode')).toHaveValue('disabled');
   await page.getByTestId('intelligence-example').click();
+  expect(await page.evaluate(()=>(window as Window & {voiceQueries?:number}).voiceQueries)).toBe(0);
   await expect(page.getByTestId('intelligence-run')).toBeDisabled();await calculate(page);
   const result=await page.getByTestId('intelligence-result').textContent();
   expect(result).toContain('11268.25');
@@ -96,6 +105,7 @@ test('A fresh Rust replay survives the 42 directed language transitions',async({
 test('Installed voice availability is observed without capturing or playing audio; invalid images cannot produce a calculation',async({page},info)=>{
   await open(page);const panel=page.getByTestId('intelligence-panel');
   await panel.getByText('Voice and image',{exact:true}).click();
+  await page.getByTestId('intelligence-inspect-voice').click();
   const availability=await page.evaluate(async()=>{
     type SpeechAPI={prototype:object;available?:(o:{langs:string[];processLocally:true})=>Promise<string>};
     const w=window as Window & {SpeechRecognition?:SpeechAPI;webkitSpeechRecognition?:SpeechAPI};

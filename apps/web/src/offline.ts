@@ -6,12 +6,44 @@ export function registerOffline(locale: string) {
   if (!import.meta.env.PROD || !window.isSecureContext || !("serviceWorker" in navigator)) return;
   if (!/^https?:$/.test(window.location.protocol) || window.location.hostname === "tauri.localhost") return;
 
+  const workers = navigator.serviceWorker;
+  // A cold page can finish loading a lazy workspace before its first worker claims the page.
+  // Those requests used the browser cache, so the worker never saw them in a fetch event.
+  const rememberFirstVisit = () => {
+    const assets = new URL('./assets/', window.location.href).href;
+    const claimedAt = performance.now();
+    const reported = new Set<string>();
+    const report = (entries: PerformanceEntry[]) => {
+      const urls: string[] = [];
+      for (const entry of entries) {
+        const url = entry.name;
+        if (reported.size >= 128) break;
+        if (entry.startTime > claimedAt || !url.startsWith(assets) || url.includes('?') || url.includes('#') || reported.has(url)) continue;
+        reported.add(url);
+        urls.push(url);
+      }
+      if (urls.length) workers.controller?.postMessage({ type: 'dars-cache-visited', urls });
+    };
+    // A request started before control may finish later. Observe completions until the page
+    // closes; requests started under control are already handled by the worker's fetch event.
+    if (typeof PerformanceObserver !== 'undefined') {
+      const observer = new PerformanceObserver(list => {
+        report(list.getEntries());
+        if (reported.size >= 128) observer.disconnect();
+      });
+      observer.observe({ entryTypes: ['resource'] });
+      window.addEventListener('pagehide', () => observer.disconnect(), { once: true });
+    }
+    report(performance.getEntriesByType('resource'));
+  };
+  if (!workers.controller) workers.addEventListener('controllerchange', rememberFirstVisit, { once: true });
+
   // Registration failures (for example, disabled site storage) do not affect calculations.
-  void navigator.serviceWorker
+  void workers
     .register(new URL("./dars-worker.js", window.location.href), { updateViaCache: "none" })
     .then(() => navigator.serviceWorker.ready)
     .then(({ active }) => active?.postMessage({ type: "dars-cache-locale", locale }))
-    .catch(() => undefined);
+    .catch(() => workers.removeEventListener('controllerchange', rememberFirstVisit));
 }
 
 export type AssetMode = 'packaged' | 'unavailable' | 'online' | 'offline';

@@ -126,6 +126,8 @@ jobs:
       - name: Browser verification (Linux)
         if: runner.os == 'Linux'
         working-directory: apps/web
+        env:
+          DARS_BROWSER_CHANNEL: chromium
         run: |
           npx --no-install playwright install --with-deps chromium
           npm run test:e2e

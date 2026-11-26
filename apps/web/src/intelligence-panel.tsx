@@ -37,6 +37,8 @@ export function IntelligencePanel({locale,offline,onClose,execute}:Props){
   const [record,setRecord]=useState<ReturnType<typeof resultRecord>>(),[status,setStatus]=useState<Status>('proposal');
   const [note,setNote]=useState<Note>(),[busyState,setBusy]=useState(false),[recognized,setRecognized]=useState('');
   const [hasSpeech,setHasSpeech]=useState(false),[hasVoice,setHasVoice]=useState(false);
+  const [inspectVoice,setInspectVoice]=useState(false);
+  const spoken=useRef(false);
   const active=useRef<AbortController|undefined>(undefined),generation=useRef(0),nativeReady=useRef(Promise.resolve());
   const modeRef=useRef(mode),offlineRef=useRef(offline); modeRef.current=mode;offlineRef.current=offline;
   const closeRef=useRef(onClose);closeRef.current=onClose;
@@ -60,16 +62,19 @@ export function IntelligencePanel({locale,offline,onClose,execute}:Props){
       document.removeEventListener('visibilitychange',hidden);
       active.current?.abort();
       if(native)void command({action:'configure',mode:'disabled',offline:true,generation:nextGeneration()}).catch(()=>{});
-      window.speechSynthesis?.cancel();element?.close();
+      if(spoken.current)window.speechSynthesis?.cancel();
+      element?.close();
     };
   },[native]);
   useLayoutEffect(()=>{configure(modeRef.current,offline);},[offline]); // Invalidate the pending ticket before paint.
   useEffect(()=>{
+    setHasSpeech(false);setHasVoice(false);
+    if(!inspectVoice)return;
     let live=true;const check=()=>{if(live)setHasVoice(Boolean(localVoice(locale)));};
     check();void hasLocalDictation(locale).then(x=>{if(live)setHasSpeech(x);});
     window.speechSynthesis?.addEventListener('voiceschanged',check);
     return ()=>{live=false;window.speechSynthesis?.removeEventListener('voiceschanged',check);};
-  },[locale]);
+  },[locale,inspectVoice]);
 
   function edit(){
     stop();
@@ -221,13 +226,14 @@ export function IntelligencePanel({locale,offline,onClose,execute}:Props){
         const file=e.target.files?.[0];e.target.value='';if(!file)return;edit();setRecognized('');
         void guarded(async signal=>{const text=await readPrintedExpression(file,signal);signal.throwIfAborted();setRecognized(text);});
       }}/></label>
+      {!inspectVoice && <button type="button" data-testid="intelligence-inspect-voice" onClick={()=>setInspectVoice(true)}>{l.inspectVoice}</button>}
       <button type="button" disabled={!hasSpeech||busyState} title={!hasSpeech?l.unavailable:undefined} onClick={()=>{
         void guarded(async signal=>{const text=await dictate(locale,signal);signal.throwIfAborted();setRecognized(text);});
       }}>{l.dictate}</button>
-      {!hasSpeech&&<small>{l.unavailable}</small>}
+      {inspectVoice&&!hasSpeech&&<small>{l.unavailable}</small>}
       <label>{l.recognized}<input data-testid="intelligence-recognized" value={recognized} maxLength={512} onChange={e=>setRecognized(e.target.value)}/></label>
       <button type="button" disabled={!recognized||busyState} onClick={()=>{try {accept(parseProposal(JSON.stringify({schema:1,kind:'calculate',tool:'expression',expression:recognized})),null);}catch{setStatus('failed');setNote('denied');}}}>{l.use}</button>
-      <button type="button" disabled={!hasVoice||!record} onClick={()=>{try{speakLocal(record!.proof.result,locale);}catch{setNote('unavailable');}}}>{l.speak}</button>
+      <button type="button" disabled={!hasVoice||!record} onClick={()=>{try{speakLocal(record!.proof.result,locale);spoken.current=true;}catch{setNote('unavailable');}}}>{l.speak}</button>
       {hasVoice&&<button type="button" onClick={()=>window.speechSynthesis.cancel()}>{l.stop}</button>}
     </details>
   </dialog>;
