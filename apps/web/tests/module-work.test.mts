@@ -100,6 +100,43 @@ class Fleet {
   }
 }
 
+test('scientific batches forward progress without decoding it as a terminal reply, and the watchdog restores admission', async () => {
+  const controller = new AbortController();
+  const work = createModuleWork(controller.signal, { pendingJobs: 1 });
+  const fleet = new Fleet();
+  const observed: number[] = [];
+  const options = { kind: 'batch', timeoutMs: 1000 } as const;
+  const activity = { watchdogMs: 60, update: (progress: { completed: number }) => { observed.push(progress.completed); } };
+  try {
+    const partial = fleet.task('partial');
+    const result = work.submit({ ...partial.descriptor, progress: activity }, options);
+    const active = await partial.started;
+    active.reply({ type: 'progress', completed: 0, total: 8 });
+    active.reply({ type: 'progress', completed: 4, total: 8 });
+    const late = active.capturedReply({ type: 'progress', completed: 7, total: 8 });
+    const next = fleet.task('essential', { reply: 17 });
+    const successor = work.submit(next.descriptor, { kind: 'essential' });
+    assert.deepEqual(await result, { status: 'timed_out' });
+    assert.deepEqual(await successor, { status: 'completed', value: 17 });
+    assert.equal(active.terminations, 1);
+    late();
+    assert.deepEqual(observed, [0, 4]);
+    assert.equal(partial.effects.decodes, 0);
+    assert.equal(fleet.peak, 1);
+
+    const invalid = fleet.task('invalid');
+    const rejected = work.submit({ ...invalid.descriptor, progress: activity }, options);
+    const worker = await invalid.started;
+    worker.reply({ type: 'progress', completed: 2, total: 4 });
+    worker.reply({ type: 'progress', completed: 1, total: 4 });
+    assert.deepEqual(await rejected, { status: 'failed' });
+    assert.equal(worker.terminations, 1);
+    assert.equal(fleet.live.size, 0);
+  } finally {
+    controller.abort();
+  }
+});
+
 test('Ultra Light admits essential, interactive and rendering workers while optional work defers', async () => {
   const controller = new AbortController();
   const queue = createModuleWork(controller.signal, { pendingJobs: 1 });

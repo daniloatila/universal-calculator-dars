@@ -329,6 +329,7 @@ fn value(expression: &Expr, variable: u8, point: &Point, negative: bool) -> Chec
                 Function::Ln if is_negative => Value::Absent,
                 Function::Ln => Value::Infinity(false),
                 Function::Sin | Function::Cos => Value::Absent,
+                Function::Sqrt => return Err(MathError::Unsupported),
             }),
         };
     }

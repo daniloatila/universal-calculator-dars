@@ -1,6 +1,8 @@
 mod ast;
 mod limits;
 mod numeric;
+#[cfg(any(feature = "graph-lab", feature = "optimization"))]
+pub(super) mod numerical_expression;
 mod series;
 mod symbolic;
 

@@ -4,6 +4,8 @@ import type { Locale, Messages } from './i18n';
 import type { ModuleDescriptor, ModuleRuntime } from './module-manager';
 import { financeModules } from './finance-modules';
 import type { FinanceState } from './tool-finance-runtime';
+import { scienceModules } from './science-modules';
+import type { ScienceState } from './science-runtime';
 
 export interface ModuleWorkspaceProps {
   locale: Locale;
@@ -140,4 +142,17 @@ export const primaryModules: readonly RegisteredModule[] = [
       return { activate: (scope) => activateFinance(id, scope) };
     },
   })),
+  ...scienceModules.filter((id) => id !== 'data-lab').map((id) => registerModule<ScienceState>({
+    id,
+    describe: (messages) => messages.science.modules[id],
+    async load() {
+      const { activateScience } = await import('./science-runtime');
+      return { activate: (scope) => activateScience(id, scope) };
+    },
+  })),
+  registerModule({
+    id: 'data-lab',
+    describe: (messages) => messages.science.modules['data-lab'],
+    load: () => import('./tool-data-lab'),
+  }),
 ];

@@ -14,15 +14,17 @@ const executable = executableFlag === -1
   ? fileURLToPath(new URL("../target/release/dars-desktop.exe", import.meta.url))
   : resolve(process.argv[executableFlag + 1]);
 const localeRevision = process.argv.includes("--objective-03-revision-01");
+const scienceReview = process.argv.includes("--objective-05");
 const financeRevision = process.argv.includes("--objective-04-revision-01");
-const financeReview = financeRevision || process.argv.includes("--objective-04");
+const financeReview = scienceReview || financeRevision || process.argv.includes("--objective-04");
 const universalReview = financeReview || localeRevision || process.argv.includes("--objective-03");
 const recoveryRevision = process.argv.includes("--objective-02-revision-02");
 const operationalRevision = recoveryRevision || process.argv.includes("--objective-02-revision");
 const operational = universalReview || operationalRevision || process.argv.includes("--objective-02");
 const revised = operational || process.argv.includes("--revision-01");
 const evidenceRoot = new URL(
-  financeRevision ? "../artifacts/objective-04/revision-01/desktop-regression/"
+  scienceReview ? "../artifacts/objective-05/desktop-regression/"
+    : financeRevision ? "../artifacts/objective-04/revision-01/desktop-regression/"
     : financeReview ? "../artifacts/objective-04/desktop-regression/"
     : localeRevision ? "../artifacts/objective-03/revision-01/desktop-verification/"
     : universalReview ? "../artifacts/objective-03/integrated-platform/desktop-verification/"

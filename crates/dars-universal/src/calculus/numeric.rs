@@ -103,6 +103,7 @@ fn evaluate(expression: &Expr, variable: u8, x: Sample) -> Checked<Sample> {
                 Function::Exp => Sample::new(value.exp(), (value + noise).exp() * noise),
                 Function::Ln if value > noise => Sample::new(value.ln(), noise / (value - noise)),
                 Function::Ln => Err(MathError::NoConvergence),
+                Function::Sqrt => Err(MathError::Unsupported),
             }
         }
     }
@@ -134,6 +135,7 @@ fn shapes<'a>(expression: &'a Expr, found: &mut Vec<Shape<'a>>) {
                     Function::Exp => Some(Shape::Exp(argument)),
                     Function::Ln => Some(Shape::Reciprocal(argument)),
                     Function::Abs => None,
+                    Function::Sqrt => None,
                 };
                 found.extend(shape);
             }

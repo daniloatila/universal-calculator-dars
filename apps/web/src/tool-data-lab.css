@@ -1,0 +1,118 @@
+.data-lab {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+.data-lab h2,
+.data-lab h3,
+.data-lab figure {
+  margin: 0;
+}
+.data-import,
+.data-lab details,
+.data-lab fieldset,
+.data-stat,
+.data-lab figure {
+  border: 1px solid var(--border, #425976);
+  border-radius: 0.65rem;
+  padding: 0.9rem;
+}
+.data-import,
+.data-controls,
+.data-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.75rem;
+}
+.data-heading {
+  align-items: baseline;
+  justify-content: space-between;
+}
+.data-import label,
+.data-controls label,
+.data-stat {
+  display: grid;
+  gap: 0.35rem;
+}
+.data-import label {
+  flex: 1;
+  min-width: 12rem;
+}
+.data-lab input,
+.data-lab select,
+.data-lab textarea {
+  max-width: 100%;
+  font: inherit;
+}
+.data-lab textarea {
+  width: 100%;
+  font-family: monospace;
+  margin: 0.5rem 0;
+}
+.data-lab summary {
+  cursor: pointer;
+}
+.data-lab details[open] > summary {
+  margin-bottom: 1rem;
+}
+.data-lab fieldset {
+  margin: 0.85rem 0 0;
+  min-width: 0;
+}
+.data-lab button,
+.data-lab select {
+  min-height: 2.4rem;
+}
+.data-lab .data-run {
+  background: #235590;
+  color: #fff;
+  border-color: #6595c7;
+}
+.data-scroll {
+  overflow: auto;
+  max-height: 25rem;
+}
+.data-lab table {
+  border-collapse: collapse;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+.data-lab td,
+.data-lab th {
+  padding: 0.48rem 0.65rem;
+  text-align: start;
+  border-bottom: 1px solid var(--border, #425976);
+  overflow-wrap: anywhere;
+  max-width: 24rem;
+}
+.data-lab small {
+  display: block;
+  font-size: 0.78em;
+}
+.data-histogram {
+  margin: 1.4rem 0 0.3rem;
+  display: flex;
+  gap: 3px;
+  height: 6rem;
+  align-items: end;
+  border-bottom: 1px solid currentColor;
+}
+.data-histogram > div {
+  background: #649ad8;
+  flex: 1;
+  position: relative;
+}
+.data-histogram small {
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  text-align: center;
+}
+.data-stat {
+  flex: 1;
+  min-width: 9rem;
+}
+.data-lab input[type='file'] {
+  width: 100%;
+}

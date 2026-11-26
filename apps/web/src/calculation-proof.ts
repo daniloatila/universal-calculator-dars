@@ -7,6 +7,7 @@ export const MAX_FINANCE_COMPARISON_INPUT_BYTES = 18 * 1024;
 const modules = [
   'standard', 'scientific', 'algebra', 'calculus', 'linear-algebra', 'linear_algebra', 'geometry',
   'discrete-mathematics', 'programmer', 'converter', 'date-time', 'financial', 'investment', 'loans', 'tax', 'business',
+  'statistics', 'probability', 'simulation', 'optimization', 'physics-engineering', 'graph-lab', 'data-lab',
 ] as const;
 const exactness = ['exact', 'symbolic', 'approximate'] as const;
 

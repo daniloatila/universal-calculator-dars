@@ -17,6 +17,7 @@ pub(super) enum Function {
     Exp,
     Ln,
     Abs,
+    Sqrt,
 }
 
 impl Function {
@@ -27,6 +28,7 @@ impl Function {
             Self::Exp => "exp",
             Self::Ln => "ln",
             Self::Abs => "abs",
+            Self::Sqrt => "sqrt",
         }
     }
 }
@@ -382,6 +384,8 @@ enum Token {
     Number,
     Var(u8),
     Function(Function),
+    Tangent,
+    Constant(&'static str),
     Add,
     Sub,
     Mul,
@@ -475,7 +479,7 @@ struct Parser<'a> {
 }
 
 impl<'a> Parser<'a> {
-    fn scan(text: &'a str) -> Checked<Self> {
+    fn scan(text: &'a str, extended: bool) -> Checked<Self> {
         if text.len() > 4096 {
             return Err(MathError::Limit);
         }
@@ -502,7 +506,7 @@ impl<'a> Parser<'a> {
                 '^' => Token::Power,
                 '(' => Token::Open,
                 ')' => Token::Close,
-                'x' | 'y' | 'z' => {
+                'x' | 'y' | 'z' if !extended => {
                     Token::Var(variable(&text[start..index]).ok_or(MathError::InvalidInput)?)
                 }
                 letter if letter.is_ascii_alphabetic() => {
@@ -513,14 +517,27 @@ impl<'a> Parser<'a> {
                     {
                         index += 1;
                     }
-                    Token::Function(match &text[start..index] {
-                        "sin" => Function::Sin,
-                        "cos" => Function::Cos,
-                        "exp" => Function::Exp,
-                        "ln" => Function::Ln,
-                        "abs" => Function::Abs,
+                    match &text[start..index] {
+                        "sin" => Token::Function(Function::Sin),
+                        "cos" => Token::Function(Function::Cos),
+                        "exp" => Token::Function(Function::Exp),
+                        "ln" => Token::Function(Function::Ln),
+                        "abs" => Token::Function(Function::Abs),
+                        "sqrt" if extended => Token::Function(Function::Sqrt),
+                        "tan" if extended => Token::Tangent,
+                        "x" if extended => Token::Var(0),
+                        "y" if extended => Token::Var(1),
+                        "z" if extended => Token::Var(2),
+                        "t" if extended => Token::Var(3),
+                        "a" if extended => Token::Var(4),
+                        "b" if extended => Token::Var(5),
+                        "c" if extended => Token::Var(6),
+                        "pi" if extended => {
+                            Token::Constant("3.14159265358979323846264338327950288")
+                        }
+                        "e" if extended => Token::Constant("2.71828182845904523536028747135266249"),
                         _ => return Err(MathError::Unsupported),
-                    })
+                    }
                 }
                 _ => return Err(MathError::InvalidInput),
             };
@@ -556,6 +573,7 @@ impl<'a> Parser<'a> {
         }
         let mut left = match self.take() {
             (Token::Number, text) => Expr::Num(decimal(text)?),
+            (Token::Constant(text), _) => Expr::Num(decimal(text)?),
             (Token::Var(index), _) => Expr::Var(index),
             (Token::Add, _) => self.expression(5, depth + 1)?,
             (Token::Sub, _) => Expr::Mul(vec![num(-1), self.expression(5, depth + 1)?]),
@@ -566,6 +584,17 @@ impl<'a> Parser<'a> {
                 }
                 Expr::Call(function, Box::new(self.parentheses(depth)?))
             }
+            (Token::Tangent, _) => {
+                if !matches!(self.take().0, Token::Open) {
+                    return Err(MathError::InvalidInput);
+                }
+                let argument = self.parentheses(depth)?;
+                Expr::Mul(vec![
+                    Expr::Call(Function::Sin, Box::new(argument.clone())),
+                    Expr::Pow(Box::new(Expr::Call(Function::Cos, Box::new(argument))), -1),
+                ])
+                .bounded()?
+            }
             _ => return Err(MathError::InvalidInput),
         };
         loop {
@@ -575,7 +604,11 @@ impl<'a> Parser<'a> {
                 Token::Mul => (Token::Mul, 3, 4, true),
                 Token::Div => (Token::Div, 3, 4, true),
                 Token::Power => (Token::Power, 7, 7, true),
-                Token::Var(_) | Token::Open | Token::Function(_) => (Token::Mul, 3, 4, false),
+                Token::Var(_)
+                | Token::Open
+                | Token::Function(_)
+                | Token::Tangent
+                | Token::Constant(_) => (Token::Mul, 3, 4, false),
                 _ => break,
             };
             if lower < precedence {
@@ -615,7 +648,16 @@ impl<'a> Parser<'a> {
 }
 
 pub(super) fn parse(text: &str) -> Checked<Expr> {
-    let mut parser = Parser::scan(text)?;
+    parse_mode(text, false)
+}
+
+#[cfg(any(feature = "graph-lab", feature = "optimization"))]
+pub(super) fn parse_numerical(text: &str) -> Checked<Expr> {
+    parse_mode(text, true)
+}
+
+fn parse_mode(text: &str, extended: bool) -> Checked<Expr> {
+    let mut parser = Parser::scan(text, extended)?;
     let expression = parser.expression(0, 0)?;
     if !matches!(parser.peek().0, Token::End) {
         return Err(MathError::InvalidInput);

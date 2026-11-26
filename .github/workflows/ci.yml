@@ -60,6 +60,9 @@ jobs:
           node tests/check-date-time-targets.mjs target/release/dars
           node tests/check-finance-targets.mjs target/release/dars
           node tests/check-finance-comparison-targets.mjs target/release/dars
+          node tests/check-data-targets.mjs target/release/dars
+          node tests/check-science-kernel-targets.mjs target/release/dars
+          node tests/verify-simulation-targets.mjs target/release/dars
           python3 -B crates/dars-core/tests/structured-oracle.py
       - name: Verify advanced mathematics with independent references
         if: runner.os == 'Linux'
@@ -80,6 +83,25 @@ jobs:
           python3 -B tests/verify-investment-business.py target/release/dars
           python3 -B tests/verify-tax.py target/release/dars
           python3 -B tests/verify-finance-comparison.py target/release/dars
+          for suite in statistics probability simulation physics-engineering graph-lab; do
+            "$RUNNER_TEMP/dars-test-math/bin/python" -B "tests/verify-$suite.py" target/release/dars
+          done
+          "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-optimization.py target/release/dars --scipy
+      - name: Measure scientific engine line coverage
+        if: runner.os == 'Linux' && github.ref == 'refs/heads/codex/objective-05-science-engineering-data'
+        run: |
+          rustup component add llvm-tools-preview
+          cargo install cargo-llvm-cov --version 0.9.2 --locked
+          cargo llvm-cov --locked --release --no-report -p dars-universal
+          cargo llvm-cov run --locked --release --no-report -p dars-cli -- -V
+          export LLVM_PROFILE_FILE="$PWD/target/llvm-cov-target/science-%p-%m.profraw"
+          for suite in statistics probability simulation physics-engineering graph-lab; do
+            "$RUNNER_TEMP/dars-test-math/bin/python" -B "tests/verify-$suite.py" target/llvm-cov-target/release/dars
+          done
+          "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-optimization.py target/llvm-cov-target/release/dars --scipy
+          node tests/check-data-targets.mjs target/llvm-cov-target/release/dars
+          cargo llvm-cov report --release --json --summary-only --output-path "$RUNNER_TEMP/dars-science-coverage.json"
+          python3 -B tests/summarize-science-coverage.py "$RUNNER_TEMP/dars-science-coverage.json"
       - name: Measure financial line coverage from tests and independent oracles
         if: runner.os == 'Linux' && github.ref == 'refs/heads/codex/objective-04-finance-and-business'
         run: |
@@ -112,7 +134,7 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           cargo test --locked --release -p dars-desktop --lib -- --include-ignored
       - name: Write provenance for the Windows review executable
-        if: runner.os == 'Windows' && (github.ref == 'refs/heads/codex/objective-03-universal-mathematics' || github.ref == 'refs/heads/codex/objective-04-finance-and-business')
+        if: runner.os == 'Windows' && (github.ref == 'refs/heads/codex/objective-03-universal-mathematics' || github.ref == 'refs/heads/codex/objective-04-finance-and-business' || github.ref == 'refs/heads/codex/objective-05-science-engineering-data')
         run: |
           $review = Join-Path $env:RUNNER_TEMP 'dars-windows-review'
           New-Item -ItemType Directory -Path $review | Out-Null
@@ -120,7 +142,7 @@ jobs:
           $wasm = @(Get-ChildItem apps/web/dist/assets -File -Filter '*.wasm' | Sort-Object Name | ForEach-Object {
             [ordered]@{ name = $_.Name; sha256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant() }
           })
-          $expected = if ($env:GITHUB_REF -eq 'refs/heads/codex/objective-04-finance-and-business') { 15 } else { 10 }
+          $expected = if ($env:GITHUB_REF -eq 'refs/heads/codex/objective-05-science-engineering-data') { 22 } elseif ($env:GITHUB_REF -eq 'refs/heads/codex/objective-04-finance-and-business') { 15 } else { 10 }
           if ($wasm.Count -ne $expected) { throw "Expected $expected packed WASM modules" }
           [ordered]@{
             schema = 1
@@ -143,7 +165,7 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           Copy-Item artifacts/objective-03/revision-01/desktop-verification/windows-x64.json (Join-Path $review 'hosted-windows-ui.json')
       - name: Retain the Windows review executable for one day
-        if: runner.os == 'Windows' && (github.ref == 'refs/heads/codex/objective-03-universal-mathematics' || github.ref == 'refs/heads/codex/objective-04-finance-and-business')
+        if: runner.os == 'Windows' && (github.ref == 'refs/heads/codex/objective-03-universal-mathematics' || github.ref == 'refs/heads/codex/objective-04-finance-and-business' || github.ref == 'refs/heads/codex/objective-05-science-engineering-data')
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: dars-windows-review

@@ -6,6 +6,30 @@ fn main() -> ExitCode {
         eprintln!("Usage: dars \"EXPRESSION\"");
         return ExitCode::from(2);
     };
+    if expression == "dataset" {
+        use std::io::Read;
+        let settings = args.next();
+        if let Some(config) = settings.as_deref().and_then(std::ffi::OsStr::to_str)
+            && args.next().is_none()
+        {
+            let mut bytes = Vec::new();
+            let result = std::io::stdin()
+                .lock()
+                .take(16 * 1024 * 1024 + 1)
+                .read_to_end(&mut bytes);
+            if result.is_err() {
+                return emit(serde_json::json!({"ok":false,"code":"invalid_input"}).to_string());
+            }
+            let proof = dars_universal::data_lab::Dataset::open(&bytes, config)
+                .and_then(|table| table.proof());
+            return emit(
+                proof
+                    .unwrap_or_else(|code| serde_json::json!({"ok":false,"code":code}).to_string()),
+            );
+        }
+        eprintln!("Usage: dars dataset SETTINGS_JSON < source-file");
+        return ExitCode::from(2);
+    }
     if expression == "tool" {
         let request = args.next();
         if let Some(request) = request.as_deref().and_then(std::ffi::OsStr::to_str)
@@ -40,7 +64,7 @@ fn main() -> ExitCode {
     match expression {
         "-h" | "--help" => {
             println!(
-                "Usage: dars \"EXPRESSION\"\n       dars tool \"REQUEST_JSON\"\n       dars standard-record \"EXPRESSION\" [\"BINDINGS_JSON\"]\nPrint a DARS result as JSON."
+                "Usage: dars \"EXPRESSION\"\n       dars tool \"REQUEST_JSON\"\n       dars standard-record \"EXPRESSION\" [\"BINDINGS_JSON\"]\n       dars dataset SETTINGS_JSON < source-file\nPrint a DARS result as JSON."
             )
         }
         "-V" | "--version" => println!("dars {}", env!("CARGO_PKG_VERSION")),

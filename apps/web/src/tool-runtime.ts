@@ -2,6 +2,7 @@ import { parseCalculationProof } from './calculation-proof';
 import type { CalculationProof } from './calculation-proof';
 import type { ModuleActivation } from './module-manager';
 import { createModuleWork } from './module-work';
+import type { ModuleProgress, ModuleTaskClass } from './module-work';
 
 export type ToolRequest = {
   schema: 1;
@@ -30,7 +31,8 @@ export function activateTool<State>(scope: ModuleActivation<State>, createWorker
   const work = createModuleWork(scope.signal, { pendingJobs: 1 });
 
   return {
-    submit(request: ToolRequest, signal: AbortSignal, timeoutMs = 15_000) {
+    submit(request: ToolRequest, signal: AbortSignal, timeoutMs: number | undefined = 15_000,
+      kind: ModuleTaskClass = 'essential', progress?: { update(value: ModuleProgress): void; watchdogMs: number }) {
       return work.submit({
         request,
         createWorker() {
@@ -39,7 +41,8 @@ export function activateTool<State>(scope: ModuleActivation<State>, createWorker
           return worker;
         },
         decode: (value) => decodeReply(value, request),
-      }, { kind: 'essential', signal, timeoutMs });
+        progress,
+      }, { kind, signal, timeoutMs });
     },
     setPolicy: work.setPolicy,
     getResources() {

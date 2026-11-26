@@ -54,7 +54,7 @@ fn decimal(value: &str) -> Checked<Rational> {
     })
 }
 
-pub(super) fn parse(value: &str) -> Checked<Rational> {
+pub(crate) fn parse(value: &str) -> Checked<Rational> {
     let value = value.trim();
     if value.len() > 256 {
         return Err(MathError::Limit);
@@ -97,7 +97,7 @@ pub(super) fn symbolic_pi(value: &Rational, power: i8) -> String {
     }
 }
 
-pub(super) fn significant_decimal(value: &Rational, digits: u32) -> String {
+pub(crate) fn significant_decimal(value: &Rational, digits: u32) -> String {
     if value.is_zero() {
         return "0".to_owned();
     }

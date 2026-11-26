@@ -6,7 +6,7 @@ import { performance } from 'node:perf_hooks';
 import { resolve } from 'node:path';
 
 /** Compare the full engine envelope across isolated binaries and time initialized WASM requests. */
-export async function verifyToolTargets(module, cases, workloads, isolatedRequests = []) {
+export async function verifyToolTargets(module, cases, workloads, isolatedRequests = [], compare = assert.deepEqual) {
   assert(process.argv[2], 'Pass the native DARS CLI executable.');
   const cli = resolve(process.argv[2]);
   const target = new URL(`../apps/web/src/tool-wasm/${module}/`, import.meta.url);
@@ -31,7 +31,7 @@ export async function verifyToolTargets(module, cases, workloads, isolatedReques
       if (error.status !== 1) throw error;
       nativeResult = JSON.parse(error.stdout);
     }
-    assert.deepEqual(wasmResult, nativeResult, input);
+    compare(wasmResult, nativeResult, input);
   }
   for (const request of isolatedRequests) {
     assert.deepEqual(JSON.parse(evaluate(JSON.stringify(request))), { ok: false, code: 'unsupported' });

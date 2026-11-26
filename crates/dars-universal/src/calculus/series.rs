@@ -165,6 +165,7 @@ fn compound(function: Function, jet: Jet) -> Checked<Jet> {
             Some(Ordering::Equal) => Err(MathError::Unsupported),
             None => Err(MathError::Unsupported),
         },
+        Function::Sqrt => Err(MathError::Unsupported),
     }
 }
 

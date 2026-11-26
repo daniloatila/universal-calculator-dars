@@ -41,6 +41,7 @@ pub(super) fn derivative(expression: &Expr, variable: u8) -> Checked<Expr> {
                 Function::Exp => expression.clone(),
                 Function::Ln => pow(argument_copy, -1)?,
                 Function::Abs => mul([argument_copy, pow(expression.clone(), -1)?])?,
+                Function::Sqrt => return Err(MathError::Unsupported),
             };
             mul([outer, derivative(argument, variable)?])
         }
@@ -130,6 +131,7 @@ fn elementary_primitive(expression: &Expr, variable: u8) -> Checked<Expr> {
                     argument,
                     expression.clone(),
                 ])?,
+                Function::Sqrt => return Err(MathError::Unsupported),
             };
             mul([Expr::Num(slope.recip()), primitive])
         }

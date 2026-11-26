@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import type { Locale, Messages } from './i18n';
 import type { RegisteredModule } from './module-registry';
+import { financeModules } from './finance-modules';
+import { scienceModules } from './science-modules';
 
 interface ModuleNavigationProps {
   modules: readonly RegisteredModule[];
@@ -19,6 +21,12 @@ export default function ModuleNavigation({ modules, selectedId, locale, messages
   const query = searchable ? fold(search.trim()) : '';
   const matches = modules.map((module) => ({ id: module.id, ...module.describe(messages) }))
     .filter(({ id, title, description }) => !query || id === selectedId || fold(id + ' ' + title + ' ' + description).includes(query));
+  const groups = [
+    [messages.science.labels.math_category, matches.filter(({ id }) =>
+      !financeModules.some((module) => module === id) && !scienceModules.some((module) => module === id))],
+    [messages.science.labels.finance_category, matches.filter(({ id }) => financeModules.some((module) => module === id))],
+    [messages.science.labels.science_category, matches.filter(({ id }) => scienceModules.some((module) => module === id))],
+  ] as const;
 
   return <nav className="module-navigation" aria-label={messages.tools.navigation}>
     <div className="module-navigation-picker">
@@ -29,7 +37,10 @@ export default function ModuleNavigation({ modules, selectedId, locale, messages
       <label>
         <span>{messages.operations.modulePicker}</span>
         <select value={selectedId ?? ''} onChange={(event) => select(event.currentTarget.value)}>
-          {matches.map(({ id, title }) => <option key={id} value={id}>{title}</option>)}
+          {searchable ? groups.filter(([, options]) => options.length).map(([group, options]) =>
+            <optgroup key={group} label={group}>
+              {options.map(({ id, title }) => <option key={id} value={id}>{title}</option>)}
+            </optgroup>) : matches.map(({ id, title }) => <option key={id} value={id}>{title}</option>)}
         </select>
       </label>
     </div>

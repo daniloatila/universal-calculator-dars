@@ -5,6 +5,7 @@ import type { Locator, Page } from '@playwright/test';
 import { parseCalculationProofFile } from '../src/calculation-proof';
 import { proofLabels } from '../src/calculation-proof-labels';
 import { financeModules } from '../src/finance-modules';
+import { scienceModules } from '../src/science-modules';
 import ar from '../src/locales/ar.json' with { type: 'json' };
 import en from '../src/locales/en.json' with { type: 'json' };
 import es from '../src/locales/es.json' with { type: 'json' };
@@ -17,7 +18,7 @@ const modules = ['standard', 'scientific', 'algebra', 'calculus', 'linear-algebr
   'discrete-mathematics', 'programmer', 'converter', 'date-time'] as const;
 type Module = typeof modules[number];
 const profiles = ['ultra_light', 'efficiency', 'balanced', 'performance', 'maximum'] as const;
-const advancedAsset = /\/assets\/(?:tool-|dars_tool_wasm)/u;
+const advancedAsset = /\/assets\/(?:tool-|science-|data-lab-|module-frames-|dars_tool_wasm)/u;
 const viewerAsset = /\/assets\/calculation-proof-panel-[\w-]+\.js$/u;
 const picker = (page: Page) => page.getByRole('combobox', { name: en.operations.modulePicker, exact: true });
 const editor = (page: Page, label = en.expression) => page.getByRole('textbox', { name: label, exact: true });
@@ -203,9 +204,9 @@ test('All ten workspaces calculate individually across five profiles with one wo
   await page.goto('/');
   await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await expect(picker(page).locator('option')).toHaveCount(modules.length + financeModules.length);
+  await expect(picker(page).locator('option')).toHaveCount(modules.length + financeModules.length + scienceModules.length);
   expect(await picker(page).locator('option').evaluateAll((options) => options.map((option) => (option as HTMLOptionElement).value)))
-    .toEqual([...modules, ...financeModules]);
+    .toEqual([...modules, ...financeModules, ...scienceModules]);
   expect([...advancedRequests]).toEqual([]);
   const search = page.getByRole('searchbox', { name: en.tools.search, exact: true });
   await search.fill('date & time');
@@ -279,7 +280,7 @@ test.describe('localized touch workspace', () => {
       await languages.selectOption(locale);
       await expect(page.locator('html')).toHaveAttribute('lang', locale);
       const localPicker = page.getByRole('combobox', { name: messages.operations.modulePicker, exact: true });
-      await expect(localPicker.locator('option')).toHaveCount(modules.length + financeModules.length);
+      await expect(localPicker.locator('option')).toHaveCount(modules.length + financeModules.length + scienceModules.length);
       await expect(record(page).locator('summary')).toHaveText(messages.standardRecord.title);
       const search = page.getByRole('searchbox', { name: messages.tools.search, exact: true });
       await search.fill(messages.dateTime.title);

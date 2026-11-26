@@ -1,5 +1,5 @@
 mod currency;
-mod scalar;
+pub(crate) mod scalar;
 mod units;
 
 use crate::{Computation, Exactness, MathError};
@@ -74,6 +74,40 @@ fn option_unit(options: &Map<String, Value>, name: &str) -> Checked<Unit> {
 
 fn ratio(value: Rational, from: Ratio, to: Ratio) -> Checked<Rational> {
     checked(value * (from.rational() / to.rational()))
+}
+
+fn absolute_kelvin(value: &Rational, scale: Ratio, offset: Ratio) -> Checked<Rational> {
+    let kelvin = checked(value * scale.rational() + offset.rational())?;
+    if kelvin.is_negative() {
+        return Err(MathError::Domain);
+    }
+    Ok(kelvin)
+}
+
+#[cfg(feature = "physics-engineering")]
+pub(super) use scalar::{parse as parse_quantity, significant_decimal as round_quantity};
+
+#[cfg(feature = "physics-engineering")]
+pub(super) fn convert_exact(value: &Rational, from: &str, to: &str) -> Checked<Rational> {
+    let from = units::find(from).ok_or(MathError::Domain)?;
+    let to = units::find(to).ok_or(MathError::Domain)?;
+    if from.family != to.family {
+        return Err(MathError::Domain);
+    }
+    match (from.model, to.model) {
+        (Model::Linear(source), Model::Linear(target)) => ratio(value.clone(), source, target),
+        (
+            Model::Affine { scale, offset },
+            Model::Affine {
+                scale: target,
+                offset: target_offset,
+            },
+        ) => {
+            let kelvin = absolute_kelvin(value, scale, offset)?;
+            checked((kelvin - target_offset.rational()) / target.rational())
+        }
+        _ => Err(MathError::Unsupported),
+    }
 }
 
 fn pressure_nominal(
@@ -152,10 +186,7 @@ fn physical(value: Rational, options: &Map<String, Value>) -> Checked<Answer> {
                 offset: target_offset,
             },
         ) => {
-            let kelvin = checked(&value * source.rational() + source_offset.rational())?;
-            if kelvin.is_negative() {
-                return Err(MathError::Domain);
-            }
+            let kelvin = absolute_kelvin(&value, source, source_offset)?;
             let converted = checked((kelvin - target_offset.rational()) / target.rational())?;
             let mut result = Answer::physical(
                 converted.to_string(),

@@ -25,6 +25,24 @@ mod programmer;
 #[cfg(feature = "scientific")]
 mod scientific;
 
+#[cfg(feature = "data-lab")]
+pub mod data_lab;
+#[cfg(feature = "graph-lab")]
+mod graph_lab;
+#[cfg(feature = "optimization")]
+mod optimization;
+#[cfg(feature = "physics-engineering")]
+mod physics_engineering;
+#[cfg(feature = "probability")]
+mod probability;
+#[cfg(feature = "simulation")]
+mod simulation;
+#[cfg(feature = "statistics")]
+mod statistics;
+
+#[cfg(any(feature = "statistics", feature = "probability"))]
+mod discrete_tail;
+
 const SCHEMA: u8 = 1;
 const REQUEST_BYTES: usize = 24 * 1024;
 const EXPRESSION_BYTES: usize = 4096;
@@ -50,6 +68,21 @@ pub enum MathError {
     Limit,
     Unsupported,
     NoConvergence,
+}
+
+impl MathError {
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::InvalidInput => "invalid_input",
+            Self::Domain => "domain",
+            Self::Singular => "singular",
+            Self::AmbiguousLocalTime => "ambiguous_local_time",
+            Self::NonexistentLocalTime => "nonexistent_local_time",
+            Self::Limit => "limit",
+            Self::Unsupported => "unsupported",
+            Self::NoConvergence => "no_convergence",
+        }
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
@@ -308,11 +341,56 @@ fn dispatch(
         module if finance::MODULES.contains(&module) => {
             finance::dispatch(module, &request.operation, &request.input, &request.options)
         }
+        #[cfg(feature = "statistics")]
+        "statistics" => Ok((
+            statistics::evaluate(&request.operation, &request.input, &request.options)?,
+            "statistics/1",
+            &["https://www.itl.nist.gov/div898/handbook/"],
+        )),
+        #[cfg(feature = "probability")]
+        "probability" => Ok((
+            probability::evaluate(&request.operation, &request.input, &request.options)?,
+            "probability/1",
+            &["https://docs.rs/statrs/0.18.0/statrs/distribution/"],
+        )),
+        #[cfg(feature = "simulation")]
+        "simulation" => Ok((
+            simulation::evaluate(&request.operation, &request.input, &request.options)?,
+            "simulation/1",
+            &["https://www.pcg-random.org/"],
+        )),
+        #[cfg(feature = "optimization")]
+        "optimization" => Ok((
+            optimization::evaluate(&request.operation, &request.input, &request.options)?,
+            "optimization/1",
+            &["https://docs.scipy.org/doc/scipy/reference/optimize.html"],
+        )),
+        #[cfg(feature = "physics-engineering")]
+        "physics-engineering" => Ok((
+            physics_engineering::evaluate(&request.operation, &request.input, &request.options)?,
+            "physics-engineering/1",
+            &[
+                "https://www.bipm.org/en/si-brochure-9",
+                "https://physics.nist.gov/cuu/pdf/JPCRD2022CODATA.pdf",
+            ],
+        )),
+        #[cfg(feature = "graph-lab")]
+        "graph-lab" => Ok((
+            graph_lab::evaluate(&request.operation, &request.input, &request.options)?,
+            "graph-lab/1",
+            &["https://dlmf.nist.gov/3.3"],
+        )),
+        #[cfg(feature = "data-lab")]
+        "data-lab" => Ok((
+            data_lab::evaluate(&request.operation, &request.input, &request.options)?,
+            "data-lab/1",
+            &["https://www.rfc-editor.org/rfc/rfc4180"],
+        )),
         _ => Err(MathError::Unsupported),
     }
 }
 
-fn execute(input: &str) -> Result<Value, MathError> {
+fn parse_request(input: &str) -> Result<(Request, usize), MathError> {
     if input.len() > REQUEST_BYTES {
         return Err(MathError::Limit);
     }
@@ -343,7 +421,30 @@ fn execute(input: &str) -> Result<Value, MathError> {
     {
         return Err(MathError::InvalidInput);
     }
+    Ok((request, normalized_limit))
+}
+
+fn execute(input: &str) -> Result<Value, MathError> {
+    execute_allowed(input, None)
+}
+
+fn execute_allowed(input: &str, allowed: Option<&[&str]>) -> Result<Value, MathError> {
+    let (request, normalized_limit) = parse_request(input)?;
+    if allowed.is_some_and(|modules| !modules.contains(&request.module.as_str())) {
+        return Err(MathError::Unsupported);
+    }
     let (result, algorithm, references) = dispatch(&request)?;
+    proof_response(&request, normalized_limit, result, algorithm, references)
+}
+
+fn proof_response(
+    request: &Request,
+    normalized_limit: usize,
+    result: Computation,
+    algorithm: &str,
+    references: &[&str],
+) -> Result<Value, MathError> {
+    let original = request.original_input.as_deref().unwrap_or(&request.input);
     if result.normalized.len() > normalized_limit
         || result.result.len() > RESULT_BYTES
         || !valid_proof_map(&result.variables)
@@ -408,6 +509,51 @@ fn execute(input: &str) -> Result<Value, MathError> {
         algorithm_version: algorithm,
         references,
     } }))
+}
+
+#[cfg(feature = "simulation")]
+pub struct SimulationTask {
+    request: Request,
+    normalized_limit: usize,
+    run: simulation::SimulationRun,
+}
+
+#[cfg(feature = "simulation")]
+impl SimulationTask {
+    pub fn new(input: &str) -> Result<Self, MathError> {
+        let (request, normalized_limit) = parse_request(input)?;
+        if request.module != "simulation" || request.operation != "monte_carlo" {
+            return Err(MathError::Unsupported);
+        }
+        let run = simulation::SimulationRun::begin(&request.input, &request.options)?;
+        Ok(Self {
+            request,
+            normalized_limit,
+            run,
+        })
+    }
+
+    pub fn step(&mut self, max_batch: usize) -> Result<String, MathError> {
+        serde_json::to_string(&self.run.step(max_batch)?).map_err(|_| MathError::InvalidInput)
+    }
+
+    pub fn finish(self) -> Result<String, MathError> {
+        Ok(proof_response(
+            &self.request,
+            self.normalized_limit,
+            self.run.finish()?,
+            "simulation/1",
+            &["https://www.pcg-random.org/"],
+        )?
+        .to_string())
+    }
+}
+
+/// Restrict a packaged worker to its public module, even when it reuses another engine internally.
+pub fn evaluate_worker_json(input: &str, allowed: &[&str]) -> String {
+    execute_allowed(input, Some(allowed))
+        .unwrap_or_else(|code| json!({"ok":false,"code":code}))
+        .to_string()
 }
 
 /// Evaluate a schema-one request locally. Both native and WASM consumers use this envelope.

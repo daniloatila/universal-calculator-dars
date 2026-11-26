@@ -1,6 +1,6 @@
 [package]
 name = "dars-tool-wasm"
-version = "0.4.1"
+version = "0.5.0"
 edition = "2024"
 license = "Apache-2.0"
 publish = false
@@ -24,6 +24,14 @@ investment = ["dars-universal/investment"]
 loans = ["dars-universal/loans"]
 tax = ["dars-universal/tax"]
 business = ["dars-universal/business"]
+
+statistics = ["dars-universal/statistics"]
+probability = ["dars-universal/probability"]
+simulation = ["dars-universal/simulation"]
+optimization = ["dars-universal/optimization"]
+physics-engineering = ["dars-universal/physics-engineering"]
+graph-lab = ["dars-universal/graph-lab"]
+data-lab = ["dars-universal/data-lab"]
 
 [dependencies]
 dars-universal = { path = "../dars-universal", default-features = false }
