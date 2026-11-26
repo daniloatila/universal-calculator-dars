@@ -6,29 +6,8 @@ fn main() -> ExitCode {
         eprintln!("Usage: dars \"EXPRESSION\"");
         return ExitCode::from(2);
     };
-    if expression == "dataset" {
-        use std::io::Read;
-        let settings = args.next();
-        if let Some(config) = settings.as_deref().and_then(std::ffi::OsStr::to_str)
-            && args.next().is_none()
-        {
-            let mut bytes = Vec::new();
-            let result = std::io::stdin()
-                .lock()
-                .take(16 * 1024 * 1024 + 1)
-                .read_to_end(&mut bytes);
-            if result.is_err() {
-                return emit(serde_json::json!({"ok":false,"code":"invalid_input"}).to_string());
-            }
-            let proof = dars_universal::data_lab::Dataset::open(&bytes, config)
-                .and_then(|table| table.proof());
-            return emit(
-                proof
-                    .unwrap_or_else(|code| serde_json::json!({"ok":false,"code":code}).to_string()),
-            );
-        }
-        eprintln!("Usage: dars dataset SETTINGS_JSON < source-file");
-        return ExitCode::from(2);
+    if expression == "dataset" || expression == "dataset-replay" {
+        return dataset(args, expression == "dataset-replay");
     }
     if expression == "tool" {
         let request = args.next();
@@ -64,13 +43,71 @@ fn main() -> ExitCode {
     match expression {
         "-h" | "--help" => {
             println!(
-                "Usage: dars \"EXPRESSION\"\n       dars tool \"REQUEST_JSON\"\n       dars standard-record \"EXPRESSION\" [\"BINDINGS_JSON\"]\n       dars dataset SETTINGS_JSON < source-file\nPrint a DARS result as JSON."
+                "Usage: dars \"EXPRESSION\"\n       dars tool \"REQUEST_JSON\"\n       dars standard-record \"EXPRESSION\" [\"BINDINGS_JSON\"]\n       dars dataset SETTINGS_JSON [--page OFFSET LENGTH] < source-file\n       dars dataset-replay DESCRIPTOR_JSON [--page OFFSET LENGTH] < source-file\nPrint a DARS result as JSON."
             )
         }
         "-V" | "--version" => println!("dars {}", env!("CARGO_PKG_VERSION")),
         _ => return emit(dars_core::evaluate_json(expression)),
     }
     ExitCode::SUCCESS
+}
+
+fn dataset(args: impl Iterator<Item = std::ffi::OsString>, replay: bool) -> ExitCode {
+    use dars_universal::data_lab::{Dataset, max_input_bytes, max_replay_input_bytes};
+    use std::io::Read;
+
+    let args: Vec<_> = args.collect();
+    let usage = || {
+        eprintln!("Usage: dars dataset SETTINGS_JSON [--page OFFSET LENGTH] < source-file");
+        eprintln!(
+            "       dars dataset-replay DESCRIPTOR_JSON [--page OFFSET LENGTH] < source-file"
+        );
+        ExitCode::from(2)
+    };
+    let Some(options) = args.first().and_then(|value| value.to_str()) else {
+        return usage();
+    };
+    let page = match args.as_slice() {
+        [_] => None,
+        [_, flag, offset, length] if flag == "--page" => {
+            let index = |s: &std::ffi::OsString| s.to_str()?.parse::<usize>().ok();
+            let (Some(offset), Some(length)) = (index(offset), index(length)) else {
+                return usage();
+            };
+            Some((offset, length))
+        }
+        _ => return usage(),
+    };
+    let result = (|| {
+        let max_bytes = if replay {
+            max_replay_input_bytes(options)?
+        } else {
+            max_input_bytes(options)?
+        };
+        let mut bytes = Vec::new();
+        std::io::stdin()
+            .lock()
+            .take(max_bytes as u64 + 1)
+            .read_to_end(&mut bytes)
+            .map_err(|_| dars_universal::MathError::InvalidInput)?;
+        let table = if replay {
+            Dataset::replay(&bytes, options)?
+        } else {
+            Dataset::open(&bytes, options)?
+        };
+        if let Some((offset, length)) = page {
+            table.page(offset, length)
+        } else {
+            table.proof()
+        }
+    })();
+    match result {
+        Ok(output) => {
+            println!("{output}");
+            ExitCode::SUCCESS
+        }
+        Err(code) => emit(serde_json::json!({"ok":false,"code":code}).to_string()),
+    }
 }
 
 fn emit(output: String) -> ExitCode {

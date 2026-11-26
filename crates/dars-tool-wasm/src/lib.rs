@@ -98,6 +98,20 @@ impl LocalDataset {
             .map(Self)
             .map_err(science_error)
     }
+    pub fn replay(bytes: &[u8], descriptor: &str) -> Result<LocalDataset, JsValue> {
+        dars_universal::data_lab::Dataset::replay(bytes, descriptor)
+            .map(Self)
+            .map_err(science_error)
+    }
+    pub fn resource_diagnostics(&self) -> String {
+        self.0.resource_diagnostics()
+    }
+
+    pub fn reserve_browser_response(&self, bytes: usize) -> Result<(), JsValue> {
+        self.0
+            .reserve_browser_response(bytes)
+            .map_err(science_error)
+    }
     pub fn page(&self, offset: usize, length: usize) -> Result<String, JsValue> {
         self.0.page(offset, length).map_err(science_error)
     }

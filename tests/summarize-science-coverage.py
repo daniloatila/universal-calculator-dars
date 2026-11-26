@@ -24,3 +24,5 @@ covered, total = (sum(row[k] for row in rows) for k in ("covered", "total"))
 print(json.dumps({"suite": "science-rust-line-coverage", "covered": covered, "total": total,
                   "percent": round(100 * covered / total, 2), "target_percent": 95,
                   "files": sorted(rows, key=lambda r: r["path"])}, indent=2))
+if covered * 100 <= total * 95:
+    raise SystemExit("Scientific production-source line coverage must exceed 95%.")

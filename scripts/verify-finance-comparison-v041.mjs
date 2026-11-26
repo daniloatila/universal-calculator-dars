@@ -5,8 +5,8 @@ import { join, resolve } from 'node:path';
 import { runWindowsToolBenchmark } from '../benchmarks/windows-tool.mjs';
 
 const [executable, expectedSha, output, version = '0.4.1'] = process.argv.slice(2);
-assert(executable && /^[0-9a-f]{64}$/u.test(expectedSha ?? '') && output && ['0.4.1','0.5.0'].includes(version),
-  'Pass the Windows executable, its verified SHA-256, an output directory, and optionally version 0.4.1 or 0.5.0.');
+assert(executable && /^[0-9a-f]{64}$/u.test(expectedSha ?? '') && output && ['0.4.1','0.5.0','0.5.1'].includes(version),
+  'Pass the Windows executable, its verified SHA-256, an output directory, and optionally version 0.4.1, 0.5.0 or 0.5.1.');
 const digest = createHash('sha256').update(await readFile(executable)).digest('hex');
 assert.equal(digest, expectedSha);
 const folder = resolve(output);
@@ -37,8 +37,8 @@ function checkProof(proof) {
 }
 
 const observed = await runWindowsToolBenchmark({
-  artifactObjective: version === '0.5.0' ? 'objective-05' : 'objective-04',
-  module: version === '0.5.0' ? 'finance-comparison' : 'revision-01', label: `comparison-${version}`,
+  artifactObjective: version.startsWith('0.5.') ? 'objective-05' : 'objective-04',
+  module: version.startsWith('0.5.') ? 'finance-comparison' : 'revision-01', label: `comparison-${version}`,
   async audit({ page, expect, data, sample }) {
     const main = page.locator('main');
     const chooser = page.getByRole('combobox', { name: 'Module', exact: true });

@@ -66,6 +66,7 @@ pub enum MathError {
     AmbiguousLocalTime,
     NonexistentLocalTime,
     Limit,
+    ResourceBudget,
     Unsupported,
     NoConvergence,
 }
@@ -79,6 +80,7 @@ impl MathError {
             Self::AmbiguousLocalTime => "ambiguous_local_time",
             Self::NonexistentLocalTime => "nonexistent_local_time",
             Self::Limit => "limit",
+            Self::ResourceBudget => "resource_budget",
             Self::Unsupported => "unsupported",
             Self::NoConvergence => "no_convergence",
         }
@@ -383,7 +385,7 @@ fn dispatch(
         #[cfg(feature = "data-lab")]
         "data-lab" => Ok((
             data_lab::evaluate(&request.operation, &request.input, &request.options)?,
-            "data-lab/1",
+            "data-lab/2",
             &["https://www.rfc-editor.org/rfc/rfc4180"],
         )),
         _ => Err(MathError::Unsupported),

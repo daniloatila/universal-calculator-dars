@@ -18,6 +18,19 @@ def main():
     out, _ = optimization.run("nelder_mead", "sqrt(0.001-x^2)+y^2", options={"lower":"0"})
     assert (out["status"], out["reason"]) == ("inconclusive","simplex_initialization_failed"), out
 
+    # Equivalent exact constraints scaled by a positive rational must have the same optimum.
+    for scale, bound in [("1e-12","3e-12"),("1","3"),("1e12","3e12")]:
+        program = {"objective":["2","1"],"constraints":[
+            {"coefficients":[scale,scale],"relation":"<=","rhs":bound},
+            {"coefficients":["1","0"],"relation":"<=","rhs":"1"}],"sense":"maximize"}
+        out, proof = optimization.run("linear_program",program,category="invariant_constraint_scaling")
+        assert proof["exactness"]=="exact" and out["status"]=="global_optimum" and out["value_exact"]=="4",out
+    program = {"objective":["1"],"constraints":[
+        {"coefficients":["1"],"relation":">=","rhs":"1.00000000000000000001"},
+        {"coefficients":["1"],"relation":"<=","rhs":"1"}],"sense":"minimize"}
+    out, _ = optimization.run("linear_program",program,category="near_coincident_incompatible_faces")
+    assert out["status"]=="infeasible",out
+
     data, _ = run("explicit", {"expressions":["x*(x-1)"]}, options={**unit, "find_roots":True}, category="roots_at_both_window_edges")
     assert data["roots"] == [[0,0],[0,1]], data
     data, _ = run("explicit", {"expressions":["sin(4*x)"]}, options={"lower":"-10","upper":"10","find_roots":True}, category="root_result_work_cap")
@@ -43,7 +56,7 @@ def main():
     run("surface", {"expression":"x"+" "*256}, error="limit", category="expression_byte_limit")
     run("unknown_algorithm", {"expression":"x"}, error="unsupported", category="unsupported_graph_operation")
 
-    optimization_summary = optimization.finish(None, ["Analytic square root and simplex initialization bounds"],
+    optimization_summary = optimization.finish(None, ["Analytic square root, simplex initialization, exact feasibility and positive constraint scaling"],
                                                suite="optimization-boundaries")
     graph_summary = graph.finish(None, ["Analytic grid endpoints, phase multiples, model-domain and work-limit checks"],
                                  suite="graph-lab-boundaries")

@@ -26,12 +26,13 @@ fn index(t: &Table, n: &str) -> Checked<usize> {
     }
     Ok(i)
 }
-pub(super) fn report(t: &Table, c: &Config) -> Checked<Value> {
+pub(super) fn report(t: &Table, c: &Config, meter: &mut Meter<'_>) -> Checked<Value> {
     let Some(a) = &c.analysis else {
         return Ok(Value::Null);
     };
     let i = index(t, &a.x)?;
     let j = a.y.as_ref().map(|y| index(t, y)).transpose()?;
+    meter.reserve(8192)?;
     let mut v = Vec::new();
     let mut sums: [BigRational; 5] = std::array::from_fn(|_| BigRational::zero());
     let mut pairs = 0usize;
@@ -39,11 +40,12 @@ pub(super) fn report(t: &Table, c: &Config) -> Checked<Value> {
         if !row[i].usable() {
             continue;
         }
-        let x = number(&row[i].value, c.decimal)?;
+        let x = row[i].numeric(c.decimal)?;
+        meter.reserve(256 + 4 * ((x.numer().bits() + x.denom().bits()) as usize).div_ceil(8))?;
         if let Some(j) = j
             && row[j].usable()
         {
-            let y = number(&row[j].value, c.decimal)?;
+            let y = row[j].numeric(c.decimal)?;
             for (acc, add) in sums
                 .iter_mut()
                 .zip([x.clone(), y.clone(), &x * &x, &y * &y, &x * &y])
@@ -87,8 +89,10 @@ pub(super) fn report(t: &Table, c: &Config) -> Checked<Value> {
         let cross = &n * xy - &x * &y;
         let variance = (&n * xx - &x * &x) * (&n * yy - &y * &y);
         if variance.is_positive() {
+            let squared = (&cross * &cross) / variance;
+            meter.reserve(budget::text(budget::rational_text_bytes(&squared)))?;
             Some(
-                json!({"sign":if cross.is_zero(){0}else if cross.is_positive(){1}else{-1},"r_squared":((&cross*&cross)/variance).to_string(),"n":pairs}),
+                json!({"sign":if cross.is_zero(){0}else if cross.is_positive(){1}else{-1},"r_squared":squared.to_string(),"n":pairs}),
             )
         } else {
             None
@@ -96,8 +100,12 @@ pub(super) fn report(t: &Table, c: &Config) -> Checked<Value> {
     } else {
         None
     };
+    let middle = quartile(&v, 2);
+    for value in [&q1, &q3, &middle, &low, &high, min, max] {
+        meter.reserve(budget::text(budget::rational_text_bytes(value)))?;
+    }
     Ok(
-        json!({"n":v.len(),"q1":q1.to_string(),"median":quartile(&v,2).to_string(),"q3":q3.to_string(),
+        json!({"n":v.len(),"q1":q1.to_string(),"median":middle.to_string(),"q3":q3.to_string(),
         "outliers":v.iter().filter(|n|*n<&low || *n>&high).count(),"fences":[low.to_string(),high.to_string()],
         "range":[min.to_string(),max.to_string()],"histogram":bins,"pearson":pearson}),
     )

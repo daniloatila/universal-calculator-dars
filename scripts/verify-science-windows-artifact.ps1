@@ -1,14 +1,14 @@
 param(
     [Parameter(Mandatory)][ValidateRange(1, [long]::MaxValue)][long] $ArtifactId,
     [Parameter(Mandatory)][ValidateRange(1, [long]::MaxValue)][long] $RunId,
-    [Parameter(Mandatory)][ValidatePattern('^[a-f0-9]{40}$')][string] $Commit
+    [Parameter(Mandatory)][ValidatePattern('^[a-f0-9]{40}$')][string] $Commit,
+    [ValidateSet('0.5.0','0.5.1')][string] $Version = '0.5.0'
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $repository = 'daniloatila/universal-calculator-dars'
 $branch = 'codex/objective-05-science-engineering-data'
-$version = '0.5.0'
 $project = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 $api = "repos/$repository/actions"
 $artifactPath = "$api/artifacts/$ArtifactId"

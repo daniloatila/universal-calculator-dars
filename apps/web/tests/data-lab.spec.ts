@@ -79,8 +79,8 @@ test('Data Lab applies explicit import conventions, replays native steps and exp
   const pipeline = await download(page, button(page, t.save));
   expect(pipeline.name).toBe('dars-pipeline.json');
   expect(JSON.parse(pipeline.bytes.toString())).toMatchObject({
-    version: 'data-lab/1',
-    configuration: { format: 'csv', encoding: 'latin1', decimal: 'comma', delimiter: ';',
+    version: 'data-lab/2',
+    configuration: { semantics_version: 2, format: 'csv', encoding: 'latin1', decimal: 'comma', delimiter: ';',
       steps: [{ op: 'deduplicate', columns: ['id'] }, { op: 'drop_missing', column: 'amount' }] },
   });
   const proof = await download(page, page.getByTestId('data-lab-proof-export'));

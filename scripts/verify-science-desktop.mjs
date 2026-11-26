@@ -5,13 +5,17 @@ import {join,resolve} from 'node:path';
 import {runWindowsToolBenchmark} from '../benchmarks/windows-tool.mjs';
 
 const [baseline,candidate,receiptPath,outputArg]=process.argv.slice(2);
-assert(outputArg,'Pass approved 0.4.1 executable, 0.5.0 executable, verified hosted receipt and output directory.');
-const baseReceipt=JSON.parse(await readFile(new URL('../evidence/objective-04/revision-01/windows-artifact.json',import.meta.url)));
+assert(outputArg,'Pass baseline executable, reviewed candidate executable, verified candidate receipt, and output directory.');
 const receipt=JSON.parse(await readFile(receiptPath));
+assert(['0.5.0','0.5.1'].includes(receipt.exe_version));
+const baseReceiptPath=receipt.exe_version==='0.5.1'
+  ? '../evidence/objective-05/integrated-audit/windows-artifact.json'
+  : '../evidence/objective-04/revision-01/windows-artifact.json';
+const baseReceipt=JSON.parse(await readFile(new URL(baseReceiptPath,import.meta.url)));
 const hash=data=>createHash('sha256').update(data).digest('hex');
 assert.equal(hash(await readFile(baseline)),baseReceipt.exe_sha256);
 assert.equal(hash(await readFile(candidate)),receipt.exe_sha256);
-assert.equal(receipt.exe_version,'0.5.0');assert.equal(receipt.windows_job_conclusion,'success');
+assert.equal(receipt.windows_job_conclusion,'success');
 const out=resolve(outputArg);await mkdir(out,{recursive:true});
 const modules=['statistics','probability','simulation','optimization','physics-engineering','graph-lab','data-lab'];
 const scienceWorker=/\/(?:tool-(?:statistics|probability|simulation|optimization|physics-engineering|graph-lab)|data-lab)-worker-[^/]+\.js$/u;
@@ -143,6 +147,45 @@ for(const [label,path] of [['baseline',baseline],['candidate',candidate]]){
           await sample('minimized_'+cycle,'minimized',4);
           assert.equal((await action('restore')).state,'visible');
           await sample('restored_'+cycle,'visible',4);
+        }
+        if (receipt.exe_version === '0.5.1') {
+          await menu.selectOption('data-lab');
+          await expect(page.getByTestId('data-lab-file')).toBeVisible();
+          await page.getByRole('button',{name:'End module',exact:true}).click();
+          await expect(page.locator('main')).toHaveAttribute('data-module-phase','terminated');
+          await page.getByRole('button',{name:'Resume module',exact:true}).click();
+          const source = Buffer.from('[{"valor":1.25},{"valor":"2,50"}]');
+          const run = page.getByTestId('data-lab-run');
+          const result = page.getByTestId('data-lab-result');
+          await page.getByTestId('data-lab-file').setInputFiles({name:'synthetic.json',mimeType:'application/json',buffer:source});
+          await run.click();
+          await expect(result).toHaveAttribute('data-canonical', new RegExp(hash(source)));
+          const settings = page.locator('.data-lab details').first();
+          if (await settings.getAttribute('open') === null) await settings.locator('summary').click();
+          await settings.locator('select').filter({has:page.locator('option[value="comma"]')}).selectOption('comma');
+          await settings.getByRole('combobox',{name:'valor',exact:true}).selectOption('decimal');
+          await run.click();
+          await expect.poll(async () => {
+            const stored = await result.getAttribute('data-canonical');
+            return stored && JSON.parse(stored).profile[0].statistics?.sum;
+          }).toBe('15/4');
+          const actual = JSON.parse(await result.getAttribute('data-canonical'));
+          assert.equal(actual.profile[0].statistics.n,2);
+          assert.equal(actual.profile[0].statistics.mean,'15/8');
+          data.mixedJson = {sha256:hash(source), valid:2, sum:'15/4', mean:'15/8'};
+          const proofButton = page.getByTestId('data-lab-proof-export');
+          const [download] = await Promise.all([page.waitForEvent('download'),proofButton.click()]);
+          const exported = await readFile(await download.path());
+          const proof = JSON.parse(exported);
+          const record = proof.proof ?? proof;
+          assert.equal(record.engine_version,'0.5.1');
+          assert.equal(record.variables.sha256,hash(source));
+          assert.deepEqual(JSON.parse(record.result),actual);
+          await writeFile(join(out,'mixed-json-proof.json'),exported,{flush:true});
+          await settings.locator('summary').click();
+          await page.screenshot({path:join(out,'mixed-json.png')});
+          await expect.poll(()=>page.workers().length).toBe(0);
+          await standard();
         }
         await session.send('Network.emulateNetworkConditions',{offline:false,latency:0,downloadThroughput:-1,uploadThroughput:-1});
         await session.detach();

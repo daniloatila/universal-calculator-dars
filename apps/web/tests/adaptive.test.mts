@@ -29,6 +29,7 @@ test('manual profiles impose distinct operational budgets and never modify arith
   assert.deepEqual(policies.map((policy) => policy.workerIdleMs), [1000, 4000, 12000, 45000, 120000]);
   assert.deepEqual(policies.map((policy) => policy.pendingJobs), [1, 2, 4, 6, 8]);
   assert.deepEqual(policies.map((policy) => policy.cacheEntries), [0, 4, 8, 16, 32]);
+  assert.deepEqual(policies.map((policy) => policy.dataLabResourceBudgetBytes / 2 ** 20), [32, 64, 128, 192, 256]);
   assert.deepEqual(policies.map((policy) => policy.graphicsFrameIntervalMs), [null, 100, 50, 34, 17]);
   assert.deepEqual(policies.map((policy) => policy.reducedEffects), [true, true, false, false, false]);
   assert.ok(policies.every((policy) => !('mathPrecision' in policy) && policy.suspendWhenHidden));

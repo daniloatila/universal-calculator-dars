@@ -70,7 +70,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           python3 -m venv "$RUNNER_TEMP/dars-test-math"
-          "$RUNNER_TEMP/dars-test-math/bin/python" -m pip install --only-binary=:all: --require-hashes -r tests/math-oracle-requirements.txt -r tests/linear-algebra-oracle-requirements.txt
+          "$RUNNER_TEMP/dars-test-math/bin/python" -m pip install --only-binary=:all: --require-hashes -r tests/math-oracle-requirements.txt -r tests/linear-algebra-oracle-requirements.txt -r tests/data-reader-requirements.txt
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-scientific.py target/release/dars
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-scientific-complex.py target/release/dars
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-algebra.py target/release/dars
@@ -89,6 +89,7 @@ jobs:
             "$RUNNER_TEMP/dars-test-math/bin/python" -B "tests/verify-$suite.py" target/release/dars
           done
           "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-optimization.py target/release/dars --scipy
+          "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-data-revision.py target/release/dars --readers
       - name: Measure scientific engine line coverage
         if: runner.os == 'Linux' && github.ref == 'refs/heads/codex/objective-05-science-engineering-data'
         run: |
@@ -105,6 +106,7 @@ jobs:
           node tests/check-science-kernel-targets.mjs target/llvm-cov-target/release/dars
           node tests/verify-simulation-targets.mjs target/llvm-cov-target/release/dars
           python3 -B tests/verify-data-import.py target/llvm-cov-target/release/dars
+          "$RUNNER_TEMP/dars-test-math/bin/python" -B tests/verify-data-revision.py target/llvm-cov-target/release/dars --readers
           python3 -B tests/verify-optimization-boundaries.py target/llvm-cov-target/release/dars
           cargo llvm-cov report --release --json --summary-only --output-path "$RUNNER_TEMP/dars-science-coverage.json"
           python3 -B tests/summarize-science-coverage.py "$RUNNER_TEMP/dars-science-coverage.json"

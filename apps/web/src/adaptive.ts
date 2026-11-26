@@ -52,11 +52,14 @@ export interface AdaptivePolicy {
   workerIdleMs: number;
   pendingJobs: number;
   cacheEntries: number;
+  dataLabResourceBudgetBytes: number;
   graphicsFrameIntervalMs: number | null;
   reducedEffects: boolean;
   sampleIntervalMs: number;
   suspendWhenHidden: boolean;
 }
+
+const MiB = 1024 * 1024;
 
 interface Target {
   profile: AdaptiveProfile;
@@ -74,22 +77,27 @@ export interface AdaptiveSnapshot extends Target {
 const policies: Record<AdaptiveProfile, AdaptivePolicy> = {
   ultra_light: {
     workerIdleMs: 1000, pendingJobs: 1, cacheEntries: 0, graphicsFrameIntervalMs: null,
+    dataLabResourceBudgetBytes: 32 * MiB,
     reducedEffects: true, sampleIntervalMs: 60_000, suspendWhenHidden: true,
   },
   efficiency: {
     workerIdleMs: 4000, pendingJobs: 2, cacheEntries: 4, graphicsFrameIntervalMs: 100,
+    dataLabResourceBudgetBytes: 64 * MiB,
     reducedEffects: true, sampleIntervalMs: 45_000, suspendWhenHidden: true,
   },
   balanced: {
     workerIdleMs: 12_000, pendingJobs: 4, cacheEntries: 8, graphicsFrameIntervalMs: 50,
+    dataLabResourceBudgetBytes: 128 * MiB,
     reducedEffects: false, sampleIntervalMs: 30_000, suspendWhenHidden: true,
   },
   performance: {
     workerIdleMs: 45_000, pendingJobs: 6, cacheEntries: 16, graphicsFrameIntervalMs: 34,
+    dataLabResourceBudgetBytes: 192 * MiB,
     reducedEffects: false, sampleIntervalMs: 20_000, suspendWhenHidden: true,
   },
   maximum: {
     workerIdleMs: 120_000, pendingJobs: 8, cacheEntries: 32, graphicsFrameIntervalMs: 17,
+    dataLabResourceBudgetBytes: 256 * MiB,
     reducedEffects: false, sampleIntervalMs: 15_000, suspendWhenHidden: true,
   },
 };

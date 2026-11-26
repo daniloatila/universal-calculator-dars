@@ -11,7 +11,7 @@ type Attrs = BTreeMap<String, String>;
 fn invalid<T>(_: T) -> MathError {
     MathError::InvalidInput
 }
-fn archive(bytes: &[u8]) -> Checked<Archive<'_>> {
+fn archive<'a>(bytes: &'a [u8], meter: &mut Meter<'_>) -> Checked<Archive<'a>> {
     let tail = bytes.len().saturating_sub(65557);
     let end = bytes[tail..]
         .windows(4)
@@ -22,6 +22,16 @@ fn archive(bytes: &[u8]) -> Checked<Archive<'_>> {
     if record[4..8] != [0; 4] || u16::from_le_bytes([record[10], record[11]]) > 256 {
         return Err(MathError::Limit);
     }
+    let entries = usize::from(u16::from_le_bytes([record[10], record[11]]));
+    let directory = u32::from_le_bytes(
+        record[12..16]
+            .try_into()
+            .expect("four-byte directory length"),
+    ) as usize;
+    if directory > bytes.len() {
+        return Err(MathError::InvalidInput);
+    }
+    meter.reserve(entries * 768 + directory * 4)?;
     let mut zip = ZipArchive::new(Cursor::new(bytes)).map_err(invalid)?;
     if zip.len() > 256 {
         return Err(MathError::Limit);
@@ -56,20 +66,34 @@ fn archive(bytes: &[u8]) -> Checked<Archive<'_>> {
     }
     Ok(zip)
 }
-fn part(zip: &mut Archive<'_>, name: &str) -> Checked<Vec<u8>> {
+fn xml_part(
+    zip: &mut Archive<'_>,
+    name: &str,
+    meter: &mut Meter<'_>,
+    visit: impl FnMut(&[String], Node, &mut Meter<'_>) -> Checked<()>,
+) -> Checked<()> {
     let file = zip.by_name(name).map_err(invalid)?;
     let expected = file.size();
     if expected > MAX_PART {
         return Err(MathError::Limit);
     }
+    let size = expected as usize;
+    let charge = 2 * size + 1 + 96 * 1024;
+    meter.reserve(charge)?;
     let mut v = Vec::new();
-    file.take(expected + 1)
-        .read_to_end(&mut v)
-        .map_err(invalid)?;
-    if v.len() as u64 != expected {
+    v.try_reserve_exact(size + 1)
+        .map_err(|_| MathError::ResourceBudget)?;
+    v.resize(size, 0);
+    let mut file = file.take(expected + 1);
+    file.read_exact(&mut v).map_err(invalid)?;
+    if file.read(&mut [0u8]).map_err(invalid)? != 0 {
         return Err(MathError::Limit);
     }
-    Ok(v)
+    drop(file);
+    xml(&v, meter, visit)?;
+    drop(v);
+    meter.release(charge);
+    Ok(())
 }
 
 enum Node<'a> {
@@ -77,10 +101,15 @@ enum Node<'a> {
     End,
     Text(&'a str),
 }
-fn xml(bytes: &[u8], mut visit: impl FnMut(&[String], Node) -> Checked<()>) -> Checked<()> {
+fn xml(
+    bytes: &[u8],
+    meter: &mut Meter<'_>,
+    mut visit: impl FnMut(&[String], Node, &mut Meter<'_>) -> Checked<()>,
+) -> Checked<()> {
     let source = std::str::from_utf8(bytes).map_err(invalid)?;
     let mut reader = Reader::from_str(source.trim_start_matches('\u{feff}'));
     reader.config_mut().expand_empty_elements = true;
+    meter.reserve(8192)?;
     let mut stack = Vec::new();
     let mut roots = 0;
     loop {
@@ -95,16 +124,22 @@ fn xml(bytes: &[u8], mut visit: impl FnMut(&[String], Node) -> Checked<()>) -> C
                         return Err(MathError::InvalidInput);
                     }
                 }
-                let name = tag.local_name().as_ref().to_owned();
-                if name.len() > 128 {
+                let name = tag.local_name();
+                if name.as_ref().len() > 128 {
                     return Err(MathError::Limit);
                 }
                 let mut a = Attrs::new();
+                let mut attributes = 0;
                 for attr in tag.attributes() {
                     let attr = attr.map_err(invalid)?;
-                    if attr.value.len() > 8192 || a.len() >= 64 {
+                    if attr.value.len() > 8192 || attr.key.as_ref().len() > 128 || a.len() >= 64 {
                         return Err(MathError::Limit);
                     }
+                    let charge = 192
+                        + budget::text(attr.key.as_ref().len())
+                        + budget::text(attr.value.len());
+                    meter.reserve(charge)?;
+                    attributes += charge;
                     let k = attr.key.as_ref().to_owned();
                     a.insert(
                         k,
@@ -113,15 +148,27 @@ fn xml(bytes: &[u8], mut visit: impl FnMut(&[String], Node) -> Checked<()>) -> C
                             .into_owned(),
                     );
                 }
-                stack.push(name);
-                visit(&stack, Node::Start(&a))?;
+                stack.push(name.as_ref().to_owned());
+                visit(&stack, Node::Start(&a), meter)?;
+                drop(a);
+                meter.release(attributes);
             }
             Event::End(_) => {
-                visit(&stack, Node::End)?;
+                visit(&stack, Node::End, meter)?;
                 stack.pop().ok_or(MathError::InvalidInput)?;
             }
-            Event::Text(t) => visit(&stack, Node::Text(&t.xml10_content()))?,
-            Event::CData(t) => visit(&stack, Node::Text(&t.xml10_content()))?,
+            Event::Text(t) => {
+                let charge = budget::text(t.as_ref().len());
+                meter.reserve(charge)?;
+                visit(&stack, Node::Text(&t.xml10_content()), meter)?;
+                meter.release(charge);
+            }
+            Event::CData(t) => {
+                let charge = budget::text(t.as_ref().len());
+                meter.reserve(charge)?;
+                visit(&stack, Node::Text(&t.xml10_content()), meter)?;
+                meter.release(charge);
+            }
             Event::GeneralRef(r) => {
                 let code = r.resolve_char_ref().map_err(invalid)?;
                 let value = match code {
@@ -136,7 +183,7 @@ fn xml(bytes: &[u8], mut visit: impl FnMut(&[String], Node) -> Checked<()>) -> C
                     }
                     .into(),
                 };
-                visit(&stack, Node::Text(&value))?;
+                visit(&stack, Node::Text(&value), meter)?;
             }
             Event::DocType(_) | Event::PI(_) => return Err(MathError::Unsupported),
             Event::Eof => break,
@@ -146,37 +193,43 @@ fn xml(bytes: &[u8], mut visit: impl FnMut(&[String], Node) -> Checked<()>) -> C
     if roots != 1 || !stack.is_empty() {
         return Err(MathError::InvalidInput);
     }
+    meter.release(8192);
     Ok(())
 }
 
 fn last(stack: &[String]) -> &str {
     stack.last().map_or("", String::as_str)
 }
-fn add(dst: &mut String, s: &str) -> Checked<()> {
+fn add(dst: &mut String, s: &str, meter: &mut Meter<'_>) -> Checked<()> {
     if dst.len() + s.len() > MAX_FIELD {
         return Err(MathError::Limit);
     }
+    meter.reserve(budget::text(dst.len() + s.len()) - budget::text(dst.len()))?;
     dst.push_str(s);
     Ok(())
 }
-fn shared_strings(zip: &mut Archive) -> Checked<Vec<String>> {
+fn shared_strings(zip: &mut Archive, meter: &mut Meter<'_>) -> Checked<Vec<String>> {
     if zip.index_for_name("xl/sharedStrings.xml").is_none() {
         return Ok(Vec::new());
     }
     let mut strings = Vec::new();
     let mut current = String::new();
-    xml(&part(zip, "xl/sharedStrings.xml")?, |stack, node| {
+    xml_part(zip, "xl/sharedStrings.xml", meter, |stack, node, meter| {
         match (last(stack), node) {
-            ("si", Node::Start(_)) => current.clear(),
+            ("si", Node::Start(_)) => {
+                meter.release(budget::text(current.len()));
+                current = String::new();
+            }
             ("t", Node::Text(s))
                 if stack.iter().any(|n| n == "si") && !stack.iter().any(|n| n == "rPh") =>
             {
-                add(&mut current, s)?
+                add(&mut current, s, meter)?
             }
             ("si", Node::End) => {
                 if strings.len() >= MAX_CELLS {
                     return Err(MathError::Limit);
                 }
+                meter.reserve(80)?;
                 strings.push(std::mem::take(&mut current));
             }
             _ => (),
@@ -185,75 +238,91 @@ fn shared_strings(zip: &mut Archive) -> Checked<Vec<String>> {
     })?;
     Ok(strings)
 }
-fn styles(zip: &mut Archive) -> Checked<Vec<bool>> {
+fn styles(zip: &mut Archive, meter: &mut Meter<'_>) -> Checked<Vec<std::sync::Arc<NumberFormat>>> {
     if zip.index_for_name("xl/styles.xml").is_none() {
         return Ok(Vec::new());
     }
-    let mut custom = BTreeSet::<u32>::new();
-    let mut dates = Vec::new();
-    xml(&part(zip, "xl/styles.xml")?, |stack, node| {
+    let mut custom = BTreeMap::<u32, String>::new();
+    let mut indices = Vec::new();
+    xml_part(zip, "xl/styles.xml", meter, |stack, node, meter| {
         if let Node::Start(a) = node {
             match last(stack) {
                 "numFmt" => {
                     if let (Some(id), Some(code)) = (a.get("numFmtId"), a.get("formatCode")) {
-                        // Recognize date/time tokens outside quoted literals and escaped characters.
-                        let mut literal = false;
-                        let mut escape = false;
-                        let mut bracket = false;
-                        let has = code.chars().any(|c| {
-                            if escape {
-                                escape = false;
-                                return false;
-                            }
-                            match c {
-                                '\\' | '_' | '*' => {
-                                    escape = true;
-                                    false
-                                }
-                                '"' => {
-                                    literal = !literal;
-                                    false
-                                }
-                                '[' => {
-                                    bracket = true;
-                                    false
-                                }
-                                ']' => {
-                                    bracket = false;
-                                    false
-                                }
-                                _ => {
-                                    !literal
-                                        && !bracket
-                                        && matches!(
-                                            c.to_ascii_lowercase(),
-                                            'y' | 'd' | 'h' | 's' | 'm'
-                                        )
-                                }
-                            }
-                        });
-                        if has {
-                            custom.insert(id.parse().map_err(invalid)?);
+                        if custom.len() >= 4096 || code.len() > MAX_FIELD {
+                            return Err(MathError::Limit);
+                        }
+                        meter.reserve(64 + budget::text(code.len()))?;
+                        if custom
+                            .insert(id.parse().map_err(invalid)?, code.clone())
+                            .is_some()
+                        {
+                            return Err(MathError::InvalidInput);
                         }
                     }
                 }
                 "xf" if stack.iter().any(|n| n == "cellXfs") => {
-                    if dates.len() >= 4096 {
+                    if indices.len() >= 4096 {
                         return Err(MathError::Limit);
                     }
-                    let id = a
-                        .get("numFmtId")
-                        .map_or(Ok(0), |s| s.parse::<u32>())
-                        .map_err(invalid)?;
-                    dates
-                        .push(matches!(id,14..=22|27..=36|45..=47|50..=58) || custom.contains(&id));
+                    meter.reserve(128)?;
+                    indices.push(
+                        a.get("numFmtId")
+                            .map_or(Ok(0), |value| value.parse::<u32>())
+                            .map_err(invalid)?,
+                    );
                 }
                 _ => (),
             }
         }
         Ok(())
     })?;
-    Ok(dates)
+    let mut unique = BTreeMap::new();
+    Ok(indices
+        .into_iter()
+        .map(|id| {
+            unique
+                .entry(id)
+                .or_insert_with(|| {
+                    let code = custom.remove(&id);
+                    let (custom_temporal, custom_time) =
+                        code.as_deref().map_or((false, false), temporal_format);
+                    let temporal = matches!(id,14..=22|27..=36|45..=47|50..=58) || custom_temporal;
+                    let has_time = matches!(id,18..=22|45..=47) || custom_time;
+                    std::sync::Arc::new(NumberFormat {
+                        id,
+                        code,
+                        temporal,
+                        has_time,
+                    })
+                })
+                .clone()
+        })
+        .collect())
+}
+
+fn temporal_format(code: &str) -> (bool, bool) {
+    let (mut quoted, mut bracket, mut escaped) = (false, false, false);
+    let (mut temporal, mut time) = (false, false);
+    for c in code.chars() {
+        if escaped {
+            escaped = false;
+            continue;
+        }
+        match c.to_ascii_lowercase() {
+            '"' if !bracket => quoted = !quoted,
+            '\\' | '_' | '*' if !quoted && !bracket => escaped = true,
+            '[' if !quoted => bracket = true,
+            ']' if !quoted => bracket = false,
+            'h' | 's' if !quoted && !bracket => {
+                temporal = true;
+                time = true;
+            }
+            'y' | 'd' | 'm' if !quoted && !bracket => temporal = true,
+            _ => {}
+        }
+    }
+    (temporal, time)
 }
 
 #[derive(Default)]
@@ -267,53 +336,95 @@ struct XCell {
     stored: bool,
 }
 impl XCell {
-    fn read(self, shared: &[String], dates: &[bool], epoch1904: bool) -> Checked<Cell> {
-        if self.formula.is_some() && (!self.stored || self.v.is_empty()) {
-            let mut unknown = Cell::new("", Origin::Formula)?;
-            unknown.formula = self.formula;
-            return Ok(unknown);
-        }
-        let mut cell = match self.kind.as_str() {
-            "s" => Cell::stored(
-                shared
-                    .get(self.v.parse::<usize>().map_err(invalid)?)
-                    .ok_or(MathError::InvalidInput)?,
-            )?,
-            "inlineStr" => Cell::stored(&self.inline)?,
-            "b" => Cell::stored(match self.v.as_str() {
-                "1" => "true",
-                "0" => "false",
-                _ => return Err(MathError::InvalidInput),
-            })?,
-            "e" => Cell::new(&self.v, Origin::Error)?,
-            "d" => Cell::new(&self.v, Origin::IsoDate)?,
-            "str" => Cell::stored(&self.v)?,
-            "" | "n" => {
-                if self.stored && self.style.is_some_and(|i| dates.get(i) == Some(&true)) {
-                    Cell::new(
-                        &self.v,
-                        if epoch1904 {
-                            Origin::DateSerial1904
-                        } else {
-                            Origin::DateSerial1900
-                        },
-                    )?
-                } else {
-                    Cell::stored(&self.v)?
-                }
-            }
+    fn read(
+        self,
+        shared: &[String],
+        formats: &[std::sync::Arc<NumberFormat>],
+        epoch: Epoch,
+    ) -> Checked<Cell> {
+        let cell_type = match self.kind.as_str() {
+            "" | "n" => ExcelType::Number,
+            "s" => ExcelType::Shared,
+            "inlineStr" => ExcelType::Inline,
+            "str" => ExcelType::Text,
+            "b" => ExcelType::Boolean,
+            "d" => ExcelType::Date,
+            "e" => ExcelType::Error,
             _ => return Err(MathError::Unsupported),
         };
-        if let Some(f) = self.formula {
-            cell.formula = Some(f);
-            if cell.origin != Origin::Error {
-                cell.origin = if self.stored && !self.v.is_empty() {
-                    Origin::CachedFormula
-                } else {
-                    Origin::Formula
-                };
+        let format = formats.get(self.style.unwrap_or_default()).cloned();
+        let date = match cell_type {
+            ExcelType::Date => Some(DateOrigin {
+                representation: DateRepresentation::Iso,
+                epoch,
+            }),
+            ExcelType::Number if format.as_ref().is_some_and(|f| f.temporal) => Some(DateOrigin {
+                representation: DateRepresentation::Serial,
+                epoch,
+            }),
+            _ => None,
+        };
+        let cache = self.formula.as_ref().map(|_| {
+            if !self.stored {
+                CacheStatus::Missing
+            } else if self.v.is_empty() {
+                CacheStatus::Empty
+            } else if matches!(cell_type, ExcelType::Error) {
+                CacheStatus::Error
+            } else {
+                CacheStatus::Stored
             }
-        }
+        });
+        let unavailable = matches!(cache, Some(CacheStatus::Missing | CacheStatus::Empty));
+        let value = if unavailable {
+            ""
+        } else {
+            match cell_type {
+                ExcelType::Shared => shared
+                    .get(self.v.parse::<usize>().map_err(invalid)?)
+                    .ok_or(MathError::InvalidInput)?,
+                ExcelType::Inline => &self.inline,
+                ExcelType::Boolean => match self.v.as_str() {
+                    "1" => "true",
+                    "0" => "false",
+                    "" => "",
+                    _ => return Err(MathError::InvalidInput),
+                },
+                _ => &self.v,
+            }
+        };
+        let origin = match (cell_type, cache, date) {
+            (_, Some(CacheStatus::Missing | CacheStatus::Empty), _) => Origin::Formula,
+            (ExcelType::Error, _, _) => Origin::Error,
+            (_, _, _) if value.is_empty() => Origin::Empty,
+            (_, Some(CacheStatus::Stored), _) => Origin::CachedFormula,
+            (ExcelType::Date, _, _) => Origin::IsoDate,
+            (_, _, Some(_)) => match epoch {
+                Epoch::Excel1900 => Origin::DateSerial1900,
+                Epoch::Excel1904 => Origin::DateSerial1904,
+            },
+            _ => Origin::Stored,
+        };
+        let (source_type, grammar) = match (cell_type, date, origin) {
+            (_, _, Origin::Empty) => (SourceType::Empty, Grammar::Xlsx),
+            (_, Some(_), _) => (SourceType::Date, Grammar::Xlsx),
+            (ExcelType::Number, _, _) => (SourceType::Number, Grammar::Xlsx),
+            (ExcelType::Boolean, _, _) => (SourceType::Boolean, Grammar::Xlsx),
+            (ExcelType::Error, _, _) => (SourceType::Error, Grammar::Xlsx),
+            _ => (SourceType::Text, Grammar::Text),
+        };
+        let mut cell = Cell::native(value, origin, source_type, grammar)?;
+        let differing_raw_value = (self.stored && value != self.v).then_some(self.v);
+        cell.formula = self.formula;
+        cell.workbook = Some(Box::new(WorkbookMeta {
+            cell_type,
+            style_index: self.style,
+            format,
+            has_raw_value: self.stored,
+            differing_raw_value,
+            cache,
+            date,
+        }));
         Ok(cell)
     }
 }
@@ -333,11 +444,11 @@ fn column(reference: &str) -> Checked<(usize, usize)> {
     }
     Ok((col - 1, row))
 }
-pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
-    let mut zip = archive(bytes)?;
+pub(super) fn read(bytes: &[u8], c: &Config, meter: &mut Meter<'_>) -> Checked<Table> {
+    let mut zip = archive(bytes, meter)?;
     let mut sheets = Vec::<(String, String)>::new();
     let mut epoch1904 = false;
-    xml(&part(&mut zip, "xl/workbook.xml")?, |stack, node| {
+    xml_part(&mut zip, "xl/workbook.xml", meter, |stack, node, meter| {
         if let Node::Start(a) = node {
             match last(stack) {
                 "workbookPr" => {
@@ -347,16 +458,19 @@ pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
                     if sheets.len() >= 128 {
                         return Err(MathError::Limit);
                     }
-                    let name = a.get("name").ok_or(MathError::InvalidInput)?.clone();
-                    if name.len() > 128 || sheets.iter().any(|(s, _)| s == &name) {
+                    let name = a.get("name").ok_or(MathError::InvalidInput)?;
+                    if name.len() > 128 || sheets.iter().any(|(s, _)| s == name) {
                         return Err(MathError::InvalidInput);
                     }
                     let id = a
                         .iter()
                         .find(|(k, _)| k.as_str() == "r:id" || k.ends_with(":id"))
-                        .map(|(_, v)| v.clone())
+                        .map(|(_, v)| v)
                         .ok_or(MathError::InvalidInput)?;
-                    sheets.push((name, id));
+                    meter.reserve(
+                        2 * budget::COLUMN + 2 * budget::text(name.len()) + budget::text(id.len()),
+                    )?;
+                    sheets.push((name.clone(), id.clone()));
                 }
                 _ => (),
             }
@@ -370,9 +484,11 @@ pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
     }
     .ok_or(MathError::InvalidInput)?;
     let mut path = None;
-    xml(
-        &part(&mut zip, "xl/_rels/workbook.xml.rels")?,
-        |stack, node| {
+    xml_part(
+        &mut zip,
+        "xl/_rels/workbook.xml.rels",
+        meter,
+        |stack, node, meter| {
             if let Node::Start(a) = node
                 && last(stack) == "Relationship"
                 && a.get("Id") == Some(id)
@@ -384,6 +500,7 @@ pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
                     return Err(MathError::Unsupported);
                 }
                 let target = a.get("Target").ok_or(MathError::InvalidInput)?;
+                meter.reserve(budget::text(target.len() + 3))?;
                 let full = if let Some(p) = target.strip_prefix('/') {
                     p.to_owned()
                 } else {
@@ -401,19 +518,27 @@ pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
             Ok(())
         },
     )?;
-    let shared = shared_strings(&mut zip)?;
-    let dates = styles(&mut zip)?;
+    let shared = shared_strings(&mut zip, meter)?;
+    let formats = styles(&mut zip, meter)?;
+    let epoch = if epoch1904 {
+        Epoch::Excel1904
+    } else {
+        Epoch::Excel1900
+    };
     let mut table = Table {
         sheet: Some(name.clone()),
+        workbook_epoch: Some(epoch),
         sheets: sheets.iter().map(|(s, _)| s.clone()).collect(),
         ..Default::default()
     };
     let mut cell = None::<XCell>;
     let mut row = Vec::new();
     let mut row_no = 0;
-    xml(
-        &part(&mut zip, &path.ok_or(MathError::InvalidInput)?)?,
-        |stack, node| {
+    xml_part(
+        &mut zip,
+        &path.ok_or(MathError::InvalidInput)?,
+        meter,
+        |stack, node, meter| {
             match (last(stack), node) {
                 ("row", Node::Start(a)) => {
                     let next = a
@@ -428,8 +553,10 @@ pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
                         return Err(MathError::InvalidInput);
                     }
                     for _ in row_no + 1..next {
+                        meter.reserve(budget::ROW + table.columns.len() * budget::CELL)?;
                         table.push(vec![Cell::new("", Origin::Absent)?; table.columns.len()])?;
                     }
+                    meter.reserve(budget::ROW)?;
                     row_no = next;
                     row.clear();
                 }
@@ -443,6 +570,7 @@ pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
                     {
                         return Err(MathError::InvalidInput);
                     }
+                    meter.reserve(a.get("t").map_or(0, |value| budget::text(value.len())))?;
                     cell = Some(XCell {
                         column: col,
                         kind: a.get("t").cloned().unwrap_or_default(),
@@ -466,32 +594,65 @@ pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
                 }
                 ("f", Node::Text(s)) => {
                     if let Some(f) = cell.as_mut().and_then(|x| x.formula.as_mut()) {
-                        add(f, s)?
+                        add(f, s, meter)?
                     }
                 }
                 ("v", Node::Text(s)) => {
                     if let Some(x) = &mut cell {
-                        add(&mut x.v, s)?
+                        add(&mut x.v, s, meter)?
                     }
                 }
                 ("t", Node::Text(s)) if stack.iter().any(|n| n == "is") => {
                     if let Some(x) = &mut cell {
-                        add(&mut x.inline, s)?
+                        add(&mut x.inline, s, meter)?
                     }
                 }
                 ("c", Node::End) => {
                     let x = cell.take().ok_or(MathError::InvalidInput)?;
+                    let scratch = budget::text(x.kind.len())
+                        + budget::text(x.v.len())
+                        + budget::text(x.inline.len())
+                        + x.formula.as_ref().map_or(0, |s| budget::text(s.len()));
+                    let shared_copy = if x.kind == "s" {
+                        x.v.parse::<usize>()
+                            .ok()
+                            .and_then(|i| shared.get(i))
+                            .map_or(0, |s| budget::text(s.len()))
+                    } else {
+                        0
+                    };
+                    let style_code = x
+                        .style
+                        .and_then(|i| formats.get(i))
+                        .and_then(|f| f.code.as_ref())
+                        .map_or(0, |code| budget::text(code.len()));
+                    let payload = 2 * scratch + shared_copy + style_code + 512;
+                    meter.reserve((x.column + 1 - row.len()) * budget::CELL + payload)?;
                     row.resize(x.column, Cell::new("", Origin::Absent)?);
-                    row.push(x.read(&shared, &dates, epoch1904)?);
+                    let cell = x.read(&shared, &formats, epoch)?;
+                    let stored = budget::cell_storage(&cell);
+                    if stored > payload {
+                        meter.reserve(stored - payload)?;
+                    } else {
+                        meter.release(payload - stored);
+                    }
+                    meter.release(scratch);
+                    row.push(cell);
                 }
                 ("row", Node::End) => {
                     let mut r = std::mem::take(&mut row);
                     if table.columns.is_empty() {
+                        meter.reserve(
+                            r.iter()
+                                .map(|cell| budget::COLUMN + budget::text(cell.value.len()))
+                                .sum(),
+                        )?;
                         import::first_row(&mut table, r, c.header)?;
                     } else {
                         if r.len() > table.columns.len() {
                             return Err(MathError::InvalidInput);
                         }
+                        meter.reserve((table.columns.len() - r.len()) * budget::CELL)?;
                         r.resize(table.columns.len(), Cell::new("", Origin::Absent)?);
                         table.push(r)?;
                     }

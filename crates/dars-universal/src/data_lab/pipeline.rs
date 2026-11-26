@@ -162,27 +162,143 @@ impl Source {
     fn get(&self, row: &[Cell], d: Decimal) -> Checked<Option<BigRational>> {
         match self {
             Self::Constant(r) => Ok(Some(r.clone())),
-            Self::Column(i) if row[*i].usable() => Ok(Some(number(&row[*i].value, d)?)),
+            Self::Column(i) if row[*i].usable() => Ok(Some(row[*i].numeric(d)?)),
             _ => Ok(None),
         }
     }
 }
 #[derive(Ord, PartialOrd, Eq, PartialEq)]
 enum Key {
-    Missing(Origin),
+    Unavailable(Origin, String),
     Number(BigRational),
+    Date(jiff::civil::DateTime, u8),
     Text(String),
 }
 fn key(c: &Cell, k: Kind, d: Decimal) -> Checked<Key> {
     if !c.usable() {
-        Ok(Key::Missing(c.origin))
+        Ok(Key::Unavailable(c.origin, c.value.clone()))
     } else if numeric(k) {
-        Ok(Key::Number(number(&c.value, d)?))
+        Ok(Key::Number(c.numeric(d)?))
+    } else if k == Kind::Date {
+        let (civil, basis) = c.date_key()?;
+        Ok(Key::Date(civil, basis))
     } else {
-        Ok(Key::Text(c.value.clone()))
+        Ok(Key::Text(
+            c.canonical(k, d)?.ok_or(MathError::Domain)?.into_owned(),
+        ))
     }
 }
-fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
+impl Key {
+    fn storage_bytes(&self) -> usize {
+        match self {
+            Self::Unavailable(_, s) | Self::Text(s) => budget::text(s.len()),
+            Self::Number(r) => {
+                256 + 4 * ((r.numer().bits() + r.denom().bits()) as usize).div_ceil(8)
+            }
+            Self::Date(_, _) => 0,
+        }
+    }
+}
+fn plan(t: &Table, step: &Step, meter: &mut Meter<'_>) -> Checked<()> {
+    let rows = t.rows.len();
+    match step {
+        Step::Select { columns } => {
+            let indices = column_indices(t, columns)?;
+            meter.reserve(
+                indices
+                    .iter()
+                    .map(|i| budget::COLUMN + budget::text(t.columns[*i].name.len()))
+                    .sum(),
+            )?;
+            let max_clone = t
+                .rows
+                .iter()
+                .map(|row| {
+                    indices
+                        .iter()
+                        .map(|i| budget::cell_storage(&row[*i]))
+                        .sum::<usize>()
+                })
+                .max()
+                .unwrap_or(0);
+            meter.reserve(budget::ROW + indices.len() * budget::CELL + max_clone)
+        }
+        Step::Rename { name, .. } => meter.reserve(budget::text(name.len())),
+        Step::Cast { .. } => meter.reserve(budget::RATIONAL_SCRATCH),
+        Step::DropMissing { .. } => Ok(()),
+        Step::FillMissing { column, value } => {
+            let i = t.index(column)?;
+            let missing = t.rows.iter().filter(|row| row[i].missing()).count();
+            meter.reserve((missing + 1) * budget::text(value.len()) + budget::RATIONAL_SCRATCH)
+        }
+        Step::Filter { column, value, .. } => {
+            let i = t.index(column)?;
+            let longest = t.rows.iter().map(|r| r[i].value.len()).max().unwrap_or(0);
+            meter.reserve(
+                rows * budget::ROW
+                    + budget::text(longest)
+                    + budget::text(value.len())
+                    + budget::RATIONAL_SCRATCH,
+            )
+        }
+        Step::Sort { column, .. } => {
+            t.index(column)?;
+            meter.reserve(rows * 384 + budget::RATIONAL_SCRATCH + budget::text(MAX_FIELD))
+        }
+        Step::Deduplicate { columns } => {
+            let indices = column_indices(t, columns)?;
+            meter.reserve(
+                rows * budget::ROW
+                    + 128
+                    + indices.len() * 128
+                    + budget::RATIONAL_SCRATCH
+                    + budget::text(MAX_FIELD),
+            )
+        }
+        Step::Group { name, .. } => meter.reserve(
+            2 * budget::COLUMN
+                + budget::text(name.len())
+                + budget::RATIONAL_SCRATCH
+                + budget::text(MAX_FIELD),
+        ),
+        Step::Calculate { name, .. } => meter.reserve(
+            rows * budget::CELL
+                + budget::COLUMN
+                + budget::text(name.len())
+                + budget::RATIONAL_SCRATCH,
+        ),
+        Step::Text { column, name, .. } => {
+            let index = t.index(column)?;
+            let temporary = if t
+                .rows
+                .iter()
+                .any(|row| row[index].source_type == SourceType::Date)
+            {
+                budget::RATIONAL_SCRATCH
+            } else {
+                0
+            };
+            meter.reserve(
+                rows * budget::CELL + budget::COLUMN + budget::text(name.len()) + temporary,
+            )
+        }
+        Step::Join { name, lookup, .. } => {
+            meter.reserve(
+                rows * (budget::CELL + 16)
+                    + budget::COLUMN
+                    + budget::text(name.len())
+                    + budget::RATIONAL_SCRATCH
+                    + budget::text(MAX_FIELD),
+            )?;
+            for [key, value] in lookup {
+                meter.reserve(256 + budget::text(key.len()) + budget::text(value.len()))?;
+            }
+            Ok(())
+        }
+    }
+}
+
+fn run(t: &mut Table, step: &Step, d: Decimal, meter: &mut Meter<'_>) -> Checked<()> {
     match step {
         Step::Select { columns } => {
             let indices = column_indices(t, columns)?;
@@ -203,13 +319,12 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
         }
         Step::FillMissing { column, value } => {
             let i = t.index(column)?;
-            let replacement = Cell::stored(value)?;
-            if !valid_type(value, t.columns[i].kind, d) {
-                return Err(MathError::Domain);
-            }
+            let replacement = Cell::scalar(t.columns[i].kind, value, d)?;
             for r in &mut t.rows {
                 if r[i].missing() {
+                    let from_missing = r[i].origin;
                     r[i] = replacement.clone();
+                    r[i].derive(DerivationOp::FillMissing, Some(from_missing), false);
                 }
             }
         }
@@ -220,7 +335,7 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
         } => {
             let i = t.index(column)?;
             let k = t.columns[i].kind;
-            let rhs = key(&Cell::stored(value)?, k, d)?;
+            let rhs = key(&Cell::scalar(k, value, d)?, k, d)?;
             let mut kept = Vec::new();
             for row in t.rows.drain(..) {
                 if !row[i].usable() {
@@ -247,7 +362,11 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
             let mut keyed = t
                 .rows
                 .drain(..)
-                .map(|r| Ok((key(&r[i], k, d)?, r)))
+                .map(|r| {
+                    let key = key(&r[i], k, d)?;
+                    meter.reserve(key.storage_bytes())?;
+                    Ok((key, r))
+                })
                 .collect::<Checked<Vec<_>>>()?;
             keyed.sort_by(|a, b| {
                 if *descending {
@@ -261,9 +380,30 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
         Step::Deduplicate { columns } => {
             let indices = column_indices(t, columns)?;
             let mut seen = BTreeSet::new();
-            t.rows.retain(|row| {
-                seen.insert(indices.iter().map(|i| row[*i].clone()).collect::<Vec<_>>())
-            });
+            let kinds = indices
+                .iter()
+                .map(|&i| t.columns[i].kind)
+                .collect::<Vec<_>>();
+            let mut kept = Vec::new();
+            for row in t.rows.drain(..) {
+                let structure = 128 + indices.len() * 128;
+                meter.reserve(structure)?;
+                let mut bytes = structure;
+                let mut keys = Vec::with_capacity(indices.len());
+                for (&i, &kind) in indices.iter().zip(&kinds) {
+                    let item = key(&row[i], kind, d)?;
+                    let cost = item.storage_bytes();
+                    meter.reserve(cost)?;
+                    bytes += cost;
+                    keys.push(item);
+                }
+                if seen.insert(keys) {
+                    kept.push(row);
+                } else {
+                    meter.release(bytes);
+                }
+            }
+            t.rows = kept;
         }
         Step::Calculate {
             left,
@@ -275,7 +415,7 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
             let b = Source::resolve(right, t, d)?;
             append(t, name, Kind::Decimal)?;
             for row in &mut t.rows {
-                let value = match (a.get(row, d)?, b.get(row, d)?) {
+                let mut value = match (a.get(row, d)?, b.get(row, d)?) {
                     (Some(x), Some(y)) => {
                         if matches!(operator, Operator::Divide) && y.is_zero() {
                             Cell::new("", Origin::Invalid)?
@@ -286,7 +426,10 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
                                 Operator::Multiply => x * y,
                                 Operator::Divide => x / y,
                             };
-                            Cell::stored(&bounded(calculated)?.to_string())?
+                            let calculated = bounded(calculated)?;
+                            meter
+                                .reserve(budget::text(budget::rational_text_bytes(&calculated)))?;
+                            Cell::stored(&calculated.to_string())?
                         }
                     }
                     _ => {
@@ -304,6 +447,7 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
                         )?
                     }
                 };
+                value.derive(DerivationOp::Calculate, None, true);
                 row.push(value);
             }
         }
@@ -316,15 +460,41 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
             append(t, name, Kind::Text)?;
             for row in &mut t.rows {
                 let v = &row[i];
-                let cell = if v.usable() {
-                    Cell::stored(&match transform {
-                        TextOp::Trim => v.value.trim().to_owned(),
-                        TextOp::Lowercase => v.value.to_lowercase(),
-                        TextOp::Uppercase => v.value.to_uppercase(),
-                    })?
+                let mut cell = if v.usable() {
+                    let text = v.text_input();
+                    let projected = match transform {
+                        TextOp::Trim => text.trim().len(),
+                        TextOp::Lowercase => text
+                            .chars()
+                            .flat_map(char::to_lowercase)
+                            .map(char::len_utf8)
+                            .sum(),
+                        TextOp::Uppercase => text
+                            .chars()
+                            .flat_map(char::to_uppercase)
+                            .map(char::len_utf8)
+                            .sum(),
+                    };
+                    if projected > MAX_FIELD {
+                        return Err(MathError::Limit);
+                    }
+                    let output = budget::text(projected);
+                    meter.reserve(2 * output)?;
+                    let mut result = Cell::stored(&match transform {
+                        TextOp::Trim => text.trim().to_owned(),
+                        TextOp::Lowercase => text.to_lowercase(),
+                        TextOp::Uppercase => text.to_uppercase(),
+                    })?;
+                    if v.source_type == SourceType::Date {
+                        result.source_type = SourceType::Date;
+                    }
+                    meter.release(output);
+                    result
                 } else {
+                    meter.reserve(budget::cell_storage(v))?;
                     v.clone()
                 };
+                cell.derive(DerivationOp::Text, None, false);
                 row.push(cell);
             }
         }
@@ -335,26 +505,46 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
             mode,
         } => {
             let i = t.index(column)?;
+            let kind = t.columns[i].kind;
             let mut map = BTreeMap::new();
             if lookup.len() > 1024 {
                 return Err(MathError::Limit);
             }
             for [k, v] in lookup {
-                if map.insert(k, Cell::stored(v)?).is_some() {
+                let scalar = Cell::scalar(kind, k, d)?;
+                if !scalar.usable() {
+                    return Err(MathError::Domain);
+                }
+                let key = key(&scalar, kind, d)?;
+                meter.reserve(key.storage_bytes())?;
+                let mut value = Cell::stored(v)?;
+                value.derive(DerivationOp::Join, None, false);
+                if map.insert(key, value).is_some() {
                     return Err(MathError::InvalidInput);
                 }
             }
             append(t, name, Kind::Text)?;
+            let mut matches = Vec::with_capacity(t.rows.len());
+            for row in &t.rows {
+                let matched = if row[i].usable() {
+                    map.get(&key(&row[i], kind, d)?)
+                } else {
+                    None
+                };
+                if let Some(c) = matched {
+                    meter.reserve(budget::cell_storage(c))?;
+                }
+                matches.push(matched);
+            }
+            let mut matches = matches.into_iter();
             t.rows.retain_mut(|r| {
-                if let Some(c) = r[i].usable().then(|| map.get(&r[i].value)).flatten() {
+                if let Some(c) = matches.next().flatten() {
                     r.push(c.clone());
                     true
                 } else if matches!(mode, JoinMode::Left) {
-                    r.push(Cell {
-                        value: String::new(),
-                        origin: Origin::Absent,
-                        formula: None,
-                    });
+                    let mut missing = Cell::absent();
+                    missing.derive(DerivationOp::Join, None, false);
+                    r.push(missing);
                     true
                 } else {
                     false
@@ -375,14 +565,27 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
             if !matches!(aggregate, Aggregate::Count) && !numeric(t.columns[i].kind) {
                 return Err(MathError::Domain);
             }
-            let mut groups = BTreeMap::<Cell, (usize, BigRational)>::new();
+            let mut groups = BTreeMap::<Key, (Cell, usize, BigRational)>::new();
             for row in &t.rows {
-                let (n, val) = groups
-                    .entry(row[b].clone())
-                    .or_insert_with(|| (0, BigRational::zero()));
+                let group_key = key(&row[b], t.columns[b].kind, d)?;
+                let estimate = group_key.storage_bytes();
+                let (_, n, val) = match groups.entry(group_key) {
+                    std::collections::btree_map::Entry::Occupied(entry) => entry.into_mut(),
+                    std::collections::btree_map::Entry::Vacant(entry) => {
+                        let numeric = !matches!(aggregate, Aggregate::Count);
+                        meter.reserve(
+                            320 + budget::ROW
+                                + 3 * budget::CELL
+                                + budget::cell_storage(&row[b])
+                                + estimate
+                                + if numeric { 12 * 1024 } else { budget::text(8) },
+                        )?;
+                        entry.insert((row[b].clone(), 0, BigRational::zero()))
+                    }
+                };
                 if row[i].usable() {
                     if !matches!(aggregate, Aggregate::Count) {
-                        let x = number(&row[i].value, d)?;
+                        let x = row[i].numeric(d)?;
                         match aggregate {
                             Aggregate::Min if *n == 0 || x.cmp(val) == Ordering::Less => *val = x,
                             Aggregate::Max if *n == 0 || x.cmp(val) == Ordering::Greater => {
@@ -413,8 +616,8 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
             ];
             t.rows = groups
                 .into_iter()
-                .map(|(k, (n, v))| {
-                    let cell = match aggregate {
+                .map(|(_, (k, n, v))| {
+                    let mut cell = match aggregate {
                         Aggregate::Count => Cell::stored(&n.to_string())?,
                         _ if n == 0 => Cell::new("", Origin::Null)?,
                         Aggregate::Mean => {
@@ -422,6 +625,7 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
                         }
                         _ => Cell::stored(&v.to_string())?,
                     };
+                    cell.derive(DerivationOp::Group, None, true);
                     Ok(vec![k, cell])
                 })
                 .collect::<Checked<_>>()?;
@@ -429,7 +633,12 @@ fn run(t: &mut Table, step: &Step, d: Decimal) -> Checked<()> {
     }
     Ok(())
 }
-pub(super) fn apply(t: &mut Table, c: &Config) -> Checked<Vec<Value>> {
+pub(super) fn apply(
+    t: &mut Table,
+    c: &Config,
+    budget: &Budget,
+    source_metadata: usize,
+) -> Checked<Vec<Value>> {
     let mut trace = Vec::new();
     let mut work = 0;
     for (index, step) in c.steps.iter().enumerate() {
@@ -438,7 +647,14 @@ pub(super) fn apply(t: &mut Table, c: &Config) -> Checked<Vec<Value>> {
         if work > 12_000_000 {
             return Err(MathError::Limit);
         }
-        run(t, step, c.decimal)?;
+        let content = t.storage_bytes() + source_metadata + (index + 1) * 1024;
+        let mut meter = budget.stage(Stage::Transform, content)?;
+        plan(t, step, &mut meter)?;
+        run(t, step, c.decimal, &mut meter)?;
+        budget.stage(
+            Stage::Transform,
+            t.storage_bytes() + source_metadata + (index + 1) * 1024,
+        )?;
         trace.push(json!({"index":index,"operation":serde_json::to_value(step).map_err(|_|MathError::InvalidInput)?["op"],"input_rows":before,"output_rows":t.rows.len(),"reduced_rows":before.saturating_sub(t.rows.len())}));
     }
     Ok(trace)

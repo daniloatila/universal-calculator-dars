@@ -53,17 +53,33 @@ pub(super) fn first_row(table: &mut Table, row: Vec<Cell>, header: Header) -> Ch
     }
 }
 
-pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
+pub(super) fn read(bytes: &[u8], c: &Config, meter: &mut Meter<'_>) -> Checked<Table> {
     if matches!(c.format, Format::Xlsx) {
-        return workbook::read(bytes, c);
+        return workbook::read(bytes, c, meter);
+    }
+    if !matches!(c.encoding, Encoding::Utf8) {
+        meter.reserve(bytes.len() * 3)?;
     }
     let input = text(bytes, c.encoding)?;
     if matches!(c.format, Format::Json) {
+        // The JSON reader may retain an input-sized scratch buffer for escaped tokens.
+        meter.reserve(input.len().saturating_mul(2))?;
         let mut des = serde_json::Deserializer::from_str(&input);
         let mut table = Table::default();
-        JsonRows(&mut table)
-            .deserialize(&mut des)
-            .map_err(|_| MathError::InvalidInput)?;
+        let mut exhausted = false;
+        JsonRows {
+            table: &mut table,
+            meter,
+            exhausted: &mut exhausted,
+        }
+        .deserialize(&mut des)
+        .map_err(|_| {
+            if exhausted {
+                MathError::ResourceBudget
+            } else {
+                MathError::InvalidInput
+            }
+        })?;
         des.end().map_err(|_| MathError::InvalidInput)?;
         if table.columns.is_empty() {
             return Err(MathError::InvalidInput);
@@ -78,6 +94,8 @@ pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
     if ![',', ';', '\t', '|'].contains(&delimiter) {
         return Err(MathError::InvalidInput);
     }
+    let max_record = record_extent(input.as_bytes(), delimiter as u8)?;
+    meter.reserve(max_record * 3 + 8192 + MAX_COLUMNS * 32)?;
     let mut r = csv::ReaderBuilder::new()
         .delimiter(delimiter as u8)
         .has_headers(false)
@@ -91,10 +109,17 @@ pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
         if record.len() > MAX_COLUMNS {
             return Err(MathError::Limit);
         }
-        let row = record
-            .iter()
-            .map(Cell::stored)
-            .collect::<Checked<Vec<_>>>()?;
+        meter.reserve(
+            budget::ROW
+                + record.len() * budget::CELL
+                + record.iter().map(|s| budget::text(s.len())).sum::<usize>(),
+        )?;
+        let mut row = Vec::new();
+        row.try_reserve_exact(record.len())
+            .map_err(|_| MathError::ResourceBudget)?;
+        for value in &record {
+            row.push(Cell::stored(value)?);
+        }
         if table.columns.is_empty() {
             first_row(&mut table, row, c.header)?
         } else {
@@ -107,82 +132,178 @@ pub(super) fn read(bytes: &[u8], c: &Config) -> Checked<Table> {
     Ok(table)
 }
 
+// Preflight the physical record dimensions before the CSV reader grows its record buffers.
+fn record_extent(input: &[u8], delimiter: u8) -> Checked<usize> {
+    let (mut quoted, mut field_start) = (false, true);
+    let (mut field, mut record, mut columns, mut peak) = (0usize, 0usize, 1usize, 0usize);
+    let mut bytes = input.iter().copied().peekable();
+    while let Some(byte) = bytes.next() {
+        record += 1;
+        if quoted && byte == b'"' {
+            if bytes.peek() == Some(&b'"') {
+                bytes.next();
+                field += 1;
+                record += 1;
+            } else {
+                quoted = false;
+            }
+        } else if quoted {
+            field += 1;
+        } else if byte == b'"' && field_start {
+            quoted = true;
+            field_start = false;
+        } else if byte == delimiter {
+            columns += 1;
+            field_start = true;
+            field = 0;
+        } else if matches!(byte, b'\r' | b'\n') {
+            peak = peak.max(record);
+            (field, record, columns, field_start) = (0, 0, 1, true);
+        } else {
+            field += 1;
+            field_start = false;
+        }
+        if field > MAX_FIELD || columns > MAX_COLUMNS {
+            return Err(MathError::Limit);
+        }
+    }
+    Ok(peak.max(record))
+}
+
 // Deserialize one row at a time. RawValue retains the source spelling of decimal and integer tokens.
-struct JsonRows<'a>(&'a mut Table);
-impl<'de> DeserializeSeed<'de> for JsonRows<'_> {
+struct JsonRows<'a, 'b> {
+    table: &'a mut Table,
+    meter: &'a mut Meter<'b>,
+    exhausted: &'a mut bool,
+}
+impl<'de> DeserializeSeed<'de> for JsonRows<'_, '_> {
     type Value = ();
     fn deserialize<D: serde::Deserializer<'de>>(self, d: D) -> Result<(), D::Error> {
         d.deserialize_seq(self)
     }
 }
-impl<'de> Visitor<'de> for JsonRows<'_> {
+fn reserve<E: serde::de::Error>(
+    meter: &mut Meter<'_>,
+    exhausted: &mut bool,
+    bytes: usize,
+) -> Result<(), E> {
+    meter.reserve(bytes).map_err(|error| {
+        *exhausted = true;
+        E::custom(error.as_str())
+    })
+}
+
+impl<'de> Visitor<'de> for JsonRows<'_, '_> {
     type Value = ();
     fn expecting(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.write_str("an array of flat records")
     }
     fn visit_seq<A: SeqAccess<'de>>(self, mut seq: A) -> Result<(), A::Error> {
-        while let Some(row) = seq.next_element::<JsonRow>()? {
-            if self.0.columns.is_empty() {
-                self.0
-                    .set_columns(row.0.keys().cloned().collect())
+        while let Some((row, workspace)) = seq.next_element_seed(JsonRow {
+            meter: self.meter,
+            exhausted: self.exhausted,
+        })? {
+            if self.table.columns.is_empty() {
+                reserve(
+                    self.meter,
+                    self.exhausted,
+                    row.keys()
+                        .map(|k| budget::COLUMN + budget::text(k.len()))
+                        .sum(),
+                )?;
+                self.table
+                    .set_columns(row.keys().cloned().collect())
                     .map_err(|e| A::Error::custom(e.as_str()))?;
             }
-            if row.0.keys().any(|k| self.0.index(k).is_err()) {
+            if row.keys().any(|k| self.table.index(k).is_err()) {
                 return Err(A::Error::custom("schema mismatch"));
             }
-            let mut fields = row.0;
+            reserve(
+                self.meter,
+                self.exhausted,
+                budget::ROW
+                    + self.table.columns.len() * budget::CELL
+                    + row.values().map(budget::cell_storage).sum::<usize>(),
+            )?;
+            let mut fields = row;
             let cells = self
-                .0
+                .table
                 .columns
                 .iter()
-                .map(|c| {
-                    fields.remove(&c.name).unwrap_or(Cell {
-                        value: String::new(),
-                        origin: Origin::Absent,
-                        formula: None,
-                    })
-                })
+                .map(|c| fields.remove(&c.name).unwrap_or_else(Cell::absent))
                 .collect();
-            self.0
+            self.table
                 .push(cells)
                 .map_err(|e| A::Error::custom(e.as_str()))?;
+            self.meter.release(workspace);
         }
         Ok(())
     }
 }
-struct JsonRow(BTreeMap<String, Cell>);
-impl<'de> Deserialize<'de> for JsonRow {
+struct JsonRow<'a, 'b> {
+    meter: &'a mut Meter<'b>,
+    exhausted: &'a mut bool,
+}
+struct JsonColumn(String);
+
+impl<'de> Deserialize<'de> for JsonColumn {
     fn deserialize<D: serde::Deserializer<'de>>(d: D) -> Result<Self, D::Error> {
-        struct Row;
-        impl<'de> Visitor<'de> for Row {
-            type Value = JsonRow;
-            fn expecting(&self, f: &mut fmt::Formatter) -> fmt::Result {
-                f.write_str("a flat record")
+        struct ColumnVisitor;
+        impl Visitor<'_> for ColumnVisitor {
+            type Value = JsonColumn;
+            fn expecting(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+                f.write_str("a column name of at most 128 bytes")
             }
-            fn visit_map<A: MapAccess<'de>>(self, mut map: A) -> Result<JsonRow, A::Error> {
-                let mut fields = BTreeMap::new();
-                while let Some(k) = map.next_key::<String>()? {
-                    if fields.len() >= MAX_COLUMNS || k.len() > 128 || fields.contains_key(&k) {
-                        return Err(A::Error::custom("invalid column"));
-                    }
-                    let raw = map.next_value::<&RawValue>()?.get();
-                    if raw.len() > MAX_FIELD * 6 {
-                        return Err(A::Error::custom("cell limit"));
-                    }
-                    let cell = match raw.as_bytes()[0] {
-                        b'{' | b'[' => return Err(A::Error::custom("nested cell")),
-                        b'"' => Cell::stored(
-                            &serde_json::from_str::<String>(raw).map_err(A::Error::custom)?,
-                        ),
-                        b'n' => Cell::new("", Origin::Null),
-                        _ => Cell::stored(raw),
-                    }
-                    .map_err(|e| A::Error::custom(e.as_str()))?;
-                    fields.insert(k, cell);
+            fn visit_str<E: serde::de::Error>(self, name: &str) -> Result<JsonColumn, E> {
+                if name.len() > 128 {
+                    return Err(E::custom("invalid column"));
                 }
-                Ok(JsonRow(fields))
+                Ok(JsonColumn(name.to_owned()))
             }
         }
-        d.deserialize_map(Row)
+        d.deserialize_string(ColumnVisitor)
+    }
+}
+
+impl<'de> DeserializeSeed<'de> for JsonRow<'_, '_> {
+    type Value = (BTreeMap<String, Cell>, usize);
+    fn deserialize<D: serde::Deserializer<'de>>(self, d: D) -> Result<Self::Value, D::Error> {
+        d.deserialize_map(self)
+    }
+}
+impl<'de> Visitor<'de> for JsonRow<'_, '_> {
+    type Value = (BTreeMap<String, Cell>, usize);
+    fn expecting(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        f.write_str("a flat record")
+    }
+    fn visit_map<A: MapAccess<'de>>(self, mut map: A) -> Result<Self::Value, A::Error> {
+        let mut fields = BTreeMap::new();
+        let mut workspace = 0;
+        while let Some(JsonColumn(k)) = map.next_key::<JsonColumn>()? {
+            if fields.len() >= MAX_COLUMNS || fields.contains_key(&k) {
+                return Err(A::Error::custom("invalid column"));
+            }
+            let raw = map.next_value::<&RawValue>()?.get();
+            if raw.len() > MAX_FIELD * 6 {
+                return Err(A::Error::custom("cell limit"));
+            }
+            let cost = budget::CELL * 2 + budget::text(k.len()) + budget::text(raw.len());
+            reserve(self.meter, self.exhausted, cost)?;
+            workspace += cost;
+            let cell = match raw.as_bytes()[0] {
+                b'{' | b'[' => return Err(A::Error::custom("nested cell")),
+                b'"' => {
+                    Cell::stored(&serde_json::from_str::<String>(raw).map_err(A::Error::custom)?)
+                }
+                b'n' => Cell::native("", Origin::Null, SourceType::Null, Grammar::Json),
+                b't' | b'f' => {
+                    Cell::native(raw, Origin::Stored, SourceType::Boolean, Grammar::Json)
+                }
+                _ => Cell::native(raw, Origin::Stored, SourceType::Number, Grammar::Json),
+            }
+            .map_err(|e| A::Error::custom(e.as_str()))?;
+            fields.insert(k, cell);
+        }
+        Ok((fields, workspace))
     }
 }

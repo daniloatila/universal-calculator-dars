@@ -1,11 +1,52 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import {
   MAX_CALCULATION_PROOF_BYTES, parseCalculationProof, parseCalculationProofFile,
   serializeCalculationProof, withExpressionLocale,
 } from '../src/calculation-proof.ts';
 import { localizeProofText, proofLabels } from '../src/calculation-proof-labels.ts';
+import {
+  MIN_DATA_LAB_BUDGET, decodeDataLabRecipe, defaultDataLabOptions, serializeDataLabRecipe, validateDataLabInput,
+} from '../src/data-lab-contract.ts';
+import { dataLabels } from '../src/data-lab-labels.ts';
 import { scientificRecord } from './fixtures/calculation-proof.ts';
+
+test('Data Lab imports historical proof records with their original digest and version', () => {
+  const original = readFileSync(new URL('./fixtures/data-lab-v1-proof.json', import.meta.url), 'utf8');
+  const legacy = decodeDataLabRecipe(original);
+  assert.equal(legacy?.version, 1);
+  assert.equal(legacy?.proof?.algorithm_version, 'data-lab/1');
+  assert.equal(legacy?.configuration.decimal, 'comma');
+  assert.equal(legacy?.configuration.types.valor, 'decimal');
+  assert.equal(legacy?.sha256, legacy?.proof?.variables.sha256);
+  const incompatible = JSON.stringify({ ...JSON.parse(original), algorithm_version: 'data-lab/2' });
+  assert.equal(decodeDataLabRecipe(incompatible), undefined);
+});
+
+test('Data Lab v2 recipes round-trip as settings and v2 replay charges the descriptor and embedded limit', () => {
+  const configuration = { ...defaultDataLabOptions, resource_budget_bytes: MIN_DATA_LAB_BUDGET,
+    semantics_version: 2, steps: [{ op: 'filter', column: 'code', compare: 'eq', value: '001' }] } as const;
+  const written = serializeDataLabRecipe({ ...configuration, steps: [...configuration.steps] });
+  assert.deepEqual(decodeDataLabRecipe(written)?.configuration, configuration);
+  assert.throws(() => validateDataLabInput(12_000, written, MIN_DATA_LAB_BUDGET), /resource_budget/);
+  const descriptor = JSON.stringify({ configuration, resource_policy: { limit_bytes: MIN_DATA_LAB_BUDGET } });
+  assert.doesNotThrow(() => validateDataLabInput(32, written, MIN_DATA_LAB_BUDGET, descriptor));
+  assert.throws(() => validateDataLabInput(32, written, MIN_DATA_LAB_BUDGET * 2, descriptor), /resource_budget/);
+});
+
+test('Data Lab has complete localized source, validity, migration and resource labels in all seven languages', () => {
+  const available = Object.values(dataLabels);
+  assert.equal(available.length, 7);
+  const keys = Object.keys(dataLabels.en).sort();
+  for (const labels of available) {
+    assert.deepEqual(Object.keys(labels).sort(), keys);
+    assert.ok(Object.values(labels).every(label => label.trim().length > 0));
+  }
+  for (const field of ['nativeJson', 'sourceMismatch', 'resourceExceeded', 'migrateRecipe', 'cellDetails'] as const) {
+    assert.equal(new Set(available.map(labels => labels[field])).size, 7);
+  }
+});
 
 test('a valid local record round-trips through the published JSON fields', () => {
   assert.deepEqual(parseCalculationProof(scientificRecord), scientificRecord);
