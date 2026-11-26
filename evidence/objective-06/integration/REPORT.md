@@ -1,0 +1,7 @@
+# Integration contract
+
+The three workspaces and the optional Intelligence panel call the same Rust engines as the original calculators. The exported catalog lists 191 operations across 22 engines. Each entry declares the input encoding, mathematical domain, output contract, version, bounds, worker task class, dependency and required permission. Operation-specific fields in the financial and scientific entries preserve their declared types and options. The Rust proof records the domain used for each actual computation. [Catalog](catalog.json)
+
+A request contains schema 1, module, operation, canonical input text, a bounded options map and optionally the original notation. The shared session checks the catalog, input length, options and object boundaries before dispatch. It checks the returned module, operation, algorithm and expression. Standard uses its own Rust record API. Data Lab uses a user-selected Blob and a typed configuration. Its worker returns the modeled peak from Rust to charge the enclosing flow.
+
+The productivity workspaces and Intelligence share one active auxiliary calculation. Cancel or dispose retires its worker. The existing primary Module Manager continues to own the selected workspace. Adaptive can interrupt work when its resource allowance shrinks. A browser test recovered from cancellation, refused an unknown module, returned the exact fraction 27021597764222980/3 and preserved the mixed-source Data Lab mean of 15/8. [Browser results](browser.json) · [Dependency changes](dependencies.json)

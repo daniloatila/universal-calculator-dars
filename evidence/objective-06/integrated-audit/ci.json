@@ -1,0 +1,86 @@
+{
+  "conclusion": "success",
+  "createdAt": "2026-11-26T22:03:23Z",
+  "databaseId": 45902255489,
+  "headSha": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "status": "completed",
+  "updatedAt": "2026-11-26T22:26:02Z",
+  "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45902255489",
+  "jobs": [
+    {
+      "name": "verify (ubuntu-latest)",
+      "databaseId": 140190592706,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45902255489/job/140190592706",
+      "startedAt": "2026-11-26T22:03:27Z",
+      "completedAt": "2026-11-26T22:26:01Z",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "security",
+      "databaseId": 140190592908,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45902255489/job/140190592908",
+      "startedAt": "2026-11-26T22:03:27Z",
+      "completedAt": "2026-11-26T22:06:04Z",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify (windows-latest)",
+      "databaseId": 140190592962,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45902255489/job/140190592962",
+      "startedAt": "2026-11-26T22:03:27Z",
+      "completedAt": "2026-11-26T22:15:15Z",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify (macos-latest)",
+      "databaseId": 140190593094,
+      "url": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45902255489/job/140190593094",
+      "startedAt": "2026-11-26T22:03:27Z",
+      "completedAt": "2026-11-26T22:17:19Z",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "windows_credential_checks": [
+    "credentials::tests::accepts_only_bounded_ids_and_blobs",
+    "credentials::tests::windows_credential_manager_round_trip"
+  ],
+  "windows_capability_checks": [
+    "capabilities::tests::cached_sample_is_bounded_and_current_window_state_is_reported",
+    "capabilities::tests::capabilities_origin_is_local_to_the_packaged_origin",
+    "capabilities::tests::win32_counters_observe_the_local_host_with_normal_permissions",
+    "capabilities::windows::tests::unavailable_and_absent_battery_are_not_reported_as_charged",
+    "capabilities::windows::tests::windows_idle_is_excluded_and_invalid_counters_remain_unavailable"
+  ],
+  "windows_intelligence_tests": [
+    "intelligence::tests::cancelling_an_inflight_request_drops_transport_and_recovers",
+    "intelligence::tests::consent_bound_to_body_origin_and_one_use_with_output_and_context_limits",
+    "intelligence::tests::controlled_redirect_http_limit_and_external_failure_return_stable_errors",
+    "intelligence::tests::empty_invalid_and_remote_inventories_are_distinct",
+    "intelligence::tests::factory_off_and_offline_refuse_external_calls_and_cross_mode_routes",
+    "intelligence::tests::host_selected_ipv4_ipv6_inventory_is_get_only_and_secrets_are_opt_in",
+    "intelligence::tests::local_inventory_refuses_cloud_alias_and_missing_weights_before_disclosing_content",
+    "intelligence::tests::model_cannot_set_url_credentials_or_return_verified_data",
+    "intelligence::tests::real_loopback_http_mock_transmits_only_the_reviewed_payload_after_grant",
+    "intelligence::tests::six_protocols_fixed_destinations_and_response_shapes",
+    "intelligence::tests::window_limits_and_cancellation_do_not_retry"
+  ],
+  "ubuntu_chromium_passed": 261,
+  "hosted_scientific_line_coverage": {
+    "suite": "science-rust-line-coverage",
+    "covered": 6822,
+    "total": 7106,
+    "percent": 96.0,
+    "target_percent": 95,
+    "optimization": {
+      "covered": 906,
+      "total": 967,
+      "uncovered": 61,
+      "percent": 93.69,
+      "tracking": "File-level gaps are reported in files. See the defensive paths documented in Objective 05 revision 01."
+    }
+  }
+}

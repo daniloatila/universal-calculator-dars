@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DARS Intelligence proposal v1",
+  "description": "Untrusted data. The runtime additionally checks UTF-8 byte budgets, control characters, bounded inert nested draft documents and engine validity before any separate run authorization.",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": 1
+        },
+        "kind": {
+          "const": "calculate"
+        },
+        "tool": {
+          "const": "compound_interest"
+        },
+        "principal": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9]\\d{0,39})(?:\\.\\d{1,32})?$"
+        },
+        "rate": {
+          "type": "string",
+          "pattern": "^-?(?:0|[1-9]\\d{0,39})(?:\\.\\d{1,32})?$"
+        },
+        "periods": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1200
+        },
+        "period": {
+          "enum": [
+            "month",
+            "year"
+          ]
+        },
+        "currency": {
+          "enum": [
+            "BRL",
+            "USD",
+            "EUR",
+            "GBP",
+            "JPY",
+            "CNY",
+            "INR",
+            "CHF",
+            "CAD",
+            "AUD"
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "kind",
+        "tool",
+        "principal",
+        "rate",
+        "periods",
+        "period",
+        "currency"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": 1
+        },
+        "kind": {
+          "const": "calculate"
+        },
+        "tool": {
+          "const": "expression"
+        },
+        "expression": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[0-9A-Za-z+*/^().,!%\\s-]+$"
+        }
+      },
+      "required": [
+        "schema",
+        "kind",
+        "tool",
+        "expression"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": 1
+        },
+        "kind": {
+          "const": "question"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "schema",
+        "kind",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": 1
+        },
+        "kind": {
+          "const": "declined"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "schema",
+        "kind",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": 1
+        },
+        "kind": {
+          "const": "explanation"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "schema",
+        "kind",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": 1
+        },
+        "kind": {
+          "const": "draft"
+        },
+        "studio": {
+          "enum": [
+            "notebook",
+            "formula",
+            "automation"
+          ]
+        },
+        "document": {
+          "type": "object",
+          "maxProperties": 48
+        }
+      },
+      "required": [
+        "schema",
+        "kind",
+        "studio",
+        "document"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

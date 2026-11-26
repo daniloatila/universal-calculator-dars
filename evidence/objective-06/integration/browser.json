@@ -1,0 +1,23 @@
+{
+  "standard": "27021597764222980/3",
+  "scientific": "9",
+  "finance": {
+    "amount": "11268.25",
+    "amount_exact": "1126825030131969720661201/100000000000000000000",
+    "interest": "1268.25",
+    "interest_exact": "126825030131969720661201/100000000000000000000"
+  },
+  "data": {
+    "max": "5/2",
+    "mean": "15/8",
+    "min": "5/4",
+    "n": 2,
+    "sum": "15/4"
+  },
+  "unknown": "unsupported",
+  "cancelled": "cancelled",
+  "recovered": "5",
+  "modules": 22,
+  "capabilities": 191,
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d"
+}

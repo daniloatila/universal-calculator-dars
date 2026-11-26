@@ -1,0 +1,7 @@
+# Security verification
+
+The productivity runtimes route calculations only to registered operations. Notebook cycles, invalid formula tests, unexpected flow operations, incompatible units, cumulative budget exhaustion and stale results have targeted regression cases. Automation replay compares its original trace, result and input hashes. The safe path remains available after a cancelled calculation. [Notebook tests](math-notebook/tests.json) · [Formula tests](formula-studio/checks.json) · [Automation](automation-studio/execution.json)
+
+The gateway applies the mode and offline policy before creating transport. It enforces single-use grants, per-minute call and response limits, and qualified destinations. The Windows credential round trip uses an isolated synthetic value. The test provider demonstrates that a request for a missing investment premise yields a question and an unauthorized capability is declined. Provider fixtures exercise the adapters independently from the user's connections and model availability. [Provider evidence](intelligence/README.md) · [Threat model](threat-model.md)
+
+The Windows assessment preserved operating-system settings. The machine currently reports Smart App Control Off. Earlier project-path enforcement is recorded separately, and the current package has not been qualified for signed distribution under active Smart App Control. [Windows chronology](integrated-audit/windows-protection.md)

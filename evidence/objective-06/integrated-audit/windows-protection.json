@@ -1,0 +1,201 @@
+{
+  "checked_utc": "2026-11-26T21:12:10.1028309Z",
+  "interval_start": "2026-11-24T00:00:00.0000000",
+  "current": {
+    "smart_app_control": "Off",
+    "antivirus": true,
+    "realtime": true,
+    "behavior": true,
+    "tamper": true,
+    "kernel_integrity_status": 2,
+    "usermode_integrity_status": 0
+  },
+  "log": "Microsoft-Windows-CodeIntegrity/Operational",
+  "matched": [
+    {
+      "utc": "2026-11-26T14:58:23.5308512Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-26T14:56:37.9277851Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T18:27:24.2460381Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T18:27:24.0245647Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T18:27:23.8030046Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T18:27:23.5645370Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T18:27:22.9553223Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T18:23:13.1775630Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T18:16:08.9000570Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T18:14:46.3216321Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T18:14:42.2432928Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T17:25:17.3383400Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": false,
+      "desktop_executable": true
+    },
+    {
+      "utc": "2026-11-25T17:17:03.6714964Z",
+      "id": 3099,
+      "sac_policy": true,
+      "project_path": false,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T17:17:03.6714915Z",
+      "id": 3099,
+      "sac_policy": true,
+      "project_path": false,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T13:56:39.2590981Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": true,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T13:56:39.0354323Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": true,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T13:56:38.8258752Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": true,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T13:56:38.5983285Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": true,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T13:56:37.8062779Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": true,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T13:56:31.1048863Z",
+      "id": 3077,
+      "sac_policy": true,
+      "project_path": true,
+      "rust_lint": true,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T13:30:45.6046477Z",
+      "id": 3099,
+      "sac_policy": true,
+      "project_path": false,
+      "rust_lint": false,
+      "desktop_executable": false
+    },
+    {
+      "utc": "2026-11-25T13:30:45.6046431Z",
+      "id": 3099,
+      "sac_policy": true,
+      "project_path": false,
+      "rust_lint": false,
+      "desktop_executable": false
+    }
+  ],
+  "total_in_id_filter": 55,
+  "limitations": "Retained local Windows events and recorded snapshots. Event correlation alone cannot determine a change actor or intent.",
+  "defender_operational": {
+    "from_local_date": "2026-11-24",
+    "event_id": 5007,
+    "retained_matches": 104,
+    "explicit_smart_app_control_name_matches": 0,
+    "verified_and_reputable_policy_state_registry_readback": 0
+  }
+}

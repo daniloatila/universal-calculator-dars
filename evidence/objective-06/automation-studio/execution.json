@@ -1,0 +1,346 @@
+{
+  "browser": "158.0.8127.38",
+  "external_requests": 0,
+  "runs": {
+    "finance": {
+      "status": "verified",
+      "outputs": {
+        "scenario_a": {
+          "amount": "11268.25",
+          "amount_exact": "1126825030131969720661201/100000000000000000000",
+          "interest": "1268.25",
+          "interest_exact": "126825030131969720661201/100000000000000000000"
+        },
+        "scenario_b": {
+          "amount": "11956.18",
+          "amount_exact": "4897252030306448390395044241/409600000000000000000000",
+          "interest": "1956.18",
+          "interest_exact": "801252030306448390395044241/409600000000000000000000"
+        },
+        "difference": "56355341377180082913352989/81920000000000000000000",
+        "winner": "B",
+        "comparison": {
+          "items": [
+            {
+              "id": "amount",
+              "key": "amount",
+              "reason": "direct_compatible",
+              "status": "direct",
+              "unit": "money"
+            },
+            {
+              "id": "interest",
+              "key": "interest",
+              "reason": "direct_compatible",
+              "status": "direct",
+              "unit": "money"
+            }
+          ],
+          "schema": 1,
+          "selected": {
+            "absolute_difference": "687.9314132956553090",
+            "alternative": {
+              "context": {
+                "calculation_basis": "principal_and_interest_at_horizon",
+                "capitalization": "discrete_compounding",
+                "currency": "BRL",
+                "horizon": 12,
+                "periodicity": "abstract_period",
+                "purchasing_power": "nominal",
+                "rate": "3/200",
+                "reference_date": "t0",
+                "rounding_policy": "half_even"
+              },
+              "decimal_places": 2,
+              "exactness": "exact",
+              "operation": "compound_interest",
+              "presentation": "11956.18",
+              "semantic_id": "loan_or_deposit_final_value",
+              "solver_tolerance": null,
+              "source": "canonical",
+              "value": "4897252030306448390395044241/409600000000000000000000",
+              "value_omitted": false,
+              "working_precision_bits": null
+            },
+            "common_basis": null,
+            "differences": [],
+            "exact_difference": "56355341377180082913352989/81920000000000000000000",
+            "exact_difference_omitted": false,
+            "formula": "Delta = alternative - reference; percentage points = 100 * Delta for fractional rates; relative percentage = 100 * Delta / abs(reference)",
+            "id": "amount",
+            "key": "amount",
+            "normalization": null,
+            "percentage_points": null,
+            "precision_source": "canonical_exact",
+            "precision_used": {
+              "combined_solver_tolerance": null,
+              "difference_decimal_places": 16,
+              "exact_arithmetic_on_compared_values": true,
+              "percentage_points_decimal_places": null,
+              "relative_decimal_places": 12,
+              "relative_percent_decimal_places": 10,
+              "rounding": "half_even"
+            },
+            "precision_warning": null,
+            "reason": "direct_compatible",
+            "reference": {
+              "context": {
+                "calculation_basis": "principal_and_interest_at_horizon",
+                "capitalization": "discrete_compounding",
+                "currency": "BRL",
+                "horizon": 12,
+                "periodicity": "abstract_period",
+                "purchasing_power": "nominal",
+                "rate": "1/100",
+                "reference_date": "t0",
+                "rounding_policy": "half_even"
+              },
+              "decimal_places": 2,
+              "exactness": "exact",
+              "operation": "compound_interest",
+              "presentation": "11268.25",
+              "semantic_id": "loan_or_deposit_final_value",
+              "solver_tolerance": null,
+              "source": "canonical",
+              "value": "1126825030131969720661201/100000000000000000000",
+              "value_omitted": false,
+              "working_precision_bits": null
+            },
+            "relative_difference": "0.061050419976",
+            "relative_percent": "6.1050419976",
+            "relative_reason": null,
+            "status": "direct",
+            "unit": "money"
+          }
+        }
+      },
+      "hashes": [],
+      "operations": 6,
+      "first_ms": 197.90000000037253,
+      "repeated_ms": 164.39999999850988,
+      "bytes_charged": 53560,
+      "rows_charged": 0,
+      "historical_replay": true,
+      "proofs": 5,
+      "replay": true
+    },
+    "business": {
+      "status": "verified",
+      "outputs": {
+        "unit_margins": [
+          {
+            "margin": "1/5",
+            "markup": "1/4"
+          },
+          {
+            "margin": "2/5",
+            "markup": "2/3"
+          }
+        ],
+        "total_gain": "70",
+        "weighted_margin": "14/45"
+      },
+      "hashes": [
+        "541e76409b12e2c178239f64978915f134ae7491c537b6a93d86bee45b107130"
+      ],
+      "operations": 12,
+      "first_ms": 225.09999999962747,
+      "repeated_ms": 200,
+      "bytes_charged": 113743,
+      "rows_charged": 2,
+      "historical_replay": true,
+      "proofs": 9,
+      "replay": true
+    },
+    "statistics": {
+      "status": "verified",
+      "outputs": {
+        "distribution": {
+          "series": [
+            "1",
+            "1",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "1"
+          ]
+        },
+        "statistics": {
+          "max": "7",
+          "mean": "3",
+          "min": "0",
+          "n": 4,
+          "sum": "12"
+        }
+      },
+      "hashes": [
+        "f2751ef9746b6cf7a03b04bb7988ee9264a8726076adf67da078b29be56d918c"
+      ],
+      "operations": 3,
+      "first_ms": 41.30000000074506,
+      "repeated_ms": 43,
+      "bytes_charged": 95999,
+      "rows_charged": 4,
+      "historical_replay": true,
+      "proofs": 1,
+      "replay": true
+    },
+    "science": {
+      "status": "verified",
+      "outputs": {
+        "simulation": {
+          "confidence_interval": {
+            "level": "0.95",
+            "lower": "2.9268882357165547",
+            "method": "clt_normal",
+            "upper": "3.2825912207420833"
+          },
+          "distribution": "normal",
+          "event": {
+            "comparison": ">=",
+            "confidence_interval": {
+              "level": "0.95",
+              "lower": "0.2888661900437324",
+              "method": "wilson",
+              "upper": "0.3699437078610086"
+            },
+            "count": 168,
+            "probability": "0.328125",
+            "threshold": "4.0"
+          },
+          "histogram": {
+            "bin_rule": "left_closed_right_open_last_closed",
+            "counts": [
+              12,
+              20,
+              42,
+              63,
+              76,
+              97,
+              84,
+              55,
+              36,
+              13,
+              9,
+              5
+            ],
+            "edges": [
+              "-1.9160671183347784",
+              "-0.9901513474511714",
+              "-0.0642355765675644",
+              "0.8616801943160426",
+              "1.7875959651996496",
+              "2.713511736083256",
+              "3.6394275069668636",
+              "4.565343277850471",
+              "5.4912590487340776",
+              "6.417174819617685",
+              "7.343090590501291",
+              "8.269006361384898",
+              "9.194922132268506"
+            ],
+            "requested_bins": 12
+          },
+          "loss_risk": null,
+          "mean": "3.104739728229319",
+          "model": "distribution",
+          "quantiles": {
+            "p05": "-0.18205786607056448",
+            "p25": "1.6966268370630724",
+            "p50": "3.1080960472261947",
+            "p75": "4.501321443108861",
+            "p95": "6.493334310910337"
+          },
+          "rng": "pcg32-xsh-rr/1",
+          "samples": 512,
+          "seed": "42",
+          "sensitivity": null,
+          "standard_deviation": "2.053262160193194",
+          "standard_error": "0.09074222481414666",
+          "termination": "requested_count",
+          "variance": "4.215885498481222"
+        },
+        "summary": {
+          "coefficient_of_variation": "1.0630672970817867",
+          "count": 3,
+          "exact": {
+            "iqr": "166884804424522537/50000000000000000",
+            "lower_fence": "-3543525042157861/1000000000000000",
+            "mad": "164507695664837959/50000000000000000",
+            "maximum": "6493334310910337/1000000000000000",
+            "mean": "156989541534432787/50000000000000000",
+            "mean_absolute_deviation": "55892391337028021/25000000000000000",
+            "median": "31080960472261947/10000000000000000",
+            "minimum": "-284465415735257/1562500000000000",
+            "q1": "146301909057781511/100000000000000000",
+            "q3": "96014303581365317/20000000000000000",
+            "range": "166884804424522537/25000000000000000",
+            "upper_fence": "245181482795098549/25000000000000000",
+            "variance": "27852421496496259992808715771262397/2500000000000000000000000000000000"
+          },
+          "geometric_mean": null,
+          "harmonic_mean": null,
+          "iqr": "3.3376960884904507",
+          "kurtosis": null,
+          "kurtosis_convention": "excess",
+          "lower_fence": "-3.543525042157861",
+          "mad": "3.290153913296759",
+          "maximum": "6.493334310910337",
+          "mean": "3.1397908306886557",
+          "mean_absolute_deviation": "2.235695653481121",
+          "median": "3.1080960472261947",
+          "minimum": "-0.18205786607056448",
+          "missing": 0,
+          "modes": [],
+          "outliers": [],
+          "percentiles": [],
+          "population": false,
+          "q1": "1.463019090577815",
+          "q3": "4.800715179068266",
+          "quantile_method": "type7",
+          "range": "6.6753921769809015",
+          "skewness": "0.04272673100439172",
+          "standard_deviation": "3.337808951782367",
+          "upper_fence": "9.807259311803943",
+          "variance": "11.140968598598503",
+          "weighted_mean": null
+        }
+      },
+      "hashes": [],
+      "operations": 3,
+      "first_ms": 84.90000000037253,
+      "repeated_ms": 74.69999999925494,
+      "bytes_charged": 36620,
+      "rows_charged": 0,
+      "historical_replay": true,
+      "proofs": 2,
+      "replay": true
+    },
+    "unregistered": true,
+    "reference": true,
+    "cycle": true,
+    "unrestricted": true,
+    "iterations": "limit",
+    "cumulative": "resource_budget",
+    "cancel": "cancelled",
+    "recovery": "verified",
+    "formula": {
+      "output": {
+        "value": "1200",
+        "unit": "BRL"
+      },
+      "version": "1.0.0",
+      "tests": 3
+    },
+    "typed": {
+      "value": "5",
+      "unit": "m"
+    },
+    "bad_units": "unit",
+    "modified_history": false,
+    "cumulative_rows": "row_limit"
+  },
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d"
+}

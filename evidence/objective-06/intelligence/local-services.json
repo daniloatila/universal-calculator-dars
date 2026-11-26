@@ -1,0 +1,49 @@
+{
+  "observations": [
+    {
+      "observedAt": "2026-11-26T21:32:14.552Z",
+      "host": "127.0.0.1",
+      "family": "IPv4",
+      "port": 11434,
+      "provider": "ollama",
+      "action": "user-reviewed model inventory GET",
+      "status": "connection_refused",
+      "agentStartedModelOrService": false
+    },
+    {
+      "observedAt": "2026-11-26T21:32:16.948Z",
+      "host": "127.0.0.1",
+      "family": "IPv4",
+      "port": 1234,
+      "provider": "lm_studio",
+      "action": "user-reviewed model inventory GET",
+      "status": "connection_refused",
+      "agentStartedModelOrService": false
+    },
+    {
+      "observedAt": "2026-11-26T21:32:19.397Z",
+      "host": "::1",
+      "family": "IPv6",
+      "port": 11434,
+      "provider": "ollama",
+      "action": "user-reviewed model inventory GET",
+      "status": "connection_refused",
+      "agentStartedModelOrService": false
+    },
+    {
+      "observedAt": "2026-11-26T21:32:21.818Z",
+      "host": "::1",
+      "family": "IPv6",
+      "port": 1234,
+      "provider": "lm_studio",
+      "action": "user-reviewed model inventory GET",
+      "status": "connection_refused",
+      "agentStartedModelOrService": false
+    }
+  ],
+  "webview2": "158.0.4370.33",
+  "transport": "Packaged WebView2 main window, native DARS development build, local numeric address only",
+  "sentPrompt": false,
+  "sentCredential": false,
+  "networkOrVpnSettingsChanged": false
+}

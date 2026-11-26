@@ -32,3 +32,7 @@ Version 0.5.0 reached READY_FOR_REVIEW on the Science, Engineering and Data bran
 Data Lab revision 0.5.1 passed the Objective 05 acceptance checks and is READY_FOR_REVIEW. The next milestone requires the owner’s decision. [Revision report](evidence/objective-05/revision-01/REPORT.md)
 
 On 2026-11-26 the owner formally approved Objective 05 at 95/100 and authorized Objective 06. [0.5.1](evidence/objective-05/approval.json)
+
+## Objective 06 review
+
+The audited code passed technical verification for 25 workspaces and the optional gateway. READY_FOR_REVIEW takes effect after four successful jobs on the evidence commit. The owner’s Objective 06 decision is pending. [0.6.0](evidence/objective-06/REPORT.md)

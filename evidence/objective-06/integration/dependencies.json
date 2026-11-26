@@ -1,0 +1,166 @@
+{
+  "schema": 1,
+  "compared_commits": [
+    "281da8ef144577fde382683f1ec6439c1e0260c2",
+    "9ca50cffaa31ab71867809c473968f3fcd46368d"
+  ],
+  "frontend_locked_packages": 62,
+  "frontend_integrity_changes": 0,
+  "cargo_registry_packages": [
+    449,
+    472
+  ],
+  "added_registry_entries": [
+    {
+      "name": "core-foundation",
+      "version": "0.9.4",
+      "registry_checksum": "91e195e091a93c46f7102ec7818a2aa394e1e1771c3ab4825963fa03e45afb8f"
+    },
+    {
+      "name": "errno",
+      "version": "0.3.15",
+      "registry_checksum": "e35d6e78f4cebb90e51d543db8fe41528851d6deeef6ef21ebd4bfdc1e784776"
+    },
+    {
+      "name": "foreign-types",
+      "version": "0.3.2",
+      "registry_checksum": "f6f339eb8adc052cd2ca78910fda869aefa38d22d5cb648e6485e4d3fc06f3b1"
+    },
+    {
+      "name": "foreign-types-shared",
+      "version": "0.1.1",
+      "registry_checksum": "00b0228411908ca8685dba7fc2cdd70ec9990a6e753e89b6ac91a84c40fbaf4b"
+    },
+    {
+      "name": "hyper-tls",
+      "version": "0.6.0",
+      "registry_checksum": "70206fc6890eaca9fde8a0bf71caa2ddfc9fe045ac9e5c70df101a7dbde866e0"
+    },
+    {
+      "name": "linux-raw-sys",
+      "version": "0.12.1",
+      "registry_checksum": "32a66949e030da00e8c7d4434b251670a91556f4144941d37452769c25d58a53"
+    },
+    {
+      "name": "native-tls",
+      "version": "0.2.18",
+      "registry_checksum": "465500e14ea162429d264d44189adc38b199b62b1c21eea9f69e4b73cb03bbf2"
+    },
+    {
+      "name": "openssl",
+      "version": "0.10.82",
+      "registry_checksum": "4de8111e94a56adca7ebfe6c365b6d42f99deb69b74b6becacd4204e2f193aa2"
+    },
+    {
+      "name": "openssl-macros",
+      "version": "0.1.1",
+      "registry_checksum": "a948666b637a0f465e8564c73e89d4dde00d72d4d473cc972f390fc3dcee7d9c"
+    },
+    {
+      "name": "openssl-probe",
+      "version": "0.2.2",
+      "registry_checksum": "7e036b411754132fd6b74e94b74e9a13c5cf606fa93d1885c35860d3060820b1"
+    },
+    {
+      "name": "openssl-sys",
+      "version": "0.9.118",
+      "registry_checksum": "19c413d6ec9ebaf5e1c829d355cb3e9f783778d700f135be0921d52fce3c60ae"
+    },
+    {
+      "name": "rustix",
+      "version": "1.1.6",
+      "registry_checksum": "e5e76742e5294153d4dde1207dbec5bdd81eef6fabdc0d2118babadabfd858aa"
+    },
+    {
+      "name": "rustls-pki-types",
+      "version": "1.16.0",
+      "registry_checksum": "102f35f7de7b06d8c61f1cff6592f5253e0dea431c74867aad5dfd70f44663fb"
+    },
+    {
+      "name": "schannel",
+      "version": "0.1.30",
+      "registry_checksum": "9cb23c424d8ee841bb4d813677ca237e2a610067d594fec130f87d6093495ab5"
+    },
+    {
+      "name": "security-framework",
+      "version": "3.7.0",
+      "registry_checksum": "b7f4bc775c73d9a02cde8bf7b2ec4c9d12743edf609006c7facc23998404cd1d"
+    },
+    {
+      "name": "security-framework-sys",
+      "version": "2.17.0",
+      "registry_checksum": "6ce2691df843ecc5d231c0b14ece2acc3efb62c0a398c7e1d875f3983ce020e3"
+    },
+    {
+      "name": "system-configuration",
+      "version": "0.7.0",
+      "registry_checksum": "a13f3d0daba03132c0aa9767f98351b3488edc2c100cda2d2ec2b04f3d8d3c8b"
+    },
+    {
+      "name": "system-configuration-sys",
+      "version": "0.6.0",
+      "registry_checksum": "8e1d1b10ced5ca923a1fcb8d03e96b8d3268065d724548c0211415ff6ac6bac4"
+    },
+    {
+      "name": "tempfile",
+      "version": "3.27.0",
+      "registry_checksum": "32497e9a4c7b38532efcdebeef879707aa9f794296a4f0244f6f69e9bc8574bd"
+    },
+    {
+      "name": "tokio-macros",
+      "version": "2.7.2",
+      "registry_checksum": "78773a2a397f451582ce068015985c33193cf6dea8b74d2a639fe457b2f07b0e"
+    },
+    {
+      "name": "tokio-native-tls",
+      "version": "0.3.1",
+      "registry_checksum": "bbae76ab933c85776efabc971569dd6119c580d8f5d448769dec1764bf796ef2"
+    },
+    {
+      "name": "vcpkg",
+      "version": "0.2.15",
+      "registry_checksum": "accd4ea62f7bb7a82fe23066fb0957d48ef677f6eeb8215f372f52e48bb32426"
+    },
+    {
+      "name": "windows-registry",
+      "version": "0.6.1",
+      "registry_checksum": "02752bf7fbdcce7f2a27a742f798510f3e5ad88dbe84871e5168e2120c3d5720"
+    }
+  ],
+  "removed_registry_entries": [],
+  "desktop_direct_declarations": {
+    "reqwest": {
+      "version": "=0.13.5",
+      "default-features": false,
+      "features": [
+        "native-tls",
+        "system-proxy"
+      ]
+    },
+    "serde": {
+      "version": "=1.0.229",
+      "features": [
+        "derive"
+      ]
+    },
+    "serde_json": "=1.0.154",
+    "tauri": {
+      "version": "=2.12.7",
+      "default-features": false,
+      "features": [
+        "wry"
+      ]
+    },
+    "tokio": {
+      "version": "=1.54.1",
+      "features": [
+        "macros",
+        "net",
+        "sync",
+        "time"
+      ]
+    },
+    "zeroize": "=1.9.2"
+  },
+  "scope": "Registry lockfile inventory. Optional and target-specific crates may not be linked into every binary. No model weights are distributed."
+}

@@ -1,0 +1,472 @@
+{
+  "schema": 1,
+  "candidate_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "run_id": 45902255489,
+  "artifact_id": 15156623887,
+  "platform": {
+    "release": "10.0.26200",
+    "processor": "Intel(R) Core(TM) Ultra 7 255HX",
+    "logicalProcessors": 20,
+    "physicalBytes": 33752997888
+  },
+  "webview2": "158.0.4370.33",
+  "method": "Sequential runs on one physical Windows PC with separate profiles, using the same sampler and checked Standard inputs. Private working set and process commit are distinct. Page-level offline mode is followed by explicit native requests to synthetic loopback fixtures.",
+  "scope": "The tree includes the DARS host and WebView2 descendants. Shared pages may appear in more than one working set. Machine-wide ambient deltas contain unrelated activity. One ordered pair cannot establish causal physical RAM increment below 100 MB. No separate model server was running as part of the test.",
+  "0.5.1": {
+    "exe_sha256": "847982f6e3db718fbde20e8eb4b6ce2d71d50fc6cf08b9353f58e392aecc3473",
+    "startup_to_checked_standard_ms": 546.5786000000007,
+    "standard_recalculation_ms": {
+      "n": 12,
+      "p50": 47.25354999999945,
+      "p95_nearest_rank": 63.46849999999904,
+      "maximum": 63.46849999999904
+    },
+    "phases": {
+      "ambient": {
+        "samples": 6,
+        "processes_end": 0,
+        "workers_end": 0,
+        "cpu_percent_one_logical": 0,
+        "system_physical_used_p50_bytes": 16549814272,
+        "system_commit_p50_bytes": 23242825728,
+        "system_physical_delta_from_ambient_bytes": 0,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          },
+          "host": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          }
+        }
+      },
+      "startup_visible": {
+        "samples": 1,
+        "processes_end": 7,
+        "workers_end": 1,
+        "cpu_percent_one_logical": null,
+        "system_physical_used_p50_bytes": 16695218176,
+        "system_commit_p50_bytes": 23492841472,
+        "system_physical_delta_from_ambient_bytes": 145403904,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 98209792,
+            "workingSetBytes": 365498368,
+            "privateBytes": 197124096,
+            "sharedWorkingSetBytes": 267288576
+          },
+          "host": {
+            "privateWorkingSetBytes": 4644864,
+            "workingSetBytes": 27316224,
+            "privateBytes": 6795264,
+            "sharedWorkingSetBytes": 22671360
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 93564928,
+            "workingSetBytes": 338182144,
+            "privateBytes": 190328832,
+            "sharedWorkingSetBytes": 244617216
+          }
+        }
+      },
+      "standard_visible": {
+        "samples": 6,
+        "processes_end": 7,
+        "workers_end": 1,
+        "cpu_percent_one_logical": 2.768434332412805,
+        "system_physical_used_p50_bytes": 16714289152,
+        "system_commit_p50_bytes": 23596838912,
+        "system_physical_delta_from_ambient_bytes": 164474880,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 104943616,
+            "workingSetBytes": 391434240,
+            "privateBytes": 249479168,
+            "sharedWorkingSetBytes": 286490624
+          },
+          "host": {
+            "privateWorkingSetBytes": 4644864,
+            "workingSetBytes": 27320320,
+            "privateBytes": 6795264,
+            "sharedWorkingSetBytes": 22675456
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 100298752,
+            "workingSetBytes": 364113920,
+            "privateBytes": 242683904,
+            "sharedWorkingSetBytes": 263815168
+          }
+        }
+      },
+      "standard_idle": {
+        "samples": 6,
+        "processes_end": 7,
+        "workers_end": 1,
+        "cpu_percent_one_logical": 0,
+        "system_physical_used_p50_bytes": 16733577216,
+        "system_commit_p50_bytes": 23602192384,
+        "system_physical_delta_from_ambient_bytes": 183762944,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 119537664,
+            "workingSetBytes": 409190400,
+            "privateBytes": 268533760,
+            "sharedWorkingSetBytes": 289689600
+          },
+          "host": {
+            "privateWorkingSetBytes": 4644864,
+            "workingSetBytes": 27320320,
+            "privateBytes": 6795264,
+            "sharedWorkingSetBytes": 22675456
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 114892800,
+            "workingSetBytes": 381870080,
+            "privateBytes": 261738496,
+            "sharedWorkingSetBytes": 267014144
+          }
+        }
+      },
+      "minimized_0": {
+        "samples": 4,
+        "processes_end": 7,
+        "workers_end": 0,
+        "cpu_percent_one_logical": 3.579044720159685,
+        "system_physical_used_p50_bytes": 16716357632,
+        "system_commit_p50_bytes": 23554658304,
+        "system_physical_delta_from_ambient_bytes": 166543360,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 83955712,
+            "workingSetBytes": 329527296,
+            "privateBytes": 217329664,
+            "sharedWorkingSetBytes": 245317632
+          },
+          "host": {
+            "privateWorkingSetBytes": 4648960,
+            "workingSetBytes": 27340800,
+            "privateBytes": 6799360,
+            "sharedWorkingSetBytes": 22691840
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 79306752,
+            "workingSetBytes": 302186496,
+            "privateBytes": 210530304,
+            "sharedWorkingSetBytes": 222625792
+          }
+        }
+      },
+      "restored_0": {
+        "samples": 4,
+        "processes_end": 7,
+        "workers_end": 1,
+        "cpu_percent_one_logical": 4.084673584175747,
+        "system_physical_used_p50_bytes": 16763478016,
+        "system_commit_p50_bytes": 23659012096,
+        "system_physical_delta_from_ambient_bytes": 213663744,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 97349632,
+            "workingSetBytes": 361127936,
+            "privateBytes": 316182528,
+            "sharedWorkingSetBytes": 263852032
+          },
+          "host": {
+            "privateWorkingSetBytes": 4325376,
+            "workingSetBytes": 27033600,
+            "privateBytes": 6144000,
+            "sharedWorkingSetBytes": 22708224
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 93024256,
+            "workingSetBytes": 334094336,
+            "privateBytes": 310038528,
+            "sharedWorkingSetBytes": 241143808
+          }
+        }
+      },
+      "after_close": {
+        "samples": 6,
+        "processes_end": 0,
+        "workers_end": 0,
+        "cpu_percent_one_logical": 0,
+        "system_physical_used_p50_bytes": 16663199744,
+        "system_commit_p50_bytes": 23327203328,
+        "system_physical_delta_from_ambient_bytes": 113385472,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          },
+          "host": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          }
+        }
+      }
+    },
+    "after_exit_confirmed_ms": 12.394799999998213
+  },
+  "0.6.0": {
+    "exe_sha256": "fd81e7a025553ebf5ddfcf057beb6d5e0ae8204cfe90011c86e18c174094221f",
+    "startup_to_checked_standard_ms": 533.2418000000034,
+    "standard_recalculation_ms": {
+      "n": 12,
+      "p50": 34.441750000001775,
+      "p95_nearest_rank": 62.32259999999951,
+      "maximum": 62.32259999999951
+    },
+    "phases": {
+      "ambient": {
+        "samples": 6,
+        "processes_end": 0,
+        "workers_end": 0,
+        "cpu_percent_one_logical": 0,
+        "system_physical_used_p50_bytes": 16609251328,
+        "system_commit_p50_bytes": 23200120832,
+        "system_physical_delta_from_ambient_bytes": 0,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          },
+          "host": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          }
+        }
+      },
+      "startup_visible": {
+        "samples": 1,
+        "processes_end": 7,
+        "workers_end": 1,
+        "cpu_percent_one_logical": null,
+        "system_physical_used_p50_bytes": 16756445184,
+        "system_commit_p50_bytes": 23455784960,
+        "system_physical_delta_from_ambient_bytes": 147193856,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 111603712,
+            "workingSetBytes": 382361600,
+            "privateBytes": 221970432,
+            "sharedWorkingSetBytes": 270757888
+          },
+          "host": {
+            "privateWorkingSetBytes": 3874816,
+            "workingSetBytes": 27836416,
+            "privateBytes": 5562368,
+            "sharedWorkingSetBytes": 23961600
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 107728896,
+            "workingSetBytes": 354525184,
+            "privateBytes": 216408064,
+            "sharedWorkingSetBytes": 246796288
+          }
+        }
+      },
+      "standard_visible": {
+        "samples": 6,
+        "processes_end": 7,
+        "workers_end": 1,
+        "cpu_percent_one_logical": 3.6699766006206582,
+        "system_physical_used_p50_bytes": 16778350592,
+        "system_commit_p50_bytes": 23555428352,
+        "system_physical_delta_from_ambient_bytes": 169099264,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 106024960,
+            "workingSetBytes": 393129984,
+            "privateBytes": 252936192,
+            "sharedWorkingSetBytes": 287571968
+          },
+          "host": {
+            "privateWorkingSetBytes": 3874816,
+            "workingSetBytes": 27840512,
+            "privateBytes": 5562368,
+            "sharedWorkingSetBytes": 23965696
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 102150144,
+            "workingSetBytes": 365289472,
+            "privateBytes": 247373824,
+            "sharedWorkingSetBytes": 263606272
+          }
+        }
+      },
+      "standard_idle": {
+        "samples": 6,
+        "processes_end": 7,
+        "workers_end": 1,
+        "cpu_percent_one_logical": 0.6138180941926357,
+        "system_physical_used_p50_bytes": 16809345024,
+        "system_commit_p50_bytes": 23630286848,
+        "system_physical_delta_from_ambient_bytes": 200093696,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 119656448,
+            "workingSetBytes": 410550272,
+            "privateBytes": 272506880,
+            "sharedWorkingSetBytes": 290914304
+          },
+          "host": {
+            "privateWorkingSetBytes": 3874816,
+            "workingSetBytes": 27840512,
+            "privateBytes": 5562368,
+            "sharedWorkingSetBytes": 23965696
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 115781632,
+            "workingSetBytes": 382709760,
+            "privateBytes": 266944512,
+            "sharedWorkingSetBytes": 266948608
+          }
+        }
+      },
+      "minimized_0": {
+        "samples": 4,
+        "processes_end": 7,
+        "workers_end": 0,
+        "cpu_percent_one_logical": 3.0753329121685447,
+        "system_physical_used_p50_bytes": 16823357440,
+        "system_commit_p50_bytes": 23468781568,
+        "system_physical_delta_from_ambient_bytes": 214106112,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 91209728,
+            "workingSetBytes": 350031872,
+            "privateBytes": 243412992,
+            "sharedWorkingSetBytes": 258768896
+          },
+          "host": {
+            "privateWorkingSetBytes": 3993600,
+            "workingSetBytes": 33427456,
+            "privateBytes": 5742592,
+            "sharedWorkingSetBytes": 29433856
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 87216128,
+            "workingSetBytes": 316604416,
+            "privateBytes": 237670400,
+            "sharedWorkingSetBytes": 229335040
+          }
+        }
+      },
+      "restored_0": {
+        "samples": 4,
+        "processes_end": 7,
+        "workers_end": 1,
+        "cpu_percent_one_logical": 2.5586459668468877,
+        "system_physical_used_p50_bytes": 16797851648,
+        "system_commit_p50_bytes": 23540588544,
+        "system_physical_delta_from_ambient_bytes": 188600320,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 107859968,
+            "workingSetBytes": 394891264,
+            "privateBytes": 341446656,
+            "sharedWorkingSetBytes": 286855168
+          },
+          "host": {
+            "privateWorkingSetBytes": 4673536,
+            "workingSetBytes": 34107392,
+            "privateBytes": 6422528,
+            "sharedWorkingSetBytes": 29433856
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 103186432,
+            "workingSetBytes": 360783872,
+            "privateBytes": 335024128,
+            "sharedWorkingSetBytes": 257421312
+          }
+        }
+      },
+      "after_close": {
+        "samples": 6,
+        "processes_end": 0,
+        "workers_end": 0,
+        "cpu_percent_one_logical": 0,
+        "system_physical_used_p50_bytes": 16531226624,
+        "system_commit_p50_bytes": 23182680064,
+        "system_physical_delta_from_ambient_bytes": -78024704,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          },
+          "host": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 0,
+            "workingSetBytes": 0,
+            "privateBytes": 0,
+            "sharedWorkingSetBytes": 0
+          }
+        }
+      }
+    },
+    "after_exit_confirmed_ms": 133.65610000000743
+  },
+  "candidate_validation": {
+    "registered_modules": 25,
+    "wasm_read_back": 22,
+    "historical_windows_passed": 17,
+    "offline_finance": 5,
+    "offline_science": 7,
+    "science_interactions": 11,
+    "historical_finance_comparison": true,
+    "science_workers": {
+      "scope": "science module workers",
+      "opened": 13,
+      "closed": 13
+    },
+    "productivity_workers": {
+      "opened": 27,
+      "closed": 27,
+      "peak": 2
+    },
+    "external_ui_http_requests": 0,
+    "native_fixture": {
+      "clarification": true,
+      "unknown_tool_rejected": true,
+      "closed_port": true
+    }
+  }
+}

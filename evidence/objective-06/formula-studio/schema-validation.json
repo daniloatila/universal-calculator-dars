@@ -1,0 +1,36 @@
+{
+  "validator": "PowerShell 7.6.9 Test-Json -SchemaFile",
+  "source": "community/formulas/formula-v1.schema.json",
+  "valid_examples": [
+    {
+      "document": "arithmetic-mean.json",
+      "valid": true
+    },
+    {
+      "document": "constant-speed.json",
+      "valid": true
+    },
+    {
+      "document": "rectangle-area.json",
+      "valid": true
+    },
+    {
+      "document": "simple-interest.json",
+      "valid": true
+    }
+  ],
+  "negative_cases": [
+    {
+      "case": "unknown field",
+      "valid": false
+    },
+    {
+      "case": "missing version",
+      "valid": false
+    },
+    {
+      "case": "empty tests",
+      "valid": false
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "method": "Windows paired sequential application processes and two independent runs per browser workflow. Wall time is observational and includes worker startup. Source-row and byte charges are model counters, not physical RAM.",
+  "physical_windows": {
+    "0.5.1": {
+      "startup_to_checked_standard_ms": 546.5786000000007,
+      "standard_recalculation_ms": {
+        "n": 12,
+        "p50": 47.25354999999945,
+        "p95_nearest_rank": 63.46849999999904,
+        "maximum": 63.46849999999904
+      },
+      "standard_idle": {
+        "samples": 6,
+        "processes_end": 7,
+        "workers_end": 1,
+        "cpu_percent_one_logical": 0,
+        "system_physical_used_p50_bytes": 16733577216,
+        "system_commit_p50_bytes": 23602192384,
+        "system_physical_delta_from_ambient_bytes": 183762944,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 119537664,
+            "workingSetBytes": 409190400,
+            "privateBytes": 268533760,
+            "sharedWorkingSetBytes": 289689600
+          },
+          "host": {
+            "privateWorkingSetBytes": 4644864,
+            "workingSetBytes": 27320320,
+            "privateBytes": 6795264,
+            "sharedWorkingSetBytes": 22675456
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 114892800,
+            "workingSetBytes": 381870080,
+            "privateBytes": 261738496,
+            "sharedWorkingSetBytes": 267014144
+          }
+        }
+      }
+    },
+    "0.6.0": {
+      "startup_to_checked_standard_ms": 533.2418000000034,
+      "standard_recalculation_ms": {
+        "n": 12,
+        "p50": 34.441750000001775,
+        "p95_nearest_rank": 62.32259999999951,
+        "maximum": 62.32259999999951
+      },
+      "standard_idle": {
+        "samples": 6,
+        "processes_end": 7,
+        "workers_end": 1,
+        "cpu_percent_one_logical": 0.6138180941926357,
+        "system_physical_used_p50_bytes": 16809345024,
+        "system_commit_p50_bytes": 23630286848,
+        "system_physical_delta_from_ambient_bytes": 200093696,
+        "process_memory_p50_bytes": {
+          "tree": {
+            "privateWorkingSetBytes": 119656448,
+            "workingSetBytes": 410550272,
+            "privateBytes": 272506880,
+            "sharedWorkingSetBytes": 290914304
+          },
+          "host": {
+            "privateWorkingSetBytes": 3874816,
+            "workingSetBytes": 27840512,
+            "privateBytes": 5562368,
+            "sharedWorkingSetBytes": 23965696
+          },
+          "auxiliary": {
+            "privateWorkingSetBytes": 115781632,
+            "workingSetBytes": 382709760,
+            "privateBytes": 266944512,
+            "sharedWorkingSetBytes": 266948608
+          }
+        }
+      }
+    }
+  },
+  "windows_details": "integrated-audit/physical-windows-comparison.json",
+  "physical_incremental_ram_under_100mb": "open",
+  "separate_ai_server": "No installed local model participated in the paired measurement. Ephemeral HTTP protocol fixtures have no ML runtime or weights.",
+  "automation": {
+    "finance": {
+      "first_ms": 197.90000000037253,
+      "repeated_ms": 164.39999999850988,
+      "operations": 6,
+      "rows_charged": 0,
+      "bytes_charged": 53560
+    },
+    "business": {
+      "first_ms": 225.09999999962747,
+      "repeated_ms": 200,
+      "operations": 12,
+      "rows_charged": 2,
+      "bytes_charged": 113743
+    },
+    "statistics": {
+      "first_ms": 41.30000000074506,
+      "repeated_ms": 43,
+      "operations": 3,
+      "rows_charged": 4,
+      "bytes_charged": 95999
+    },
+    "science": {
+      "first_ms": 84.90000000037253,
+      "repeated_ms": 74.69999999925494,
+      "operations": 3,
+      "rows_charged": 0,
+      "bytes_charged": 36620
+    }
+  },
+  "notebook_selective_invalidation": {
+    "first": "1126825030131969720661201/100000000000000000000",
+    "second": "309629344375621415601/24414062500000000",
+    "series_count": 13,
+    "changed": [
+      "rate",
+      "growth",
+      "gain",
+      "trajectory",
+      "verification"
+    ],
+    "unchanged": [
+      "capital",
+      "months"
+    ],
+    "proof_sha256": "5af7d42886d9d2a28b78087dad101b97ba7667105f9c73e0b3a35a3d812388a4",
+    "replayed": true
+  }
+}

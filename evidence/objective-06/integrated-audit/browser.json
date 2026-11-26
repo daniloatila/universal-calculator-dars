@@ -1,0 +1,169 @@
+{
+  "schema": 1,
+  "source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "asset_set_sha256": "1c8665bfef22e0353041d533f2877c33c7d8edfbc617406034e1d5856ba76474",
+  "files_count": 110,
+  "wasm_count": 22,
+  "asset_digest_method": "SHA-256 of UTF-8 compact JSON array of {path,sha256} for all files under apps/web/dist, sorted by relative path ascending with slash separators.",
+  "browser": {
+    "channel": "chrome",
+    "version": "158.0.8127.38"
+  },
+  "source_scope": "Production build from the identified 0.6.0 source on physical Windows with installed Google Chrome.",
+  "playwright": {
+    "started_utc": "2026-11-26T22:03:47.970Z",
+    "duration_ms": 338418.38999999996,
+    "passed": 261,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "report_sha256": "7e92c150d560cbe14f49516a02bb63aca42bb287edca16bf8d7e20ce0a749d23",
+    "suites": {
+      "algebra.spec.ts": 5,
+      "automation-flow.spec.ts": 9,
+      "calculation-proof.spec.ts": 2,
+      "calculus.spec.ts": 6,
+      "converter.spec.ts": 8,
+      "data-lab-revision.spec.ts": 8,
+      "data-lab.spec.ts": 3,
+      "date-time.spec.ts": 8,
+      "discrete-mathematics.spec.ts": 8,
+      "finance-comparison.spec.ts": 12,
+      "finance.spec.ts": 14,
+      "formula-studio.spec.ts": 8,
+      "geometry.spec.ts": 8,
+      "integrated-mathematics.spec.ts": 4,
+      "intelligence.spec.ts": 6,
+      "linear-algebra.spec.ts": 8,
+      "locale-transitions.spec.ts": 47,
+      "math-notebook.spec.ts": 6,
+      "module-frames.spec.ts": 1,
+      "module-manager.spec.ts": 1,
+      "module-shell.spec.ts": 4,
+      "operations.spec.ts": 5,
+      "optimization-cancel.spec.ts": 1,
+      "programmer.spec.ts": 7,
+      "science.spec.ts": 48,
+      "scientific.spec.ts": 8,
+      "standard-revision.spec.ts": 5,
+      "standard.spec.ts": 10,
+      "worker.spec.ts": 1
+    },
+    "inherited_0_5_1": {
+      "mapped_and_passed": 232,
+      "earlier_report_sha256": "49efa93aae50683166d4b07662c57888fc9f9191e11ff9ad046b3b0ce3d96e1d",
+      "public_reference": "chrome-0.5.1-reference.json"
+    },
+    "new_cases": 29
+  },
+  "notation": {
+    "mathematics": 420,
+    "finance": 210,
+    "science": 294,
+    "productivity": 126,
+    "total": 1050,
+    "receipt": "../locale-transition-matrix.json",
+    "sha256": "db9cc51780f45b8897a6017fe5c30aa4216b351294454249afb5f45f142deeba"
+  },
+  "standalone_offline": {
+    "results": [
+      {
+        "suite": "production-web-offline-and-lazy-locales",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "suite": "production-finance-offline",
+        "modules": [
+          "financial",
+          "investment",
+          "loans",
+          "tax",
+          "business"
+        ],
+        "passed": 5,
+        "failed": 0
+      }
+    ],
+    "log_sha256": "5951ef66d72322637b9e57f1a8c339fe617afba403e10cc3a20a08c198233d07"
+  },
+  "offline_science": {
+    "modules": [
+      "statistics",
+      "probability",
+      "simulation",
+      "optimization",
+      "physics-engineering",
+      "graph-lab",
+      "data-lab"
+    ],
+    "proofHashes": [
+      [
+        "statistics",
+        "1d6d760ccf2274150d93bd981d1bf3ca3954e9ca8bc8156b2d6a4eb0b6e9ee32"
+      ],
+      [
+        "probability",
+        "4e837ca1c79f0a29e1004e3620b1de8b5c693dd76d2845ba28c897d5d8fe36e3"
+      ],
+      [
+        "simulation",
+        "167999cb812d1e055cedf8dca47285146963fc44189d5b054e90e271064edb7e"
+      ],
+      [
+        "optimization",
+        "c5f858f3888430fdb6994c55fc10d8007b658889edafd2849c7512e7dec8ab81"
+      ],
+      [
+        "physics-engineering",
+        "f93e85031b91cd9818cdebc790dc64ae1ef7ac7243d8cb33c1a98e9a2c4f7479"
+      ],
+      [
+        "graph-lab",
+        "7144e69efe9d176e707a4e00a0794797daf484d694fae0c7bdb3afe717f2f5ae"
+      ],
+      [
+        "data-lab",
+        "dac8d9f5b91b8f3e36e1bfe1b0693a35049fe69e3c597851fd2c5412a3f0dd33"
+      ]
+    ],
+    "external": []
+  },
+  "node": {
+    "passed": 89,
+    "log_sha256": "515b86573e5496a165e61ccabc7582c653a3119d6955846504a69c248cfcf190"
+  },
+  "screenshots": [
+    {
+      "path": "chrome-captures/math-notebook.png",
+      "sha256": "3df19fa2d16b07be2db51e73ffeba0dfcc1f80982fb830079a68d64738cab3dc",
+      "width": 1072,
+      "height": 1385
+    },
+    {
+      "path": "chrome-captures/formula-studio.png",
+      "sha256": "f1414c86eced3c6e6aecb93262f7f50156c27b940f37634037aa17de944a66f8",
+      "width": 1072,
+      "height": 783
+    },
+    {
+      "path": "chrome-captures/automation-studio.png",
+      "sha256": "b81564f63a5e8ac79192735564a90ffa37e009b2781fd53806f736103d16c63e",
+      "width": 1072,
+      "height": 1399
+    },
+    {
+      "path": "chrome-captures/intelligence-investment.png",
+      "sha256": "f8ec99890d0c004f22654af3dfabdd14cef010c5aa3209d6af9e3f8d1e8a48be",
+      "width": 688,
+      "height": 620
+    },
+    {
+      "path": "chrome-captures/reviewed-printed-expression.png",
+      "sha256": "dd774c4b18bb06647852c2789f23108d17b5b4a2d37c4b45a1c4504000324f26",
+      "width": 688,
+      "height": 620
+    }
+  ],
+  "synthetic_screenshot_inputs": true
+}

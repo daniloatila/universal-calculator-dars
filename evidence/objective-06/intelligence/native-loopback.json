@@ -1,0 +1,32 @@
+{
+  "method": "Real packaged WebView2 invoking native Rust IPC. Protocol responses supplied by temporary loopback test fixtures.",
+  "queries": [
+    {
+      "host": "::1",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyBytes": 0,
+      "credential": false
+    },
+    {
+      "host": "127.0.0.1",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyBytes": 0,
+      "credential": false
+    }
+  ],
+  "externalProviderCalls": 0,
+  "math": {
+    "amount": "11268.25",
+    "amount_exact": "1126825030131969720661201/100000000000000000000",
+    "interest": "1268.25",
+    "interest_exact": "126825030131969720661201/100000000000000000000"
+  },
+  "clarification": true,
+  "unknownToolRejected": true,
+  "closedPort": true,
+  "build": "Windows native development-profile binary",
+  "webview2": "158.0.4370.33",
+  "executableSha256": "e5129693e2f4b28ebaa9bb5026dc8e8cdd94f835ee03a784e14af6b34c3d357c"
+}

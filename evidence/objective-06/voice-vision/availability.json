@@ -1,0 +1,41 @@
+{
+  "microphoneOpened": false,
+  "audioPlayed": false,
+  "entries": [
+    {
+      "lang": "en",
+      "recognition": "downloadable",
+      "localVoices": 0
+    },
+    {
+      "lang": "pt-BR",
+      "recognition": "downloadable",
+      "localVoices": 2
+    },
+    {
+      "lang": "es",
+      "recognition": "downloadable",
+      "localVoices": 0
+    },
+    {
+      "lang": "fr",
+      "recognition": "downloadable",
+      "localVoices": 0
+    },
+    {
+      "lang": "zh-CN",
+      "recognition": "downloadable",
+      "localVoices": 0
+    },
+    {
+      "lang": "hi",
+      "recognition": "downloadable",
+      "localVoices": 0
+    },
+    {
+      "lang": "ar",
+      "recognition": "unavailable",
+      "localVoices": 0
+    }
+  ]
+}

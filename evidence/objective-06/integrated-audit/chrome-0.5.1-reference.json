@@ -1,0 +1,1147 @@
+{
+  "schema": 1,
+  "source_commit": "cda90d89ada0be4974655ccf746c78e3e61bc3bc",
+  "raw_report_sha256": "49efa93aae50683166d4b07662c57888fc9f9191e11ff9ad046b3b0ce3d96e1d",
+  "test_file_and_title": [
+    [
+      "algebra.spec.ts",
+      "Algebra changes solution domains and keeps restrictions when verifying excluded values"
+    ],
+    [
+      "algebra.spec.ts",
+      "Algebra controls are localized in seven languages and retain an accessible 320 px RTL layout"
+    ],
+    [
+      "algebra.spec.ts",
+      "Algebra prepares only its own resources and calculates after offline reload"
+    ],
+    [
+      "algebra.spec.ts",
+      "Algebra runs its nine operations, exposes domain restrictions and preserves module state"
+    ],
+    [
+      "algebra.spec.ts",
+      "switching modules terminates an admitted Algebra worker and allows a fresh calculation"
+    ],
+    [
+      "calculation-proof.spec.ts",
+      "a real Scientific result exports a versioned local calculation record and reopens it as an import"
+    ],
+    [
+      "calculation-proof.spec.ts",
+      "the local proof viewer rejects malformed or oversized bytes and treats imported markup as text"
+    ],
+    [
+      "calculus.spec.ts",
+      "Calculus distinguishes limits, unsupported primitives and undefined integrals"
+    ],
+    [
+      "calculus.spec.ts",
+      "Calculus exposes numerical tolerance and an uncertified estimate in its downloadable proof"
+    ],
+    [
+      "calculus.spec.ts",
+      "Calculus localizes operation controls, numeric parameters and the narrow RTL layout"
+    ],
+    [
+      "calculus.spec.ts",
+      "Calculus performs higher and partial derivatives, integrals and a Taylor expansion"
+    ],
+    [
+      "calculus.spec.ts",
+      "Calculus prepares one isolated WASM lazily and calculates after offline reload"
+    ],
+    [
+      "calculus.spec.ts",
+      "switching modules stops a pending Calculus worker and keeps the draft"
+    ],
+    [
+      "converter.spec.ts",
+      "Converter applies manual currency rates with four date statuses and no provider request"
+    ],
+    [
+      "converter.spec.ts",
+      "Converter distinguishes exact and approximate factors, offsets and fuel reciprocals"
+    ],
+    [
+      "converter.spec.ts",
+      "Converter exports exact manual-rate provenance and captures an explicitly expired result"
+    ],
+    [
+      "converter.spec.ts",
+      "Converter loads one isolated WASM on demand and supports manual currency offline"
+    ],
+    [
+      "converter.spec.ts",
+      "Converter retains independently localized currency amount and rate with literal quote metadata"
+    ],
+    [
+      "converter.spec.ts",
+      "Converter supports all seventeen unit categories and retains selections when returning"
+    ],
+    [
+      "converter.spec.ts",
+      "Converter supports seven locales and accessible narrow RTL unit and currency forms"
+    ],
+    [
+      "converter.spec.ts",
+      "cancels unfinished work and retains the amount after switching modules"
+    ],
+    [
+      "data-lab-revision.spec.ts",
+      "Data Lab applies one cumulative budget to joins and successive text transforms"
+    ],
+    [
+      "data-lab-revision.spec.ts",
+      "Data Lab enforces the profile resource ceiling before reading and preserves a successful result after a bounded transformation rejection"
+    ],
+    [
+      "data-lab-revision.spec.ts",
+      "Data Lab migrates historical v1 records explicitly and verifies the original hash and replayed v2 proof"
+    ],
+    [
+      "data-lab-revision.spec.ts",
+      "Data Lab preserves literal XLSX types, direct and cached dates, both epochs and successive casts"
+    ],
+    [
+      "data-lab-revision.spec.ts",
+      "Data Lab retires pending work when Adaptive lowers its budget and accepts a new profile-safe run"
+    ],
+    [
+      "data-lab-revision.spec.ts",
+      "Data Lab separates JSON native numbers, localized text, exact exponents and missing states"
+    ],
+    [
+      "data-lab-revision.spec.ts",
+      "Data Lab suspension, switching, in-flight language changes and offline replay release workers and preserve canonical values"
+    ],
+    [
+      "data-lab-revision.spec.ts",
+      "cancels actual local import preparation while WASM initialization is pending and restarts"
+    ],
+    [
+      "data-lab.spec.ts",
+      "Data Lab accepts TSV, precision-preserving tabular JSON and an XLSX sheet with a stored formula cache"
+    ],
+    [
+      "data-lab.spec.ts",
+      "Data Lab applies explicit import conventions, replays native steps and exports protected and literal CSV"
+    ],
+    [
+      "data-lab.spec.ts",
+      "Data Lab cancels a live import Worker and starts a healthy successor on the same page"
+    ],
+    [
+      "date-time.spec.ts",
+      "Date & Time applies supplied weekdays, holidays and deadline counting bases"
+    ],
+    [
+      "date-time.spec.ts",
+      "Date & Time exports bundled time-zone provenance with exact offsets and DST flags"
+    ],
+    [
+      "date-time.spec.ts",
+      "Date & Time handles all eight operations and restores both workspaces"
+    ],
+    [
+      "date-time.spec.ts",
+      "Date & Time loads one isolated bundled WASM on demand and converts zones offline"
+    ],
+    [
+      "date-time.spec.ts",
+      "Date & Time resolves repeated local times and rejects skipped local times for every policy"
+    ],
+    [
+      "date-time.spec.ts",
+      "Date & Time separates signed civil periods and absolute nanosecond durations"
+    ],
+    [
+      "date-time.spec.ts",
+      "Date & Time supports seven locales and accessible 320 px RTL calendar controls"
+    ],
+    [
+      "date-time.spec.ts",
+      "cancels pending work and restores the date draft after switching modules"
+    ],
+    [
+      "discrete-mathematics.spec.ts",
+      "Discrete Mathematics distinguishes deterministic and probable primality and exports the record"
+    ],
+    [
+      "discrete-mathematics.spec.ts",
+      "Discrete Mathematics handles repetition, modular inverse and exact sequence modes"
+    ],
+    [
+      "discrete-mathematics.spec.ts",
+      "Discrete Mathematics loads its worker and WASM on demand and works offline"
+    ],
+    [
+      "discrete-mathematics.spec.ts",
+      "Discrete Mathematics renders safe truth tables, inserts operators and pages 256 assignments"
+    ],
+    [
+      "discrete-mathematics.spec.ts",
+      "Discrete Mathematics retains exact integer tokens and recognizes an empty set"
+    ],
+    [
+      "discrete-mathematics.spec.ts",
+      "Discrete Mathematics runs all sixteen operations and restores state after switching modules"
+    ],
+    [
+      "discrete-mathematics.spec.ts",
+      "Discrete Mathematics supports seven languages and an accessible narrow RTL workspace"
+    ],
+    [
+      "discrete-mathematics.spec.ts",
+      "cancels a pending worker explicitly and restores a draft on switching modules"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "a catalog separates contextual durations from comparable counts and preserves undefined indicators"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "a nonzero exact difference rounded to the display resolution is shown as approximately zero"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "business markup and margin keep their distinct bases and equal labels do not establish compatibility"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "comparator preserves differences below a cent and forbids currency-equivalent monetary deltas"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "dated loan costs surface solver tolerances and suppress differences inside their combined resolution"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "equivalent semiannual and annual rates produce three zero differences and an exportable semantic proof"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "historical comparisons replay canonical inputs, reject tampering, and survive Arabic locale and suspension"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "loan package and tax period differences remain contextual without suppressing every available metric"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "periodic and dated annual modified internal returns do not produce an equivalent delta"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "rates distinguish fractional differences, percentage points, signed negative references, and zero references"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "suspending a pending comparison terminates its Worker and a resumed comparison completes"
+    ],
+    [
+      "finance-comparison.spec.ts",
+      "unknown compounding periods remain contextual and an effective and nominal quote can share a supported annual basis"
+    ],
+    [
+      "finance.spec.ts",
+      "business projections expose sensitivity and later pages"
+    ],
+    [
+      "finance.spec.ts",
+      "cash-flow roots, currency scales, loan ledgers, and markup survive the complete UI"
+    ],
+    [
+      "finance.spec.ts",
+      "dated flows keep monetary values paired through reorder and deletion"
+    ],
+    [
+      "finance.spec.ts",
+      "finance drafts retain their source notation across six destinations from ar"
+    ],
+    [
+      "finance.spec.ts",
+      "finance drafts retain their source notation across six destinations from en"
+    ],
+    [
+      "finance.spec.ts",
+      "finance drafts retain their source notation across six destinations from es"
+    ],
+    [
+      "finance.spec.ts",
+      "finance drafts retain their source notation across six destinations from fr"
+    ],
+    [
+      "finance.spec.ts",
+      "finance drafts retain their source notation across six destinations from hi"
+    ],
+    [
+      "finance.spec.ts",
+      "finance drafts retain their source notation across six destinations from pt-BR"
+    ],
+    [
+      "finance.spec.ts",
+      "finance drafts retain their source notation across six destinations from zh-CN"
+    ],
+    [
+      "finance.spec.ts",
+      "five financial workspaces calculate under all adaptive profiles without simultaneous workers"
+    ],
+    [
+      "finance.spec.ts",
+      "mixed-source fields survive digit paste, module suspension and preference reset"
+    ],
+    [
+      "finance.spec.ts",
+      "scenario differences exclude undefined percentages and replay exported drafts locally"
+    ],
+    [
+      "finance.spec.ts",
+      "the narrow RTL finance workspace keeps forms and ledger accessible"
+    ],
+    [
+      "geometry.spec.ts",
+      "Geometry draws one-shot adaptive diagrams and releases the canvas when switching modules"
+    ],
+    [
+      "geometry.spec.ts",
+      "Geometry exports power-aware unit metadata with exact symbolic values"
+    ],
+    [
+      "geometry.spec.ts",
+      "Geometry loads one dedicated WASM on demand and calculates after offline reload"
+    ],
+    [
+      "geometry.spec.ts",
+      "Geometry localizes dimension inputs and diagrams across seven accessible locales"
+    ],
+    [
+      "geometry.spec.ts",
+      "Geometry preserves 3D distance, exact radians, segment relations and domain errors"
+    ],
+    [
+      "geometry.spec.ts",
+      "Geometry preserves coordinate block delimiters and independent dimension notation through a language change"
+    ],
+    [
+      "geometry.spec.ts",
+      "Geometry runs eleven planar, solid and Cartesian operations with exact results"
+    ],
+    [
+      "geometry.spec.ts",
+      "switching modules terminates unfinished work and retains the geometry draft"
+    ],
+    [
+      "integrated-mathematics.spec.ts",
+      "All ten workspaces calculate individually across five profiles with one worker and searchable navigation"
+    ],
+    [
+      "integrated-mathematics.spec.ts",
+      "Standard exports localized originals and retained @ bindings and imports as inert text"
+    ],
+    [
+      "integrated-mathematics.spec.ts",
+      "Standard opens the shared Proof viewer offline on first use without loading advanced engines"
+    ],
+    [
+      "integrated-mathematics.spec.ts",
+      "Standard record and navigation are available in seven languages with touch and accessible RTL"
+    ],
+    [
+      "linear-algebra.spec.ts",
+      "Linear algebra distinguishes incompatible, indeterminate, singular and invalid input"
+    ],
+    [
+      "linear-algebra.spec.ts",
+      "Linear algebra edits, pastes and resizes matrices by keyboard while retaining exact integer text"
+    ],
+    [
+      "linear-algebra.spec.ts",
+      "Linear algebra keeps pasted cell notation across locale changes and supports mixed-origin cells"
+    ],
+    [
+      "linear-algebra.spec.ts",
+      "Linear algebra loads one isolated WASM on demand and recalculates offline"
+    ],
+    [
+      "linear-algebra.spec.ts",
+      "Linear algebra localizes controls and decimal cells with accessible 320 px RTL and wide grids"
+    ],
+    [
+      "linear-algebra.spec.ts",
+      "Linear algebra runs all fourteen operations and preserves Standard and adaptive behavior"
+    ],
+    [
+      "linear-algebra.spec.ts",
+      "Linear algebra shows observed numerical diagnostics and exports canonical proof"
+    ],
+    [
+      "linear-algebra.spec.ts",
+      "switching modules terminates unfinished work and retains the matrix draft"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "an explicitly suspended Scientific draft survives language changes, preference reset and warm offline catalogs"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "incomplete notation and an ambiguous civil time remain explicit errors across language changes"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "independently edited currency amount retains the rate notation, dates and unmodified source text"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "language changes before first evaluation and during a held real request preserve Scientific notation and portable proof"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix ar → en: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix ar → es: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix ar → fr: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix ar → hi: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix ar → pt-BR: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix ar → zh-CN: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix en → ar: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix en → es: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix en → fr: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix en → hi: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix en → pt-BR: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix en → zh-CN: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix es → ar: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix es → en: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix es → fr: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix es → hi: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix es → pt-BR: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix es → zh-CN: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix fr → ar: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix fr → en: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix fr → es: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix fr → hi: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix fr → pt-BR: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix fr → zh-CN: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix hi → ar: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix hi → en: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix hi → es: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix hi → fr: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix hi → pt-BR: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix hi → zh-CN: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix pt-BR → ar: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix pt-BR → en: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix pt-BR → es: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix pt-BR → fr: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix pt-BR → hi: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix pt-BR → zh-CN: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix zh-CN → ar: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix zh-CN → en: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix zh-CN → es: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix zh-CN → fr: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix zh-CN → hi: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "locale matrix zh-CN → pt-BR: all ten mathematical requests and proofs are invariant"
+    ],
+    [
+      "locale-transitions.spec.ts",
+      "numeric set members and working-calendar dates preserve their grammar while malformed names remain invalid"
+    ],
+    [
+      "module-frames.spec.ts",
+      "adaptive graphics policies change real canvas draw cadence and suspension stops drawing"
+    ],
+    [
+      "module-manager.spec.ts",
+      "browser fixtures switch through the module manager and release workers, cache and canvas resources"
+    ],
+    [
+      "module-shell.spec.ts",
+      "real Workers time out, release foreground capacity, and return valid successors in every adaptive profile"
+    ],
+    [
+      "module-shell.spec.ts",
+      "real scheduler Workers recover from secondary hangs and release in-flight jobs on cancel, suspend, and switch"
+    ],
+    [
+      "module-shell.spec.ts",
+      "the real app shell selects heterogeneous modules and globally clears both active and suspended state"
+    ],
+    [
+      "module-shell.spec.ts",
+      "the same app shell isolates a hung module, retries and disposes a late runtime"
+    ],
+    [
+      "operations.spec.ts",
+      "offline mode persists through reload and blocks a real uncached same-origin request"
+    ],
+    [
+      "operations.spec.ts",
+      "operations, privacy and diagnostics fit 320 px and retain preferences in all seven locales"
+    ],
+    [
+      "operations.spec.ts",
+      "reset preferences clears DARS settings while preserving unrelated browser keys"
+    ],
+    [
+      "operations.spec.ts",
+      "resource profiles retire and wake a real worker without changing exact math"
+    ],
+    [
+      "operations.spec.ts",
+      "visibility suspension recovers exact session state and the privacy action discards it"
+    ],
+    [
+      "optimization-cancel.spec.ts",
+      "cancels a dispatched exact LP worker and solves a successor optimization"
+    ],
+    [
+      "programmer.spec.ts",
+      "Programmer distinguishes raw patterns, signed values, over-width shifts and rejected inputs"
+    ],
+    [
+      "programmer.spec.ts",
+      "Programmer exports and reopens the exact width and decimal-count rotation proof"
+    ],
+    [
+      "programmer.spec.ts",
+      "Programmer loads only its worker and WASM on demand and calculates offline"
+    ],
+    [
+      "programmer.spec.ts",
+      "Programmer preserves wide integer text and pages the full 1024-bit word"
+    ],
+    [
+      "programmer.spec.ts",
+      "Programmer runs all eleven operations with fixed-width results in four bases"
+    ],
+    [
+      "programmer.spec.ts",
+      "Programmer supports seven locales and accessible RTL bit positions at 320 px"
+    ],
+    [
+      "programmer.spec.ts",
+      "cancels unfinished work and resumes the input after switching modules"
+    ],
+    [
+      "science.spec.ts",
+      "Graph Lab draws real discontinuous curves and 3D surfaces, responds to the camera and exports locally"
+    ],
+    [
+      "science.spec.ts",
+      "all science workspace controls render at 320 pixels in Arabic with local-only requests"
+    ],
+    [
+      "science.spec.ts",
+      "science engines load on demand and all seven science workspaces calculate after an offline reload"
+    ],
+    [
+      "science.spec.ts",
+      "science notation ar → en preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation ar → es preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation ar → fr preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation ar → hi preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation ar → pt-BR preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation ar → zh-CN preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation en → ar preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation en → es preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation en → fr preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation en → hi preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation en → pt-BR preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation en → zh-CN preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation es → ar preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation es → en preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation es → fr preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation es → hi preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation es → pt-BR preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation es → zh-CN preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation fr → ar preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation fr → en preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation fr → es preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation fr → hi preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation fr → pt-BR preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation fr → zh-CN preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation hi → ar preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation hi → en preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation hi → es preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation hi → fr preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation hi → pt-BR preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation hi → zh-CN preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation pt-BR → ar preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation pt-BR → en preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation pt-BR → es preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation pt-BR → fr preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation pt-BR → hi preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation pt-BR → zh-CN preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation zh-CN → ar preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation zh-CN → en preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation zh-CN → es preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation zh-CN → fr preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation zh-CN → hi preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "science notation zh-CN → pt-BR preserves seven canonical results and proofs"
+    ],
+    [
+      "science.spec.ts",
+      "scientific labels keep their mathematical meaning in all seven languages"
+    ],
+    [
+      "science.spec.ts",
+      "scientific workspace proves sample conventions, analytic probability, optimization and dimensions"
+    ],
+    [
+      "science.spec.ts",
+      "simulation emits real monotone progress, releases a cancelled Worker and replays the same sample"
+    ],
+    [
+      "scientific.spec.ts",
+      "Scientific assets are absent on initial opening and remain usable after explicit offline preparation"
+    ],
+    [
+      "scientific.spec.ts",
+      "Scientific cancels an admitted worker and calculates on a fresh worker"
+    ],
+    [
+      "scientific.spec.ts",
+      "Scientific computes the required vectors and preserves Standard and adaptive behavior"
+    ],
+    [
+      "scientific.spec.ts",
+      "Scientific normalizes localized input and keeps its controls within a narrow RTL layout"
+    ],
+    [
+      "scientific.spec.ts",
+      "Scientific options control working precision and engineering notation and expose domain failures"
+    ],
+    [
+      "scientific.spec.ts",
+      "Scientific preserves log(8,2) and its proof across en → pt-BR"
+    ],
+    [
+      "scientific.spec.ts",
+      "Scientific preserves log(8,2) and its proof across pt-BR → en"
+    ],
+    [
+      "scientific.spec.ts",
+      "Scientific preserves log(8;2) and its proof across pt-BR → en"
+    ],
+    [
+      "standard-revision.spec.ts",
+      "MC aborts a pending memory operation and late results cannot overwrite the next value"
+    ],
+    [
+      "standard-revision.spec.ts",
+      "MR immediately after M+ recalls an irrational absolute percentage without relative re-evaluation"
+    ],
+    [
+      "standard-revision.spec.ts",
+      "M−, negatives and large exact values survive recall, explicit percentages and powers"
+    ],
+    [
+      "standard-revision.spec.ts",
+      "a sequence of irrational additions preserves the original history value through MC, undo and locale change"
+    ],
+    [
+      "standard-revision.spec.ts",
+      "editing or explicitly cancelling rejects stale work and clearing history keeps it empty after an older result"
+    ],
+    [
+      "standard.spec.ts",
+      "Standard calculates exact decimal and rational results, precedence and roots through WASM"
+    ],
+    [
+      "standard.spec.ts",
+      "errors are recoverable and failed calculations are excluded from history"
+    ],
+    [
+      "standard.spec.ts",
+      "keypad insertion, keyboard editing, undo and redo operate on the expression"
+    ],
+    [
+      "standard.spec.ts",
+      "memory, result copying and history use session state only"
+    ],
+    [
+      "standard.spec.ts",
+      "production calculator confines assets to its own origin"
+    ],
+    [
+      "standard.spec.ts",
+      "regional decimal input, RTL and language/theme preferences work across reload"
+    ],
+    [
+      "standard.spec.ts",
+      "the dark layout is responsive and satisfies automated axe checks"
+    ],
+    [
+      "standard.spec.ts",
+      "the default is dark on a dark system and an explicit theme survives reload"
+    ],
+    [
+      "standard.spec.ts",
+      "the default is dark on a light system and an explicit theme survives reload"
+    ],
+    [
+      "standard.spec.ts",
+      "the light layout is responsive and satisfies automated axe checks"
+    ],
+    [
+      "worker.spec.ts",
+      "a hung production worker hits its deadline, terminates and restores calculation without reload"
+    ]
+  ],
+  "canonical_math": [
+    {
+      "source": "ar",
+      "target": "en",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "ar",
+      "target": "es",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "ar",
+      "target": "fr",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "ar",
+      "target": "hi",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "ar",
+      "target": "pt-BR",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "ar",
+      "target": "zh-CN",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "en",
+      "target": "ar",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "en",
+      "target": "es",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "en",
+      "target": "fr",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "en",
+      "target": "hi",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "en",
+      "target": "pt-BR",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "en",
+      "target": "zh-CN",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "es",
+      "target": "ar",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "es",
+      "target": "en",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "es",
+      "target": "fr",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "es",
+      "target": "hi",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "es",
+      "target": "pt-BR",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "es",
+      "target": "zh-CN",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "fr",
+      "target": "ar",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "fr",
+      "target": "en",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "fr",
+      "target": "es",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "fr",
+      "target": "hi",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "fr",
+      "target": "pt-BR",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "fr",
+      "target": "zh-CN",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "hi",
+      "target": "ar",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "hi",
+      "target": "en",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "hi",
+      "target": "es",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "hi",
+      "target": "fr",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "hi",
+      "target": "pt-BR",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "hi",
+      "target": "zh-CN",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "pt-BR",
+      "target": "ar",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "pt-BR",
+      "target": "en",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "pt-BR",
+      "target": "es",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "pt-BR",
+      "target": "fr",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "pt-BR",
+      "target": "hi",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "pt-BR",
+      "target": "zh-CN",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "zh-CN",
+      "target": "ar",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "zh-CN",
+      "target": "en",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "zh-CN",
+      "target": "es",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "zh-CN",
+      "target": "fr",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "zh-CN",
+      "target": "hi",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    },
+    {
+      "source": "zh-CN",
+      "target": "pt-BR",
+      "canonical_sha256": "0d758e74a5de5fcdf42093dc2c25e0e607dc6206aff6d684e8061d92db6e7a2c"
+    }
+  ]
+}

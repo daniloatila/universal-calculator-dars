@@ -1,0 +1,315 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DARS Math Notebook v1",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,39}$",
+      "not": {
+        "enum": [
+          "constructor",
+          "prototype",
+          "__proto__"
+        ]
+      }
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "pt-BR",
+        "zh-CN",
+        "hi",
+        "es",
+        "ar",
+        "fr"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "heading",
+        "text",
+        "variable",
+        "expression",
+        "formula",
+        "scientific",
+        "financial",
+        "table",
+        "chart",
+        "result",
+        "proof"
+      ]
+    },
+    "cell": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "$ref": "#/$defs/kind"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "source": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "origin": {
+          "$ref": "#/$defs/locale"
+        },
+        "unit": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9%/^*_.-]{0,40}$"
+        },
+        "symbol": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "title",
+        "source",
+        "origin",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "variable"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "symbol"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "symbol"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "entry": {
+      "type": "object",
+      "properties": {
+        "cell": {
+          "$ref": "#/$defs/id"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "maxItems": 128
+        },
+        "changed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "maxItems": 128
+        },
+        "operation": {
+          "$ref": "#/$defs/kind"
+        },
+        "source": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "origin": {
+          "$ref": "#/$defs/locale"
+        },
+        "inputs": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/id"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "maxLength": 8192
+              },
+              "unit": {
+                "type": "string",
+                "maxLength": 40
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "output": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string",
+              "maxLength": 32768
+            },
+            "unit": {
+              "type": "string",
+              "maxLength": 40
+            },
+            "display": {
+              "type": "string",
+              "maxLength": 4096
+            },
+            "exactness": {
+              "enum": [
+                "exact",
+                "symbolic",
+                "approximate"
+              ]
+            },
+            "fields": {
+              "type": "object",
+              "propertyNames": {
+                "$ref": "#/$defs/id"
+              },
+              "additionalProperties": {
+                "type": "string",
+                "maxLength": 4096
+              }
+            },
+            "table": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 4096
+                },
+                "maxItems": 12
+              },
+              "maxItems": 128
+            },
+            "series": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 4096
+                },
+                "maxItems": 12
+              },
+              "maxItems": 128
+            },
+            "proofs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "description": "Validated against the DARS Calculation Proof v1 contract by parseCalculationProof."
+              },
+              "maxItems": 128
+            },
+            "formula": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "maxLength": 80
+                },
+                "version": {
+                  "type": "string",
+                  "maxLength": 32
+                },
+                "receipt": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "receipt"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "cell",
+        "dependencies",
+        "changed",
+        "operation",
+        "source",
+        "origin",
+        "inputs",
+        "output"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "dars-notebook"
+    },
+    "version": {
+      "const": 1
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "cells": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/cell"
+      },
+      "maxItems": 128
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {"type": "string", "maxLength": 1024},
+        "tags": {"type": "array", "maxItems": 16, "items": {"type": "string", "maxLength": 40}}
+      }
+    },
+    "formulaDefinitions": {
+      "type": "array",
+      "items": {
+        "$ref": "../../../community/formulas/formula-v1.schema.json"
+      },
+      "maxItems": 16
+    },
+    "history": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/id"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "required": [
+    "format",
+    "version",
+    "title",
+    "cells"
+  ],
+  "additionalProperties": false
+}

@@ -67,3 +67,15 @@ Mesmo Windows x64, WebView2 158.0.4370.33, perfis novos e 6 amostras no repouso 
 | Diferença de RAM física do sistema entre repouso e controle ambiente | -2.437.120 | 129.417.216 |
 
 A variação física de todo o sistema inclui atividade alheia ao aplicativo. A meta de menos de 100.000.000 de bytes incrementais e a investigação prolongada de retenção permanecem em aberto. [0.5.0](../../objective-05/revision-01/windows-baseline.json) · [0.5.1](../../objective-05/revision-01/windows-candidate.json)
+
+## Comparação pareada 0.5.1 / 0.6.0
+
+A comparação pareada usou o mesmo Windows físico e o mesmo WebView2. As linhas abrangem host e descendentes ativos no modo Padrão visível em repouso. A meta de menos de 100 MB e a avaliação de retenção prolongada permanecem em aberto. O teste não executou servidor de modelos.
+
+| Mediana em bytes | 0.5.1 | 0.6.0 |
+| --- | ---: | ---: |
+| Conjunto de trabalho privado | 119537664 | 119656448 |
+| Memória privada comprometida | 268533760 | 272506880 |
+| Delta físico do sistema em relação ao controle | 183762944 | 200093696 |
+
+[0.6.0](../../objective-06/integrated-audit/physical-windows-comparison.json)

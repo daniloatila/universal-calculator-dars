@@ -1,0 +1,36 @@
+{
+  "source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "method": "Installed Chrome, isolated production build with local Rust/WASM",
+  "results": [
+    {
+      "scenario": "A well-formed proposal still needs Rust to validate its mathematical expression",
+      "status": "passed",
+      "durationMs": 1095
+    },
+    {
+      "scenario": "Intelligence is off by default; synthetic financial proposal replays with the real Rust engine and zero external calls",
+      "status": "passed",
+      "durationMs": 1352
+    },
+    {
+      "scenario": "Imported suggestion, clarification and model explanation stay unverified; unregistered effects get no controls",
+      "status": "passed",
+      "durationMs": 1079
+    },
+    {
+      "scenario": "Local OCR on selected synthetic PNG requires human review before Rust computation",
+      "status": "passed",
+      "durationMs": 1185
+    },
+    {
+      "scenario": "A fresh Rust replay survives the 42 directed language transitions",
+      "status": "passed",
+      "durationMs": 9329
+    },
+    {
+      "scenario": "Installed voice availability is observed without capturing or playing audio; invalid images cannot produce a calculation",
+      "status": "passed",
+      "durationMs": 1021
+    }
+  ]
+}

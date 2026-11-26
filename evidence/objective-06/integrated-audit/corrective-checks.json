@@ -1,0 +1,56 @@
+{
+  "reviewed_prior_source": "8ab903dd95282682902bfb6077bf0249afee4063",
+  "focused_chrome": {
+    "passed": 15,
+    "failed": 0,
+    "cases": [
+      "Automation preserves the en notation across remaining languages",
+      "Automation preserves the pt-BR notation across remaining languages",
+      "Automation preserves the zh-CN notation across remaining languages",
+      "Automation preserves the hi notation across remaining languages",
+      "Automation preserves the es notation across remaining languages",
+      "Automation preserves the ar notation across remaining languages",
+      "Automation preserves the fr notation across remaining languages",
+      "Automation opens files inertly, completes four local flows and rejects a forward reference",
+      "A saved automation proof opens for review and requires an exact replay",
+      "A well-formed proposal still needs Rust to validate its mathematical expression",
+      "Intelligence is off by default; synthetic financial proposal replays with the real Rust engine and zero external calls",
+      "Imported suggestion, clarification and model explanation stay unverified; unregistered effects get no controls",
+      "Local OCR on selected synthetic PNG requires human review before Rust computation",
+      "A fresh Rust replay survives the 42 directed language transitions",
+      "Installed voice availability is observed without capturing or playing audio; invalid images cannot produce a calculation"
+    ]
+  },
+  "proposal_node_tests": {
+    "passed": 5,
+    "commands": [
+      "node --experimental-strip-types --test apps/web/tests/intelligence.test.mts"
+    ]
+  },
+  "findings": [
+    {
+      "case": "duplicate finance field or fractional period rounded by JSON.parse",
+      "result": "Both raw proposals and historical envelopes now validate original JSON tokens first. Duplicate keys and non-integer numeric tokens are rejected."
+    },
+    {
+      "case": "purely declarative workflow shown as verified by engine and approximation only recorded in exported JSON",
+      "result": "Run completion describes the flow. Only steps returning an actual proof receive an engine label. Simulation displays a visible approximation notice."
+    },
+    {
+      "case": "proposal structurally valid but malformed mathematical expression",
+      "result": "Review describes structural validation in seven languages. The separate Rust execution refuses 2+ and produces no result."
+    }
+  ],
+  "proposal_and_automation_change_commit": "e36d752354bf88dc288049128d51aa230dfaa83b",
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "hosted_failure": {
+    "run": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45899572342",
+    "source": "e36d752354bf88dc288049128d51aa230dfaa83b",
+    "hosted_headless_shell_passed": 254,
+    "failed": 7,
+    "intelligence_pages": 6,
+    "offline_data_lab": 1,
+    "other_jobs_passed": 3,
+    "disposition": "Retained the entire test suite. On-demand speech discovery, full Chromium headless for browser verification and recovery of visited pre-control assets. Independent installed Chrome reproduced the offline cache race by delaying first service-worker registration."
+  }
+}

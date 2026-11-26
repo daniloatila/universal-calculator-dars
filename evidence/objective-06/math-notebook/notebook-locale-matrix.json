@@ -1,0 +1,300 @@
+{
+  "module": "math-notebook",
+  "total": 42,
+  "comparisons": [
+    {
+      "source": "en",
+      "target": "pt-BR",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "en",
+      "target": "zh-CN",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "en",
+      "target": "hi",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "en",
+      "target": "es",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "en",
+      "target": "ar",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "en",
+      "target": "fr",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "pt-BR",
+      "target": "en",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "pt-BR",
+      "target": "zh-CN",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "pt-BR",
+      "target": "hi",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "pt-BR",
+      "target": "es",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "pt-BR",
+      "target": "ar",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "pt-BR",
+      "target": "fr",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "zh-CN",
+      "target": "en",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "zh-CN",
+      "target": "pt-BR",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "zh-CN",
+      "target": "hi",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "zh-CN",
+      "target": "es",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "zh-CN",
+      "target": "ar",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "zh-CN",
+      "target": "fr",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "hi",
+      "target": "en",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "hi",
+      "target": "pt-BR",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "hi",
+      "target": "zh-CN",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "hi",
+      "target": "es",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "hi",
+      "target": "ar",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "hi",
+      "target": "fr",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "es",
+      "target": "en",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "es",
+      "target": "pt-BR",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "es",
+      "target": "zh-CN",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "es",
+      "target": "hi",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "es",
+      "target": "ar",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "es",
+      "target": "fr",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "ar",
+      "target": "en",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "ar",
+      "target": "pt-BR",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "ar",
+      "target": "zh-CN",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "ar",
+      "target": "hi",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "ar",
+      "target": "es",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "ar",
+      "target": "fr",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "fr",
+      "target": "en",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "fr",
+      "target": "pt-BR",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "fr",
+      "target": "zh-CN",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "fr",
+      "target": "hi",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "fr",
+      "target": "es",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    },
+    {
+      "source": "fr",
+      "target": "ar",
+      "canonical": "(72057594037927945/8)+0.125",
+      "result": "36028797018963973/4",
+      "proof_sha256": "98aea6bb21a6715ca33c54265c1150487ea7bc468721023186429d28e9143be4"
+    }
+  ]
+}

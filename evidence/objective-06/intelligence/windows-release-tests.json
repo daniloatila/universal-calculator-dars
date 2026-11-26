@@ -1,0 +1,25 @@
+{
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "platform": "physical Windows x64",
+  "command": "cargo test --locked --release -p dars-desktop --lib -- --include-ignored",
+  "gateways": 11,
+  "credential_tests": 2,
+  "passed": 13,
+  "failed": 0,
+  "ignored": 0,
+  "names": [
+    "credentials::tests::accepts_only_bounded_ids_and_blobs",
+    "intelligence::tests::empty_invalid_and_remote_inventories_are_distinct",
+    "intelligence::tests::local_inventory_refuses_cloud_alias_and_missing_weights_before_disclosing_content",
+    "intelligence::tests::model_cannot_set_url_credentials_or_return_verified_data",
+    "intelligence::tests::factory_off_and_offline_refuse_external_calls_and_cross_mode_routes",
+    "intelligence::tests::consent_bound_to_body_origin_and_one_use_with_output_and_context_limits",
+    "intelligence::tests::window_limits_and_cancellation_do_not_retry",
+    "intelligence::tests::six_protocols_fixed_destinations_and_response_shapes",
+    "intelligence::tests::cancelling_an_inflight_request_drops_transport_and_recovers",
+    "intelligence::tests::real_loopback_http_mock_transmits_only_the_reviewed_payload_after_grant",
+    "intelligence::tests::host_selected_ipv4_ipv6_inventory_is_get_only_and_secrets_are_opt_in",
+    "credentials::tests::windows_credential_manager_round_trip",
+    "intelligence::tests::controlled_redirect_http_limit_and_external_failure_return_stable_errors"
+  ]
+}

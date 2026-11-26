@@ -1,0 +1,567 @@
+{
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "algorithm": "SHA-256; text normalized to the LF bytes in Git",
+  "scope": "All review evidence files other than this manifest. Executable and Windows archive hashes are in integrated-audit/windows-artifact.json.",
+  "files": [
+    {
+      "path": "acceptance.json",
+      "bytes": 6425,
+      "sha256": "cd39ce84f470c7759370e56121ee86c3793a4430c7e8f06d06ff584776b267a6"
+    },
+    {
+      "path": "automation-studio/execution.json",
+      "bytes": 11222,
+      "sha256": "1652e8e4f845fd37eb1f2744f25a73f26467a09b2175336b06a950569766bff3"
+    },
+    {
+      "path": "automation-studio/REPORT.md",
+      "bytes": 2935,
+      "sha256": "4c06269ed9f9502c20e0b500346b161d718b39f3d93b6f39d1a26a4c825b9b75"
+    },
+    {
+      "path": "automation-studio/REPORT.pt-BR.md",
+      "bytes": 2864,
+      "sha256": "0537910e1fd96d472ddb010e18bb88de0cf0eaea1c7ba1eb3fcbbc2e2714e6ed"
+    },
+    {
+      "path": "benchmarks.json",
+      "bytes": 4313,
+      "sha256": "e8f51057dfb241d07234cbdb4f704ff11d21527ce68ef235935bbec6a5e4fd64"
+    },
+    {
+      "path": "changes.md",
+      "bytes": 1585,
+      "sha256": "3f18f07f6c4b2330239d04b83e36c62fddd97cd3dec0a4fcbd5a2998d8cb8017"
+    },
+    {
+      "path": "changes.pt-BR.md",
+      "bytes": 1619,
+      "sha256": "dd2e1a70ab41ea6751b4b841cb4bb69e63ea1fd20d0a6708d871fa480bd3556d"
+    },
+    {
+      "path": "compatibility.md",
+      "bytes": 1663,
+      "sha256": "9f299d6e987c4ac2d2c4ebb91a56227838953d1ac151088da85020dfab2a5d3f"
+    },
+    {
+      "path": "compatibility.pt-BR.md",
+      "bytes": 1653,
+      "sha256": "410ecb12204e26b316fef666e6c0584b503511146b9259a33a06d1e4763bcb36"
+    },
+    {
+      "path": "coverage.json",
+      "bytes": 2842,
+      "sha256": "4e3ccdf517dede2e21aaddb223ebd79daffb59229f340f77ba461bab1e19a9a6"
+    },
+    {
+      "path": "formula-studio/checks.json",
+      "bytes": 2249,
+      "sha256": "9e07ad1091c8cfd1338d9772f38524fc32ae41654511da030dd81684d5424742"
+    },
+    {
+      "path": "formula-studio/formula-run.json",
+      "bytes": 2749,
+      "sha256": "0babf9db5c89d01097c7b205e08b44eedc4595f0f51efc00725df66964f3a458"
+    },
+    {
+      "path": "formula-studio/formula-studio.png",
+      "bytes": 68776,
+      "sha256": "f1414c86eced3c6e6aecb93262f7f50156c27b940f37634037aa17de944a66f8"
+    },
+    {
+      "path": "formula-studio/locale-matrix.json",
+      "bytes": 19518,
+      "sha256": "1342643973f542694b8f24c4e5033d71a1bd37f0c4a559ba0475ab19c6c47914"
+    },
+    {
+      "path": "formula-studio/README.md",
+      "bytes": 3161,
+      "sha256": "417de361eae86f9a82a4e949e05b79bca57e80ed6892c398db834e848590741f"
+    },
+    {
+      "path": "formula-studio/README.pt-BR.md",
+      "bytes": 3476,
+      "sha256": "df38a4b6da7383e5776d43c735fc332a105f6f45e2309eb09a261b706bd0c658"
+    },
+    {
+      "path": "formula-studio/schema-validation.json",
+      "bytes": 662,
+      "sha256": "411aca57328b2373971610820cc64fb1ad58a66babcd2fa22f1a0a50b28791fd"
+    },
+    {
+      "path": "integrated-audit/browser.json",
+      "bytes": 5057,
+      "sha256": "7a6d86881b4279fcdf8751dc835d6549e9a6b13c8b461baac332520a6e0a97a0"
+    },
+    {
+      "path": "integrated-audit/chrome-0.5.1-reference.json",
+      "bytes": 37824,
+      "sha256": "a602cfab455fec0596cece77925532a2ab61b84a3bbd5a64e448e0876404162f"
+    },
+    {
+      "path": "integrated-audit/chrome-captures/automation-studio.png",
+      "bytes": 387875,
+      "sha256": "b81564f63a5e8ac79192735564a90ffa37e009b2781fd53806f736103d16c63e"
+    },
+    {
+      "path": "integrated-audit/chrome-captures/formula-studio.png",
+      "bytes": 68776,
+      "sha256": "f1414c86eced3c6e6aecb93262f7f50156c27b940f37634037aa17de944a66f8"
+    },
+    {
+      "path": "integrated-audit/chrome-captures/intelligence-investment.png",
+      "bytes": 26392,
+      "sha256": "f8ec99890d0c004f22654af3dfabdd14cef010c5aa3209d6af9e3f8d1e8a48be"
+    },
+    {
+      "path": "integrated-audit/chrome-captures/math-notebook.png",
+      "bytes": 407836,
+      "sha256": "3df19fa2d16b07be2db51e73ffeba0dfcc1f80982fb830079a68d64738cab3dc"
+    },
+    {
+      "path": "integrated-audit/chrome-captures/reviewed-printed-expression.png",
+      "bytes": 25663,
+      "sha256": "dd774c4b18bb06647852c2789f23108d17b5b4a2d37c4b45a1c4504000324f26"
+    },
+    {
+      "path": "integrated-audit/ci.json",
+      "bytes": 3863,
+      "sha256": "ddbb572314a5f88883b4237f255975e81786581928fe21b3847d8d101d9d082b"
+    },
+    {
+      "path": "integrated-audit/collect-browser.py",
+      "bytes": 12475,
+      "sha256": "38e6d5351c2136a4281297e5cd663d84d07a8c5d72cc7a09f85291b435ad066f"
+    },
+    {
+      "path": "integrated-audit/collect-regression.py",
+      "bytes": 6872,
+      "sha256": "2f849471ed87d7181135664112b354745d76940c08da5baa96b78ca8e94cb812"
+    },
+    {
+      "path": "integrated-audit/collect-source-ci.py",
+      "bytes": 4373,
+      "sha256": "0ce973bcf3ff250103f2cfb6089bbb9854470ed2ebbdb9a47067a3906e1232ec"
+    },
+    {
+      "path": "integrated-audit/corrective-checks.json",
+      "bytes": 3225,
+      "sha256": "d1cc302d1dd1a16c3a4344356397e88b75db18d084d5cac20e398bffd64a8c04"
+    },
+    {
+      "path": "integrated-audit/physical-windows-comparison.json",
+      "bytes": 15945,
+      "sha256": "e2b1123662a09287506b29e3d8af6d689cc81fbf926d951b8377f84ae16d0698"
+    },
+    {
+      "path": "integrated-audit/physical-windows-results.md",
+      "bytes": 1775,
+      "sha256": "81232e1fd9a7dca64f3c10611e9d733abff569d65e3ea8192daf46815bb0bfe8"
+    },
+    {
+      "path": "integrated-audit/physical-windows-results.pt-BR.md",
+      "bytes": 1930,
+      "sha256": "845ae23c79ce207d564082fd4a154afc04a16ab6cbc160d38d70fb6c633c4184"
+    },
+    {
+      "path": "integrated-audit/regression.json",
+      "bytes": 6147,
+      "sha256": "e2ac4f7472e39758ca5e49173f120a22128aa52833d96f3603811586793c68c0"
+    },
+    {
+      "path": "integrated-audit/windows-artifact.json",
+      "bytes": 4045,
+      "sha256": "cdf92b308e9efc5dad3a8d0765c10ac0cdea6f722e2b58235675263c4e01c088"
+    },
+    {
+      "path": "integrated-audit/windows-baseline.json",
+      "bytes": 21247,
+      "sha256": "ce911fea02ebaefc8f7d9fc5b50f10a7b19e3a21b4da84b2b373cd557f850ff9"
+    },
+    {
+      "path": "integrated-audit/windows-candidate.json",
+      "bytes": 60035,
+      "sha256": "0af1187ebb06b5742467cabc60f1a241c0ed9d86d14382a155a3171868fb86b6"
+    },
+    {
+      "path": "integrated-audit/windows-captures/automation-studio.png",
+      "bytes": 362380,
+      "sha256": "ad5db046a988c68a562b25b90b4197a98990c4b9708442916a271e637eaf357a"
+    },
+    {
+      "path": "integrated-audit/windows-captures/data-lab.png",
+      "bytes": 336598,
+      "sha256": "265d45571e1de68cc10f58b1ab63725594b0da2c8da462ffed1fa17c99f3fba3"
+    },
+    {
+      "path": "integrated-audit/windows-captures/formula-studio.png",
+      "bytes": 170050,
+      "sha256": "27297fde1ac2ff9b156c0ca9e4d9d36bd7e8cea44366e9a2b4b923c57e4ab10d"
+    },
+    {
+      "path": "integrated-audit/windows-captures/graph-lab-surface.png",
+      "bytes": 242232,
+      "sha256": "ef4013fe6982d10ad577fa407f47d19e8e082b8b556f2d58f571a65c96f1be04"
+    },
+    {
+      "path": "integrated-audit/windows-captures/graph-lab.png",
+      "bytes": 207949,
+      "sha256": "074ef13805371c04098790d1b63f93247394f4365f9e404949a9d8a281d0785a"
+    },
+    {
+      "path": "integrated-audit/windows-captures/intelligence-native-proof.png",
+      "bytes": 34733,
+      "sha256": "ab08f73ca43756405fa6821a778211ce1443e7c0dbdf659a052f842a7130c4fe"
+    },
+    {
+      "path": "integrated-audit/windows-captures/intelligence-native-refused.png",
+      "bytes": 30334,
+      "sha256": "4019cf4488a409f2a1c4eace60873bcc749716316bad0e1cb3efeda85ba1991e"
+    },
+    {
+      "path": "integrated-audit/windows-captures/intelligence.png",
+      "bytes": 72731,
+      "sha256": "a887384053fb82c53ffdcd005bff82bece5360abc523626b84615827d6176b0b"
+    },
+    {
+      "path": "integrated-audit/windows-captures/manifest.json",
+      "bytes": 2577,
+      "sha256": "e58c8176d397d448500b28bfa871d5cc4359901a24c6330a3d8bbce888f98415"
+    },
+    {
+      "path": "integrated-audit/windows-captures/math-notebook.png",
+      "bytes": 365603,
+      "sha256": "ae3fe61ebc6b3837064ccf2ead2d6a1b7c8e1bd723ce562e1a765f42ba07471d"
+    },
+    {
+      "path": "integrated-audit/windows-captures/mixed-json.png",
+      "bytes": 321446,
+      "sha256": "7c4f539c3e160db999b1b309f3c2a738f8927378bf39edafe6e936ecaf47f529"
+    },
+    {
+      "path": "integrated-audit/windows-captures/optimization.png",
+      "bytes": 166782,
+      "sha256": "b7a2bdb4e7c3af01df664d4bfccd8db25fe67b4c9e102212f68b9d84e1b6ba3b"
+    },
+    {
+      "path": "integrated-audit/windows-captures/physics-engineering.png",
+      "bytes": 160382,
+      "sha256": "6b2ad5caecc3ce604d1f1cec2c2e3342da367b9a9b5daa6746fe8847ee965bab"
+    },
+    {
+      "path": "integrated-audit/windows-captures/probability.png",
+      "bytes": 207955,
+      "sha256": "aed2831448bfd515c7100550b0c3b8c9e496181125b2a5d66728615cadb6e15a"
+    },
+    {
+      "path": "integrated-audit/windows-captures/simulation.png",
+      "bytes": 175615,
+      "sha256": "f4a9ebaa19c9ccd9c89d005def93d0f02715683e735ca1edfafe368cea3ec704"
+    },
+    {
+      "path": "integrated-audit/windows-captures/statistics.png",
+      "bytes": 173071,
+      "sha256": "0dfe6c09f946a74fa4b045ac4560d4324366172445f13091e59eb2d06b8d6bc6"
+    },
+    {
+      "path": "integrated-audit/windows-finance-captures/candidate-business.png",
+      "bytes": 209589,
+      "sha256": "384ae1f24dbd1f97ffa9a4e37ce0b637ed78601227eb6e231340294229573301"
+    },
+    {
+      "path": "integrated-audit/windows-finance-captures/candidate-financial.png",
+      "bytes": 177817,
+      "sha256": "d4dc71a53a60972c384c92905932bf2ecf507e41064792b1d12f55a76a97ac88"
+    },
+    {
+      "path": "integrated-audit/windows-finance-captures/candidate-investment.png",
+      "bytes": 242678,
+      "sha256": "99a521a1d6c4e55c18b8033f1a89136d1ba122d2fab35e97b2c45af1624f8c1a"
+    },
+    {
+      "path": "integrated-audit/windows-finance-captures/candidate-loans.png",
+      "bytes": 215641,
+      "sha256": "4620f3a0b7a0831e2d9b872c375ea9b7680fd4fcf77d11b4edd2a8f241c404dd"
+    },
+    {
+      "path": "integrated-audit/windows-finance-captures/candidate-tax.png",
+      "bytes": 178005,
+      "sha256": "fab39cbf4834177086ce10b53941e26485850ed0f289b95046be245fbee88782"
+    },
+    {
+      "path": "integrated-audit/windows-finance-captures/equivalent-rate-comparison.png",
+      "bytes": 260474,
+      "sha256": "f48528041a5f433bc95780cf7038d57a08485ea490fd144eafc87840881ca4a3"
+    },
+    {
+      "path": "integrated-audit/windows-finance-captures/manifest.json",
+      "bytes": 1208,
+      "sha256": "d17baeefe0996da711d1cba5b172bb0bec8b5d49f8eea1b273c55b35ba40a9cb"
+    },
+    {
+      "path": "integrated-audit/windows-finance-comparison-proof.json",
+      "bytes": 6009,
+      "sha256": "2cb94b23fd7fc790ab167ce6062b8cb5ff4dccf03d908898d2c70595dc5a2417"
+    },
+    {
+      "path": "integrated-audit/windows-finance-comparison.json",
+      "bytes": 2057,
+      "sha256": "6132bb35b89576b9fbb13571b60ede88e650fd2034e92c05f9ce2e7f7d64e4fb"
+    },
+    {
+      "path": "integrated-audit/windows-finance-offline.json",
+      "bytes": 29674,
+      "sha256": "4432773ea224011624b5a62e81b80709c893daa04f78f7c22190390eb1caf9a2"
+    },
+    {
+      "path": "integrated-audit/windows-intelligence-native.json",
+      "bytes": 743,
+      "sha256": "8b74d129ea0fbd87d9c34bdda3faf6f66251361211d819956aded94c90d63db2"
+    },
+    {
+      "path": "integrated-audit/windows-method.md",
+      "bytes": 3336,
+      "sha256": "20cccd9e27eb255cdef38e35cda7ded3e7ed246e85e4427d551579878d3978c6"
+    },
+    {
+      "path": "integrated-audit/windows-method.pt-BR.md",
+      "bytes": 3475,
+      "sha256": "b2a4ecf56ca4ba0749cbc795f376f37e3dcc940cbcdf343831879a10b3f764fd"
+    },
+    {
+      "path": "integrated-audit/windows-mixed-json-proof.json",
+      "bytes": 2885,
+      "sha256": "4cb08d37b2fc27885356e8fcb02e171229bf603cf6b87dd1cba06dd11514b011"
+    },
+    {
+      "path": "integrated-audit/windows-protection.json",
+      "bytes": 4966,
+      "sha256": "5f3ef374dd3772aaa5af8e191b147663d20192c82b11366b6b425a61e2d2236d"
+    },
+    {
+      "path": "integrated-audit/windows-protection.md",
+      "bytes": 1339,
+      "sha256": "e9453f1d09add64ccebeb8bddf4e8793cf26aa84bbb995a755d9b83c750a351e"
+    },
+    {
+      "path": "integrated-audit/windows-protection.pt-BR.md",
+      "bytes": 1426,
+      "sha256": "aa3c0d824c4c715f6aa3f7493649c68b95c8c2e992815b89d9472ed3e9d44144"
+    },
+    {
+      "path": "integrated-audit/windows-regression.json",
+      "bytes": 804,
+      "sha256": "a7b9965052ce32c4b3d25eedbb9ea4182449f64152b5b054f4a3bc184d1147c0"
+    },
+    {
+      "path": "integration/browser.json",
+      "bytes": 566,
+      "sha256": "bb4fa86e401d0d1fff83620e9d19f9e5ee08f0e5d5f6fff18396d08ef7365d4d"
+    },
+    {
+      "path": "integration/catalog.json",
+      "bytes": 248217,
+      "sha256": "f8e7a854ca91db16e30c2ea87f19750c4bd65b88ad24780075aff4b462fe2e76"
+    },
+    {
+      "path": "integration/data-lab-first-visit.json",
+      "bytes": 1774,
+      "sha256": "9b271c7abebb4369f3aaa9b1a38914fa29c4e50b113c8f3bedd3ba8ba880c1bd"
+    },
+    {
+      "path": "integration/dependencies.json",
+      "bytes": 4883,
+      "sha256": "d8e0bfc6c7dc1c5f73f5008c293a6443d74c787adc8d43e3716a1f1559d3f01e"
+    },
+    {
+      "path": "integration/REPORT.md",
+      "bytes": 1539,
+      "sha256": "760d010f4012d63f8339e61472d9cac9089528c462d61fb4de7f045bc9aa2e08"
+    },
+    {
+      "path": "integration/REPORT.pt-BR.md",
+      "bytes": 1487,
+      "sha256": "5bab0633968ed89835bb1ff4ec2c6197ea97ccc2d6dcb9396ddc22c3919ad1ab"
+    },
+    {
+      "path": "intelligence/browser.json",
+      "bytes": 1254,
+      "sha256": "f5c747ef2bb52e97c459674ab1f8fcb810373151fd854223ff06bc7e26a2b92a"
+    },
+    {
+      "path": "intelligence/languages.json",
+      "bytes": 1022,
+      "sha256": "9917883e8333d582936849310ec5e368e84a2b201c13fbcfa9ca930d18325249"
+    },
+    {
+      "path": "intelligence/local-services.json",
+      "bytes": 1423,
+      "sha256": "afd599153eab65b38adc1c9415b976805037498d120d8edfd58cd701bd38187b"
+    },
+    {
+      "path": "intelligence/native-loopback.json",
+      "bytes": 920,
+      "sha256": "2a7b4393313a50c2869325babcedb04a45c0ab0c20dbd67eda74a6a20a9d0325"
+    },
+    {
+      "path": "intelligence/proposal.schema.json",
+      "bytes": 3793,
+      "sha256": "5ba634bc8a0c8ea77fb877e2bcaad75bb1297e4f6a2b596eb420b7b9dccb8378"
+    },
+    {
+      "path": "intelligence/providers.md",
+      "bytes": 3514,
+      "sha256": "3d29a9c4abd895fd5861a46a0ababc46a58b911ccb38d5db1bd3e46dde2c8b29"
+    },
+    {
+      "path": "intelligence/providers.pt-BR.md",
+      "bytes": 3500,
+      "sha256": "d61cd6a43bb78c30362aad0b2cbad82f5effeac65515d420e8bbb471c869ca90"
+    },
+    {
+      "path": "intelligence/README.md",
+      "bytes": 6889,
+      "sha256": "06badd1fd448a2694c699845573da29e7ca3130fd8ef4ef95571ba4175b05a15"
+    },
+    {
+      "path": "intelligence/README.pt-BR.md",
+      "bytes": 7035,
+      "sha256": "f1908c55866b2f99ef227d67d2b251a1149dd5c9b61af33b6eabd2e9515df05b"
+    },
+    {
+      "path": "intelligence/verified-investment.png",
+      "bytes": 26392,
+      "sha256": "f8ec99890d0c004f22654af3dfabdd14cef010c5aa3209d6af9e3f8d1e8a48be"
+    },
+    {
+      "path": "intelligence/windows-release-tests.json",
+      "bytes": 1443,
+      "sha256": "c03df69bb98d2c546617f599a3fffd8ff00bc7c8f797fedf2b20f9ee36af1831"
+    },
+    {
+      "path": "locale-transition-matrix.json",
+      "bytes": 265020,
+      "sha256": "75eeaf70f747030ed297a74bb317e93f8c58cd0f16b20c211ae6bfc49dfb3e48"
+    },
+    {
+      "path": "math-notebook/financial-plan.darsnb",
+      "bytes": 27490,
+      "sha256": "3f5641047ca8ef6bfae72bbca1fbf99e3fd70eff2e736f6600736a23e1016a44"
+    },
+    {
+      "path": "math-notebook/notebook-financial.png",
+      "bytes": 407836,
+      "sha256": "3df19fa2d16b07be2db51e73ffeba0dfcc1f80982fb830079a68d64738cab3dc"
+    },
+    {
+      "path": "math-notebook/notebook-locale-matrix.json",
+      "bytes": 10012,
+      "sha256": "8435da0b7048cbed9b0935539be9ea6751a15de6e0fb39714910a98a41ff9c9d"
+    },
+    {
+      "path": "math-notebook/notebook-v1.schema.json",
+      "bytes": 6968,
+      "sha256": "20203c4e8767b3fc4ab891990b045633284e50d1dddf615f08d8732c667b48d1"
+    },
+    {
+      "path": "math-notebook/REPORT.md",
+      "bytes": 5773,
+      "sha256": "505b8b28cc1ca7c49f33b5f0cbd91d00f419852633bbb49f644e22342a969750"
+    },
+    {
+      "path": "math-notebook/REPORT.pt-BR.md",
+      "bytes": 6061,
+      "sha256": "17028713bf0dafd23fe8d48f61ed30fa0e373aa8b434dc0338b5353f945532ba"
+    },
+    {
+      "path": "math-notebook/tests.json",
+      "bytes": 3333,
+      "sha256": "1ec7e4c78bb27008b791b7c197388804d3dd38189f0b477a8050db956f33bc2c"
+    },
+    {
+      "path": "privacy.md",
+      "bytes": 2144,
+      "sha256": "e5c7a8ec63e4f22fc4ebc7778324013b7082c3a8bcf365efb1e9a2f8bfb00255"
+    },
+    {
+      "path": "privacy.pt-BR.md",
+      "bytes": 2136,
+      "sha256": "dff91b0d14ce628bc954a8c2b7931b389452007b2a0fff64972dd06f664f9a43"
+    },
+    {
+      "path": "regression.md",
+      "bytes": 2809,
+      "sha256": "346dc824100fbea98327f5be46294d93bd2e7b2747099f90716cc944732d98c0"
+    },
+    {
+      "path": "regression.pt-BR.md",
+      "bytes": 3097,
+      "sha256": "f926e3d376f29b11d87630db311831dfa71a3d645f3bdab802769b4a6a09387e"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 6139,
+      "sha256": "345f0f4d59d35cd719a7319bab978f0d500cde95eb25bc561cfacab10bbea205"
+    },
+    {
+      "path": "REPORT.pt-BR.md",
+      "bytes": 6525,
+      "sha256": "d79ed8924e9b88b3ce06a9de6fcef8f0e2c6d4628e52c40ae4e0fd94d36aa905"
+    },
+    {
+      "path": "reproduction.md",
+      "bytes": 2552,
+      "sha256": "386368dbe47de763a678886c8ed335fff78033292f1a1669c0d4be4020cccf94"
+    },
+    {
+      "path": "reproduction.pt-BR.md",
+      "bytes": 2432,
+      "sha256": "d2b717e8f3581e00c9f11c454cd325e2740c1318a229993049517ac29359fab4"
+    },
+    {
+      "path": "security.md",
+      "bytes": 1444,
+      "sha256": "c5b4fc5b9bb8b9731bc63716f3278c02279f00126b275e7e1ff229dde06eef61"
+    },
+    {
+      "path": "security.pt-BR.md",
+      "bytes": 1429,
+      "sha256": "83c26484e729661711d3aadba1ad84927a706df65d9459649868b6da9c84973e"
+    },
+    {
+      "path": "tests.json",
+      "bytes": 2946,
+      "sha256": "10df331961adcfbabfc967967d71660dd3b483bbc72e39ad14c3179dba6b7c81"
+    },
+    {
+      "path": "threat-model.md",
+      "bytes": 2128,
+      "sha256": "82e2a924c43be06fb933f8615318cb0758714e993634d61f332cbedc7d5c323a"
+    },
+    {
+      "path": "threat-model.pt-BR.md",
+      "bytes": 2039,
+      "sha256": "9ffef7912537e175a5e953cb1a1ab7ee101561f0df981d6e4d2f63238ca402b4"
+    },
+    {
+      "path": "voice-vision/availability.json",
+      "bytes": 731,
+      "sha256": "292d9490b67d90fd0e6b80a4d2ef07ada12c6eb2cc8ac8f65990468b25d28f8a"
+    },
+    {
+      "path": "voice-vision/README.md",
+      "bytes": 3183,
+      "sha256": "34ccf7c4bcf8b1b15fab75d8eb6a926ec61d89c77930db923809797e27559467"
+    },
+    {
+      "path": "voice-vision/README.pt-BR.md",
+      "bytes": 3234,
+      "sha256": "38b6389e365fd3fee35bc39a30e60eb26ed8a2f0fa0363948f253d28d41f0500"
+    },
+    {
+      "path": "voice-vision/reviewed-printed-expression.png",
+      "bytes": 25663,
+      "sha256": "dd774c4b18bb06647852c2789f23108d17b5b4a2d37c4b45a1c4504000324f26"
+    }
+  ]
+}

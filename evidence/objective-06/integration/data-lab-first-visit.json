@@ -1,0 +1,41 @@
+{
+  "suite": "data-lab-first-visit-warming",
+  "base_source": "e36d752354bf88dc288049128d51aa230dfaa83b",
+  "failed_hosted_run": 45899572342,
+  "observed_failure": "The Data Lab file input did not mount after an offline reload when the workspace had loaded before service worker control.",
+  "controlled_cold_reproduction": {
+    "engine": "Windows installed Chrome 158.0.8127.38",
+    "intervention": "Held only the local service-worker script response until the Data Lab UI appeared. Then let the real worker activate, disabled network and reloaded the page.",
+    "before": {
+      "visited_workspace_javascript_css_contract": 3,
+      "matching_application_cache_entries": 0,
+      "offline_form_available": false
+    },
+    "after": {
+      "visited_workspace_javascript_css_contract": 3,
+      "matching_application_cache_entries": 3,
+      "offline_form_available": true
+    }
+  },
+  "in_flight_reproduction": {
+    "intervention": "Held Data Lab contract request across first service worker control. The test verifies cache admission for completed and in-flight resources, absence of Loans and Physics/Engineering engine downloads, actual offline import and Rust proof replay.",
+    "chrome": {
+      "startTime": "2026-11-26T22:02:40.276Z",
+      "duration": 6461.8099999999995,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "passed_attempts": 3,
+    "synthetic_proof_replayed": true,
+    "external_requests": [],
+    "report_sha256": "2234e6c1dee231c5dd390c68c8ae825b19b5e7a9abdada962f7c05d9c01e85a5"
+  },
+  "repair_source": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "recovered_workspace_assets": [
+    "Data Lab workspace JavaScript",
+    "Data Lab workspace stylesheet",
+    "Data Lab contract JavaScript"
+  ]
+}

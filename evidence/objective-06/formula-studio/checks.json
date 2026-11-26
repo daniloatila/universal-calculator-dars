@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "release": "0.6.0",
+  "browser": "Google Chrome 158.0.8127.38 on Windows",
+  "start_utc": "2026-11-26T22:03:47.970Z",
+  "frontend": "Vite production preview",
+  "browser_checks": {
+    "passed": 8,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "titles": [
+      "Formula Studio preserves exact source notation and version from en to all six other languages",
+      "Formula Studio preserves exact source notation and version from pt-BR to all six other languages",
+      "Formula Studio preserves exact source notation and version from zh-CN to all six other languages",
+      "Formula Studio preserves exact source notation and version from hi to all six other languages",
+      "Formula Studio preserves exact source notation and version from es to all six other languages",
+      "Formula Studio preserves exact source notation and version from ar to all six other languages",
+      "Formula Studio preserves exact source notation and version from fr to all six other languages",
+      "Formula Studio stages imports, rejects failed verification, allows editing, duplication and exact versioned execution"
+    ]
+  },
+  "native_wasm_checks": {
+    "passed": 6,
+    "failed": 0,
+    "titles": [
+      "four offline community formulas agree between Rust CLI and WASM, with exact integer and rational cases",
+      "formula records are version-pinned, detached, and reproducible offline in a fresh library",
+      "failed tests, schema violations, oversized input and undefined references never register a formula",
+      "pinned dependencies validate input and output dimensions, detect cycles and retain child proof",
+      "bounds and dimensional expression grammar use exact validation, typed roots and certified tolerances",
+      "refuse an unaudited answer, respect cancellation, discard stale session writes, and recover"
+    ],
+    "standard_wasm_sha256": "09acfa4995fa026d25a6a0284c591d5f328794208f21fb3f1e8be46af0d3683e"
+  },
+  "screen_sha256": "f1414c86eced3c6e6aecb93262f7f50156c27b940f37634037aa17de944a66f8",
+  "source_notation_sample": "pt-BR",
+  "last_display_language_in_screenshot": "fr",
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "containing_browser_suite_passed": 261
+}

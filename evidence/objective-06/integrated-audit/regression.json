@@ -1,0 +1,209 @@
+{
+  "version": "0.6.0",
+  "source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "workflow": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45902255489",
+  "advanced_math_independent": {
+    "scientific-sympy-mpmath": 102,
+    "scientific-complex-mpmath": 75,
+    "algebra-sympy": 184,
+    "calculus-sympy-mpmath": 210,
+    "linear-algebra-sympy-numpy-scipy": 223,
+    "geometry-sympy": 159,
+    "discrete-mathematics-python-sympy": 289,
+    "programmer-python-integers": 368,
+    "converter-fraction-decimal-sympy": 342,
+    "date-time-datetime-calendar-zoneinfo": 403
+  },
+  "math_cli_wasm": {
+    "scientific": 19,
+    "algebra": 28,
+    "calculus": 27,
+    "linear_algebra": 30,
+    "geometry": 32,
+    "discrete-mathematics": 38,
+    "programmer": 36,
+    "converter": 46,
+    "date-time": 49
+  },
+  "finance_independent": {
+    "financial_and_loans": 128,
+    "investment_and_business": 87,
+    "tax": 362
+  },
+  "financial_comparisons": {
+    "independent": 84,
+    "cli_wasm": 84,
+    "bound_replays": 79
+  },
+  "simulation_chunk_replays": 36,
+  "science": {
+    "Statistics": 213,
+    "Probability": 277,
+    "Simulation": 57,
+    "physics-engineering-independent-cli": 47,
+    "optimization-independent-cli": 39,
+    "graph-lab-independent-cli": 25,
+    "optimization-boundaries": 6,
+    "graph-lab-boundaries": 10,
+    "tabular-import-contracts": 55,
+    "local-tabular-scientific-oracle": 20,
+    "data-lab-revision-contract": 23
+  },
+  "historical_base_cli_wasm": {
+    "python-fraction-decimal-oracle": 157,
+    "fraction-decimal-structured-wasm": 291,
+    "native-wasm-result-parity": 20
+  },
+  "data_lab_revision": {
+    "independent_groups": 23,
+    "native_wasm_request_comparisons": 31,
+    "group_names": [
+      "mixed_json_source_grammar_and_exact_profile",
+      "v2_proof_and_page_replay",
+      "changed_source_digest",
+      "v1_requires_explicit_migration",
+      "exact_decimal_exponent_and_integer_beyond_binary64",
+      "leading_zero_text_ids",
+      "zero_empty_null_absent_invalid",
+      "initial_text_and_successive_casts",
+      "localized_filter_exact_sort_calculate_group",
+      "fill_type_conversion_literal_keys_dedup_and_join",
+      "xlsx_numbers_text_cache_1900",
+      "direct_and_cached_dates_fractional_serial_1900",
+      "missing_empty_error_caches_and_iso_1900",
+      "xlsx_numbers_text_cache_1904",
+      "direct_and_cached_dates_fractional_serial_1904",
+      "missing_empty_error_caches_and_iso_1904",
+      "protected_and_literal_csv",
+      "shared_string_workbook_resource_admission_and_recovery",
+      "fill_missing_resource_admission_and_recovery",
+      "join_repeated_labels_resource_admission_and_recovery",
+      "expanding_text_resource_admission_and_recovery",
+      "multiple_retained_columns_resource_admission_and_recovery",
+      "ingress_limit_and_successor"
+    ]
+  },
+  "rust_core_integration_binaries": {
+    "standard": 10,
+    "structured_values": 6
+  },
+  "physical_chrome": {
+    "started_utc": "2026-11-26T22:03:47.970Z",
+    "duration_ms": 338418.38999999996,
+    "passed": 261,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "report_sha256": "7e92c150d560cbe14f49516a02bb63aca42bb287edca16bf8d7e20ce0a749d23",
+    "suites": {
+      "algebra.spec.ts": 5,
+      "automation-flow.spec.ts": 9,
+      "calculation-proof.spec.ts": 2,
+      "calculus.spec.ts": 6,
+      "converter.spec.ts": 8,
+      "data-lab-revision.spec.ts": 8,
+      "data-lab.spec.ts": 3,
+      "date-time.spec.ts": 8,
+      "discrete-mathematics.spec.ts": 8,
+      "finance-comparison.spec.ts": 12,
+      "finance.spec.ts": 14,
+      "formula-studio.spec.ts": 8,
+      "geometry.spec.ts": 8,
+      "integrated-mathematics.spec.ts": 4,
+      "intelligence.spec.ts": 6,
+      "linear-algebra.spec.ts": 8,
+      "locale-transitions.spec.ts": 47,
+      "math-notebook.spec.ts": 6,
+      "module-frames.spec.ts": 1,
+      "module-manager.spec.ts": 1,
+      "module-shell.spec.ts": 4,
+      "operations.spec.ts": 5,
+      "optimization-cancel.spec.ts": 1,
+      "programmer.spec.ts": 7,
+      "science.spec.ts": 48,
+      "scientific.spec.ts": 8,
+      "standard-revision.spec.ts": 5,
+      "standard.spec.ts": 10,
+      "worker.spec.ts": 1
+    },
+    "inherited_0_5_1": {
+      "mapped_and_passed": 232,
+      "earlier_report_sha256": "49efa93aae50683166d4b07662c57888fc9f9191e11ff9ad046b3b0ce3d96e1d",
+      "public_reference": "chrome-0.5.1-reference.json"
+    },
+    "new_cases": 29
+  },
+  "physical_windows": {
+    "historical": 17,
+    "executable_sha256": "fd81e7a025553ebf5ddfcf057beb6d5e0ae8204cfe90011c86e18c174094221f",
+    "webview2": "158.0.4370.33"
+  },
+  "directed_notation": {
+    "inherited": 924,
+    "current": 1050
+  },
+  "offline_science_modules": [
+    "statistics",
+    "probability",
+    "simulation",
+    "optimization",
+    "physics-engineering",
+    "graph-lab",
+    "data-lab"
+  ],
+  "rust_core_historical_map": "16 inherited tests in two maintained core integration test binaries; see original regression ledger and the audited Check Rust formatting and core workflow step.",
+  "node_passed": 89,
+  "hosted_chromium": 261,
+  "offline_web": {
+    "production-web-offline-and-lazy-locales": 10,
+    "production-finance-offline": 5
+  },
+  "credential_checks": 2,
+  "capability_checks": 5,
+  "historical_mapping": [
+    [
+      "rust_standard_and_structured",
+      16
+    ],
+    [
+      "cli_oracle",
+      157
+    ],
+    [
+      "wasm_structured",
+      291
+    ],
+    [
+      "cli_wasm",
+      20
+    ],
+    [
+      "node",
+      57
+    ],
+    [
+      "physical_chrome",
+      27
+    ],
+    [
+      "production_offline",
+      10
+    ],
+    [
+      "physical_webview2",
+      17
+    ],
+    [
+      "hosted_credential",
+      2
+    ],
+    [
+      "hosted_capabilities",
+      5
+    ]
+  ],
+  "physical_chrome_receipt": "browser.json",
+  "physical_windows_receipt": "windows-regression.json",
+  "locale_matrix_receipt": "../locale-transition-matrix.json",
+  "counting": "The 602 historical positions are maintained equivalents inside larger current suites. Counts for different layers overlap and should not be summed into a grand total."
+}

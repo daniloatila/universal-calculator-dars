@@ -1,0 +1,29 @@
+{
+  "method": "Real packaged WebView2 invoking native Rust IPC. Protocol responses supplied by temporary loopback test fixtures.",
+  "queries": [
+    {
+      "host": "::1",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyBytes": 0,
+      "credential": false
+    },
+    {
+      "host": "127.0.0.1",
+      "method": "GET",
+      "path": "/v1/models",
+      "bodyBytes": 0,
+      "credential": false
+    }
+  ],
+  "externalProviderCalls": 0,
+  "math": {
+    "amount": "11268.25",
+    "amount_exact": "1126825030131969720661201/100000000000000000000",
+    "interest": "1268.25",
+    "interest_exact": "126825030131969720661201/100000000000000000000"
+  },
+  "clarification": true,
+  "unknownToolRejected": true,
+  "closedPort": true
+}

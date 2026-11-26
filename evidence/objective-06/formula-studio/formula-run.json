@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "kind": "dars-formula-run",
+  "definition": {
+    "schema": 1,
+    "kind": "dars-formula",
+    "id": "arithmetic-mean",
+    "version": "1.0.0",
+    "name": "Arithmetic mean of two values",
+    "description": "Unweighted arithmetic mean of two dimensionless quantities.",
+    "category": "statistics",
+    "expression": "(a + b) / 2",
+    "domain": "Finite rational observations.",
+    "unit": "1",
+    "author": "DARS contributors",
+    "license": "Apache-2.0",
+    "parameters": [
+      {
+        "name": "a",
+        "type": "rational",
+        "unit": "1",
+        "default": "1/3"
+      },
+      {
+        "name": "b",
+        "type": "rational",
+        "unit": "1",
+        "default": "2/3"
+      }
+    ],
+    "dependencies": [],
+    "references": [
+      "Arithmetic mean of a finite list, sum divided by count."
+    ],
+    "tests": [
+      {
+        "name": "Rational mean",
+        "inputs": {},
+        "expected": "1/2",
+        "unit": "1"
+      },
+      {
+        "name": "Large adjacent observations",
+        "inputs": {
+          "a": {
+            "value": "9007199254740993",
+            "unit": "1"
+          },
+          "b": {
+            "value": "9007199254740995",
+            "unit": "1"
+          }
+        },
+        "expected": "9007199254740994",
+        "unit": "1"
+      }
+    ]
+  },
+  "inputs": {
+    "a": {
+      "value": "2.25",
+      "unit": "1"
+    },
+    "b": {
+      "value": "3/4",
+      "unit": "1"
+    }
+  },
+  "tests": [
+    {
+      "name": "Rational mean",
+      "observed": "1/2",
+      "unit": "1",
+      "exactness": "exact"
+    },
+    {
+      "name": "Large adjacent observations",
+      "observed": "9007199254740994",
+      "unit": "1",
+      "exactness": "exact"
+    }
+  ],
+  "proof": {
+    "schema": 1,
+    "module": "standard",
+    "operation": "evaluate",
+    "expression": "(((2.25)+(3/4))/2)",
+    "normalized": "(((2.25)+(3/4))/2)",
+    "variables": {},
+    "units": {},
+    "options": {},
+    "domain": "real",
+    "method": "standard_rational_expression",
+    "formula": null,
+    "result": "3/2",
+    "exactness": "exact",
+    "precision": null,
+    "tolerance": null,
+    "rounding": null,
+    "error_bound": null,
+    "assumptions": [],
+    "constraints": [],
+    "references": [
+      "https://docs.rs/num-rational/0.4.2/num_rational/type.BigRational.html",
+      "https://dlmf.nist.gov/3.1"
+    ],
+    "engine_version": "0.6.0",
+    "algorithm_version": "standard/1"
+  },
+  "dependencies": [],
+  "source_notation": {
+    "expression": {
+      "text": "(a + b) / 2",
+      "locale": "pt-BR"
+    },
+    "inputs": {
+      "a": {
+        "text": "2,25",
+        "locale": "pt-BR"
+      },
+      "b": {
+        "text": "3/4",
+        "locale": "pt-BR"
+      }
+    }
+  }
+}

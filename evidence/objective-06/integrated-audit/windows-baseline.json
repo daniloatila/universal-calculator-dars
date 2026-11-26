@@ -1,0 +1,867 @@
+{
+  "status": "complete",
+  "method": "Interactive Windows WebView2. Fresh profile, ordered checked calculations, Win32 sampling of host and auxiliary processes.",
+  "label": "baseline",
+  "executableSha256": "847982f6e3db718fbde20e8eb4b6ce2d71d50fc6cf08b9353f58e392aecc3473",
+  "environment": {
+    "release": "10.0.26200",
+    "processor": "Intel(R) Core(TM) Ultra 7 255HX",
+    "logicalProcessors": 20,
+    "physicalBytes": 33752997888
+  },
+  "phases": {
+    "ambient": {
+      "state": "missing",
+      "count": 6,
+      "intervalSeconds": 5.07530505,
+      "processMemory": {
+        "tree": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          }
+        },
+        "host": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          }
+        },
+        "auxiliary": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          }
+        }
+      },
+      "cpuOneLogicalPercent": 0,
+      "systemPhysicalBytes": {
+        "count": 6,
+        "p50": 16549814272,
+        "p95": 16554692608,
+        "p99": 16554692608
+      },
+      "systemCommitBytes": {
+        "count": 6,
+        "p50": 23242825728,
+        "p95": 23252176896,
+        "p99": 23252176896
+      },
+      "workersAtEnd": 0,
+      "processesAtEnd": 0
+    },
+    "startup_visible": {
+      "state": "visible",
+      "count": 1,
+      "intervalSeconds": 0,
+      "processMemory": {
+        "tree": {
+          "workingSetBytes": {
+            "count": 1,
+            "p50": 365498368,
+            "p95": 365498368,
+            "p99": 365498368
+          },
+          "privateWorkingSetBytes": {
+            "count": 1,
+            "p50": 98209792,
+            "p95": 98209792,
+            "p99": 98209792
+          },
+          "privateBytes": {
+            "count": 1,
+            "p50": 197124096,
+            "p95": 197124096,
+            "p99": 197124096
+          },
+          "sharedCommitBytes": {
+            "count": 1,
+            "p50": 89231360,
+            "p95": 89231360,
+            "p99": 89231360
+          },
+          "sharedWorkingSetBytes": {
+            "count": 1,
+            "p50": 267288576,
+            "p95": 267288576,
+            "p99": 267288576
+          }
+        },
+        "host": {
+          "workingSetBytes": {
+            "count": 1,
+            "p50": 27316224,
+            "p95": 27316224,
+            "p99": 27316224
+          },
+          "privateWorkingSetBytes": {
+            "count": 1,
+            "p50": 4644864,
+            "p95": 4644864,
+            "p99": 4644864
+          },
+          "privateBytes": {
+            "count": 1,
+            "p50": 6795264,
+            "p95": 6795264,
+            "p99": 6795264
+          },
+          "sharedCommitBytes": {
+            "count": 1,
+            "p50": 5308416,
+            "p95": 5308416,
+            "p99": 5308416
+          },
+          "sharedWorkingSetBytes": {
+            "count": 1,
+            "p50": 22671360,
+            "p95": 22671360,
+            "p99": 22671360
+          }
+        },
+        "auxiliary": {
+          "workingSetBytes": {
+            "count": 1,
+            "p50": 338182144,
+            "p95": 338182144,
+            "p99": 338182144
+          },
+          "privateWorkingSetBytes": {
+            "count": 1,
+            "p50": 93564928,
+            "p95": 93564928,
+            "p99": 93564928
+          },
+          "privateBytes": {
+            "count": 1,
+            "p50": 190328832,
+            "p95": 190328832,
+            "p99": 190328832
+          },
+          "sharedCommitBytes": {
+            "count": 1,
+            "p50": 83922944,
+            "p95": 83922944,
+            "p99": 83922944
+          },
+          "sharedWorkingSetBytes": {
+            "count": 1,
+            "p50": 244617216,
+            "p95": 244617216,
+            "p99": 244617216
+          }
+        }
+      },
+      "cpuOneLogicalPercent": null,
+      "systemPhysicalBytes": {
+        "count": 1,
+        "p50": 16695218176,
+        "p95": 16695218176,
+        "p99": 16695218176
+      },
+      "systemCommitBytes": {
+        "count": 1,
+        "p50": 23492841472,
+        "p95": 23492841472,
+        "p99": 23492841472
+      },
+      "workersAtEnd": 1,
+      "processesAtEnd": 7
+    },
+    "standard_visible": {
+      "state": "visible",
+      "count": 6,
+      "intervalSeconds": 5.0795859000000005,
+      "processMemory": {
+        "tree": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 391434240,
+            "p95": 393768960,
+            "p99": 393768960
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 104943616,
+            "p95": 107315200,
+            "p99": 107315200
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 249479168,
+            "p95": 250568704,
+            "p99": 250568704
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 91123712,
+            "p95": 97492992,
+            "p99": 97492992
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 286490624,
+            "p95": 288632832,
+            "p99": 288632832
+          }
+        },
+        "host": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 27320320,
+            "p95": 27320320,
+            "p99": 27320320
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 4644864,
+            "p95": 4644864,
+            "p99": 4644864
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 6795264,
+            "p95": 6795264,
+            "p99": 6795264
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 5308416,
+            "p95": 5312512,
+            "p99": 5312512
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 22675456,
+            "p95": 22675456,
+            "p99": 22675456
+          }
+        },
+        "auxiliary": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 364113920,
+            "p95": 366448640,
+            "p99": 366448640
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 100298752,
+            "p95": 102670336,
+            "p99": 102670336
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 242683904,
+            "p95": 243773440,
+            "p99": 243773440
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 85811200,
+            "p95": 92184576,
+            "p99": 92184576
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 263815168,
+            "p95": 265957376,
+            "p99": 265957376
+          }
+        }
+      },
+      "cpuOneLogicalPercent": 2.768434332412805,
+      "systemPhysicalBytes": {
+        "count": 6,
+        "p50": 16714289152,
+        "p95": 16794980352,
+        "p99": 16794980352
+      },
+      "systemCommitBytes": {
+        "count": 6,
+        "p50": 23596838912,
+        "p95": 23739174912,
+        "p99": 23739174912
+      },
+      "workersAtEnd": 1,
+      "processesAtEnd": 7
+    },
+    "standard_idle": {
+      "state": "visible",
+      "count": 6,
+      "intervalSeconds": 5.104323799999999,
+      "processMemory": {
+        "tree": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 409190400,
+            "p95": 410636288,
+            "p99": 410636288
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 119537664,
+            "p95": 120836096,
+            "p99": 120836096
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 268533760,
+            "p95": 273305600,
+            "p99": 273305600
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 91123712,
+            "p95": 95973376,
+            "p99": 95973376
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 289689600,
+            "p95": 289804288,
+            "p99": 289804288
+          }
+        },
+        "host": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 27320320,
+            "p95": 27320320,
+            "p99": 27320320
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 4644864,
+            "p95": 4644864,
+            "p99": 4644864
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 6795264,
+            "p95": 6795264,
+            "p99": 6795264
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 5312512,
+            "p95": 5312512,
+            "p99": 5312512
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 22675456,
+            "p95": 22675456,
+            "p99": 22675456
+          }
+        },
+        "auxiliary": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 381870080,
+            "p95": 383315968,
+            "p99": 383315968
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 114892800,
+            "p95": 116191232,
+            "p99": 116191232
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 261738496,
+            "p95": 266510336,
+            "p99": 266510336
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 85811200,
+            "p95": 90660864,
+            "p99": 90660864
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 267014144,
+            "p95": 267128832,
+            "p99": 267128832
+          }
+        }
+      },
+      "cpuOneLogicalPercent": 0,
+      "systemPhysicalBytes": {
+        "count": 6,
+        "p50": 16733577216,
+        "p95": 16750088192,
+        "p99": 16750088192
+      },
+      "systemCommitBytes": {
+        "count": 6,
+        "p50": 23602192384,
+        "p95": 23648198656,
+        "p99": 23648198656
+      },
+      "workersAtEnd": 1,
+      "processesAtEnd": 7
+    },
+    "minimized_0": {
+      "state": "minimized",
+      "count": 4,
+      "intervalSeconds": 3.0559830500000027,
+      "processMemory": {
+        "tree": {
+          "workingSetBytes": {
+            "count": 4,
+            "p50": 329527296,
+            "p95": 334000128,
+            "p99": 334000128
+          },
+          "privateWorkingSetBytes": {
+            "count": 4,
+            "p50": 83955712,
+            "p95": 87420928,
+            "p99": 87420928
+          },
+          "privateBytes": {
+            "count": 4,
+            "p50": 217329664,
+            "p95": 263716864,
+            "p99": 263716864
+          },
+          "sharedCommitBytes": {
+            "count": 4,
+            "p50": 87060480,
+            "p95": 95580160,
+            "p99": 95580160
+          },
+          "sharedWorkingSetBytes": {
+            "count": 4,
+            "p50": 245317632,
+            "p95": 250044416,
+            "p99": 250044416
+          }
+        },
+        "host": {
+          "workingSetBytes": {
+            "count": 4,
+            "p50": 27340800,
+            "p95": 27340800,
+            "p99": 27340800
+          },
+          "privateWorkingSetBytes": {
+            "count": 4,
+            "p50": 4648960,
+            "p95": 4648960,
+            "p99": 4648960
+          },
+          "privateBytes": {
+            "count": 4,
+            "p50": 6799360,
+            "p95": 6799360,
+            "p99": 6799360
+          },
+          "sharedCommitBytes": {
+            "count": 4,
+            "p50": 5312512,
+            "p95": 5312512,
+            "p99": 5312512
+          },
+          "sharedWorkingSetBytes": {
+            "count": 4,
+            "p50": 22691840,
+            "p95": 22691840,
+            "p99": 22691840
+          }
+        },
+        "auxiliary": {
+          "workingSetBytes": {
+            "count": 4,
+            "p50": 302186496,
+            "p95": 306659328,
+            "p99": 306659328
+          },
+          "privateWorkingSetBytes": {
+            "count": 4,
+            "p50": 79306752,
+            "p95": 82771968,
+            "p99": 82771968
+          },
+          "privateBytes": {
+            "count": 4,
+            "p50": 210530304,
+            "p95": 256917504,
+            "p99": 256917504
+          },
+          "sharedCommitBytes": {
+            "count": 4,
+            "p50": 81747968,
+            "p95": 90267648,
+            "p99": 90267648
+          },
+          "sharedWorkingSetBytes": {
+            "count": 4,
+            "p50": 222625792,
+            "p95": 227352576,
+            "p99": 227352576
+          }
+        }
+      },
+      "cpuOneLogicalPercent": 3.579044720159685,
+      "systemPhysicalBytes": {
+        "count": 4,
+        "p50": 16716357632,
+        "p95": 16727719936,
+        "p99": 16727719936
+      },
+      "systemCommitBytes": {
+        "count": 4,
+        "p50": 23554658304,
+        "p95": 23626457088,
+        "p99": 23626457088
+      },
+      "workersAtEnd": 0,
+      "processesAtEnd": 7
+    },
+    "restored_0": {
+      "state": "visible",
+      "count": 4,
+      "intervalSeconds": 3.0602200500000034,
+      "processMemory": {
+        "tree": {
+          "workingSetBytes": {
+            "count": 4,
+            "p50": 361127936,
+            "p95": 366596096,
+            "p99": 366596096
+          },
+          "privateWorkingSetBytes": {
+            "count": 4,
+            "p50": 97349632,
+            "p95": 97755136,
+            "p99": 97755136
+          },
+          "privateBytes": {
+            "count": 4,
+            "p50": 316182528,
+            "p95": 316350464,
+            "p99": 316350464
+          },
+          "sharedCommitBytes": {
+            "count": 4,
+            "p50": 54439936,
+            "p95": 91516928,
+            "p99": 91516928
+          },
+          "sharedWorkingSetBytes": {
+            "count": 4,
+            "p50": 263852032,
+            "p95": 269148160,
+            "p99": 269148160
+          }
+        },
+        "host": {
+          "workingSetBytes": {
+            "count": 4,
+            "p50": 27033600,
+            "p95": 27033600,
+            "p99": 27033600
+          },
+          "privateWorkingSetBytes": {
+            "count": 4,
+            "p50": 4325376,
+            "p95": 4325376,
+            "p99": 4325376
+          },
+          "privateBytes": {
+            "count": 4,
+            "p50": 6144000,
+            "p95": 6144000,
+            "p99": 6144000
+          },
+          "sharedCommitBytes": {
+            "count": 4,
+            "p50": 5312512,
+            "p95": 5312512,
+            "p99": 5312512
+          },
+          "sharedWorkingSetBytes": {
+            "count": 4,
+            "p50": 22708224,
+            "p95": 22708224,
+            "p99": 22708224
+          }
+        },
+        "auxiliary": {
+          "workingSetBytes": {
+            "count": 4,
+            "p50": 334094336,
+            "p95": 339562496,
+            "p99": 339562496
+          },
+          "privateWorkingSetBytes": {
+            "count": 4,
+            "p50": 93024256,
+            "p95": 93429760,
+            "p99": 93429760
+          },
+          "privateBytes": {
+            "count": 4,
+            "p50": 310038528,
+            "p95": 310206464,
+            "p99": 310206464
+          },
+          "sharedCommitBytes": {
+            "count": 4,
+            "p50": 49127424,
+            "p95": 86204416,
+            "p99": 86204416
+          },
+          "sharedWorkingSetBytes": {
+            "count": 4,
+            "p50": 241143808,
+            "p95": 246439936,
+            "p99": 246439936
+          }
+        }
+      },
+      "cpuOneLogicalPercent": 4.084673584175747,
+      "systemPhysicalBytes": {
+        "count": 4,
+        "p50": 16763478016,
+        "p95": 16765988864,
+        "p99": 16765988864
+      },
+      "systemCommitBytes": {
+        "count": 4,
+        "p50": 23659012096,
+        "p95": 23694663680,
+        "p99": 23694663680
+      },
+      "workersAtEnd": 1,
+      "processesAtEnd": 7
+    },
+    "after_close": {
+      "state": "missing",
+      "count": 6,
+      "intervalSeconds": 5.087274699999998,
+      "processMemory": {
+        "tree": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          }
+        },
+        "host": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          }
+        },
+        "auxiliary": {
+          "workingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "privateBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedCommitBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "sharedWorkingSetBytes": {
+            "count": 6,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          }
+        }
+      },
+      "cpuOneLogicalPercent": 0,
+      "systemPhysicalBytes": {
+        "count": 6,
+        "p50": 16663199744,
+        "p95": 16684314624,
+        "p99": 16684314624
+      },
+      "systemCommitBytes": {
+        "count": 6,
+        "p50": 23327203328,
+        "p95": 23385370624,
+        "p99": 23385370624
+      },
+      "workersAtEnd": 0,
+      "processesAtEnd": 0
+    }
+  },
+  "interactions": [],
+  "webview": "158.0.4370.33",
+  "startupToCheckedStandardMs": 546.5786000000007,
+  "initialAdvancedAssets": [],
+  "standardTimesMs": [
+    34.3775999999998,
+    36.43680000000131,
+    28.793100000000777,
+    56.27609999999913,
+    62.66599999999926,
+    61.58610000000044,
+    46.96669999999904,
+    47.52249999999913,
+    44.94940000000133,
+    46.98459999999977,
+    48.164999999999054,
+    63.46849999999904
+  ],
+  "runtimePhases": [],
+  "modules": [],
+  "workers": {
+    "scope": "science module workers",
+    "opened": 0,
+    "closed": 0
+  },
+  "externalHttpRequests": 0,
+  "descendantsClearedAfterExitMs": 12.394799999998213
+}

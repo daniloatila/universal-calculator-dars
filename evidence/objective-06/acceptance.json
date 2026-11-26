@@ -1,0 +1,172 @@
+{
+  "objective": "06",
+  "version": "0.6.0",
+  "status": "READY_FOR_REVIEW",
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "source_workflow": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45902255489",
+  "main_approval_commit": "281da8ef144577fde382683f1ec6439c1e0260c2",
+  "review_branch": "codex/objective-06-productivity-automation-ai",
+  "criteria": [
+    {
+      "section": "01-05",
+      "criterion": "Owner-approved milestones, main integration and dedicated review branch",
+      "status": "evidenced",
+      "evidence": [
+        "../objective-05/approval.json",
+        "../../PROJECT_STATE.md"
+      ]
+    },
+    {
+      "section": "03",
+      "criterion": "22 authoritative Rust engines, 191 catalog operations, 25 workspaces and bounded auxiliary execution",
+      "status": "evidenced",
+      "evidence": [
+        "integration/catalog.json",
+        "integration/browser.json",
+        "integrated-audit/windows-candidate.json"
+      ]
+    },
+    {
+      "section": "04",
+      "criterion": "Notebook editing, dependencies, cycles, stale results, selective recalculation, portable inert documents and financial plan",
+      "status": "evidenced",
+      "evidence": [
+        "math-notebook/tests.json",
+        "math-notebook/financial-plan.darsnb",
+        "math-notebook/notebook-v1.schema.json"
+      ]
+    },
+    {
+      "section": "05",
+      "criterion": "Formula creation, unit and domain constraints, pinned versions, tests and offline community library",
+      "status": "evidenced",
+      "evidence": [
+        "formula-studio/checks.json",
+        "formula-studio/formula-run.json",
+        "../../community/formulas/formula-v1.schema.json"
+      ]
+    },
+    {
+      "section": "06",
+      "criterion": "Four declarative flows reproduce without AI, validate cumulative budgets, preserve exact data and recover after cancellation",
+      "status": "evidenced",
+      "evidence": [
+        "automation-studio/execution.json",
+        "../../schemas/automation-flow-v1.schema.json"
+      ]
+    },
+    {
+      "section": "07-08",
+      "criterion": "Three modes, disabled factory state, validated proposals, questions, unavailable tools, real engine proofs, local replay and scoped native HTTPS/loopback adapters",
+      "status": "evidenced",
+      "evidence": [
+        "intelligence/browser.json",
+        "intelligence/native-loopback.json",
+        "integrated-audit/windows-intelligence-native.json",
+        "intelligence/local-services.json",
+        "intelligence/proposal.schema.json"
+      ]
+    },
+    {
+      "section": "09",
+      "criterion": "Synthetic credentials, request-specific consent, offline rejection, bounded responses, zero automatic fallback and refusal of unauthorized operations",
+      "status": "evidenced",
+      "evidence": [
+        "intelligence/windows-release-tests.json",
+        "intelligence/README.md",
+        "security.md",
+        "privacy.md",
+        "threat-model.md"
+      ]
+    },
+    {
+      "section": "10",
+      "criterion": "Local OCR and reviewed math; device voice availability recorded under the conditional media criterion",
+      "status": "evidenced",
+      "evidence": [
+        "voice-vision/availability.json",
+        "voice-vision/README.md",
+        "intelligence/browser.json"
+      ]
+    },
+    {
+      "section": "11",
+      "criterion": "Historical proof compatibility and separation of model, input, engine proof, approximation and explanation",
+      "status": "evidenced",
+      "evidence": [
+        "integrated-audit/corrective-checks.json",
+        "compatibility.md",
+        "integrated-audit/regression.json"
+      ]
+    },
+    {
+      "section": "12",
+      "criterion": "Five adaptive profiles, worker recovery, bounded memory, paired 0.5.1/0.6.0 physical benchmark and ongoing memory debt",
+      "status": "evidenced",
+      "evidence": [
+        "integrated-audit/browser.json",
+        "benchmarks.json",
+        "../../evidence/objective-02/revision-02/memory-debt.md"
+      ]
+    },
+    {
+      "section": "13",
+      "criterion": "Read-only Windows protection investigation with time bounds and attribution limits",
+      "status": "evidenced",
+      "evidence": [
+        "integrated-audit/windows-protection.json",
+        "integrated-audit/windows-protection.md"
+      ]
+    },
+    {
+      "section": "14",
+      "criterion": "25 modules across seven locales, 1050 directional comparisons and 42 separate Intelligence checks",
+      "status": "evidenced",
+      "evidence": [
+        "locale-transition-matrix.json",
+        "intelligence/languages.json"
+      ]
+    },
+    {
+      "section": "15",
+      "criterion": "Historical regression, independent math and finance checks, scientific coverage and Optimization follow-up",
+      "status": "evidenced",
+      "evidence": [
+        "integrated-audit/regression.json",
+        "coverage.json",
+        "regression.md",
+        "tests.json"
+      ]
+    },
+    {
+      "section": "16-17",
+      "criterion": "Windows/browser functionality, bilingual review evidence, artifact hashes and hosted checks",
+      "status": "evidenced",
+      "evidence": [
+        "integrated-audit/ci.json",
+        "integrated-audit/windows-artifact.json",
+        "integrated-audit/physical-windows-comparison.json",
+        "REPORT.md",
+        "REPORT.pt-BR.md"
+      ]
+    }
+  ],
+  "delivery_gate": {
+    "on_success": "READY_FOR_REVIEW",
+    "while_pending": "IN_PROGRESS",
+    "on_failure": "FAILED_VALIDATION",
+    "condition": "The four jobs must succeed on the exact evidence commit. The GitHub Actions run for that SHA is the immutable external delivery receipt."
+  },
+  "conditional_capabilities": {
+    "trained_local_inference": "unavailable at the four default loopback targets; synthetic provider plus real native transport verified",
+    "commercial_api_inference": "no authorized keys or credits; protocol fixtures only",
+    "speech": "Chrome reported no ready on-device dictation in the seven tested locales; local voice discovery only",
+    "memory_target": "open: one pair of system-wide measurements cannot establish a causal increment below 100 MB",
+    "distribution": "active-policy trust and signing reserved for Objective 07"
+  },
+  "status_after_review": {
+    "01-05": "APPROVED 95/100 each",
+    "07-08": "NOT_STARTED"
+  },
+  "approval": "awaiting independent audit and explicit owner decision"
+}

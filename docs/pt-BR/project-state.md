@@ -4,7 +4,7 @@
 
 ## Objetivo atual
 
-**Objetivo 06 · Produtividade, automação e IA · 0.6.0 · IN_PROGRESS**
+**Objetivo 06 · Produtividade, automação e IA · 0.6.0 · READY_FOR_REVIEW**
 
 Em 24/11/2026, o proprietário aprovou o Objetivo 01 após a avaliação independente de 95/100 e autorizou o Objetivo 02. A entrega 0.1.1 revisada é a referência comparativa. [Aprovação](../../evidence/objective-01/approval.json) · [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) · [Relatório do Objetivo 02](../../evidence/objective-02/REPORT.md)
 
@@ -26,6 +26,8 @@ O parecer independente da 0.5.0 atribuiu 89/100 e manteve a aprovação pendente
 
 O proprietário aprovou formalmente o Objetivo 05 com 95/100 e autorizou o Objetivo 06 em 26/11/2026. [0.5.1](../../evidence/objective-05/approval.json)
 
+Os 25 módulos e o gateway opcional passaram pela verificação técnica do código auditado. A entrada em READY_FOR_REVIEW exige quatro jobs aprovados no commit de evidências. A decisão do proprietário sobre o Objetivo 06 está pendente. [0.6.0](../../evidence/objective-06/REPORT.pt-BR.md)
+
 | Objetivo | Versão planejada | Estado | Evidências |
 | --- | --- | --- | --- |
 | 01 · Fundação | 0.1.1 | APPROVED | [Aprovação](../../evidence/objective-01/approval.json) · [Revisão 01](../../evidence/objective-01/revision-01/REPORT.md) |
@@ -33,7 +35,7 @@ O proprietário aprovou formalmente o Objetivo 05 com 95/100 e autorizou o Objet
 | 03 · Matemática universal | 0.3.1 | APPROVED | [Aprovação](../../evidence/objective-03/approval.json) · [Revisão 01](../../evidence/objective-03/revision-01/REPORT.pt-BR.md) · [Auditoria histórica da 0.3.0](../../evidence/objective-03/REPORT.pt-BR.md) |
 | 04 · Finanças e negócios | 0.4.1 | APPROVED | [Revisão 01](../../evidence/objective-04/revision-01/REPORT.pt-BR.md) · [Aceitação](../../evidence/objective-04/revision-01/acceptance.json) · [Relatório 0.4.0](../../evidence/objective-04/REPORT.pt-BR.md) |
 | 05 · Ciência, engenharia e dados | 0.5.1 | APPROVED | [Relatório](../../evidence/objective-05/revision-01/REPORT.pt-BR.md) · [Aceitação](../../evidence/objective-05/revision-01/acceptance.json) |
-| 06 · Produtividade, automação e IA | 0.6.0 | IN_PROGRESS | `evidence/objective-06/` |
+| 06 · Produtividade, automação e IA | 0.6.0 | READY_FOR_REVIEW | [0.6.0](../../evidence/objective-06/REPORT.pt-BR.md) |
 | 07 · Distribuição e atualizações | 0.9.0 | NOT_STARTED | `evidence/objective-07/` |
 | 08 · Auditoria global e lançamento | 1.0.0 | NOT_STARTED | `evidence/objective-08/` |
 

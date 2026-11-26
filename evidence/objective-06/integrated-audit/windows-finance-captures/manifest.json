@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "run_id": 45902255489,
+  "artifact_id": 15156623887,
+  "exe_sha256": "fd81e7a025553ebf5ddfcf057beb6d5e0ae8204cfe90011c86e18c174094221f",
+  "screenshots": [
+    {
+      "name": "candidate-financial.png",
+      "bytes": 177817,
+      "sha256": "d4dc71a53a60972c384c92905932bf2ecf507e41064792b1d12f55a76a97ac88"
+    },
+    {
+      "name": "candidate-investment.png",
+      "bytes": 242678,
+      "sha256": "99a521a1d6c4e55c18b8033f1a89136d1ba122d2fab35e97b2c45af1624f8c1a"
+    },
+    {
+      "name": "candidate-loans.png",
+      "bytes": 215641,
+      "sha256": "4620f3a0b7a0831e2d9b872c375ea9b7680fd4fcf77d11b4edd2a8f241c404dd"
+    },
+    {
+      "name": "candidate-tax.png",
+      "bytes": 178005,
+      "sha256": "fab39cbf4834177086ce10b53941e26485850ed0f289b95046be245fbee88782"
+    },
+    {
+      "name": "candidate-business.png",
+      "bytes": 209589,
+      "sha256": "384ae1f24dbd1f97ffa9a4e37ce0b637ed78601227eb6e231340294229573301"
+    },
+    {
+      "name": "equivalent-rate-comparison.png",
+      "bytes": 260474,
+      "sha256": "f48528041a5f433bc95780cf7038d57a08485ea490fd144eafc87840881ca4a3"
+    }
+  ]
+}

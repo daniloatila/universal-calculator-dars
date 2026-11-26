@@ -1,0 +1,75 @@
+{
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "workflow": "https://github.com/daniloatila/universal-calculator-dars/actions/runs/45902255489",
+  "local_chrome": 261,
+  "inherited_chrome": 232,
+  "hosted_chromium": 261,
+  "node": 89,
+  "native_gateway_and_credentials": 13,
+  "physical_windows": 17,
+  "offline_examples": {
+    "base_web": 10,
+    "finance": 5,
+    "science": 7
+  },
+  "old_mapped_checks": 602,
+  "advanced_math": 2355,
+  "advanced_cli_wasm": 305,
+  "financial_independent": 577,
+  "financial_comparisons": {
+    "independent": 84,
+    "cli_wasm": 84,
+    "bound_replays": 79
+  },
+  "simulation_replays": 36,
+  "data_lab": {
+    "independent_groups": 23,
+    "native_wasm_request_comparisons": 31,
+    "group_names": [
+      "mixed_json_source_grammar_and_exact_profile",
+      "v2_proof_and_page_replay",
+      "changed_source_digest",
+      "v1_requires_explicit_migration",
+      "exact_decimal_exponent_and_integer_beyond_binary64",
+      "leading_zero_text_ids",
+      "zero_empty_null_absent_invalid",
+      "initial_text_and_successive_casts",
+      "localized_filter_exact_sort_calculate_group",
+      "fill_type_conversion_literal_keys_dedup_and_join",
+      "xlsx_numbers_text_cache_1900",
+      "direct_and_cached_dates_fractional_serial_1900",
+      "missing_empty_error_caches_and_iso_1900",
+      "xlsx_numbers_text_cache_1904",
+      "direct_and_cached_dates_fractional_serial_1904",
+      "missing_empty_error_caches_and_iso_1904",
+      "protected_and_literal_csv",
+      "shared_string_workbook_resource_admission_and_recovery",
+      "fill_missing_resource_admission_and_recovery",
+      "join_repeated_labels_resource_admission_and_recovery",
+      "expanding_text_resource_admission_and_recovery",
+      "multiple_retained_columns_resource_admission_and_recovery",
+      "ingress_limit_and_successor"
+    ]
+  },
+  "language_transitions": {
+    "workspace": 1050,
+    "intelligence_separate": 42
+  },
+  "local_automations": 4,
+  "conditional_inference": {
+    "trained_local_inference": "unavailable at the four default loopback targets; synthetic provider plus real native transport verified",
+    "commercial_api_inference": "no authorized keys or credits; protocol fixtures only",
+    "speech": "Chrome reported no ready on-device dictation in the seven tested locales; local voice discovery only",
+    "memory_target": "open: one pair of system-wide measurements cannot establish a causal increment below 100 MB",
+    "distribution": "active-policy trust and signing reserved for Objective 07"
+  },
+  "receipts": [
+    "integrated-audit/ci.json",
+    "integrated-audit/regression.json",
+    "integrated-audit/browser.json",
+    "intelligence/windows-release-tests.json",
+    "integrated-audit/windows-regression.json",
+    "integrated-audit/corrective-checks.json"
+  ],
+  "counting": "Overlapping suites are identified separately and are not added into a single test count."
+}

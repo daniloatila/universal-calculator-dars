@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "audited_source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "run_id": 45902255489,
+  "artifact_id": 15156623887,
+  "exe_sha256": "fd81e7a025553ebf5ddfcf057beb6d5e0ae8204cfe90011c86e18c174094221f",
+  "screenshots": [
+    {
+      "name": "automation-studio.png",
+      "bytes": 362380,
+      "sha256": "ad5db046a988c68a562b25b90b4197a98990c4b9708442916a271e637eaf357a"
+    },
+    {
+      "name": "data-lab.png",
+      "bytes": 336598,
+      "sha256": "265d45571e1de68cc10f58b1ab63725594b0da2c8da462ffed1fa17c99f3fba3"
+    },
+    {
+      "name": "formula-studio.png",
+      "bytes": 170050,
+      "sha256": "27297fde1ac2ff9b156c0ca9e4d9d36bd7e8cea44366e9a2b4b923c57e4ab10d"
+    },
+    {
+      "name": "graph-lab-surface.png",
+      "bytes": 242232,
+      "sha256": "ef4013fe6982d10ad577fa407f47d19e8e082b8b556f2d58f571a65c96f1be04"
+    },
+    {
+      "name": "graph-lab.png",
+      "bytes": 207949,
+      "sha256": "074ef13805371c04098790d1b63f93247394f4365f9e404949a9d8a281d0785a"
+    },
+    {
+      "name": "intelligence-native-proof.png",
+      "bytes": 34733,
+      "sha256": "ab08f73ca43756405fa6821a778211ce1443e7c0dbdf659a052f842a7130c4fe"
+    },
+    {
+      "name": "intelligence-native-refused.png",
+      "bytes": 30334,
+      "sha256": "4019cf4488a409f2a1c4eace60873bcc749716316bad0e1cb3efeda85ba1991e"
+    },
+    {
+      "name": "intelligence.png",
+      "bytes": 72731,
+      "sha256": "a887384053fb82c53ffdcd005bff82bece5360abc523626b84615827d6176b0b"
+    },
+    {
+      "name": "math-notebook.png",
+      "bytes": 365603,
+      "sha256": "ae3fe61ebc6b3837064ccf2ead2d6a1b7c8e1bd723ce562e1a765f42ba07471d"
+    },
+    {
+      "name": "mixed-json.png",
+      "bytes": 321446,
+      "sha256": "7c4f539c3e160db999b1b309f3c2a738f8927378bf39edafe6e936ecaf47f529"
+    },
+    {
+      "name": "optimization.png",
+      "bytes": 166782,
+      "sha256": "b7a2bdb4e7c3af01df664d4bfccd8db25fe67b4c9e102212f68b9d84e1b6ba3b"
+    },
+    {
+      "name": "physics-engineering.png",
+      "bytes": 160382,
+      "sha256": "6b2ad5caecc3ce604d1f1cec2c2e3342da367b9a9b5daa6746fe8847ee965bab"
+    },
+    {
+      "name": "probability.png",
+      "bytes": 207955,
+      "sha256": "aed2831448bfd515c7100550b0c3b8c9e496181125b2a5d66728615cadb6e15a"
+    },
+    {
+      "name": "simulation.png",
+      "bytes": 175615,
+      "sha256": "f4a9ebaa19c9ccd9c89d005def93d0f02715683e735ca1edfafe368cea3ec704"
+    },
+    {
+      "name": "statistics.png",
+      "bytes": 173071,
+      "sha256": "0dfe6c09f946a74fa4b045ac4560d4324366172445f13091e59eb2d06b8d6bc6"
+    }
+  ]
+}

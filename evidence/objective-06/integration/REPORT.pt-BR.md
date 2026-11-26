@@ -1,0 +1,7 @@
+# Contrato de integração
+
+Os três módulos e o painel opcional de IA chamam os mesmos motores Rust das calculadoras originais. O catálogo exportado lista 191 operações em 22 motores. Cada entrada declara codificação, domínio matemático, retorno, versão, limites, classe de tarefa, dependência e permissão. As entradas financeiras e científicas preservam os tipos e as opções dos formulários. A prova Rust informa o domínio usado no cálculo efetivo. [Catálogo](catalog.json)
+
+Uma solicitação contém esquema 1, módulo, operação, entrada canônica, opções limitadas e, quando aplicável, a notação original. Antes de encaminhar, a sessão verifica catálogo, tamanho, opções e estrutura. Na resposta, confere módulo, operação, algoritmo e expressão. A calculadora Padrão usa a API de provas Rust. O Data Lab recebe os bytes selecionados e a configuração tipada. O worker devolve a estimativa de pico do Rust para o orçamento do fluxo.
+
+Os módulos de produtividade e o painel compartilham um cálculo auxiliar ativo. Cancelar ou sair encerra o worker. O Module Manager conserva o controle do módulo principal. O DARS Adaptive pode interromper o trabalho quando o orçamento diminui. O teste de navegador recuperou o cálculo após cancelamento, recusou um módulo desconhecido, devolveu a fração exata 27021597764222980/3 e conservou a média 15/8 para dados de origens diferentes. [Resultados](browser.json) · [Dependências](dependencies.json)

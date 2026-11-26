@@ -1,0 +1,95 @@
+{
+  "product_version": "0.6.0",
+  "source_commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "asset_set_sha256": "1c8665bfef22e0353041d533f2877c33c7d8edfbc617406034e1d5856ba76474",
+  "installed_chrome": "158.0.8127.38",
+  "browser_report_sha256": "7e92c150d560cbe14f49516a02bb63aca42bb287edca16bf8d7e20ce0a749d23",
+  "browser_cases": [
+    {
+      "title": "financial notebook replays the exact Rust plan and selectively recalculates the changed rate",
+      "passed": true,
+      "duration_ms": 1942
+    },
+    {
+      "title": "notebook cell editing, reorder, keyboard undo/redo, type errors and cycles remain local",
+      "passed": true,
+      "duration_ms": 843
+    },
+    {
+      "title": "portable notebook keeps stored data inert and rejects invalid documents without disturbing the current one",
+      "passed": true,
+      "duration_ms": 361
+    },
+    {
+      "title": "notebook computes pinned community formulas, scientific expressions, tables and charts offline",
+      "passed": true,
+      "duration_ms": 870
+    },
+    {
+      "title": "a notebook can cancel a live financial projection, release its worker and recover with new data",
+      "passed": true,
+      "duration_ms": 551
+    },
+    {
+      "title": "42 Math Notebook source-to-presentation transitions preserve exact operands and proof",
+      "passed": true,
+      "duration_ms": 9982
+    }
+  ],
+  "screenshot": {
+    "file": "notebook-financial.png",
+    "sha256": "3df19fa2d16b07be2db51e73ffeba0dfcc1f80982fb830079a68d64738cab3dc",
+    "width": 1072,
+    "height": 1385
+  },
+  "finance": {
+    "first": "1126825030131969720661201/100000000000000000000",
+    "second": "309629344375621415601/24414062500000000",
+    "series_count": 13,
+    "changed": [
+      "rate",
+      "growth",
+      "gain",
+      "trajectory",
+      "verification"
+    ],
+    "unchanged": [
+      "capital",
+      "months"
+    ],
+    "proof_sha256": "5af7d42886d9d2a28b78087dad101b97ba7667105f9c73e0b3a35a3d812388a4",
+    "replayed": true
+  },
+  "cancellation": {
+    "partial_finance_requests": 4,
+    "workers": {
+      "opened": 9,
+      "closed": 9,
+      "financial": 4
+    },
+    "recovered": "9",
+    "stale_output": false
+  },
+  "math_notebook_language_comparisons": 42,
+  "language_receipt": "notebook-locale-matrix.json",
+  "node_version": "v24.22.3",
+  "node_test_passed": 5,
+  "node_tests": [
+    "the dependency graph orders reversed input, identifies cycles and missing dependencies independently",
+    "a rate change only invalidates its descendants; document reordering does not recalculate",
+    "notebook import is closed, bounded and inert; the documented ASCII draft migrates explicitly",
+    "temporary graph work enforces abort, cumulative document budget and dependency failure without a value",
+    "numeric dependency checking refuses incompatible units and approximate upstream values"
+  ],
+  "integrated_node_run": "../integrated-audit/browser.json",
+  "portable_example": {
+    "file": "financial-plan.darsnb",
+    "sha256": "3f5641047ca8ef6bfae72bbca1fbf99e3fd70eff2e736f6600736a23e1016a44",
+    "bytes": 27490,
+    "record_count": 7,
+    "financial_proofs": 13,
+    "imported_state": "historical",
+    "explicitly_recalculated_outputs_matched": 7,
+    "schema_validation": "PowerShell Test-Json with local schema references, Draft 2020-12"
+  }
+}

@@ -67,3 +67,15 @@ Same Windows x64 host, WebView2 158.0.4370.33, fresh profiles and 6 visible-idle
 | System physical usage at idle minus ambient control | -2,437,120 | 129,417,216 |
 
 System-wide physical usage includes activity outside the application. The target below 100,000,000 incremental bytes and the extended retention study remain open. [0.5.0](../../objective-05/revision-01/windows-baseline.json) · [0.5.1](../../objective-05/revision-01/windows-candidate.json)
+
+## Paired 0.5.1 / 0.6.0 measurement
+
+The paired run used the same physical Windows system and WebView2 runtime. The table covers the host and its descendants in visible, idle Standard. The 100 MB incremental target and long-duration retention investigation remain open. No model server ran in the test.
+
+| Median in bytes | 0.5.1 | 0.6.0 |
+| --- | ---: | ---: |
+| Private working set | 119537664 | 119656448 |
+| Private committed bytes | 268533760 | 272506880 |
+| System physical delta from ambient | 183762944 | 200093696 |
+
+[0.6.0](../../objective-06/integrated-audit/physical-windows-comparison.json)

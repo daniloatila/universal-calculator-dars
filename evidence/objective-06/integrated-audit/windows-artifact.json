@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "repository": "daniloatila/universal-calculator-dars",
+  "branch": "codex/objective-06-productivity-automation-ai",
+  "commit": "9ca50cffaa31ab71867809c473968f3fcd46368d",
+  "run_id": 45902255489,
+  "run_attempt": 1,
+  "windows_job_id": 140190592962,
+  "windows_job_conclusion": "success",
+  "artifact_id": 15156623887,
+  "archive_sha256": "847450bacf579ae6b3833d2da2c178773ed8506beb2d56abe01fd8c107370045",
+  "archive_bytes": 8337420,
+  "retention_expires_utc": "2026-11-27T22:15:07Z",
+  "target": "windows-x64",
+  "exe_sha256": "fd81e7a025553ebf5ddfcf057beb6d5e0ae8204cfe90011c86e18c174094221f",
+  "exe_bytes": 25769984,
+  "exe_version": "0.6.0",
+  "pe_machine": "AMD64 (0x8664)",
+  "signature_status": "NotSigned",
+  "packaged_wasm_receipt_count": 22,
+  "packaged_wasm_receipt": [
+    {
+      "name": "dars_tool_wasm_bg-_5mMWq4s.wasm",
+      "sha256": "2e60e684d1479aa956729cd78939875725a5f3540a7cd74f95fd09440c9e3e34"
+    },
+    {
+      "name": "dars_tool_wasm_bg-B-5b_ddP.wasm",
+      "sha256": "2b4ed0c54bdc06adc4ccf1e0253417d19fa1ea4703f184a77e338c75303f5652"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BC9c2Yky.wasm",
+      "sha256": "b2e31b79c43a036167b20bda095166f1630e417771ee98ac1de7d8a140973b7a"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BID61IvF.wasm",
+      "sha256": "a8161322e6adeb82d92cf73c37ba3111f63f6a226872929d7fb3886a1d50cd6c"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BNXGnJg3.wasm",
+      "sha256": "3bde0bf3921bc677fe3bbd0db6a76b1a5aba66e9f5e3d1a75548d050f690a156"
+    },
+    {
+      "name": "dars_tool_wasm_bg-BSsWkRhx.wasm",
+      "sha256": "6cdc40f2327237b5e64f3761c9a259022993176ee0b33373de17d90081f38eea"
+    },
+    {
+      "name": "dars_tool_wasm_bg-C7t94VuK.wasm",
+      "sha256": "aba66a52b4c935c66a862030a3ba373e4c1c76f0a49d6cc49de74a6fe0bcce7b"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CaDR_RvZ.wasm",
+      "sha256": "f63aa95d7ee623519f4683e183823238ef5e3b0635c2eee734853e89b3569ad8"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CIOzQCF7.wasm",
+      "sha256": "51106bfa3ce04272d97f5a6f32ad4f5685482cced33373aea3cbcf34c4937e2d"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CIqDXRI7.wasm",
+      "sha256": "91d5965de9741ac4a223d460ad47bbd16cf0c05de449ac911d272fe528cab370"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CNA_O3nS.wasm",
+      "sha256": "13ee88e606a0a50464a2bf099126ec0062ee2318b0b9578e712b62f7bb111f20"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CPSc0V1F.wasm",
+      "sha256": "6a2fabdf0f2c062087c166d0194ed8656657e6f7a1b944f5eea8ae8545595bda"
+    },
+    {
+      "name": "dars_tool_wasm_bg-CwFzR-za.wasm",
+      "sha256": "6d3bff36cf97404f39c4de909fea1aa5b478785343ee99e61b51afde5df18300"
+    },
+    {
+      "name": "dars_tool_wasm_bg-D0HnV7ze.wasm",
+      "sha256": "af08a76573e8b0f8e9bce73e35c8282e2be26fcdd1ca3aeaca4e7df9e27928e8"
+    },
+    {
+      "name": "dars_tool_wasm_bg-D8jK-KY0.wasm",
+      "sha256": "28a7dba3940ce4923febb8556dc88e5e03b067a0816204ded54ad3bbe3bac32b"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DRnmqpjU.wasm",
+      "sha256": "1de8c616539898e680112c46e0a8305c7f4828dc9eb2b4faf77e495cb9bd629c"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DSB1-Poy.wasm",
+      "sha256": "7786ee0856b8c268044605b758cfca74c35ae04ce560da7b96502e98473e88a3"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DSvHrDFS.wasm",
+      "sha256": "5dad1bd42e857f611976fa865f3b0ac0ab6d9c8aa06b60a3e9595f878b551bec"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DwIPlIv-.wasm",
+      "sha256": "c40c109ebbc88fa3e2bc7577a8b435ede6f3e442cbcf5026e1f658c99a5808ef"
+    },
+    {
+      "name": "dars_tool_wasm_bg-DzDwlrKk.wasm",
+      "sha256": "ca6725c43e29ba9437a12fb7885abd90fefc756902fef90598f84ad2f1275fbb"
+    },
+    {
+      "name": "dars_tool_wasm_bg-eoTZNEer.wasm",
+      "sha256": "a7354b36bf88e7e483b06972799810fe7bdfa3050d32328a349a1073da9feb4a"
+    },
+    {
+      "name": "dars_wasm_bg-DoNz4GNy.wasm",
+      "sha256": "d3bf438a4100abc4d0aa536bb7d603b74dcb6d36bdc1d5542b7a9e519512c075"
+    }
+  ],
+  "checked_at_utc": "2026-11-26T22:16:17.8907789Z"
+}
