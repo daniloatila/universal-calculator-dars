@@ -1,5 +1,6 @@
 import type { ToolRequest } from './tool-runtime.ts';
 import type { CalculationProof } from './calculation-proof.ts';
+import { hasUniqueKeys } from './calculation-proof.ts';
 
 export const providers = ['ollama','lm_studio','compatible','openai','anthropic','gemini'] as const;
 export type Provider = typeof providers[number];
@@ -18,6 +19,16 @@ const safeText = (text:unknown,max:number):text is string=>typeof text==='string
 const object = (v:unknown):v is Record<string,unknown>=>v!==null && typeof v==='object' && !Array.isArray(v);
 const keys = (v:Record<string,unknown>,allowed:string[])=>Object.keys(v).length===allowed.length && allowed.every(k=>Object.hasOwn(v,k));
 const fail=():never=>{throw new Error('invalid_response');};
+function readStructured(text:string):unknown {
+  try {
+    if(!hasUniqueKeys(text,24))return fail();
+    // Structural counts must be lexical integers. Financial decimals travel as strings.
+    for(const [token] of text.matchAll(/"(?:[^"\\]|\\[\s\S])*"|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/gu)){
+      if(!token.startsWith('"') && (!/^-?\d{1,16}$/.test(token) || !Number.isSafeInteger(Number(token))))return fail();
+    }
+    return JSON.parse(text);
+  } catch { return fail(); }
+}
 function inert(v:unknown,depth=0):boolean {
   if(depth>8)return false;
   if(v===null||typeof v==='boolean')return true;
@@ -32,8 +43,7 @@ function inert(v:unknown,depth=0):boolean {
 /** Closed schema. No member lets a model choose a URL, privilege, result or executable. */
 export function parseProposal(text:string):Proposal {
   if(!safeText(text,8192)||new TextEncoder().encode(text).length>8192) return fail();
-  let v:unknown;
-  try {v=JSON.parse(text);}catch{return fail();}
+  const v=readStructured(text);
   if(!object(v)||v.schema!==1)return fail();
   if(v.kind==='calculate'&&v.tool==='expression'&&keys(v,['schema','kind','tool','expression'])
     && safeText(v.expression,512)&&/^[0-9A-Za-z+*/^().,!%\s-]+$/.test(v.expression))
@@ -67,7 +77,7 @@ export function resultRecord(proposal:Calculation, source:Source, proof:Calculat
 /** Read only the interpretation for explicit fresh execution. Disregard attached historic results. */
 export function readRecipe(text:string):Proposal {
   if(new TextEncoder().encode(text).length>131072)throw new Error('limit');
-  const v:unknown=JSON.parse(text);
+  const v=readStructured(text);
   return object(v)&&v.contract==='dars-intelligence/1'&&v.schema===1
     ? parseProposal(JSON.stringify(v.interpretation)) : parseProposal(text);
 }

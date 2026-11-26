@@ -12,6 +12,15 @@ async function calculate(page:Page){
   await page.getByTestId('intelligence-validate').click();
   await page.getByTestId('intelligence-run').click();await expect(page.getByTestId('intelligence-status')).toHaveText('Verified by Rust');
 }
+test('A well-formed proposal still needs Rust to validate its mathematical expression',async({page})=>{
+  await open(page);
+  await load(page,{schema:1,kind:'calculate',tool:'expression',expression:'2+'});
+  await page.getByTestId('intelligence-validate').click();
+  await expect(page.getByTestId('intelligence-status')).toContainText('Structure validated');
+  await page.getByTestId('intelligence-run').click();
+  await expect(page.getByTestId('intelligence-status')).toContainText('Failed');
+  await expect(page.getByTestId('intelligence-result')).toHaveCount(0);
+});
 test('Intelligence is off by default; synthetic financial proposal replays with the real Rust engine and zero external calls',async({page,baseURL},info)=>{
   const requests:string[]=[];
   await page.route('**/*',async route=>{

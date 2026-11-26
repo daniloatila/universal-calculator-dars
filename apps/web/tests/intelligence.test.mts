@@ -51,3 +51,12 @@ test('Seven localized views retain the same canonical request for all directed l
   }
   assert.equal(n,42);
 });
+test('Proposal and replay read the original numeric and key tokens before conversion',()=>{
+  const source=JSON.stringify(investment);
+  for(const input of [source.replace('"periods":12','"periods":12.0000000000000001'),
+    source.replace('"rate":"0.01"','"rate":"0.02","rate":"0.01"')]){
+    assert.throws(()=>parseProposal(input));
+    assert.throws(()=>readRecipe(input));
+    assert.throws(()=>readRecipe('{"schema":1,"contract":"dars-intelligence/1","interpretation":'+input+'}'));
+  }
+});

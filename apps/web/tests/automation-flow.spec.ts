@@ -57,9 +57,12 @@ test('Automation opens files inertly, completes four local flows and rejects a f
   const doc={format:'dars-flow',version:1,id:'local',inputs:{},steps:[{id:'out',op:'let',value:'9'}],outputs:['out']};
   await file.setInputFiles({name:'ordinary.darsflow',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(doc))});
   await expect(page.getByTestId('flow-status')).toContainText('open for review');await expect(page.getByTestId('flow-results')).toHaveCount(0);
+  expect((await execute(page)).trace.every(step=>!step.proof)).toBe(true);
+  await expect(page.getByTestId('flow-status')).toHaveText('Flow completed');
   for(const demo of ['finance','business','statistics','science']){
     await page.getByTestId('flow-demo').selectOption(demo);await page.getByTestId('flow-example').click();
     const r=await execute(page);expect(r.status).toBe('verified');
+    if(demo==='science')await expect(page.getByTestId('flow-approximate')).toBeVisible();
     if(demo==='statistics')await info.attach('automation-preview.png',{body:await page.getByTestId('automation-studio').screenshot(),contentType:'image/png'});
   }
   await page.getByTestId('flow-editor').fill(JSON.stringify({...doc,steps:[{id:'out',op:'let',value:{ref:'missing'}}]}));

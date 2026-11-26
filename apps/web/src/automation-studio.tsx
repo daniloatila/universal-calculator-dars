@@ -12,6 +12,15 @@ import science from './automation-examples/science.json';
 import './automation-studio.css';
 
 const examples={finance,business,statistics,science};
+const verification={
+  en:['Flow completed','Includes approximate inputs or results'],
+  'pt-BR':['Fluxo concluído','Inclui entradas ou resultados aproximados'],
+  es:['Flujo completado','Incluye entradas o resultados aproximados'],
+  fr:['Flux terminé','Contient des entrées ou des résultats approchés'],
+  'zh-CN':['流程已完成','包含近似输入或结果'],
+  hi:['प्रवाह पूरा हुआ','इनपुट या परिणामों में सन्निकट मान शामिल हैं'],
+  ar:['اكتمل التدفق','يتضمن مدخلات أو نتائج تقريبية'],
+};
 type Demo=keyof typeof examples;
 const format=(v:unknown)=>JSON.stringify(v,null,2);
 const labels={
@@ -106,11 +115,13 @@ export function activate(scope:ModuleActivation<AutomationState>):PrimaryModule<
         <button onClick={()=>{try{const flow=parseFlow(draft.text);download(flow.id+'.darsflow',format(flow));}
           catch{setError('invalid_input');setStatus(16);}}}>{t[10]}</button>
         {receipt && <button data-testid="flow-proof" onClick={()=>download(receipt.flow.id+'.proof.json',JSON.stringify(receipt))}>{t[13]}</button>}</div>
-      <p role="status" data-testid="flow-status">{t[status]} {error && <code>{error}</code>}{status===15 && <bdi>{progress}</bdi>}</p>
+      <p role="status" data-testid="flow-status">{status===20?verification[locale][0]:t[status]} {error && <code>{error}</code>}{status===15 && <bdi>{progress}</bdi>}</p>
+      {receipt?.includesApproximation && <p data-testid="flow-approximate">{verification[locale][1]}</p>}
       {receipt && <><h3>{t[12]}</h3><pre dir="ltr" data-testid="flow-results">{format(receipt.outputs)}</pre>
         {bars.length>0 && bars.every(Number.isFinite) && <figure><figcaption>{t[21]}</figcaption>
           {bars.map((n,i)=><div key={i}><meter min={0} max={Math.max(1,...bars)} value={n}/> {n}</div>)}</figure>}
-        <details><summary>{t[18]} ({receipt.trace.length})</summary><ol>{receipt.trace.map((step,i)=><li key={i}><bdi>{step.step} · {step.op}</bdi></li>)}</ol></details></>}
+        <details><summary>{t[18]} ({receipt.trace.length})</summary><ol>{receipt.trace.map((step,i)=><li key={i}><bdi>{step.step} · {step.op}</bdi>
+          {step.proof && <span> · {t[20]} · <bdi>{step.proof.exactness}</bdi></span>}</li>)}</ol></details></>}
     </section>;
   }
   return {Workspace,snapshot:()=>state,setPolicy:session.setPolicy,getResources:session.getResources,dispose:session.dispose};
